@@ -1,1 +1,1 @@
-{"text": "Ａガイド", "structure": [{"jp": "Ａガイド", "en": "A: Guide"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "Ａガイド", "structure": [{"jp": "Ａガイド", "en": "A button: guide"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2"}}

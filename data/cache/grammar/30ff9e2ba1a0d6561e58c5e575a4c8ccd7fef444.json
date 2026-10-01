@@ -1,1 +1,1 @@
-{"text": "どの　ボックスに　ジャンプしますか？", "structure": [{"jp": "どの　ボックスに", "en": "to which Box"}, {"jp": "ジャンプしますか？", "en": "will you jump?"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "どの　ボックスに　ジャンプしますか？", "structure": [{"jp": "どの　ボックスに", "en": "to which Box"}, {"jp": "ジャンプしますか？", "en": "will you jump?"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2"}}

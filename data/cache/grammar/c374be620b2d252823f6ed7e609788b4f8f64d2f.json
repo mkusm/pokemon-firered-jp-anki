@@ -1,1 +1,1 @@
-{"text": "ありがとう　レッド　ほんとうに　ありがとう！", "structure": [{"jp": "ありがとう", "en": "thank you"}, {"jp": "レッド", "en": "Red"}, {"jp": "ほんとうに", "en": "truly"}, {"jp": "ありがとう！", "en": "thank you!"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "ありがとう　レッド　ほんとうに　ありがとう！", "structure": [{"jp": "ありがとう　レッド", "en": "thank you, Red"}, {"jp": "ほんとうに　ありがとう！", "en": "truly, thank you!"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2"}}

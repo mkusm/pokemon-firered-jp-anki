@@ -1,1 +1,1 @@
-{"text": "つよさをみる", "structure": [{"jp": "つよさを", "en": "the strength"}, {"jp": "みる", "en": "look at"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "つよさをみる", "structure": [{"jp": "つよさを", "en": "strength"}, {"jp": "みる", "en": "look at"}], "patterns": [{"name": "〜さ", "span": "つよさ", "words": ["つよさ"], "explanation": "さ replaces the last い of a describing word to turn it into a thing: 'strong' becomes 'strength'. つよさ = 'strength'."}], "_run": {"model": "opus", "effort": "low", "version": "2"}}

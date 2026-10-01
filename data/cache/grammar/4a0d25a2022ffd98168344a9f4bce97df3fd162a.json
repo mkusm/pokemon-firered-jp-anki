@@ -1,1 +1,1 @@
-{"text": "ロケットだんが　オツキミやまで…　…ん？", "structure": [{"jp": "ロケットだんが", "en": "Team Rocket"}, {"jp": "オツキミやまで…", "en": "at Mt. Moon..."}, {"jp": "…ん？", "en": "Hm?"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "ロケットだんが　オツキミやまで…　…ん？", "structure": [{"jp": "ロケットだんが　オツキミやまで…", "en": "Team Rocket, at Mt. Moon..."}, {"jp": "…ん？", "en": "...hm?"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2"}}

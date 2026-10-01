@@ -1,1 +1,1 @@
-{"text": "じぶんの　ばしょも　わかる。", "structure": [{"jp": "じぶんの　ばしょも", "en": "also your own location"}, {"jp": "わかる。", "en": "you can tell"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "じぶんの　ばしょも　わかる。", "structure": [{"jp": "じぶんの　ばしょも", "en": "your own location too"}, {"jp": "わかる。", "en": "can be known"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2"}}

@@ -1,1 +1,1 @@
-{"text": "モンスターボールを　ポイ！", "structure": [{"jp": "モンスターボールを", "en": "a Poké Ball"}, {"jp": "ポイ！", "en": "toss!"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "モンスターボールを　ポイ！", "structure": [{"jp": "モンスターボールを", "en": "a Poké Ball"}, {"jp": "ポイ！", "en": "toss!"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2"}}

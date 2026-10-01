@@ -1,1 +1,1 @@
-{"text": "Ａもどる　Ｂまえのデータ", "structure": [{"jp": "Ａもどる", "en": "A: back"}, {"jp": "Ｂまえのデータ", "en": "B: previous data"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "Ａもどる　Ｂまえのデータ", "structure": [{"jp": "Ａもどる", "en": "A: go back"}, {"jp": "Ｂまえのデータ", "en": "B: previous data"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2"}}

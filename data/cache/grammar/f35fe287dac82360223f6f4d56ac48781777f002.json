@@ -1,1 +1,1 @@
-{"text": "せんたくＡわすれる", "structure": [{"jp": "せんたく", "en": "Select"}, {"jp": "Ａ", "en": "A"}, {"jp": "わすれる", "en": "Forget"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "せんたくＡわすれる", "structure": [{"jp": "せんたく", "en": "select"}, {"jp": "Ａわすれる", "en": "A: forget"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2"}}

@@ -1,1 +1,1 @@
-{"text": "どうじゃ！", "structure": [{"jp": "どうじゃ！", "en": "how about that!"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "どうじゃ！", "structure": [{"jp": "どうじゃ！", "en": "how about that!"}], "patterns": [{"name": "〜だ", "span": "どうじゃ", "words": ["どう", "じゃ"], "explanation": "じゃ is the old-man way of saying だ, 'is'. どうじゃ = 'how is that?'."}], "_run": {"model": "opus", "effort": "low", "version": "2"}}

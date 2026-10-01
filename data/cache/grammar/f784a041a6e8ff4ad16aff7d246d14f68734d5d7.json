@@ -1,1 +1,1 @@
-{"text": "ちょっと　まったあ！", "structure": [{"jp": "ちょっと　まったあ！", "en": "Hold on a moment!"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "ちょっと　まったあ！", "structure": [{"jp": "ちょっと　まったあ！", "en": "hold it a moment!"}], "patterns": [{"name": "〜た (command)", "span": "まったあ", "words": ["まったあ"], "explanation": "The た ending, shouted, can be a sharp order instead of the past. The last sound is stretched for the shout. まったあ = 'wait!'"}], "_run": {"model": "opus", "effort": "low", "version": "2"}}

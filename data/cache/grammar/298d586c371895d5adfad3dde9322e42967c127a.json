@@ -1,1 +1,1 @@
-{"text": "たかさ", "structure": [{"jp": "たかさ", "en": "height"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "たかさ", "structure": [{"jp": "たかさ", "en": "height"}], "patterns": [{"name": "〜さ", "span": "たかさ", "words": ["たかさ"], "explanation": "Swapping the last い of a describing word for さ turns it into the name of an amount. たかさ = 'height'."}], "_run": {"model": "opus", "effort": "low", "version": "2"}}

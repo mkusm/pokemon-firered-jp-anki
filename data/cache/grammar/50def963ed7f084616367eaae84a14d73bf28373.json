@@ -1,1 +1,1 @@
-{"text": "さあ　レッド　グリーン！", "structure": [{"jp": "さあ", "en": "now"}, {"jp": "レッド　グリーン！", "en": "Red, Green!"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "さあ　レッド　グリーン！", "structure": [{"jp": "さあ", "en": "now"}, {"jp": "レッド　グリーン！", "en": "Red, Green!"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2"}}

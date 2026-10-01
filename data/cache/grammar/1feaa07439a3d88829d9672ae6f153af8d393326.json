@@ -1,1 +1,1 @@
-{"text": "グリーンか？", "structure": [{"jp": "グリーンか？", "en": "Is it Green?"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "グリーンか？", "structure": [{"jp": "グリーンか？", "en": "Green, is it?"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2"}}

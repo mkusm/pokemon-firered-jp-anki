@@ -34,9 +34,14 @@ from .paths import DATA
 
 CACHE = DATA / "cache" / "grammar"
 DRY_OUT = DATA / "dryrun" / "grammar.json"
+# Opus, like the analysis it builds on. Sonnet was given the translation and
+# still glossed a phrase its own way where it read the sentence differently:
+# とうろくして　つかいます came out as "registering … / it is used" under the
+# translation "using a registered Key Item". An answer from another model
+# counts as missing and is asked again.
 # 80 sentences tried at 10, 40 and 80 a call: 10 and 40 found the same patterns,
-# 80 dropped some near the end of the batch.
-MODEL, EFFORT, BATCH, WORKERS = "sonnet", "low", 40, 8
+# 80 dropped some near the end of the batch, with either model.
+MODEL, EFFORT, BATCH, WORKERS = "opus", "low", 40, 8
 VERSION = "2"  # part of the cache key: 2 asks for explanations without grammar terms
 
 SYSTEM = """You explain the grammar of Japanese sentences from Pokémon FireRed to a learner who is building an Anki deck. The words have already been explained one by one. Your job is what sits between words.
@@ -124,8 +129,11 @@ def run(rows: pd.DataFrame, analyses: dict) -> None:
     """Fill the cache for rows: deck rows in card order, one per sentence."""
     CACHE.mkdir(parents=True, exist_ok=True)
     rows = rows[rows["text"].map(lambda t: t in analyses)]
-    done = lambda t: cache_file(t, analyses[t]["words"]).exists()
-    cost = 0.0
+
+    def done(t: str) -> bool:
+        f = cache_file(t, analyses[t]["words"])
+        return f.exists() and json.loads(f.read_text())["_run"]["model"] == MODEL
+
     for _ in range(3):  # a call can fail or skip a sentence: go round again
         todo = rows[~rows["text"].map(done)]
         if todo.empty:
@@ -145,11 +153,9 @@ def run(rows: pd.DataFrame, analyses: dict) -> None:
                 except Exception as e:  # schema failure, timeout, CLI error
                     print(f"[grammar] call failed: {str(e)[:200]}")
                     continue
-                cost += info["cost"]
-                print(f"[grammar] {n}/{len(batches)} calls, {got} sentences, "
-                      f"{info['out']} out tokens, {info['ms'] / 1000:.0f}s")
+                print(f"[grammar] {n}/{len(batches)} calls, {got} sentences, {info['ms'] / 1000:.0f}s")
     left = int((~rows["text"].map(done)).sum())
-    print(f"[grammar] done: {len(rows) - left}/{len(rows)} sentences cached, ${cost:.2f} API-equivalent this run")
+    print(f"[grammar] done: {len(rows) - left}/{len(rows)} sentences cached")
 
 
 def first_sentences(n_cards: int | None = None, n_sentences: int | None = None,
@@ -273,9 +279,7 @@ def dry_run(start: str, count: int) -> None:
             print(f"   • {p['name']}  ⟨{p['span']}⟩  words: {' + '.join(p['words'])}{ok}\n       {p['explanation']}")
     DRY_OUT.parent.mkdir(parents=True, exist_ok=True)
     DRY_OUT.write_text(json.dumps(saved, ensure_ascii=False, indent=1), encoding="utf-8")
-    n = len(rows)
-    print(f"\n{n} sentences, {info['out']} output tokens ({info['out'] // n} per sentence), "
-          f"${info['cost']:.3f} API-equivalent, {info['ms'] / 1000:.0f}s")
+    print(f"\n{len(rows)} sentences, {info['ms'] / 1000:.0f}s")
 
 
 if __name__ == "__main__":

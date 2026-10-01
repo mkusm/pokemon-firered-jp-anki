@@ -1,1 +1,1 @@
-{"text": "まてよ！", "structure": [{"jp": "まてよ！", "en": "wait!"}], "patterns": [{"name": "〜よ", "span": "まてよ", "words": ["まて", "よ"], "explanation": "まて is a rough command, and よ adds force. まてよ = 'hey, wait!'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "まてよ！", "structure": [{"jp": "まてよ！", "en": "Wait up!"}], "patterns": [{"name": "〜え (command)", "span": "まて", "words": ["まて"], "explanation": "Changing the last sound of a verb to the え row makes a blunt order. まて = 'wait!'."}], "_run": {"model": "opus", "effort": "low", "version": "2"}}

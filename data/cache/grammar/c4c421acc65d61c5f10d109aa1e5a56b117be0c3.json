@@ -1,1 +1,1 @@
-{"text": "べつのばしょ", "structure": [{"jp": "べつの", "en": "different"}, {"jp": "ばしょ", "en": "place"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "べつのばしょ", "structure": [{"jp": "べつのばしょ", "en": "a different place"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2"}}

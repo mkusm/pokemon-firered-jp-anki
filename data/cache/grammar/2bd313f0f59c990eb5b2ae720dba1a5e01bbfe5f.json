@@ -1,1 +1,1 @@
-{"text": "ＰＡＧＥ", "structure": [{"jp": "ＰＡＧＥ", "en": "PAGE"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "ＰＡＧＥ", "structure": [{"jp": "ＰＡＧＥ", "en": "PAGE"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2"}}

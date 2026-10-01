@@ -1,1 +1,1 @@
-{"text": "けむし", "structure": [{"jp": "けむし", "en": "Caterpillar"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "けむし", "structure": [{"jp": "けむし", "en": "caterpillar"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2"}}

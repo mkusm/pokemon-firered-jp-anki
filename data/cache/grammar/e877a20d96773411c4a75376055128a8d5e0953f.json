@@ -1,1 +1,1 @@
-{"text": "きゅうしょに　あたった！", "structure": [{"jp": "きゅうしょに", "en": "on a vital spot"}, {"jp": "あたった！", "en": "it hit!"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "きゅうしょに　あたった！", "structure": [{"jp": "きゅうしょに", "en": "on a weak spot"}, {"jp": "あたった！", "en": "it hit!"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2"}}

@@ -1,1 +1,1 @@
-{"text": "にがす", "structure": [{"jp": "にがす", "en": "release"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "にがす", "structure": [{"jp": "にがす", "en": "release"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2"}}

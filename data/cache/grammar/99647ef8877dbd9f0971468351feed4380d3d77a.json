@@ -1,1 +1,1 @@
-{"text": "かたて", "structure": [{"jp": "かたて", "en": "one hand"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "かたて", "structure": [{"jp": "かたて", "en": "one-handed"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2"}}

@@ -1,1 +1,1 @@
-{"text": "ねむらない", "structure": [{"jp": "ねむらない", "en": "doesn't sleep"}], "patterns": [{"name": "〜ない", "span": "ねむらない", "words": ["ねむらない"], "explanation": "ない after a verb means not doing it. ねむらない = 'doesn't sleep'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "ねむらない", "structure": [{"jp": "ねむらない", "en": "does not sleep"}], "patterns": [{"name": "〜ない", "span": "ねむらない", "words": ["ねむらない"], "explanation": "ない on the end of a verb means 'not'. ねむらない = 'does not fall asleep'."}], "_run": {"model": "opus", "effort": "low", "version": "2"}}

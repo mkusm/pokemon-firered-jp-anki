@@ -189,7 +189,7 @@
         <rect x="160" y="186" width="110" height="46" rx="8"/><text x="215" y="206" text-anchor="middle" font-size="13" font-weight="700">classify</text><text x="215" y="222" text-anchor="middle" font-size="11.5">835 strings placed</text>
         <rect x="420" y="186" width="110" height="46" rx="8"/><text x="475" y="206" text-anchor="middle" font-size="13" font-weight="700">Opus</text><text x="475" y="222" text-anchor="middle" font-size="11.5">3,123 sentences</text>
         <rect x="550" y="186" width="90" height="46" rx="8"/><text x="595" y="206" text-anchor="middle" font-size="13" font-weight="700">sense merge</text><text x="595" y="222" text-anchor="middle" font-size="11.5">620 words</text>
-        <rect x="660" y="186" width="90" height="46" rx="8"/><text x="705" y="206" text-anchor="middle" font-size="13" font-weight="700">grammar</text><text x="705" y="222" text-anchor="middle" font-size="11.5">1,285 patterns</text>
+        <rect x="660" y="186" width="90" height="46" rx="8"/><text x="705" y="206" text-anchor="middle" font-size="13" font-weight="700">grammar</text><text x="705" y="222" text-anchor="middle" font-size="11.5">1,576 patterns</text>
       </g>
       <path d="M140 122 H160"/><path d="M270 122 H290"/><path d="M400 122 H420"/><path d="M530 122 H550"/><path d="M640 122 H660"/>
       <path d="M205 148 V186"/><path d="M225 186 V148"/>
@@ -275,11 +275,11 @@
   <h3>Choosing the model</h3>
   <p>A dry run analysed the first 200 sentences five ways and compared each with Opus on the same sentences.</p>
   <div class="scroll"><table>
-    <tr><th>Run</th><th class="n">Same entry as Opus</th><th class="n">Same entry and sense</th><th class="n">Output tokens per sentence</th></tr>
-    <tr><td>Sonnet, low effort, batches of 20</td><td class="n">99.0%</td><td class="n">94.6%</td><td class="n">655</td></tr>
-    <tr><td>Sonnet, low effort, batches of 30</td><td class="n">99.4%</td><td class="n">95.5%</td><td class="n">659</td></tr>
-    <tr><td>Sonnet, low effort, batches of 40</td><td class="n">99.4%</td><td class="n">96.3%</td><td class="n">661</td></tr>
-    <tr><td>Sonnet, medium effort, batches of 30</td><td class="n">99.7%</td><td class="n">94.4%</td><td class="n">619</td></tr>
+    <tr><th>Run</th><th class="n">Same entry as Opus</th><th class="n">Same entry and sense</th></tr>
+    <tr><td>Sonnet, low effort, batches of 20</td><td class="n">99.0%</td><td class="n">94.6%</td></tr>
+    <tr><td>Sonnet, low effort, batches of 30</td><td class="n">99.4%</td><td class="n">95.5%</td></tr>
+    <tr><td>Sonnet, low effort, batches of 40</td><td class="n">99.4%</td><td class="n">96.3%</td></tr>
+    <tr><td>Sonnet, medium effort, batches of 30</td><td class="n">99.7%</td><td class="n">94.4%</td></tr>
   </table></div>
   <p>More effort did not help and larger batches did not hurt, so the full run used Sonnet at low effort in batches of 40: 322 calls for the first pass.</p>
 
@@ -306,9 +306,10 @@
     <li><strong>Up to three patterns</strong>: a name (<span class="jp" lang="ja">〜ことになる</span>, <span class="jp" lang="ja">〜で</span> (how), verb + noun), the stretch of the sentence that shows it, the words that take part, and one or two sentences of explanation ending in what that stretch means.</li>
   </ul>
   <p>A word's card shows the patterns that word takes part in, and the breakdown sits behind a fold. There are no cards for the patterns themselves.</p>
-  <p>The explanations are asked for in plain words. The first version said "<span class="jp" lang="ja">で</span> marks the manner/basis", which told a learner nothing; it now says "<span class="jp" lang="ja">で</span> after a noun says the way or method something is done". Three terms survive because nothing shorter exists: て-form, plain verb, verb stem.</p>
+  <p>The explanations are asked for in plain words. The first version said "<span class="jp" lang="ja">で</span> marks the manner/basis", which told a learner nothing; it now says "<span class="jp" lang="ja">で</span> after a word tells you the way something is done". Three terms survive because nothing shorter exists: て-form, plain verb, verb stem.</p>
   <p>Everything on a card was written for that card's sentence. An index of patterns was tried and removed: it gave each pattern name one fixed heading, and a name that covers several uses then put a line on the card that contradicted the explanation under it (<span class="jp" lang="ja">から</span> "because" headed "the starting point: from"). The price is that one pattern can be spelled two ways on different cards.</p>
-  <p>Answers are cached by sentence and word list, so a sentence the analysis later splits differently is asked again. The first chapter is 1,225 sentences: 31 calls on Sonnet, eight at a time, three minutes. 766 of them have at least one pattern, 1,285 patterns in all.</p>
+  <p>The pass runs on Opus, like the analysis it builds on. It first ran on Sonnet, which is given the translation but, where it would have read the sentence differently, glossed a phrase its own way: under the translation "using a registered Key Item", the breakdown of <span class="jp" lang="ja">とうろくして　つかいます</span> said "registering important things / it is used". Opus writes "registering a Key Item and / using it". In 30 breakdowns drawn at random after the change, all agree with their translations.</p>
+  <p>Answers are cached by sentence and word list, so a sentence the analysis later splits differently is asked again, and so is one answered by another model. The first chapter is 1,225 sentences: 31 calls, eight at a time, five minutes. 812 of them have at least one pattern, 1,576 patterns in all.</p>
 </section>
 
 <section id="cards">
@@ -355,12 +356,12 @@
     <li>6,064 distinct dictionary forms across the 11,198 cards.</li>
     <li>6,459 cards take their example from story dialogue; the rest from Pokédex entries, menus, move and item descriptions and battle messages.</li>
     <li>109 cards are tagged <code>low-confidence</code>: the dictionary entry does not match the word, there is no entry and the model was unsure, or the word is a scrap of broken text. A doubt only about which listed sense fits a helper verb or an idiom no longer counts; those glosses were checked by hand. 11 are tagged <code>sense-guessed</code>.</li>
-    <li>2,466 cards, the first chapter, carry a sentence breakdown, and 1,004 of them a grammar pattern for their word.</li>
+    <li>2,466 cards, the first chapter, carry a sentence breakdown, and 1,250 of them a grammar pattern for their word.</li>
     <li>228 are tagged <code>onomatopoeia</code>: JMdict marks the sense as a sound or mimetic word (<span class="jp" lang="ja">ドキドキ</span>, <span class="jp" lang="ja">キラキラ</span>), and the back says so.</li>
     <li>70 are tagged <code>fragment</code>: stammers, garbled speech and pieces of interrupted words (<span class="jp" lang="ja">こっ　こんなに</span>). They stay in the deck because the card is what explains them.</li>
     <li>926 name cards in the second deck.</li>
   </ul>
-  <p>The first full analysis took about five hours of calls including one usage-limit pause, and would cost roughly $110 at API prices. A classify pass is about 21 calls and under a dollar. Redoing the first chapter on Opus was about $21, and its grammar pass about $3.</p>
+  <p>The first full analysis took about five hours of calls including one usage-limit pause. A classify pass is about 21 calls. Redoing the first chapter on Opus took 12 minutes, and its grammar pass 5.</p>
 </section>
 
 <section id="change">

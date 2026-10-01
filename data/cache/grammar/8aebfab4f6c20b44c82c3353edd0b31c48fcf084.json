@@ -1,1 +1,1 @@
-{"text": "ＨＰは　つねに　チェック！", "structure": [{"jp": "ＨＰは", "en": "HP"}, {"jp": "つねに", "en": "always"}, {"jp": "チェック！", "en": "check it!"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "ＨＰは　つねに　チェック！", "structure": [{"jp": "ＨＰは", "en": "as for HP"}, {"jp": "つねに　チェック！", "en": "always check it!"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2"}}

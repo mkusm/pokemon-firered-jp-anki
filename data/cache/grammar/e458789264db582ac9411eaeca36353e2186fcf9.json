@@ -1,1 +1,1 @@
-{"text": "＊の　からだの　しびれが　とれた", "structure": [{"jp": "＊の　からだの", "en": "＊'s body's"}, {"jp": "しびれが", "en": "numbness"}, {"jp": "とれた", "en": "went away"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "＊の　からだの　しびれが　とれた", "structure": [{"jp": "＊の　からだの　しびれが", "en": "the numbness in ＊'s body"}, {"jp": "とれた", "en": "went away"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2"}}

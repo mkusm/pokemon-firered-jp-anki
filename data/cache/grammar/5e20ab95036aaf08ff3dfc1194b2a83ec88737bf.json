@@ -1,1 +1,1 @@
-{"text": "レッドの　パソコンに　せつぞくした！", "structure": [{"jp": "レッドの　パソコンに", "en": "to Red's PC"}, {"jp": "せつぞくした！", "en": "connected!"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "レッドの　パソコンに　せつぞくした！", "structure": [{"jp": "レッドの　パソコンに", "en": "to Red's PC"}, {"jp": "せつぞくした！", "en": "connected!"}], "patterns": [{"name": "〜する", "span": "せつぞくした", "words": ["せつぞく", "した"], "explanation": "する added to an action word turns it into a verb; した is its past form. せつぞくした = 'connected'."}], "_run": {"model": "opus", "effort": "low", "version": "2"}}

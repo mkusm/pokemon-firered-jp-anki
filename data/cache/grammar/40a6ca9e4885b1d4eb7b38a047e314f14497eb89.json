@@ -1,1 +1,1 @@
-{"text": "ここは　レッド　のいえ", "structure": [{"jp": "ここは", "en": "this place"}, {"jp": "レッド　のいえ", "en": "Red's house"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "ここは　レッド　のいえ", "structure": [{"jp": "ここは", "en": "this place is"}, {"jp": "レッド　のいえ", "en": "Red's house"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2"}}

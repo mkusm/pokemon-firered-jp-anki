@@ -1,1 +1,1 @@
-{"text": "ママより", "structure": [{"jp": "ママより", "en": "from Mom"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "ママより", "structure": [{"jp": "ママより", "en": "from Mom"}], "patterns": [{"name": "〜より (from)", "span": "ママより", "words": ["ママ", "より"], "explanation": "より after a name at the end of a letter shows who it is from. ママより = 'from Mom'."}], "_run": {"model": "opus", "effort": "low", "version": "2"}}

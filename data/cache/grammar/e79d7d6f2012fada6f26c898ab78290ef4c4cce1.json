@@ -1,1 +1,1 @@
-{"text": "スプレーしきの　きずぐすり。", "structure": [{"jp": "スプレーしきの", "en": "spray-type"}, {"jp": "きずぐすり。", "en": "wound medicine"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "スプレーしきの　きずぐすり。", "structure": [{"jp": "スプレーしきの", "en": "spray-type"}, {"jp": "きずぐすり。", "en": "wound medicine"}], "patterns": [{"name": "〜しき", "span": "スプレーしき", "words": ["スプレー", "しき"], "explanation": "しき added to a word means 'of that type or style'. スプレーしき = 'spray-type'."}], "_run": {"model": "opus", "effort": "low", "version": "2"}}

@@ -1,1 +1,1 @@
-{"text": "２２ばん　どうろ", "structure": [{"jp": "２２ばん", "en": "number 22"}, {"jp": "どうろ", "en": "road"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "２２ばん　どうろ", "structure": [{"jp": "２２ばん", "en": "number 22"}, {"jp": "どうろ", "en": "route"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2"}}

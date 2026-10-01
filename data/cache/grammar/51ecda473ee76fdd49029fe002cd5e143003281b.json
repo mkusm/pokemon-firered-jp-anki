@@ -1,1 +1,1 @@
-{"text": "どうじに　あいての　すばやさを　さげる。", "structure": [{"jp": "どうじに", "en": "at the same time"}, {"jp": "あいての　すばやさを", "en": "the opponent's Speed"}, {"jp": "さげる。", "en": "lowers"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "どうじに　あいての　すばやさを　さげる。", "structure": [{"jp": "どうじに", "en": "at the same time"}, {"jp": "あいての　すばやさを", "en": "the opponent's Speed"}, {"jp": "さげる。", "en": "lowers"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2"}}

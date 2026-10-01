@@ -1,1 +1,1 @@
-{"text": "そうげんのポケモン", "structure": [{"jp": "そうげんのポケモン", "en": "Pokémon of the grassland"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "そうげんのポケモン", "structure": [{"jp": "そうげんのポケモン", "en": "Pokémon of the grasslands"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2"}}

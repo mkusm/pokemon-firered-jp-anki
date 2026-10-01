@@ -1,1 +1,1 @@
-{"text": "……　おきゃくさま！", "structure": [{"jp": "……　おきゃくさま！", "en": "...dear customer!"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "……　おきゃくさま！", "structure": [{"jp": "……　おきゃくさま！", "en": "...dear customer!"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2"}}

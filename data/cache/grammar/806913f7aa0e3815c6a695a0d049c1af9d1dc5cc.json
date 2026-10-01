@@ -1,1 +1,1 @@
-{"text": "めいちゅうりつ", "structure": [{"jp": "めいちゅうりつ", "en": "Accuracy"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "めいちゅうりつ", "structure": [{"jp": "めいちゅうりつ", "en": "Accuracy"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2"}}

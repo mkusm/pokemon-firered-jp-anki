@@ -1,1 +1,1 @@
-{"text": "さみしがり", "structure": [{"jp": "さみしがり", "en": "lonely (nature)"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "さみしがり", "structure": [{"jp": "さみしがり", "en": "one who gets lonely easily"}], "patterns": [{"name": "〜がる", "span": "さみしがり", "words": ["さみしがり"], "explanation": "がる after a feeling word says someone shows that feeling; cut down to がり it names a person who is often like that. さみしがり = 'someone who easily feels lonely'."}], "_run": {"model": "opus", "effort": "low", "version": "2"}}

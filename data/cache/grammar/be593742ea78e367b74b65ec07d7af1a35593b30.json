@@ -1,1 +1,1 @@
-{"text": "ジャン", "structure": [{"jp": "ジャン", "en": "Jean"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "ジャン", "structure": [{"jp": "ジャン", "en": "Jean"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2"}}

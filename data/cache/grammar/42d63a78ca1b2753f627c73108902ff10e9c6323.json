@@ -1,1 +1,1 @@
-{"text": "＊の　＊は　＊を　くりだした！", "structure": [{"jp": "＊の　＊は", "en": "＊'s ＊"}, {"jp": "＊を", "en": "＊"}, {"jp": "くりだした！", "en": "sent out"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "＊の　＊は　＊を　くりだした！", "structure": [{"jp": "＊の　＊は", "en": "＊ ＊"}, {"jp": "＊を　くりだした！", "en": "sent out ＊!"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2"}}

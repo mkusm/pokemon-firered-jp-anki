@@ -1,1 +1,1 @@
-{"text": "レッドは　パソコンの　スイッチを　いれた！", "structure": [{"jp": "レッドは", "en": "Red"}, {"jp": "パソコンの　スイッチを", "en": "the PC's switch"}, {"jp": "いれた！", "en": "turned on!"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "レッドは　パソコンの　スイッチを　いれた！", "structure": [{"jp": "レッドは", "en": "Red"}, {"jp": "パソコンの　スイッチを　いれた！", "en": "turned on the PC's switch!"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2"}}

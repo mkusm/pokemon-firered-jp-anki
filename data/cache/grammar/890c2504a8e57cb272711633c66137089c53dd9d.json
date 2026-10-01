@@ -1,1 +1,1 @@
-{"text": "はあ　はあ…", "structure": [{"jp": "はあ　はあ…", "en": "huff, huff"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "はあ　はあ…", "structure": [{"jp": "はあ　はあ…", "en": "Huff, huff..."}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2"}}

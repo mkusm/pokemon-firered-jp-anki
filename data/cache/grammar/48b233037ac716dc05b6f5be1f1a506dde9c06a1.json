@@ -1,1 +1,1 @@
-{"text": "れいせい", "structure": [{"jp": "れいせい", "en": "quiet"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "れいせい", "structure": [{"jp": "れいせい", "en": "quiet, cool-headed"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2"}}

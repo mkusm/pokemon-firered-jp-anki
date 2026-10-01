@@ -1,1 +1,1 @@
-{"text": "ノートを　のぞいた！", "structure": [{"jp": "ノートを", "en": "the notebook (object)"}, {"jp": "のぞいた！", "en": "peeked!"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "ノートを　のぞいた！", "structure": [{"jp": "ノートを", "en": "the notebook"}, {"jp": "のぞいた！", "en": "peeked at!"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2"}}

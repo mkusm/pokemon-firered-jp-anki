@@ -1,1 +1,1 @@
-{"text": "オニスズメ　めいめい　「オニチャン」", "structure": [{"jp": "オニスズメ", "en": "Spearow"}, {"jp": "めいめい", "en": "named"}, {"jp": "「オニチャン」", "en": "\"Onichan\""}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "オニスズメ　めいめい　「オニチャン」", "structure": [{"jp": "オニスズメ", "en": "Spearow"}, {"jp": "めいめい　「オニチャン」", "en": "named \"Onichan\""}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2"}}

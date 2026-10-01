@@ -1,1 +1,1 @@
-{"text": "それじゃ　いくぞ！", "structure": [{"jp": "それじゃ　いくぞ！", "en": "All right, here we go!"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "それじゃ　いくぞ！", "structure": [{"jp": "それじゃ", "en": "all right then"}, {"jp": "いくぞ！", "en": "here we go!"}], "patterns": [{"name": "〜ぞ", "span": "いくぞ", "words": ["いく", "ぞ"], "explanation": "ぞ at the end is a rough, manly way of announcing what you are about to do. いくぞ = 'here I go!'"}], "_run": {"model": "opus", "effort": "low", "version": "2"}}

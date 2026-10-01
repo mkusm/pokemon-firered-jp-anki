@@ -1,1 +1,1 @@
-{"text": "やったあ　かったぞー！", "structure": [{"jp": "やったあ　かったぞー！", "en": "Yay, we won!"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "やったあ　かったぞー！", "structure": [{"jp": "やったあ", "en": "yay"}, {"jp": "かったぞー！", "en": "we won!"}], "patterns": [{"name": "〜ぞ", "span": "かったぞー", "words": ["かった", "ぞー"], "explanation": "ぞ at the end is a rough, manly way of pushing your point; here it is drawn out as a shout of joy. かったぞー = 'we won!'"}], "_run": {"model": "opus", "effort": "low", "version": "2"}}

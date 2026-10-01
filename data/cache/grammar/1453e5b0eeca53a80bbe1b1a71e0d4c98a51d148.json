@@ -1,1 +1,1 @@
-{"text": "ないようを　よむ", "structure": [{"jp": "ないようを　よむ", "en": "read the contents"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "ないようを　よむ", "structure": [{"jp": "ないようを　よむ", "en": "read the contents"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2"}}

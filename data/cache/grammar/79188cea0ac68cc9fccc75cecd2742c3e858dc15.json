@@ -1,1 +1,1 @@
-{"text": "どうぐを　ひきだす", "structure": [{"jp": "どうぐを　ひきだす", "en": "withdraw an item"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "どうぐを　ひきだす", "structure": [{"jp": "どうぐを", "en": "an item"}, {"jp": "ひきだす", "en": "withdraw"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2"}}

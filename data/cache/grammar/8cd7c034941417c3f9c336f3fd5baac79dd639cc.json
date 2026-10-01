@@ -1,1 +1,1 @@
-{"text": "えらぶ　きりかえ　ＡＢおわる", "structure": [{"jp": "えらぶ　きりかえ　ＡＢおわる", "en": "choose, switch, A/B finish"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "えらぶ　きりかえ　ＡＢおわる", "structure": [{"jp": "えらぶ", "en": "choose"}, {"jp": "きりかえ", "en": "switch"}, {"jp": "ＡＢおわる", "en": "A or B: finish"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2"}}

@@ -1,1 +1,1 @@
-{"text": "かるいじゅん", "structure": [{"jp": "かるい", "en": "light"}, {"jp": "じゅん", "en": "order"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "かるいじゅん", "structure": [{"jp": "かるいじゅん", "en": "in order of lightest"}], "patterns": [{"name": "〜じゅん", "span": "かるいじゅん", "words": ["かるい", "じゅん"], "explanation": "じゅん after a describing word means 'in order, starting from the most like that'. かるいじゅん = 'lightest first'."}], "_run": {"model": "opus", "effort": "low", "version": "2"}}

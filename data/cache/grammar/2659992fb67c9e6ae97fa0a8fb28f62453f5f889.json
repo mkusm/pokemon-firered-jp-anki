@@ -1,1 +1,1 @@
-{"text": "バッグを　とじます", "structure": [{"jp": "バッグを", "en": "the Bag"}, {"jp": "とじます", "en": "close"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "バッグを　とじます", "structure": [{"jp": "バッグを　とじます", "en": "close the Bag"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2"}}

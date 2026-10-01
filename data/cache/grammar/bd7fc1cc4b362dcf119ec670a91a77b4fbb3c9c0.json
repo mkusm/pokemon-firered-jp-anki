@@ -1,1 +1,1 @@
-{"text": "ボックスそうさを　つづけますか？", "structure": [{"jp": "ボックスそうさを", "en": "Box operations (object)"}, {"jp": "つづけますか？", "en": "continue?"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "ボックスそうさを　つづけますか？", "structure": [{"jp": "ボックスそうさを", "en": "Box operations"}, {"jp": "つづけますか？", "en": "will you continue?"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2"}}

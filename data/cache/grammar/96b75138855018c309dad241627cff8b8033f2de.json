@@ -1,1 +1,1 @@
-{"text": "＊の　へんかが　とまった！", "structure": [{"jp": "＊の　へんかが", "en": "＊'s change"}, {"jp": "とまった！", "en": "stopped"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "＊の　へんかが　とまった！", "structure": [{"jp": "＊の　へんかが", "en": "＊'s change"}, {"jp": "とまった！", "en": "stopped!"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2"}}

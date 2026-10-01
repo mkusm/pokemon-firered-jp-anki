@@ -1,1 +1,1 @@
-{"text": "みてみて！", "structure": [{"jp": "みてみて！", "en": "look, look!"}], "patterns": [{"name": "〜て (request)", "span": "みてみて", "words": ["みて"], "explanation": "て form alone is a casual request. みて = 'look!'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "みてみて！", "structure": [{"jp": "みてみて！", "en": "look, look!"}], "patterns": [{"name": "〜て (request)", "span": "みて", "words": ["みて"], "explanation": "A て-form verb on its own is a casual request, short for てください. みて = 'look!'."}], "_run": {"model": "opus", "effort": "low", "version": "2"}}

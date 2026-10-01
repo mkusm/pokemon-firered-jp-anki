@@ -1,1 +1,1 @@
-{"text": "ＳＴＡＲＴなきごえ", "structure": [{"jp": "ＳＴＡＲＴ", "en": "START"}, {"jp": "なきごえ", "en": "cry"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "ＳＴＡＲＴなきごえ", "structure": [{"jp": "ＳＴＡＲＴなきごえ", "en": "START: cry"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2"}}

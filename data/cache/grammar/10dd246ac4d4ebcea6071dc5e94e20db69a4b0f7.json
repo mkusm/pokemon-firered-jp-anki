@@ -1,1 +1,1 @@
-{"text": "＊の　＊は　＊を　ひっこめた！", "structure": [{"jp": "＊の　＊は", "en": "＊'s ＊"}, {"jp": "＊を　ひっこめた！", "en": "withdrew ＊"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "＊の　＊は　＊を　ひっこめた！", "structure": [{"jp": "＊の　＊は", "en": "＊'s ＊"}, {"jp": "＊を　ひっこめた！", "en": "withdrew ＊!"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2"}}

@@ -15,7 +15,7 @@ class UsageLimit(Exception):
 
 def call(prompt: str, system: str, schema: dict, model: str, effort: str,
          timeout: int = 1800) -> tuple[dict, dict]:
-    """→ (structured output, run info: cost, tokens, duration)."""
+    """→ (structured output, run info: duration)."""
     cmd = [
         "claude", "-p", "--model", model, "--effort", effort,
         "--output-format", "json", "--json-schema", json.dumps(schema),
@@ -38,14 +38,7 @@ def call(prompt: str, system: str, schema: dict, model: str, effort: str,
         if "limit" in msg.lower():
             raise UsageLimit(msg)
         raise RuntimeError(msg[:500])
-    usage = out.get("usage", {})
-    info = {
-        "cost": out.get("total_cost_usd", 0.0),
-        "in": usage.get("input_tokens", 0) + usage.get("cache_read_input_tokens", 0)
-        + usage.get("cache_creation_input_tokens", 0),
-        "out": usage.get("output_tokens", 0),
-        "ms": out.get("duration_ms", 0),
-    }
+    info = {"ms": out.get("duration_ms", 0)}
     if out.get("structured_output") is None:
         raise RuntimeError(f"no structured output: {str(out.get('result'))[:300]}")
     return out["structured_output"], info

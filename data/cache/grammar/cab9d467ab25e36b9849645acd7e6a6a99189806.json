@@ -1,1 +1,1 @@
-{"text": "みえない……", "structure": [{"jp": "みえない……", "en": "can't see"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "みえない……", "structure": [{"jp": "みえない……", "en": "I can't see it..."}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2"}}

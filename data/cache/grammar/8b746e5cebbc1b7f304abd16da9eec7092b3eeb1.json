@@ -1,1 +1,1 @@
-{"text": "グレー", "structure": [{"jp": "グレー", "en": "Gray"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "グレー", "structure": [{"jp": "グレー", "en": "Gray"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2"}}

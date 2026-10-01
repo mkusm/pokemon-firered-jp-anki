@@ -1,1 +1,1 @@
-{"text": "てれや", "structure": [{"jp": "てれや", "en": "bashful"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "てれや", "structure": [{"jp": "てれや", "en": "bashful person"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2"}}

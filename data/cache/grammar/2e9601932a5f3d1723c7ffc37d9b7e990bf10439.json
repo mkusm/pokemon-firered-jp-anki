@@ -1,1 +1,1 @@
-{"text": "そうじゃ！", "structure": [{"jp": "そうじゃ！", "en": "That's right!"}], "patterns": [{"name": "〜だ", "span": "そうじゃ", "words": ["そう", "じゃ"], "explanation": "じゃ is the old-man form of だ. そうじゃ = 'That's so'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "そうじゃ！", "structure": [{"jp": "そうじゃ！", "en": "that's right!"}], "patterns": [{"name": "〜だ", "span": "そうじゃ", "words": ["じゃ"], "explanation": "じゃ is how old men in stories say だ, 'is'. そうじゃ = 'that's right'."}], "_run": {"model": "opus", "effort": "low", "version": "2"}}

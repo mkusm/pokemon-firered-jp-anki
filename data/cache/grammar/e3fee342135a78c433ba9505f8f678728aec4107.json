@@ -1,1 +1,1 @@
-{"text": "むしよけスプレー", "structure": [{"jp": "むしよけスプレー", "en": "Repel (bug-repelling spray)"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "むしよけスプレー", "structure": [{"jp": "むしよけスプレー", "en": "bug-repelling spray"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2"}}
