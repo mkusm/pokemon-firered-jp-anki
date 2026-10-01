@@ -1,0 +1,327 @@
+# Where non-dialogue text is first seen, for the order stage.
+#
+# Keys are corpus groups (common text) or map_order.yaml `global` entries
+# (script text with no single map). Glob patterns like easy_chat_group_* work.
+# A value is one anchor, or a list of [label regex, anchor] rules tried in
+# order (first match wins; end with ['.', …] as the fallback).
+#
+# Anchors:
+#   <map_order entry>  seen at that point, after that entry's own dialogue
+#   start              before the intro (title screen, menus)
+#   end                end of the deck (rare: link play, never-seen text)
+#   exclude            never carded (debug, Ruby/Sapphire leftovers)
+#   species | move | item | ability | trainer | trainer_class | mapsec | pokedex
+#                      computed from the pret decomp: first map where the thing
+#                      is met (wild, trainer party, gift, Mart, item ball, TM…)
+#   berry | named      a berry's own first find; a move or ability named in the label
+#   battle_effect      a battle message → first move whose effect prints it
+#   area_desc          a Town Map area description → where that area is reached
+#   effect:<regex>     first time a move with a matching battle effect is seen
+#   item:<regex>       first time any matching item constant is obtained
+#   a|b                try a; if it can't place the row, use b
+#
+# Check with: uv run python -m firered_anki.order
+
+groups:
+  # --- computed from the decomp
+  species_names: species
+  pokedex_text_fr: pokedex          # after the Pokédex, once the species is met
+  pokedex_entries: pokedex          # species categories (たねポケモン…)
+  move_names: move
+  move_descriptions: move
+  items: item
+  abilities: ability
+  trainers: exclude                 # trainer names (アミ, シンゴ): labels, not vocabulary
+  trainer_class_names: trainer_class
+  region_map_entry_strings: mapsec  # map-name popups
+  berry: berry                      # each berry where it is first found
+
+  # --- first battle and first look at your party (rival in Oak's lab)
+  battle_main: PalletTown_ProfessorOaksLab      # type names
+  battle_interface: PalletTown_ProfessorOaksLab
+  learn_move: PalletTown_ProfessorOaksLab
+  nature_names: PalletTown_ProfessorOaksLab
+  battle_message:
+    - ['Safari|Bait|ThrewRock|WatchingCarefully|IsEating|IsAngry', FuchsiaCity_SafariZone_Entrance]
+    - ['Link|Multi|Partner|TwoLink|BattleTower', end]
+    - ['Ghost|SilphScope|Unidentified', PokemonTower_2F]
+    - ['OldMan|Pokedude|Teachy', pokedude]
+    # Status messages the engine prints outside any move's script: tied by hand
+    # to the effect that causes the status.
+    - ['PkmnsItem', 'item:ITEM_\w+_BERRY']                  # a held berry cured it
+    - ['IgnoresAsleep|TurnedAway|PretendNotNotice|IgnoredOrders|WontObey|Loafing', ingame_trade]  # only traded Pokémon disobey
+    - ['MustRecharge', 'effect:EFFECT_RECHARGE']
+    - ['Flinch', 'effect:EFFECT_FLINCH.*']
+    - ['Asleep|WokeUp|gText_Sleep', 'effect:EFFECT_SLEEP']
+    - ['Confus', 'effect:EFFECT_CONFUSE.*']
+    - ['Paraly', 'effect:EFFECT_PARALYZE.*']
+    - ['Frozen|Defrost', 'effect:EFFECT_FREEZE_HIT']
+    - ['Burn', 'effect:EFFECT_(BURN_HIT|WILL_O_WISP)']
+    - ['HurtByPoison|gText_Poison', 'effect:EFFECT_(POISON.*|TOXIC)']
+    - ['Substitute', 'effect:EFFECT_SUBSTITUTE']
+    - ['Disable', 'effect:EFFECT_DISABLE']
+    - ['ByMist', 'effect:EFFECT_MIST']
+    - ['InLove|ByLove', 'effect:EFFECT_ATTRACT']
+    - ['TookSunlight', 'effect:EFFECT_SOLAR_?BEAM']
+    - ['Rain|Raining', 'effect:EFFECT_RAIN_DANCE']
+    - ['Sunlight', 'effect:EFFECT_SUNNY_DAY']
+    - ['TighteningFocus', 'effect:EFFECT_FOCUS_PUNCH']
+    - ['PerishCount', 'effect:EFFECT_PERISH_SONG']
+    # Traced through the battle scripts to the move effect that prints it
+    # ("must recharge" → Hyper Beam): where that move is first seen. Else a move
+    # or ability named in the label; the rest at the first battle (or where the
+    # classify stage puts them).
+    - ['.', 'battle_effect|named|PalletTown_ProfessorOaksLab']
+
+  # --- features unlocked along the way
+  # Teachy TV: each programme where its topic first matters.
+  teachy_tv:
+    - ['Status', ViridianForest]                  # first poison
+    - ['Matchups', PewterCity_Gym]                # type matchups
+    - ['TMs|TMTypes|TMDescription', 'item:ITEM_TM\d+']
+    - ['^', pokedude]                             # battling, catching, registering: with the TV
+  mon_markings: pc
+  daycare: Route5_PokemonDayCare
+  ingame_trades: ingame_trade
+  # Quest log (the "previously on your quest" recap when you reload a save):
+  # place names where the place is reached, action lines where the action
+  # first happens, link-play lines at the end, the rest at the first reload.
+  quest_log:
+    # places
+    - ['_SilphCo$', SilphCo_1F]
+    - ['_FightingDojo$', SaffronCity_Dojo]
+    - ['_CeladonDeptStore$', CeladonCity_DepartmentStore_1F]
+    - ['_RocketHideout$', RocketHideout_B1F]
+    - ['_VictoryRoad$', VictoryRoad_1F]
+    - ['_PokemonFanClub$', VermilionCity_PokemonFanClub]
+    - ['_UndergroundPath$', UndergroundPath_SouthEntrance]
+    - ['_PowerPlant$', PowerPlant]
+    - ['_VolunteerHouse$', LavenderTown_VolunteerPokemonHouse]
+    - ['_RockTunnel$', RockTunnel_1F]
+    - ['_BikeShop$', CeruleanCity_BikeShop]
+    - ['_Restaurant$', CeladonCity_Restaurant]
+    - ['_CeladonMansion$', CeladonCity_Condominiums_1F]
+    - ['_PokemonMansion$', PokemonMansion_1F]
+    - ['_OakResearchLab$|LeftOaksLab', PalletTown_ProfessorOaksLab]
+    - ['_NameRatersHouse$', LavenderTown_House2]
+    - ['_Home$|RestedAtHome', PalletTown_PlayersHouse_1F]
+    - ['_PokemonLeagueGate$', Route23]
+    - ['_ViridianForest$', ViridianForest]
+    - ['_PewterMuseumOfScience$', PewterCity_Museum_1F]
+    - ['_MtMoon$', MtMoon_1F]
+    - ['_BillsHouse$', Route25_SeaCottage]
+    - ['_DayCare$', Route5_PokemonDayCare]
+    - ['_SSAnne$', SSAnne_1F_Corridor]
+    - ['_DiglettsCave$', DiglettsCave_SouthEntrance]
+    - ['_PokemonTower$', PokemonTower_1F]
+    - ['_RocketGameCorner$|GameCorner', CeladonCity_GameCorner]
+    - ['_SafariZone$|InSafariZone', FuchsiaCity_SafariZone_Entrance]
+    - ['_WardensHome$', FuchsiaCity_WardensHouse]
+    - ['_SeafoamIslands$', SeafoamIslands_B4F]
+    - ['_PokemonResearchLab$', CinnabarIsland_PokemonLab_Entrance]
+    - ['_PokemonLeague$', IndigoPlateau_PokemonCenter_1F]
+    - ['_CeruleanCave$', CeruleanCave_B1F]
+    # link play
+    - ['UnionRoom|ChattedWith|TradedMon1ForTrainers|WithPersonResulted|WithPeopleResulted|BattledTrainerEndedInOutcome|_Win$|_Loss$|_Draw$|WonTheMatchAsAResult', end]
+    - ['UsedDive', end]                           # no Dive in FireRed
+    # actions
+    - ['UsedSurf', surf]
+    - ['UsedCut', field_moves]
+    - ['UsedFly', Route16_House]
+    - ['UsedFlash', Route2_EastBuilding]
+    - ['UsedStrength', FuchsiaCity_WardensHouse]
+    - ['UsedRockSmash', 'item:ITEM_HM06']
+    - ['UsedWaterfall', 'item:ITEM_HM07']
+    - ['UsedEscapeRope', 'item:ITEM_ESCAPE_ROPE']
+    # Moves named in the label: where that move is first seen.
+    - ['UsedTeleport|UsedDig|UsedSweetScent|UsedMilkDrink|UsedSoftboiled', 'named|end']
+    - ['FromHM|WithHM', 'item:ITEM_HM\d+']
+    - ['FromTM|WithTM', 'item:ITEM_TM\d+']
+    - ['PC$|FromPC|InPC|Box|SwitchedMultipleMons|SwitchedPartyMon', pc]
+    - ['Bought|Sold', poke_mart]
+    - ['AtCenter', ViridianCity_PokemonCenter_1F]
+    - ['TradedMon1ForPersons', ingame_trade]
+    - ['Gym', PewterCity_Gym]
+    - ['EliteFour', PokemonLeague_LoreleisRoom]
+    - ['Champion', PokemonLeague_ChampionsRoom]
+    - ['PlayerSentOutMon1RivalSentOutMon2', Route22]
+    - ['HeldItem|UsedItemOnMon|UsedTheItem|UsedTheKeyItem|ObtainedItem', Route1]
+    - ['^', ViridianCity]                         # generic recap lines, first reload
+  keyboard_text: exclude            # naming-screen letter grids
+
+  strings:
+    - ['^\^j_', exclude]
+    # Town Map area descriptions: where that place is reached (else with the map).
+    - ['RegionMap_AreaDesc_', 'area_desc|PalletTown_RivalsHouse']
+    - ['ExpandedPlaceholder|Empty\d|Unused|Dummy', exclude]   # Ruby/Sapphire names, blanks
+    # Error messages a normal game never shows: save failures, corrupted or
+    # deleted save data, damaged backup memory.
+    - ['SaveError|SaveFail|Corrupt|BackupMemory|SaveFileHasBeenDeleted|GamePlayCannot', end]
+    # A hardware error and the hidden save-wipe screen.
+    - ['SubCircuitBoard|ClearAllSaveData|ClearingData', end]
+    - ['Credits|Staff|HOF|LeagueChamp|Victories|BecomeLeader', PokemonLeague_HallOfFame]
+    - ['Giddy|Mail|EasyChat|BerryCrush|Union|Link|Trade|Communicat|Record|Wonder|News|Mystery|Wireless|Profile|Chat|Designers|Dodrio|PokemonJump|Colosseum|Hoenn|Birch|Contest|SecretBase|Decor|Diploma', end]
+    - ['Bard|Trendy|GoodSaying|Song|Phrase|Beauty|Tough|Pink|Rankings|Players|Pressing|Cooperative|Excellents|WantToPlayAgain|EReader|JPText|Card|Stamp|Gift|Comm', end]
+    - ['Shop|Sell|Buy|Pokedollar|HowMany|QuitShopping|SendItHome', poke_mart]
+    - ['Cut|Flash|LightUp|Dive|Surf|Strength|Waterfall|RockSmash|ShareHp|HealingSpot|Teleport|Dig', field_moves]
+    - ['Lemonade|SodaPop|FreshWater|Iron_|Zinc_|Calcium_|Carbos_|Protein_|HealPowder|\d+F\b|\d+F_|B\dF', CeladonCity_DepartmentStore_1F]
+    - ['Nibble|Fish|Rod', 'item:ITEM_(OLD|GOOD|SUPER)_ROD']
+    - ['Itemfinder', itemfinder]
+    - ['PokeFlute', PokemonTower_7F]
+    - ['CoinCase', CeladonCity_GameCorner]
+    - ['(?i)boulder_?badge', PewterCity_Gym]
+    - ['(?i)cascade_?badge', CeruleanCity_Gym]
+    - ['(?i)thunder_?badge', VermilionCity_Gym]
+    - ['(?i)rainbow_?badge', CeladonCity_Gym]
+    - ['(?i)soul_?badge', FuchsiaCity_Gym]
+    - ['(?i)marsh_?badge', SaffronCity_Gym]
+    - ['(?i)volcano_?badge', CinnabarIsland_Gym]
+    - ['(?i)earth_?badge', ViridianCity_Gym]
+    - ['PC|Box|Storage|Withdraw|Deposit|Etcetera|Marking', pc]
+    - ['Pokedex|Dex|Habitat|Area|Category|Size|Height|Weight|Seen|Owned|Cry|Mode|Search|Lbs|Kanto', pokedex_rating]
+    - ['Fame', CeruleanCity]
+    - ['RegionMap|TownMap', PalletTown_RivalsHouse]
+    - ['Coins|Slot|GameCorner', CeladonCity_GameCorner]
+    - ['TM|HM|Tm\d', 'item:ITEM_(TM|HM)\d+']      # TM Case comes with the first TM
+    - ['Berry|Berries', 'item:ITEM_\w+_BERRY']
+    - ['Egg|Hatch|DayCare|Daycare', Route5_PokemonDayCare]
+    - ['Safari', FuchsiaCity_SafariZone_Entrance]
+    - ['Island|Seagallop|Sevii', seagallop]
+    - ['TeachyTv|Pokedude', pokedude]
+    - ['VsSeeker|VSSeeker', VermilionCity_PokemonCenter_1F]
+    - ['Bike|Bicycle|Cycling', CeruleanCity_BikeShop]
+    # Only the summary and level-up screens; other Pkmn/Move/Battle strings are
+    # too mixed for a keyword (medicine results, PC boxes, link play) and go to
+    # the classify stage through the catch-all below.
+    - ['PokeSum|Summary|LevelUp', PalletTown_ProfessorOaksLab]
+    - ['.', start]                  # title screen, start menu, bag, options, save
+
+  # --- link play and other rarely seen text
+  union_room_message: end
+  diploma: end                      # completed Pokédex
+  easy_chat_group_*: end
+
+  # --- debug, junk and Ruby/Sapphire leftovers
+  '^j_*': exclude
+  header: exclude                   # secret-base decorations
+  description: exclude
+  battle_anim_status_effects: exclude
+  battle_script_commands: exclude
+  dodrio_berry_picking: exclude
+  field_player_avatar: exclude
+  item_menu: exclude
+  link_rfu_2: exclude
+  mystery_event_msg: exclude
+  mystery_gift_menu: exclude
+  pokemon: exclude
+  sprite: exclude
+  string_util: exclude
+  trade: exclude
+  trainer_card: exclude
+  union_room: exclude
+  union_room_chat: exclude
+
+  # --- map_order.yaml `global` entries (script text)
+  # The Help menu (L/R) is optional reading in manual-style prose, and most of
+  # its words are in the story anyway: its cards go to the end of the deck.
+  help_system: end
+  save:
+    - ['SaveFailed|DifferentGameFile', end]   # save error, overwrite warning
+    - ['^', start]
+  # Lines shown when you inspect an object (bookshelf, TV, kitchen, machines,
+  # signs). The game triggers them by tile type, so the decomp can't say where
+  # each first occurs: the classify stage places them.
+  flavor_text:
+    - ['.', PalletTown_PlayersHouse_2F]
+  obtain_item: Route1                       # the Mart clerk's free Potion
+  # Fame Checker entries unlock as you meet each person; the device itself
+  # comes from the rival in Cerulean.
+  fame_checker:
+    - ['ProfOak|Daisy|Brock', CeruleanCity]
+    - ['Misty', CeruleanCity_Gym]
+    - ['Bill', Route25_SeaCottage]
+    - ['LtSurge', VermilionCity_Gym]
+    - ['Erika', CeladonCity_Gym]
+    - ['Giovanni', RocketHideout_B4F]
+    - ['MrFuji', PokemonTower_7F]
+    - ['Koga', FuchsiaCity_Gym]
+    - ['Sabrina', SaffronCity_Gym]
+    - ['Blaine', CinnabarIsland_Gym]
+    - ['Lorelei', PokemonLeague_LoreleisRoom]
+    - ['Bruno', PokemonLeague_BrunosRoom]
+    - ['Agatha', PokemonLeague_AgathasRoom]
+    - ['Lance', PokemonLeague_LancesRoom]
+    - ['.', CeruleanCity]
+  VSSeeker: VermilionCity_PokemonCenter_1F
+  pc_transfer: pc
+  repel: item:ITEM_REPEL
+  white_out: end
+  cable_club: end
+  event_scripts:
+    - ['Colosseum|TradeCenter|TimeCapsule|RecordCorner|Link|Wireless|MixRecords|TestMsg', end]
+    - ['CardKey', SilphCo_2F]
+    - ['ProfOaksPC|PokedexRated|HavePokedexRated', pokedex_rating]
+    - ['PC|BootedUp', pc]
+    - ['Discount|Mart', poke_mart]
+    - ['Nickname', PalletTown_ProfessorOaksLab]
+    - ['.', ViridianCity_PokemonCenter_1F]
+
+# Story points the classify stage (LLM) may choose from for rows that only a
+# catch-all '.' rule placed. id → what the player first meets there.
+llm_points:
+  start: title screen, new game, options, start menu, bag, save, naming screen
+  PalletTown_PlayersHouse_2F: your bedroom (game console, TV, PC, bed)
+  PalletTown_PlayersHouse_1F: your house downstairs (kitchen, food, dishes, TV, Mom)
+  PalletTown_RivalsHouse: rival's house (Daisy, Town Map on the table, bookshelves)
+  PalletTown_ProfessorOaksLab: first Pokémon, first battle (vs rival), party and summary screens, move/stat/type basics
+  Route1: first wild encounters, first free item
+  ViridianCity: catching tutorial (old man), Poké Balls in battle
+  ViridianCity_PokemonCenter_1F: first Pokémon Center, healing, Someone's PC (Pokémon storage, item storage)
+  ViridianCity_Mart: first Poké Mart (buy/sell)
+  pokedex_rating: Pokédex received, Pokédex screens
+  Route22: first trainer battle outside the lab (prize money, trainer send-outs)
+  ViridianForest: bug Pokémon, first status problems (poison, paralysis), first evolutions
+  PewterCity_Gym: first Gym, badges, first TM (TM Case)
+  MtMoon_1F: caves, fossils, Team Rocket first met, Repel
+  CeruleanCity: Fame Checker, rival battle 3
+  Route25_SeaCottage: Bill, Bill's PC
+  CeruleanCity_House2: the burgled house in Cerulean (Team Rocket broke in)
+  Route5_PokemonDayCare: Day Care (leaving Pokémon, levels)
+  VermilionCity_PokemonCenter_1F: VS Seeker (trainer rematches)
+  SSAnne_CaptainsOffice: HM01 Cut, field moves, teaching HMs
+  VermilionCity_Gym: Lt. Surge, trash-can switches
+  Route11_EastEntrance_2F: Itemfinder, Oak's aides
+  RockTunnel_1F: dark caves, Flash
+  LavenderTown_House2: Name Rater, nicknames
+  CeladonCity_DepartmentStore_1F: department store, elevators, vending machines, vitamins, evolution stones
+  CeladonCity_GameCorner: Game Corner, slot machines, coins, prize exchange
+  CeladonCity_Gym: Erika, grass-type status moves (sleep powder)
+  RocketHideout_B4F: Giovanni, Silph Scope, spin tiles
+  PokemonTower_2F: ghost battles, the unidentifiable ghost
+  PokemonTower_7F: Mr. Fuji, Poké Flute (waking Pokémon)
+  Route12: Snorlax, first special wild battle
+  Route12_FishingHouse: Super Rod, fishing
+  FuchsiaCity_SafariZone_Entrance: Safari Zone rules, Safari Balls, bait and rocks
+  SafariZone_SecretHouse: HM03 Surf, surfing
+  Route16_House: HM02 Fly
+  SilphCo_1F: Silph Co., card-key doors, warp tiles
+  SaffronCity_Dojo: Fighting Dojo, gift Pokémon
+  SeafoamIslands_B4F: strong currents, Strength puzzles, Articuno
+  CinnabarIsland_PokemonLab_ExperimentRoom: fossil revival, trades
+  CinnabarIsland_Gym: Blaine, quiz machines
+  seagallop: Sevii Islands ferry, Pokémon network with Celio
+  TwoIsland_JoyfulGameCorner: Sevii minigames lodge
+  ThreeIsland_BerryForest: berries, Berry Pouch
+  PowerPlant: abandoned Power Plant, big machines, Zapdos
+  ViridianCity_Gym: Giovanni gym, spin tiles, eighth badge
+  VictoryRoad_1F: Strength boulder switches, Victory Road
+  IndigoPlateau_PokemonCenter_1F: Indigo Plateau, Pokémon League entrance and signs
+  PokemonLeague_LoreleisRoom: Elite Four, weather/advanced battle effects often first seen here
+  PokemonLeague_HallOfFame: Hall of Fame, ending credits
+  PalletTown_ProfessorOaksLab_Text_OakNowTheseUnitsCanRecordMoreData: National Pokédex (postgame)
+  FourIsland: Four Island Day Care, Pokémon Eggs, hatching, breeding
+  FiveIsland_RocketWarehouse: postgame Team Rocket, password doors
+  SevenIsland_TrainerTower: Trainer Tower, timed challenges, double battles
+  CeruleanCave_B1F: Mewtwo, end of postgame
+  end: link cable, trading, wireless, Union Room, Mystery Gift, e-Reader; or text a normal single-player game never shows
+  exclude: debug text, unused text, Ruby/Sapphire leftovers

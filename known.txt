@@ -1,0 +1,21 @@
+# Words I already know: analysed, never carded. One per line, as a base form
+# (は) or a kanji spelling (私). Lines starting with # are ignored.
+は
+が
+を
+に
+で
+と
+も
+の
+へ
+や
+か
+よ
+ね
+な
+から
+まで
+です
+ます
+だ
