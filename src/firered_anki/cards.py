@@ -137,6 +137,52 @@ def clean_char_readings(kanji: str, base: str, raw: str) -> str:
     return ""
 
 
+# Pieces of words, not words: stammers (こっ　こんなに), speech broken up by
+# sleep or possession (たべら……　れな……　い), the toothless Warden's garble.
+# The analysis says so in its gloss. These cards stay: they explain text a
+# learner would otherwise puzzle over. They get a tag so they can be found.
+# A half of a compound the game splits with a space ("first half of 忍び込む")
+# is ordinary vocabulary and is not matched; nor is げんきのかけら (Revive),
+# literally a "fragment of vitality".
+FRAGMENT = re.compile(
+    r"stammer|stutter|garbled|broken (?:speech|up)|fragment '|\(cut off\)"
+    r"|fragment of [\u3040-\u30ff\u4e00-\u9fff]"
+    r"|placeholder text|end of '|\((?:first|middle|last|second) (?:part|half)[,)]",
+    re.I,
+)
+# A whole line of short katakana scraps and ellipses: オ…　マ…　エモ…　…　ナカ…マニッ！
+# (…　ココカラ　タチサレ… is a real sentence written in katakana: its runs are long.)
+BROKEN_LINE = re.compile(r"[…　ァ-ヶーぞッっ！？]+")
+SCRAP = re.compile(r"[ァ-ヶーぞッっ]+")
+SOUND = re.compile(r"onomatop|mimetic|sound effect|sound word|\bsfx\b|\(sound|sound of|laugh|screech|noise|babbl", re.I)
+
+
+def _gloss(w: dict) -> str:
+    return " | ".join(w.get(k) or "" for k in ("in_context", "literal", "modifiers"))
+
+
+def is_broken_line(text: str) -> bool:
+    if not BROKEN_LINE.fullmatch(text) or text.count("…") < 2:
+        return False
+    runs = SCRAP.findall(text)
+    return len(runs) >= 2 and sum(map(len, runs)) / len(runs) <= 3
+
+
+def is_fragment(text: str, w: dict) -> bool:
+    """A piece of a word: glossed as one, or any non-sound word in a line of scraps."""
+    gloss = _gloss(w)
+    return bool(FRAGMENT.search(gloss)) or (is_broken_line(text) and not SOUND.search(gloss))
+
+
+def is_onomatopoeia(w: dict, entry: dict) -> bool:
+    """JMdict marks the chosen sense as onomatopoeic or mimetic, or the gloss
+    says it is a sound (for sound words with no entry, like ピカ)."""
+    senses = entry.get("s", [])
+    n = w.get("sense") or 0
+    marked = senses[n - 1].get("on") if 1 <= n <= len(senses) else any(s.get("on") for s in senses)
+    return bool(marked) or bool(re.search(r"onomatop|mimetic|sound effect|sound word|\bsfx\b|\(sound", _gloss(w), re.I))
+
+
 def dict_sense(w: dict, entry: dict) -> str:
     """The JMdict definition of the sense chosen for this sentence. It tells
     apart cards whose short gloss is the same: 危ない "dangerous" (sense 1) and
@@ -342,6 +388,7 @@ def build_cards(run_name: str = MAIN.name, offline_merge: bool = False) -> tuple
                 "Literal": w.get("literal") or "",
                 "InContext": w.get("in_context") or "", "Modifiers": w.get("modifiers") or "",
                 "DictSense": dict_sense(w, e),
+                "Onomatopoeia": "onomatopoeic or mimetic word" if is_onomatopoeia(w, e) else "",
                 "SentenceKanji": a["kanji"], "SentenceEnglish": a["english"],
                 "ExtraExamples": "<br>".join(extras), "Context": ctx,
                 "Location": location(r), "MessageId": r.msg_id,
@@ -350,7 +397,9 @@ def build_cards(run_name: str = MAIN.name, offline_merge: bool = False) -> tuple
                 "tags": [re.sub(r"\W", "_", location(r))]
                 + (["proper"] if w.get("proper") else [])
                 + (["low-confidence"] if w.get("low_confidence") or w.get("_form_mismatch") else [])
-                + (["sense-guessed"] if w.get("_sense_guessed") else []),
+                + (["sense-guessed"] if w.get("_sense_guessed") else [])
+                + (["onomatopoeia"] if is_onomatopoeia(w, e) else [])
+                + (["fragment"] if is_fragment(first["text"], w) else []),
             })
         df = pd.DataFrame(out).sort_values("order").reset_index(drop=True)
         df["Order"] = [f"{i:06d}" for i in range(len(df))]
