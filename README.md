@@ -47,6 +47,8 @@ text that would otherwise be puzzling.
 
 ## How to use
 
+All you need is [Anki](https://apps.ankiweb.net/), on desktop or on your phone.
+
 1. **Get the deck.** Download `firered_jp.apkg` from the
    [latest release](https://github.com/mkusm/pokemon-firered-jp-anki/releases/latest)
    and open it in Anki (desktop: File → Import; AnkiDroid and AnkiMobile: open
@@ -72,7 +74,29 @@ text that would otherwise be puzzling.
    notes** and **Update note types** to *Always*, or Anki keeps the old card
    layout.
 
-## Requirements
+## How the order is decided
+
+1. **Dialogue** follows `map_order.yaml`.
+2. **Everything else** goes where you first see it. Species, moves, items,
+   abilities, map names and battle messages are worked out from the decomp: wild
+   encounters, trainer parties, Mart stock, item pickups, TMs, and which move
+   effect's battle script prints which message. Menus and other UI go by the
+   rules in `first_seen.yaml`.
+3. **Spreading.** The game is cut into chapters, one per gym badge. Non-dialogue
+   lines are interleaved with the story inside their chapter, and only kept if
+   they teach something the chapter's dialogue does not.
+4. The deck opens with the game's own opening (controls guide, intro, Oak's
+   speech); menu text only starts once the menu can be opened.
+
+Text a normal game never shows goes to the end: link play, error messages, the
+Help menu, and Ruby/Sapphire leftovers that have no place in FireRed.
+
+## Building it yourself
+
+You don't need any of this to use the deck: the release files and Anki are
+enough. This part is for rebuilding the deck or changing how it is made.
+
+### Requirements
 
 - [uv](https://docs.astral.sh/uv/) and Python 3.10+
 - git
@@ -80,7 +104,7 @@ text that would otherwise be puzzling.
   on a Claude subscription through `claude -p`. With the caches in this repo you
   do not need it to rebuild the deck.
 
-## Build the deck
+### Build the deck
 
 ```sh
 scripts/fetch_vendor.sh          # the game text and the decomp, into vendor/
@@ -112,7 +136,7 @@ For scale: the first full run was 12,747 sentences in 322 calls (Sonnet, low
 effort, 40 sentences a call), about five hours with one usage-limit pause, and
 roughly $110 at API prices. Escalation redid 2,132 sentences on Opus.
 
-## Things you edit
+### Things you edit
 
 | File | What it controls |
 |---|---|
@@ -125,24 +149,7 @@ After editing any of them, re-run from `order` onward. Card IDs come from the
 word, sense and form, so a rebuilt deck updates your existing cards and keeps
 their review history.
 
-## How the order is decided
-
-1. **Dialogue** follows `map_order.yaml`.
-2. **Everything else** goes where you first see it. Species, moves, items,
-   abilities, map names and battle messages are worked out from the decomp: wild
-   encounters, trainer parties, Mart stock, item pickups, TMs, and which move
-   effect's battle script prints which message. Menus and other UI go by the
-   rules in `first_seen.yaml`.
-3. **Spreading.** The game is cut into chapters, one per gym badge. Non-dialogue
-   lines are interleaved with the story inside their chapter, and only kept if
-   they teach something the chapter's dialogue does not.
-4. The deck opens with the game's own opening (controls guide, intro, Oak's
-   speech); menu text only starts once the menu can be opened.
-
-Text a normal game never shows goes to the end: link play, error messages, the
-Help menu, and Ruby/Sapphire leftovers that have no place in FireRed.
-
-## Layout
+### Layout
 
 ```
 src/firered_anki/
