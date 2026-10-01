@@ -9,8 +9,10 @@ words (かみ is 紙, 神 or 髪). A tokenizer and a dictionary alone pick wrong
 every sentence is analysed by Claude with its neighbours, speaker and location in
 view, and JMdict is used to ground and check the answer.
 
-**Keep this repository private.** `data/cache/` contains the game's text, which is
-Nintendo's. The deck is for personal study.
+This is an unofficial fan project for studying Japanese. Pokémon and the game's
+text belong to Nintendo, Creatures and GAME FREAK; the text comes from the public
+[poke-corpus](https://github.com/abcboy101/poke-corpus) and is also present in
+`data/cache/`, inside the analysed sentences.
 
 How it works, in detail: [`docs/how-it-works.html`](docs/how-it-works.html)
 (open it in a browser).
@@ -19,21 +21,25 @@ How it works, in detail: [`docs/how-it-works.html`](docs/how-it-works.html)
 
 | | |
 |---|---|
-| `firered_jp.apkg` | 11,174 cards, in story order |
-| `firered_jp_names.apkg` | 957 cards for names (Pokémon, places, moves, items), optional |
+| `firered_jp.apkg` | 11,234 cards, in story order |
+| `firered_jp_names.apkg` | 925 cards for names (Pokémon, places, moves, items), optional |
+
+Both are attached to the [latest release](https://github.com/mkusm/pokemon-firered-jp-anki/releases/latest),
+ready to import.
 
 Each card:
 
 - **Front:** the sentence as the game shows it, with one word highlighted, and
   the speaker when known.
 - **Back:** the word's form and dictionary form, kanji with per-character
-  readings, romaji, what it means here, how the form is built
+  readings, romaji, what it means here, the dictionary sense that was chosen,
+  how the form is built
   (`つかまえ (stem) + て (te-form)`), the sentence in kanji and in English, up to
   two more example sentences, the whole message, and the JMdict senses.
 
 つかまえた, つかまえて and つかまえられる are three cards: every form is drilled
 where the story first uses it. Cards are tagged with their location, and
-`low-confidence` or `sense-guessed` where the analysis was unsure.
+`low-confidence` where the analysis was unsure.
 
 In Anki, set the deck's new-card order to **order added**, or the story order is
 lost. When re-importing after a rebuild, set **Update note types** to **Always**.
@@ -70,6 +76,7 @@ uv run python -m firered_anki.classify          # place strings no rule fits
 uv run python -m firered_anki.order             # apply those placements
 uv run python -m firered_anki.analyse full      # analyse uncached sentences
 uv run python -m firered_anki.analyse escalate  # redo flagged ones on Opus
+uv run python -m firered_anki.sense_pick        # choose the sense where only the entry is known
 ```
 
 Both resume from the cache, and `analyse` waits out a usage limit and carries on.
@@ -121,6 +128,7 @@ src/firered_anki/
   analyse.py      per-sentence LLM analysis, dry run, escalation
   claude_cli.py   headless `claude -p` with a JSON schema
   grounding.py    fill and check JMdict IDs after the LLM
+  sense_pick.py   LLM choice of sense for entries found by lookup
   cards.py        occurrences → cards, sense merge, examples
   romaji.py       kana → Hepburn
   build.py        cards → .apkg
@@ -133,7 +141,7 @@ vendor/           upstream clones (ignored)
 
 - About 250 battle messages and 580 other UI strings are placed by the LLM's
   judgement, not computed. See `first_seen_llm.yaml`.
-- Chapter 1, up to Brock, is the largest, about 2,480 cards: that is where the
+- Chapter 1, up to Brock, is the largest, about 2,500 cards: that is where the
   menus and most basic vocabulary first appear.
 - JMdict comes from `jamdict-data` (a 2020 snapshot).
 - Rematch lines of ordinary trainers sit at their route's first visit.

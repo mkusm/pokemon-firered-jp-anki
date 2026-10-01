@@ -21,7 +21,7 @@ import json
 import random
 import re
 import sys
-from collections import defaultdict
+from collections import Counter, defaultdict
 
 import pandas as pd
 
@@ -74,6 +74,78 @@ def base_kana(w: dict, entry: dict) -> str:
     return entry["r"][0] + suru
 
 
+KANJI = re.compile(r"[\u4e00-\u9fff々]")
+# Readings as cited in a dictionary can differ from the reading inside a word
+# by gemination (食 しょく in 食器 しょっき) or voicing (紙 かみ in 手紙 てがみ).
+_PLAIN = str.maketrans("がぎぐげござじずぜぞだぢづでどばびぶべぼぱぴぷぺぽっ",
+                       "かきくけこさしすせそたちつてとはひふへほはひふへほつ")
+
+
+def _same_sounds(a: str, b: str) -> bool:
+    if len(a) != len(b):
+        return False
+    for x, y in zip(a.translate(_PLAIN), b.translate(_PLAIN)):
+        if x != y and not ({x, y} <= set("つくちき")):
+            return False
+    return True
+
+
+def clean_char_readings(kanji: str, base: str, raw: str) -> str:
+    """Per-kanji readings in one format, or "" if they can't be trusted.
+
+    The model sometimes lists the kana endings as extra items (決 き · める),
+    includes them in a reading (売 うり in 安売り), or names a character that
+    is not in the word. Kana items are dropped, overlapping endings trimmed,
+    and the result is kept only if the readings add up to the word's reading.
+    A reading for a group of characters (上手 うま) is kept as a group.
+    """
+    if not raw or not KANJI.search(kanji):
+        return ""
+    pairs = []
+    for item in re.split(r"[·・,、]", raw):
+        m = re.match(r"^\s*(\S+)\s+(\S+)\s*$", item)
+        if m and all(KANJI.match(ch) for ch in m.group(1)):
+            pairs.append([m.group(1), hira(m.group(2))])
+    word, reading = kanji, hira(base)
+    if word.endswith("する") and reading.endswith("する"):
+        word, reading = word[:-2], reading[:-2]
+    if "".join(h for h, _ in pairs) != "".join(ch for ch in word if KANJI.match(ch)):
+        return ""  # a missing, extra or invented character
+
+    def rebuild(trim: bool) -> tuple[str, list[tuple[str, str]]]:
+        out, kept, i = "", [], 0
+        for head, r in pairs:
+            j = word.index(head, i)
+            out += hira(word[i:j])
+            i = j + len(head)
+            if trim:
+                # An ending the model counted twice: 売 うり before り.
+                tail = hira(re.match(r"[^\u4e00-\u9fff々]*", word[i:]).group())
+                for n in range(min(len(tail), len(r) - 1), 0, -1):
+                    if r.endswith(tail[:n]):
+                        r = r[:-n]
+                        break
+            kept.append((head, r))
+            out += r
+        return out + hira(word[i:]), kept
+
+    # As given first: 幼 おさな in 幼なじみ ends in な legitimately.
+    for trim in (False, True):
+        rebuilt, kept = rebuild(trim)
+        if _same_sounds(rebuilt, reading):
+            return " · ".join(f"{h} {r}" for h, r in kept)
+    return ""
+
+
+def dict_sense(w: dict, entry: dict) -> str:
+    """The JMdict definition of the sense chosen for this sentence. It tells
+    apart cards whose short gloss is the same: 危ない "dangerous" (sense 1) and
+    "close (call); narrow (escape)" (sense 4)."""
+    senses = entry.get("s", [])
+    n = w.get("sense") or 0
+    return "; ".join(senses[n - 1]["g"]) if 1 <= n <= len(senses) else ""
+
+
 def sentence_in_romaji(text: str, analysis: dict) -> str:
     words = analysis["words"]
     return sentence_romaji(text, words, {i for i, w in enumerate(words) if is_particle(w)})
@@ -103,6 +175,23 @@ def occurrences(deck: pd.DataFrame, analyses: dict, known: set) -> pd.DataFrame:
                 "proper": bool(w.get("proper")), "known": skip, "word": w,
             })
     return pd.DataFrame(rows)
+
+
+def unify_unlinked(occ: pd.DataFrame) -> pd.Series:
+    """Give a word with no JMdict entry the key of the same word where it has
+    one. The analysis links を to its entry in some sentences and not in
+    others; without this the same word makes two cards."""
+    linked: dict[tuple, Counter] = defaultdict(Counter)
+    for k, w in zip(occ["key"], occ["word"]):
+        if k[0] == "jm":
+            linked[(hira(w["base"]), k[3])][k] += 1
+
+    def fix(k: tuple) -> tuple:
+        if k[0] == "base" and (k[1], k[3]) in linked:
+            return linked[(k[1], k[3])].most_common(1)[0][0]
+        return k
+
+    return occ["key"].map(fix)
 
 
 # --- 2. sense merge ------------------------------------------------------------
@@ -182,7 +271,11 @@ def merge_senses(occ: pd.DataFrame, entries: dict, offline: bool = False) -> dic
 # --- 3–4. order and examples ------------------------------------------------------
 
 def location(r) -> str:
-    name = r.first_seen if r.dialogue else f"UI: {r.group}"
+    # A map_order entry that is a single label (gControlsGuide_Text_Intro,
+    # Route22_Text_LateRivalIntro) only moves the line in time: the place is
+    # still the message's own group.
+    place = r.group if "_Text_" in str(r.first_seen) else r.first_seen
+    name = place if r.dialogue else f"UI: {r.group}"
     name = re.sub(r"^llm: ", "", str(name))
     return re.sub(r"(?<=[a-z])(?=[A-Z])|_", " ", name).replace("  ", " ").strip()
 
@@ -198,6 +291,7 @@ def build_cards(run_name: str = MAIN.name, offline_merge: bool = False) -> tuple
     analyses = results(run_name, deck["text"].unique(), entries)
     occ = occurrences(deck, analyses, known_words())
 
+    occ["key"] = unify_unlinked(occ)
     canon = merge_senses(occ, entries, offline=offline_merge)
     occ["key"] = occ["key"].map(
         lambda k: (k[0], k[1], canon.get((k[1], k[2]), k[2]), k[3]) if k[0] == "jm" else k)
@@ -243,8 +337,11 @@ def build_cards(run_name: str = MAIN.name, offline_merge: bool = False) -> tuple
                 "WordRomaji": romaji(form_of(w), particle=is_particle(w)),
                 "BaseRomaji": romaji(base_kana(w, e), particle=is_particle(w)),
                 "SentenceRomaji": sentence_in_romaji(first["text"], a),
-                "CharReadings": w.get("char_readings") or "", "Literal": w.get("literal") or "",
+                "CharReadings": clean_char_readings(
+                    w.get("kanji") or "", base_kana(w, e), w.get("char_readings") or ""),
+                "Literal": w.get("literal") or "",
                 "InContext": w.get("in_context") or "", "Modifiers": w.get("modifiers") or "",
+                "DictSense": dict_sense(w, e),
                 "SentenceKanji": a["kanji"], "SentenceEnglish": a["english"],
                 "ExtraExamples": "<br>".join(extras), "Context": ctx,
                 "Location": location(r), "MessageId": r.msg_id,

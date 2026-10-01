@@ -21,7 +21,7 @@ from dataclasses import dataclass
 
 import pandas as pd
 
-from . import claude_cli
+from . import claude_cli, sense_pick
 from .order import ORDER_OUT
 from .paths import DATA, ROOT
 from .grounding import ground
@@ -252,6 +252,7 @@ def results(run_name: str, texts, entries: dict) -> dict[str, dict]:
             r = json.loads(p.read_text())
             for w in r["words"]:
                 ground(w, entries)
+                sense_pick.apply(t, w, entries)
             out[t] = r
     return out
 

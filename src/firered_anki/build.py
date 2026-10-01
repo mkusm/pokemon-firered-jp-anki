@@ -25,7 +25,7 @@ NAMES_OUT_APKG = ROOT / "firered_jp_names.apkg"
 FIELDS = [
     "Order", "Sentence", "SentenceRomaji", "Word", "WordRomaji", "Base", "BaseRomaji",
     "Kanji", "UsuallyKana", "CharReadings",
-    "Literal", "InContext", "Modifiers", "SentenceKanji", "SentenceEnglish",
+    "Literal", "InContext", "DictSense", "Modifiers", "SentenceKanji", "SentenceEnglish",
     "ExtraExamples", "Context", "Location", "MessageId", "Speaker", "Dictionary",
 ]
 
@@ -49,6 +49,7 @@ BACK = """
 {{#CharReadings}}<div class="readings">{{CharReadings}}</div>{{/CharReadings}}
 <div class="meaning">{{InContext}}</div>
 <div class="literal">literally: {{Literal}}</div>
+{{#DictSense}}<div class="literal">dictionary sense: {{DictSense}}</div>{{/DictSense}}
 {{#Modifiers}}<div class="modifiers">{{Modifiers}}</div>{{/Modifiers}}
 <div class="block">
   <div class="kanji-sentence">{{SentenceKanji}}</div>
