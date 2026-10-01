@@ -21,8 +21,8 @@ How it works, in detail: [`docs/how-it-works.html`](docs/how-it-works.html)
 
 | | |
 |---|---|
-| `firered_jp.apkg` | 11,236 cards, in story order |
-| `firered_jp_names.apkg` | 925 cards for names (Pokémon, places, moves, items), optional |
+| `firered_jp.apkg` | 11,198 cards, in story order |
+| `firered_jp_names.apkg` | 926 cards for names (Pokémon, places, moves, items), optional |
 
 Both are attached to the [latest release](https://github.com/mkusm/pokemon-firered-jp-anki/releases/latest).
 
@@ -35,12 +35,19 @@ Each card:
   how the form is built
   (`つかまえ (stem) + て (te-form)`), the sentence in kanji and in English, up to
   two more example sentences, the whole message, and the JMdict senses.
+- **Grammar**, on the back, for the first chapter so far (everything up to the
+  first gym, 2,466 cards): the patterns the word takes part in, each explained
+  in plain words for that sentence, and a breakdown of the sentence phrase by
+  phrase. The card for で in じゅんばんで　せつめい　します says: "で after a
+  noun says the way or method something is done. じゅんばんで　せつめいします =
+  'I'll explain in that order'."
 
 つかまえた, つかまえて and つかまえられる are three cards: every form is drilled
 where the story first uses it.
 
-Tags: every card has its location. `low-confidence` marks cards where the
-analysis was unsure, `onomatopoeia` sound and mimetic words (ドキドキ, キラキラ),
+Tags: every card has its location. `low-confidence` marks cards whose
+dictionary entry could not be confirmed, or whose word is a scrap of text the
+analysis had to guess at, `onomatopoeia` sound and mimetic words (ドキドキ, キラキラ),
 and `fragment` pieces of broken speech: stammers (こっ　こんなに), garbled or
 interrupted words. Fragment cards are kept on purpose, because they explain
 text that would otherwise be puzzling.
@@ -60,11 +67,12 @@ All you need is [Anki](https://apps.ankiweb.net/), on desktop or on your phone.
 3. **Pick a pace.** The cards follow the game, so the natural way to use the
    deck is to study a stretch and then play it. For scale: the opening sequence
    is the first 166 cards, everything up to the first gym about 2,500, the whole
-   deck 11,236. At 20 new cards a day that is about four months to Brock.
+   deck 11,198. At 20 new cards a day that is about four months to Brock.
 4. **Read the card.** The front is the line as the game shows it, in kana, with
    one word highlighted: read the sentence and recall that word. The back gives
    the reading in romaji, the dictionary form, the meaning in this sentence,
-   how the form is built, and the sentence in kanji and in English.
+   how the form is built, the grammar it is part of, and the sentence in kanji
+   and in English.
 5. **Trim what you don't want.** In the browser, search by tag and suspend:
    `tag:fragment` (stammers and broken speech), `tag:onomatopoeia`,
    `tag:low-confidence`, or a place such as `tag:Pewter_City_Gym`. To drop
@@ -72,7 +80,10 @@ All you need is [Anki](https://apps.ankiweb.net/), on desktop or on your phone.
 6. **Update later.** Import a newer release over the old one. Card IDs are
    stable, so your review history stays. In the import dialog set **Update
    notes** and **Update note types** to *Always*, or Anki keeps the old card
-   layout.
+   layout. Coming from v1.0 or v1.1, also tick **Merge note types**: v1.2 adds
+   two fields for the grammar. About 220 first-chapter cards were re-analysed
+   into different words or forms in v1.2; those arrive as new cards and their
+   old versions stay in your collection until you delete them.
 
 ## How the order is decided
 
@@ -128,13 +139,18 @@ uv run python -m firered_anki.classify          # place strings no rule fits
 uv run python -m firered_anki.order             # apply those placements
 uv run python -m firered_anki.analyse full      # analyse uncached sentences
 uv run python -m firered_anki.analyse escalate  # redo flagged ones on Opus
+uv run python -m firered_anki.analyse rerun 0    # redo a chapter's Sonnet answers on Opus (no number: all)
 uv run python -m firered_anki.sense_pick        # check entries found by lookup, choose their sense
+uv run python -m firered_anki.grammar run --chapter 0   # grammar patterns and sentence breakdowns
 ```
 
-Both resume from the cache, and `analyse` waits out a usage limit and carries on.
-For scale: the first full run was 12,747 sentences in 322 calls (Sonnet, low
-effort, 40 sentences a call), about five hours with one usage-limit pause, and
-roughly $110 at API prices. Escalation redid 2,132 sentences on Opus.
+All of them resume from the cache, and `analyse` waits out a usage limit and
+carries on. For scale: the first full run was 12,747 sentences in 322 calls
+(Sonnet, low effort, 40 sentences a call), about five hours with one usage-limit
+pause, and roughly $110 at API prices. Escalation redid 2,132 sentences on Opus.
+Redoing the first chapter on Opus was 993 sentences in 25 calls, ten at a time:
+12 minutes and about $21. Its grammar pass was 1,225 sentences in 31 calls on
+Sonnet: 3 minutes and about $3.
 
 ### Things you edit
 
@@ -160,10 +176,11 @@ src/firered_anki/
   classify.py     LLM placement of catch-all strings
   spread.py       interleave non-dialogue lines by chapter
   tokenize.py     fugashi tokens, JMdict candidates
-  analyse.py      per-sentence LLM analysis, dry run, escalation
+  analyse.py      per-sentence LLM analysis, dry run, escalation, Opus rerun
   claude_cli.py   headless `claude -p` with a JSON schema
   grounding.py    fill and check JMdict IDs after the LLM
   sense_pick.py   LLM check of entries found by lookup, and their sense
+  grammar.py      LLM pass for grammar patterns and sentence breakdowns
   cards.py        occurrences → cards, sense merge, examples
   romaji.py       kana → Hepburn
   build.py        cards → .apkg
@@ -174,6 +191,15 @@ vendor/           upstream clones (ignored)
 
 ## Known limits
 
+- The deck is in two states. The first chapter was analysed by Opus and has
+  grammar on its cards. The other nine chapters are Sonnet's analysis, with
+  Opus only on the sentences Sonnet flagged, and have no grammar yet. On a
+  sample of 100 sentences Opus corrected a clear Sonnet error in 3: a wrong
+  item name, a line read as "I was asked a favor" that means "do me a favor",
+  and あったら filed under ある where it is 合う.
+- A grammar pattern's name is written per sentence, so the same pattern can be
+  spelled two ways on different cards (〜せる and 〜させる).
+- Nothing has been proofread by a native speaker.
 - About 250 battle messages and 580 other UI strings are placed by the LLM's
   judgement, not computed. See `first_seen_llm.yaml`.
 - Chapter 1, up to Brock, is the largest, about 2,500 cards: that is where the
