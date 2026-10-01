@@ -21,7 +21,7 @@ How it works, in detail: [`docs/how-it-works.html`](docs/how-it-works.html)
 
 | | |
 |---|---|
-| `firered_jp.apkg` | 11,234 cards, in story order |
+| `firered_jp.apkg` | 11,236 cards, in story order |
 | `firered_jp_names.apkg` | 925 cards for names (Pokémon, places, moves, items), optional |
 
 Both are attached to the [latest release](https://github.com/mkusm/pokemon-firered-jp-anki/releases/latest),
@@ -81,7 +81,7 @@ uv run python -m firered_anki.classify          # place strings no rule fits
 uv run python -m firered_anki.order             # apply those placements
 uv run python -m firered_anki.analyse full      # analyse uncached sentences
 uv run python -m firered_anki.analyse escalate  # redo flagged ones on Opus
-uv run python -m firered_anki.sense_pick        # choose the sense where only the entry is known
+uv run python -m firered_anki.sense_pick        # check entries found by lookup, choose their sense
 ```
 
 Both resume from the cache, and `analyse` waits out a usage limit and carries on.
@@ -133,7 +133,7 @@ src/firered_anki/
   analyse.py      per-sentence LLM analysis, dry run, escalation
   claude_cli.py   headless `claude -p` with a JSON schema
   grounding.py    fill and check JMdict IDs after the LLM
-  sense_pick.py   LLM choice of sense for entries found by lookup
+  sense_pick.py   LLM check of entries found by lookup, and their sense
   cards.py        occurrences → cards, sense merge, examples
   romaji.py       kana → Hepburn
   build.py        cards → .apkg
