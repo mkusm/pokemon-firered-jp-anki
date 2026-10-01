@@ -135,7 +135,7 @@
 <main>
 <header class="hero">
   <h1>How a line of FireRed becomes a flashcard</h1>
-  <p class="lede">The deck has 11,174 cards. Each one is a word, in one form, in the sentence where the Japanese game first uses it. This page follows the text from the cartridge's script to the card.</p>
+  <p class="lede">The deck has 11,234 cards. Each one is a word, in one form, in the sentence where the Japanese game first uses it. This page follows the text from the cartridge's script to the card.</p>
 
   <figure class="card">
     <div class="gba jp" lang="ja">グリーンは　すでに　ポケモンを　<mark>つかまえて</mark>　ずかんの　ページを　ふやしている　そうじゃ！</div>
@@ -145,13 +145,14 @@
         <dt>Romaji</dt><dd>tsukamaete, from tsukamaeru</dd>
         <dt>Here</dt><dd>catching, and</dd>
         <dt>Literally</dt><dd>to catch</dd>
+        <dt>Dictionary sense</dt><dd>to catch; to capture; to arrest</dd>
         <dt>Form</dt><dd class="jp" lang="ja">つかまえ + て (te-form)</dd>
         <dt>In kanji</dt><dd class="jp" lang="ja">グリーンは既にポケモンを捕まえて図鑑のページを増やしているそうじゃ！</dd>
         <dt>English</dt><dd>I hear Green has already been catching Pokémon and adding pages to his Pokédex!</dd>
         <dt>Where</dt><dd>Professor Oak's lab, Pallet Town</dd>
       </dl>
     </div>
-    <figcaption>Card 609. The top is the front, exactly as the game shows the line. The rest is the back, which also carries the whole sentence in romaji, two more sentences that use つかまえて, Oak's full message, and the dictionary's senses for 捕まえる.</figcaption>
+    <figcaption>Card 632. The top is the front, exactly as the game shows the line. The rest is the back, which also carries the whole sentence in romaji, two more sentences that use つかまえて, Oak's full message, and the dictionary's senses for 捕まえる.</figcaption>
   </figure>
 </header>
 
@@ -179,14 +180,14 @@
         <rect x="30" y="96" width="110" height="52" rx="8"/><text x="85" y="118" text-anchor="middle" font-size="14" font-weight="700">extract</text><text class="sub" x="85" y="136" text-anchor="middle">16,166 sentences</text>
         <rect x="160" y="96" width="110" height="52" rx="8"/><text x="215" y="118" text-anchor="middle" font-size="14" font-weight="700">order</text><text class="sub" x="215" y="136" text-anchor="middle">14,400 kept</text>
         <rect x="290" y="96" width="110" height="52" rx="8"/><text x="345" y="118" text-anchor="middle" font-size="14" font-weight="700">tokenize</text><text class="sub" x="345" y="136" text-anchor="middle">12,335 unique</text>
-        <rect x="550" y="96" width="90" height="52" rx="8"/><text x="595" y="118" text-anchor="middle" font-size="14" font-weight="700">cards</text><text class="sub" x="595" y="136" text-anchor="middle">11,174 + 957</text>
+        <rect x="550" y="96" width="90" height="52" rx="8"/><text x="595" y="118" text-anchor="middle" font-size="14" font-weight="700">cards</text><text class="sub" x="595" y="136" text-anchor="middle">11,234 + 925</text>
         <rect x="660" y="96" width="90" height="52" rx="8"/><text x="705" y="118" text-anchor="middle" font-size="14" font-weight="700">build</text><text class="sub" x="705" y="136" text-anchor="middle">two .apkg</text>
       </g>
       <g class="llm">
         <rect x="420" y="96" width="110" height="52" rx="8"/><text x="475" y="118" text-anchor="middle" font-size="14" font-weight="700">analyse</text><text x="475" y="136" text-anchor="middle" font-size="11.5">71,500 words</text>
         <rect x="160" y="186" width="110" height="46" rx="8"/><text x="215" y="206" text-anchor="middle" font-size="13" font-weight="700">classify</text><text x="215" y="222" text-anchor="middle" font-size="11.5">835 strings placed</text>
         <rect x="420" y="186" width="110" height="46" rx="8"/><text x="475" y="206" text-anchor="middle" font-size="13" font-weight="700">escalate</text><text x="475" y="222" text-anchor="middle" font-size="11.5">2,132 on Opus</text>
-        <rect x="550" y="186" width="90" height="46" rx="8"/><text x="595" y="206" text-anchor="middle" font-size="13" font-weight="700">sense merge</text><text x="595" y="222" text-anchor="middle" font-size="11.5">623 words</text>
+        <rect x="550" y="186" width="90" height="46" rx="8"/><text x="595" y="206" text-anchor="middle" font-size="13" font-weight="700">sense merge</text><text x="595" y="222" text-anchor="middle" font-size="11.5">624 words</text>
       </g>
       <path d="M140 122 H160"/><path d="M270 122 H290"/><path d="M400 122 H420"/><path d="M530 122 H550"/><path d="M640 122 H660"/>
       <path d="M205 148 V186"/><path d="M225 186 V148"/>
@@ -284,6 +285,7 @@
 
   <h3>Grounding</h3>
   <p>When the tokenizer misreads a word, the right entry may not be among the candidates, and the model answers correctly but without an ID: it says <span class="jp" lang="ja">とおり</span> is 通る while the candidates only offered the noun 通り. After the pass, the model's own kanji and dictionary form are looked up in JMdict, and the entry is filled in when exactly one matches. Short grammar words such as <span class="jp" lang="ja">の</span> and <span class="jp" lang="ja">が</span> are left without an entry on purpose.</p>
+  <p>The lookup finds the entry but not which of its senses is meant. For the 1,175 words where the entry has several, a small extra pass (<code>sense_pick</code>) asks Claude to choose, given the sentence, the word and the gloss already written for it. <span class="jp" lang="ja">教えてください</span> then gets 下さる "to kindly do for one", not "to give".</p>
 </section>
 
 <section id="cards">
@@ -292,9 +294,10 @@
   <ul>
     <li><strong>Names</strong> go to a second deck. Trainer names are not carded at all.</li>
     <li><strong>Known words</strong> listed in <code>known.txt</code> are skipped.</li>
-    <li><strong>Sense merge.</strong> JMdict splits meanings finely, and the model sometimes picks neighbouring senses for the same idea. Each of the 623 entries used in more than one sense goes to Claude once, with its sentences, to group senses a learner would treat as one. 戦う and 出る were merged; 見る "to see" and <span class="jp" lang="ja">〜てみる</span> "to try" were kept apart.</li>
+    <li><strong>Sense merge.</strong> JMdict splits meanings finely, and the model sometimes picks neighbouring senses for the same idea. Each of the 624 entries used in more than one sense goes to Claude once, with its sentences, to group senses a learner would treat as one. 戦う and 出る were merged; 見る "to see" and <span class="jp" lang="ja">〜てみる</span> "to try" were kept apart.</li>
     <li><strong>Order.</strong> The chapter spreading runs again on these real keys.</li>
     <li><strong>Example.</strong> A card takes the first sentence in that order, with the dialogue preference above. Up to two later sentences are kept as extra examples, each with its own form explained.</li>
+    <li><strong>Dictionary sense.</strong> The back shows the JMdict definition of the sense chosen for that sentence. Two cards for <span class="jp" lang="ja">あぶない</span> can both be glossed "dangerous"; this line says one is "dangerous; risky" and the other "close (call); narrow (escape)".</li>
     <li><strong>Romaji</strong> is converted from the kana by table, with spaces between words and particles written as read: は as wa, を as o.</li>
   </ul>
   <p>Before writing the result, the stage prints 30 random cards as plain text for checking by eye.</p>
@@ -310,25 +313,25 @@
   <h2>The deck in numbers</h2>
   <div class="scroll"><table>
     <tr><th>Chapter ends with</th><th class="n">Cards</th></tr>
-    <tr><td>Brock</td><td class="n">2,482</td></tr>
-    <tr><td>Misty</td><td class="n">929</td></tr>
-    <tr><td>Lt. Surge</td><td class="n">959</td></tr>
-    <tr><td>Erika</td><td class="n">1,163</td></tr>
-    <tr><td>Koga</td><td class="n">849</td></tr>
-    <tr><td>Sabrina</td><td class="n">868</td></tr>
-    <tr><td>Blaine</td><td class="n">331</td></tr>
-    <tr><td>Giovanni</td><td class="n">706</td></tr>
+    <tr><td>Brock</td><td class="n">2,517</td></tr>
+    <tr><td>Misty</td><td class="n">926</td></tr>
+    <tr><td>Lt. Surge</td><td class="n">966</td></tr>
+    <tr><td>Erika</td><td class="n">1,160</td></tr>
+    <tr><td>Koga</td><td class="n">847</td></tr>
+    <tr><td>Sabrina</td><td class="n">877</td></tr>
+    <tr><td>Blaine</td><td class="n">332</td></tr>
+    <tr><td>Giovanni</td><td class="n">713</td></tr>
     <tr><td>The League</td><td class="n">293</td></tr>
-    <tr><td>Postgame</td><td class="n">964</td></tr>
-    <tr><td>End of deck: link play, Help menu, errors, text FireRed never shows</td><td class="n">1,630</td></tr>
-    <tr><th>Main deck</th><th class="n">11,174</th></tr>
+    <tr><td>Postgame</td><td class="n">963</td></tr>
+    <tr><td>End of deck: link play, Help menu, errors, text FireRed never shows</td><td class="n">1,640</td></tr>
+    <tr><th>Main deck</th><th class="n">11,234</th></tr>
   </table></div>
-  <p>The first chapter is the largest because the menus, the battle screen and most everyday vocabulary all appear before the first gym. The deck's first 148 cards are the opening sequence alone.</p>
+  <p>The first chapter is the largest because the menus, the battle screen and most everyday vocabulary all appear before the first gym. The deck's first 166 cards are the opening sequence alone.</p>
   <ul>
-    <li>6,056 distinct dictionary forms across the 11,174 cards.</li>
-    <li>6,440 cards take their example from story dialogue; the rest from Pokédex entries, menus, move and item descriptions and battle messages.</li>
-    <li>269 cards are tagged <code>low-confidence</code>, 419 <code>sense-guessed</code> (the sense was chosen by gloss overlap during grounding).</li>
-    <li>957 name cards in the second deck.</li>
+    <li>6,072 distinct dictionary forms across the 11,234 cards.</li>
+    <li>6,484 cards take their example from story dialogue; the rest from Pokédex entries, menus, move and item descriptions and battle messages.</li>
+    <li>272 cards are tagged <code>low-confidence</code>.</li>
+    <li>925 name cards in the second deck.</li>
   </ul>
   <p>The first full analysis took about five hours of calls including one usage-limit pause, and would cost roughly $110 at API prices. A classify pass is about 21 calls and under a dollar.</p>
 </section>
@@ -355,7 +358,7 @@
     <li>The dictionary is the 2020 JMdict snapshot shipped with jamdict.</li>
     <li>The order follows one walkthrough. The game lets you do several stretches in a different order.</li>
   </ul>
-  <div class="aside">The text is Nintendo's. The deck and this repository are for personal study and should stay private.</div>
+  <div class="aside">This is an unofficial fan project for studying Japanese. Pokémon and the game's text belong to Nintendo, Creatures and GAME FREAK.</div>
 </section>
 
 <footer>pokemon-firered-jp-anki. Text from abcboy101/poke-corpus, game data from pret/pokefirered, dictionary from JMdict, route from Bulbapedia.</footer>

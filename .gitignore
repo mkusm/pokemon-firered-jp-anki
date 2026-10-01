@@ -16,12 +16,13 @@ vendor/
 # data/: only the LLM answers are tracked, since they are the expensive part to
 # regenerate. Stage outputs, reports, logs and the dry-run caches are rebuilt
 # in about a minute with no LLM calls.
-# Keep this repo private: the caches hold Nintendo's game text.
+# The caches include the game's sentences (from the public poke-corpus).
 data/*
 !data/cache/
 data/cache/*
 !data/cache/classify/
 !data/cache/sense_merge/
+!data/cache/sense_pick/
 !data/cache/analyse/
 data/cache/analyse/*
 !data/cache/analyse/main/
