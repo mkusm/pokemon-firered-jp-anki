@@ -1,0 +1,291 @@
+"""Stage 5: one card per word form and sense, in story order.
+
+  1. Every analysed word becomes an occurrence keyed by (jmdict_id, sense, form),
+     or (base, kanji, form) when it has no JMdict entry. Names go to their own
+     deck; words in known.txt are never carded.
+  2. Sense merge: an entry used in several senses goes to Claude once, with
+     the sentences, to group senses that are one meaning for a learner
+     (人 "person" / "human being") while keeping real ones apart (見る "see" /
+     〜てみる "try"). Cached per entry.
+  3. Spread: non-dialogue lines are interleaved with the story by chapter (see
+     spread.py), now on real card keys instead of tokenizer lemmas.
+  4. Each card takes its first sentence in that order, except that a dialogue
+     sentence in the same chapter beats a non-dialogue line. Up to two later
+     sentences become extra examples.
+
+Run: uv run python -m firered_anki.cards [run-name]   (default: main)
+"""
+
+import hashlib
+import json
+import random
+import re
+import sys
+from collections import defaultdict
+
+import pandas as pd
+
+from . import claude_cli
+from .analyse import MAIN, load, results
+from .map_order import MapOrder
+from .paths import DATA, ROOT
+from .romaji import romaji, sentence_romaji
+from .spread import spread
+from .tokenize import hira
+
+CARDS_OUT = DATA / "05_cards" / "cards.parquet"
+NAMES_OUT = DATA / "05_cards" / "names.parquet"
+SPOTCHECK_OUT = DATA / "05_cards" / "spotcheck.txt"
+KNOWN = ROOT / "known.txt"
+MERGE_CACHE = DATA / "cache" / "sense_merge"
+MERGE_MODEL, MERGE_EFFORT, MERGE_BATCH = "sonnet", "low", 50
+MAX_EXTRA = 2
+
+
+def known_words() -> set[str]:
+    lines = KNOWN.read_text(encoding="utf-8").splitlines() if KNOWN.exists() else []
+    return {ln.strip() for ln in lines if ln.strip() and not ln.startswith("#")}
+
+
+PARTICLES = {"が", "を", "は", "に", "で", "と", "も", "の", "へ", "から", "まで", "より", "や"}
+
+
+def form_of(w: dict) -> str:
+    """The word's form without a particle the LLM glued on (ことが → こと)."""
+    surface, base = w["surface"], w["base"]
+    if hira(surface).startswith(hira(base)) and hira(surface)[len(base):] in PARTICLES:
+        return surface[:len(base)]
+    return surface
+
+
+def is_particle(w: dict) -> bool:
+    """A kana-only grammar word in its own form: は, を, へ, には…"""
+    return not w.get("kanji") and w["surface"] == w["base"] and (
+        w["surface"] in {"は", "へ", "を"} or w["surface"].endswith("は"))
+
+
+def base_kana(w: dict, entry: dict) -> str:
+    """The base form in kana. A few come back in kanji (言う); take the reading
+    from the JMdict entry then."""
+    base = w["base"]
+    if not re.search(r"[\u4e00-\u9fff]", base) or not entry.get("r"):
+        return base
+    suru = "する" if base.endswith("する") and not entry["r"][0].endswith("する") else ""
+    return entry["r"][0] + suru
+
+
+def sentence_in_romaji(text: str, analysis: dict) -> str:
+    words = analysis["words"]
+    return sentence_romaji(text, words, {i for i, w in enumerate(words) if is_particle(w)})
+
+
+def word_key(w: dict) -> tuple:
+    form = form_of(w)
+    if w.get("jmdict_id"):
+        return ("jm", w["jmdict_id"], w.get("sense") or 1, form)
+    return ("base", hira(w["base"]), w.get("kanji") or "", form)
+
+
+# --- 1. occurrences ------------------------------------------------------------
+
+def occurrences(deck: pd.DataFrame, analyses: dict, known: set) -> pd.DataFrame:
+    rows = []
+    for r in deck.itertuples():
+        a = analyses.get(r.text)
+        if not a:
+            continue
+        for pos, w in enumerate(a["words"]):
+            if "＊" in w["surface"] or not w["surface"]:
+                continue
+            skip = w["base"] in known or w["surface"] in known or (w.get("kanji") or "") in known
+            rows.append({
+                "row": r.Index, "text": r.text, "pos": pos, "key": word_key(w),
+                "proper": bool(w.get("proper")), "known": skip, "word": w,
+            })
+    return pd.DataFrame(rows)
+
+
+# --- 2. sense merge ------------------------------------------------------------
+
+MERGE_SYSTEM = """You help build a Japanese vocabulary deck from Pokémon FireRed. Each word below was tagged with different JMdict senses in different sentences. For each word, group the senses a learner would treat as ONE meaning (same idea, neighbouring dictionary senses) and keep apart senses that are really different to learn (見る "to see" vs 〜てみる "to try doing"; 居る "to exist" vs 〜ている "be doing"). Reply with JSON only."""
+
+MERGE_SCHEMA = {
+    "type": "object",
+    "properties": {"words": {"type": "array", "items": {
+        "type": "object",
+        "properties": {
+            "id": {"type": "integer"},
+            "groups": {"type": "array", "items": {"type": "array", "items": {"type": "integer"}}},
+        },
+        "required": ["id", "groups"],
+    }}},
+    "required": ["words"],
+}
+
+
+def merge_senses(occ: pd.DataFrame, entries: dict, offline: bool = False) -> dict[tuple, int]:
+    """(jmdict_id, sense) → canonical sense (the group's first-used sense)."""
+    jm = occ[occ["key"].map(lambda k: k[0] == "jm") & ~occ["proper"]]
+    used: dict[int, dict[int, list[str]]] = defaultdict(lambda: defaultdict(list))
+    for k, w, text in zip(jm["key"], jm["word"], jm["text"]):
+        ex = used[k[1]][k[2]]
+        if len(ex) < 2 and text not in ex:
+            ex.append(text)
+    multi = {eid: s for eid, s in used.items() if len(s) > 1}
+    MERGE_CACHE.mkdir(parents=True, exist_ok=True)
+
+    def cache_file(eid, senses):
+        h = hashlib.sha1(json.dumps([eid, sorted(senses)]).encode()).hexdigest()
+        return MERGE_CACHE / f"{h}.json"
+
+    todo = [eid for eid, s in multi.items() if not cache_file(eid, s).exists()]
+    if todo and not offline:
+        print(f"sense merge: {len(multi)} entries used in several senses, {len(todo)} to ask")
+    for i in range(0, 0 if offline else len(todo), MERGE_BATCH):
+        chunk = todo[i:i + MERGE_BATCH]
+        lines = []
+        for eid in chunk:
+            e = entries.get(str(eid), {})
+            head = "・".join(e.get("k") or e.get("r") or ["?"])
+            lines.append(f"\nword {eid}: {head}")
+            for sn, exs in sorted(multi[eid].items()):
+                gl = "; ".join(e["s"][sn - 1]["g"]) if e and 0 < sn <= len(e["s"]) else "?"
+                lines.append(f"  sense {sn}: {gl}  e.g. {' / '.join(exs)}")
+        try:
+            out, _ = claude_cli.call("\n".join(lines) + "\n\nReturn groups of sense numbers per word id.",
+                                     MERGE_SYSTEM, MERGE_SCHEMA, MERGE_MODEL, MERGE_EFFORT)
+        except claude_cli.UsageLimit:
+            print("sense merge: usage limit; unmerged entries keep their senses")
+            break
+        for item in out.get("words", []):
+            if item["id"] in multi:
+                e = entries.get(str(item["id"]), {})
+                cache_file(item["id"], multi[item["id"]]).write_text(json.dumps(
+                    {"id": item["id"], "word": (e.get("k") or e.get("r") or ["?"])[0],
+                     "groups": item["groups"]}, ensure_ascii=False))
+
+    canon = {}
+    for eid, senses in multi.items():
+        f = cache_file(eid, senses)
+        if not f.exists():
+            continue
+        data = json.loads(f.read_text())
+        for grp in data["groups"] if isinstance(data, dict) else data:
+            grp = [s for s in grp if s in senses]
+            if grp:
+                first = min(grp, key=lambda s: list(senses).index(s))
+                for s in grp:
+                    canon[(eid, s)] = first
+    return canon
+
+
+# --- 3–4. order and examples ------------------------------------------------------
+
+def location(r) -> str:
+    name = r.first_seen if r.dialogue else f"UI: {r.group}"
+    name = re.sub(r"^llm: ", "", str(name))
+    return re.sub(r"(?<=[a-z])(?=[A-Z])|_", " ", name).replace("  ", " ").strip()
+
+
+def highlight(text: str, surface: str) -> str:
+    i = text.find(surface)
+    return text if i < 0 else f"{text[:i]}<b>{surface}</b>{text[i + len(surface):]}"
+
+
+def build_cards(run_name: str = MAIN.name, offline_merge: bool = False) -> tuple[pd.DataFrame, pd.DataFrame]:
+    deck, entries = load()
+    deck = deck.sort_values("first_seen_order").reset_index(drop=True)
+    analyses = results(run_name, deck["text"].unique(), entries)
+    occ = occurrences(deck, analyses, known_words())
+
+    canon = merge_senses(occ, entries, offline=offline_merge)
+    occ["key"] = occ["key"].map(
+        lambda k: (k[0], k[1], canon.get((k[1], k[2]), k[2]), k[3]) if k[0] == "jm" else k)
+
+    # Spread on card keys (names and known words make no cards).
+    cardable = occ[~occ["proper"] & ~occ["known"]]
+    words = cardable.groupby("row")["key"].agg(lambda ks: frozenset(ks))
+    words = words.reindex(deck.index).map(lambda x: x if isinstance(x, frozenset) else frozenset())
+    deck["card_order"] = spread(deck, words)
+
+    occ = occ.join(deck[["card_order", "dialogue", "chapter", "msg_id", "text", "speaker"]]
+                   .rename(columns={"text": "_t"}), on="row")
+
+    msg_text = deck.sort_values(["line_no", "page", "sent"]).groupby("msg_id")["text"].agg(list)
+
+    def one_deck(sub: pd.DataFrame) -> pd.DataFrame:
+        out = []
+        for key, g in sub.groupby("key", sort=False):
+            placed = g[g["card_order"].notna()].sort_values("card_order")
+            if placed.empty:
+                continue
+            first = placed.iloc[0]
+            if not first["dialogue"]:
+                same_ch = placed[placed["dialogue"] & (placed["chapter"] == first["chapter"])]
+                if len(same_ch):
+                    first = same_ch.iloc[0]
+            later = g[(g["text"] != first["text"])].drop_duplicates("text")
+            later = later.sort_values(["dialogue", "card_order"], ascending=[False, True])
+            w, r = first["word"], deck.loc[first["row"]]
+            a = analyses[first["text"]]
+            ctx = " ".join(f"<u>{t}</u>" if t == first["text"] else t for t in msg_text[first["msg_id"]])
+            extras = [
+                f"{highlight(t, form_of(ww))} — {analyses[t]['english']}"
+                + (f" ({ww['surface']}: {ww['modifiers']})" if ww.get("modifiers") else "")
+                for t, ww in zip(later["text"][:MAX_EXTRA], later["word"][:MAX_EXTRA])
+            ]
+            e = entries.get(str(w.get("jmdict_id")), {}) if w.get("jmdict_id") else {}
+            out.append({
+                "key": json.dumps(key, ensure_ascii=False), "order": first["card_order"],
+                "Sentence": highlight(first["text"], form_of(w)),
+                "Word": form_of(w), "Base": w["base"], "Kanji": w.get("kanji") or "",
+                "UsuallyKana": "yes" if w.get("usually_kana") else "",
+                "WordRomaji": romaji(form_of(w), particle=is_particle(w)),
+                "BaseRomaji": romaji(base_kana(w, e), particle=is_particle(w)),
+                "SentenceRomaji": sentence_in_romaji(first["text"], a),
+                "CharReadings": w.get("char_readings") or "", "Literal": w.get("literal") or "",
+                "InContext": w.get("in_context") or "", "Modifiers": w.get("modifiers") or "",
+                "SentenceKanji": a["kanji"], "SentenceEnglish": a["english"],
+                "ExtraExamples": "<br>".join(extras), "Context": ctx,
+                "Location": location(r), "MessageId": r.msg_id,
+                "Speaker": first["speaker"] or "",
+                "Dictionary": "; ".join(f"{i}) {'; '.join(s['g'])}" for i, s in enumerate(e.get("s", []), 1)),
+                "tags": [re.sub(r"\W", "_", location(r))]
+                + (["proper"] if w.get("proper") else [])
+                + (["low-confidence"] if w.get("low_confidence") or w.get("_form_mismatch") else [])
+                + (["sense-guessed"] if w.get("_sense_guessed") else []),
+            })
+        df = pd.DataFrame(out).sort_values("order").reset_index(drop=True)
+        df["Order"] = [f"{i:06d}" for i in range(len(df))]
+        return df
+
+    return one_deck(occ[~occ["proper"] & ~occ["known"]]), one_deck(occ[occ["proper"]])
+
+
+def main() -> None:
+    run_name = sys.argv[1] if len(sys.argv) > 1 else MAIN.name
+    cards, names = build_cards(run_name)
+    CARDS_OUT.parent.mkdir(parents=True, exist_ok=True)
+    cards.to_parquet(CARDS_OUT, index=False)
+    names.to_parquet(NAMES_OUT, index=False)
+
+    # The spec's check before trusting the deck: 30 random cards as text.
+    rnd = random.Random(7)
+    lines = []
+    for _, c in cards.iloc[sorted(rnd.sample(range(len(cards)), min(30, len(cards))))].iterrows():
+        lines.append(
+            f"#{c.Order} [{c.Location}] {' '.join(c.tags)}\n"
+            f"  {re.sub('<.*?>', '', c.Sentence)}\n"
+            f"  {c.Word} → {c.Kanji or c.Base}【{c.Base}】 {c.CharReadings}\n"
+            f"  literal: {c.Literal} | here: {c.InContext}\n"
+            f"  {c.Modifiers}\n  {c.SentenceKanji}\n  {c.SentenceEnglish}\n")
+    SPOTCHECK_OUT.write_text("\n".join(lines), encoding="utf-8")
+
+    print(f"cards {len(cards)}, name cards {len(names)}")
+    print(f"low-confidence {sum('low-confidence' in t for t in cards.tags)}, "
+          f"sense guessed {sum('sense-guessed' in t for t in cards.tags)}")
+    print(f"→ {CARDS_OUT.relative_to(ROOT)}, {NAMES_OUT.relative_to(ROOT)}, {SPOTCHECK_OUT.relative_to(ROOT)}")
+
+
+if __name__ == "__main__":
+    main()

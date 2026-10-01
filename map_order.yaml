@@ -1,0 +1,420 @@
+# Play order for the FireRed JP deck. The one hand-maintained input.
+#
+# Each `order` entry is a map (e.g. PewterCity_Gym), a script group name
+# (e.g. new_game_intro) or a label (e.g. Route22_Text_LateRivalIntro).
+# A message goes to the longest entry matching its script group or the start
+# of its label (whole `_`-separated parts only, so Route2 never matches Route21);
+# the group wins ties. Label-prefix entries pull a map's later-story lines out
+# to where they are actually seen. Within an entry, messages keep corpus order.
+# Check coverage with: uv run python -m firered_anki.map_order
+#
+# Route: Bulbapedia's FireRed/LeafGreen walkthrough, Parts 1–21 (P1…P21 below):
+# https://bulbapedia.bulbagarden.net/wiki/Walkthrough:Pok%C3%A9mon_FireRed_and_LeafGreen
+# Kanto → Sevii 1–3 after Blaine → League → postgame Sevii 4–7 → Cerulean Cave.
+
+order:
+  # --- Before you can open the menu: the opening sequence, in game order (P1)
+  - gControlsGuide_Text_Intro
+  - gControlsGuide_Text_DPad
+  - gControlsGuide_Text_AButton
+  - gControlsGuide_Text_BButton
+  - gControlsGuide_Text_StartButton
+  - gControlsGuide_Text_SelectButton
+  - gControlsGuide_Text_LRButtons
+  - gPikachuIntro_Text_Page1
+  - gPikachuIntro_Text_Page2
+  - gPikachuIntro_Text_Page3
+  - gOakSpeech_Text_WelcomeToTheWorld
+  - gOakSpeech_Text_ThisWorld
+  - gOakSpeech_Text_IsInhabitedFarAndWide
+  - gOakSpeech_Text_IStudyPokemon
+  - gOakSpeech_Text_TellMeALittleAboutYourself
+  - gOakSpeech_Text_AskPlayerGender
+  - gOakSpeech_Text_YourNameWhatIsIt
+  - new_game_intro            # the name choices (NEW NAME, レッド, グリーン…)
+  - gOakSpeech_Text_SoYourNameIsPlayer
+  - gOakSpeech_Text_WhatWasHisName
+  - gOakSpeech_Text_YourRivalsNameWhatWasIt
+  - gOakSpeech_Text_ConfirmRivalName
+  - gOakSpeech_Text_RememberRivalsName
+  - gOakSpeech_Text_LetsGo
+
+  # --- Pallet Town (P1); the start menu opens here
+  - PalletTown_PlayersHouse_2F
+  - PalletTown_PlayersHouse_1F
+  - PalletTown                # Oak stops you in the grass; sign_lady girl
+  - PalletTown_ProfessorOaksLab   # starter, first rival battle, later the Pokédex
+
+  # --- Route 1 → Viridian → parcel → Pokédex → Route 22 → Viridian Forest (P2)
+  - Route1
+  - ViridianCity              # old man blocking the road
+  - ViridianCity_PokemonCenter_1F
+  - pc                        # "Someone's PC" menus
+  - ViridianCity_Mart         # Oak's Parcel
+  - poke_mart
+  - ViridianCity_House
+  - ViridianCity_School
+  - pokedex_rating            # Oak's ratings, from when he hands over the Pokédex
+  - PalletTown_RivalsHouse    # Daisy, Town Map
+  - pokedude                  # Teachy TV from the old man, after the Pokédex
+  - Route22                   # rival battle 2
+  - Route2
+  - Route2_ViridianForest_SouthEntrance
+  - ViridianForest
+  - Route2_ViridianForest_NorthEntrance
+
+  # --- Pewter (P3)
+  - PewterCity
+  - PewterCity_PokemonCenter_1F
+  - PewterCity_Mart
+  - PewterCity_House1
+  - PewterCity_House2
+  - PewterCity_Museum_1F
+  - PewterCity_Museum_2F
+  - PewterCity_Gym            # Brock
+
+  # --- Route 3 → Mt. Moon → Route 4 (P4)
+  - Route3
+  - Route4_PokemonCenter_1F   # Magikarp salesman
+  - MtMoon_1F
+  - MtMoon_B2F                # fossils
+  - Route4
+
+  # --- Cerulean, Nugget Bridge, Bill (P5)
+  - CeruleanCity              # rival battle 3, Fame Checker
+  - CeruleanCity_PokemonCenter_1F
+  - CeruleanCity_Mart
+  - CeruleanCity_BikeShop     # first seen here; the bike comes later
+  - CeruleanCity_House1
+  - CeruleanCity_House3
+  - CeruleanCity_House4
+  - CeruleanCity_House5
+  - CeruleanCity_Gym          # Misty
+  - Route24                   # Nugget Bridge
+  - Route25
+  - Route25_SeaCottage        # Bill, S.S. Ticket
+  - CeruleanCity_House2       # robbed house, TM28 Dig; police block it until now
+
+  # --- Route 5/6 → Vermilion → S.S. Anne (P5–P6)
+  - Route5
+  - Route5_PokemonDayCare
+  - day_care
+  - Route5_SouthEntrance      # Saffron gate, thirsty guard
+  - UndergroundPath_SouthEntrance
+  - Route6
+  - Route6_NorthEntrance
+  - VermilionCity
+  - VermilionCity_PokemonCenter_1F   # VS Seeker
+  - VermilionCity_Mart
+  - VermilionCity_House1
+  - VermilionCity_House2
+  - VermilionCity_House3
+  - VermilionCity_PokemonFanClub   # Bike Voucher
+  - SSAnne_1F_Corridor
+  - SSAnne_B1F_Room1
+  - SSAnne_B1F_Room2
+  - SSAnne_B1F_Room3
+  - SSAnne_B1F_Room4
+  - SSAnne_B1F_Room5
+  - SSAnne_1F_Room1
+  - SSAnne_1F_Room2
+  - SSAnne_1F_Room3
+  - SSAnne_1F_Room4
+  - SSAnne_1F_Room5
+  - SSAnne_1F_Room6
+  - SSAnne_1F_Room7
+  - SSAnne_Kitchen
+  - SSAnne_2F_Corridor        # rival battle 4
+  - SSAnne_2F_Room1
+  - SSAnne_2F_Room2
+  - SSAnne_2F_Room3
+  - SSAnne_2F_Room4
+  - SSAnne_2F_Room5
+  - SSAnne_2F_Room6
+  - SSAnne_3F_Corridor
+  - SSAnne_Deck
+  - SSAnne_CaptainsOffice     # HM01 Cut
+  - field_moves               # Cut is the first field move
+  - VermilionCity_Gym         # Lt. Surge
+
+  # --- Route 11, Diglett's Cave, back to Route 2 (P7)
+  - Route11
+  - Route11_EastEntrance_1F
+  - Route11_EastEntrance_2F   # Oak's aide, Itemfinder
+  - itemfinder
+  - aide
+  - DiglettsCave_SouthEntrance
+  - DiglettsCave_NorthEntrance
+  - Route2_House              # in-game trade
+  - ingame_trade
+  - Route2_EastBuilding       # Oak's aide, HM05 Flash
+
+  # --- Route 9/10 → Rock Tunnel → Lavender (P8)
+  - Route9
+  - Route10
+  - Route10_PokemonCenter_1F
+  - RockTunnel_1F
+  - RockTunnel_B1F
+  - LavenderTown
+  - LavenderTown_PokemonCenter_1F
+  - LavenderTown_Mart
+  - LavenderTown_House1
+  - LavenderTown_House2       # Name Rater
+  - LavenderTown_VolunteerPokemonHouse
+  - PokemonTower_1F
+  - PokemonTower_2F           # rival battle 5
+
+  # --- Route 8 → Underground Path → Route 7 → Celadon (P8–P9)
+  - Route8
+  - Route8_WestEntrance
+  - UndergroundPath_EastEntrance
+  - UndergroundPath_WestEntrance
+  - Route7
+  - Route7_EastEntrance
+  - CeladonCity
+  - CeladonCity_PokemonCenter_1F
+  - CeladonCity_DepartmentStore_1F
+  - CeladonCity_DepartmentStore_2F
+  - CeladonCity_DepartmentStore_3F
+  - CeladonCity_DepartmentStore_4F
+  - CeladonCity_DepartmentStore_5F
+  - CeladonCity_DepartmentStore_Roof
+  - CeladonCity_Condominiums_1F       # Tea for the Saffron gate guards
+  - CeladonCity_Condominiums_2F
+  - CeladonCity_Condominiums_3F
+  - CeladonCity_Condominiums_Roof
+  - CeladonCity_Condominiums_RoofRoom  # Eevee
+  - CeladonCity_Restaurant
+  - CeladonCity_House1
+  - CeladonCity_Hotel
+  - CeladonCity_GameCorner
+  - CeladonCity_GameCorner_PrizeRoom
+  - CeladonCity_Gym           # Erika
+  - RocketHideout_B1F
+  - RocketHideout_B2F
+  - RocketHideout_B3F
+  - RocketHideout_B4F         # Giovanni, Silph Scope
+  - RocketHideout_Elevator
+  - SaffronCity               # walked through under Rocket control, back to Lavender
+
+  # --- Pokémon Tower, Mr. Fuji (P9)
+  - PokemonTower_3F
+  - PokemonTower_4F
+  - PokemonTower_5F
+  - PokemonTower_6F
+  - PokemonTower_7F           # Mr. Fuji, then the Poké Flute
+
+  # --- Routes 12–15 → Fuchsia → Safari Zone (P10)
+  - Route12_NorthEntrance_1F
+  - Route12_NorthEntrance_2F
+  - Route12                   # Snorlax
+  - Route12_FishingHouse
+  - Route13
+  - Route14
+  - Route15
+  - Route15_WestEntrance_1F
+  - Route15_WestEntrance_2F
+  - FuchsiaCity
+  - FuchsiaCity_PokemonCenter_1F
+  - FuchsiaCity_Mart
+  - FuchsiaCity_House1
+  - FuchsiaCity_House2
+  - FuchsiaCity_House3
+  - FuchsiaCity_WardensHouse  # lost teeth; HM04 Strength after the Safari Zone
+  - FuchsiaCity_Gym           # Koga
+  - FuchsiaCity_SafariZone_Entrance
+  - safari_zone
+  - FuchsiaCity_SafariZone_Office
+  - SafariZone_Center
+  - SafariZone_Center_RestHouse
+  - SafariZone_East
+  - SafariZone_East_RestHouse
+  - SafariZone_North
+  - SafariZone_North_RestHouse
+  - SafariZone_West
+  - SafariZone_West_RestHouse
+  - SafariZone_SecretHouse    # HM03 Surf
+  - surf
+
+  # --- Cycling Road north for Fly (P10)
+  - Route18
+  - Route18_EastEntrance_1F
+  - Route18_EastEntrance_2F
+  - Route17
+  - Route16
+  - Route16_NorthEntrance_1F
+  - Route16_NorthEntrance_2F
+  - Route16_House             # HM02 Fly
+
+  # --- Saffron, Silph Co. (P11)
+  - SaffronCity_PokemonCenter_1F
+  - SaffronCity_Mart
+  - SaffronCity_House
+  - SaffronCity_PokemonTrainerFanClub
+  - SaffronCity_MrPsychicsHouse
+  - SilphCo_1F
+  - SilphCo_2F
+  - SilphCo_3F
+  - SilphCo_4F
+  - SilphCo_5F
+  - SilphCo_6F
+  - SilphCo_7F                # rival battle 6
+  - SilphCo_8F
+  - SilphCo_9F
+  - SilphCo_10F
+  - SilphCo_11F               # Giovanni
+  - SaffronCity_Text_YouBeatTeamRocket
+  - SaffronCity_Text_SafeToGoOutAgain
+  - SaffronCity_Text_PeopleComingBackToSaffron
+  - SaffronCity_Text_SawRocketBossEscaping
+  - SaffronCity_CopycatsHouse_1F   # a grunt blocks it until Silph is cleared
+  - SaffronCity_CopycatsHouse_2F
+  - SaffronCity_Dojo
+  - SaffronCity_Gym           # Sabrina
+
+  # --- Routes 19–20, Seafoam → Cinnabar (P12)
+  - Route19
+  - Route20
+  - SeafoamIslands_B4F
+  - CinnabarIsland
+  - CinnabarIsland_PokemonCenter_1F
+  - CinnabarIsland_Mart
+  - CinnabarIsland_PokemonLab_Entrance
+  - CinnabarIsland_PokemonLab_Lounge
+  - CinnabarIsland_PokemonLab_ResearchRoom
+  - CinnabarIsland_PokemonLab_ExperimentRoom   # fossil revival
+  - PokemonMansion_1F
+  - PokemonMansion_2F
+  - PokemonMansion_3F
+  - PokemonMansion_B1F        # Secret Key
+  - CinnabarIsland_Gym        # Blaine
+
+  # --- Sevii Islands 1–3 with Bill (P13–P14)
+  - seagallop
+  - OneIsland
+  - OneIsland_PokemonCenter_1F    # Celio
+  - OneIsland_House1
+  - OneIsland_House2
+  - OneIsland_TreasureBeach
+  - OneIsland_KindleRoad
+  - OneIsland_KindleRoad_EmberSpa
+  - MtEmber_Exterior
+  - TwoIsland
+  - TwoIsland_PokemonCenter_1F
+  - TwoIsland_House
+  - TwoIsland_JoyfulGameCorner
+  - TwoIsland_CapeBrink_House   # reachable by Surf on this trip
+  - ThreeIsland_Port
+  - ThreeIsland_DunsparceTunnel # Three Isle Path
+  - ThreeIsland               # bikers
+  - ThreeIsland_PokemonCenter_1F
+  - ThreeIsland_Mart
+  - ThreeIsland_House1
+  - ThreeIsland_House2
+  - ThreeIsland_House3
+  - ThreeIsland_House4
+  - ThreeIsland_House5
+  - ThreeIsland_BondBridge
+  - ThreeIsland_BerryForest   # Lostelle
+
+  # --- Back to Kanto: Route 21, Viridian Gym, Victory Road, League (P15–P17)
+  - Route21_South
+  - Route21_North
+  - PowerPlant                # no dialogue; Zapdos, Electabuzz, TM items
+  - ViridianCity_Text_ViridiansGymLeaderReturned
+  - ViridianCity_Gym          # Giovanni
+  - Route22_Text_LateRivalIntro   # rival battle 7
+  - Route22_Text_LateRivalDefeat
+  - Route22_Text_LateRivalVictory
+  - Route22_Text_LateRivalPostBattle
+  - Route23                   # badge checks
+  - route23
+  - VictoryRoad_1F
+  - VictoryRoad_2F
+  - VictoryRoad_3F
+  - IndigoPlateau_PokemonCenter_1F
+  - PokemonLeague_LoreleisRoom
+  - PokemonLeague_BrunosRoom
+  - PokemonLeague_AgathasRoom
+  - PokemonLeague_LancesRoom
+  - PokemonLeague_ChampionsRoom
+  - PokemonLeague_HallOfFame
+
+  # --- Postgame: National Dex, Ruby, Sevii 4–7, Sapphire (P18–P19)
+  - PalletTown_ProfessorOaksLab_Text_OakNowTheseUnitsCanRecordMoreData
+  - MtEmber_RubyPath_B3F
+  - FourIsland
+  - FourIsland_PokemonCenter_1F
+  - FourIsland_Mart
+  - FourIsland_House1
+  - FourIsland_LoreleisHouse
+  - FourIsland_IcefallCave_Back   # Lorelei scene on reaching the back cave
+  - FourIsland_Text_LoreleiHasReturned
+  - SixIsland
+  - SixIsland_PokemonCenter_1F
+  - SixIsland_Mart
+  - SixIsland_House
+  - SixIsland_WaterPath
+  - SixIsland_WaterPath_House1
+  - SixIsland_WaterPath_House2
+  - SixIsland_GreenPath
+  - SixIsland_PatternBush
+  - SixIsland_OutcastIsland
+  - SixIsland_RuinValley
+  - SixIsland_DottedHole_SapphireRoom   # second password
+  - FiveIsland
+  - FiveIsland_PokemonCenter_1F
+  - FiveIsland_House1
+  - FiveIsland_House2
+  - FiveIsland_Meadow
+  - FiveIsland_RocketWarehouse    # Sapphire recovered
+  - FiveIsland_MemorialPillar
+  - FiveIsland_WaterLabyrinth
+  - FiveIsland_ResortGorgeous
+  - FiveIsland_ResortGorgeous_House
+  - FiveIsland_LostCave_Room1
+  - FiveIsland_LostCave_Room4
+  - FiveIsland_LostCave_Room10
+  - SevenIsland
+  - SevenIsland_PokemonCenter_1F
+  - SevenIsland_Mart
+  - SevenIsland_House_Room1
+  - SevenIsland_TrainerTower
+  - TrainerTower_Lobby
+  - SevenIsland_SevaultCanyon_Entrance
+  - SevenIsland_SevaultCanyon
+  - SevenIsland_SevaultCanyon_TanobyKey
+  - SevenIsland_SevaultCanyon_House
+  - SevenIsland_TanobyRuins
+
+  # --- Postgame Kanto (P20–P21)
+  - CeruleanCave_B1F
+  - PokemonLeague_LoreleisRoom_Text_RematchIntro
+  - PokemonLeague_BrunosRoom_Text_RematchIntro
+  - PokemonLeague_AgathasRoom_Text_RematchIntro
+  - PokemonLeague_LancesRoom_Text_RematchIntro
+  - PokemonLeague_ChampionsRoom_Text_RematchIntro
+
+# Script groups with no single map. Placed later by the first_seen_map stage
+# (see the spec's Non-dialogue text section), not dumped at the start.
+global:
+  - event_scripts   # shared Pokémon Center, door and link-room lines
+  - obtain_item     # "received X" lines
+  - white_out
+  - pc_transfer
+  - repel
+  - save
+  - help_system
+  - fame_checker    # device from the rival in Cerulean; entries unlock per person
+  - flavor_text     # bookshelves, Town Map, TVs
+  - cable_club      # link rooms, end of deck per the spec
+  - VSSeeker        # trainers group; the VS Seeker comes from Vermilion
+
+# Unreachable in FireRed or event-only: never carded.
+exclude:
+  - test                    # debug messages
+  - berries                 # Ruby/Sapphire leftovers (Route104, Sootopolis…)
+  - competitive_brothers    # Sootopolis leftover
+  - eon_ticket              # event-only
+  - mystery_event_club
+  - mystery_event_msg
