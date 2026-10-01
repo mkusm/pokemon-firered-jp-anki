@@ -38,8 +38,13 @@ Each card:
   two more example sentences, the whole message, and the JMdict senses.
 
 つかまえた, つかまえて and つかまえられる are three cards: every form is drilled
-where the story first uses it. Cards are tagged with their location, and
-`low-confidence` where the analysis was unsure.
+where the story first uses it.
+
+Tags: every card has its location. `low-confidence` marks cards where the
+analysis was unsure, `onomatopoeia` sound and mimetic words (ドキドキ, キラキラ),
+and `fragment` pieces of broken speech: stammers (こっ　こんなに), garbled or
+interrupted words. Fragment cards are kept on purpose, because they explain
+text that would otherwise be puzzling.
 
 In Anki, set the deck's new-card order to **order added**, or the story order is
 lost. When re-importing after a rebuild, set **Update note types** to **Always**.

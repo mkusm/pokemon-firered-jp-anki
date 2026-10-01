@@ -50,10 +50,13 @@ def lemma_of(w) -> str:
 def compact(e) -> dict:
     senses = []
     for s in e.senses[:MAX_SENSES]:
-        senses.append({
+        sense = {
             "pos": [p.split(" (")[0] for p in s.pos][:2],
             "g": [g.text for g in s.gloss][:MAX_GLOSSES],
-        })
+        }
+        if "onomatopoeic or mimetic word" in s.misc:
+            sense["on"] = True  # ドキドキ, キラキラ…
+        senses.append(sense)
     return {
         "k": [k.text for k in e.kanji_forms][:3],
         "r": [k.text for k in e.kana_forms][:3],
