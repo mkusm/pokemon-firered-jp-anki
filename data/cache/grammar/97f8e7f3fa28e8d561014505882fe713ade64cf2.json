@@ -1,1 +1,1 @@
-{"text": "やせいの　＊は　にげだした！", "structure": [{"jp": "やせいの　＊は", "en": "the wild ＊"}, {"jp": "にげだした！", "en": "ran away"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "やせいの　＊は　にげだした！", "structure": [{"jp": "やせいの　＊は", "en": "the wild ＊"}, {"jp": "にげだした！", "en": "ran away!"}], "patterns": [{"name": "〜だす", "span": "にげだした", "words": ["にげだした"], "explanation": "だす added to a verb says the action suddenly starts. にげだした = 'took off running away'."}], "_run": {"model": "opus", "effort": "low", "version": "2"}}

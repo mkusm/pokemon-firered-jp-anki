@@ -1,1 +1,1 @@
-{"text": "ただし　マシンは　つかい　すてだ！", "structure": [{"jp": "ただし", "en": "however"}, {"jp": "マシンは", "en": "a TM"}, {"jp": "つかい　すてだ！", "en": "is single-use"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "ただし　マシンは　つかい　すてだ！", "structure": [{"jp": "ただし", "en": "however"}, {"jp": "マシンは", "en": "a TM"}, {"jp": "つかい　すてだ！", "en": "is use-once-and-throw-away!"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2"}}

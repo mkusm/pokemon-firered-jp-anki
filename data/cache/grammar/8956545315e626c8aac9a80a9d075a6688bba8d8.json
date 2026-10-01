@@ -1,1 +1,1 @@
-{"text": "ポケモンの　あずかり　システムを　よびだした！", "structure": [{"jp": "ポケモンの　あずかり　システムを", "en": "the Pokémon Storage System"}, {"jp": "よびだした！", "en": "called up!"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "ポケモンの　あずかり　システムを　よびだした！", "structure": [{"jp": "ポケモンの　あずかり　システムを", "en": "the Pokémon Storage System"}, {"jp": "よびだした！", "en": "called up!"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2"}}

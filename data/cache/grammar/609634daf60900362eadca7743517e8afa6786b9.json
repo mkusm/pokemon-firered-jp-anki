@@ -1,1 +1,1 @@
-{"text": "パソコンから　どうぐを　ひきだします", "structure": [{"jp": "パソコンから", "en": "from the PC"}, {"jp": "どうぐを", "en": "items"}, {"jp": "ひきだします", "en": "take out"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "パソコンから　どうぐを　ひきだします", "structure": [{"jp": "パソコンから", "en": "from the PC"}, {"jp": "どうぐを　ひきだします", "en": "take out items"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2"}}

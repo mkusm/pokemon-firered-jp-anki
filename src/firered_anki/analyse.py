@@ -207,7 +207,7 @@ def run(cfg: Config, rows: pd.DataFrame, entries: dict, workers: int = 3,
         lambda t: cache_path(cfg.name, t).exists())
     todo = rows[~rows["text"].map(done)]
     batches = make_batches(todo, cfg.batch)
-    stats = {"calls": 0, "failed_calls": 0, "cost": 0.0, "in": 0, "out": 0, "ms": 0,
+    stats = {"calls": 0, "failed_calls": 0, "ms": 0,
              "limited": False, "todo": todo["text"].nunique()}
     print(f"[{cfg.name}] {rows['text'].nunique()} sentences, {todo['text'].nunique()} to do, {len(batches)} calls")
 
@@ -235,15 +235,13 @@ def run(cfg: Config, rows: pd.DataFrame, entries: dict, workers: int = 3,
                 stats["failed_calls"] += 1
                 print(f"[{cfg.name}] call failed: {str(e)[:200]}")
                 continue
-            for k in ("cost", "in", "out", "ms"):
-                stats[k] += info[k]
+            stats["ms"] += info["ms"]
             for rec in check(b, res, entries):
                 if not rec["missing"]:
                     rec["_run"] = {"model": cfg.model, "effort": cfg.effort, "batch": len(b),
                                    "prompt": PROMPT_VERSION}
                     cache_path(cfg.name, rec["text"]).write_text(json.dumps(rec, ensure_ascii=False))
-            print(f"[{cfg.name}] {stats['calls']}/{len(batches)} calls, "
-                  f"{info['out']} out tokens, {info['ms'] / 1000:.0f}s")
+            print(f"[{cfg.name}] {stats['calls']}/{len(batches)} calls, {len(b)} sentences, {info['ms'] / 1000:.0f}s")
     return stats
 
 
@@ -355,8 +353,7 @@ def rerun(chapter: int | None = None, workers: int = 10) -> None:
     print(f"[rerun] {rows['text'].nunique()} sentences to redo on {RERUN.model}, {workers} calls at a time")
     while True:
         st = run(RERUN, rows, entries, workers=workers, redo=True)
-        print(f"[rerun] round: {st['calls']} calls ({st['failed_calls']} failed), {st['out']} out tokens, "
-              f"${st['cost']:.2f} API-equivalent")
+        print(f"[rerun] round: {st['calls']} calls ({st['failed_calls']} failed)")
         if st["todo"] == 0:
             print("[rerun] done")
             return
@@ -397,12 +394,9 @@ def dry_run(only: str | None = None) -> None:
         st = run(cfg, rows, entries)
         res = results(cfg.name, rows["text"].unique(), entries)
         m = metrics(res, rows["text"].nunique())
-        n_done = max(len(res), 1)
         table.append({
             "run": cfg.name, **m,
             "failed calls": f"{st['failed_calls']}/{st['calls']}",
-            "out tokens/sentence": round(st["out"] / n_done) if st["out"] else "cached",
-            "$ API-equiv/sentence": round(st["cost"] / n_done, 4) if st["cost"] else "cached",
             "wall min": round((time.time() - t0) / 60, 1),
         })
     rep = pd.DataFrame(table)

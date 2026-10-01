@@ -1,1 +1,1 @@
-{"text": "わんぱく", "structure": [{"jp": "わんぱく", "en": "impish"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "わんぱく", "structure": [{"jp": "わんぱく", "en": "impish"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2"}}

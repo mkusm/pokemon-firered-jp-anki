@@ -1,1 +1,1 @@
-{"text": "オーキドはかせの　ポケモン　さいごの　いっぴきだ…！", "structure": [{"jp": "オーキドはかせの　ポケモン", "en": "Professor Oak's Pokémon"}, {"jp": "さいごの　いっぴきだ…！", "en": "the last one"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "オーキドはかせの　ポケモン　さいごの　いっぴきだ…！", "structure": [{"jp": "オーキドはかせの　ポケモン", "en": "Professor Oak's Pokémon"}, {"jp": "さいごの　いっぴきだ…！", "en": "it's the last one...!"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2"}}

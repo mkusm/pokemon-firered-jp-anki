@@ -1,1 +1,1 @@
-{"text": "ひくいじゅん", "structure": [{"jp": "ひくいじゅん", "en": "in order of lowness"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "ひくいじゅん", "structure": [{"jp": "ひくいじゅん", "en": "in order from the shortest"}], "patterns": [{"name": "〜じゅん", "span": "ひくいじゅん", "words": ["ひくい", "じゅん"], "explanation": "じゅん after a word means 'in order of that', starting from it. ひくいじゅん = 'shortest first'."}], "_run": {"model": "opus", "effort": "low", "version": "2"}}

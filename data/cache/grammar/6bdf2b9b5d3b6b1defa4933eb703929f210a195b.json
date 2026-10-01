@@ -1,1 +1,1 @@
-{"text": "メロメロ", "structure": [{"jp": "メロメロ", "en": "Infatuated"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "メロメロ", "structure": [{"jp": "メロメロ", "en": "Infatuated"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2"}}

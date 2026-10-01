@@ -1,1 +1,1 @@
-{"text": "フレンドリィ　ショップで！", "structure": [{"jp": "フレンドリィ　ショップで！", "en": "At the Poké Mart!"}], "patterns": [{"name": "〜で (where)", "span": "ショップで", "words": ["ショップ", "で"], "explanation": "で after a place says where something is done. The rest (buy it) is left unsaid. ショップで = 'at the shop'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "フレンドリィ　ショップで！", "structure": [{"jp": "フレンドリィ　ショップで！", "en": "at the Poké Mart!"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2"}}

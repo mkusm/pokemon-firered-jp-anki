@@ -1,1 +1,1 @@
-{"text": "バックが　いっぱいだ！", "structure": [{"jp": "バックが", "en": "the Bag"}, {"jp": "いっぱいだ！", "en": "is full"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "バックが　いっぱいだ！", "structure": [{"jp": "バックが", "en": "the Bag"}, {"jp": "いっぱいだ！", "en": "is full!"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2"}}

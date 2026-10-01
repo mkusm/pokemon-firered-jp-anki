@@ -1,1 +1,1 @@
-{"text": "＊の　ポケモンたちを　いっきょに　＊に　いどうした！", "structure": [{"jp": "＊の　ポケモンたちを", "en": "the Pokémon of *"}, {"jp": "いっきょに", "en": "all at once"}, {"jp": "＊に", "en": "to *"}, {"jp": "いどうした！", "en": "moved"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "＊の　ポケモンたちを　いっきょに　＊に　いどうした！", "structure": [{"jp": "＊の　ポケモンたちを", "en": "the Pokémon in ＊"}, {"jp": "いっきょに", "en": "all at once"}, {"jp": "＊に　いどうした！", "en": "moved to ＊!"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2"}}

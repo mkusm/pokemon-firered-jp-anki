@@ -1,1 +1,1 @@
-{"text": "ほんとうに　にがしますか？", "structure": [{"jp": "ほんとうに", "en": "really"}, {"jp": "にがしますか？", "en": "will you release it?"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "ほんとうに　にがしますか？", "structure": [{"jp": "ほんとうに", "en": "really"}, {"jp": "にがしますか？", "en": "will you release it?"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2"}}

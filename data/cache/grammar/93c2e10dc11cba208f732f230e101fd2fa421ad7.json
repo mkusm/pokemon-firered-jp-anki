@@ -1,1 +1,1 @@
-{"text": "さすがだな！", "structure": [{"jp": "さすがだな！", "en": "as expected!"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "さすがだな！", "structure": [{"jp": "さすがだな！", "en": "just as expected of you!"}], "patterns": [{"name": "〜な (feeling)", "span": "さすがだな", "words": ["さすが", "だ", "な"], "explanation": "な at the end of a sentence shows the speaker's own feeling, like 'huh' or 'sure is'. さすがだな = 'that's just like you, isn't it'."}], "_run": {"model": "opus", "effort": "low", "version": "2"}}

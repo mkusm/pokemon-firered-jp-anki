@@ -1,1 +1,1 @@
-{"text": "ニビ　ポケモン　ジム　タケシ　にんてい　トレーナー！", "structure": [{"jp": "ニビ　ポケモン　ジム", "en": "Pewter Pokémon Gym"}, {"jp": "タケシ　にんてい　トレーナー！", "en": "Brock-certified trainer"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "ニビ　ポケモン　ジム　タケシ　にんてい　トレーナー！", "structure": [{"jp": "ニビ　ポケモン　ジム", "en": "Pewter Pokémon Gym"}, {"jp": "タケシ　にんてい　トレーナー！", "en": "trainers certified by Brock!"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2"}}

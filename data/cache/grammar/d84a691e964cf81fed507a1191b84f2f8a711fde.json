@@ -1,1 +1,1 @@
-{"text": "レッドくん", "structure": [{"jp": "レッドくん", "en": "Red (friendly title)"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "レッドくん", "structure": [{"jp": "レッドくん", "en": "Red!"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2"}}

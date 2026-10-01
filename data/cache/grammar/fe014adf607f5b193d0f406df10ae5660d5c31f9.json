@@ -1,1 +1,1 @@
-{"text": "サトシ", "structure": [{"jp": "サトシ", "en": "Satoshi"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "サトシ", "structure": [{"jp": "サトシ", "en": "Satoshi"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2"}}

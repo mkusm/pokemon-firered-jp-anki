@@ -1,1 +1,1 @@
-{"text": "やったー！", "structure": [{"jp": "やったー！", "en": "Gotcha!"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "やったー！", "structure": [{"jp": "やったー！", "en": "I did it!"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2"}}

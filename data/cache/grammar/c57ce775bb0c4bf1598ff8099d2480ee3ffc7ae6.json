@@ -1,1 +1,1 @@
-{"text": "ゆけっ！", "structure": [{"jp": "ゆけっ！", "en": "Go!"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "ゆけっ！", "structure": [{"jp": "ゆけっ！", "en": "go!"}], "patterns": [{"name": "〜え (command)", "span": "ゆけっ", "words": ["ゆけっ"], "explanation": "Changing the last sound of a verb to an え-sound makes a blunt order; ゆく is an older way to say いく. ゆけっ = 'go!'."}], "_run": {"model": "opus", "effort": "low", "version": "2"}}

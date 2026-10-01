@@ -1,1 +1,1 @@
-{"text": "わざの　ついかこうかを　うけない", "structure": [{"jp": "わざの　ついかこうかを", "en": "the additional effects of moves"}, {"jp": "うけない", "en": "does not receive"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "わざの　ついかこうかを　うけない", "structure": [{"jp": "わざの　ついかこうかを", "en": "the added effects of moves"}, {"jp": "うけない", "en": "does not receive"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2"}}

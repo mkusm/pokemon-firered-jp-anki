@@ -1,1 +1,1 @@
-{"text": "みない", "structure": [{"jp": "みない", "en": "don't watch"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "みない", "structure": [{"jp": "みない", "en": "don't watch"}], "patterns": [{"name": "〜ない", "span": "みない", "words": ["みない"], "explanation": "ない on the end of a verb makes it 'not'. みない = 'don't watch'."}], "_run": {"model": "opus", "effort": "low", "version": "2"}}

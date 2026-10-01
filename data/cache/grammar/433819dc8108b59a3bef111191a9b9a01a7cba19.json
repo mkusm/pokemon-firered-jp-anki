@@ -1,1 +1,1 @@
-{"text": "よく　きた！", "structure": [{"jp": "よく　きた！", "en": "Good of you to come!"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "よく　きた！", "structure": [{"jp": "よく　きた！", "en": "good of you to come!"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2"}}

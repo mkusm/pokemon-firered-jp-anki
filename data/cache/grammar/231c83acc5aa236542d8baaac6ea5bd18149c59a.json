@@ -1,1 +1,1 @@
-{"text": "でんわだ！", "structure": [{"jp": "でんわだ！", "en": "It's a phone!"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "でんわだ！", "structure": [{"jp": "でんわだ！", "en": "it's a telephone!"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2"}}

@@ -1,1 +1,1 @@
-{"text": "なにかの　せっけいず　だ！", "structure": [{"jp": "なにかの", "en": "of something"}, {"jp": "せっけいず　だ！", "en": "it's a blueprint"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "なにかの　せっけいず　だ！", "structure": [{"jp": "なにかの　せっけいず　だ！", "en": "it's a blueprint of something!"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2"}}

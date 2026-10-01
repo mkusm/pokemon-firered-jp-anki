@@ -1,1 +1,1 @@
-{"text": "はい　どうぞ　まいど　ありがとう　ございます", "structure": [{"jp": "はい　どうぞ", "en": "here you go"}, {"jp": "まいど　ありがとう　ございます", "en": "thank you for your business"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "はい　どうぞ　まいど　ありがとう　ございます", "structure": [{"jp": "はい　どうぞ", "en": "here you go"}, {"jp": "まいど　ありがとう　ございます", "en": "thank you as always"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2"}}

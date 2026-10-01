@@ -1,1 +1,1 @@
-{"text": "いつか　きっと　つかまるよ！", "structure": [{"jp": "いつか　きっと", "en": "someday, surely"}, {"jp": "つかまるよ！", "en": "you'll get caught/caught one!"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "いつか　きっと　つかまるよ！", "structure": [{"jp": "いつか　きっと", "en": "someday, surely"}, {"jp": "つかまるよ！", "en": "it will get caught!"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2"}}

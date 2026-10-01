@@ -1,1 +1,1 @@
-{"text": "＊を　＊コ　ひきだしました", "structure": [{"jp": "＊を", "en": "＊ (item)"}, {"jp": "＊コ", "en": "＊ pieces"}, {"jp": "ひきだしました", "en": "withdrew"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "＊を　＊コ　ひきだしました", "structure": [{"jp": "＊を", "en": "＊ (the item)"}, {"jp": "＊コ", "en": "＊ pieces"}, {"jp": "ひきだしました", "en": "withdrew"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2"}}

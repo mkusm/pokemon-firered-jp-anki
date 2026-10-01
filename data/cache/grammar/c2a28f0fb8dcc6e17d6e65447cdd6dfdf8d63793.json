@@ -1,1 +1,1 @@
-{"text": "それが　わしの　ゆめ　だった！", "structure": [{"jp": "それが", "en": "that"}, {"jp": "わしの　ゆめ　だった！", "en": "was my dream"}], "patterns": [{"name": "〜だ", "span": "ゆめ　だった", "words": ["だった", "ゆめ"], "explanation": "だった is the past of だ, 'was'. わし is an old man's word for 'I'. ゆめ　だった = 'was a dream'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "それが　わしの　ゆめ　だった！", "structure": [{"jp": "それが", "en": "that"}, {"jp": "わしの　ゆめ　だった！", "en": "was my dream!"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2"}}

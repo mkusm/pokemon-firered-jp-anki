@@ -1,1 +1,1 @@
-{"text": "＊を　いくつ　うりますか？", "structure": [{"jp": "＊を", "en": "＊ (object)"}, {"jp": "いくつ", "en": "how many"}, {"jp": "うりますか？", "en": "will you sell?"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "＊を　いくつ　うりますか？", "structure": [{"jp": "＊を", "en": "＊"}, {"jp": "いくつ", "en": "how many"}, {"jp": "うりますか？", "en": "will you sell?"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2"}}

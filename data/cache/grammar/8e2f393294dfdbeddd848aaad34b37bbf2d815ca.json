@@ -1,1 +1,1 @@
-{"text": "きみの　なまえは？", "structure": [{"jp": "きみの　なまえは？", "en": "your name is?"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "きみの　なまえは？", "structure": [{"jp": "きみの　なまえは？", "en": "your name is...?"}], "patterns": [{"name": "〜は？", "span": "なまえは？", "words": ["なまえ", "は"], "explanation": "Stopping after は with a rising voice leaves the rest of the question unsaid, like 'and ... is?'. きみの　なまえは？ = 'and your name is?'"}], "_run": {"model": "opus", "effort": "low", "version": "2"}}

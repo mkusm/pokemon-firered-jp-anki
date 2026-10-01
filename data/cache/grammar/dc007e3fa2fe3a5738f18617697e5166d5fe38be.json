@@ -1,1 +1,1 @@
-{"text": "くやしいな！", "structure": [{"jp": "くやしいな！", "en": "How frustrating!"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "くやしいな！", "structure": [{"jp": "くやしいな！", "en": "how frustrating!"}], "patterns": [{"name": "〜な (feeling)", "span": "くやしいな", "words": ["くやしい", "な"], "explanation": "な at the end shows the speaker's own strong feeling, like 'how ...!'. くやしいな = 'how frustrating!'"}], "_run": {"model": "opus", "effort": "low", "version": "2"}}

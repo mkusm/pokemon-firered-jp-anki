@@ -1,1 +1,1 @@
-{"text": "かくとう", "structure": [{"jp": "かくとう", "en": "Fighting"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "かくとう", "structure": [{"jp": "かくとう", "en": "Fighting"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2"}}

@@ -1,1 +1,1 @@
-{"text": "ステレオ", "structure": [{"jp": "ステレオ", "en": "stereo"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "ステレオ", "structure": [{"jp": "ステレオ", "en": "stereo"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2"}}

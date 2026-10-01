@@ -1,1 +1,1 @@
-{"text": "うふふ　かわいい　ポケモンね！", "structure": [{"jp": "うふふ", "en": "tee-hee"}, {"jp": "かわいい　ポケモンね！", "en": "what a cute Pokémon"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "うふふ　かわいい　ポケモンね！", "structure": [{"jp": "うふふ", "en": "tee-hee"}, {"jp": "かわいい　ポケモンね！", "en": "a cute Pokémon, isn't it!"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2"}}

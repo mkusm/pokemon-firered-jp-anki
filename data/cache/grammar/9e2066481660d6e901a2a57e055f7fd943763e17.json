@@ -1,1 +1,1 @@
-{"text": "なし", "structure": [{"jp": "なし", "en": "none"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "なし", "structure": [{"jp": "なし", "en": "none"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2"}}

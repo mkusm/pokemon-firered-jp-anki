@@ -1,1 +1,1 @@
-{"text": "かざん", "structure": [{"jp": "かざん", "en": "Volcano"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "かざん", "structure": [{"jp": "かざん", "en": "volcano"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2"}}

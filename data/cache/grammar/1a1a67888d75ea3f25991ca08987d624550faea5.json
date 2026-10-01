@@ -1,1 +1,1 @@
-{"text": "スペース　シャトル　コロンビアごう", "structure": [{"jp": "スペース　シャトル", "en": "space shuttle"}, {"jp": "コロンビアごう", "en": "Columbia (ship name)"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "スペース　シャトル　コロンビアごう", "structure": [{"jp": "スペース　シャトル", "en": "Space Shuttle"}, {"jp": "コロンビアごう", "en": "the Columbia"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2"}}

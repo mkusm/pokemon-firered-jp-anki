@@ -1,1 +1,1 @@
-{"text": "おもさ", "structure": [{"jp": "おもさ", "en": "weight"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "おもさ", "structure": [{"jp": "おもさ", "en": "weight"}], "patterns": [{"name": "〜さ", "span": "おもさ", "words": ["おもさ"], "explanation": "Swapping the last い of a describing word for さ turns it into the name of that quality. おもさ = 'heaviness', so 'weight'."}], "_run": {"model": "opus", "effort": "low", "version": "2"}}

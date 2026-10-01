@@ -1,1 +1,1 @@
-{"text": "しっぽをふる", "structure": [{"jp": "しっぽを", "en": "the tail"}, {"jp": "ふる", "en": "wag"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "しっぽをふる", "structure": [{"jp": "しっぽをふる", "en": "wag the tail"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2"}}

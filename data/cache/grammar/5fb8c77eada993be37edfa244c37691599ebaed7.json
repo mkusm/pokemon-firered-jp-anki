@@ -1,1 +1,1 @@
-{"text": "＊は　ちからつきた", "structure": [{"jp": "＊は", "en": "＊"}, {"jp": "ちからつきた", "en": "ran out of strength"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "＊は　ちからつきた", "structure": [{"jp": "＊は", "en": "＊ (the Pokémon)"}, {"jp": "ちからつきた", "en": "ran out of strength"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2"}}

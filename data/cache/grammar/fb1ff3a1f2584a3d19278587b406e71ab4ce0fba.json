@@ -1,1 +1,1 @@
-{"text": "かいものを　やめます", "structure": [{"jp": "かいものを", "en": "shopping"}, {"jp": "やめます", "en": "stop"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "かいものを　やめます", "structure": [{"jp": "かいものを", "en": "shopping"}, {"jp": "やめます", "en": "quit"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2"}}

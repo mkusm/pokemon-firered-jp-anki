@@ -1,1 +1,1 @@
-{"text": "やせいの　＊が　あらわれた！", "structure": [{"jp": "やせいの　＊が　あらわれた！", "en": "a wild ＊ appeared!"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "やせいの　＊が　あらわれた！", "structure": [{"jp": "やせいの　＊が", "en": "a wild ＊"}, {"jp": "あらわれた！", "en": "appeared!"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2"}}

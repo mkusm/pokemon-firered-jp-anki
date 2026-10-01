@@ -1,1 +1,1 @@
-{"text": "いってらっしゃい！", "structure": [{"jp": "いってらっしゃい！", "en": "off you go"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "いってらっしゃい！", "structure": [{"jp": "いってらっしゃい！", "en": "off you go, take care!"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2"}}

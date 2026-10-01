@@ -38,9 +38,9 @@ Each card:
 - **Grammar**, on the back, for the first chapter so far (everything up to the
   first gym, 2,466 cards): the patterns the word takes part in, each explained
   in plain words for that sentence, and a breakdown of the sentence phrase by
-  phrase. The card for で in じゅんばんで　せつめい　します says: "で after a
-  noun says the way or method something is done. じゅんばんで　せつめいします =
-  'I'll explain in that order'."
+  phrase. The card for と in しゅじんこうと　なって says: "と before なる shows
+  what someone turns into; it is a more formal に. しゅじんこうと　なって =
+  'becoming the hero'."
 
 つかまえた, つかまえて and つかまえられる are three cards: every form is drilled
 where the story first uses it.
@@ -147,10 +147,9 @@ uv run python -m firered_anki.grammar run --chapter 0   # grammar patterns and s
 All of them resume from the cache, and `analyse` waits out a usage limit and
 carries on. For scale: the first full run was 12,747 sentences in 322 calls
 (Sonnet, low effort, 40 sentences a call), about five hours with one usage-limit
-pause, and roughly $110 at API prices. Escalation redid 2,132 sentences on Opus.
-Redoing the first chapter on Opus was 993 sentences in 25 calls, ten at a time:
-12 minutes and about $21. Its grammar pass was 1,225 sentences in 31 calls on
-Sonnet: 3 minutes and about $3.
+pause. Escalation redid 2,132 sentences on Opus. Redoing the first chapter on
+Opus was 993 sentences in 25 calls, ten at a time, 12 minutes. Its grammar pass,
+also on Opus, was 1,225 sentences in 31 calls, eight at a time, 5 minutes.
 
 ### Things you edit
 

@@ -1,1 +1,1 @@
-{"text": "この　せかいには", "structure": [{"jp": "この　せかいには", "en": "in this world"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "この　せかいには", "structure": [{"jp": "この　せかいには", "en": "in this world"}], "patterns": [{"name": "〜には", "span": "せかいには", "words": ["せかい", "に", "は"], "explanation": "に gives the place and は sets that place up as what the sentence is about. この　せかいには = 'in this world'."}], "_run": {"model": "opus", "effort": "low", "version": "2"}}

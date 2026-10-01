@@ -1,1 +1,1 @@
-{"text": "カントー　ちほうの　ちずだ！", "structure": [{"jp": "カントー　ちほうの　ちずだ！", "en": "it's a map of the Kanto region"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "カントー　ちほうの　ちずだ！", "structure": [{"jp": "カントー　ちほうの", "en": "of the Kanto region"}, {"jp": "ちずだ！", "en": "it's a map!"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2"}}

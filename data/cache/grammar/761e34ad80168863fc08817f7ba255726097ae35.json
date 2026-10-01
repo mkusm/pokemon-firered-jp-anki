@@ -1,1 +1,1 @@
-{"text": "つづきから　はじめる", "structure": [{"jp": "つづきから", "en": "from the continuation"}, {"jp": "はじめる", "en": "start"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "つづきから　はじめる", "structure": [{"jp": "つづきから", "en": "from where you left off"}, {"jp": "はじめる", "en": "start"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2"}}

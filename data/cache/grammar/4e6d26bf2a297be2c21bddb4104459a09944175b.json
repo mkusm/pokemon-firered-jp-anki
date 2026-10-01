@@ -1,1 +1,1 @@
-{"text": "きみは　つよいな！", "structure": [{"jp": "きみは", "en": "you"}, {"jp": "つよいな！", "en": "are strong!"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "きみは　つよいな！", "structure": [{"jp": "きみは", "en": "you"}, {"jp": "つよいな！", "en": "are strong, wow!"}], "patterns": [{"name": "〜な (feeling)", "span": "つよいな", "words": ["つよい", "な"], "explanation": "な at the end shows the speaker's own feeling of being impressed. つよいな = 'you sure are strong!'"}], "_run": {"model": "opus", "effort": "low", "version": "2"}}

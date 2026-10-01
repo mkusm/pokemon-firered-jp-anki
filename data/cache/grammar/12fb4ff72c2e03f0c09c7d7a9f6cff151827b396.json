@@ -1,1 +1,1 @@
-{"text": "ゆうかん", "structure": [{"jp": "ゆうかん", "en": "brave (nature)"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "ゆうかん", "structure": [{"jp": "ゆうかん", "en": "brave"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2"}}

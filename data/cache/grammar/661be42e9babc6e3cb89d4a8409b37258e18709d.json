@@ -1,1 +1,1 @@
-{"text": "それとも　おんなのこ？", "structure": [{"jp": "それとも　おんなのこ？", "en": "or a girl?"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "それとも　おんなのこ？", "structure": [{"jp": "それとも", "en": "or"}, {"jp": "おんなのこ？", "en": "a girl?"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2"}}

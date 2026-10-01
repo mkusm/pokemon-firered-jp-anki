@@ -1,1 +1,1 @@
-{"text": "いよいよ　これから　きみの　ものがたりの　はじまりだ！", "structure": [{"jp": "いよいよ　これから", "en": "at last, from now"}, {"jp": "きみの　ものがたりの　はじまりだ！", "en": "is the start of your story!"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "いよいよ　これから　きみの　ものがたりの　はじまりだ！", "structure": [{"jp": "いよいよ　これから", "en": "at last, from now"}, {"jp": "きみの　ものがたりの", "en": "your story's"}, {"jp": "はじまりだ！", "en": "beginning it is!"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2"}}

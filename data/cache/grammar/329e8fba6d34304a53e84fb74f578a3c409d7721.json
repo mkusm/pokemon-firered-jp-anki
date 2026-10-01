@@ -1,1 +1,1 @@
-{"text": "モノラル", "structure": [{"jp": "モノラル", "en": "mono"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "モノラル", "structure": [{"jp": "モノラル", "en": "mono"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2"}}

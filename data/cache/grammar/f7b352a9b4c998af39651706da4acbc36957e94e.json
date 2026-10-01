@@ -1,1 +1,1 @@
-{"text": "もちものが　いっぱいだ", "structure": [{"jp": "もちものが", "en": "belongings"}, {"jp": "いっぱいだ", "en": "are full"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "もちものが　いっぱいだ", "structure": [{"jp": "もちものが", "en": "your belongings"}, {"jp": "いっぱいだ", "en": "are full"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2"}}

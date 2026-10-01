@@ -94,10 +94,10 @@ def schema(pts: dict) -> dict:
     }
 
 
-def ask(batch: pd.DataFrame, pts: dict) -> tuple[dict[int, str], float]:
-    out, info = claude_cli.call(prompt(batch, pts), SYSTEM, schema(pts), MODEL, EFFORT, timeout=600)
+def ask(batch: pd.DataFrame, pts: dict) -> dict[int, str]:
+    out, _ = claude_cli.call(prompt(batch, pts), SYSTEM, schema(pts), MODEL, EFFORT, timeout=600)
     items = out.get("items", [])
-    return {it["n"]: it["point"] for it in items if 0 <= it["n"] < len(batch)}, info["cost"]
+    return {it["n"]: it["point"] for it in items if 0 <= it["n"] < len(batch)}
 
 
 def main() -> None:
@@ -115,14 +115,13 @@ def main() -> None:
             print(prompt(batches[0].head(3), pts)[-1200:])
         return
 
-    cost, missing = 0.0, 0
+    missing = 0
     try:
         with ThreadPoolExecutor(WORKERS) as pool:
             futs = {pool.submit(ask, b, pts): b for b in batches}
             for n, fut in enumerate(as_completed(futs), 1):
                 b = futs[fut]
-                got, c = fut.result()
-                cost += c
+                got = fut.result()
                 for i, r in enumerate(b.itertuples()):
                     if i in got:
                         (CACHE / f"{r.key}.json").write_text(json.dumps({"msg_id": r.msg_id, "point": got[i]}))
@@ -139,7 +138,7 @@ def main() -> None:
         + yaml.safe_dump(dict(sorted(out.items())), allow_unicode=True, sort_keys=False),
         encoding="utf-8",
     )
-    print(f"answered {len(out)}/{len(msgs)}, unanswered this run {missing}, cost ${cost:.2f} (API-equivalent)")
+    print(f"answered {len(out)}/{len(msgs)}, unanswered this run {missing}")
     print(f"→ {LLM_OVERRIDES.relative_to(ROOT)}; now re-run: uv run python -m firered_anki.order")
 
 

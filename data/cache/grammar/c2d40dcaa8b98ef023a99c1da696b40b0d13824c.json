@@ -1,1 +1,1 @@
-{"text": "じんるい　はじめて　つきに　たつ！", "structure": [{"jp": "じんるい", "en": "mankind"}, {"jp": "はじめて", "en": "for the first time"}, {"jp": "つきに　たつ！", "en": "stands on the moon"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "じんるい　はじめて　つきに　たつ！", "structure": [{"jp": "じんるい", "en": "mankind"}, {"jp": "はじめて", "en": "for the first time"}, {"jp": "つきに　たつ！", "en": "stands on the moon!"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2"}}

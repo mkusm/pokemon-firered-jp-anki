@@ -1,1 +1,1 @@
-{"text": "はい　いいえ", "structure": [{"jp": "はい", "en": "yes"}, {"jp": "いいえ", "en": "no"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "はい　いいえ", "structure": [{"jp": "はい", "en": "yes"}, {"jp": "いいえ", "en": "no"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2"}}

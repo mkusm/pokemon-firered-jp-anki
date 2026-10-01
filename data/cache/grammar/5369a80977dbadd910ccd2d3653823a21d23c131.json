@@ -1,1 +1,1 @@
-{"text": "みずべのポケモン", "structure": [{"jp": "みずべの", "en": "of the waterside"}, {"jp": "ポケモン", "en": "Pokémon"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "みずべのポケモン", "structure": [{"jp": "みずべのポケモン", "en": "Pokémon of the water's edge"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2"}}

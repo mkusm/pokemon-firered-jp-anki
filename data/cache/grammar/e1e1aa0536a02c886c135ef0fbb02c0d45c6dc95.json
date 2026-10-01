@@ -1,1 +1,1 @@
-{"text": "じゅうじボタン", "structure": [{"jp": "じゅうじボタン", "en": "control pad"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "じゅうじボタン", "structure": [{"jp": "じゅうじボタン", "en": "Control Pad"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2"}}

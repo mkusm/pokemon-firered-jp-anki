@@ -1,1 +1,1 @@
-{"text": "ここは　オーキド　はかせの　ポケモン　けんきゅうじょ", "structure": [{"jp": "ここは", "en": "this place"}, {"jp": "オーキド　はかせの　ポケモン　けんきゅうじょ", "en": "Professor Oak's Pokémon lab"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "ここは　オーキド　はかせの　ポケモン　けんきゅうじょ", "structure": [{"jp": "ここは", "en": "this place is"}, {"jp": "オーキド　はかせの　ポケモン　けんきゅうじょ", "en": "Professor Oak's Pokémon Research Lab"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2"}}

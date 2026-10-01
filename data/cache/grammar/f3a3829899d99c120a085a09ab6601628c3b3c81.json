@@ -1,1 +1,1 @@
-{"text": "ここは　ポケモン　リーグ　しょうめん　ゲート", "structure": [{"jp": "ここは", "en": "this place"}, {"jp": "ポケモン　リーグ　しょうめん　ゲート", "en": "Pokémon League front gate"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "ここは　ポケモン　リーグ　しょうめん　ゲート", "structure": [{"jp": "ここは", "en": "this place is"}, {"jp": "ポケモン　リーグ　しょうめん　ゲート", "en": "the Pokémon League Front Gate"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2"}}

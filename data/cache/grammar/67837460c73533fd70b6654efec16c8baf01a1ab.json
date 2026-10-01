@@ -1,1 +1,1 @@
-{"text": "レッドくん　いらっしゃい！", "structure": [{"jp": "レッドくん", "en": "Red"}, {"jp": "いらっしゃい！", "en": "welcome!"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "レッドくん　いらっしゃい！", "structure": [{"jp": "レッドくん", "en": "Red"}, {"jp": "いらっしゃい！", "en": "welcome!"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2"}}

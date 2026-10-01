@@ -1,1 +1,1 @@
-{"text": "トキワの　もり　…　でぐち　このさき　ニビ　シティ", "structure": [{"jp": "トキワの　もり", "en": "Viridian Forest"}, {"jp": "でぐち", "en": "exit"}, {"jp": "このさき　ニビ　シティ", "en": "ahead, Pewter City"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "トキワの　もり　…　でぐち　このさき　ニビ　シティ", "structure": [{"jp": "トキワの　もり　…　でぐち", "en": "Viridian Forest ... exit"}, {"jp": "このさき　ニビ　シティ", "en": "Pewter City ahead"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2"}}

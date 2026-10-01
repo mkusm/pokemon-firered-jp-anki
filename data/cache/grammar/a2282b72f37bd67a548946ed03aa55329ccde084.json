@@ -1,1 +1,1 @@
-{"text": "おおきさくらべ", "structure": [{"jp": "おおきさくらべ", "en": "size comparison"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "おおきさくらべ", "structure": [{"jp": "おおきさくらべ", "en": "size comparison"}], "patterns": [{"name": "〜さ", "span": "おおきさ", "words": ["おおきさ"], "explanation": "Swapping the last い of a describing word for さ turns it into the name of an amount. おおきさ = 'size'."}], "_run": {"model": "opus", "effort": "low", "version": "2"}}

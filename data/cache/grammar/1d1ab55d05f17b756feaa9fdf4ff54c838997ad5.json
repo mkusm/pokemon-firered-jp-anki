@@ -1,1 +1,1 @@
-{"text": "＊は　どくをあびた！", "structure": [{"jp": "＊は　どくをあびた！", "en": "＊ was poisoned!"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "＊は　どくをあびた！", "structure": [{"jp": "＊は", "en": "＊"}, {"jp": "どくをあびた！", "en": "was showered with poison!"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2"}}

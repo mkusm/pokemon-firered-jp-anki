@@ -1,1 +1,1 @@
-{"text": "ポケモンずかん　もくじ", "structure": [{"jp": "ポケモンずかん", "en": "Pokédex"}, {"jp": "もくじ", "en": "table of contents"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "ポケモンずかん　もくじ", "structure": [{"jp": "ポケモンずかん", "en": "Pokédex"}, {"jp": "もくじ", "en": "table of contents"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2"}}

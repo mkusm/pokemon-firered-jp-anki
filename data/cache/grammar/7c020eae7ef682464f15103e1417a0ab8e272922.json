@@ -1,1 +1,1 @@
-{"text": "おかねが　たりないですよ！", "structure": [{"jp": "おかねが", "en": "money"}, {"jp": "たりないですよ！", "en": "is not enough!"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "おかねが　たりないですよ！", "structure": [{"jp": "おかねが", "en": "money"}, {"jp": "たりないですよ！", "en": "is not enough!"}], "patterns": [{"name": "〜ないです", "span": "たりないです", "words": ["たりない", "です"], "explanation": "です after a ない word just makes the 'not' polite. たりないです = 'is not enough'."}], "_run": {"model": "opus", "effort": "low", "version": "2"}}

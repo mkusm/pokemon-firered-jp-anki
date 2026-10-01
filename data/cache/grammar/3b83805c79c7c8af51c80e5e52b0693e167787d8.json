@@ -1,1 +1,1 @@
-{"text": "ごゆっくり　どうぞ！", "structure": [{"jp": "ごゆっくり　どうぞ！", "en": "please take your time"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "ごゆっくり　どうぞ！", "structure": [{"jp": "ごゆっくり　どうぞ！", "en": "please take your time!"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2"}}

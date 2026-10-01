@@ -1,1 +1,1 @@
-{"text": "まけたあ！", "structure": [{"jp": "まけたあ！", "en": "I lost!"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
+{"text": "まけたあ！", "structure": [{"jp": "まけたあ！", "en": "I lost!"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2"}}
