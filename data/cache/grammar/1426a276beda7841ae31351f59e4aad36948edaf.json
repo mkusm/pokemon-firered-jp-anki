@@ -1,0 +1,1 @@
+{"text": "これは　まずいぞ！", "structure": [{"jp": "これは　まずいぞ！", "en": "This is bad!"}], "patterns": [{"name": "〜ぞ", "span": "まずいぞ", "words": ["ぞ"], "explanation": "ぞ is a rough, strong ending that stresses what you say. まずいぞ = 'this is bad, I tell you!'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

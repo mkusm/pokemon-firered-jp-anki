@@ -1,0 +1,1 @@
+{"text": "やめとけ！", "structure": [{"jp": "やめとけ！", "en": "Forget it!"}], "patterns": [{"name": "〜ておく", "span": "やめとけ", "words": ["やめとけ"], "explanation": "とけ is a contracted ておけ, a rough command. やめとけ = 'quit it, leave it'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

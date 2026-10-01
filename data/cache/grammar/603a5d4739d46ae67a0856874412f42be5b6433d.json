@@ -1,0 +1,1 @@
+{"text": "まてー！", "structure": [{"jp": "まてー！", "en": "wait!"}], "patterns": [{"name": "〜ろ", "span": "まてー", "words": ["まてー"], "explanation": "The bare command form of a verb is a rough order. まてー = 'wait!'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

@@ -1,0 +1,1 @@
+{"text": "かいに　きた", "structure": [{"jp": "かいに", "en": "to buy"}, {"jp": "きた", "en": "came"}], "patterns": [{"name": "〜に (purpose)", "span": "かいに　きた", "words": ["かい", "に", "きた"], "explanation": "The verb stem plus に says the purpose of going or coming. かいに　きた = 'came to buy'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

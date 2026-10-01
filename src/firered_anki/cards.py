@@ -12,6 +12,9 @@
   4. Each card takes its first sentence in that order, except that a dialogue
      sentence in the same chapter beats a non-dialogue line. Up to two later
      sentences become extra examples.
+  5. Where the grammar pass has covered a sentence (see grammar.py), its word
+     cards get the patterns the word takes part in and a breakdown of the
+     sentence. There are no cards for the patterns themselves.
 
 Run: uv run python -m firered_anki.cards [run-name]   (default: main)
 """
@@ -25,8 +28,9 @@ from collections import Counter, defaultdict
 
 import pandas as pd
 
-from . import claude_cli
+from . import claude_cli, grammar
 from .analyse import MAIN, load, results
+from .grounding import sense_glosses
 from .map_order import MapOrder
 from .paths import DATA, ROOT
 from .romaji import romaji, sentence_romaji
@@ -187,9 +191,31 @@ def dict_sense(w: dict, entry: dict) -> str:
     """The JMdict definition of the sense chosen for this sentence. It tells
     apart cards whose short gloss is the same: 危ない "dangerous" (sense 1) and
     "close (call); narrow (escape)" (sense 4)."""
-    senses = entry.get("s", [])
+    return "; ".join(sense_glosses(w.get("jmdict_id"), w.get("sense"), {str(w.get("jmdict_id")): entry}))
+
+
+def dictionary(w: dict, entry: dict) -> str:
+    """The entry's first senses, and the chosen one if it comes after them
+    (する 6, "to decide on")."""
+    senses = [(i, s["g"]) for i, s in enumerate(entry.get("s", []), 1)]
     n = w.get("sense") or 0
-    return "; ".join(senses[n - 1]["g"]) if 1 <= n <= len(senses) else ""
+    if n > len(senses) and (g := sense_glosses(w.get("jmdict_id"), n, {})):
+        senses.append((n, g))
+    return "; ".join(f"{i}) {'; '.join(g)}" for i, g in senses)
+
+
+def unsure(w: dict, entry: dict) -> bool:
+    """Whether the card gets the low-confidence tag. Always when the entry is
+    not this word. The model also flags words whose use no listed sense fits,
+    a helper verb or an idiom (きたえて　いく, においが　する): those glosses
+    checked out by hand, so the flag is dropped when the entry is verified
+    and the word is a plain form of its base. It stays for a guess at what a
+    scrap of text is (リッ for かなしばり) and for words with no entry."""
+    if w.get("_form_mismatch") or not w.get("low_confidence"):
+        return bool(w.get("_form_mismatch"))
+    a, b = hira(form_of(w)).translate(_PLAIN), hira(base_kana(w, entry)).translate(_PLAIN)
+    plain_form = a[:1] == b[:1] or b.endswith(("する", "くる"))  # します, きた: the stem changes
+    return not (entry and plain_form)
 
 
 def sentence_in_romaji(text: str, analysis: dict) -> str:
@@ -284,7 +310,7 @@ def merge_senses(occ: pd.DataFrame, entries: dict, offline: bool = False) -> dic
             head = "・".join(e.get("k") or e.get("r") or ["?"])
             lines.append(f"\nword {eid}: {head}")
             for sn, exs in sorted(multi[eid].items()):
-                gl = "; ".join(e["s"][sn - 1]["g"]) if e and 0 < sn <= len(e["s"]) else "?"
+                gl = "; ".join(sense_glosses(eid, sn, entries)) or "?"
                 lines.append(f"  sense {sn}: {gl}  e.g. {' / '.join(exs)}")
         try:
             out, _ = claude_cli.call("\n".join(lines) + "\n\nReturn groups of sense numbers per word id.",
@@ -331,7 +357,9 @@ def highlight(text: str, surface: str) -> str:
     return text if i < 0 else f"{text[:i]}<b>{surface}</b>{text[i + len(surface):]}"
 
 
-def build_cards(run_name: str = MAIN.name, offline_merge: bool = False) -> tuple[pd.DataFrame, pd.DataFrame]:
+def prepare(run_name: str = MAIN.name, offline_merge: bool = False) -> tuple[pd.DataFrame, dict, dict, pd.DataFrame]:
+    """Deck rows with their card order, the JMdict entries, the analyses, and
+    every word occurrence under its card key."""
     deck, entries = load()
     deck = deck.sort_values("first_seen_order").reset_index(drop=True)
     analyses = results(run_name, deck["text"].unique(), entries)
@@ -347,6 +375,12 @@ def build_cards(run_name: str = MAIN.name, offline_merge: bool = False) -> tuple
     words = cardable.groupby("row")["key"].agg(lambda ks: frozenset(ks))
     words = words.reindex(deck.index).map(lambda x: x if isinstance(x, frozenset) else frozenset())
     deck["card_order"] = spread(deck, words)
+    return deck, entries, analyses, occ
+
+
+def build_cards(run_name: str = MAIN.name, offline_merge: bool = False) -> tuple[pd.DataFrame, pd.DataFrame]:
+    deck, entries, analyses, occ = prepare(run_name, offline_merge)
+    gram = grammar.results(deck["text"].unique(), analyses)
 
     occ = occ.join(deck[["card_order", "dialogue", "chapter", "msg_id", "text", "speaker"]]
                    .rename(columns={"text": "_t"}), on="row")
@@ -375,6 +409,7 @@ def build_cards(run_name: str = MAIN.name, offline_merge: bool = False) -> tuple
                 for t, ww in zip(later["text"][:MAX_EXTRA], later["word"][:MAX_EXTRA])
             ]
             e = entries.get(str(w.get("jmdict_id")), {}) if w.get("jmdict_id") else {}
+            g = gram.get(first["text"])
             out.append({
                 "key": json.dumps(key, ensure_ascii=False), "order": first["card_order"],
                 "Sentence": highlight(first["text"], form_of(w)),
@@ -389,14 +424,17 @@ def build_cards(run_name: str = MAIN.name, offline_merge: bool = False) -> tuple
                 "InContext": w.get("in_context") or "", "Modifiers": w.get("modifiers") or "",
                 "DictSense": dict_sense(w, e),
                 "Onomatopoeia": "onomatopoeic or mimetic word" if is_onomatopoeia(w, e) else "",
+                "Grammar": "".join(map(grammar.pattern_html, grammar.word_patterns(
+                    g, first["text"], a["words"], first["pos"]))) if g else "",
+                "Breakdown": grammar.breakdown_html(g) if g else "",
                 "SentenceKanji": a["kanji"], "SentenceEnglish": a["english"],
                 "ExtraExamples": "<br>".join(extras), "Context": ctx,
                 "Location": location(r), "MessageId": r.msg_id,
                 "Speaker": first["speaker"] or "",
-                "Dictionary": "; ".join(f"{i}) {'; '.join(s['g'])}" for i, s in enumerate(e.get("s", []), 1)),
+                "Dictionary": dictionary(w, e),
                 "tags": [re.sub(r"\W", "_", location(r))]
                 + (["proper"] if w.get("proper") else [])
-                + (["low-confidence"] if w.get("low_confidence") or w.get("_form_mismatch") else [])
+                + (["low-confidence"] if unsure(w, e) else [])
                 + (["sense-guessed"] if w.get("_sense_guessed") else [])
                 + (["onomatopoeia"] if is_onomatopoeia(w, e) else [])
                 + (["fragment"] if is_fragment(first["text"], w) else []),
@@ -427,7 +465,8 @@ def main() -> None:
             f"  {c.Modifiers}\n  {c.SentenceKanji}\n  {c.SentenceEnglish}\n")
     SPOTCHECK_OUT.write_text("\n".join(lines), encoding="utf-8")
 
-    print(f"cards {len(cards)}, name cards {len(names)}")
+    print(f"cards {len(cards)}, name cards {len(names)} "
+          f"(grammar on {sum(cards.Breakdown != '')} cards, a pattern line on {sum(cards.Grammar != '')})")
     print(f"low-confidence {sum('low-confidence' in t for t in cards.tags)}, "
           f"sense guessed {sum('sense-guessed' in t for t in cards.tags)}")
     print(f"→ {CARDS_OUT.relative_to(ROOT)}, {NAMES_OUT.relative_to(ROOT)}, {SPOTCHECK_OUT.relative_to(ROOT)}")

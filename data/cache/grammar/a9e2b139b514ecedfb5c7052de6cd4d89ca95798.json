@@ -1,0 +1,1 @@
+{"text": "じゃあ　モンスターボールを　なげるぞー！", "structure": [{"jp": "じゃあ", "en": "okay"}, {"jp": "モンスターボールを　なげるぞー！", "en": "I'm going to throw a Poké Ball"}], "patterns": [{"name": "〜ぞ", "span": "なげるぞー", "words": ["ぞー"], "explanation": "ぞ is a rough, strong ending that shows determination. なげるぞー = 'I'm throwing it!'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

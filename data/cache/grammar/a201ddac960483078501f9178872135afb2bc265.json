@@ -1,0 +1,1 @@
+{"text": "…え　わしに　わたす　ものが？", "structure": [{"jp": "…え", "en": "Eh"}, {"jp": "わしに　わたす　ものが？", "en": "something to give me?"}], "patterns": [{"name": "verb + noun", "span": "わしに　わたす　もの", "words": ["わし", "に", "わたす", "もの"], "explanation": "The verb before もの describes it. わしにわたすもの = 'a thing to give to me'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

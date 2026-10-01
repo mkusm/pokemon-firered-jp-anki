@@ -1,0 +1,1 @@
+{"text": "このボックスを　どうしますか？", "structure": [{"jp": "このボックスを", "en": "this Box"}, {"jp": "どうしますか？", "en": "what will you do?"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

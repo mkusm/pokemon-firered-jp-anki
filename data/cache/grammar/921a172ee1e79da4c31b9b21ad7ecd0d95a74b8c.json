@@ -1,0 +1,1 @@
+{"text": "ついに　５０しゅるいを　こえたか！", "structure": [{"jp": "ついに", "en": "finally"}, {"jp": "５０しゅるいを　こえたか！", "en": "you passed 50 kinds!"}], "patterns": [{"name": "〜か", "span": "こえたか", "words": ["こえた", "か"], "explanation": "か at the end here shows surprise or realization. こえたか = 'so you've passed it!'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

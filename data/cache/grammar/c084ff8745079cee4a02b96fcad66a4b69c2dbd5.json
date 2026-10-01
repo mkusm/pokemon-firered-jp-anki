@@ -1,0 +1,1 @@
+{"text": "あかみを　おびて　すけている。", "structure": [{"jp": "あかみを　おびて", "en": "tinged with red"}, {"jp": "すけている。", "en": "and is translucent"}], "patterns": [{"name": "〜て (linking)", "span": "おびて", "words": ["おびて"], "explanation": "て joins two states into one description. あかみを　おびて　すけている = 'is tinged red and see-through'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

@@ -1,0 +1,1 @@
+{"text": "にげられて　しまった・・・", "structure": [{"jp": "にげられて　しまった・・・", "en": "it got away…"}], "patterns": [{"name": "〜てしまう", "span": "にげられて　しまった", "words": ["にげられて", "しまった"], "explanation": "てしまう says something happened completely, often to your regret. にげられてしまった = 'it went and got away'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

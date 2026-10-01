@@ -1,0 +1,1 @@
+{"text": "…　ニビ　けいさつ　まで", "structure": [{"jp": "ニビ　けいさつ", "en": "Pewter Police"}, {"jp": "まで", "en": "as far as"}], "patterns": [{"name": "〜まで", "span": "けいさつ　まで", "words": ["まで"], "explanation": "まで means 'up to'. Here it points to where to go or report. けいさつまで = 'to the police'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

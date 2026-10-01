@@ -1,0 +1,1 @@
+{"text": "なかは　しろいページ　ばっかりだ！", "structure": [{"jp": "なかは", "en": "inside"}, {"jp": "しろいページ　ばっかりだ！", "en": "only white pages"}], "patterns": [{"name": "〜ばかり", "span": "ばっかり", "words": ["ばっかり"], "explanation": "ばかり means 'nothing but'; ばっかり is the casual stressed form. しろいページ　ばっかり = 'nothing but blank pages'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

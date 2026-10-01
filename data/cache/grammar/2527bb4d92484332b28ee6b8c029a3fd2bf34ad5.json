@@ -1,0 +1,1 @@
+{"text": "おさがしものですか？", "structure": [{"jp": "おさがしものですか？", "en": "are you looking for something?"}], "patterns": [{"name": "お〜", "span": "おさがしもの", "words": ["お", "さがしもの"], "explanation": "お before a word makes it polite, here about the customer's action. おさがしもの = 'the thing you are looking for'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

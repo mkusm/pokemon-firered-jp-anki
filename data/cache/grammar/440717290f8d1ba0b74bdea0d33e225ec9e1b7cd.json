@@ -1,0 +1,1 @@
+{"text": "その　あかい　はこは　なんじゃ？", "structure": [{"jp": "その　あかい　はこは", "en": "that red box"}, {"jp": "なんじゃ？", "en": "what is it?"}], "patterns": [{"name": "〜だ", "span": "なんじゃ", "words": ["じゃ"], "explanation": "じゃ is the old-man form of だ. なんじゃ = 'what is it?'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

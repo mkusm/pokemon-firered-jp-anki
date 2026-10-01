@@ -1,0 +1,1 @@
+{"text": "＊は　＊から　かいほうされた！", "structure": [{"jp": "＊は", "en": "＊"}, {"jp": "＊から", "en": "from ＊"}, {"jp": "かいほうされた！", "en": "was freed"}], "patterns": [{"name": "〜られる (passive)", "span": "かいほうされた", "words": ["かいほうされた"], "explanation": "される is the 'had it done to' form of する. かいほうされた = 'was freed'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

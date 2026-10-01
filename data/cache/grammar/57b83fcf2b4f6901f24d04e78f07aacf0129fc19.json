@@ -1,0 +1,1 @@
+{"text": "おまえも　すきなものを　とれ！", "structure": [{"jp": "おまえも", "en": "you too"}, {"jp": "すきなものを", "en": "what you like"}, {"jp": "とれ！", "en": "take!"}], "patterns": [{"name": "〜え (command)", "span": "とれ", "words": ["とれ"], "explanation": "The え-row ending is a blunt command. とれ = 'Take it!'"}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

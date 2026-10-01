@@ -1,0 +1,1 @@
+{"text": "いい　においがする！", "structure": [{"jp": "いい　においが", "en": "a good smell"}, {"jp": "する！", "en": "there is"}], "patterns": [{"name": "〜がする", "span": "においがする", "words": ["におい", "が", "する"], "explanation": "がする with a smell, sound or feeling says you sense it. いい　においがする = 'it smells good'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

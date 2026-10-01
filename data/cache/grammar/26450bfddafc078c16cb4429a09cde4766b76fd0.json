@@ -1,0 +1,1 @@
+{"text": "きょうは　やすうり　ですよ！", "structure": [{"jp": "きょうは", "en": "today"}, {"jp": "やすうり　ですよ！", "en": "it's a sale!"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

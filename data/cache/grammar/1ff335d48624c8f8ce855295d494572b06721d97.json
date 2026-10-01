@@ -1,0 +1,1 @@
+{"text": "かたくて　がまん　づよい！", "structure": [{"jp": "かたくて", "en": "hard and"}, {"jp": "がまん　づよい！", "en": "patient"}], "patterns": [{"name": "〜て (linking)", "span": "かたくて", "words": ["かたくて"], "explanation": "くて joins an adjective to the next one. かたくて　がまんづよい = 'hard and enduring'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

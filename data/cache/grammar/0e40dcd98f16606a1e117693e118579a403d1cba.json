@@ -1,0 +1,1 @@
+{"text": "よけられた！", "structure": [{"jp": "よけられた！", "en": "It dodged it!"}], "patterns": [{"name": "〜られる (passive)", "span": "よけられた", "words": ["よけられた"], "explanation": "The られる ending says the action was done to the speaker, here the dodge was against you. よけられた = 'it was dodged'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

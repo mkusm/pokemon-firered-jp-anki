@@ -1,0 +1,1 @@
+{"text": "＊と　とりかえた！", "structure": [{"jp": "＊と", "en": "with ＊"}, {"jp": "とりかえた！", "en": "swapped"}], "patterns": [{"name": "〜と (with)", "span": "＊と", "words": ["と"], "explanation": "と after a noun here means 'for' or 'with' the other thing in a swap. ＊と　とりかえた = 'swapped it for ＊'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

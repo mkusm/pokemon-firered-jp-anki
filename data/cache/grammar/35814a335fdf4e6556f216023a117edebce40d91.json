@@ -1,0 +1,1 @@
+{"text": "オーキド　はかせに　よろしく！", "structure": [{"jp": "オーキド　はかせに", "en": "to Professor Oak"}, {"jp": "よろしく！", "en": "say hi"}], "patterns": [{"name": "〜によろしく", "span": "はかせに　よろしく", "words": ["に", "よろしく"], "explanation": "Person + によろしく asks someone to pass on your regards. はかせに　よろしく = 'give my regards to the Professor'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

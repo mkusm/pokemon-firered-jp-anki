@@ -1,0 +1,1 @@
+{"text": "なんだか　おもしろそう！", "structure": [{"jp": "なんだか", "en": "somehow"}, {"jp": "おもしろそう！", "en": "looks fun"}], "patterns": [{"name": "〜そう", "span": "おもしろそう", "words": ["おもしろそう"], "explanation": "Drop the い of an adjective and add そう to say it looks that way. おもしろそう = 'looks fun'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

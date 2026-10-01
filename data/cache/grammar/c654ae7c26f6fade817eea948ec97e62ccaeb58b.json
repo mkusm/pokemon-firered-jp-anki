@@ -1,0 +1,1 @@
+{"text": "ここは　ニビシティ　ニビは　はいいろ　いしの　いろ", "structure": [{"jp": "ここは　ニビシティ", "en": "this is Pewter City"}, {"jp": "ニビは　はいいろ", "en": "Pewter is grey"}, {"jp": "いしの　いろ", "en": "the colour of stone"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

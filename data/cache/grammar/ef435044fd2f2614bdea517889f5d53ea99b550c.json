@@ -1,0 +1,1 @@
+{"text": "ポケモングッズが　たくさん　そろってる！", "structure": [{"jp": "ポケモングッズが", "en": "Pokémon goods"}, {"jp": "たくさん　そろってる！", "en": "are fully stocked"}], "patterns": [{"name": "〜ている", "span": "そろってる", "words": ["そろってる"], "explanation": "てる is the casual form of ている, showing the resulting state. そろってる = 'are all gathered'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

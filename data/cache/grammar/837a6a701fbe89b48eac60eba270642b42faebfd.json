@@ -1,0 +1,1 @@
+{"text": "こどもが　なんの　ようだ！", "structure": [{"jp": "こどもが", "en": "a kid"}, {"jp": "なんの　ようだ！", "en": "what business is it"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

@@ -1,0 +1,1 @@
+{"text": "いどう　Ａけってい　Ｂもどる", "structure": [{"jp": "いどう", "en": "move"}, {"jp": "Ａけってい", "en": "A: confirm"}, {"jp": "Ｂもどる", "en": "B: back"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

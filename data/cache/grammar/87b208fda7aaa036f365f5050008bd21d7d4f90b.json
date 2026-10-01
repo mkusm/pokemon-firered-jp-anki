@@ -1,0 +1,1 @@
+{"text": "ひっく…　まちやがれ！", "structure": [{"jp": "ひっく…", "en": "hic"}, {"jp": "まちやがれ！", "en": "wait, you!"}], "patterns": [{"name": "〜やがる", "span": "まちやがれ", "words": ["まちやがれ"], "explanation": "やがれ is a rude, rough command ending, from やがる. まちやがれ = 'wait, damn you!'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

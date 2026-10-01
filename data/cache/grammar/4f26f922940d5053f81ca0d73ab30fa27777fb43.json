@@ -1,0 +1,1 @@
+{"text": "＊は　どくの　ダメージを　うけている！", "structure": [{"jp": "＊は", "en": "* (topic)"}, {"jp": "どくの　ダメージを", "en": "poison damage"}, {"jp": "うけている！", "en": "is taking"}], "patterns": [{"name": "〜ている", "span": "うけている", "words": ["うけている"], "explanation": "ている shows an action going on now. うけている = 'is receiving'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

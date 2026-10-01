@@ -1,0 +1,1 @@
+{"text": "こいつは　とても　そだてやすいぞ！", "structure": [{"jp": "こいつは", "en": "this one"}, {"jp": "とても", "en": "very"}, {"jp": "そだてやすいぞ！", "en": "is easy to raise"}], "patterns": [{"name": "〜やすい", "span": "そだてやすい", "words": ["そだてやすい"], "explanation": "Verb stem plus やすい means easy to do. そだてやすい = 'easy to raise'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

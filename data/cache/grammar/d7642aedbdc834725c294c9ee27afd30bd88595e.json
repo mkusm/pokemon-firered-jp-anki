@@ -1,0 +1,1 @@
+{"text": "これでは　たたかえません！", "structure": [{"jp": "これでは", "en": "in this state"}, {"jp": "たたかえません！", "en": "can't battle"}], "patterns": [{"name": "〜れる (potential)", "span": "たたかえません", "words": ["たたかえません"], "explanation": "The え-row form of a verb means 'can do', and ません makes it 'cannot'. たたかえません = 'I can't fight'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

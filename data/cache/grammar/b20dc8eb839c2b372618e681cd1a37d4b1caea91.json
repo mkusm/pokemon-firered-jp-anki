@@ -1,0 +1,1 @@
+{"text": "すっげー　よわいの！", "structure": [{"jp": "すっげー　よわいの！", "en": "it's super weak!"}], "patterns": [{"name": "〜の (explaining)", "span": "よわいの", "words": ["よわい", "の"], "explanation": "の at the end of a casual sentence explains or stresses a feeling. すっげーよわいの！ = 'it's just so weak!'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

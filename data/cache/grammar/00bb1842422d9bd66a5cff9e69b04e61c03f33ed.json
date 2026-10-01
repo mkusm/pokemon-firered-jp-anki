@@ -1,0 +1,1 @@
+{"text": "よゆうで", "structure": [{"jp": "よゆうで", "en": "with room to spare"}], "patterns": [{"name": "〜で (how)", "span": "よゆうで", "words": ["で"], "explanation": "で shows the way or state something is done in. よゆうで = 'with ease'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

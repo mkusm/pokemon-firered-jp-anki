@@ -1,0 +1,1 @@
+{"text": "おまえ　なかなか　やるな！", "structure": [{"jp": "おまえ", "en": "you"}, {"jp": "なかなか", "en": "quite"}, {"jp": "やるな！", "en": "are good"}], "patterns": [{"name": "〜な (sentence ending)", "span": "やるな", "words": ["な"], "explanation": "な at the end shows the speaker's feeling in a casual, male way. やるな = 'you're good, huh'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

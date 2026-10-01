@@ -1,0 +1,1 @@
+{"text": "しかし　＊の　こうげきは　はずれた！", "structure": [{"jp": "しかし", "en": "but"}, {"jp": "＊の　こうげきは", "en": "＊'s attack"}, {"jp": "はずれた！", "en": "missed"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

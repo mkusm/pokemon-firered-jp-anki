@@ -1,0 +1,1 @@
+{"text": "…　さあ　えらべ！", "structure": [{"jp": "さあ", "en": "now"}, {"jp": "えらべ！", "en": "choose!"}], "patterns": [{"name": "〜え (command)", "span": "えらべ", "words": ["えらべ"], "explanation": "The え-row ending is a blunt command. えらべ = 'Choose!'"}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

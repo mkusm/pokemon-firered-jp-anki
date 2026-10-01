@@ -1,0 +1,1 @@
+{"text": "＊は　＊を　つかって　はりきり　だした！", "structure": [{"jp": "＊は　＊を　つかって", "en": "using ＊"}, {"jp": "はりきり　だした！", "en": "started getting pumped"}], "patterns": [{"name": "〜だす", "span": "はりきり　だした", "words": ["はりきり", "だした"], "explanation": "A verb stem plus だす means 'start to'. はりきりだした = 'began to get fired up'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

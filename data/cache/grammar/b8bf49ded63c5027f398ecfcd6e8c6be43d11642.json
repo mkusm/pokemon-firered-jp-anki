@@ -1,0 +1,1 @@
+{"text": "あわてるな　グリーン！", "structure": [{"jp": "あわてるな", "en": "don't panic"}, {"jp": "グリーン！", "en": "Green!"}], "patterns": [{"name": "〜な (prohibition)", "span": "あわてるな", "words": ["あわてる", "な"], "explanation": "Dictionary form + な is a blunt 'don't'. あわてるな = 'Don't panic!'"}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

@@ -5,6 +5,11 @@ the build updates existing notes instead of duplicating them and keeps review
 history. Notes are added in story order; set the deck's new-card order to
 "order added" in Anki.
 
+The note type's last two fields, Grammar and Breakdown, came with the grammar
+pass. They are at the end so that Anki can merge the note type into the
+earlier one on import ("Merge note types"). They are empty on cards whose
+sentence the grammar pass has not reached.
+
 Run: uv run python -m firered_anki.build
 """
 
@@ -27,6 +32,7 @@ FIELDS = [
     "Kanji", "UsuallyKana", "CharReadings",
     "Literal", "InContext", "DictSense", "Onomatopoeia", "Modifiers", "SentenceKanji", "SentenceEnglish",
     "ExtraExamples", "Context", "Location", "MessageId", "Speaker", "Dictionary",
+    "Grammar", "Breakdown",
 ]
 
 FRONT = """
@@ -52,10 +58,12 @@ BACK = """
 {{#DictSense}}<div class="literal">dictionary sense: {{DictSense}}</div>{{/DictSense}}
 {{#Onomatopoeia}}<div class="literal">{{Onomatopoeia}}</div>{{/Onomatopoeia}}
 {{#Modifiers}}<div class="modifiers">{{Modifiers}}</div>{{/Modifiers}}
+{{#Grammar}}<div class="grammar">{{Grammar}}</div>{{/Grammar}}
 <div class="block">
   <div class="kanji-sentence">{{SentenceKanji}}</div>
   <div class="english">{{SentenceEnglish}}</div>
 </div>
+{{#Breakdown}}<details><summary>Sentence breakdown</summary><div class="breakdown">{{Breakdown}}</div></details>{{/Breakdown}}
 {{#ExtraExamples}}<details><summary>More examples</summary><div class="extra">{{ExtraExamples}}</div></details>{{/ExtraExamples}}
 <details><summary>Whole message</summary><div class="context">{{Context}}</div></details>
 {{#Dictionary}}<details><summary>Dictionary</summary><div class="dict">{{Dictionary}}</div></details>{{/Dictionary}}
@@ -89,6 +97,16 @@ details { margin-top: 10px; font-size: 15px; }
 summary { color: #6b7280; cursor: pointer; }
 .context u { text-decoration-color: #c2410c; }
 .meta { font-size: 12px; margin-top: 14px; }
+.grammar { margin-top: 8px; }
+.pat { margin-top: 6px; padding-left: 8px; border-left: 3px solid #2563eb; }
+.pname { font-weight: 700; color: #1d4ed8; }
+.pspan { margin-left: 6px; color: #6b7280; font-size: 16px; }
+.pexp { font-size: 16px; }
+.nightMode .pname { color: #93c5fd; }
+.nightMode .pat { border-left-color: #60a5fa; }
+.chunks { border-collapse: collapse; margin: 4px 0 8px; }
+.chunks td { padding: 2px 12px 2px 0; vertical-align: top; }
+.ce { color: #6b7280; }
 """
 
 MODEL = genanki.Model(

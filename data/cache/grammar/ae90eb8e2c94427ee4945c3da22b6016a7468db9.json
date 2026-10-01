@@ -1,0 +1,1 @@
+{"text": "ぼくは　ここで！", "structure": [{"jp": "ぼくは", "en": "I"}, {"jp": "ここで！", "en": "(part ways) here"}], "patterns": [{"name": "〜で (place)", "span": "ここで", "words": ["で", "ここ"], "explanation": "The sentence stops short; the rest is left unsaid. ここで = 'here (I'll leave you)'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

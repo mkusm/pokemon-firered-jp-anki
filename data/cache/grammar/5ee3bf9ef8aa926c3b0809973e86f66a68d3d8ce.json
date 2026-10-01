@@ -1,0 +1,1 @@
+{"text": "ためして　みなよ！", "structure": [{"jp": "ためして　みなよ！", "en": "try it out!"}], "patterns": [{"name": "〜てみる", "span": "ためして　みなよ", "words": ["ためして", "みな", "よ"], "explanation": "てみる means try doing it. みな is a casual, friendly command form of みる. ためして　みなよ = 'go ahead and try it'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

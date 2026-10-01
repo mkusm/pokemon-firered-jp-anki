@@ -1,0 +1,1 @@
+{"text": "カプセルしきに　なっている。", "structure": [{"jp": "カプセルしきに", "en": "in capsule style"}, {"jp": "なっている。", "en": "is made"}], "patterns": [{"name": "〜になる", "span": "しきに　なっている", "words": ["に", "なっている"], "explanation": "になる means become or turn out to be; ている shows the resulting state. しきになっている = 'is of the ... style'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

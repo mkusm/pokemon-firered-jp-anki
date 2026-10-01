@@ -1,0 +1,1 @@
+{"text": "あぶない　とこだった！", "structure": [{"jp": "あぶない　とこ", "en": "a dangerous spot"}, {"jp": "だった！", "en": "it was"}], "patterns": [{"name": "〜ところだった", "span": "とこだった", "words": ["とこ", "だった"], "explanation": "ところだった says something almost happened. とこ is the casual ところ. あぶない　とこだった = 'that was close (nearly dangerous)'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

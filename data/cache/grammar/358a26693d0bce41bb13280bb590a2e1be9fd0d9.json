@@ -1,0 +1,1 @@
+{"text": "もうおぼえてる", "structure": [{"jp": "もう", "en": "already"}, {"jp": "おぼえてる", "en": "knows it"}], "patterns": [{"name": "〜ている", "span": "おぼえてる", "words": ["おぼえてる"], "explanation": "てる is a casual short form of ている, which shows a state that continues. おぼえてる = 'knows it'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

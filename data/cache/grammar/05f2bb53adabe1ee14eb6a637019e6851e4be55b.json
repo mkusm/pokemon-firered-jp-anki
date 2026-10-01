@@ -1,0 +1,1 @@
+{"text": "まつんじゃあ！", "structure": [{"jp": "まつんじゃあ！", "en": "wait, I say!"}], "patterns": [{"name": "〜のだ", "span": "まつんじゃあ", "words": ["まつんじゃあ"], "explanation": "んじゃ is the old-man form of のだ, used to push a point or give an order. まつんじゃあ = 'you must wait!'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

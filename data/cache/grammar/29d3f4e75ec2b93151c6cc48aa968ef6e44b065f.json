@@ -1,0 +1,1 @@
+{"text": "きみは　おとこのこ　かな？", "structure": [{"jp": "きみは　おとこのこ　かな？", "en": "are you a boy, I wonder?"}], "patterns": [{"name": "〜かな", "span": "おとこのこ　かな", "words": ["かな"], "explanation": "かな is a soft question, like wondering aloud. おとこのこかな = 'are you a boy, I wonder?'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

@@ -1,0 +1,1 @@
+{"text": "ぜんぶ　おれに　まかせなー！", "structure": [{"jp": "ぜんぶ　おれに", "en": "everything, to me"}, {"jp": "まかせなー！", "en": "leave it!"}], "patterns": [{"name": "〜なさい", "span": "まかせなー", "words": ["まかせなー"], "explanation": "な after the stem of a verb is a casual, friendly command, shortened from なさい. まかせなー = 'Leave it to me!'"}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

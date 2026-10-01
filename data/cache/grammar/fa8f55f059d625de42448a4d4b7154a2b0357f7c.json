@@ -1,0 +1,1 @@
+{"text": "こんにちは　レッドくん　ちょうど　よかったわ！", "structure": [{"jp": "こんにちは　レッドくん", "en": "hello, Red"}, {"jp": "ちょうど　よかったわ！", "en": "perfect timing"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

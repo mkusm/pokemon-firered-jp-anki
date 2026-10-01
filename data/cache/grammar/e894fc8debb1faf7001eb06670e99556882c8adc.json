@@ -1,0 +1,1 @@
+{"text": "みちに　だんさが　あるだろ！", "structure": [{"jp": "みちに　だんさが", "en": "ledges on the road"}, {"jp": "あるだろ！", "en": "there are, right?"}], "patterns": [{"name": "〜だろう", "span": "あるだろ", "words": ["あるだろ"], "explanation": "だろ is a casual だろう. It asks the listener to agree. あるだろ = 'there are, aren't there?'"}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

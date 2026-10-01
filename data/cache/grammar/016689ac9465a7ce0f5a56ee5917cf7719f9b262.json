@@ -1,0 +1,1 @@
+{"text": "ポケモン　リーグに　いくのか？", "structure": [{"jp": "ポケモン　リーグに　いくのか？", "en": "Are you going to the Pokémon League?"}], "patterns": [{"name": "〜のか", "span": "いくのか", "words": ["の", "か"], "explanation": "のか asks a question and wants an explanation, in a rough male style. いくのか = 'are you going?'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

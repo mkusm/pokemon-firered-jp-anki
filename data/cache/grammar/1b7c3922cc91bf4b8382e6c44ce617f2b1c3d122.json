@@ -1,0 +1,1 @@
+{"text": "してんのうが　くんりん　してる！", "structure": [{"jp": "してんのうが", "en": "the Elite Four"}, {"jp": "くんりん　してる！", "en": "reign"}], "patterns": [{"name": "〜ている", "span": "くんりん　してる", "words": ["くんりん", "してる"], "explanation": "てる is short for ている, saying a state continues. くんりん　してる = 'are reigning'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

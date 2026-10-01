@@ -1,0 +1,1 @@
+{"text": "たたかいは　すきではない。", "structure": [{"jp": "たたかいは", "en": "as for fighting"}, {"jp": "すきではない。", "en": "it doesn't like"}], "patterns": [{"name": "〜ではない", "span": "すきではない", "words": ["すき", "ではない"], "explanation": "ではない makes a plain 'is not'. すきではない = 'does not like'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

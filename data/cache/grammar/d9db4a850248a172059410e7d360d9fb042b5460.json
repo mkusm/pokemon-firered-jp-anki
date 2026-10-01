@@ -1,0 +1,1 @@
+{"text": "もらって　くれい！", "structure": [{"jp": "もらって　くれい！", "en": "do take it!"}], "patterns": [{"name": "〜てくれる", "span": "もらって　くれい", "words": ["もらって", "くれい"], "explanation": "てくれ asks someone to do something for you; くれい is an old-man form of くれ. もらって　くれい = 'please take it'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

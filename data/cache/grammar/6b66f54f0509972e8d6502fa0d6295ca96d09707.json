@@ -1,0 +1,1 @@
+{"text": "すっかり　わすれてた！", "structure": [{"jp": "すっかり", "en": "completely"}, {"jp": "わすれてた！", "en": "forgot"}], "patterns": [{"name": "〜ている", "span": "わすれてた", "words": ["わすれてた"], "explanation": "てた is the casual short form of ていた. Here it says the state of having forgotten lasted until now. わすれてた = 'I had forgotten'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

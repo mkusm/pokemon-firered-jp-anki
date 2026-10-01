@@ -1,0 +1,1 @@
+{"text": "レッドは　タケシから　わざマシン３９を　もらった！", "structure": [{"jp": "レッドは", "en": "Red"}, {"jp": "タケシから", "en": "from Takeshi"}, {"jp": "わざマシン３９を", "en": "TM39"}, {"jp": "もらった！", "en": "received"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

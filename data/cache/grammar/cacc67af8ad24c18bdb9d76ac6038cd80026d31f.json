@@ -1,0 +1,1 @@
+{"text": "こら　どこへいく！", "structure": [{"jp": "こら", "en": "Hey"}, {"jp": "どこへ", "en": "to where"}, {"jp": "いく！", "en": "are you going"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

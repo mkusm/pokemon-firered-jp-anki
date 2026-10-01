@@ -1,0 +1,1 @@
+{"text": "うりに　きた", "structure": [{"jp": "うりに", "en": "to sell"}, {"jp": "きた", "en": "came"}], "patterns": [{"name": "〜に (purpose)", "span": "うりに　きた", "words": ["うり", "に", "きた"], "explanation": "Verb stem + に before a movement verb gives the purpose of going or coming. うりに　きた = 'came to sell'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

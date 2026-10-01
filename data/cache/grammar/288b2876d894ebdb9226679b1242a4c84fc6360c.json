@@ -1,0 +1,1 @@
+{"text": "マーキングしてください", "structure": [{"jp": "マーキングして", "en": "mark"}, {"jp": "ください", "en": "please"}], "patterns": [{"name": "〜てください", "span": "マーキングしてください", "words": ["マーキング", "してください"], "explanation": "て-form plus ください politely asks someone to do something. マーキングしてください = 'please mark it'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

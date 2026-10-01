@@ -1,0 +1,1 @@
+{"text": "どうだい　よく　わかったかな？", "structure": [{"jp": "どうだい", "en": "how was it?"}, {"jp": "よく　わかったかな？", "en": "did you understand well?"}], "patterns": [{"name": "〜かな", "span": "わかったかな", "words": ["か", "な"], "explanation": "かな is a soft question to yourself or the listener. わかったかな = 'I wonder if you got it'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

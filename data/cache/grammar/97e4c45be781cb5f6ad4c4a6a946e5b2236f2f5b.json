@@ -1,0 +1,1 @@
+{"text": "レッド　は　レポートに　しっかり　かきのこした！", "structure": [{"jp": "レッド　は", "en": "Red"}, {"jp": "レポートに", "en": "in the report"}, {"jp": "しっかり　かきのこした！", "en": "wrote down firmly"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

@@ -1,0 +1,1 @@
+{"text": "ふーん…　そうなんだぁ", "structure": [{"jp": "ふーん…", "en": "hmm"}, {"jp": "そうなんだぁ", "en": "is that so"}], "patterns": [{"name": "〜のだ", "span": "そうなんだぁ", "words": ["そう", "な", "ん", "だぁ"], "explanation": "なんだ shows you're taking in an explanation. そうなんだ = 'I see, so that's how it is'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

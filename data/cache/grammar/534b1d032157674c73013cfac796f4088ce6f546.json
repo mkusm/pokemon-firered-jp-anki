@@ -1,0 +1,1 @@
+{"text": "いってこい！", "structure": [{"jp": "いってこい！", "en": "go and come back!"}], "patterns": [{"name": "〜てくる", "span": "いってこい", "words": ["いってこい"], "explanation": "て-form plus こい (rough command of くる) means go and come back. いってこい = 'go get them!'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

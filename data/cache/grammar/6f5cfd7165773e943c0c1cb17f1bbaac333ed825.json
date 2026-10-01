@@ -1,0 +1,1 @@
+{"text": "ノート　みちゃ　だめ！", "structure": [{"jp": "ノート", "en": "notebook"}, {"jp": "みちゃ", "en": "looking"}, {"jp": "だめ！", "en": "no good"}], "patterns": [{"name": "〜てはいけない", "span": "みちゃ　だめ", "words": ["みちゃ", "だめ"], "explanation": "ちゃ is short for ては; with だめ it says you must not. みちゃ　だめ = 'don't look'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

@@ -1,0 +1,1 @@
+{"text": "おまえ　ポケモントレーナーの　さいのうが　あるな！", "structure": [{"jp": "おまえ", "en": "you"}, {"jp": "ポケモントレーナーの　さいのうが", "en": "talent as a Pokémon Trainer"}, {"jp": "あるな！", "en": "you have"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

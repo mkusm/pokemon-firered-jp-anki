@@ -1,0 +1,1 @@
+{"text": "あいてが　よわっている！", "structure": [{"jp": "あいてが", "en": "the opponent"}, {"jp": "よわっている！", "en": "is weakened"}], "patterns": [{"name": "〜ている", "span": "よわっている", "words": ["よわっている"], "explanation": "ている shows a state that has resulted. よわっている = 'is weakened'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

@@ -1,0 +1,1 @@
+{"text": "ゆめと　ぼうけんと！", "structure": [{"jp": "ゆめと　ぼうけんと！", "en": "dreams and adventure!"}], "patterns": [{"name": "〜と (and)", "span": "ゆめと　ぼうけんと", "words": ["ゆめ", "と", "ぼうけん", "と"], "explanation": "と joins nouns as 'and'. ゆめと　ぼうけんと = 'dreams and adventure'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

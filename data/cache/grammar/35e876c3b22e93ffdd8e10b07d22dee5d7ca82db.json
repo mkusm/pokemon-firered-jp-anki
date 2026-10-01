@@ -1,0 +1,1 @@
+{"text": "あやしい　ひとを　みたら…！", "structure": [{"jp": "あやしい　ひとを", "en": "a suspicious person"}, {"jp": "みたら…！", "en": "if you see"}], "patterns": [{"name": "〜たら", "span": "みたら", "words": ["みたら"], "explanation": "たら means 'if' or 'when' something happens. みたら = 'if you see'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

@@ -23,6 +23,7 @@ data/cache/*
 !data/cache/classify/
 !data/cache/sense_merge/
 !data/cache/sense_pick/
+!data/cache/grammar/
 !data/cache/analyse/
 data/cache/analyse/*
 !data/cache/analyse/main/

@@ -1,0 +1,1 @@
+{"text": "ねむらない", "structure": [{"jp": "ねむらない", "en": "doesn't sleep"}], "patterns": [{"name": "〜ない", "span": "ねむらない", "words": ["ねむらない"], "explanation": "ない after a verb means not doing it. ねむらない = 'doesn't sleep'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

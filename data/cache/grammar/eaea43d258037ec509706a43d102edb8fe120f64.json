@@ -1,0 +1,1 @@
+{"text": "けづくろい　しないの？", "structure": [{"jp": "けづくろい　しないの？", "en": "you won't groom it?"}], "patterns": [{"name": "〜ない", "span": "しないの", "words": ["しない", "の"], "explanation": "ない makes a verb negative; rising の asks a gentle question. しないの？ = 'won't you do it?'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

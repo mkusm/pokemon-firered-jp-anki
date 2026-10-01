@@ -1,0 +1,1 @@
+{"text": "どの　テーマにしますか？", "structure": [{"jp": "どの　テーマに", "en": "which theme"}, {"jp": "しますか？", "en": "will you choose?"}], "patterns": [{"name": "〜に する", "span": "テーマにしますか", "words": ["に", "します"], "explanation": "に　する means to decide on something. テーマに　します = 'I'll go with this theme'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

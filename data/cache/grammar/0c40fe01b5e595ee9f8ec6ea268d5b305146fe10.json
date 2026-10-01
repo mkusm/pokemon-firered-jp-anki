@@ -1,0 +1,1 @@
+{"text": "…　チラシが　はって　ある！", "structure": [{"jp": "チラシが", "en": "a flyer"}, {"jp": "はって　ある！", "en": "is posted"}], "patterns": [{"name": "〜てある", "span": "はって　ある", "words": ["はって", "ある"], "explanation": "てある says someone did it and it stays that way. はってある = 'is posted (on purpose)'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

@@ -1,0 +1,1 @@
+{"text": "みごとじゃ！", "structure": [{"jp": "みごとじゃ！", "en": "splendid!"}], "patterns": [{"name": "〜だ", "span": "みごとじゃ", "words": ["じゃ"], "explanation": "じゃ is the old-man form of だ. みごとじゃ = 'it is splendid!'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

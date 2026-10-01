@@ -1,0 +1,1 @@
+{"text": "レッドは　＊を　＊まい　みつけた！", "structure": [{"jp": "レッドは", "en": "Red"}, {"jp": "＊を　＊まい", "en": "＊ coins"}, {"jp": "みつけた！", "en": "found!"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

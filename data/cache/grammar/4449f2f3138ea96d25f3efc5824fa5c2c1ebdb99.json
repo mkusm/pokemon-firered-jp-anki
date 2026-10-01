@@ -1,0 +1,1 @@
+{"text": "……　もらえたら　うれしい？", "structure": [{"jp": "……　もらえたら", "en": "if you could get it"}, {"jp": "うれしい？", "en": "would you be happy?"}], "patterns": [{"name": "〜たら", "span": "もらえたら", "words": ["もらえたら"], "explanation": "たら means 'if' or 'when' something happens. もらえたらうれしい = 'I'd be happy if I could get it'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

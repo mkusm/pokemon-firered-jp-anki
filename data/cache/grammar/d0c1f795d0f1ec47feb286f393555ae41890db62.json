@@ -1,0 +1,1 @@
+{"text": "あなたの　ポケモンは　しあわせね！", "structure": [{"jp": "あなたの　ポケモンは", "en": "your Pokémon"}, {"jp": "しあわせね！", "en": "is happy, isn't it"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

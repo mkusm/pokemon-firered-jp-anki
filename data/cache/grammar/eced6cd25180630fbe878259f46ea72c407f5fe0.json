@@ -1,0 +1,1 @@
+{"text": "ちょっと　まって　おれ！", "structure": [{"jp": "ちょっと", "en": "a moment"}, {"jp": "まって　おれ！", "en": "wait!"}], "patterns": [{"name": "〜ている", "span": "まって　おれ", "words": ["まって", "おれ"], "explanation": "おる is an old-man form of いる, so this is て-form + いろ as a command: keep waiting. まって　おれ = 'Stay put and wait!'"}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

@@ -1,0 +1,1 @@
+{"text": "＊から　＊を　あずかった！", "structure": [{"jp": "＊から", "en": "from ＊"}, {"jp": "＊を", "en": "＊ (object)"}, {"jp": "あずかった！", "en": "took in keeping"}], "patterns": [{"name": "〜から", "span": "＊から", "words": ["から"], "explanation": "から after a person or place shows the source. ＊から　あずかった = 'took it from ＊'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

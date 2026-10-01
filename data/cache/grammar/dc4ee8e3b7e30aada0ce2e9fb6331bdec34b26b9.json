@@ -1,0 +1,1 @@
+{"text": "すなあらしで　かいひりつが　あがる", "structure": [{"jp": "すなあらしで", "en": "in a sandstorm"}, {"jp": "かいひりつが　あがる", "en": "evasion rises"}], "patterns": [{"name": "〜で (how)", "span": "すなあらしで", "words": ["で"], "explanation": "で here gives the situation or cause. すなあらしで = 'in a sandstorm'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

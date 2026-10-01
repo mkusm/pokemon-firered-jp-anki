@@ -1,0 +1,1 @@
+{"text": "ずかんの　ちょうしは　どうかな？", "structure": [{"jp": "ずかんの　ちょうしは", "en": "the state of your Pokédex"}, {"jp": "どうかな？", "en": "how is it?"}], "patterns": [{"name": "〜かな", "span": "どうかな", "words": ["か", "な"], "explanation": "かな wonders aloud, a soft question. どうかな = 'I wonder how it is'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

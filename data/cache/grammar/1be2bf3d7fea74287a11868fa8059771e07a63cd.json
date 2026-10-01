@@ -1,0 +1,1 @@
+{"text": "えんりょは　いらんぜ！", "structure": [{"jp": "えんりょは　いらんぜ！", "en": "no need for reserve"}], "patterns": [{"name": "〜ぜ", "span": "いらんぜ", "words": ["いらん", "ぜ"], "explanation": "いらん is a rough form of いらない, and ぜ is a rough, manly ending for emphasis. えんりょは　いらんぜ = 'no need to hold back, man'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

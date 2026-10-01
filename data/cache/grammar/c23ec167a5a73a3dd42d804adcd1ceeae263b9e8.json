@@ -1,0 +1,1 @@
+{"text": "レッド　どーだい？", "structure": [{"jp": "レッド", "en": "Red"}, {"jp": "どーだい？", "en": "how is it?"}], "patterns": [{"name": "〜かい", "span": "どーだい", "words": ["どー", "だ", "い"], "explanation": "い after だ is a casual, older male way to ask a question. どーだい = 'How is it?'"}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

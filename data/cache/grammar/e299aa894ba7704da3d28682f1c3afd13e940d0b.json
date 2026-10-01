@@ -1,0 +1,1 @@
+{"text": "けっこう　ほねが　おれるよ", "structure": [{"jp": "けっこう", "en": "quite"}, {"jp": "ほねが　おれるよ", "en": "it takes effort"}], "patterns": [{"name": "〜が折れる", "span": "ほねが　おれる", "words": ["ほね", "おれる"], "explanation": "A set phrase: bones break, meaning it's hard work. ほねがおれる = 'it's laborious'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

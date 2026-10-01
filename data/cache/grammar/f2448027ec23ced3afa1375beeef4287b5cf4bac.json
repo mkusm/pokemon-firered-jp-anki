@@ -1,0 +1,1 @@
+{"text": "おお　そうじゃ！", "structure": [{"jp": "おお", "en": "Oh"}, {"jp": "そうじゃ！", "en": "that's right!"}], "patterns": [{"name": "〜だ", "span": "そうじゃ", "words": ["そう", "じゃ"], "explanation": "じゃ is old-man だ. そうじゃ = 'That's right'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
