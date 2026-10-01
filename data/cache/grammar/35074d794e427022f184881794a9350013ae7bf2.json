@@ -1,0 +1,1 @@
+{"text": "わしの　ゆめが　かなった！", "structure": [{"jp": "わしの　ゆめが", "en": "my dream"}, {"jp": "かなった！", "en": "came true"}], "patterns": [{"name": "〜た", "span": "かなった", "words": ["かなった"], "explanation": "た at the end of a verb says the thing happened or is now done. かなった = 'came true'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

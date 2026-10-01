@@ -1,0 +1,1 @@
+{"text": "あちらへ　おまわりください", "structure": [{"jp": "あちらへ", "en": "that way"}, {"jp": "おまわりください", "en": "please go around"}], "patterns": [{"name": "お〜ください", "span": "おまわりください", "words": ["おまわりください"], "explanation": "お plus verb stem plus ください is a polite request. おまわりください = 'please go around'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

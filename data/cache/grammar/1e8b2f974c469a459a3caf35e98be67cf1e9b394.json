@@ -1,0 +1,1 @@
+{"text": "どのポケモンに　おしえますか？", "structure": [{"jp": "どのポケモンに", "en": "to which Pokémon"}, {"jp": "おしえますか？", "en": "will you teach?"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

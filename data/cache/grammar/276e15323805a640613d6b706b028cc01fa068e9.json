@@ -1,0 +1,1 @@
+{"text": "きみは　もう　はくぶつかん　けんがくした？", "structure": [{"jp": "きみは", "en": "you"}, {"jp": "もう", "en": "already"}, {"jp": "はくぶつかん", "en": "the museum"}, {"jp": "けんがくした？", "en": "toured?"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

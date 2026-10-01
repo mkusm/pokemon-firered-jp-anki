@@ -1,0 +1,1 @@
+{"text": "そんじゃ　あばよ！", "structure": [{"jp": "そんじゃ", "en": "well then"}, {"jp": "あばよ！", "en": "see ya!"}], "patterns": [{"name": "〜じゃ", "span": "そんじゃ", "words": ["そんじゃ"], "explanation": "そんじゃ is a rough, casual form of それでは, used to wrap up or move on. そんじゃ　あばよ = 'Well then, see ya!'"}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

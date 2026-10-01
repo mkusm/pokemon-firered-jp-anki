@@ -1,0 +1,1 @@
+{"text": "ピンチに　ほのおが　つよくなる", "structure": [{"jp": "ピンチに", "en": "in a pinch"}, {"jp": "ほのおが　つよくなる", "en": "Fire gets stronger"}], "patterns": [{"name": "〜くなる", "span": "つよくなる", "words": ["つよくなる"], "explanation": "い-adjective without い plus くなる means 'become that way'. つよくなる = 'become stronger'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

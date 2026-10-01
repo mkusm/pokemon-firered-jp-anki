@@ -1,0 +1,1 @@
+{"text": "ふむ…　がんばってるな！", "structure": [{"jp": "ふむ…", "en": "hmm"}, {"jp": "がんばってるな！", "en": "you're working hard!"}], "patterns": [{"name": "〜ている", "span": "がんばってる", "words": ["がんばってる"], "explanation": "てる is the casual form of ている, saying something is going on. がんばってるな = 'you're doing your best'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

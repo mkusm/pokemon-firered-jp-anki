@@ -1,0 +1,1 @@
+{"text": "トキワの　もりへ　いくの？", "structure": [{"jp": "トキワの　もりへ", "en": "to Viridian Forest"}, {"jp": "いくの？", "en": "are you going?"}], "patterns": [{"name": "〜の (question)", "span": "いくの？", "words": ["いく", "の"], "explanation": "の at the end with a rising tone asks a casual question. いくの = 'are you going?'"}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

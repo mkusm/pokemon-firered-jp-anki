@@ -1,0 +1,1 @@
+{"text": "どくを　くらったら　どくけし！", "structure": [{"jp": "どくを　くらったら", "en": "if you get poisoned"}, {"jp": "どくけし！", "en": "(use) Antidote!"}], "patterns": [{"name": "〜たら", "span": "くらったら", "words": ["くらったら"], "explanation": "たら means 'if' or 'when' something happens. くらったら = 'if you take (it)'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

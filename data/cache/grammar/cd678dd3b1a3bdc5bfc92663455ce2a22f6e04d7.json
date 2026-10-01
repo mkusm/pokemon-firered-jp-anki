@@ -1,0 +1,1 @@
+{"text": "おうえん　しているわよ　がんばってね！", "structure": [{"jp": "おうえん　しているわよ", "en": "I'm cheering for you"}, {"jp": "がんばってね！", "en": "do your best"}], "patterns": [{"name": "〜ている", "span": "しているわよ", "words": ["している"], "explanation": "て-form plus いる shows an ongoing action. おうえん　している = 'am cheering'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

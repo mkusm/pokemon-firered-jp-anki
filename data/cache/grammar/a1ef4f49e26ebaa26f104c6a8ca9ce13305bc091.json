@@ -1,0 +1,1 @@
+{"text": "レッドは　キズぐすりを　バッグの　どうぐポケットに　しまった！", "structure": [{"jp": "レッドは", "en": "Red"}, {"jp": "キズぐすりを", "en": "the Potion"}, {"jp": "バッグの　どうぐポケットに　しまった！", "en": "put away in the Bag's Items pocket"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

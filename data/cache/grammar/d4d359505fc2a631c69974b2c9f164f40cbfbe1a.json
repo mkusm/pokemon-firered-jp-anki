@@ -1,0 +1,1 @@
+{"text": "５００円も　したのに…", "structure": [{"jp": "５００円も　したのに…", "en": "even though it cost 500 yen"}], "patterns": [{"name": "〜のに", "span": "したのに", "words": ["した", "のに"], "explanation": "のに means 'even though', with a feeling of disappointment. したのに… = 'and yet it cost that much...'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

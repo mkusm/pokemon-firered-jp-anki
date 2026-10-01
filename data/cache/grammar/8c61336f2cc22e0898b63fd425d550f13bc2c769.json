@@ -1,0 +1,1 @@
+{"text": "ふたりは　ポケモンずかんを　オーキドはかせに　あずけた！", "structure": [{"jp": "ふたりは", "en": "the two"}, {"jp": "ポケモンずかんを", "en": "Pokédexes"}, {"jp": "オーキドはかせに　あずけた！", "en": "left with Professor Oak"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

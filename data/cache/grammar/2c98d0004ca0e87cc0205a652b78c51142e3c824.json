@@ -1,0 +1,1 @@
+{"text": "ポケモンに　もたせる", "structure": [{"jp": "ポケモンに", "en": "to a Pokémon"}, {"jp": "もたせる", "en": "make hold"}], "patterns": [{"name": "〜せる", "span": "もたせる", "words": ["もたせる"], "explanation": "せる makes or lets someone do the verb. Here the Pokémon is the one who holds. もたせる = 'have (it) hold'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

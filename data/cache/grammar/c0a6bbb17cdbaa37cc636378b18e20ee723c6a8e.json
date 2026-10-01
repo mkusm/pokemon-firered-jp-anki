@@ -1,0 +1,1 @@
+{"text": "しかし　うまく　きまらなかった！", "structure": [{"jp": "しかし", "en": "but"}, {"jp": "うまく", "en": "well"}, {"jp": "きまらなかった！", "en": "didn't work"}], "patterns": [{"name": "〜ない", "span": "きまらなかった", "words": ["きまらなかった"], "explanation": "ない makes a verb negative, and なかった makes it past. きまらなかった = 'did not work'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

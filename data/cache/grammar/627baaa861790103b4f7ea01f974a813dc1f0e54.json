@@ -1,0 +1,1 @@
+{"text": "＊　いいぞ！", "structure": [{"jp": "＊　いいぞ！", "en": "＊, good!"}], "patterns": [{"name": "〜ぞ", "span": "いいぞ", "words": ["いいぞ"], "explanation": "ぞ is a rough, strong ending for emphasis. いいぞ = 'Good going!'"}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

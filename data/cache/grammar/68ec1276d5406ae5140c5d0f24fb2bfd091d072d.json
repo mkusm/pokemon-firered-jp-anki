@@ -1,0 +1,1 @@
+{"text": "レッド　グリーン　これを　おまえたちに　あずける！", "structure": [{"jp": "レッド　グリーン", "en": "Red, Green"}, {"jp": "これを", "en": "this"}, {"jp": "おまえたちに", "en": "to you two"}, {"jp": "あずける！", "en": "I entrust"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

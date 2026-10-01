@@ -1,0 +1,1 @@
+{"text": "ほっぺたの　りょうがわに　ちいさい　でんきぶくろを　もつ。", "structure": [{"jp": "ほっぺたの　りょうがわに", "en": "on both sides of the cheeks"}, {"jp": "ちいさい　でんきぶくろを", "en": "small electric sacs"}, {"jp": "もつ。", "en": "has"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

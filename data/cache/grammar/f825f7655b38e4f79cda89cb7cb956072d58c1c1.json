@@ -1,0 +1,1 @@
+{"text": "ぶつかっても　はんどうを　うけない", "structure": [{"jp": "ぶつかっても", "en": "even if it crashes"}, {"jp": "はんどうを　うけない", "en": "takes no recoil"}], "patterns": [{"name": "〜ても", "span": "ぶつかっても", "words": ["ぶつかって", "も"], "explanation": "ても means 'even if'. ぶつかっても = 'even if it crashes'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

@@ -1,0 +1,1 @@
+{"text": "レッドは　５こ　モンスターボールを　もらった！", "structure": [{"jp": "レッドは", "en": "Red"}, {"jp": "５こ", "en": "five"}, {"jp": "モンスターボールを", "en": "Poké Balls"}, {"jp": "もらった！", "en": "received"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

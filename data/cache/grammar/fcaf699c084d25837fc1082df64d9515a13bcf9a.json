@@ -1,0 +1,1 @@
+{"text": "それじゃ　きを　つけて！", "structure": [{"jp": "それじゃ", "en": "well then"}, {"jp": "きを　つけて！", "en": "take care"}], "patterns": [{"name": "〜てください", "span": "つけて", "words": ["つけて"], "explanation": "A bare て-form at the end is a casual request, with ください left out. きを　つけて = 'be careful'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

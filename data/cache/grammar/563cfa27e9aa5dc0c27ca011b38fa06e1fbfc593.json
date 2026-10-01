@@ -1,0 +1,1 @@
+{"text": "この　ちょうしで　めざせ！", "structure": [{"jp": "この　ちょうしで", "en": "at this pace"}, {"jp": "めざせ！", "en": "aim for it!"}], "patterns": [{"name": "〜で (how)", "span": "ちょうしで", "words": ["ちょうし", "で"], "explanation": "で shows the way or condition something is done in. この　ちょうしで = 'at this rate'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

@@ -1,0 +1,1 @@
+{"text": "どうにか　ちょうしが　でてきたな！", "structure": [{"jp": "どうにか　ちょうしが　でてきたな！", "en": "you've somehow gotten into the swing of it!"}], "patterns": [{"name": "〜てくる", "span": "でてきた", "words": ["でてきた"], "explanation": "てくる says something begins and comes toward now. ちょうしが　でてきた = 'your form has started to show'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

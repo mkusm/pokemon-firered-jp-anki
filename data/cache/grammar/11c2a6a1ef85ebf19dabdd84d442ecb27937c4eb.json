@@ -1,0 +1,1 @@
+{"text": "テレビに　ポケモンが　うつっている！", "structure": [{"jp": "テレビに", "en": "on the TV"}, {"jp": "ポケモンが", "en": "a Pokémon"}, {"jp": "うつっている！", "en": "is showing"}], "patterns": [{"name": "〜ている", "span": "うつっている", "words": ["うつっている"], "explanation": "ている says a state that is going on now. うつっている = 'is shown'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

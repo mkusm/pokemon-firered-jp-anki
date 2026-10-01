@@ -1,0 +1,1 @@
+{"text": "＊は　おぼえられない！", "structure": [{"jp": "＊は", "en": "as for ＊"}, {"jp": "おぼえられない！", "en": "can't learn"}], "patterns": [{"name": "〜られる (potential)", "span": "おぼえられない", "words": ["おぼえられない"], "explanation": "られる on a verb means 'can do', and ない makes it 'cannot'. おぼえられない = 'can't learn'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

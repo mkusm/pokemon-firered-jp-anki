@@ -1,0 +1,1 @@
+{"text": "いくな！", "structure": [{"jp": "いくな！", "en": "don't go!"}], "patterns": [{"name": "〜な (prohibition)", "span": "いくな", "words": ["いく", "な"], "explanation": "な after a plain verb is a blunt 'don't'. いくな = 'don't go!'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

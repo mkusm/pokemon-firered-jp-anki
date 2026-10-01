@@ -1,0 +1,1 @@
+{"text": "こいつ　なめた　マネを！", "structure": [{"jp": "こいつ", "en": "this guy"}, {"jp": "なめた　マネを！", "en": "a cheeky stunt"}], "patterns": [{"name": "verb + noun", "span": "なめた　マネ", "words": ["なめた", "マネ"], "explanation": "A plain verb right before a noun describes that noun. なめた　マネ = 'a disrespectful act'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

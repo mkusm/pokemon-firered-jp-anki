@@ -1,0 +1,1 @@
+{"text": "グリーン　だったかな？", "structure": [{"jp": "グリーン　だったかな？", "en": "was it Green, I wonder?"}], "patterns": [{"name": "〜かな", "span": "だったかな", "words": ["だった", "かな"], "explanation": "かな is a casual 'I wonder'. だった is the past of 'is'. グリーン　だったかな = 'was it Green, I wonder?'"}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

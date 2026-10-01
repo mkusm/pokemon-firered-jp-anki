@@ -1,0 +1,1 @@
+{"text": "みせましょう　みせましょう！", "structure": [{"jp": "みせましょう", "en": "let me show you"}, {"jp": "みせましょう！", "en": "let me show you!"}], "patterns": [{"name": "〜ましょう", "span": "みせましょう", "words": ["みせましょう"], "explanation": "ましょう means 'let's' or 'I'll do it'. みせましょう = 'let me show you'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

@@ -1,0 +1,1 @@
+{"text": "だっぴして　からだを　なおす", "structure": [{"jp": "だっぴして", "en": "sheds its skin and"}, {"jp": "からだを　なおす", "en": "heals the body"}], "patterns": [{"name": "〜て (linking)", "span": "だっぴして", "words": ["だっぴして"], "explanation": "て joins two actions, the first leading to the second. だっぴして = 'shed skin, and then'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

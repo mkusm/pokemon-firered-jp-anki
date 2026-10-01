@@ -1,0 +1,1 @@
+{"text": "＊は　ふきとばされた！", "structure": [{"jp": "＊は　ふきとばされた！", "en": "＊ was blown away!"}], "patterns": [{"name": "〜られる (passive)", "span": "ふきとばされた", "words": ["ふきとばされた"], "explanation": "The される ending says something was done to the subject. ふきとばされた = 'was blown away'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

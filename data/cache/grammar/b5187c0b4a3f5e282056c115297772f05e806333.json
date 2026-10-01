@@ -1,0 +1,1 @@
+{"text": "ボックスを　しゅうりょうしますか？", "structure": [{"jp": "ボックスを", "en": "the Box"}, {"jp": "しゅうりょうしますか？", "en": "do you exit?"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

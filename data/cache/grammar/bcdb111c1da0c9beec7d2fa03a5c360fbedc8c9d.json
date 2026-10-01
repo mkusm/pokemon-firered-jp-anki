@@ -1,0 +1,1 @@
+{"text": "どんどん　さきに　すすんで　ください。", "structure": [{"jp": "どんどん　さきに", "en": "steadily ahead"}, {"jp": "すすんで　ください。", "en": "please proceed"}], "patterns": [{"name": "〜てください", "span": "すすんで　ください", "words": ["すすんでください"], "explanation": "て form plus ください politely asks someone to do something. すすんでください = 'please go on'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

@@ -1,0 +1,1 @@
+{"text": "そんな　いそいで　どこに　いく？", "structure": [{"jp": "そんな　いそいで", "en": "in such a hurry"}, {"jp": "どこに　いく？", "en": "where are you going?"}], "patterns": [{"name": "〜て (linking)", "span": "いそいで", "words": ["いそいで"], "explanation": "The て-form of a verb can say how an action is done. いそいでいく = 'go in a hurry'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

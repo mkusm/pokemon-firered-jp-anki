@@ -1,0 +1,1 @@
+{"text": "＊には　あたらなかった！", "structure": [{"jp": "＊には", "en": "to ＊"}, {"jp": "あたらなかった！", "en": "did not hit"}], "patterns": [{"name": "〜ない", "span": "あたらなかった", "words": ["あたらなかった"], "explanation": "なかった is the past of ない, 'did not'. あたらなかった = 'did not hit'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

@@ -1,0 +1,1 @@
+{"text": "おなかが　なりそう！", "structure": [{"jp": "おなかが", "en": "my stomach"}, {"jp": "なりそう！", "en": "looks about to growl"}], "patterns": [{"name": "〜そう", "span": "なりそう", "words": ["なりそう"], "explanation": "そう on a verb stem says something looks about to happen. なりそう = 'it's about to growl'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

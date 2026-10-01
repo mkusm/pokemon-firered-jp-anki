@@ -1,0 +1,1 @@
+{"text": "じゃま　しないで　くれ！", "structure": [{"jp": "じゃま　しないで", "en": "don't bother"}, {"jp": "くれ！", "en": "please"}], "patterns": [{"name": "〜ないでくれ", "span": "しないで　くれ", "words": ["しないで", "くれ"], "explanation": "ない-form plus で plus くれ is a rough request not to do something. じゃま　しないで　くれ = 'don't get in my way!'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

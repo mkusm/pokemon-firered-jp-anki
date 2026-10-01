@@ -1,0 +1,1 @@
+{"text": "なんだか　きもち　よさそう！", "structure": [{"jp": "なんだか", "en": "somehow"}, {"jp": "きもち　よさそう！", "en": "looks pleasant"}], "patterns": [{"name": "〜そう", "span": "よさそう", "words": ["よさそう"], "explanation": "そう on an adjective stem says it looks like that. いい becomes よさそう. きもち　よさそう = 'looks pleasant'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

@@ -1,0 +1,1 @@
+{"text": "＊は　＊に　しんかした！", "structure": [{"jp": "＊は", "en": "＊"}, {"jp": "＊に", "en": "into ＊"}, {"jp": "しんかした！", "en": "evolved"}], "patterns": [{"name": "〜に (result)", "span": "＊に　しんかした", "words": ["に"], "explanation": "に shows what something changes into. ＊に　しんかした = 'evolved into ＊'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

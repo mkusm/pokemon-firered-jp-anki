@@ -1,0 +1,1 @@
+{"text": "みてみて！", "structure": [{"jp": "みてみて！", "en": "look, look!"}], "patterns": [{"name": "〜て (request)", "span": "みてみて", "words": ["みて"], "explanation": "て form alone is a casual request. みて = 'look!'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

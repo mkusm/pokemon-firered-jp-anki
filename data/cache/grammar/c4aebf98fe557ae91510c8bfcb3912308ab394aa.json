@@ -1,0 +1,1 @@
+{"text": "オーキドの　パソコンと　つないだ！", "structure": [{"jp": "オーキドの　パソコンと", "en": "with Oak's PC"}, {"jp": "つないだ！", "en": "connected"}], "patterns": [{"name": "〜と (with)", "span": "パソコンと", "words": ["と"], "explanation": "と after a noun means together with it. オーキドのパソコンとつないだ = 'connected with Oak's PC'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

@@ -1,0 +1,1 @@
+{"text": "レッドは　オーキドから　ポケモンずかんを　もらった！", "structure": [{"jp": "レッドは", "en": "Red"}, {"jp": "オーキドから", "en": "from Oak"}, {"jp": "ポケモンずかんを", "en": "a Pokédex"}, {"jp": "もらった！", "en": "received"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

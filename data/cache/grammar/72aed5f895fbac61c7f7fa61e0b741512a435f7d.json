@@ -1,0 +1,1 @@
+{"text": "わしゃ　もう　いうことは　ない！", "structure": [{"jp": "わしゃ　もう", "en": "I, now"}, {"jp": "いうことは　ない！", "en": "have nothing to say"}], "patterns": [{"name": "〜こと", "span": "いうことは　ない", "words": ["いう", "こと", "ない"], "explanation": "こと makes a verb into a thing. いうことはない = 'there is nothing to say'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

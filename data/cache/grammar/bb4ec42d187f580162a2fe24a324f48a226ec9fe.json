@@ -1,0 +1,1 @@
+{"text": "ポケモンが　いませんよ！", "structure": [{"jp": "ポケモンが", "en": "Pokémon"}, {"jp": "いませんよ！", "en": "aren't there"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

@@ -1,0 +1,1 @@
+{"text": "ポケモン　トレーナー　だろ？", "structure": [{"jp": "ポケモン　トレーナー", "en": "Pokémon Trainer"}, {"jp": "だろ？", "en": "right?"}], "patterns": [{"name": "〜だろう", "span": "だろ", "words": ["だろ"], "explanation": "だろ is casual だろう, used to check something you think is true. トレーナーだろ = 'you're a Trainer, right?'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

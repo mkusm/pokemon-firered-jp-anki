@@ -1,0 +1,1 @@
+{"text": "…　ちょっと　おれの　あいて　してみろ！", "structure": [{"jp": "ちょっと", "en": "a little"}, {"jp": "おれの　あいて　してみろ！", "en": "try being my opponent"}], "patterns": [{"name": "〜てみる", "span": "してみろ", "words": ["してみろ"], "explanation": "てみる means to try doing. みろ is the rough command form. あいてしてみろ = 'try facing me!'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

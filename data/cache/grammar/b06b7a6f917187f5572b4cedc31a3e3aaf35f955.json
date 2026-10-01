@@ -1,0 +1,1 @@
+{"text": "＊は　＊で　きかなかった！", "structure": [{"jp": "＊は", "en": "to ＊"}, {"jp": "＊で", "en": "because of ＊"}, {"jp": "きかなかった！", "en": "it had no effect"}], "patterns": [{"name": "〜ない", "span": "きかなかった", "words": ["きかなかった"], "explanation": "ない means 'not'; なかった is its past. きかなかった = 'did not work'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

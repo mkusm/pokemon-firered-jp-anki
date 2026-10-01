@@ -1,0 +1,1 @@
+{"text": "＊を　いくつ　あずけますか？", "structure": [{"jp": "＊を", "en": "＊"}, {"jp": "いくつ", "en": "how many"}, {"jp": "あずけますか？", "en": "will you deposit?"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

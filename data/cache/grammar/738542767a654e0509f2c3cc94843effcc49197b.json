@@ -1,0 +1,1 @@
+{"text": "もう　ポケモンが　ないや", "structure": [{"jp": "もう　ポケモンが", "en": "already, Pokémon"}, {"jp": "ないや", "en": "are gone"}], "patterns": [{"name": "〜や", "span": "ないや", "words": ["や", "ない"], "explanation": "や at the end is a casual, soft way to state a feeling or realization. ないや = 'I have none, (oh well)'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

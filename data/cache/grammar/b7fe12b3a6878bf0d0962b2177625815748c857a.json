@@ -1,0 +1,1 @@
+{"text": "もどれ！", "structure": [{"jp": "もどれ！", "en": "come back!"}], "patterns": [{"name": "〜え (command)", "span": "もどれ", "words": ["もどれ"], "explanation": "The え-row ending is a blunt order. もどれ = 'come back!'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

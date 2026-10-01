@@ -1,0 +1,1 @@
+{"text": "きみは　ポケモン　もってるな？", "structure": [{"jp": "きみは", "en": "you"}, {"jp": "ポケモン　もってるな？", "en": "have Pokémon, right?"}], "patterns": [{"name": "〜な", "span": "もってるな", "words": ["もってる", "な"], "explanation": "な at the end checks something, like 'right?'. もってるな = 'you have them, right?'"}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

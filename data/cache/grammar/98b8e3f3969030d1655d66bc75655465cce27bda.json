@@ -1,0 +1,1 @@
+{"text": "＊の　＊で　＊は　きずついた！", "structure": [{"jp": "＊の　＊で", "en": "by ＊'s ＊"}, {"jp": "＊は", "en": "＊"}, {"jp": "きずついた！", "en": "was hurt"}], "patterns": [{"name": "〜で (how)", "span": "＊で", "words": ["で"], "explanation": "で shows the cause or means. ＊で　きずついた = 'was hurt by ＊'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

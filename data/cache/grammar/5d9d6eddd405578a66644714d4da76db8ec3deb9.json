@@ -1,0 +1,1 @@
+{"text": "＊は　すでに　まひしている", "structure": [{"jp": "＊は", "en": "＊"}, {"jp": "すでに", "en": "already"}, {"jp": "まひしている", "en": "is paralyzed"}], "patterns": [{"name": "〜ている", "span": "まひしている", "words": ["まひしている"], "explanation": "ている after a verb shows a state that has resulted and continues. まひしている = 'is paralyzed'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

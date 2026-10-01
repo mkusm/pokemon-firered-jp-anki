@@ -1,0 +1,1 @@
+{"text": "レッドは　おじさんから　ひみつのコハクを　もらった！", "structure": [{"jp": "レッドは", "en": "Red"}, {"jp": "おじさんから", "en": "from the man"}, {"jp": "ひみつのコハクを", "en": "the Old Amber"}, {"jp": "もらった！", "en": "received"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

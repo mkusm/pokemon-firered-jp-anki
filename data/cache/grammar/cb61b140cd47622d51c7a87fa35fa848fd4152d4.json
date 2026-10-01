@@ -1,0 +1,1 @@
+{"text": "やせいの　ポケモンが　とびだして　きたら　チャンス！", "structure": [{"jp": "やせいの　ポケモンが", "en": "a wild Pokémon"}, {"jp": "とびだして　きたら", "en": "if it jumps out"}, {"jp": "チャンス！", "en": "chance"}], "patterns": [{"name": "〜たら", "span": "きたら", "words": ["きたら"], "explanation": "たら means when or if. とびだしてきたら = 'when it jumps out at you'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

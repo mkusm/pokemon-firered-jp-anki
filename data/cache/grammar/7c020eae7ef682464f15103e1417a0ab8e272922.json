@@ -1,0 +1,1 @@
+{"text": "おかねが　たりないですよ！", "structure": [{"jp": "おかねが", "en": "money"}, {"jp": "たりないですよ！", "en": "is not enough!"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

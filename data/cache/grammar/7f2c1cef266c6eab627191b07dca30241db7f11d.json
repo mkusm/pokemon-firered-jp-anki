@@ -1,0 +1,1 @@
+{"text": "ここは　１ばん　どうろ　マサラ　タウン　…　トキワ　シティ", "structure": [{"jp": "ここは　１ばん　どうろ", "en": "this is Route 1"}, {"jp": "マサラ　タウン　…　トキワ　シティ", "en": "Pallet Town to Viridian City"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

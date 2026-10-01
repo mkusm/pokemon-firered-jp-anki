@@ -1,0 +1,1 @@
+{"text": "なんだか　てれちゃうね！", "structure": [{"jp": "なんだか", "en": "somehow"}, {"jp": "てれちゃうね！", "en": "I get embarrassed, huh"}], "patterns": [{"name": "〜てしまう", "span": "てれちゃう", "words": ["てれちゃう"], "explanation": "ちゃう is a casual form of てしまう, here meaning one can't help the feeling. てれちゃう = 'I just get embarrassed'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

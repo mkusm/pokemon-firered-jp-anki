@@ -1,0 +1,1 @@
+{"text": "でんわ　してるんだ！", "structure": [{"jp": "でんわ　してるんだ！", "en": "I'm on the phone!"}], "patterns": [{"name": "〜ている", "span": "してる", "words": ["してる"], "explanation": "てる is the casual form of ている, showing an ongoing action. んだ explains the situation. でんわ　してるんだ = 'I'm on the phone, you see'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

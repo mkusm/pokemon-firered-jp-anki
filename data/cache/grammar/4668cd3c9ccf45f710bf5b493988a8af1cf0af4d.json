@@ -1,0 +1,1 @@
+{"text": "はい　たしかに　５０えん　いただき　ました！", "structure": [{"jp": "はい　たしかに", "en": "yes, certainly"}, {"jp": "５０えん　いただき　ました！", "en": "I received 50 yen"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

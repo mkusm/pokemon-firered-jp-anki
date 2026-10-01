@@ -1,0 +1,1 @@
+{"text": "まちなー！", "structure": [{"jp": "まちなー！", "en": "Wait!"}], "patterns": [{"name": "〜な (command)", "span": "まちなー", "words": ["まちなー"], "explanation": "The verb stem plus な is a rough, bossy command. まちな = 'hold it'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

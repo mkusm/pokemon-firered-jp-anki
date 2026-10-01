@@ -1,0 +1,1 @@
+{"text": "＊は　けんこうになった！", "structure": [{"jp": "＊は", "en": "＊"}, {"jp": "けんこうに", "en": "healthy"}, {"jp": "なった！", "en": "became"}], "patterns": [{"name": "〜になる", "span": "けんこうに　なった", "words": ["に", "なった"], "explanation": "に　なる says something changes into a state. けんこうになった = 'became healthy'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

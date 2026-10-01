@@ -1,0 +1,1 @@
+{"text": "まどの　むこうには　……　とてもきれいな　そらが　みえる！", "structure": [{"jp": "まどの　むこうには", "en": "beyond the window"}, {"jp": "……", "en": "..."}, {"jp": "とてもきれいな　そらが", "en": "a very beautiful sky"}, {"jp": "みえる！", "en": "can be seen"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

@@ -1,0 +1,1 @@
+{"text": "どのポケモンに　もたせますか？", "structure": [{"jp": "どのポケモンに", "en": "to which Pokémon"}, {"jp": "もたせますか？", "en": "will you make it hold?"}], "patterns": [{"name": "〜させる", "span": "もたせます", "words": ["もたせます"], "explanation": "させる makes or lets someone do the action. もたせます = 'have (it) hold, give to hold'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

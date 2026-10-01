@@ -1,0 +1,1 @@
+{"text": "いちげきひっさつが　きかない", "structure": [{"jp": "いちげきひっさつが", "en": "one-hit KO moves"}, {"jp": "きかない", "en": "don't work"}], "patterns": [{"name": "〜ない", "span": "きかない", "words": ["きかない"], "explanation": "ない after a verb makes it negative. きかない = 'doesn't work'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

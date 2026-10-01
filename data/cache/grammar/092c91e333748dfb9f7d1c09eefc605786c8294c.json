@@ -1,0 +1,1 @@
+{"text": "どの　こうもくを　みますか？", "structure": [{"jp": "どの　こうもくを", "en": "which topic"}, {"jp": "みますか？", "en": "will you look at?"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

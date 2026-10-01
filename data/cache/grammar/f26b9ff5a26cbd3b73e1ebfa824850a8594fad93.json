@@ -1,0 +1,1 @@
+{"text": "よんで　よんで！", "structure": [{"jp": "よんで　よんで！", "en": "read it, read it!"}], "patterns": [{"name": "〜て (request)", "span": "よんで", "words": ["よんで"], "explanation": "て form alone is a casual request. よんで = 'read it!'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

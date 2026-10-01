@@ -1,0 +1,1 @@
+{"text": "ふだんは　つちのなかに　すんでいる。", "structure": [{"jp": "ふだんは", "en": "usually"}, {"jp": "つちのなかに　すんでいる。", "en": "lives underground"}], "patterns": [{"name": "〜ている", "span": "すんでいる", "words": ["すんでいる"], "explanation": "ている shows a continuing state. すんでいる = 'lives'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

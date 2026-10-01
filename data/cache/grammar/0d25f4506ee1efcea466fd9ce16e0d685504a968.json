@@ -1,0 +1,1 @@
+{"text": "また　きてね", "structure": [{"jp": "また　きてね", "en": "come again"}], "patterns": [{"name": "〜てください", "span": "きてね", "words": ["きて", "ね"], "explanation": "A て-form plus ね is a soft, friendly request. きてね = 'please come'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

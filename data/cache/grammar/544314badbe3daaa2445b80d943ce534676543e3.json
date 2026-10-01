@@ -1,0 +1,1 @@
+{"text": "じぶんできめる", "structure": [{"jp": "じぶんできめる", "en": "decide by myself"}], "patterns": [{"name": "〜で (how)", "span": "じぶんで", "words": ["じぶん", "で"], "explanation": "で after じぶん means by oneself. じぶんできめる = 'decide it myself'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

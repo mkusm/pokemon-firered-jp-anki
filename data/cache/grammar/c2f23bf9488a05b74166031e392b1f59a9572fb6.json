@@ -1,0 +1,1 @@
+{"text": "＊の　＊　との　しょうぶに　まけた……", "structure": [{"jp": "＊の　＊　との　しょうぶに", "en": "in the battle with ＊ ＊"}, {"jp": "まけた……", "en": "lost"}], "patterns": [{"name": "〜に負ける", "span": "しょうぶに　まけた", "words": ["しょうぶ", "に", "まけた"], "explanation": "に marks what you lose to or in. しょうぶに　まけた = 'lost the battle'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

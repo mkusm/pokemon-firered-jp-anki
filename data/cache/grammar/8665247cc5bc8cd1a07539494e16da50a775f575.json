@@ -1,0 +1,1 @@
+{"text": "どの　ポケモンに　する？", "structure": [{"jp": "どの　ポケモンに", "en": "which Pokémon"}, {"jp": "する？", "en": "will you pick?"}], "patterns": [{"name": "〜にする", "span": "ポケモンに　する", "words": ["ポケモン", "に", "する"], "explanation": "に + する means to decide on something. ポケモンに　する = 'choose the Pokémon'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

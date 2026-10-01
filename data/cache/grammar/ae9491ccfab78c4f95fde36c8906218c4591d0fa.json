@@ -1,0 +1,1 @@
+{"text": "ずかん　みたいな　ものが　ある！", "structure": [{"jp": "ずかん　みたいな　ものが", "en": "something like a Pokédex"}, {"jp": "ある！", "en": "there is"}], "patterns": [{"name": "〜みたいだ", "span": "ずかん　みたいな　もの", "words": ["みたいな"], "explanation": "みたい after a noun means 'like it'. ずかん　みたいな　もの = 'something like a Pokédex'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

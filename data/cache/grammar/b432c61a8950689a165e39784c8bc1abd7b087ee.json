@@ -1,0 +1,1 @@
+{"text": "ぜんぜん　ページが　ふえとらんぞ？", "structure": [{"jp": "ぜんぜん　ページが", "en": "the pages, not at all"}, {"jp": "ふえとらんぞ？", "en": "haven't increased"}], "patterns": [{"name": "〜ている", "span": "ふえとらん", "words": ["ふえとらん"], "explanation": "とらん is a dialect-like old-man form of ていない, 'is not doing'. ふえとらん = 'haven't increased'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

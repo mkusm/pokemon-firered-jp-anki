@@ -1,0 +1,1 @@
+{"text": "どれを　かいふくする？", "structure": [{"jp": "どれを", "en": "which one (object)"}, {"jp": "かいふくする？", "en": "restore?"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

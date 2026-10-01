@@ -1,0 +1,1 @@
+{"text": "まてよ！", "structure": [{"jp": "まてよ！", "en": "wait!"}], "patterns": [{"name": "〜よ", "span": "まてよ", "words": ["まて", "よ"], "explanation": "まて is a rough command, and よ adds force. まてよ = 'hey, wait!'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

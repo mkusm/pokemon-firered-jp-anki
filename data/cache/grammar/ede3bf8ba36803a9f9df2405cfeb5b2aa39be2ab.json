@@ -1,0 +1,1 @@
+{"text": "これいじょう　バッグに　はいりません", "structure": [{"jp": "これいじょう", "en": "any more than this"}, {"jp": "バッグに", "en": "in the Bag"}, {"jp": "はいりません", "en": "won't fit"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

@@ -1,0 +1,1 @@
+{"text": "つかまえた　ポケモン　＊！", "structure": [{"jp": "つかまえた　ポケモン　＊！", "en": "Pokémon caught: ＊"}], "patterns": [{"name": "verb + noun", "span": "つかまえた　ポケモン", "words": ["つかまえた", "ポケモン"], "explanation": "A past-tense verb placed before a noun describes it. つかまえた　ポケモン = 'Pokémon that were caught'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

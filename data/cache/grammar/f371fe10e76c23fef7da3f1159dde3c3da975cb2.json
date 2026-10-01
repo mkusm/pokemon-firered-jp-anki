@@ -1,0 +1,1 @@
+{"text": "にげられない！", "structure": [{"jp": "にげられない！", "en": "can't escape"}], "patterns": [{"name": "〜られる (potential)", "span": "にげられない", "words": ["にげられない"], "explanation": "られる means 'can do', and ない negates it. にげられない = 'can't escape'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

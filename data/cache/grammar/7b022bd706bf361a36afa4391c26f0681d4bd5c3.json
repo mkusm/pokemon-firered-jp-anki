@@ -1,0 +1,1 @@
+{"text": "まちくたびれたぞー！", "structure": [{"jp": "まちくたびれたぞー！", "en": "I'm tired of waiting"}], "patterns": [{"name": "〜ぞ", "span": "まちくたびれたぞー", "words": ["ぞー"], "explanation": "ぞ is a rough, male ending that stresses what you say. まちくたびれたぞ = 'I'm worn out from waiting!'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

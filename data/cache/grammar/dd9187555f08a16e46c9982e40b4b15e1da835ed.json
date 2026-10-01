@@ -1,0 +1,1 @@
+{"text": "ついに　パーフェクトな　ずかんの　かんせいじゃ！", "structure": [{"jp": "ついに", "en": "at last"}, {"jp": "パーフェクトな　ずかんの　かんせいじゃ！", "en": "completion of a perfect Pokédex"}], "patterns": [{"name": "〜だ", "span": "かんせいじゃ", "words": ["じゃ"], "explanation": "じゃ is the old-man form of だ. かんせいじゃ = 'it is complete'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

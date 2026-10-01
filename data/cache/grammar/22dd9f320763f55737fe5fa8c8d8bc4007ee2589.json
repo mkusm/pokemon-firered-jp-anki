@@ -1,0 +1,1 @@
+{"text": "バッジさえ　あれば…", "structure": [{"jp": "バッジさえ　あれば…", "en": "if only there were a Badge"}], "patterns": [{"name": "〜さえ〜ば", "span": "さえ　あれば", "words": ["さえ", "あれば"], "explanation": "さえ〜ば says 'if only this one thing is there, it's enough'. バッジさえあれば = 'if only I had the Badge'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}

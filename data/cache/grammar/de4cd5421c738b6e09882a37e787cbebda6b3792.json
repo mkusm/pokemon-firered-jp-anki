@@ -1,0 +1,1 @@
+{"text": "ながくて　じょうぶな　ヒモ。", "structure": [{"jp": "ながくて　じょうぶな　ヒモ。", "en": "a long, sturdy rope"}], "patterns": [{"name": "〜て (linking)", "span": "ながくて　じょうぶな", "words": ["ながくて", "じょうぶな"], "explanation": "くて joins an い-adjective to the next description. ながくてじょうぶな = 'long and sturdy'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2"}}
