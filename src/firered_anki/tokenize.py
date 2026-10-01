@@ -47,9 +47,9 @@ def lemma_of(w) -> str:
     return (w.feature.lemma or w.surface).split("-")[0]
 
 
-def compact(e) -> dict:
+def compact(e, max_senses: int | None = MAX_SENSES) -> dict:
     senses = []
-    for s in e.senses[:MAX_SENSES]:
+    for s in e.senses[:max_senses]:
         sense = {
             "pos": [p.split(" (")[0] for p in s.pos][:2],
             "g": [g.text for g in s.gloss][:MAX_GLOSSES],

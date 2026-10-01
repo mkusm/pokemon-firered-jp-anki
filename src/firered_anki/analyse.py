@@ -16,7 +16,7 @@ import json
 import re
 import sys
 import time
-from concurrent.futures import ThreadPoolExecutor, as_completed
+from concurrent.futures import CancelledError, ThreadPoolExecutor, as_completed
 from dataclasses import dataclass
 
 import pandas as pd
@@ -221,12 +221,16 @@ def run(cfg: Config, rows: pd.DataFrame, entries: dict, workers: int = 3,
             stats["calls"] += 1
             try:
                 b, res, info = fut.result()
+            except CancelledError:
+                continue
             except claude_cli.UsageLimit:
-                print(f"[{cfg.name}] usage limit: stopping; re-run to resume from the cache")
-                stats["limited"] = True
-                for f in futs:
-                    f.cancel()
-                break
+                # Stop sending, but keep what the calls still running bring back.
+                if not stats["limited"]:
+                    print(f"[{cfg.name}] usage limit: stopping; re-run to resume from the cache")
+                    stats["limited"] = True
+                    for f in futs:
+                        f.cancel()
+                continue
             except Exception as e:  # schema failure, timeout, CLI error
                 stats["failed_calls"] += 1
                 print(f"[{cfg.name}] call failed: {str(e)[:200]}")
@@ -332,6 +336,37 @@ def escalate() -> None:
             sys.exit("[escalate] giving up: a round with no successful call")
 
 
+RERUN = Config("main", "opus", "low", 40)  # writes over the main cache
+
+
+def rerun(chapter: int | None = None, workers: int = 10) -> None:
+    """Redo on Opus the sentences only Sonnet has answered: every one, or the
+    ones the deck shows in one chapter. Sonnet is wrong without flagging it in
+    about 3 sentences in 100 (a wrong item name, あったら filed under ある for
+    合う), which escalation cannot catch."""
+    df, entries = load()
+    if chapter is not None:
+        from .cards import prepare  # late: cards imports this module
+
+        deck = prepare(offline_merge=True)[0]
+        shown = deck[(deck["chapter"] == chapter) & deck["card_order"].notna()]
+        df = df[df["text"].isin(set(shown["text"]))]
+    rows = df[df["text"].map(lambda t: cached_model(MAIN.name, t) not in (None, RERUN.model))]
+    print(f"[rerun] {rows['text'].nunique()} sentences to redo on {RERUN.model}, {workers} calls at a time")
+    while True:
+        st = run(RERUN, rows, entries, workers=workers, redo=True)
+        print(f"[rerun] round: {st['calls']} calls ({st['failed_calls']} failed), {st['out']} out tokens, "
+              f"${st['cost']:.2f} API-equivalent")
+        if st["todo"] == 0:
+            print("[rerun] done")
+            return
+        if st["limited"]:
+            print(f"[rerun] waiting {LIMIT_WAIT_S // 60} min for the usage limit", flush=True)
+            time.sleep(LIMIT_WAIT_S)
+        elif st["calls"] == st["failed_calls"]:
+            sys.exit("[rerun] giving up: a round with no successful call")
+
+
 # --- dry run -----------------------------------------------------------------
 
 def dry_plan(df: pd.DataFrame) -> list[tuple[Config, pd.DataFrame]]:
@@ -407,5 +442,7 @@ if __name__ == "__main__":
         full()
     elif args == ["escalate"]:
         escalate()
+    elif args[:1] == ["rerun"]:
+        rerun(int(args[1]) if len(args) > 1 else None)
     else:
-        sys.exit("usage: python -m firered_anki.analyse full | escalate | dry-run [config-name]")
+        sys.exit("usage: python -m firered_anki.analyse full | escalate | rerun [chapter] | dry-run [config-name]")
