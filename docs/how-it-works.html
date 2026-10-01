@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How the FireRed deck is built</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --page: #eef2f1;
+    --panel: #ffffff;
+    --ink: #1c2a30;
+    --muted: #55676e;
+    --rule: #cfd9d8;
+    --red: #c3272b;        /* the cartridge */
+    --frame: #2d6a76;      /* the game's message-box frame */
+    --frame-dark: #1d4650;
+    --box: #f8f8f0;        /* the message box paper */
+    --box-ink: #404048;
+    --box-shadow: #d0d0c0;
+    --mark: #f3c531;       /* the highlighted word */
+    --code: #e3eae9;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --page: #10181c; --panel: #172228; --ink: #dfe8ea; --muted: #93a6ad;
+      --rule: #2a3a41; --red: #ef6461; --frame: #4a9aa8; --frame-dark: #2d6a76;
+      --box: #f8f8f0; --box-ink: #404048; --code: #1f2d34;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body {
+    margin: 0; background: var(--page); color: var(--ink);
+    font-family: "Zen Kaku Gothic New", "Hiragino Sans", "Yu Gothic", "Noto Sans JP", system-ui, sans-serif;
+    font-size: 17px; line-height: 1.65;
+  }
+  a { color: var(--frame); text-underline-offset: 3px; }
+  a:focus-visible, summary:focus-visible { outline: 3px solid var(--mark); outline-offset: 2px; }
+
+  .layout { display: grid; grid-template-columns: minmax(0, 1fr); max-width: 1120px; margin: 0 auto; padding: 0 20px 96px; }
+  nav.toc { display: none; }
+  @media (min-width: 1000px) {
+    .layout { grid-template-columns: 220px minmax(0, 1fr); column-gap: 56px; }
+    nav.toc { display: block; position: sticky; top: 24px; align-self: start; padding-top: 72px; font-size: 15px; }
+    nav.toc a { display: block; padding: 5px 0 5px 12px; color: var(--muted); text-decoration: none; border-left: 2px solid var(--rule); }
+    nav.toc a:hover { color: var(--ink); border-left-color: var(--red); }
+  }
+  main { max-width: 760px; }
+
+  header.hero { padding: 64px 0 8px; }
+  h1 { font-size: clamp(34px, 5.4vw, 54px); line-height: 1.1; letter-spacing: -0.02em; margin: 0 0 18px; font-weight: 700; }
+  .lede { font-size: 20px; color: var(--muted); max-width: 40em; margin: 0 0 36px; }
+  h2 { font-size: 30px; line-height: 1.2; letter-spacing: -0.01em; margin: 72px 0 14px; padding-top: 18px; border-top: 3px solid var(--ink); }
+  h3 { font-size: 20px; margin: 36px 0 8px; }
+  p { margin: 0 0 16px; max-width: 42em; }
+  ul, ol { margin: 0 0 16px; padding-left: 22px; max-width: 42em; }
+  li { margin-bottom: 6px; }
+  code { font-family: ui-monospace, "SF Mono", Menlo, Consolas, "Noto Sans Mono CJK JP", "MS Gothic", "Zen Kaku Gothic New", "Hiragino Sans", "Noto Sans JP", monospace; font-size: 0.86em; background: var(--code); padding: 1px 5px; border-radius: 4px; }
+  pre { background: var(--code); padding: 14px 16px; border-radius: 8px; overflow-x: auto; font-size: 14px; line-height: 1.5; }
+  pre code { background: none; padding: 0; font-size: inherit; }
+  .jp { font-feature-settings: "palt" 0; }
+
+  /* The game's message box */
+  .gba {
+    font-family: "DotGothic16", "MS Gothic", "Osaka-Mono", monospace;
+    background: var(--box); color: var(--box-ink);
+    border: 4px solid var(--frame); outline: 3px solid var(--frame-dark); outline-offset: -9px;
+    border-radius: 12px; padding: 22px 24px; font-size: 22px; line-height: 1.75;
+    text-shadow: 1.5px 1.5px 0 var(--box-shadow);
+  }
+  .gba mark { background: var(--mark); color: #2a2a2a; padding: 0 3px; border-radius: 3px; text-shadow: none; }
+  .gba .who { display: block; font-size: 15px; color: #7a7a82; margin-bottom: 4px; }
+
+  .card { display: grid; gap: 0; margin: 0 0 12px; }
+  .card .back {
+    background: var(--panel); border: 1px solid var(--rule); border-top: 0;
+    border-radius: 0 0 12px 12px; margin: -10px 10px 0; padding: 26px 22px 18px;
+  }
+  .back dl { display: grid; grid-template-columns: max-content 1fr; gap: 6px 18px; margin: 0; font-size: 16px; }
+  .back dt { color: var(--muted); }
+  .back dd { margin: 0; }
+  .back .word { font-size: 24px; font-weight: 700; margin-bottom: 10px; }
+  .back .word small { font-size: 16px; font-weight: 400; color: var(--muted); margin-left: 8px; }
+  figcaption { font-size: 14px; color: var(--muted); margin: 10px 2px 0; max-width: 44em; }
+  figure { margin: 24px 0 28px; }
+
+  table { border-collapse: collapse; width: 100%; margin: 8px 0 22px; font-size: 15.5px; }
+  th, td { text-align: left; padding: 8px 12px 8px 0; border-bottom: 1px solid var(--rule); vertical-align: top; }
+  th { font-weight: 700; border-bottom: 2px solid var(--ink); }
+  td.n, th.n { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; padding-right: 0; padding-left: 12px; }
+  .scroll { overflow-x: auto; }
+
+  .pipeline { background: var(--panel); border: 1px solid var(--rule); border-radius: 12px; padding: 18px 14px 10px; overflow-x: auto; }
+  .pipeline svg { min-width: 700px; width: 100%; height: auto; display: block; }
+  .pipeline text { font-family: "Zen Kaku Gothic New", system-ui, sans-serif; fill: var(--ink); }
+  .pipeline .sub { fill: var(--muted); font-size: 11.5px; }
+  .pipeline .stage rect { fill: var(--page); stroke: var(--ink); stroke-width: 1.5; }
+  .pipeline .llm rect { fill: var(--mark); stroke: var(--ink); }
+  .pipeline .llm text { fill: #22292c; }
+  .pipeline .src rect { fill: none; stroke: var(--frame); stroke-width: 1.5; stroke-dasharray: 5 4; }
+  .pipeline path { stroke: var(--ink); stroke-width: 1.5; fill: none; marker-end: url(#arrow); }
+  .pipeline marker path { fill: var(--ink); stroke: none; marker-end: none; }
+
+  .aside { border-left: 4px solid var(--red); padding: 2px 0 2px 16px; margin: 20px 0; color: var(--muted); max-width: 42em; }
+  .steps { counter-reset: s; list-style: none; padding: 0; }
+  .steps > li { counter-increment: s; position: relative; padding-left: 44px; margin-bottom: 14px; }
+  .steps > li::before {
+    content: counter(s); position: absolute; left: 0; top: 0; width: 30px; height: 30px; border-radius: 50%;
+    background: var(--ink); color: var(--page); font-weight: 700; font-size: 15px; display: grid; place-items: center;
+  }
+  footer { margin-top: 72px; padding-top: 18px; border-top: 1px solid var(--rule); font-size: 14px; color: var(--muted); }
+</style>
+</head>
+<body>
+<div class="layout">
+
+<nav class="toc" aria-label="Sections">
+  <a href="#problem">The problem</a>
+  <a href="#pipeline">The pipeline</a>
+  <a href="#extract">Extract</a>
+  <a href="#order">Order</a>
+  <a href="#tokenize">Tokenize</a>
+  <a href="#analyse">Analyse</a>
+  <a href="#cards">Cards</a>
+  <a href="#build">Build</a>
+  <a href="#numbers">The deck in numbers</a>
+  <a href="#change">Changing things</a>
+  <a href="#limits">Known limits</a>
+</nav>
+
+<main>
+<header class="hero">
+  <h1>How a line of FireRed becomes a flashcard</h1>
+  <p class="lede">The deck has 11,174 cards. Each one is a word, in one form, in the sentence where the Japanese game first uses it. This page follows the text from the cartridge's script to the card.</p>
+
+  <figure class="card">
+    <div class="gba jp" lang="ja">グリーンは　すでに　ポケモンを　<mark>つかまえて</mark>　ずかんの　ページを　ふやしている　そうじゃ！</div>
+    <div class="back">
+      <div class="word jp" lang="ja">つかまえて <small>つかまえる　捕まえる（捕 つか）</small></div>
+      <dl>
+        <dt>Romaji</dt><dd>tsukamaete, from tsukamaeru</dd>
+        <dt>Here</dt><dd>catching, and</dd>
+        <dt>Literally</dt><dd>to catch</dd>
+        <dt>Form</dt><dd class="jp" lang="ja">つかまえ + て (te-form)</dd>
+        <dt>In kanji</dt><dd class="jp" lang="ja">グリーンは既にポケモンを捕まえて図鑑のページを増やしているそうじゃ！</dd>
+        <dt>English</dt><dd>I hear Green has already been catching Pokémon and adding pages to his Pokédex!</dd>
+        <dt>Where</dt><dd>Professor Oak's lab, Pallet Town</dd>
+      </dl>
+    </div>
+    <figcaption>Card 609. The top is the front, exactly as the game shows the line. The rest is the back, which also carries the whole sentence in romaji, two more sentences that use つかまえて, Oak's full message, and the dictionary's senses for 捕まえる.</figcaption>
+  </figure>
+</header>
+
+<section id="problem">
+  <h2>Why a dictionary is not enough</h2>
+  <p>FireRed's Japanese script is written almost entirely in kana. In 358,000 characters of text there is one kanji, 円. That is kind to a child reading the game and hard on a program reading it, for two reasons.</p>
+  <p><strong>The same kana is several words.</strong> <span class="jp" lang="ja">かみ</span> is paper (紙), a god (神) or hair (髪). Only the sentence says which.</p>
+  <p><strong>The spaces are not word boundaries.</strong> The game puts a full-width space between phrases, so a noun arrives glued to its particle and a verb to its endings. A standard tokenizer, trained on text with kanji, has to guess where the words are, and it guesses wrong often. It reads <span class="jp" lang="ja">てんそう</span> (転送, transfer) as three scraps: <span class="jp" lang="ja">て + ん + そう</span>.</p>
+  <p>So every sentence is read by a language model that can see the sentences around it, who is speaking and where in the game it is. The tokenizer and the dictionary still run first, but as a list of suggestions the model picks from, and as a check on what it answers.</p>
+</section>
+
+<section id="pipeline">
+  <h2>The pipeline</h2>
+  <p>Seven stages, each a Python module that reads the previous stage's file and writes its own. Yellow stages call Claude. Everything they answer is cached on disk, so a rebuild makes no calls.</p>
+  <div class="pipeline">
+    <svg viewBox="0 0 760 250" role="img" aria-label="Pipeline: the game text and the decompiled game data feed extract, order, tokenize, analyse, cards and build. Classify is a side step of order, and escalate a side step of analyse.">
+      <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z"/></marker></defs>
+      <g class="src">
+        <rect x="10" y="12" width="150" height="46" rx="8"/><text x="85" y="32" text-anchor="middle" font-size="13" font-weight="700">Game text</text><text class="sub" x="85" y="48" text-anchor="middle">poke-corpus, 14,480 lines</text>
+        <rect x="190" y="12" width="150" height="46" rx="8"/><text x="265" y="32" text-anchor="middle" font-size="13" font-weight="700">Game data</text><text class="sub" x="265" y="48" text-anchor="middle">pret decomp, 425 maps</text>
+        <rect x="370" y="12" width="150" height="46" rx="8"/><text x="445" y="32" text-anchor="middle" font-size="13" font-weight="700">Dictionary</text><text class="sub" x="445" y="48" text-anchor="middle">JMdict</text>
+      </g>
+      <path d="M85 58 V96"/><path d="M265 58 V86 H215 V96"/><path d="M445 58 V86 H345 V96"/>
+      <g class="stage">
+        <rect x="30" y="96" width="110" height="52" rx="8"/><text x="85" y="118" text-anchor="middle" font-size="14" font-weight="700">extract</text><text class="sub" x="85" y="136" text-anchor="middle">16,166 sentences</text>
+        <rect x="160" y="96" width="110" height="52" rx="8"/><text x="215" y="118" text-anchor="middle" font-size="14" font-weight="700">order</text><text class="sub" x="215" y="136" text-anchor="middle">14,400 kept</text>
+        <rect x="290" y="96" width="110" height="52" rx="8"/><text x="345" y="118" text-anchor="middle" font-size="14" font-weight="700">tokenize</text><text class="sub" x="345" y="136" text-anchor="middle">12,335 unique</text>
+        <rect x="550" y="96" width="90" height="52" rx="8"/><text x="595" y="118" text-anchor="middle" font-size="14" font-weight="700">cards</text><text class="sub" x="595" y="136" text-anchor="middle">11,174 + 957</text>
+        <rect x="660" y="96" width="90" height="52" rx="8"/><text x="705" y="118" text-anchor="middle" font-size="14" font-weight="700">build</text><text class="sub" x="705" y="136" text-anchor="middle">two .apkg</text>
+      </g>
+      <g class="llm">
+        <rect x="420" y="96" width="110" height="52" rx="8"/><text x="475" y="118" text-anchor="middle" font-size="14" font-weight="700">analyse</text><text x="475" y="136" text-anchor="middle" font-size="11.5">71,500 words</text>
+        <rect x="160" y="186" width="110" height="46" rx="8"/><text x="215" y="206" text-anchor="middle" font-size="13" font-weight="700">classify</text><text x="215" y="222" text-anchor="middle" font-size="11.5">835 strings placed</text>
+        <rect x="420" y="186" width="110" height="46" rx="8"/><text x="475" y="206" text-anchor="middle" font-size="13" font-weight="700">escalate</text><text x="475" y="222" text-anchor="middle" font-size="11.5">2,132 on Opus</text>
+        <rect x="550" y="186" width="90" height="46" rx="8"/><text x="595" y="206" text-anchor="middle" font-size="13" font-weight="700">sense merge</text><text x="595" y="222" text-anchor="middle" font-size="11.5">623 words</text>
+      </g>
+      <path d="M140 122 H160"/><path d="M270 122 H290"/><path d="M400 122 H420"/><path d="M530 122 H550"/><path d="M640 122 H660"/>
+      <path d="M205 148 V186"/><path d="M225 186 V148"/>
+      <path d="M465 148 V186"/><path d="M485 186 V148"/>
+      <path d="M595 186 V148"/>
+    </svg>
+  </div>
+</section>
+
+<section id="extract">
+  <h2>Extract: from script dump to sentences</h2>
+  <p>The source is <a href="https://github.com/abcboy101/poke-corpus">poke-corpus</a>, which holds the FireRed and LeafGreen script as parallel files: one with message IDs, one per language, line for line. Each ID carries the same label the decompiled game uses, which is what later ties a line to a map.</p>
+<pre><code>frlg.script.ViridianForest.ViridianForest_Text_RickIntro
+よーしッ！\nきみは　ポケモン　もってるな？\rしょうぶ　しようぜ！</code></pre>
+  <p>Of 14,480 lines, 12,895 have text. The stage then:</p>
+  <ul>
+    <li><strong>Keeps FireRed.</strong> LeafGreen's Pokédex text and its versions of the in-game trades are dropped.</li>
+    <li><strong>Fills in names.</strong> <code>[PLAYER]</code> becomes <span class="jp" lang="ja">レッド</span> and <code>[RIVAL]</code> <span class="jp" lang="ja">グリーン</span>, the game's own default names. Names and numbers the game fills in at runtime become <span class="jp">＊</span>, which no later stage treats as a word.</li>
+    <li><strong>Removes control codes.</strong> About ninety kinds: colours, pauses, music cues, fonts. A code it does not recognise stops the run instead of slipping through.</li>
+    <li><strong>Finds the speaker.</strong> <span class="jp" lang="ja">オーキド『…</span> names who is talking; the name goes to its own column.</li>
+    <li><strong>Splits into sentences</strong> at 。！？. A page of the text box that does not end a sentence runs on into the next page, unless a new speaker starts there.</li>
+  </ul>
+  <p>The result is 16,166 sentences, 13,661 of them distinct. Each keeps its message ID, speaker and the raw line.</p>
+</section>
+
+<section id="order">
+  <h2>Order: when do you first see each line?</h2>
+  <p>The script is filed by map, not by story. Ordering it is the largest part of the project, and it works differently for dialogue and for everything else.</p>
+
+  <h3>Dialogue follows the walkthrough</h3>
+  <p><code>map_order.yaml</code> lists 344 maps and scenes in play order: Kanto, the first three Sevii Islands after Blaine, the League, then the postgame. It was drafted from the decomp's map names and checked against all 21 parts of Bulbapedia's walkthrough.</p>
+  <p>Two details matter. A map you return to can list single messages to be placed later, so the rival's second battle on Route 22 sits after the eighth badge and not at your first visit. And the game's opening is listed message by message, because the script dump stores it out of order: controls guide, intro pages, Professor Oak's speech, then the naming prompts.</p>
+
+  <h3>Everything else goes where it first appears</h3>
+  <p>Menus, battle messages, move and item descriptions and Pokédex entries have no map. Most of them can be worked out from the <a href="https://github.com/pret/pokefirered">decompiled game</a>:</p>
+  <div class="scroll"><table>
+    <tr><th>Text</th><th>First seen where</th><th class="n">Placed</th><th class="n">Never met</th></tr>
+    <tr><td>Species names, Pokédex entries</td><td>The species is in the wild, in a trainer's party, a gift, or evolves from one that is</td><td class="n">657</td><td class="n">501</td></tr>
+    <tr><td>Move names and descriptions</td><td>A Pokémon you meet knows the move at its level, or you get its TM</td><td class="n">582</td><td class="n">127</td></tr>
+    <tr><td>Items</td><td>A Mart sells it, it lies on the ground, it is hidden, or someone gives it to you</td><td class="n">354</td><td class="n">260</td></tr>
+    <tr><td>Abilities</td><td>A species that has the ability is met</td><td class="n">122</td><td class="n">34</td></tr>
+    <tr><td>Map names, Town Map descriptions</td><td>The area is reached</td><td class="n">117</td><td class="n">11</td></tr>
+    <tr><td>Battle messages</td><td>The first move whose effect prints the message is seen</td><td class="n">167</td><td class="n">6</td></tr>
+  </table></div>
+  <p>"Never met" is mostly Ruby and Sapphire data still in the cartridge: Hoenn species, items and trainers a FireRed player cannot reach. Those go to the end of the deck.</p>
+  <p>Battle messages needed the most care. The game's battle scripts say which move effect prints which message, so each effect's script is followed through its jumps, shared sub-scripts and message tables. "<span class="jp" lang="ja">＊は　へんしんした</span>" then sits on Route 13, where Ditto appears, instead of in your first battle. Three corrections came out of checking the results: surfing and fishing encounters count only once you have Surf or a rod; a trainer counts from where their battle text is placed; and the engine's own table pads unused effects with the sleep script, which has to be ignored.</p>
+
+  <h3>Rules for the rest, and a model for what no rule fits</h3>
+  <p>What the decomp cannot say is handled by <code>first_seen.yaml</code>: rules per group of text, matching on the programmers' labels. PC screens go to the first Pokémon Center, badge names to their gym, each quest-log line to the place or action it recaps, the Help menu and error messages to the end.</p>
+  <p>Some groups are too mixed for keywords. For those, the <code>classify</code> stage shows Claude each string's label, Japanese and English text and asks it to pick one of 56 story points. It placed 835 strings this way; the answers are saved in <code>first_seen_llm.yaml</code> where you can read and correct them.</p>
+
+  <h3>Spreading, so menus never come in a block</h3>
+  <p>Placing every line exactly where it is first seen put about 2,700 cards of menu and battle text before the story reached the second house. So the game is cut into ten chapters, one per gym badge, then the League, then the postgame. Inside a chapter:</p>
+  <ol class="steps">
+    <li>A non-dialogue line is kept only if it teaches something that neither earlier chapters nor this chapter's dialogue teach. Most do not, and are held back as extra example sentences.</li>
+    <li>The kept lines are spread evenly through the chapter's dialogue, each one no earlier than the point where it is first seen.</li>
+    <li>At each slot the line with the most common new words per word of text goes first, so short menu words come before long help-style prose.</li>
+    <li>If dialogue in the same chapter uses the same word, the dialogue sentence becomes the card's example.</li>
+  </ol>
+  <p>This runs twice: here on tokenizer guesses, as a preview, and again in the cards stage on the model's real word senses.</p>
+</section>
+
+<section id="tokenize">
+  <h2>Tokenize: suggestions for the model</h2>
+  <p>fugashi with UniDic splits each of the 12,335 distinct sentences and gives a dictionary form and part of speech per piece. Then every entry JMdict has for those pieces is collected, 13,974 entries in all, a median of 11 per sentence.</p>
+  <p>Because the split is often wrong, single pieces are not enough. Within each space-separated phrase, runs of up to four adjacent pieces are looked up too, as written and with the last piece in dictionary form. That is how <span class="jp" lang="ja">てんそう</span> still offers 転送 after being split in three. Words never cross the game's spaces, so runs do not either.</p>
+</section>
+
+<section id="analyse">
+  <h2>Analyse: one model call per forty sentences</h2>
+  <p>Sentences are sent in batches of up to 40, in game order, cut only between messages so a conversation is never split. Each sentence comes with its map, its speaker, the tokenizer's split and the candidate dictionary entries. The model returns, for every sentence, a version in normal kanji, an English translation, and every word with:</p>
+  <ul>
+    <li>the form as written and its dictionary form;</li>
+    <li>the kanji spelling, whether it is usually written in kana, and each character's reading;</li>
+    <li>a literal meaning and the meaning in this sentence;</li>
+    <li>how the form is built, ending by ending;</li>
+    <li>the JMdict entry and sense that fit, or nothing if none does;</li>
+    <li>whether it is a name, and whether the model is unsure.</li>
+  </ul>
+  <p>The calls go through headless Claude Code (<code>claude -p</code>) with tools switched off, the project's own system prompt and a JSON schema the CLI enforces, so a malformed answer fails instead of being stored. Results are cached by sentence text. A sentence is never sent twice, and a run that hits a usage limit waits and resumes.</p>
+
+  <h3>Choosing the model</h3>
+  <p>A dry run analysed the first 200 sentences five ways and compared each with Opus on the same sentences.</p>
+  <div class="scroll"><table>
+    <tr><th>Run</th><th class="n">Same entry as Opus</th><th class="n">Same entry and sense</th><th class="n">Output tokens per sentence</th></tr>
+    <tr><td>Sonnet, low effort, batches of 20</td><td class="n">99.0%</td><td class="n">94.6%</td><td class="n">655</td></tr>
+    <tr><td>Sonnet, low effort, batches of 30</td><td class="n">99.4%</td><td class="n">95.5%</td><td class="n">659</td></tr>
+    <tr><td>Sonnet, low effort, batches of 40</td><td class="n">99.4%</td><td class="n">96.3%</td><td class="n">661</td></tr>
+    <tr><td>Sonnet, medium effort, batches of 30</td><td class="n">99.7%</td><td class="n">94.4%</td><td class="n">619</td></tr>
+  </table></div>
+  <p>More effort did not help and larger batches did not hurt, so the full run used Sonnet at low effort in batches of 40: 322 calls for the first pass.</p>
+
+  <h3>A second opinion where it is needed</h3>
+  <p>A sentence is sent again, to Opus, when one of its words is marked unsure, has a form that does not match the entry chosen for it, or points at an entry or sense that does not exist. Names are exempt. That was 2,132 sentences, about one in six. Afterwards 0.7% of words are still marked unsure, down from 3.1%.</p>
+
+  <h3>Grounding</h3>
+  <p>When the tokenizer misreads a word, the right entry may not be among the candidates, and the model answers correctly but without an ID: it says <span class="jp" lang="ja">とおり</span> is 通る while the candidates only offered the noun 通り. After the pass, the model's own kanji and dictionary form are looked up in JMdict, and the entry is filled in when exactly one matches. Short grammar words such as <span class="jp" lang="ja">の</span> and <span class="jp" lang="ja">が</span> are left without an entry on purpose.</p>
+</section>
+
+<section id="cards">
+  <h2>Cards: one per form, in order</h2>
+  <p>Every analysed word is an occurrence with a key: the dictionary entry, the sense, and the form as written. <span class="jp" lang="ja">つかまえた</span>, <span class="jp" lang="ja">つかまえて</span> and <span class="jp" lang="ja">つかまえられる</span> have three keys and become three cards. That is deliberate: each form is drilled where the story first uses it. する alone has 191.</p>
+  <ul>
+    <li><strong>Names</strong> go to a second deck. Trainer names are not carded at all.</li>
+    <li><strong>Known words</strong> listed in <code>known.txt</code> are skipped.</li>
+    <li><strong>Sense merge.</strong> JMdict splits meanings finely, and the model sometimes picks neighbouring senses for the same idea. Each of the 623 entries used in more than one sense goes to Claude once, with its sentences, to group senses a learner would treat as one. 戦う and 出る were merged; 見る "to see" and <span class="jp" lang="ja">〜てみる</span> "to try" were kept apart.</li>
+    <li><strong>Order.</strong> The chapter spreading runs again on these real keys.</li>
+    <li><strong>Example.</strong> A card takes the first sentence in that order, with the dialogue preference above. Up to two later sentences are kept as extra examples, each with its own form explained.</li>
+    <li><strong>Romaji</strong> is converted from the kana by table, with spaces between words and particles written as read: は as wa, を as o.</li>
+  </ul>
+  <p>Before writing the result, the stage prints 30 random cards as plain text for checking by eye.</p>
+</section>
+
+<section id="build">
+  <h2>Build: packages that can be rebuilt</h2>
+  <p>genanki writes two packages. The note type and deck have fixed IDs, and each note's ID is derived from its key. Importing a rebuilt deck therefore updates the cards you already have and leaves their review history alone.</p>
+  <p>Notes are added in story order. In Anki, set the deck's new-card order to "order added". When re-importing after a template change, set "Update note types" to "Always", or Anki keeps the old template.</p>
+</section>
+
+<section id="numbers">
+  <h2>The deck in numbers</h2>
+  <div class="scroll"><table>
+    <tr><th>Chapter ends with</th><th class="n">Cards</th></tr>
+    <tr><td>Brock</td><td class="n">2,482</td></tr>
+    <tr><td>Misty</td><td class="n">929</td></tr>
+    <tr><td>Lt. Surge</td><td class="n">959</td></tr>
+    <tr><td>Erika</td><td class="n">1,163</td></tr>
+    <tr><td>Koga</td><td class="n">849</td></tr>
+    <tr><td>Sabrina</td><td class="n">868</td></tr>
+    <tr><td>Blaine</td><td class="n">331</td></tr>
+    <tr><td>Giovanni</td><td class="n">706</td></tr>
+    <tr><td>The League</td><td class="n">293</td></tr>
+    <tr><td>Postgame</td><td class="n">964</td></tr>
+    <tr><td>End of deck: link play, Help menu, errors, text FireRed never shows</td><td class="n">1,630</td></tr>
+    <tr><th>Main deck</th><th class="n">11,174</th></tr>
+  </table></div>
+  <p>The first chapter is the largest because the menus, the battle screen and most everyday vocabulary all appear before the first gym. The deck's first 148 cards are the opening sequence alone.</p>
+  <ul>
+    <li>6,056 distinct dictionary forms across the 11,174 cards.</li>
+    <li>6,440 cards take their example from story dialogue; the rest from Pokédex entries, menus, move and item descriptions and battle messages.</li>
+    <li>269 cards are tagged <code>low-confidence</code>, 419 <code>sense-guessed</code> (the sense was chosen by gloss overlap during grounding).</li>
+    <li>957 name cards in the second deck.</li>
+  </ul>
+  <p>The first full analysis took about five hours of calls including one usage-limit pause, and would cost roughly $110 at API prices. A classify pass is about 21 calls and under a dollar.</p>
+</section>
+
+<section id="change">
+  <h2>Changing things</h2>
+  <div class="scroll"><table>
+    <tr><th>To do this</th><th>Edit</th><th>Then re-run from</th></tr>
+    <tr><td>Stop carding words you know</td><td><code>known.txt</code></td><td><code>cards</code></td></tr>
+    <tr><td>Move a map or a scene</td><td><code>map_order.yaml</code></td><td><code>order</code></td></tr>
+    <tr><td>Move a kind of menu or system text</td><td><code>first_seen.yaml</code></td><td><code>order</code></td></tr>
+    <tr><td>Correct one string the model placed</td><td><code>first_seen_llm.yaml</code></td><td><code>order</code></td></tr>
+    <tr><td>Change the card layout</td><td><code>build.py</code></td><td><code>build</code></td></tr>
+  </table></div>
+  <p>A rule change that brings in text not seen before needs <code>tokenize</code> and <code>analyse full</code> as well; they only work on what is missing from the cache. Changing the analysis prompt does not re-run cached sentences by itself: delete the cache entries you want redone.</p>
+</section>
+
+<section id="limits">
+  <h2>Known limits</h2>
+  <ul>
+    <li>About 250 battle messages and 580 other strings are placed by the model's judgement. Ability messages and trainer-battle text are among them.</li>
+    <li>Rematch lines of ordinary trainers sit at their route's first visit, though you only see them with the VS Seeker.</li>
+    <li>All 25 nature names are placed together at Professor Oak's lab.</li>
+    <li>The dictionary is the 2020 JMdict snapshot shipped with jamdict.</li>
+    <li>The order follows one walkthrough. The game lets you do several stretches in a different order.</li>
+  </ul>
+  <div class="aside">The text is Nintendo's. The deck and this repository are for personal study and should stay private.</div>
+</section>
+
+<footer>pokemon-firered-jp-anki. Text from abcboy101/poke-corpus, game data from pret/pokefirered, dictionary from JMdict, route from Bulbapedia.</footer>
+</main>
+</div>
+</body>
+</html>
