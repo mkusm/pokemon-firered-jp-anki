@@ -24,8 +24,7 @@ How it works, in detail: [`docs/how-it-works.html`](docs/how-it-works.html)
 | `firered_jp.apkg` | 11,236 cards, in story order |
 | `firered_jp_names.apkg` | 925 cards for names (Pokémon, places, moves, items), optional |
 
-Both are attached to the [latest release](https://github.com/mkusm/pokemon-firered-jp-anki/releases/latest),
-ready to import.
+Both are attached to the [latest release](https://github.com/mkusm/pokemon-firered-jp-anki/releases/latest).
 
 Each card:
 
@@ -46,8 +45,32 @@ and `fragment` pieces of broken speech: stammers (こっ　こんなに), garble
 interrupted words. Fragment cards are kept on purpose, because they explain
 text that would otherwise be puzzling.
 
-In Anki, set the deck's new-card order to **order added**, or the story order is
-lost. When re-importing after a rebuild, set **Update note types** to **Always**.
+## How to use
+
+1. **Get the deck.** Download `firered_jp.apkg` from the
+   [latest release](https://github.com/mkusm/pokemon-firered-jp-anki/releases/latest)
+   and open it in Anki (desktop: File → Import; AnkiDroid and AnkiMobile: open
+   the file). Add `firered_jp_names.apkg` too if you want the names.
+2. **Keep the story order.** New cards must come in the order they were added.
+   In the deck's options, under New Cards, set **Insertion order** to
+   *Sequential (oldest cards first)*, and leave the display order on its
+   defaults. With a random order the deck loses its point.
+3. **Pick a pace.** The cards follow the game, so the natural way to use the
+   deck is to study a stretch and then play it. For scale: the opening sequence
+   is the first 166 cards, everything up to the first gym about 2,500, the whole
+   deck 11,236. At 20 new cards a day that is about four months to Brock.
+4. **Read the card.** The front is the line as the game shows it, in kana, with
+   one word highlighted: read the sentence and recall that word. The back gives
+   the reading in romaji, the dictionary form, the meaning in this sentence,
+   how the form is built, and the sentence in kanji and in English.
+5. **Trim what you don't want.** In the browser, search by tag and suspend:
+   `tag:fragment` (stammers and broken speech), `tag:onomatopoeia`,
+   `tag:low-confidence`, or a place such as `tag:Pewter_City_Gym`. To drop
+   words for good, add them to `known.txt` and rebuild.
+6. **Update later.** Import a newer release over the old one. Card IDs are
+   stable, so your review history stays. In the import dialog set **Update
+   notes** and **Update note types** to *Always*, or Anki keeps the old card
+   layout.
 
 ## Requirements
 
