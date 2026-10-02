@@ -352,9 +352,19 @@ def location(r) -> str:
     return re.sub(r"(?<=[a-z])(?=[A-Z])|_", " ", name).replace("  ", " ").strip()
 
 
-def highlight(text: str, surface: str) -> str:
-    i = text.find(surface)
-    return text if i < 0 else f"{text[:i]}<b>{surface}</b>{text[i + len(surface):]}"
+def highlight(text: str, words: list[dict], pos: int) -> str:
+    """The sentence with the word at `pos` in bold. The word is found by
+    walking the sentence word by word, not by searching for its kana: か "or"
+    in Ｌか　Ｒ must not be marked inside あそびかた earlier in the sentence."""
+    form = form_of(words[pos])
+    start, i = 0, -1
+    for w in words[:pos + 1]:
+        i = text.find(w["surface"], start)
+        if i >= 0:
+            start = i + len(w["surface"])
+    if i < 0:  # the word runs across one of the game's spaces: fall back to a search
+        i = text.find(form)
+    return text if i < 0 else f"{text[:i]}<b>{form}</b>{text[i + len(form):]}"
 
 
 def prepare(run_name: str = MAIN.name, offline_merge: bool = False) -> tuple[pd.DataFrame, dict, dict, pd.DataFrame]:
@@ -405,15 +415,15 @@ def build_cards(run_name: str = MAIN.name, offline_merge: bool = False) -> tuple
             a = analyses[first["text"]]
             ctx = " ".join(f"<u>{t}</u>" if t == first["text"] else t for t in msg_text[first["msg_id"]])
             extras = [
-                f"{highlight(t, form_of(ww))} — {analyses[t]['english']}"
+                f"{highlight(t, analyses[t]['words'], n)} — {analyses[t]['english']}"
                 + (f" ({ww['surface']}: {ww['modifiers']})" if ww.get("modifiers") else "")
-                for t, ww in zip(later["text"][:MAX_EXTRA], later["word"][:MAX_EXTRA])
+                for t, ww, n in zip(later["text"][:MAX_EXTRA], later["word"][:MAX_EXTRA], later["pos"][:MAX_EXTRA])
             ]
             e = entries.get(str(w.get("jmdict_id")), {}) if w.get("jmdict_id") else {}
             g = gram.get(first["text"])
             out.append({
                 "key": json.dumps(key, ensure_ascii=False), "order": first["card_order"],
-                "Sentence": highlight(first["text"], form_of(w)),
+                "Sentence": highlight(first["text"], a["words"], first["pos"]),
                 "Word": form_of(w), "Base": w["base"], "Kanji": w.get("kanji") or "",
                 "UsuallyKana": "yes" if w.get("usually_kana") else "",
                 "WordRomaji": romaji(form_of(w), particle=is_particle(w)),
