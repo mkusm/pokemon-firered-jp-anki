@@ -28,7 +28,7 @@ from html import escape
 
 import pandas as pd
 
-from . import claude_cli
+from . import claude_cli, corrections
 from .analyse import MAIN, load, results as analysis_results
 from .paths import DATA
 
@@ -202,10 +202,12 @@ def locate(text: str, span: str) -> tuple[int, int] | None:
 
 
 def results(texts, analyses: dict) -> dict[str, dict]:
-    """Cached grammar per sentence. Each pattern also gets where its span is
-    (`at`: start and end in the sentence, or None if it is not in it)."""
+    """Cached grammar per sentence, with the hand corrections applied. Each
+    pattern also gets where its span is (`at`: start and end in the sentence,
+    or None if it is not in it)."""
     out = {}
     for t, g in cached(texts, analyses):
+        corrections.apply_grammar(t, g)
         for p in g["patterns"]:
             p.update(name=tidy(p["name"]), at=locate(t, p["span"]))
         out[t] = g
