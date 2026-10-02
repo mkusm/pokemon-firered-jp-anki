@@ -21,8 +21,10 @@ from .paths import ROOT
 FILE = ROOT / "corrections.yaml"
 _applied: set[tuple] = set()
 
-# What names an item in each list, and so cannot itself be corrected.
-KEYS = {"words": ("surface", "nth"), "breakdown": ("jp",), "patterns": ("span",)}
+# What names an item in each list. To correct a word's form itself, give
+# `new_surface`: the model sometimes writes a form that is not in the sentence
+# (きずぐすri, or ASCII cm for the game's ｃｍ).
+KEYS = {"words": ("surface", "nth", "new_surface"), "breakdown": ("jp",), "patterns": ("span",)}
 
 
 @lru_cache(maxsize=None)
@@ -46,6 +48,8 @@ def _fix(text: str, kind: str, fixes: list[dict], items: list[dict], field: str)
             hits = hits[fix["nth"] - 1:fix["nth"]]
         for it in hits[:1]:
             it.update({k: v for k, v in fix.items() if k not in KEYS[kind]})
+            if "new_surface" in fix:
+                it["surface"] = fix["new_surface"]
             _applied.add((text, kind, n))
 
 

@@ -1,0 +1,1 @@
+{"text": "スプレーしきの　きずぐすり。", "structure": [{"jp": "スプレーしきの", "en": "spray-type"}, {"jp": "きずぐすり。", "en": "wound medicine."}], "patterns": [{"name": "〜しき", "span": "スプレーしき", "words": ["スプレー", "しき"], "explanation": "しき stuck onto a thing's name says 'of that type' or 'working in that way'. スプレーしき = 'spray-type'."}], "_run": {"model": "opus", "effort": "low", "version": "2"}}

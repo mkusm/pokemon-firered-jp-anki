@@ -131,4 +131,5 @@ Update this when it changes.
 - Chapter 0: analysed by Opus, grammar by Opus.
 - Chapters 1 to 9: analysed by Sonnet, with Opus on the sentences Sonnet
   flagged; no grammar yet.
-- `corrections.yaml` has one entry, the SELECT button line.
+- `corrections.yaml` has six entries: the SELECT button line, and five word
+  forms the model wrote that were not in their sentence.

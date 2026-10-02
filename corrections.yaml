@@ -12,6 +12,8 @@
 #     words:                  # a word, by its form in the sentence
 #       - surface: して       #   (nth: 2 for the second して)
 #         in_context: …       #   any of the word's fields
+#         new_surface: …      #   the form itself, when the model wrote one
+#                             #   that is not in the sentence
 #     breakdown:              # a line of the sentence breakdown, by its Japanese
 #       - jp: つかいます
 #         en: …
@@ -36,3 +38,38 @@
       explanation: >-
         The て form sets up what comes first: having done one thing, you do the
         next. とうろくして　つかいます = 'having registered it, you use it'.
+
+# Forms the model wrote that are not in the sentence. The card showed the wrong
+# form and could not mark it in the sentence.
+
+- sentence: スプレーしきの　きずぐすり。
+  why: The model's form ended in Latin letters.
+  words:
+    - surface: きずぐすri
+      new_surface: きずぐすり
+
+- sentence: ジムでの　たたかい　シビレましタ！
+  why: The speaker's last kana is written in katakana; the model normalised it.
+  words:
+    - surface: シビレました
+      new_surface: シビレましタ
+      modifiers: シビレ (stem) + まし (polite) + タ (past, written in katakana for the speaker's accent)
+
+- sentence: でも　ぜんぶ　ひろって　たら　じかん　なくなっちゃう！
+  why: The model dropped the て. ひろってたら is short for ひろっていたら.
+  words:
+    - surface: ひろったら
+      new_surface: ひろってたら
+      modifiers: ひろっ + て (te-form) + たら (short for いたら, conditional of いる)
+
+- sentence: やーん　＊ｃｍよ　こんなの　はじめてよー！
+  why: The game writes ｃｍ in full-width letters; the model wrote ASCII.
+  words:
+    - surface: cm
+      new_surface: ｃｍ
+
+- sentence: ＊ｃｍって…　やだ　このまえと　おなじよー
+  why: The game writes ｃｍ in full-width letters; the model wrote ASCII.
+  words:
+    - surface: cm
+      new_surface: ｃｍ
