@@ -21,7 +21,7 @@ How it works, in detail: [`docs/how-it-works.html`](docs/how-it-works.html)
 
 | | |
 |---|---|
-| `firered_jp.apkg` | 11,198 cards, in story order |
+| `firered_jp.apkg` | 11,197 cards, in story order |
 | `firered_jp_names.apkg` | 926 cards for names (Pokémon, places, moves, items), optional |
 
 Both are attached to the [latest release](https://github.com/mkusm/pokemon-firered-jp-anki/releases/latest).
@@ -67,7 +67,7 @@ All you need is [Anki](https://apps.ankiweb.net/), on desktop or on your phone.
 3. **Pick a pace.** The cards follow the game, so the natural way to use the
    deck is to study a stretch and then play it. For scale: the opening sequence
    is the first 166 cards, everything up to the first gym about 2,500, the whole
-   deck 11,198. At 20 new cards a day that is about four months to Brock.
+   deck 11,197. At 20 new cards a day that is about four months to Brock.
 4. **Read the card.** The front is the line as the game shows it, in kana, with
    one word highlighted: read the sentence and recall that word. The back gives
    the reading in romaji, the dictionary form, the meaning in this sentence,

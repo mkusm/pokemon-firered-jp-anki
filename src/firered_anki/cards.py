@@ -355,16 +355,24 @@ def location(r) -> str:
 def highlight(text: str, words: list[dict], pos: int) -> str:
     """The sentence with the word at `pos` in bold. The word is found by
     walking the sentence word by word, not by searching for its kana: か "or"
-    in Ｌか　Ｒ must not be marked inside あそびかた earlier in the sentence."""
-    form = form_of(words[pos])
+    in Ｌか　Ｒ must not be marked inside あそびかた earlier in the sentence.
+    A word can run across the game's spaces (すすんで　ください is one word),
+    so the walk ignores them and the bold stretch includes them."""
+    index = [n for n, ch in enumerate(text) if ch != "　"]
+    bare = text.replace("　", "")
+    form = form_of(words[pos]).replace("　", "")
     start, i = 0, -1
     for w in words[:pos + 1]:
-        i = text.find(w["surface"], start)
+        surface = w["surface"].replace("　", "")
+        i = bare.find(surface, start) if surface else -1
         if i >= 0:
-            start = i + len(w["surface"])
-    if i < 0:  # the word runs across one of the game's spaces: fall back to a search
-        i = text.find(form)
-    return text if i < 0 else f"{text[:i]}<b>{form}</b>{text[i + len(form):]}"
+            start = i + len(surface)
+    if i < 0:
+        i = bare.find(form) if form else -1
+    if i < 0:
+        return text
+    a, b = index[i], index[i + len(form) - 1] + 1
+    return f"{text[:a]}<b>{text[a:b]}</b>{text[b:]}"
 
 
 def prepare(run_name: str = MAIN.name, offline_merge: bool = False) -> tuple[pd.DataFrame, dict, dict, pd.DataFrame]:
