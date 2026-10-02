@@ -24,7 +24,13 @@
     The model wrote "you register it and then use it", which reads as two things
     the SELECT button does. The button only uses the item; registering is done
     from the item's menu in the Bag (pokefirered, src/item_menu.c). The て form
-    here sets up the state the main verb happens in.
+    here sets up the state the main verb happens in. The breakdown said
+    "registering a Key Item and / using it", the same two-jobs reading.
+  breakdown:
+    - jp: たいせつな　ものを　とうろくして
+      en: having registered a Key Item,
+    - jp: つかいます
+      en: you use it
   patterns:
     - span: とうろくして　つかいます
       explanation: >-
