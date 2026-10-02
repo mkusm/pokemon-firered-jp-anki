@@ -21,7 +21,7 @@ from dataclasses import dataclass
 
 import pandas as pd
 
-from . import claude_cli, sense_pick
+from . import claude_cli, corrections, sense_pick
 from .order import ORDER_OUT
 from .paths import DATA, ROOT
 from .grounding import ground
@@ -246,7 +246,8 @@ def run(cfg: Config, rows: pd.DataFrame, entries: dict, workers: int = 3,
 
 
 def results(run_name: str, texts, entries: dict) -> dict[str, dict]:
-    """Cached analyses, with JMdict grounding applied (the cache stays raw)."""
+    """Cached analyses, with JMdict grounding and the hand corrections applied
+    (the cache stays raw)."""
     out = {}
     for t in texts:
         p = cache_path(run_name, t)
@@ -255,6 +256,7 @@ def results(run_name: str, texts, entries: dict) -> dict[str, dict]:
             for w in r["words"]:
                 ground(w, entries)
                 sense_pick.apply(t, w, entries)
+            corrections.apply_analysis(t, r)
             out[t] = r
     return out
 

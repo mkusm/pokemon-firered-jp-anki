@@ -1,0 +1,32 @@
+# Hand corrections to the model's answers, laid over the cache every time it
+# is read. Running the model again never overwrites them. If the model's answer
+# changes so that a correction no longer fits, the cards stage stops and says so.
+#
+# One entry per sentence, written exactly as in the game (full-width spaces).
+# All parts are optional except `sentence`; `why` is for the reader.
+#
+#   - sentence: …
+#     why: …
+#     english: …              # the sentence's translation
+#     kanji: …                # the sentence in kanji
+#     words:                  # a word, by its form in the sentence
+#       - surface: して       #   (nth: 2 for the second して)
+#         in_context: …       #   any of the word's fields
+#     breakdown:              # a line of the sentence breakdown, by its Japanese
+#       - jp: つかいます
+#         en: …
+#     patterns:               # a grammar pattern, by its span
+#       - span: …
+#         explanation: …      #   and/or name
+
+- sentence: どうぐの　いれかえや　たいせつな　ものを　とうろくして　つかいます
+  why: >-
+    The model wrote "you register it and then use it", which reads as two things
+    the SELECT button does. The button only uses the item; registering is done
+    from the item's menu in the Bag (pokefirered, src/item_menu.c). The て form
+    here sets up the state the main verb happens in.
+  patterns:
+    - span: とうろくして　つかいます
+      explanation: >-
+        The て form sets up what comes first: having done one thing, you do the
+        next. とうろくして　つかいます = 'having registered it, you use it'.

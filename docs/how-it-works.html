@@ -371,11 +371,13 @@
     <tr><td>Stop carding words you know</td><td><code>known.txt</code></td><td><code>cards</code></td></tr>
     <tr><td>Move a map or a scene</td><td><code>map_order.yaml</code></td><td><code>order</code></td></tr>
     <tr><td>Move a kind of menu or system text</td><td><code>first_seen.yaml</code></td><td><code>order</code></td></tr>
+    <tr><td>Correct a translation, a gloss or a grammar explanation by hand</td><td><code>corrections.yaml</code></td><td><code>cards</code></td></tr>
     <tr><td>Correct one string the model placed</td><td><code>first_seen_llm.yaml</code></td><td><code>order</code></td></tr>
     <tr><td>Redo a chapter on Opus</td><td>nothing</td><td><code>analyse rerun N</code>, then <code>sense_pick</code>, <code>grammar run --chapter N</code>, <code>cards</code></td></tr>
     <tr><td>Change the card layout</td><td><code>build.py</code></td><td><code>build</code></td></tr>
   </table></div>
   <p>A rule change that brings in text not seen before needs <code>tokenize</code> and <code>analyse full</code> as well; they only work on what is missing from the cache. Changing the analysis prompt does not re-run cached sentences by itself: delete the cache entries you want redone.</p>
+  <p>Hand corrections are kept apart from the model's answers. The cache stays raw, and <code>corrections.yaml</code> is laid over it each time it is read, so running the model again never loses a correction. Each one names what it corrects: a word by its form, a breakdown line by its Japanese, a pattern by its span. If a rerun changes the answer so that a correction no longer fits, the cards stage stops and names it.</p>
 </section>
 
 <section id="limits">

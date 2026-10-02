@@ -159,8 +159,10 @@ also on Opus, was 1,225 sentences in 31 calls, eight at a time, 5 minutes.
 | `map_order.yaml` | Play order of the 344 maps and scenes, following Bulbapedia's walkthrough. Lists single labels where a map is revisited later in the story. |
 | `first_seen.yaml` | Where menus, battle text, items and other non-dialogue text is first seen: rules per text group, and the list of story points the LLM may choose from. |
 | `first_seen_llm.yaml` | Written by `classify`: the story point chosen for each string no rule fits. Readable, so you can review it. |
+| `corrections.yaml` | Hand corrections to the model's answers: a translation, a word's gloss, a breakdown line, a grammar explanation. They are laid over the cache when it is read, so running the model again never overwrites them. If the model's answer changes so that a correction no longer fits, `cards` stops and says so. |
 
-After editing any of them, re-run from `order` onward. Card IDs come from the
+After editing any of them, re-run from `order` onward (`corrections.yaml` and
+`known.txt` only need `cards` and `build`). Card IDs come from the
 word, sense and form, so a rebuilt deck updates your existing cards and keeps
 their review history.
 
@@ -178,6 +180,7 @@ src/firered_anki/
   analyse.py      per-sentence LLM analysis, dry run, escalation, Opus rerun
   claude_cli.py   headless `claude -p` with a JSON schema
   grounding.py    fill and check JMdict IDs after the LLM
+  corrections.py  lay the hand corrections over the LLM's answers
   sense_pick.py   LLM check of entries found by lookup, and their sense
   grammar.py      LLM pass for grammar patterns and sentence breakdowns
   cards.py        occurrences → cards, sense merge, examples

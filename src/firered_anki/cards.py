@@ -28,7 +28,7 @@ from collections import Counter, defaultdict
 
 import pandas as pd
 
-from . import claude_cli, grammar
+from . import claude_cli, corrections, grammar
 from .analyse import MAIN, load, results
 from .grounding import sense_glosses
 from .map_order import MapOrder
@@ -381,6 +381,7 @@ def prepare(run_name: str = MAIN.name, offline_merge: bool = False) -> tuple[pd.
 def build_cards(run_name: str = MAIN.name, offline_merge: bool = False) -> tuple[pd.DataFrame, pd.DataFrame]:
     deck, entries, analyses, occ = prepare(run_name, offline_merge)
     gram = grammar.results(deck["text"].unique(), analyses)
+    corrections.check()  # every hand correction found what it corrects
 
     occ = occ.join(deck[["card_order", "dialogue", "chapter", "msg_id", "text", "speaker"]]
                    .rename(columns={"text": "_t"}), on="row")
