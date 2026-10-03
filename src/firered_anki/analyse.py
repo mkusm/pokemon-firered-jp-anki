@@ -21,7 +21,7 @@ from dataclasses import dataclass
 
 import pandas as pd
 
-from . import claude_cli, corrections, sense_pick
+from . import claude_cli, corrections, particles, sense_pick
 from .order import ORDER_OUT
 from .paths import DATA, ROOT
 from .grounding import ground
@@ -253,9 +253,10 @@ def results(run_name: str, texts, entries: dict) -> dict[str, dict]:
         p = cache_path(run_name, t)
         if p.exists():
             r = json.loads(p.read_text())
-            for w in r["words"]:
+            for pos, w in enumerate(r["words"]):
                 ground(w, entries)
                 sense_pick.apply(t, w, entries)
+                particles.apply(t, pos, w, entries)
             corrections.apply_analysis(t, r)
             out[t] = r
     return out

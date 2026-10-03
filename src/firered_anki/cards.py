@@ -34,6 +34,7 @@ from .grounding import sense_glosses
 from .map_order import MapOrder
 from .paths import DATA, ROOT
 from .romaji import romaji, sentence_romaji
+from .spans import word_span
 from .spread import spread
 from .tokenize import hira
 
@@ -252,18 +253,25 @@ def occurrences(deck: pd.DataFrame, analyses: dict, known: set) -> pd.DataFrame:
 def unify_unlinked(occ: pd.DataFrame) -> pd.Series:
     """Give a word with no JMdict entry the key of the same word where it has
     one. The analysis links を to its entry in some sentences and not in
-    others; without this the same word makes two cards."""
+    others; without this the same word makes two cards.
+
+    A grammar word the particle pass looked at and found no listed sense for
+    keeps its own key: と naming what something becomes is not と "if", and
+    must not be the face of that card."""
+    # Names and ordinary words are kept apart: そう in an item's name is not
+    # the adverb そう.
     linked: dict[tuple, Counter] = defaultdict(Counter)
     for k, w in zip(occ["key"], occ["word"]):
         if k[0] == "jm":
-            linked[(hira(w["base"]), k[3])][k] += 1
+            linked[(bool(w.get("proper")), hira(w["base"]), k[3])][k] += 1
 
-    def fix(k: tuple) -> tuple:
-        if k[0] == "base" and (k[1], k[3]) in linked:
-            return linked[(k[1], k[3])].most_common(1)[0][0]
+    def fix(k: tuple, w: dict) -> tuple:
+        group = (bool(w.get("proper")), k[1], k[3])
+        if k[0] == "base" and group in linked and not w.get("_no_sense"):
+            return linked[group].most_common(1)[0][0]
         return k
 
-    return occ["key"].map(fix)
+    return pd.Series([fix(k, w) for k, w in zip(occ["key"], occ["word"])], index=occ.index)
 
 
 # --- 2. sense merge ------------------------------------------------------------
@@ -353,26 +361,9 @@ def location(r) -> str:
 
 
 def highlight(text: str, words: list[dict], pos: int) -> str:
-    """The sentence with the word at `pos` in bold. The word is found by
-    walking the sentence word by word, not by searching for its kana: か "or"
-    in Ｌか　Ｒ must not be marked inside あそびかた earlier in the sentence.
-    A word can run across the game's spaces (すすんで　ください is one word),
-    so the walk ignores them and the bold stretch includes them."""
-    index = [n for n, ch in enumerate(text) if ch != "　"]
-    bare = text.replace("　", "")
-    form = form_of(words[pos]).replace("　", "")
-    start, i = 0, -1
-    for w in words[:pos + 1]:
-        surface = w["surface"].replace("　", "")
-        i = bare.find(surface, start) if surface else -1
-        if i >= 0:
-            start = i + len(surface)
-    if i < 0:
-        i = bare.find(form) if form else -1
-    if i < 0:
-        return text
-    a, b = index[i], index[i + len(form) - 1] + 1
-    return f"{text[:a]}<b>{text[a:b]}</b>{text[b:]}"
+    """The sentence with the word at `pos` in bold."""
+    at = word_span(text, words, pos, form_of(words[pos]))
+    return text if at is None else f"{text[:at[0]]}<b>{text[at[0]:at[1]]}</b>{text[at[1]:]}"
 
 
 def prepare(run_name: str = MAIN.name, offline_merge: bool = False) -> tuple[pd.DataFrame, dict, dict, pd.DataFrame]:
@@ -383,7 +374,9 @@ def prepare(run_name: str = MAIN.name, offline_merge: bool = False) -> tuple[pd.
     analyses = results(run_name, deck["text"].unique(), entries)
     occ = occurrences(deck, analyses, known_words())
 
-    occ["key"] = unify_unlinked(occ)
+    unified = unify_unlinked(occ)
+    occ["own"] = [a == b for a, b in zip(occ["key"], unified)]  # False: filed under a card by its form alone
+    occ["key"] = unified
     canon = merge_senses(occ, entries, offline=offline_merge)
     occ["key"] = occ["key"].map(
         lambda k: (k[0], k[1], canon.get((k[1], k[2]), k[2]), k[3]) if k[0] == "jm" else k)
@@ -418,7 +411,8 @@ def build_cards(run_name: str = MAIN.name, offline_merge: bool = False) -> tuple
                 if len(same_ch):
                     first = same_ch.iloc[0]
             later = g[(g["text"] != first["text"])].drop_duplicates("text")
-            later = later.sort_values(["dialogue", "card_order"], ascending=[False, True])
+            # A use filed here by its form alone may be another sense: show it last.
+            later = later.sort_values(["own", "dialogue", "card_order"], ascending=[False, False, True])
             w, r = first["word"], deck.loc[first["row"]]
             a = analyses[first["text"]]
             ctx = " ".join(f"<u>{t}</u>" if t == first["text"] else t for t in msg_text[first["msg_id"]])

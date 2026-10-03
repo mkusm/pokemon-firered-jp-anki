@@ -21,8 +21,8 @@ How it works, in detail: [`docs/how-it-works.html`](docs/how-it-works.html)
 
 | | |
 |---|---|
-| `firered_jp.apkg` | 11,197 cards, in story order |
-| `firered_jp_names.apkg` | 926 cards for names (Pokémon, places, moves, items), optional |
+| `firered_jp.apkg` | 11,237 cards, in story order |
+| `firered_jp_names.apkg` | 925 cards for names (Pokémon, places, moves, items), optional |
 
 Both are attached to the [latest release](https://github.com/mkusm/pokemon-firered-jp-anki/releases/latest).
 
@@ -36,7 +36,7 @@ Each card:
   (`つかまえ (stem) + て (te-form)`), the sentence in kanji and in English, up to
   two more example sentences, the whole message, and the JMdict senses.
 - **Grammar**, on the back, for the first chapter so far (everything up to the
-  first gym, 2,466 cards): the patterns the word takes part in, each explained
+  first gym, 2,506 cards): the patterns the word takes part in, each explained
   in plain words for that sentence, and a breakdown of the sentence phrase by
   phrase. The card for と in しゅじんこうと　なって says: "と before なる shows
   what someone turns into; it is a more formal に. しゅじんこうと　なって =
@@ -44,6 +44,11 @@ Each card:
 
 つかまえた, つかまえて and つかまえられる are three cards: every form is drilled
 where the story first uses it.
+
+Particles get a card for each job they do, in the first chapter so far: か has
+one card as the question marker and another for "or", が one as the subject
+marker and another for "but". In the later chapters each particle still has a
+single card, showing its first use.
 
 Tags: every card has its location. `low-confidence` marks cards whose
 dictionary entry could not be confirmed, or whose word is a scrap of text the
@@ -66,8 +71,8 @@ All you need is [Anki](https://apps.ankiweb.net/), on desktop or on your phone.
    defaults. With a random order the deck loses its point.
 3. **Pick a pace.** The cards follow the game, so the natural way to use the
    deck is to study a stretch and then play it. For scale: the opening sequence
-   is the first 166 cards, everything up to the first gym about 2,500, the whole
-   deck 11,197. At 20 new cards a day that is about four months to Brock.
+   is the first 174 cards, everything up to the first gym about 2,500, the whole
+   deck 11,237. At 20 new cards a day that is about four months to Brock.
 4. **Read the card.** The front is the line as the game shows it, in kana, with
    one word highlighted: read the sentence and recall that word. The back gives
    the reading in romaji, the dictionary form, the meaning in this sentence,
@@ -141,6 +146,7 @@ uv run python -m firered_anki.analyse full      # analyse uncached sentences
 uv run python -m firered_anki.analyse escalate  # redo flagged ones on Opus
 uv run python -m firered_anki.analyse rerun 0    # redo a chapter's Sonnet answers on Opus (no number: all)
 uv run python -m firered_anki.sense_pick        # check entries found by lookup, choose their sense
+uv run python -m firered_anki.particles --chapter 0     # which job each particle is doing
 uv run python -m firered_anki.grammar run --chapter 0   # grammar patterns and sentence breakdowns
 ```
 
@@ -149,7 +155,8 @@ carries on. For scale: the first full run was 12,747 sentences in 322 calls
 (Sonnet, low effort, 40 sentences a call), about five hours with one usage-limit
 pause. Escalation redid 2,132 sentences on Opus. Redoing the first chapter on
 Opus was 993 sentences in 25 calls, ten at a time, 12 minutes. Its grammar pass,
-also on Opus, was 1,225 sentences in 31 calls, eight at a time, 5 minutes.
+also on Opus, was 1,225 sentences in 31 calls, eight at a time, 5 minutes. The
+particle pass was 2,331 uses in 48 calls, a little over a minute.
 
 ### Things you edit
 
@@ -182,6 +189,8 @@ src/firered_anki/
   grounding.py    fill and check JMdict IDs after the LLM
   corrections.py  lay the hand corrections over the LLM's answers
   sense_pick.py   LLM check of entries found by lookup, and their sense
+  particles.py    LLM pass: the dictionary sense of each use of a particle
+  spans.py        where a word is in its sentence
   grammar.py      LLM pass for grammar patterns and sentence breakdowns
   cards.py        occurrences → cards, sense merge, examples
   romaji.py       kana → Hepburn
@@ -199,6 +208,8 @@ vendor/           upstream clones (ignored)
   sample of 100 sentences Opus corrected a clear Sonnet error in 3: a wrong
   item name, a line read as "I was asked a favor" that means "do me a favor",
   and あったら filed under ある where it is 合う.
+- Particles are split into one card per job only in the first chapter. In the
+  later chapters all uses of a particle are still filed under one card.
 - A grammar pattern's name is written per sentence, so the same pattern can be
   spelled two ways on different cards (〜せる and 〜させる).
 - Nothing has been proofread by a native speaker.

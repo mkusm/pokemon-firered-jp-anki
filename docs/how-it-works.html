@@ -136,7 +136,7 @@
 <main>
 <header class="hero">
   <h1>How a line of FireRed becomes a flashcard</h1>
-  <p class="lede">The deck has 11,197 cards. Each one is a word, in one form, in the sentence where the Japanese game first uses it. This page follows the text from the cartridge's script to the card.</p>
+  <p class="lede">The deck has 11,237 cards. Each one is a word, in one form, in the sentence where the Japanese game first uses it. This page follows the text from the cartridge's script to the card.</p>
 
   <figure class="card">
     <div class="gba jp" lang="ja">グリーンは　すでに　ポケモンを　<mark>つかまえて</mark>　ずかんの　ページを　ふやしている　そうじゃ！</div>
@@ -153,7 +153,7 @@
         <dt>Where</dt><dd>Professor Oak's lab, Pallet Town</dd>
       </dl>
     </div>
-    <figcaption>Card 628. The top is the front, exactly as the game shows the line. The rest is the back, which also carries the whole sentence in romaji, two more sentences that use つかまえて, Oak's full message, and the dictionary's senses for 捕まえる.</figcaption>
+    <figcaption>Card 652. The top is the front, exactly as the game shows the line. The rest is the back, which also carries the whole sentence in romaji, two more sentences that use つかまえて, Oak's full message, and the dictionary's senses for 捕まえる.</figcaption>
   </figure>
 </header>
 
@@ -181,14 +181,14 @@
         <rect x="30" y="96" width="110" height="52" rx="8"/><text x="85" y="118" text-anchor="middle" font-size="14" font-weight="700">extract</text><text class="sub" x="85" y="136" text-anchor="middle">16,166 sentences</text>
         <rect x="160" y="96" width="110" height="52" rx="8"/><text x="215" y="118" text-anchor="middle" font-size="14" font-weight="700">order</text><text class="sub" x="215" y="136" text-anchor="middle">14,400 kept</text>
         <rect x="290" y="96" width="110" height="52" rx="8"/><text x="345" y="118" text-anchor="middle" font-size="14" font-weight="700">tokenize</text><text class="sub" x="345" y="136" text-anchor="middle">12,335 unique</text>
-        <rect x="550" y="96" width="90" height="52" rx="8"/><text x="595" y="118" text-anchor="middle" font-size="14" font-weight="700">cards</text><text class="sub" x="595" y="136" text-anchor="middle">11,197 + 926</text>
+        <rect x="550" y="96" width="90" height="52" rx="8"/><text x="595" y="118" text-anchor="middle" font-size="14" font-weight="700">cards</text><text class="sub" x="595" y="136" text-anchor="middle">11,237 + 925</text>
         <rect x="660" y="96" width="90" height="52" rx="8"/><text x="705" y="118" text-anchor="middle" font-size="14" font-weight="700">build</text><text class="sub" x="705" y="136" text-anchor="middle">two .apkg</text>
       </g>
       <g class="llm">
         <rect x="420" y="96" width="110" height="52" rx="8"/><text x="475" y="118" text-anchor="middle" font-size="14" font-weight="700">analyse</text><text x="475" y="136" text-anchor="middle" font-size="11.5">71,250 words</text>
         <rect x="160" y="186" width="110" height="46" rx="8"/><text x="215" y="206" text-anchor="middle" font-size="13" font-weight="700">classify</text><text x="215" y="222" text-anchor="middle" font-size="11.5">835 strings placed</text>
         <rect x="420" y="186" width="110" height="46" rx="8"/><text x="475" y="206" text-anchor="middle" font-size="13" font-weight="700">Opus</text><text x="475" y="222" text-anchor="middle" font-size="11.5">3,123 sentences</text>
-        <rect x="550" y="186" width="90" height="46" rx="8"/><text x="595" y="206" text-anchor="middle" font-size="13" font-weight="700">sense merge</text><text x="595" y="222" text-anchor="middle" font-size="11.5">620 words</text>
+        <rect x="550" y="186" width="90" height="46" rx="8"/><text x="595" y="206" text-anchor="middle" font-size="13" font-weight="700">sense merge</text><text x="595" y="222" text-anchor="middle" font-size="11.5">632 words</text>
         <rect x="660" y="186" width="90" height="46" rx="8"/><text x="705" y="206" text-anchor="middle" font-size="13" font-weight="700">grammar</text><text x="705" y="222" text-anchor="middle" font-size="11.5">1,576 patterns</text>
       </g>
       <path d="M140 122 H160"/><path d="M270 122 H290"/><path d="M400 122 H420"/><path d="M530 122 H550"/><path d="M640 122 H660"/>
@@ -286,6 +286,11 @@
   <h3>A second opinion where it is needed</h3>
   <p>A sentence is sent again, to Opus, when one of its words is marked unsure, has a form that does not match the entry chosen for it, or points at an entry or sense that does not exist. Names are exempt. That was 2,132 sentences, about one in six. Afterwards 0.7% of words are still marked unsure, down from 3.1%.</p>
 
+  <h3>Particles: one card for each job</h3>
+  <p>Short grammar words do several jobs each. <span class="jp" lang="ja">か</span> asks a question or means "or"; <span class="jp" lang="ja">が</span> marks the subject or means "but". The analysis mostly leaves them without a dictionary sense, and grounding does not look them up, because one spelling has many entries. So every use of a particle used to land on one card, which showed whatever its first sentence said. <span class="jp" lang="ja">か</span> "or" was taught on two cards, and <span class="jp" lang="ja">か</span> the question marker on none.</p>
+  <p>A separate pass (<code>particles</code>) asks about each such use. The model sees the sentence with the word marked, the translation, the gloss already written, and the senses of the kana-only JMdict entries with that reading, and answers with an entry and a sense. Each sense then gets its own card at the first sentence that has it: <span class="jp" lang="ja">に</span> has cards for "at", "to", "for (a purpose)", "as" and "from (someone)". Where no listed sense fits, as with <span class="jp" lang="ja">と</span> naming what something becomes in <span class="jp" lang="ja">しゅじんこうと　なって</span>, the use keeps a card of its own and is not filed under another sense.</p>
+  <p>This has run on the first chapter: 2,331 uses of 76 words, 38 of them with no fitting sense. In a hand check of 60 answers, 57 were clearly right and 3 debatable. In the later chapters a particle's uses are still filed under one card; shown as an extra example on a first-chapter card, such a use comes after the ones that were checked.</p>
+
   <h3>Opus for whole chapters</h3>
   <p>The second opinion only reaches sentences where Sonnet shows doubt. It cannot catch a confident mistake. The line for the SELECT button, <span class="jp" lang="ja">たいせつな　ものを　とうろくして　つかいます</span>, came back as "to register important things"; Opus reads it as the game means it, "to use a registered Key Item".</p>
   <p>To see how often that happens, Opus analysed 100 sentences that only Sonnet had seen, taken from ten points in the game. It fixed a clear error in 3: an item name (<span class="jp" lang="ja">かいふくのくすり</span> is Full Restore, not Potion), <span class="jp" lang="ja">ひとつ　たのまれて！</span> ("do me a favor", not "I was asked a favor"), and <span class="jp" lang="ja">あったら</span> filed under ある where it is 合う. About six more were real improvements, one was slightly worse, and the rest differed only in wording.</p>
@@ -318,7 +323,7 @@
   <ul>
     <li><strong>Names</strong> go to a second deck. Trainer names are not carded at all.</li>
     <li><strong>Known words</strong> listed in <code>known.txt</code> are skipped.</li>
-    <li><strong>Sense merge.</strong> JMdict splits meanings finely, and the model sometimes picks neighbouring senses for the same idea. Each of the 620 entries used in more than one sense goes to Claude once, with its sentences, to group senses a learner would treat as one. 戦う and 出る were merged; 見る "to see" and <span class="jp" lang="ja">〜てみる</span> "to try" were kept apart.</li>
+    <li><strong>Sense merge.</strong> JMdict splits meanings finely, and the model sometimes picks neighbouring senses for the same idea. Each of the 632 entries used in more than one sense goes to Claude once, with its sentences, to group senses a learner would treat as one. 戦う and 出る were merged; 見る "to see" and <span class="jp" lang="ja">〜てみる</span> "to try" were kept apart.</li>
     <li><strong>Order.</strong> The chapter spreading runs again on these real keys.</li>
     <li><strong>Example.</strong> A card takes the first sentence in that order, with the dialogue preference above. Up to two later sentences are kept as extra examples, each with its own form explained.</li>
     <li><strong>Dictionary sense.</strong> The back shows the JMdict definition of the sense chosen for that sentence. Two cards for <span class="jp" lang="ja">あぶない</span> can both be glossed "dangerous"; this line says one is "dangerous; risky" and the other "close (call); narrow (escape)".</li>
@@ -338,28 +343,28 @@
   <h2>The deck in numbers</h2>
   <div class="scroll"><table>
     <tr><th>Chapter ends with</th><th class="n">Cards</th></tr>
-    <tr><td>Brock</td><td class="n">2,466</td></tr>
-    <tr><td>Misty</td><td class="n">931</td></tr>
-    <tr><td>Lt. Surge</td><td class="n">968</td></tr>
+    <tr><td>Brock</td><td class="n">2,506</td></tr>
+    <tr><td>Misty</td><td class="n">932</td></tr>
+    <tr><td>Lt. Surge</td><td class="n">966</td></tr>
     <tr><td>Erika</td><td class="n">1,166</td></tr>
-    <tr><td>Koga</td><td class="n">851</td></tr>
-    <tr><td>Sabrina</td><td class="n">875</td></tr>
+    <tr><td>Koga</td><td class="n">852</td></tr>
+    <tr><td>Sabrina</td><td class="n">876</td></tr>
     <tr><td>Blaine</td><td class="n">334</td></tr>
-    <tr><td>Giovanni</td><td class="n">713</td></tr>
+    <tr><td>Giovanni</td><td class="n">714</td></tr>
     <tr><td>The League</td><td class="n">289</td></tr>
     <tr><td>Postgame</td><td class="n">962</td></tr>
-    <tr><td>End of deck: link play, Help menu, errors, text FireRed never shows</td><td class="n">1,642</td></tr>
-    <tr><th>Main deck</th><th class="n">11,197</th></tr>
+    <tr><td>End of deck: link play, Help menu, errors, text FireRed never shows</td><td class="n">1,640</td></tr>
+    <tr><th>Main deck</th><th class="n">11,237</th></tr>
   </table></div>
-  <p>The first chapter is the largest because the menus, the battle screen and most everyday vocabulary all appear before the first gym. The deck's first 166 cards are the opening sequence alone.</p>
+  <p>The first chapter is the largest because the menus, the battle screen and most everyday vocabulary all appear before the first gym. The deck's first 174 cards are the opening sequence alone.</p>
   <ul>
-    <li>6,064 distinct dictionary forms across the 11,197 cards.</li>
-    <li>6,458 cards take their example from story dialogue; the rest from Pokédex entries, menus, move and item descriptions and battle messages.</li>
+    <li>6,064 distinct dictionary forms across the 11,237 cards.</li>
+    <li>6,494 cards take their example from story dialogue; the rest from Pokédex entries, menus, move and item descriptions and battle messages.</li>
     <li>109 cards are tagged <code>low-confidence</code>: the dictionary entry does not match the word, there is no entry and the model was unsure, or the word is a scrap of broken text. A doubt only about which listed sense fits a helper verb or an idiom no longer counts; those glosses were checked by hand. 11 are tagged <code>sense-guessed</code>.</li>
-    <li>2,466 cards, the first chapter, carry a sentence breakdown, and 1,250 of them a grammar pattern for their word.</li>
+    <li>2,506 cards, the first chapter, carry a sentence breakdown, and 1,273 of them a grammar pattern for their word.</li>
     <li>228 are tagged <code>onomatopoeia</code>: JMdict marks the sense as a sound or mimetic word (<span class="jp" lang="ja">ドキドキ</span>, <span class="jp" lang="ja">キラキラ</span>), and the back says so.</li>
     <li>70 are tagged <code>fragment</code>: stammers, garbled speech and pieces of interrupted words (<span class="jp" lang="ja">こっ　こんなに</span>). They stay in the deck because the card is what explains them.</li>
-    <li>926 name cards in the second deck.</li>
+    <li>925 name cards in the second deck.</li>
   </ul>
   <p>The first full analysis took about five hours of calls including one usage-limit pause. A classify pass is about 21 calls. Redoing the first chapter on Opus took 12 minutes, and its grammar pass 5.</p>
 </section>
@@ -373,7 +378,7 @@
     <tr><td>Move a kind of menu or system text</td><td><code>first_seen.yaml</code></td><td><code>order</code></td></tr>
     <tr><td>Correct a translation, a gloss or a grammar explanation by hand</td><td><code>corrections.yaml</code></td><td><code>cards</code></td></tr>
     <tr><td>Correct one string the model placed</td><td><code>first_seen_llm.yaml</code></td><td><code>order</code></td></tr>
-    <tr><td>Redo a chapter on Opus</td><td>nothing</td><td><code>analyse rerun N</code>, then <code>sense_pick</code>, <code>grammar run --chapter N</code>, <code>cards</code></td></tr>
+    <tr><td>Redo a chapter on Opus</td><td>nothing</td><td><code>analyse rerun N</code>, then <code>sense_pick</code>, <code>particles --chapter N</code>, <code>grammar run --chapter N</code>, <code>cards</code></td></tr>
     <tr><td>Change the card layout</td><td><code>build.py</code></td><td><code>build</code></td></tr>
   </table></div>
   <p>A rule change that brings in text not seen before needs <code>tokenize</code> and <code>analyse full</code> as well; they only work on what is missing from the cache. Changing the analysis prompt does not re-run cached sentences by itself: delete the cache entries you want redone.</p>
@@ -384,6 +389,7 @@
   <h2>Known limits</h2>
   <ul>
     <li>The deck is in two states: the first chapter is Opus's analysis with grammar on its cards; the other nine are Sonnet's, with Opus only where Sonnet showed doubt, and have no grammar yet.</li>
+    <li>Particles are split into one card per job only in the first chapter; in the later chapters all uses of a particle are still filed under one card.</li>
     <li>A grammar pattern is named per sentence, so one pattern can be spelled two ways on different cards (<span class="jp" lang="ja">〜せる</span> and <span class="jp" lang="ja">〜させる</span>). The explanations have not been checked one by one.</li>
     <li>About 250 battle messages and 580 other strings are placed by the model's judgement. Ability messages and trainer-battle text are among them.</li>
     <li>Rematch lines of ordinary trainers sit at their route's first visit, though you only see them with the VS Seeker.</li>

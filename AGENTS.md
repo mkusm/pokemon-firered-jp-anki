@@ -39,6 +39,7 @@ There is no test suite. The checks are in "Before you say it is done" below.
 | `analyse` | every word of every sentence (`full`, `escalate`, `rerun N`) | yes |
 | `grounding` | checks and fills dictionary links | no |
 | `sense_pick` | checks links found by lookup | yes |
+| `particles` | the dictionary sense of each use of a particle (`--chapter N`) | yes |
 | `grammar` | patterns and sentence breakdown (`run --chapter N`) | yes |
 | `corrections` | lays `corrections.yaml` over the cached answers | no |
 | `cards` | occurrences → cards | only for a sense-merge question not yet cached |
@@ -80,6 +81,9 @@ first gym badge. The docs call it "the first chapter".
 - Do not drop cards for stammers, garbled speech, word fragments or sound
   words. They are tagged (`fragment`, `onomatopoeia`), not filtered: the card is
   what explains the odd text.
+- A particle gets one card per job (か the question marker, か "or"), from the
+  sense the `particles` stage gives each use. A use with no sense of its own is
+  filed under the particle's most common card, as an example only.
 - A card's identity is its key (dictionary entry, sense, form). Changing how
   keys are made changes identities, and people lose review history on those
   cards. Measure it (see below) and say so.
@@ -93,7 +97,12 @@ first gym badge. The docs call it "the first chapter".
   index of patterns; one was tried and produced headings that contradicted the
   explanation under them.
 - The grammar pass must run after the analysis of the same sentences: its
-  answers are matched to the analysis's word list.
+  answers are matched to the analysis's word list. The order for a chapter is
+  `analyse rerun N`, `sense_pick`, `particles --chapter N`,
+  `grammar run --chapter N`, `cards`, `build`.
+- A change to card keys can change which lines the chapter shows, so after
+  `cards` check that nothing is left to ask: `particles --chapter N --dry-run`
+  and a grammar run should both find nothing to do.
 
 **No cost figures.** Do not put dollar amounts or token counts in the code's
 output, the docs or release notes. Sentence counts, call counts and minutes are
@@ -128,8 +137,10 @@ fine.
 
 Update this when it changes.
 
-- Chapter 0: analysed by Opus, grammar by Opus.
+- Chapter 0: analysed by Opus, grammar by Opus, particles split by sense.
+  Sixteen of its 1,225 sentences are still Sonnet's analysis: they moved into
+  the chapter after the Opus rerun.
 - Chapters 1 to 9: analysed by Sonnet, with Opus on the sentences Sonnet
-  flagged; no grammar yet.
+  flagged; no grammar, and one card per particle.
 - `corrections.yaml` has six entries: the SELECT button line, and five word
   forms the model wrote that were not in their sentence.
