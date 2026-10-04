@@ -140,6 +140,8 @@ first gym badge. The docs call it "the first chapter".
 - The words inside a name get a card from a real sentence when one has them,
   and from the bare name line only when nothing else does. The pieces of a
   Pokémon's name and the number in a route's name make no card.
+- A number, a circled step number and a button's letter are not words and
+  make no card (`cards.NOT_A_WORD`). Abbreviations in Latin letters do.
 - Any other name makes no card. There is no names deck: do not bring it back
   for naming-screen presets, one-off characters or pieces of names. A name
   that should have a card goes into `names_by_hand.yaml`. A cry or a shouted
@@ -227,7 +229,7 @@ Update this when it changes.
   types, 132 places, 24 people, 2 for Team Rocket, 8 badges, 20 game terms, 15
   real-world names), found by `names.py` in every chapter with no model call.
   The 56 name lines this put in chapter 0 were re-analysed on Opus. The names
-  deck is gone: one deck, 11,212 cards. The note type has a `Note` field.
+  deck is gone: one deck, 11,120 cards. The note type has a `Note` field.
 - English names: the name check passes on every sentence the deck shows, in
   all chapters. 91 sentences were redone on Opus for it, most of them in
   chapters 1 to 9, so those chapters now have a few more Opus sentences.

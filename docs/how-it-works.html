@@ -136,7 +136,7 @@
 <main>
 <header class="hero">
   <h1>How a line of FireRed becomes a flashcard</h1>
-  <p class="lede">The deck has 11,212 cards. Each one is a word, in one form, in the sentence where the Japanese game first uses it. This page follows the text from the cartridge's script to the card.</p>
+  <p class="lede">The deck has 11,120 cards. Each one is a word, in one form, in the sentence where the Japanese game first uses it. This page follows the text from the cartridge's script to the card.</p>
 
   <figure class="card">
     <div class="gba jp" lang="ja">グリーンは　すでに　ポケモンを　<mark>つかまえて</mark>　ずかんの　ページを　ふやしている　そうじゃ！</div>
@@ -181,7 +181,7 @@
         <rect x="30" y="96" width="110" height="52" rx="8"/><text x="85" y="118" text-anchor="middle" font-size="14" font-weight="700">extract</text><text class="sub" x="85" y="136" text-anchor="middle">16,166 sentences</text>
         <rect x="160" y="96" width="110" height="52" rx="8"/><text x="215" y="118" text-anchor="middle" font-size="14" font-weight="700">order</text><text class="sub" x="215" y="136" text-anchor="middle">12,780 kept</text>
         <rect x="290" y="96" width="110" height="52" rx="8"/><text x="345" y="118" text-anchor="middle" font-size="14" font-weight="700">tokenize</text><text class="sub" x="345" y="136" text-anchor="middle">11,163 unique</text>
-        <rect x="550" y="96" width="90" height="52" rx="8"/><text x="595" y="118" text-anchor="middle" font-size="14" font-weight="700">cards</text><text class="sub" x="595" y="136" text-anchor="middle">11,212</text>
+        <rect x="550" y="96" width="90" height="52" rx="8"/><text x="595" y="118" text-anchor="middle" font-size="14" font-weight="700">cards</text><text class="sub" x="595" y="136" text-anchor="middle">11,120</text>
         <rect x="660" y="96" width="90" height="52" rx="8"/><text x="705" y="118" text-anchor="middle" font-size="14" font-weight="700">build</text><text class="sub" x="705" y="136" text-anchor="middle">two .apkg</text>
       </g>
       <g class="llm">
@@ -347,6 +347,8 @@
     <li><strong>Any other name makes no card</strong>: the presets of the naming screen, a character who appears once, a piece of a longer name. There used to be a second deck for these; it had nothing left worth learning. A cry or a shouted name (<span class="jp" lang="ja">ぴかちゅ</span>, <span class="jp" lang="ja">やどらーん</span>) keeps its card, because the card is what explains it. Trainer names are not carded at all.</li>
     <li><strong>Notes.</strong> A name can carry a short note where it takes knowledge a learner may not have: something from Japan (<span class="jp" lang="ja">ファミコン</span> is the Family Computer, sold abroad as the NES; <span class="jp" lang="ja">はないちもんめ</span> is a children's game), or from another Pokémon game (<span class="jp" lang="ja">オダマキ</span> is Professor Birch of Hoenn). The notes are written by hand in <code>names_by_hand.yaml</code>, and say so where the English game replaced the reference (Tokyo Tower became Ayers Rock).</li>
     <li><strong>Known words</strong> listed in <code>known.txt</code> are skipped.</li>
+    <li><strong>Not words:</strong> a number, a circled step number and a button's letter make no card. An abbreviation the game writes in Latin letters does (<span class="jp">ＨＰ</span>, <span class="jp">Ｌｖ</span>, <span class="jp">ＳＴＡＲＴ</span>), and so does a number with its counter (<span class="jp" lang="ja">３０ぴき</span>).</li>
+    <li><strong>Literal meaning</strong> is shown only where it says something. On a name it is the parts (<span class="jp" lang="ja">げんきのかけら</span>, "vigor + shard"). On a word it is shown when it has a word that neither the meaning nor the dictionary sense has: <span class="jp" lang="ja">ふとっぱら</span> "big belly" beside "generous", not <span class="jp" lang="ja">ずつう</span> "headache" beside "headache". That is 2,560 cards; on the rest the line only repeated the other two.</li>
     <li><strong>Sense merge.</strong> JMdict splits meanings finely, and the model sometimes picks neighbouring senses for the same idea. Each of the 588 entries used in more than one sense goes to Claude once, with its sentences, to group senses a learner would treat as one. 戦う and 出る were merged; 見る "to see" and <span class="jp" lang="ja">〜てみる</span> "to try" were kept apart.</li>
     <li><strong>Order.</strong> The chapter spreading runs again on these real keys.</li>
     <li><strong>Example.</strong> A card takes the first sentence in that order, with the dialogue preference above. Up to two later sentences are kept as extra examples, each with its own form explained.</li>
@@ -367,25 +369,25 @@
   <h2>The deck in numbers</h2>
   <div class="scroll"><table>
     <tr><th>Chapter ends with</th><th class="n">Cards</th></tr>
-    <tr><td>Brock</td><td class="n">2,402</td></tr>
-    <tr><td>Misty</td><td class="n">1,051</td></tr>
-    <tr><td>Lt. Surge</td><td class="n">1,047</td></tr>
-    <tr><td>Erika</td><td class="n">1,300</td></tr>
-    <tr><td>Koga</td><td class="n">961</td></tr>
-    <tr><td>Sabrina</td><td class="n">889</td></tr>
-    <tr><td>Blaine</td><td class="n">374</td></tr>
-    <tr><td>Giovanni</td><td class="n">755</td></tr>
-    <tr><td>The League</td><td class="n">312</td></tr>
-    <tr><td>Postgame</td><td class="n">1,148</td></tr>
-    <tr><td>End of deck: link play, Help menu, errors</td><td class="n">973</td></tr>
-    <tr><th>Main deck</th><th class="n">11,212</th></tr>
+    <tr><td>Brock</td><td class="n">2,381</td></tr>
+    <tr><td>Misty</td><td class="n">1,043</td></tr>
+    <tr><td>Lt. Surge</td><td class="n">1,041</td></tr>
+    <tr><td>Erika</td><td class="n">1,270</td></tr>
+    <tr><td>Koga</td><td class="n">956</td></tr>
+    <tr><td>Sabrina</td><td class="n">883</td></tr>
+    <tr><td>Blaine</td><td class="n">372</td></tr>
+    <tr><td>Giovanni</td><td class="n">753</td></tr>
+    <tr><td>The League</td><td class="n">311</td></tr>
+    <tr><td>Postgame</td><td class="n">1,146</td></tr>
+    <tr><td>End of deck: link play, Help menu, errors</td><td class="n">964</td></tr>
+    <tr><th>Main deck</th><th class="n">11,120</th></tr>
   </table></div>
   <p>The first chapter is the largest because the menus, the battle screen and most everyday vocabulary all appear before the first gym. The deck's first 168 cards are the opening sequence alone.</p>
   <ul>
-    <li>6,310 distinct dictionary forms across the 11,212 cards.</li>
-    <li>6,682 cards take their example from story dialogue; the rest from Pokédex entries, menus, move and item descriptions and battle messages.</li>
-    <li>110 cards are tagged <code>low-confidence</code>: the dictionary entry does not match the word, there is no entry and the model was unsure, or the word is a scrap of broken text. A doubt only about which listed sense fits a helper verb or an idiom no longer counts; those glosses were checked by hand. 10 are tagged <code>sense-guessed</code>.</li>
-    <li>2,227 cards carry a sentence breakdown, and 1,139 of them a grammar pattern for their word. All but a few are in the first chapter, whose other 214 cards sit on a bare name or a line of one word, with nothing to break down.</li>
+    <li>6,233 distinct dictionary forms across the 11,120 cards.</li>
+    <li>6,637 cards take their example from story dialogue; the rest from Pokédex entries, menus, move and item descriptions and battle messages.</li>
+    <li>109 cards are tagged <code>low-confidence</code>: the dictionary entry does not match the word, there is no entry and the model was unsure, or the word is a scrap of broken text. A doubt only about which listed sense fits a helper verb or an idiom no longer counts; those glosses were checked by hand. 10 are tagged <code>sense-guessed</code>.</li>
+    <li>2,206 cards carry a sentence breakdown, and 1,132 of them a grammar pattern for their word. All but a few are in the first chapter, whose other 214 cards sit on a bare name or a line of one word, with nothing to break down.</li>
     <li>210 are tagged <code>onomatopoeia</code>: JMdict marks the sense as a sound or mimetic word (<span class="jp" lang="ja">ドキドキ</span>, <span class="jp" lang="ja">キラキラ</span>), and the back says so.</li>
     <li>67 are tagged <code>fragment</code>: stammers, garbled speech and pieces of interrupted words (<span class="jp" lang="ja">こっ　こんなに</span>). They stay in the deck because the card is what explains them.</li>
     <li>901 cards are names: 221 Pokémon, 148 items, 253 moves, 61 abilities, 17 types, 132 places, 24 people, Team Rocket and its grunts, 8 badges, 20 game terms and 15 real-world names, each tagged with its kind. 302 of them sit on a line of dialogue or other text that says the name; 599 on the name's own line, where the thing is first met. 17 carry a note.</li>

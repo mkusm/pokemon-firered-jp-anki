@@ -167,7 +167,10 @@ SCRAP = re.compile(r"[ァ-ヶーぞッっ]+")
 SOUND = re.compile(r"onomatop|mimetic|sound effect|sound word|\bsfx\b|\(sound|sound of|laugh|screech|noise|babbl", re.I)
 
 
-NUMBER = re.compile(r"[0-9０-９]+")
+# Not words: a number, a circled step number, a button's letter. They make no
+# card anywhere. Abbreviations the game writes in Latin letters do (ＨＰ, Ｌｖ,
+# ＳＴＡＲＴ), and so does a number with its counter (３０ぴき).
+NOT_A_WORD = re.compile(r"[0-9０-９①-⑳]+|[A-ZＡ-Ｚ]")
 
 # A name that is not one names.py knows still gets a card when the card is
 # what explains the text: a Pokémon's cry (ぴかちゅ), a name drawn out in a
@@ -199,6 +202,26 @@ def is_onomatopoeia(w: dict, entry: dict) -> bool:
     n = w.get("sense") or 0
     marked = senses[n - 1].get("on") if 1 <= n <= len(senses) else any(s.get("on") for s in senses)
     return bool(marked) or bool(re.search(r"onomatop|mimetic|sound effect|sound word|\bsfx\b|\(sound", _gloss(w), re.I))
+
+
+_SMALL = {"to", "a", "an", "the", "of", "be", "one", "s", "is", "it", "in", "on", "for", "and", "or", "that", "as",
+          "at", "by", "with", "etc", "esp", "e", "g"}
+
+
+def _said(s: str) -> set:
+    """The words of a gloss, endings off, small words out: "to stab" and "stabbing" are one."""
+    return {re.sub(r"(ing|ed|es|s)$", "", x) for x in re.findall(r"[a-z]+", s.lower())} - _SMALL
+
+
+def literal(w: dict, sense: str) -> str:
+    """The literal meaning, where it says something. A name's is its parts
+    ("vigor + shard"). A word's is shown only if it has a word that neither
+    the meaning nor the dictionary sense has: ふとっぱら "big belly" beside
+    "generous", not ずつう "headache" beside "headache"."""
+    lit = (w.get("literal") or "").strip()
+    if w.get("name") or not lit:
+        return lit
+    return lit if _said(lit) - _said(w.get("in_context") or "") - _said(sense) else ""
 
 
 def dict_sense(w: dict, entry: dict) -> str:
@@ -279,8 +302,8 @@ def occurrences(deck: pd.DataFrame, analyses: dict, known: set) -> pd.DataFrame:
         for pos, w in enumerate(a["words"]):
             if "＊" in w["surface"] or not w["surface"]:
                 continue
-            if kind and NUMBER.fullmatch(w["surface"]):
-                continue  # ２２ in ２２ばん　どうろ: the route's card is enough
+            if NOT_A_WORD.fullmatch(w["surface"].replace("　", "")):
+                continue
             if kind == "pokemon" and runs:
                 continue  # マダ and ツボミ in マダツボミ are wordplay, on the name's card as its literal meaning
             # The name's card covers the name-word, and a part that is only a
@@ -572,7 +595,7 @@ def build_cards(run_name: str = MAIN.name, offline_merge: bool = False) -> pd.Da
                 "SentenceRomaji": sentence_in_romaji(first["text"], a),
                 "CharReadings": clean_char_readings(
                     w.get("kanji") or "", base_kana(w, e), w.get("char_readings") or ""),
-                "Literal": w.get("literal") or "",
+                "Literal": literal(w, dict_sense(w, e)),
                 "InContext": w.get("in_context") or "", "Modifiers": w.get("modifiers") or "",
                 "Note": w.get("note") or "",
                 "DictSense": dict_sense(w, e),

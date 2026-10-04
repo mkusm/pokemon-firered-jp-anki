@@ -21,7 +21,7 @@ How it works, in detail: [`docs/how-it-works.html`](docs/how-it-works.html)
 
 | | |
 |---|---|
-| `firered_jp.apkg` | 11,212 cards, in story order |
+| `firered_jp.apkg` | 11,120 cards, in story order |
 
 It is attached to the [latest release](https://github.com/mkusm/pokemon-firered-jp-anki/releases/latest).
 
@@ -30,12 +30,13 @@ Each card:
 - **Front:** the sentence as the game shows it, with one word highlighted, and
   the speaker when known.
 - **Back:** the word's form and dictionary form, kanji with per-character
-  readings, romaji, what it means here, the dictionary sense that was chosen,
+  readings, romaji, what it means here, its literal meaning where that adds
+  something (ふとっぱら "big belly" for "generous"), the dictionary sense that was chosen,
   how the form is built
   (`つかまえ (stem) + て (te-form)`), the sentence in kanji and in English, up to
   two more example sentences, the whole message, and the JMdict senses.
 - **Grammar**, on the back, for the first chapter so far (everything up to the
-  first gym, 2,402 cards): the patterns the word takes part in, each explained
+  first gym, 2,381 cards): the patterns the word takes part in, each explained
   in plain words for that sentence, and a breakdown of the sentence phrase by
   phrase. The card for と in しゅじんこうと　なって says: "と before なる shows
   what someone turns into; it is a more formal に. しゅじんこうと　なって =
@@ -108,7 +109,7 @@ All you need is [Anki](https://apps.ankiweb.net/), on desktop or on your phone.
 3. **Pick a pace.** The cards follow the game, so the natural way to use the
    deck is to study a stretch and then play it. For scale: the opening sequence
    is the first 168 cards, everything up to the first gym about 2,500, the whole
-   deck 11,212. At 20 new cards a day that is about four months to Brock.
+   deck 11,120. At 20 new cards a day that is about four months to Brock.
 4. **Read the card.** The front is the line as the game shows it, in kana, with
    one word highlighted: read the sentence and recall that word. The back gives
    the reading in romaji, the dictionary form, the meaning in this sentence,
