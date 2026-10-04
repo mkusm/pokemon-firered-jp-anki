@@ -78,6 +78,13 @@ knowledge a learner may not have, the card explains it: ファミコン is "shor
 ファミリーコンピュータ (Family Computer), the console sold outside Japan as the
 NES".
 
+A sentence can carry a note too, where a reader outside Japan would miss
+something: a cultural reference (the film on the TV in your room), a play on
+words, a regional dialect, or a place where the English game says something
+else (the old man in Viridian is drunk in Japanese and wants coffee in
+English). Notes that state a fact about the outside world are checked by a web
+search before they are shown. The first chapter has them so far.
+
 Names not worth a card get none: the presets of the naming screen, characters
 who appear once, pieces of longer names. There is no separate names deck.
 
@@ -205,9 +212,10 @@ uv run python -m firered_anki.splits --chapter 0        # settle strings cut two
 uv run python -m firered_anki.names --chapter 0         # redo sentences whose translation misnames a Pokémon, item, move, ability, place, person or badge
 uv run python -m firered_anki.particles --chapter 0     # particle uses the analysis left without a sense
 uv run python -m firered_anki.grammar run --chapter 0   # grammar patterns and sentence breakdowns
+uv run python -m firered_anki.notes --chapter 0         # notes on cultural references, wordplay, dialect; facts checked by web search
 ```
 
-For a whole chapter there is one command that runs the last six in the right
+For a whole chapter there is one command that runs the last seven in the right
 order and repeats until nothing is left to ask:
 
 ```sh

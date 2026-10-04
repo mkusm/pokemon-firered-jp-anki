@@ -1,0 +1,1 @@
+{"text": "それ　あずけたら　こまるん　ちゃう？", "note": "This system message is in Kansai dialect (the speech of the Osaka area: ちゃう for 'isn't it?'), so it sounds like a friendly, joking person rather than a machine. The English game replaced it with a flat error message.", "kind": "dialect", "claim": "", "_run": {"model": "opus", "effort": "low", "version": "1"}}

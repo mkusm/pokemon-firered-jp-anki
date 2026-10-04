@@ -126,6 +126,7 @@
   <a href="#tokenize">Tokenize</a>
   <a href="#analyse">Analyse</a>
   <a href="#grammar">Grammar</a>
+  <a href="#notes">Notes</a>
   <a href="#cards">Cards</a>
   <a href="#build">Build</a>
   <a href="#numbers">The deck in numbers</a>
@@ -339,13 +340,28 @@
   <p>Answers are cached by sentence and word list, so a sentence the analysis later splits differently is asked again, and so is one answered by another model. A line of one word (a menu word, <span class="jp" lang="ja">はい</span>) and a bare name are skipped: there is nothing between words to explain, and the word's own card already says how its form is built. That leaves 903 of the 1,171 sentences the first chapter shows: 31 calls when it was first run, eight at a time, five minutes. 721 of them have at least one pattern, 1,384 patterns in all.</p>
 </section>
 
+<section id="notes">
+  <h2>Notes: what a reader outside Japan would miss</h2>
+  <p>The translation and the grammar say what a sentence means. Some sentences still leave a foreign reader behind. The TV in your room shows four boys walking on railroad tracks; a Japanese player knows the film. The old man in Viridian says he was drunk, where the English game gives him coffee. The PC talks back in Kansai dialect. Brock's sign calls him a man of <span class="jp" lang="ja">かたい　いし</span>, which is "hard stone" and "firm will" at once.</p>
+  <p>The model writes a note for a sentence in four cases only, and nothing for the rest:</p>
+  <ul>
+    <li><strong>culture:</strong> something from Japan or the real world a foreign reader may not know;</li>
+    <li><strong>wordplay:</strong> a play on a word or a name that the translation loses;</li>
+    <li><strong>dialect:</strong> a regional dialect, and what it tells a Japanese reader about the speaker;</li>
+    <li><strong>changed:</strong> the English game says something else in substance. The model is given the English game's line for this. It is not a reference translation, and that is the point: where the localisers changed something, there is usually something cultural underneath.</li>
+  </ul>
+  <p>It is told not to explain grammar, vocabulary or Pokémon lore, and not to explain names, which have notes of their own.</p>
+  <p>A culture note states a fact about the outside world, and a model can be wrong about those. So each one carries the single fact a reader could look up, and a second call, the only one in the pipeline with web search switched on, looks it up. It returns the page, the passage that supports or contradicts the fact, and the note as it should be shown: unchanged, corrected, or empty if nothing settled it. An unconfirmed note is not shown. The page and the passage stay in the cache. Notes on wordplay, dialect and changed lines are not searched: the first two are about the language itself, the last is checked against the English text the model was given.</p>
+  <p>The first chapter: 903 sentences in 23 calls gave 66 notes, 32 of them on lines the English game changed, 18 on culture, 11 on wordplay, 5 on dialect. Of the 18 culture notes the search confirmed 16; the other 2 were dropped (one called "I can't eat any more" the stock sleep-talking line of manga, which no page would back). A note shows on every card that uses its sentence, 180 cards, except on a name's card that has its own note.</p>
+</section>
+
 <section id="cards">
   <h2>Cards: one per form, in order</h2>
   <p>Every analysed word is an occurrence with a key: the dictionary entry, the sense, and the form as written. <span class="jp" lang="ja">つかまえた</span>, <span class="jp" lang="ja">つかまえて</span> and <span class="jp" lang="ja">つかまえられる</span> have three keys and become three cards. That is deliberate: each form is drilled where the story first uses it. する alone has 194.</p>
   <ul>
     <li><strong>Names</strong> have one card each in the main deck: Pokémon, items, moves, abilities, places, the main characters, badges and a few game terms. The analysis reads a name as its words (<span class="jp" lang="ja">げんき</span> + <span class="jp" lang="ja">の</span> + <span class="jp" lang="ja">かけら</span>), which is right for the words and leaves the Revive itself without a card. So the names are found afterwards: a word the analysis marked as that name, or a run of words that spells it. The card sits at the first dialogue line that says the name, or else at the name's own line in the game's list, where the thing is first met. It gives the name the English game uses and the parts as the literal meaning. A word that only looks like a name is left alone: <span class="jp" lang="ja">クラブ</span> "club" is not Krabby, <span class="jp" lang="ja">かたく　なる</span> "become hard" is not Harden. A thing called by an ordinary word that nothing uses as a name (<span class="jp" lang="ja">じてんしゃ</span>, bicycle) keeps that word's card.</li>
     <li><strong>Any other name makes no card</strong>: the presets of the naming screen, a character who appears once, a piece of a longer name. There used to be a second deck for these; it had nothing left worth learning. A cry or a shouted name (<span class="jp" lang="ja">ぴかちゅ</span>, <span class="jp" lang="ja">やどらーん</span>) keeps its card, because the card is what explains it. Trainer names are not carded at all.</li>
-    <li><strong>Notes.</strong> A name can carry a short note where it takes knowledge a learner may not have: something from Japan (<span class="jp" lang="ja">ファミコン</span> is the Family Computer, sold abroad as the NES; <span class="jp" lang="ja">はないちもんめ</span> is a children's game), or from another Pokémon game (<span class="jp" lang="ja">オダマキ</span> is Professor Birch of Hoenn). The notes are written by hand in <code>names_by_hand.yaml</code>, and say so where the English game replaced the reference (Tokyo Tower became Ayers Rock).</li>
+    <li><strong>Notes.</strong> A name can carry a short note where it takes knowledge a learner may not have: something from Japan (<span class="jp" lang="ja">ファミコン</span> is the Family Computer, sold abroad as the NES; <span class="jp" lang="ja">はないちもんめ</span> is a children's game), or from another Pokémon game (<span class="jp" lang="ja">オダマキ</span> is Professor Birch of Hoenn). These notes on names are written by hand in <code>names_by_hand.yaml</code> (38 cards have one: the ten Kanto towns are each named after a colour, and their notes say which), and say so where the English game replaced the reference (Tokyo Tower became Ayers Rock).</li>
     <li><strong>Known words</strong> listed in <code>known.txt</code> are skipped.</li>
     <li><strong>Not words:</strong> a number, a circled step number and a button's letter make no card. An abbreviation the game writes in Latin letters does (<span class="jp">ＨＰ</span>, <span class="jp">Ｌｖ</span>, <span class="jp">ＳＴＡＲＴ</span>), and so does a number with its counter (<span class="jp" lang="ja">３０ぴき</span>).</li>
     <li><strong>Literal meaning</strong> is shown only where it says something. On a name it is the parts (<span class="jp" lang="ja">げんきのかけら</span>, "vigor + shard"). On a word it is shown when it has a word that neither the meaning nor the dictionary sense has: <span class="jp" lang="ja">ふとっぱら</span> "big belly" beside "generous", not <span class="jp" lang="ja">ずつう</span> "headache" beside "headache". That is 2,560 cards; on the rest the line only repeated the other two.</li>

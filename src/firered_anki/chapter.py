@@ -10,7 +10,8 @@ fixed series of stages has to run before the chapter is consistent again:
   5. cards                 the steps above change words, and so which sentences are shown
   6. particles --chapter N particle uses left without a sense
   7. grammar run --chapter N  shown sentences with no grammar yet
-  8. cards
+  8. notes --chapter N     sentences not yet asked for a note, notes not yet checked
+  9. cards
 
 A step can bring a new sentence into the chapter, so the series repeats until
 nothing is left to ask. Each stage runs as its own process and works out the
@@ -26,7 +27,7 @@ import math
 import subprocess
 import sys
 
-from . import analyse, grammar, names, particles, sense_pick, splits
+from . import analyse, grammar, names, notes, particles, sense_pick, splits
 from .paths import ROOT
 
 MAX_ROUNDS = 4
@@ -41,6 +42,7 @@ def steps(n: int) -> list[list[str]]:
         ["cards"],
         ["particles", "--chapter", str(n)],
         ["grammar", "run", "--chapter", str(n)],
+        ["notes", "--chapter", str(n)],
         ["cards"],
     ]
 
@@ -68,6 +70,8 @@ def left(n: int) -> dict[str, int]:
             for t, a in analyses.items() for w in a["words"]),
         "particle uses to ask about": len(particles.unasked(shown["text"], analyses, known_words())),
         "sentences with no grammar": sum(not grammar.answered(t, analyses) for t in explained),
+        "sentences not asked for a note": sum(notes.read(t) is None for t in explained),
+        "notes not checked": sum(bool(r := notes.read(t)) and notes.needs_check(r) for t in explained),
         "_shown": len(shown),
     }
 

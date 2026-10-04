@@ -34,7 +34,7 @@ from collections import Counter, defaultdict
 
 import pandas as pd
 
-from . import claude_cli, corrections, grammar, names
+from . import claude_cli, corrections, grammar, names, notes
 from .analyse import MAIN, load, results
 from .grounding import sense_glosses
 from .map_order import MapOrder
@@ -534,6 +534,7 @@ def prepare(run_name: str = MAIN.name, offline_merge: bool = False) -> tuple[pd.
 def build_cards(run_name: str = MAIN.name, offline_merge: bool = False) -> pd.DataFrame:
     deck, entries, analyses, occ = prepare(run_name, offline_merge)
     gram = grammar.results(deck["text"].unique(), analyses)
+    noted = notes.results(deck["text"].unique())
     corrections.check()  # every hand correction found what it corrects
 
     occ = occ.join(deck[["card_order", "dialogue", "chapter", "msg_id", "text", "speaker"]]
@@ -598,6 +599,8 @@ def build_cards(run_name: str = MAIN.name, offline_merge: bool = False) -> pd.Da
                 "Literal": literal(w, dict_sense(w, e)),
                 "InContext": w.get("in_context") or "", "Modifiers": w.get("modifiers") or "",
                 "Note": w.get("note") or "",
+                # Not beside a name's own note, which says the same thing better.
+                "SentenceNote": "" if w.get("note") else noted.get(first["text"], ""),
                 "DictSense": dict_sense(w, e),
                 "Onomatopoeia": "onomatopoeic or mimetic word" if is_onomatopoeia(w, e) else "",
                 "Grammar": "".join(map(grammar.pattern_html, grammar.word_patterns(

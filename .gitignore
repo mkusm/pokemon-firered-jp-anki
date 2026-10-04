@@ -25,6 +25,7 @@ data/cache/*
 !data/cache/sense_pick/
 !data/cache/grammar/
 !data/cache/particles/
+!data/cache/notes/
 !data/cache/analyse/
 data/cache/analyse/*
 !data/cache/analyse/main/

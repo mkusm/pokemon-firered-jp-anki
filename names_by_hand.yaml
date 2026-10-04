@@ -123,3 +123,20 @@ world:
   マリオ: {en: Mario, note: "Nintendo's Mario. The game described, where Mario walks along with a bucket on his head, is Mario & Wario (1993), made by Game Freak, the makers of Pokémon."}
   はないちもんめ: {en: Hana Ichi Monme, note: "A children's game: two lines of children hold hands, walk toward each other singing, and win players from the other side. The English game drops the reference."}
   だいもんじやき: {en: Daimonji-yaki, note: "A common wrong name for Kyoto's Gozan no Okuribi, the bonfires of 16 August that light the character 大 on a mountainside. The move だいもんじ (Fire Blast) is named after them."}
+
+# Notes for names that come from the game's own lists. Every Kanto town is
+# named after a colour, and its sign says which; the English names keep the
+# idea with other colour words. The colour words were checked against lists
+# of traditional Japanese colours, the signs against the game text.
+note:
+  オツキミやま: "お月見 (おつきみ) is moon viewing, the custom of admiring the full moon in autumn: Moon-Viewing Mountain. English: Mt. Moon."
+  マサラ: "From まっさら (真っ新), 'brand new', and close to まっしろ, 'pure white'. The town's sign says so: マサラは　まっしろ　はじまりのいろ, 'Masara is pure white, the colour of beginnings'. Every Kanto town is named after a colour; English keeps the idea with Pallet, a painter's palette."
+  トキワ: "常磐色 (ときわいろ) is evergreen, a deep green. The town's sign: トキワは　みどり　えいえんのいろ, 'green, the colour of eternity'. English: Viridian."
+  ニビ: "鈍色 (にびいろ) is a dull grey. The town's sign: ニビは　はいいろ　いしのいろ, 'grey, the colour of stone'. English: Pewter."
+  ハナダ: "縹色 (はなだいろ) is a light indigo blue. The town's sign: ハナダは　みずいろ　しんぴのいろ, 'light blue, the colour of mystery'. English: Cerulean."
+  クチバ: "朽葉色 (くちばいろ), 'fallen-leaf colour', is a russet orange. The town's sign: クチバは　オレンジ　ゆうやけのいろ, 'orange, the colour of sunset'. English: Vermilion."
+  シオン: "紫苑色 (しおんいろ) is the pale purple of the aster flower. English: Lavender."
+  タマムシ: "玉虫色 (たまむしいろ) is the shifting green and purple of the jewel beetle. The town's sign: タマムシ　にじいろ　ゆめのいろ, 'rainbow, the colour of dreams'. English: Celadon."
+  ヤマブキ: "山吹色 (やまぶきいろ) is the golden yellow of the kerria flower. The town's sign: ヤマブキ　きんいろ　かがやきのいろ, 'gold, the colour of brilliance'. English: Saffron."
+  セキチク: "石竹色 (せきちくいろ) is the pink of the dianthus flower. English: Fuchsia."
+  グレン: "紅蓮 (ぐれん) is crimson, the red of a lotus and of flames. The town's sign: グレンの　あかは　じょうねつのいろ, 'Guren's red is the colour of passion'. English: Cinnabar."

@@ -52,7 +52,9 @@ def spread(df: pd.DataFrame, words: pd.Series, pin: dict | None = None) -> pd.Se
     Returns the new order (float, NaN for lines that teach nothing)."""
     pin = pin or {}
     freq = Counter(w for ws in words for w in ws)
-    value = lambda ws, known: sum(math.sqrt(freq[w]) for w in ws - known)
+    # fsum: the same total whatever order the set is walked in, so that two
+    # lines of equal value do not swap places from one run to the next.
+    value = lambda ws, known: math.fsum(math.sqrt(freq[w]) for w in ws - known)
 
     out: dict = {}
     known: set = set()

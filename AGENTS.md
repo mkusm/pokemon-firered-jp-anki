@@ -42,6 +42,7 @@ There is no test suite. The checks are in "Before you say it is done" below.
 | `splits` | one fixed word boundary per string cut two ways; redoes the sentences that differ (`--chapter N`) | yes |
 | `particles` | the particle uses the analysis left without a sense (`--chapter N`) | yes |
 | `grammar` | patterns and sentence breakdown (`run --chapter N`) | yes |
+| `notes` | a note where a sentence needs knowledge a learner may not have; checks the factual ones by web search (`--chapter N`, `--dry-run`) | yes; the check is the only call with tools |
 | `chapter` | runs the model stages for one chapter in order until nothing is left (`chapter N`, `--dry-run`) | yes, through the stages it runs |
 | `corrections` | lays `corrections.yaml` over the cached answers | no |
 | `names` | finds the names (Pokémon, items, moves, abilities, places, people, badges, game terms) for their cards; gives the model the English names; redoes sentences that misname one (`--chapter N`, `--dry-run`) | yes, only for the sentences that fail |
@@ -60,6 +61,8 @@ first gym badge. The docs call it "the first chapter".
   the question, and talk through a prompt change before making it.
 - Batches are 40 sentences. Larger ones drop answers near the end of the batch
   and come close to the output cap.
+- Model calls run with tools switched off. The one exception is the notes
+  stage's fact check, which is given web search.
 
 **The caches are the model's raw answers. Do not edit them by hand.**
 - To fix one wrong translation, gloss, breakdown line or grammar explanation,
@@ -173,12 +176,25 @@ first gym badge. The docs call it "the first chapter".
 - The grammar pass must run after the analysis of the same sentences: its
   answers are matched to the analysis's word list. The order for a chapter is
   `analyse rerun N`, `splits --chapter N`, `names --chapter N`, `sense_pick`,
-  `cards`, `particles --chapter N`, `grammar run --chapter N`, `cards`, `build`.
+  `cards`, `particles --chapter N`, `grammar run --chapter N`,
+  `notes --chapter N`, `cards`, `build`.
 - `chapter N` runs that series, and repeats it until nothing is left to ask:
   a change to card keys can change which lines the chapter shows. Use it
   instead of running the stages by hand. `chapter N --dry-run` only says what
   is left, and calls nothing; run it after any change that could touch a
   finished chapter.
+
+**Notes.**
+- A sentence note is for what a reader who does not know Japan would miss: a
+  cultural reference, a play on words, a regional dialect, a place where the
+  English game says something else in substance. Not grammar, vocabulary,
+  Pokémon lore, or what a name means (names have their own notes in
+  `names_by_hand.yaml`).
+- A note that states a fact about the outside world is shown only after the
+  check step has found a page that supports it; the page and the passage are
+  kept in the cache. Do not show an unchecked one, and do not write such a
+  note by hand without looking it up.
+- To change or remove a note, use `note:` in `corrections.yaml`.
 
 **No cost figures.** Do not put dollar amounts or token counts in the code's
 output, the docs or release notes. Sentence counts, call counts and minutes are

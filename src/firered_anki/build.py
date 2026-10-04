@@ -8,7 +8,8 @@ history. Notes are added in story order; set the deck's new-card order to
 Fields added after the first release are at the end of the note type, so that
 Anki can merge it into the earlier one on import ("Merge note types"): Grammar
 and Breakdown came with the grammar pass and are empty on cards whose sentence
-it has not reached; Note is the explanation on a name a learner may not know.
+it has not reached; Note is the explanation on a name a learner may not know,
+SentenceNote the one on a sentence.
 
 Run: uv run python -m firered_anki.build
 """
@@ -31,7 +32,7 @@ FIELDS = [
     "Kanji", "UsuallyKana", "CharReadings",
     "Literal", "InContext", "DictSense", "Onomatopoeia", "Modifiers", "SentenceKanji", "SentenceEnglish",
     "ExtraExamples", "Context", "Location", "MessageId", "Speaker", "Dictionary",
-    "Grammar", "Breakdown", "Note",
+    "Grammar", "Breakdown", "Note", "SentenceNote",
 ]
 
 FRONT = """
@@ -62,6 +63,7 @@ BACK = """
 <div class="block">
   <div class="kanji-sentence">{{SentenceKanji}}</div>
   <div class="english">{{SentenceEnglish}}</div>
+  {{#SentenceNote}}<div class="about">{{SentenceNote}}</div>{{/SentenceNote}}
 </div>
 {{#Breakdown}}<details><summary>Sentence breakdown</summary><div class="breakdown">{{Breakdown}}</div></details>{{/Breakdown}}
 {{#ExtraExamples}}<details><summary>More examples</summary><div class="extra">{{ExtraExamples}}</div></details>{{/ExtraExamples}}

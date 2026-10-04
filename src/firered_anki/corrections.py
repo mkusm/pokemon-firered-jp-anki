@@ -74,6 +74,14 @@ def apply_grammar(text: str, g: dict) -> None:
     _fix(text, "patterns", c.get("patterns", []), g["patterns"], "span")
 
 
+def note(text: str) -> str | None:
+    """The hand-written note for a sentence, or None if there is none. An
+    empty note removes the model's. It stands on its own: there need not be
+    a model's note under it."""
+    c = load().get(text)
+    return " ".join(str(c["note"]).split()) if c and "note" in c else None
+
+
 def check() -> None:
     """Stop if a correction found nothing to correct. Call after the analyses
     and the grammar of the whole deck have been read."""

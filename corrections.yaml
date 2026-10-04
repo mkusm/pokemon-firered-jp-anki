@@ -20,6 +20,7 @@
 #     patterns:               # a grammar pattern, by its span
 #       - span: …
 #         explanation: …      #   and/or name
+#     note: …                 # the sentence's note; "" removes the model's
 
 - sentence: どうぐの　いれかえや　たいせつな　ものを　とうろくして　つかいます
   why: >-

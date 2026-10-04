@@ -1,0 +1,1 @@
+{"text": "はいはい　こどもは　けんがくりょう　５０えん　です　けんがく　しますか？", "note": "The Japanese game prices everything in yen (えん); the English game replaced this with its own invented currency, written with a $-like sign.", "kind": "changed", "claim": "", "_run": {"model": "opus", "effort": "low", "version": "1"}}

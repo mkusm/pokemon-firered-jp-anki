@@ -109,6 +109,12 @@ def _tables() -> tuple[dict, dict, dict]:
                 # ニビジム: the English game says PEWTER GYM.
                 add(jp[:-len(ja)] + "ジム", "place", name[:-len(eng)] + " Gym")
     by_hand = yaml.safe_load(BY_HAND.read_text(encoding="utf-8")) if BY_HAND.exists() else {}
+    # `note:` is not a kind: notes for names from the game's lists. A town's
+    # note is on its short name and its full one (マサラ, マサラタウン).
+    for jp, note in by_hand.pop("note", {}).items():
+        for full in [jp, *(jp + ja for ja, _ in TOWN)]:
+            if full in out:
+                notes[full] = " ".join(note.split())
     for kind, listing in by_hand.items():
         for jp, entry in listing.items():
             # "English name", or {en: English name, note: what a learner may not know}
