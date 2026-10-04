@@ -1,0 +1,1 @@
+{"text": "……あほか！", "structure": [{"jp": "……あほか！", "en": "...are you stupid?!"}], "patterns": [{"name": "〜か (retort)", "span": "あほか", "words": ["あほ", "か"], "explanation": "か right after a word, said sharply, is not a real question but a scornful 'what are you, a...?'. あほか = 'are you stupid?!'"}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

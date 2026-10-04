@@ -1,0 +1,1 @@
+{"text": "きみ　ポケモン　すきかい？", "structure": [{"jp": "きみ", "en": "you"}, {"jp": "ポケモン　すきかい？", "en": "do you like Pokémon?"}], "patterns": [{"name": "〜かい", "span": "すきかい", "words": ["すき", "かい"], "explanation": "かい is a soft, friendly way for a man to ask a yes-or-no question. すきかい = 'do you like them?'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

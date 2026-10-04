@@ -1,0 +1,1 @@
+{"text": "ふるくて　ボロい　つりざお。", "structure": [{"jp": "ふるくて　ボロい　つりざお。", "en": "an old and worn-out fishing rod"}], "patterns": [{"name": "〜くて", "span": "ふるくて", "words": ["ふるくて"], "explanation": "A describing word with い changed to くて means 'and' another describing word is coming. ふるくてボロい = 'old and worn-out'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

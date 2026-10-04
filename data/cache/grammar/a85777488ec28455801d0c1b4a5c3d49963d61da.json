@@ -1,0 +1,1 @@
+{"text": "ここは　ポケモンの　れいはい　とう　ポケモン　タワー", "structure": [{"jp": "ここは", "en": "this is"}, {"jp": "ポケモンの　れいはい　とう", "en": "the Pokémon memorial tower"}, {"jp": "ポケモン　タワー", "en": "Pokémon Tower"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

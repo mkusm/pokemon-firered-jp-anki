@@ -1,0 +1,1 @@
+{"text": "おわったか", "structure": [{"jp": "おわったか", "en": "so it's over, huh"}], "patterns": [{"name": "〜か (talking to oneself)", "span": "おわったか", "words": ["おわった", "か"], "explanation": "か here is not a real question; the speaker is noting something to himself. おわったか = 'so it's over, huh'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

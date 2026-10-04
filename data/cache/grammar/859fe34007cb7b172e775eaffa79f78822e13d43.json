@@ -1,0 +1,1 @@
+{"text": "ゲームを　なげるな！", "structure": [{"jp": "ゲームを", "en": "the game"}, {"jp": "なげるな！", "en": "don't throw it!"}], "patterns": [{"name": "〜な (prohibition)", "span": "なげるな", "words": ["なげる", "な"], "explanation": "な right after the plain form of a verb is a blunt 'don't'. なげるな = 'don't throw'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

@@ -1,0 +1,1 @@
+{"text": "おこりやすい　せいかく。", "structure": [{"jp": "おこりやすい　せいかく。", "en": "a nature that gets angry easily"}], "patterns": [{"name": "〜やすい", "span": "おこりやすい", "words": ["おこりやすい"], "explanation": "やすい added to the stem of a verb means 'easy to do' or 'quick to do'. おこりやすい = 'quick to get angry'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

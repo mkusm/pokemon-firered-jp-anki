@@ -1,0 +1,1 @@
+{"text": "てもちの　ポケモンが　いっぱいじゃ！", "structure": [{"jp": "てもちの　ポケモンが", "en": "the Pokémon in your party"}, {"jp": "いっぱいじゃ！", "en": "are full up!"}], "patterns": [{"name": "〜だ", "span": "いっぱいじゃ", "words": ["いっぱい", "じゃ"], "explanation": "じゃ is the way old people in stories say だ, 'is'. いっぱいじゃ = 'is full'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

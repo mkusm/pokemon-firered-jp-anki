@@ -1,0 +1,1 @@
+{"text": "エビワラーに　するか？", "structure": [{"jp": "エビワラーに　するか？", "en": "will you go with Hitmonchan?"}], "patterns": [{"name": "〜にする", "span": "エビワラーに　する", "words": ["に", "する"], "explanation": "A thing plus にする says you choose that thing. エビワラーに　する = 'go with Hitmonchan'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

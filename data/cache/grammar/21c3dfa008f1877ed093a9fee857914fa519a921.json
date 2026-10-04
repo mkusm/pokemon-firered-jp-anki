@@ -1,0 +1,1 @@
+{"text": "やめるの？", "structure": [{"jp": "やめるの？", "en": "You're giving up on it?"}], "patterns": [{"name": "〜の (question)", "span": "やめるの", "words": ["やめる", "の"], "explanation": "の at the end with a rising voice makes a soft, casual question that asks for confirmation. やめるの？ = 'you're not going to?'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

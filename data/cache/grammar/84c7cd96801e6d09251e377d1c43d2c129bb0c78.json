@@ -1,0 +1,1 @@
+{"text": "うえから　ひかりが　さしこんでいる！", "structure": [{"jp": "うえから", "en": "from above"}, {"jp": "ひかりが　さしこんでいる！", "en": "light is shining in!"}], "patterns": [{"name": "〜ている", "span": "さしこんでいる", "words": ["さしこんでいる"], "explanation": "ている after a verb says the action is going on now. さしこんでいる = 'is shining in'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

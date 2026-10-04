@@ -1,0 +1,1 @@
+{"text": "しょうぶ　するの？", "structure": [{"jp": "しょうぶ　するの？", "en": "are you going to battle?"}], "patterns": [{"name": "〜の (question)", "span": "するの", "words": ["する", "の"], "explanation": "の at the end with a rising voice makes a soft, casual question. するの？ = 'are you going to do it?'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

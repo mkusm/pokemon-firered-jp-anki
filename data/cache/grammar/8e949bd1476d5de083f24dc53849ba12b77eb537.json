@@ -1,0 +1,1 @@
+{"text": "サファリ　ゾーンで　トレジャー　ハウスは　みつけたか？", "structure": [{"jp": "サファリ　ゾーンで", "en": "in the Safari Zone"}, {"jp": "トレジャー　ハウスは", "en": "the Treasure House"}, {"jp": "みつけたか？", "en": "did you find it?"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

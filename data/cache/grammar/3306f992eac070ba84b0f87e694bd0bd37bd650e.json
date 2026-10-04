@@ -1,0 +1,1 @@
+{"text": "ポケモンは　くさむらの　なかに　このんで　かくれる！", "structure": [{"jp": "ポケモンは", "en": "Pokémon"}, {"jp": "くさむらの　なかに", "en": "in the tall grass"}, {"jp": "このんで　かくれる！", "en": "like to hide!"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

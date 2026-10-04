@@ -1,0 +1,1 @@
+{"text": "ここは　ヤマブキ　シティ　ヤマブキ　きんいろ　かがやきのいろ", "structure": [{"jp": "ここは　ヤマブキ　シティ", "en": "this is Saffron City"}, {"jp": "ヤマブキ　きんいろ", "en": "Saffron: gold"}, {"jp": "かがやきのいろ", "en": "the color of radiance"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

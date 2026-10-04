@@ -1,0 +1,1 @@
+{"text": "みかけない　かお　だ！", "structure": [{"jp": "みかけない　かお　だ！", "en": "it's a face I don't see around!"}], "patterns": [{"name": "verb + noun", "span": "みかけない　かお", "words": ["みかけない", "かお"], "explanation": "A verb placed right before a thing describes that thing. みかけない　かお = 'a face I don't see around here'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

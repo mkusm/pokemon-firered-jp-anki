@@ -1,0 +1,1 @@
+{"text": "こんどは　ぜったい　かとう！", "structure": [{"jp": "こんどは", "en": "this time"}, {"jp": "ぜったい　かとう！", "en": "let's definitely win!"}], "patterns": [{"name": "〜よう", "span": "かとう", "words": ["かとう"], "explanation": "Changing the last sound of a verb to おう says 'let's do it' or 'I will do it'. かとう = 'let's win'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

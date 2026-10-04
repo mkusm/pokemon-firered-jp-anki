@@ -1,0 +1,1 @@
+{"text": "そら　こい！", "structure": [{"jp": "そら", "en": "there now"}, {"jp": "こい！", "en": "come at me!"}], "patterns": [{"name": "〜え (command)", "span": "こい", "words": ["こい"], "explanation": "This is the blunt order form of a verb, used by rough speakers; for くる 'come' it is the odd form こい. こい = 'come on!'"}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

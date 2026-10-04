@@ -1,0 +1,1 @@
+{"text": "いあいぎりで　きりますか？", "structure": [{"jp": "いあいぎりで", "en": "with Cut"}, {"jp": "きりますか？", "en": "will you cut it?"}], "patterns": [{"name": "〜で (how)", "span": "いあいぎりで", "words": ["いあいぎり", "で"], "explanation": "で after a thing shows the tool or means used to do something. いあいぎりで = 'with Cut'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

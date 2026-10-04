@@ -1,0 +1,1 @@
+{"text": "１かい　５０えんです　やりますか？", "structure": [{"jp": "１かい　５０えんです", "en": "it's 50 yen a go"}, {"jp": "やりますか？", "en": "will you do it?"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

@@ -1,0 +1,1 @@
+{"text": "みてよ！", "structure": [{"jp": "みてよ！", "en": "look!"}], "patterns": [{"name": "〜て (request)", "span": "みてよ", "words": ["みて", "よ"], "explanation": "A verb ending in て at the end of a sentence is a friendly way to ask someone to do something. みてよ = 'come on, look'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

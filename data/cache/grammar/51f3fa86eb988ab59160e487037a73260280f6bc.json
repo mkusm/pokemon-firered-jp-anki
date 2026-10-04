@@ -1,0 +1,1 @@
+{"text": "うらぎり　じゃない？", "structure": [{"jp": "うらぎり　じゃない？", "en": "it's not a betrayal?"}], "patterns": [{"name": "〜ではない", "span": "うらぎり　じゃない", "words": ["うらぎり", "じゃない"], "explanation": "じゃない is the everyday spoken form of ではない, 'is not'. うらぎり　じゃない = 'it's not a betrayal'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

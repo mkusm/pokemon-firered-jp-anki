@@ -1,0 +1,1 @@
+{"text": "どーんと！", "structure": [{"jp": "どーんと！", "en": "with a bang!"}], "patterns": [{"name": "〜と (how)", "span": "どーんと", "words": ["どーん", "と"], "explanation": "と after a sound word tells in what way something is done; the verb is left unsaid here. どーんと = 'with a bang'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

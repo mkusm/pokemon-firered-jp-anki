@@ -1,0 +1,1 @@
+{"text": "たすけに　きた？", "structure": [{"jp": "たすけに", "en": "to help"}, {"jp": "きた？", "en": "you came?"}], "patterns": [{"name": "〜に (purpose)", "span": "たすけに　きた", "words": ["たすけ", "に", "きた"], "explanation": "に before a verb of coming or going tells what you came to do. たすけに　きた = 'came to help'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

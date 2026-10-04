@@ -1,0 +1,1 @@
+{"text": "ちょうど　いいぜ！", "structure": [{"jp": "ちょうど　いいぜ！", "en": "that's just right!"}], "patterns": [{"name": "〜ぜ", "span": "いいぜ", "words": ["いい", "ぜ"], "explanation": "ぜ at the end is rough, male speech that adds punch to what is said. ちょうど いいぜ = 'that's just perfect!'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

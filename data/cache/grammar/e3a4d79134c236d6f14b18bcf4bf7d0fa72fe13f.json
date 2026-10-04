@@ -1,0 +1,1 @@
+{"text": "やる　じゃない！", "structure": [{"jp": "やる　じゃない！", "en": "not bad at all!"}], "patterns": [{"name": "〜じゃない (exclamation)", "span": "やる　じゃない", "words": ["やる", "じゃない"], "explanation": "じゃない here does not mean 'not'; it adds surprise, like 'well, look at that!'. やる　じゃない = 'you're pretty good!'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

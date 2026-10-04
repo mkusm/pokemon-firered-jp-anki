@@ -1,0 +1,1 @@
+{"text": "レッドは　しゃちょうから　マスターボールを　もらった！", "structure": [{"jp": "レッドは", "en": "Red"}, {"jp": "しゃちょうから", "en": "from the president"}, {"jp": "マスターボールを　もらった！", "en": "received a Master Ball!"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

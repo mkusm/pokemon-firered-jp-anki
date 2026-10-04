@@ -1,0 +1,1 @@
+{"text": "きあいが　たりんか", "structure": [{"jp": "きあいが", "en": "fighting spirit"}, {"jp": "たりんか", "en": "isn't enough, huh"}], "patterns": [{"name": "〜ない", "span": "たりん", "words": ["たりん"], "explanation": "ん at the end of a verb is a short, rough way of saying ない, 'not'. たりん = 'is not enough'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

@@ -1,0 +1,1 @@
+{"text": "レッドは　せんいんに　ふねのチケットを　みせた！", "structure": [{"jp": "レッドは", "en": "Red"}, {"jp": "せんいんに", "en": "to the sailor"}, {"jp": "ふねのチケットを　みせた！", "en": "showed the S.S. Ticket!"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

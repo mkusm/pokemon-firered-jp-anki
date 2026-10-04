@@ -1,0 +1,1 @@
+{"text": "さあ　こっちへ　きなさい！", "structure": [{"jp": "さあ", "en": "Come now"}, {"jp": "こっちへ　きなさい！", "en": "come over here!"}], "patterns": [{"name": "〜なさい", "span": "きなさい", "words": ["きなさい"], "explanation": "なさい after a verb is a firm order from someone above you, like a parent or teacher. きなさい = 'come (here)'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

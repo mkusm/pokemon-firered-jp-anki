@@ -1,0 +1,1 @@
+{"text": "だめか", "structure": [{"jp": "だめか", "en": "no good, huh"}], "patterns": [{"name": "〜か (realization)", "span": "だめか", "words": ["だめ", "か"], "explanation": "か said to yourself with a falling tone shows you are taking in a fact, like 'huh'. だめか = 'no good, huh'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

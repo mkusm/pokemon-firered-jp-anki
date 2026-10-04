@@ -1,0 +1,1 @@
+{"text": "あなたは　よく　いくの？", "structure": [{"jp": "あなたは", "en": "you"}, {"jp": "よく　いくの？", "en": "go often?"}], "patterns": [{"name": "〜の (question)", "span": "いくの", "words": ["いく", "の"], "explanation": "の at the end with a rising voice makes a soft, casual question. いくの = 'do you go?'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

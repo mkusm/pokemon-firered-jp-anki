@@ -1,0 +1,1 @@
+{"text": "はやく　はやく　はやく　しろ！", "structure": [{"jp": "はやく　はやく", "en": "quick, quick"}, {"jp": "はやく　しろ！", "en": "hurry up!"}], "patterns": [{"name": "〜しろ (command)", "span": "はやく　しろ", "words": ["はやく", "しろ"], "explanation": "しろ is する turned into a blunt, rough order. はやく しろ = 'do it fast, hurry up!'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

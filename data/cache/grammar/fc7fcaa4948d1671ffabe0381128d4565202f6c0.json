@@ -1,0 +1,1 @@
+{"text": "おかしいな？", "structure": [{"jp": "おかしいな？", "en": "that's strange...?"}], "patterns": [{"name": "〜な (musing)", "span": "おかしいな", "words": ["おかしい", "な"], "explanation": "な at the end shows the speaker is thinking aloud to himself. おかしいな = 'that's odd...'"}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

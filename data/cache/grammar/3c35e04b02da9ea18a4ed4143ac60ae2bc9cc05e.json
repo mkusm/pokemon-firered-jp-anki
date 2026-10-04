@@ -1,0 +1,1 @@
+{"text": "おおあめに　なった！", "structure": [{"jp": "おおあめに　なった！", "en": "it turned into a downpour!"}], "patterns": [{"name": "〜になる", "span": "おおあめに　なった", "words": ["おおあめ", "に", "なった"], "explanation": "に before なる shows what something turns into. おおあめに　なった = 'it became a downpour'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

@@ -1,0 +1,1 @@
+{"text": "おいおい　それは　タマゴだよ", "structure": [{"jp": "おいおい", "en": "hey, hey"}, {"jp": "それは　タマゴだよ", "en": "that's an Egg"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

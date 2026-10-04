@@ -1,0 +1,1 @@
+{"text": "よくきたな　＊は　げんきじゃぞ", "structure": [{"jp": "よくきたな", "en": "good of you to come"}, {"jp": "＊は　げんきじゃぞ", "en": "＊ is doing fine"}], "patterns": [{"name": "〜だ", "span": "げんきじゃ", "words": ["げんき", "じゃ"], "explanation": "じゃ is how old men in stories say だ, 'is'. げんきじゃ = 'is doing fine'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

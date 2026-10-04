@@ -1,0 +1,1 @@
+{"text": "…　…　わざマシンは　ぜんぶで　５０しゅるい！", "structure": [{"jp": "…　…　わざマシンは", "en": "... TMs"}, {"jp": "ぜんぶで　５０しゅるい！", "en": "50 kinds in all!"}], "patterns": [{"name": "〜で (total)", "span": "ぜんぶで", "words": ["ぜんぶ", "で"], "explanation": "で after an amount word shows the total being counted up. ぜんぶで = 'in all'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

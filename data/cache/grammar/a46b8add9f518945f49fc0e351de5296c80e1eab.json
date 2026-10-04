@@ -1,0 +1,1 @@
+{"text": "マサキは　わしの　まごじゃ！", "structure": [{"jp": "マサキは", "en": "Bill"}, {"jp": "わしの　まごじゃ！", "en": "is my grandson!"}], "patterns": [{"name": "〜だ", "span": "まごじゃ", "words": ["まご", "じゃ"], "explanation": "じゃ is the way old men in stories say だ, 'is'. まごじゃ = 'is my grandson'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

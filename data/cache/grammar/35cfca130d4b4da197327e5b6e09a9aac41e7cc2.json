@@ -1,0 +1,1 @@
+{"text": "なんだ　おまえは？", "structure": [{"jp": "なんだ", "en": "what are (you)?"}, {"jp": "おまえは？", "en": "you, that is"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

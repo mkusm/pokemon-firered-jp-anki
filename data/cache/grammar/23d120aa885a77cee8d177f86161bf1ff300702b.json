@@ -1,0 +1,1 @@
+{"text": "でなおして　くるわ", "structure": [{"jp": "でなおして　くるわ", "en": "I'll go and come back to try again"}], "patterns": [{"name": "〜てくる", "span": "でなおして　くる", "words": ["でなおして", "くる"], "explanation": "くる after a て-form means you go off, do the thing, and come back. でなおして　くる = 'I'll go start over and come back'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

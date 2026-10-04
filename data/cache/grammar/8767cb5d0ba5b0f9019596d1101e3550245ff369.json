@@ -1,0 +1,1 @@
+{"text": "どうして　まけたかな", "structure": [{"jp": "どうして", "en": "why"}, {"jp": "まけたかな", "en": "did I lose, I wonder"}], "patterns": [{"name": "〜かな", "span": "まけたかな", "words": ["まけた", "かな"], "explanation": "かな at the end means 'I wonder', a question asked to yourself. どうして まけたかな = 'I wonder why I lost'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

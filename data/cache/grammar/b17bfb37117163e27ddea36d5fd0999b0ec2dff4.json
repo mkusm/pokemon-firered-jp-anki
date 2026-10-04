@@ -1,0 +1,1 @@
+{"text": "ゴミばこの　そこに　スイッチが　あった！", "structure": [{"jp": "ゴミばこの　そこに", "en": "at the bottom of the trash can"}, {"jp": "スイッチが　あった！", "en": "there was a switch!"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

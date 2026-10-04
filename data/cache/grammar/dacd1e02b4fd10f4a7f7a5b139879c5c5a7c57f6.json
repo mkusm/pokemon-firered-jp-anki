@@ -1,0 +1,1 @@
+{"text": "ただもの　では　ない！", "structure": [{"jp": "ただもの　では　ない！", "en": "you're no ordinary person!"}], "patterns": [{"name": "〜ではない", "span": "ただもの　では　ない", "words": ["ただもの", "ではない"], "explanation": "ではない after a thing says 'is not that thing'. ただもの　では　ない = 'is no ordinary person'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

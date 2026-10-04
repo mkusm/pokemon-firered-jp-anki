@@ -46,20 +46,6 @@
 # Forms the model wrote that are not in the sentence. The card showed the wrong
 # form and could not mark it in the sentence.
 
-- sentence: ジムでの　たたかい　シビレましタ！
-  why: The speaker's last kana is written in katakana; the model normalised it.
-  words:
-    - surface: シビレました
-      new_surface: シビレましタ
-      modifiers: シビレ (stem) + まし (polite) + タ (past, written in katakana for the speaker's accent)
-
-- sentence: でも　ぜんぶ　ひろって　たら　じかん　なくなっちゃう！
-  why: The model dropped the て. ひろってたら is short for ひろっていたら.
-  words:
-    - surface: ひろったら
-      new_surface: ひろってたら
-      modifiers: ひろっ + て (te-form) + たら (short for いたら, conditional of いる)
-
 - sentence: やーん　＊ｃｍよ　こんなの　はじめてよー！
   why: The game writes ｃｍ in full-width letters; the model wrote ASCII.
   words:

@@ -1,0 +1,1 @@
+{"text": "まけたら　ありがね　ぜんぶ！", "structure": [{"jp": "まけたら", "en": "if you lose"}, {"jp": "ありがね　ぜんぶ！", "en": "all the money you have!"}], "patterns": [{"name": "〜たら", "span": "まけたら", "words": ["まけたら"], "explanation": "たら on a verb means 'if' or 'once that happens'. まけたら = 'if you lose'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

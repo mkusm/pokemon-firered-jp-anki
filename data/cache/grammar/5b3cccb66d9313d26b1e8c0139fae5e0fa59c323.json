@@ -1,0 +1,1 @@
+{"text": "これが　ほしい　のか！", "structure": [{"jp": "これが　ほしい　のか！", "en": "so this is what you want!"}], "patterns": [{"name": "〜のか", "span": "ほしい　のか", "words": ["ほしい", "のか"], "explanation": "のか at the end shows the speaker has just worked something out, like 'so that's it'. ほしい　のか = 'so you want it!'"}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

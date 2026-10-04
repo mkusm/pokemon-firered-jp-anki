@@ -1,0 +1,1 @@
+{"text": "だめよ　たすけてー！", "structure": [{"jp": "だめよ", "en": "No, don't!"}, {"jp": "たすけてー！", "en": "Help!"}], "patterns": [{"name": "〜て (request)", "span": "たすけてー", "words": ["たすけてー"], "explanation": "A verb ending in て on its own is a casual way of asking someone to do it. たすけてー = 'help me!'"}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

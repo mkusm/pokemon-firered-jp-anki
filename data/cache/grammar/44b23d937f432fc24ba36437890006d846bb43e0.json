@@ -1,0 +1,1 @@
+{"text": "…　…　ポケモン　とりほうだい！", "structure": [{"jp": "…　…　ポケモン　とりほうだい！", "en": "...catch all the Pokémon you can!"}], "patterns": [{"name": "〜放題", "span": "とりほうだい", "words": ["とりほうだい"], "explanation": "ほうだい after a verb stem says you may do it as much as you like. とりほうだい = 'catch as many as you like'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

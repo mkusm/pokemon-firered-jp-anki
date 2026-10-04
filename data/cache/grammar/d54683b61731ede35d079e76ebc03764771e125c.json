@@ -1,0 +1,1 @@
+{"text": "きまりや！", "structure": [{"jp": "きまりや！", "en": "it's settled!"}], "patterns": [{"name": "〜だ", "span": "きまりや", "words": ["きまり", "や"], "explanation": "や is the Kansai dialect way of saying だ, 'is'. きまりや = 'it's settled'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

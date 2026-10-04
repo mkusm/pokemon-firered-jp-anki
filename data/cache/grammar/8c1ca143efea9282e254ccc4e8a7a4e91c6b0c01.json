@@ -1,0 +1,1 @@
+{"text": "いつか　かならず　かてる！", "structure": [{"jp": "いつか", "en": "someday"}, {"jp": "かならず", "en": "for sure"}, {"jp": "かてる！", "en": "I can win!"}], "patterns": [{"name": "〜られる (potential)", "span": "かてる", "words": ["かてる"], "explanation": "Changing かつ to かてる turns 'win' into 'can win'. かてる = 'I can win'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

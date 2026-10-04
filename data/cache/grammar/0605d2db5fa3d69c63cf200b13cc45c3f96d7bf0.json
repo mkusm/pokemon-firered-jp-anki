@@ -1,0 +1,1 @@
+{"text": "…　カテ…　ルカーッ！", "structure": [{"jp": "…　カテ…　ルカーッ！", "en": "...can you... win?!"}], "patterns": [{"name": "〜られる (potential)", "span": "カテ…　ル", "words": ["カテ…ル"], "explanation": "Changing the last sound of a verb to the え row plus る means 'can do'. かつ 'win' becomes かてる = 'can win'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

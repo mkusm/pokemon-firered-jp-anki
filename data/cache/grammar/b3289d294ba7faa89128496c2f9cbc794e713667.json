@@ -1,0 +1,1 @@
+{"text": "ポケモン　たいけつ　だよな！", "structure": [{"jp": "ポケモン　たいけつ　だよな！", "en": "it's a Pokémon showdown, right?!"}], "patterns": [{"name": "〜よな", "span": "だよな", "words": ["だ", "よな"], "explanation": "よな at the end is a casual, manly way to check that the listener agrees. たいけつ　だよな = 'it's a showdown, right?'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

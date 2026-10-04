@@ -1,0 +1,1 @@
+{"text": "ナツメも　いいよね！", "structure": [{"jp": "ナツメも　いいよね！", "en": "Sabrina's nice too, right?"}], "patterns": [{"name": "〜よね", "span": "いいよね", "words": ["いい", "よ", "ね"], "explanation": "よね at the end says what you think and checks that the listener thinks the same. いいよね = 'she's nice, right?'"}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

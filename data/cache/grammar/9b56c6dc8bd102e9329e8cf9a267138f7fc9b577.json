@@ -1,0 +1,1 @@
+{"text": "がんばれ　がんばれ　レッドー！", "structure": [{"jp": "がんばれ　がんばれ", "en": "go, go"}, {"jp": "レッドー！", "en": "Red!"}], "patterns": [{"name": "〜え (command)", "span": "がんばれ", "words": ["がんばれ"], "explanation": "Changing the last sound of a verb to え makes a blunt order, here used as a cheer. がんばれ = 'do your best!'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

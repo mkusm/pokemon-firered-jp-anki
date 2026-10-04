@@ -1,0 +1,1 @@
+{"text": "ひいてる　ひいてる！", "structure": [{"jp": "ひいてる　ひいてる！", "en": "it's tugging, it's tugging!"}], "patterns": [{"name": "〜ている", "span": "ひいてる", "words": ["ひいてる"], "explanation": "ひいてる is the short spoken form of ひいている, which says the action is going on now. ひいてる = 'it's tugging'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

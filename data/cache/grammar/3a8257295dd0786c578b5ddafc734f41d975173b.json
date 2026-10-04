@@ -1,0 +1,1 @@
+{"text": "さっそく　はじめましょ！", "structure": [{"jp": "さっそく　はじめましょ！", "en": "let's start right away!"}], "patterns": [{"name": "〜ましょう", "span": "はじめましょ", "words": ["はじめましょ"], "explanation": "ましょう means 'let's'; here the last う is dropped, which sounds light and chatty. はじめましょ = 'let's begin'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

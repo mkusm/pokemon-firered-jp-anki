@@ -1,0 +1,1 @@
+{"text": "くやしく　ないよ！", "structure": [{"jp": "くやしく　ないよ！", "en": "I'm not upset!"}], "patterns": [{"name": "〜くない", "span": "くやしく　ない", "words": ["くやしく", "ない"], "explanation": "An い-word changed to く plus ない means 'not' that. くやしく　ない = 'not upset'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

@@ -1,0 +1,1 @@
+{"text": "マジかよ", "structure": [{"jp": "マジかよ", "en": "seriously?!"}], "patterns": [{"name": "〜かよ", "span": "マジかよ", "words": ["マジ", "か", "よ"], "explanation": "かよ at the end is a rough way to show disbelief or annoyance, not a real question. マジかよ = 'are you serious?!'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

@@ -1,0 +1,1 @@
+{"text": "チラシが　はってある！", "structure": [{"jp": "チラシが", "en": "a flyer"}, {"jp": "はってある！", "en": "has been posted up!"}], "patterns": [{"name": "〜てある", "span": "はってある", "words": ["はって", "ある"], "explanation": "てある says somebody did the thing earlier and it is still that way now. はってある = 'has been posted up'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

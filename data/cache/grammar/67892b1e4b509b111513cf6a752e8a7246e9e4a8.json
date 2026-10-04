@@ -1,0 +1,1 @@
+{"text": "…　あわてるな！", "structure": [{"jp": "…　あわてるな！", "en": "...don't panic!"}], "patterns": [{"name": "〜な (prohibition)", "span": "あわてるな", "words": ["あわてる", "な"], "explanation": "な right after a plain verb is a blunt 'don't'. あわてるな = 'don't get flustered'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

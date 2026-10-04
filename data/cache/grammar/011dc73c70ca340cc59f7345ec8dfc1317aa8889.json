@@ -1,0 +1,1 @@
+{"text": "まける　なんて…！", "structure": [{"jp": "まける　なんて…！", "en": "to think I'd lose...!"}], "patterns": [{"name": "〜なんて", "span": "まける　なんて", "words": ["まける", "なんて"], "explanation": "なんて after something shows surprise or disbelief about it. まける　なんて = 'to think I'd lose'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

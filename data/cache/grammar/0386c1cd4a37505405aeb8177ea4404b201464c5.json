@@ -1,0 +1,1 @@
+{"text": "たすかったわ　ありがと", "structure": [{"jp": "たすかったわ", "en": "you saved me"}, {"jp": "ありがと", "en": "thanks"}], "patterns": [{"name": "〜わ", "span": "たすかったわ", "words": ["たすかった", "わ"], "explanation": "わ at the end is a soft, womanly way to add feeling to what you say. たすかったわ = 'you really saved me'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

@@ -1,0 +1,1 @@
+{"text": "どこかなー？", "structure": [{"jp": "どこかなー？", "en": "I wonder where it is?"}], "patterns": [{"name": "〜かな", "span": "どこかなー", "words": ["どこ", "かなー"], "explanation": "かな at the end means 'I wonder', here stretched out. どこかなー = 'I wonder where'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

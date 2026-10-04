@@ -1,0 +1,1 @@
+{"text": "また　あったわね！", "structure": [{"jp": "また　あったわね！", "en": "We meet again, don't we!"}], "patterns": [{"name": "〜わ", "span": "あったわね", "words": ["わ", "ね"], "explanation": "わ is a soft feminine ending, and ね adds 'isn't it', asking the listener to agree. また　あったわね = 'we've met again, haven't we'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

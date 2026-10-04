@@ -1,0 +1,1 @@
+{"text": "ヘンな　やつ　だなあ！", "structure": [{"jp": "ヘンな　やつ", "en": "a weird person"}, {"jp": "だなあ！", "en": "you sure are!"}], "patterns": [{"name": "〜なあ", "span": "やつ　だなあ", "words": ["やつ", "だ", "なあ"], "explanation": "なあ at the end shows strong feeling, said half to himself. やつ　だなあ = 'what a person!'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

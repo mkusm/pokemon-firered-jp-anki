@@ -1,0 +1,1 @@
+{"text": "まけたの？", "structure": [{"jp": "まけたの？", "en": "did I lose?"}], "patterns": [{"name": "〜の (question)", "span": "まけたの？", "words": ["まけた", "の"], "explanation": "の at the end with a rising voice makes a soft question asking for an explanation. まけたの？ = 'did I lose?'"}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

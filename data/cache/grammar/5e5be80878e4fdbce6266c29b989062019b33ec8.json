@@ -1,0 +1,1 @@
+{"text": "コインケースを　もっていない！", "structure": [{"jp": "コインケースを", "en": "a Coin Case"}, {"jp": "もっていない！", "en": "you don't have!"}], "patterns": [{"name": "〜ている", "span": "もっていない", "words": ["もっていない"], "explanation": "ている shows a lasting state, and ていない is its 'not' form. もっていない = 'you don't have'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

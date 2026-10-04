@@ -1,0 +1,1 @@
+{"text": "りょこう　だぞー！", "structure": [{"jp": "りょこう　だぞー！", "en": "it's a trip!"}], "patterns": [{"name": "〜ぞ", "span": "だぞー", "words": ["だ", "ぞー"], "explanation": "ぞ at the end is rough, boyish talk that makes a firm statement; the long ー is him shouting it happily. りょこう　だぞー = 'it's a trip!'"}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

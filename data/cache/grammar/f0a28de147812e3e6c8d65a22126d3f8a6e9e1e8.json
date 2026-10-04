@@ -1,0 +1,1 @@
+{"text": "ですぞ！", "structure": [{"jp": "ですぞ！", "en": "I am indeed!"}], "patterns": [{"name": "〜ぞ", "span": "ですぞ", "words": ["です", "ぞ"], "explanation": "ぞ at the end pushes the statement hard; after polite です it sounds like a pompous older man. ですぞ = 'I am indeed!'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

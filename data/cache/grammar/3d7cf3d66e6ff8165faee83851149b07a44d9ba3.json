@@ -1,0 +1,1 @@
+{"text": "ゆ　ゆうれいは　どこじゃ", "structure": [{"jp": "ゆ　ゆうれいは", "en": "Th-the ghost"}, {"jp": "どこじゃ", "en": "where is it?"}], "patterns": [{"name": "〜だ", "span": "どこじゃ", "words": ["どこ", "じゃ"], "explanation": "じゃ is how old men in stories say だ, 'is'. どこじゃ = 'where is it?'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

@@ -1,0 +1,1 @@
+{"text": "あそこは　めずらしい　ポケモンが　たくさん　いた！", "structure": [{"jp": "あそこは", "en": "over there"}, {"jp": "めずらしい　ポケモンが", "en": "rare Pokémon"}, {"jp": "たくさん　いた！", "en": "there were lots!"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

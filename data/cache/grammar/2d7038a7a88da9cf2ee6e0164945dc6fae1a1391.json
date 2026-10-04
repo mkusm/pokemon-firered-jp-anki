@@ -1,0 +1,1 @@
+{"text": "わたしが　ここの　シェフです！", "structure": [{"jp": "わたしが", "en": "I (am the one who)"}, {"jp": "ここの　シェフです！", "en": "am the chef here!"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

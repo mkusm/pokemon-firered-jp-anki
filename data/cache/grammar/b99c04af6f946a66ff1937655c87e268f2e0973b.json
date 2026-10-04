@@ -1,0 +1,1 @@
+{"text": "また　きて　ください", "structure": [{"jp": "また", "en": "again"}, {"jp": "きて　ください", "en": "please come"}], "patterns": [{"name": "〜てください", "span": "きて　ください", "words": ["きて", "ください"], "explanation": "The て-form plus ください politely asks someone to do something. きて　ください = 'please come'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

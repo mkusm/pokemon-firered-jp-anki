@@ -1,0 +1,1 @@
+{"text": "きみの　こううんを　いのっている！", "structure": [{"jp": "きみの　こううんを", "en": "your good luck"}, {"jp": "いのっている！", "en": "I am wishing for!"}], "patterns": [{"name": "〜ている", "span": "いのっている", "words": ["いのっている"], "explanation": "ている after a verb says the action is going on now. いのっている = 'I am wishing'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

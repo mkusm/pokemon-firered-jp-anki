@@ -1,0 +1,1 @@
+{"text": "ぼくは　キャンプボーイ　かのじょは　ピクニックガール！", "structure": [{"jp": "ぼくは　キャンプボーイ", "en": "I'm a Camper"}, {"jp": "かのじょは　ピクニックガール！", "en": "she's a Picnicker!"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

@@ -1,0 +1,1 @@
+{"text": "ロケットだんの　マークいり。", "structure": [{"jp": "ロケットだんの", "en": "Team Rocket's"}, {"jp": "マークいり。", "en": "with the mark on it"}], "patterns": [{"name": "〜いり", "span": "マークいり", "words": ["マーク", "いり"], "explanation": "いり stuck on a thing means 'with that in it or on it'. マークいり = 'bearing the mark'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

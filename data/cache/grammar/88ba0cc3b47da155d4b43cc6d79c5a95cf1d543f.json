@@ -1,0 +1,1 @@
+{"text": "サファリ　ボールを　ぜんぶ　なげました！", "structure": [{"jp": "サファリ　ボールを", "en": "the Safari Balls"}, {"jp": "ぜんぶ", "en": "all"}, {"jp": "なげました！", "en": "you threw!"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

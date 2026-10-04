@@ -1,0 +1,1 @@
+{"text": "どうかな？", "structure": [{"jp": "どうかな？", "en": "how about it?"}], "patterns": [{"name": "〜かな", "span": "どうかな", "words": ["どう", "かな"], "explanation": "かな at the end makes a soft, wondering question. どうかな = 'how about it, I wonder?'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

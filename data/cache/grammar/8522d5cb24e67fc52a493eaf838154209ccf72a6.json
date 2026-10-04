@@ -1,0 +1,1 @@
+{"text": "こらこら　まて！", "structure": [{"jp": "こらこら", "en": "hey, hey"}, {"jp": "まて！", "en": "wait!"}], "patterns": [{"name": "〜ろ (command)", "span": "まて", "words": ["まて"], "explanation": "This is the blunt order form of a verb; for verbs like まつ the last sound changes to え. まて = 'wait!'"}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

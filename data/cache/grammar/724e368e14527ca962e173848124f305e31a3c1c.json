@@ -1,0 +1,1 @@
+{"text": "ちょうしが　でなかったわ", "structure": [{"jp": "ちょうしが　でなかったわ", "en": "I couldn't get into form"}], "patterns": [{"name": "〜わ", "span": "わ", "words": ["わ"], "explanation": "わ at the end of a sentence gives it a soft, feminine tone. でなかったわ = 'it just didn't come out'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

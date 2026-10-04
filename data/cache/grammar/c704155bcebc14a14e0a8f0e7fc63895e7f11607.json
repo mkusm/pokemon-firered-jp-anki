@@ -1,0 +1,1 @@
+{"text": "ポケモンを　つりあげた！", "structure": [{"jp": "ポケモンを", "en": "a Pokémon"}, {"jp": "つりあげた！", "en": "you fished up!"}], "patterns": [{"name": "〜あげる", "span": "つりあげた", "words": ["つりあげた"], "explanation": "あげる stuck onto a verb adds the idea of 'up'. つりあげた = 'fished it up, landed it'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

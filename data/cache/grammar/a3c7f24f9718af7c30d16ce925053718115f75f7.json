@@ -1,0 +1,1 @@
+{"text": "かっこいい　かっこいいぜ！", "structure": [{"jp": "かっこいい", "en": "cool"}, {"jp": "かっこいいぜ！", "en": "so cool, man!"}], "patterns": [{"name": "〜ぜ", "span": "かっこいいぜ", "words": ["かっこいい", "ぜ"], "explanation": "ぜ at the end is rough, cocky male speech that adds punch to what was said. かっこいいぜ = 'so cool, man!'"}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

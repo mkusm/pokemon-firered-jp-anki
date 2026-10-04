@@ -1,0 +1,1 @@
+{"text": "おもった　とおりだ", "structure": [{"jp": "おもった　とおりだ", "en": "it's just as I thought"}], "patterns": [{"name": "〜とおり", "span": "おもった　とおり", "words": ["おもった", "とおり"], "explanation": "とおり after a verb means 'exactly the way that'. おもった とおり = 'just as I thought'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

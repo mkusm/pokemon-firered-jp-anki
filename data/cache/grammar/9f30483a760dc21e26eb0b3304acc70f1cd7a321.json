@@ -1,0 +1,1 @@
+{"text": "おっと　そっちは　いま　つうこう　きんしだよ", "structure": [{"jp": "おっと", "en": "whoa"}, {"jp": "そっちは", "en": "that way"}, {"jp": "いま", "en": "right now"}, {"jp": "つうこう　きんしだよ", "en": "is closed to traffic"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

@@ -1,0 +1,1 @@
+{"text": "まけたのか", "structure": [{"jp": "まけたのか", "en": "I lost, did I?"}], "patterns": [{"name": "〜のか", "span": "まけたのか", "words": ["まけた", "のか"], "explanation": "のか at the end shows the speaker taking in a fact with some surprise, half asking himself. まけたのか = 'so I lost...?'"}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

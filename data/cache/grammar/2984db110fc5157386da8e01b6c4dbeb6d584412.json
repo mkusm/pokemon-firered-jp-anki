@@ -1,0 +1,1 @@
+{"text": "ここは　１３ばん　どうろ　きた　…　サイレンズ　ブリッジ", "structure": [{"jp": "ここは　１３ばん　どうろ", "en": "this is Route 13"}, {"jp": "きた　…　サイレンズ　ブリッジ", "en": "north: Silence Bridge"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

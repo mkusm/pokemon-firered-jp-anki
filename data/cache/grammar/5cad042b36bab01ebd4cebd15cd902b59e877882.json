@@ -1,0 +1,1 @@
+{"text": "…　やっと　きたな！", "structure": [{"jp": "…　やっと", "en": "…finally"}, {"jp": "きたな！", "en": "you came, huh!"}], "patterns": [{"name": "〜な", "span": "きたな", "words": ["きた", "な"], "explanation": "な at the end is said as you take in what has happened, like 'so' or 'huh'. やっと　きたな = 'so you finally came'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

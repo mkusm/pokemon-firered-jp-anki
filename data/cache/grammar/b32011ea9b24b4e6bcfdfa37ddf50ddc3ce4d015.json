@@ -1,0 +1,1 @@
+{"text": "おまえは　どちらを　えらぶ？", "structure": [{"jp": "おまえは", "en": "you"}, {"jp": "どちらを　えらぶ？", "en": "which will you choose?"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

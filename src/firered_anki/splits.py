@@ -282,4 +282,8 @@ def main() -> None:
 
 if __name__ == "__main__":
     sys.stdout.reconfigure(line_buffering=True)
-    main()
+    try:
+        main()
+    except claude_cli.UsageLimit as e:
+        # Nothing is half-written: decisions are saved only once all are made.
+        print(f"[splits] usage limit reached; run again later to carry on\n  {e}")

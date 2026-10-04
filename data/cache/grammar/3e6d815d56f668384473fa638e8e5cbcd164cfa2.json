@@ -1,0 +1,1 @@
+{"text": "いいな　つよい　ポケモン！", "structure": [{"jp": "いいな", "en": "lucky you"}, {"jp": "つよい　ポケモン！", "en": "strong Pokémon!"}], "patterns": [{"name": "〜な", "span": "いいな", "words": ["いい", "な"], "explanation": "な at the end shows the speaker's own feeling, here envy. いいな = 'that's nice, I wish I had that'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

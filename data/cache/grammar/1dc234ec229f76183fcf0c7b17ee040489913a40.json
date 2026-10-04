@@ -1,0 +1,1 @@
+{"text": "…　マスターボール　だろう", "structure": [{"jp": "…　マスターボール　だろう", "en": "...that'd be the Master Ball"}], "patterns": [{"name": "〜だろう", "span": "マスターボール　だろう", "words": ["だろう"], "explanation": "だろう says the speaker is guessing, like 'probably' or 'I suppose'. マスターボール　だろう = 'it's probably the Master Ball'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

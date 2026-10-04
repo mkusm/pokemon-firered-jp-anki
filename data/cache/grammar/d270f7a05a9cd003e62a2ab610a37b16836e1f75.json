@@ -1,0 +1,1 @@
+{"text": "そら　かてー！", "structure": [{"jp": "そら", "en": "there"}, {"jp": "かてー！", "en": "win!"}], "patterns": [{"name": "〜ろ (command)", "span": "かてー", "words": ["かてー"], "explanation": "かて is the blunt order form of かつ 'to win', stretched out here as a shout. かてー = 'win!'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

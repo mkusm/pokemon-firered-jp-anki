@@ -1,0 +1,1 @@
+{"text": "やぶれたのか", "structure": [{"jp": "やぶれたのか", "en": "so I've been defeated"}], "patterns": [{"name": "〜のか", "span": "やぶれたのか", "words": ["やぶれた", "のか"], "explanation": "のか said to yourself shows something sinking in: 'so that's how it is'. やぶれたのか = 'so I've been defeated'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

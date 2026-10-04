@@ -1,0 +1,1 @@
+{"text": "あはは　そうよね！", "structure": [{"jp": "あはは", "en": "ahaha"}, {"jp": "そうよね！", "en": "that's right, isn't it!"}], "patterns": [{"name": "〜よね", "span": "そうよね", "words": ["よ", "ね"], "explanation": "よね at the end states something and asks the listener to agree. そうよね = 'that's right, isn't it'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

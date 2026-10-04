@@ -1,0 +1,1 @@
+{"text": "がまん　ならねえ", "structure": [{"jp": "がまん　ならねえ", "en": "I can't stand it"}], "patterns": [{"name": "〜ない", "span": "ならねえ", "words": ["ならねえ"], "explanation": "ねえ is a rough, tough-guy way of saying ない, 'not'. With がまん it says putting up with it is not possible. がまん　ならねえ = 'I can't stand it'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

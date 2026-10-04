@@ -1,0 +1,1 @@
+{"text": "モンスターボールを　なげろ！", "structure": [{"jp": "モンスターボールを", "en": "Poké Balls"}, {"jp": "なげろ！", "en": "throw them!"}], "patterns": [{"name": "〜え・〜ろ (command)", "span": "なげろ", "words": ["なげろ"], "explanation": "Changing the end of a verb to ろ turns it into a blunt order. なげろ = 'throw!'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

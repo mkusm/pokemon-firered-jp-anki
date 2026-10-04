@@ -1,0 +1,1 @@
+{"text": "ここは　イワヤマ　トンネル　ハナダ　シティ　…　シオン　タウン", "structure": [{"jp": "ここは　イワヤマ　トンネル", "en": "this is Rock Tunnel"}, {"jp": "ハナダ　シティ　…　シオン　タウン", "en": "Cerulean City ... Lavender Town"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

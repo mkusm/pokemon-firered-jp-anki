@@ -1,0 +1,1 @@
+{"text": "…　…　…　ぼくもさ！", "structure": [{"jp": "…　…　…　ぼくもさ！", "en": "...me too!"}], "patterns": [{"name": "〜さ", "span": "ぼくもさ", "words": ["ぼく", "も", "さ"], "explanation": "さ at the end is a light, casual way of stating something, mostly used by boys and men. ぼくもさ = 'me too, you know'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

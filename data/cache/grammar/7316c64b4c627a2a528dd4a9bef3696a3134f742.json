@@ -1,0 +1,1 @@
+{"text": "かねが　たらんな", "structure": [{"jp": "かねが　たらんな", "en": "you don't have enough money"}], "patterns": [{"name": "〜ない", "span": "たらん", "words": ["たらん"], "explanation": "ん in place of ない is an old-man or dialect way of saying 'not'. たらん = 'is not enough'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

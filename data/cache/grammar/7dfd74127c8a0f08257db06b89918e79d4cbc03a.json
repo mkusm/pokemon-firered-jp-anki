@@ -1,0 +1,1 @@
+{"text": "＊は　おこっている！", "structure": [{"jp": "＊は", "en": "＊"}, {"jp": "おこっている！", "en": "is angry!"}], "patterns": [{"name": "〜ている", "span": "おこっている", "words": ["おこっている"], "explanation": "ている after a verb shows a state that is going on now. おこっている = 'is angry'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

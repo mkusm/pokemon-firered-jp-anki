@@ -1,0 +1,1 @@
+{"text": "この　フロアは　モンスターボールの　けんきゅう　セクションだ！", "structure": [{"jp": "この　フロアは", "en": "this floor"}, {"jp": "モンスターボールの　けんきゅう　セクションだ！", "en": "is the Poké Ball research section!"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

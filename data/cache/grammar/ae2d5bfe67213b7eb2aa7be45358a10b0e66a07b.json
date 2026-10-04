@@ -1,0 +1,1 @@
+{"text": "ここは　シオン　タウン　シオンは　むらさき　とうとい　いろ", "structure": [{"jp": "ここは　シオン　タウン", "en": "this is Lavender Town"}, {"jp": "シオンは　むらさき", "en": "Lavender is purple"}, {"jp": "とうとい　いろ", "en": "the noble color"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

@@ -1,0 +1,1 @@
+{"text": "つきあうぜ！", "structure": [{"jp": "つきあうぜ！", "en": "I'll go along with it!"}], "patterns": [{"name": "〜ぜ", "span": "つきあうぜ", "words": ["つきあう", "ぜ"], "explanation": "ぜ at the end is rough, manly talk that pushes your statement at the listener. つきあうぜ = 'I'll go along with it, man!'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

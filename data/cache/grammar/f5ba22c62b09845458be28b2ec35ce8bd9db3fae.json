@@ -1,0 +1,1 @@
+{"text": "スタート　ボタン　おして！", "structure": [{"jp": "スタート　ボタン", "en": "the Start Button"}, {"jp": "おして！", "en": "press!"}], "patterns": [{"name": "〜て (request)", "span": "おして", "words": ["おして"], "explanation": "A て-form on its own at the end is a casual way to tell someone to do something. おして = 'press it'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

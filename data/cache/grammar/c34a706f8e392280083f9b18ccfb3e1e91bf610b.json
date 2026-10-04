@@ -1,0 +1,1 @@
+{"text": "かんべん　してくれ…", "structure": [{"jp": "かんべん　してくれ…", "en": "give me a break..."}], "patterns": [{"name": "〜てくれ", "span": "してくれ", "words": ["してくれ"], "explanation": "てくれ after a verb is a blunt way of asking someone to do something for you. かんべん　してくれ = 'spare me, will you'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

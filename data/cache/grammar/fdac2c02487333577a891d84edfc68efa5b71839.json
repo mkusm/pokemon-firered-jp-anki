@@ -1,0 +1,1 @@
+{"text": "かかって　こいよ！", "structure": [{"jp": "かかって　こいよ！", "en": "come at me!"}], "patterns": [{"name": "〜てくる", "span": "かかって　こい", "words": ["かかって", "こい"], "explanation": "てくる after a verb says the action comes toward the speaker. こい is the blunt order form of くる. かかって　こい = 'come at me'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

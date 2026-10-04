@@ -1,0 +1,1 @@
+{"text": "おまえも　つっぱれ！", "structure": [{"jp": "おまえも", "en": "you too"}, {"jp": "つっぱれ！", "en": "act tough!"}], "patterns": [{"name": "〜え・〜ろ (command)", "span": "つっぱれ", "words": ["つっぱれ"], "explanation": "Changing the last sound of a verb from る to れ turns it into a blunt order. つっぱれ = 'act tough!'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

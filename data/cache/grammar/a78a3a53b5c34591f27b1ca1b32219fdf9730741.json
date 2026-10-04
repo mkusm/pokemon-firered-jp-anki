@@ -1,0 +1,1 @@
+{"text": "ポケモンの　こうかん　かな！", "structure": [{"jp": "ポケモンの　こうかん　かな！", "en": "Pokémon trading, I guess!"}], "patterns": [{"name": "〜かな", "span": "こうかん　かな", "words": ["かな"], "explanation": "かな at the end shows the speaker is wondering or guessing out loud. こうかん　かな = 'a trade, I guess'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

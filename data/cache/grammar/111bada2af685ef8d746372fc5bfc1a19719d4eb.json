@@ -1,0 +1,1 @@
+{"text": "はいれよ！", "structure": [{"jp": "はいれよ！", "en": "join already!"}], "patterns": [{"name": "〜ろ (command)", "span": "はいれ", "words": ["はいれ"], "explanation": "Changing the last sound of the verb to え (or adding ろ) makes a blunt order. After two softer tries he now just orders. はいれ = 'join!'"}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

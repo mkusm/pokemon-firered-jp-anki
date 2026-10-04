@@ -1,0 +1,1 @@
+{"text": "あッ　なんや　そのめは？", "structure": [{"jp": "あッ", "en": "hey"}, {"jp": "なんや", "en": "what is"}, {"jp": "そのめは？", "en": "that look (in your eyes)?"}], "patterns": [{"name": "〜だ", "span": "なんや", "words": ["なん", "や"], "explanation": "や is the Kansai dialect way of saying だ, 'is'. なんや = 'what is it'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

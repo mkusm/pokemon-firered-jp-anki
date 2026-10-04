@@ -5,10 +5,50 @@
 # A string is fixed only when two independent decisions agreed. You can edit
 # a line by hand; the stage never changes a string that is already here.
 
+あそびかた:
+  as: depends
+  why: 'two independent decisions disagreed: あそびかた / あそび + かた'
+  example: あそびかた　やりかたなど　なにか　こまったことが　あったら　Ｌか　Ｒの　ボタンを　おしてください。
+あたりやすく:
+  as: depends
+  why: 'two independent decisions disagreed: あたりやすく / あたり + やすく'
+  example: せんとうちゅうは　きゅうしょに　あたりやすくなる　どうぐ。
+あるいている:
+  as: あるいて + いる
+  why: The て-form stands on its own and いる is a helper verb, matching して + くれる.
+  example: やまのなかの　さかみちを　あるいていると　ゴローンが　ころがって　くることが　ある。
+あれで:
+  as: depends
+  why: The set adverb あれで(も) "believe it or not" is one word, but あれ + で "with that (HM)" is a pronoun plus a particle.
+  example: ウチの　いもうと　あれでも　ポケモン　トレーナーの　はしくれ！
+いいなり:
+  as: depends
+  why: 言いなり "at someone's beck and call" is one noun, while いい + なり is "good" plus the archaic copula.
+  example: シルフも　ポケモンも…　ロケットだんの　いいなりに　なったら　やだなあ
+いいや:
+  as: depends
+  why: いいや "no" is one interjection, while いい + や is "fine" plus a casual sentence ending.
+  example: はじめに　ベトベター　だして…　いいや　ほかので　いっきに…　…　うーん　ブツ　ブツ…
+いうても:
+  as: いうて + も
+  why: いうて stands on its own as a て-form and も adds "even if"; most sentences already cut it this way.
+  example: そんなん　いうても　ポケモン　もちきれへんやんけ！
+いがいと:
+  as: depends
+  why: 意外と "surprisingly" is one adverb, but 以外 + と "other than" + "and" is a noun plus a particle.
+  example: どうくつの　なかって　いがいと　ひろいのねー！
+いたいめ:
+  as: いたいめ
+  why: 痛い目 is a dictionary set expression meaning "painful experience", where め does not mean "eye".
+  example: おれは　この　ポスターを　みはってるのだ　じゃまを　すると　いたいめに　あわせるぞ！
 いだいな:
   as: いだい + な
   why: いだい is a na-adjective that stands on its own and な is its linking form; no dictionary entry for the whole.
   example: これは　ポケモンの　れきしに　のこる　いだいな　しごとじゃー！
+いちじてきに:
+  as: いちじてき + に
+  why: いちじてき is a な-adjective that stands alone and に is its regular adverbial particle; there is no entry for the whole.
+  example: たたかう　ポケモンの　すばやさを　いちじてきに　あげるの
 いっしょに:
   as: いっしょ + に
   why: いっしょ is a noun that stands alone and に makes it adverbial, cut like the other noun + に strings.
@@ -21,14 +61,46 @@
   as: いどう + した
   why: いどう is a noun that stands alone, followed by the past of する.
   example: てもちの　＊を　＊に　いどうした！
+いままで:
+  as: いま + まで
+  why: Noun plus particle whose meaning is just "until now", and most sentences already cut it.
+  example: わたしは　いままで　かった　ことが　ない…　ずっと　そうなの　かも…
 いやな:
   as: いや + な
   why: A na-adjective plus its linking な; the move name いやなおと is a separate, longer word.
   example: いやなおと
+いれてある:
+  as: いれて + ある
+  why: いれて stands on its own as a て-form and ある adds the resulting-state sense, so the meaning is just the two words.
+  example: バッグに　いれてある　どうぐを　べんりボタンに　とうろく　できます
 いろいろな:
   as: いろいろ + な
   why: いろいろ stands alone and な only links it to the noun; cut the same way as every other na-adjective here.
   example: いろいろな　ボタンを　よくつかう　じゅんばんで　せつめい　します。
+いわれました:
+  as: いわれました
+  why: ました is a conjugation ending on the stem いわれ, so it must not be cut.
+  example: オーキド　はかせの　じょしゅ　です　ポケモンずかんが　１０しゅるい　あつまってる　ようなら　ひでんマシン０５を　わたす　よう　はかせに　いわれ　ました　……　それでは　さっそく　レッドくん！
+うんめいてきな:
+  as: うんめいてき + な
+  why: うんめいてき is a na-adjective that stands on its own and な is the linking copula form, with no dictionary entry for the whole.
+  example: ＊なせいかく　Ｌｖ＊のとき　うんめいてきな　であいを　した
+おいしそうな:
+  as: おいしそう + な
+  why: おいしそう stands alone as a na-adjective and な is the linking copula.
+  example: おいしそうな　たべものが　いっぱい　はいってそう！
+おかげで:
+  as: おかげ + で
+  why: Noun plus particle, and the meaning is just the two together.
+  example: おかげで　ポケモン　ずかんの　ページが　ふえたぜ！
+おきゃく:
+  as: おきゃく
+  why: The polite prefix お is not a word on its own, and this matches おきゃくさん as one word.
+  example: …じゃ　おきゃく　さんに　おこられるか？
+おきゃくさん:
+  as: おきゃくさん
+  why: Dictionary word, and the deck already has it as one word in most sentences.
+  example: おきゃくさん！
 おしえてくれる:
   as: おしえて + くれる
   why: A て-form plus the helper くれる, each standing on its own with its usual meaning.
@@ -37,10 +109,26 @@
   as: おしえテレビ
   why: Name of an item (Teachy TV).
   example: たとえば　おにいさんの　バッグに　おしえテレビが　あるとして…　これを　とうろく　して　みせちゃいましょう　かっこよく！
+おしてみよう:
+  as: おして + みよう
+  why: The て-form stands on its own and みる is a helper verb, matching the other て-form cuts.
+  example: ポスターの　うらに　ひみつの　スイッチを　みつけた　おしてみよう！
+おっている:
+  as: おって + いる
+  why: Both verbs (bear and pursue) are a free-standing て-form plus いる, so the cut is the same.
+  example: ＊は　すでに　やけどを　おっている
 おとどけもの:
   as: おとどけもの
   why: Name of the item (Oak's Parcel), and most sentences already keep it whole.
   example: レッドは　オーキド　はかせに　おとどけものを　わたした！
+おはか:
+  as: お + はか
+  why: Polite prefix plus a noun that stands alone, and most sentences already cut it.
+  example: あなたも　おはか　まいりに　きたの？
+おはな:
+  as: お + はな
+  why: Polite prefix plus the noun はな, cut the same way as おはか.
+  example: おはな　なんか　いけてる　から　おとなしそうに　みえるが　てごわい　あいてに　なるぞ！
 おまえたち:
   as: おまえたち
   why: Dictionary entry for plural 'you', and most sentences already keep it whole.
@@ -49,10 +137,22 @@
   as: おまちしてます
   why: Humble お + stem + する is one conjugated form; まち cannot stand on its own here.
   example: またの　ごりようを　おまちしてます！
+おれたち:
+  as: おれたち
+  why: おれたち has its own dictionary entry as the pronoun "we" and most sentences already keep it whole.
+  example: おれたちは　だいじな　しごとを　してるんだ！
+おわたし:
+  as: お + わたし
+  why: Humble prefix of the お…する pattern plus the verb-stem noun, cut like the other お- words.
+  example: まにあって　よかった……　オーキドはかせの　じょしゅです　おとどけものを　たのまれたので　おわたし　します　どうぞ！
 おわってしまう:
   as: おわって + しまう
   why: The て-form stands alone and しまう is a separate auxiliary verb; most sentences already cut it.
   example: ポケモンに　どうぐを　つかうだけでも　こっちの　ばんは　おわってしまうよ　さあ　こんどは　むこうの　ばんだぞ！
+かい:
+  as: depends
+  why: 'two independent decisions disagreed: かい / depends'
+  example: これ　たのまれてるんだけど　わたして　くれるかい！
 かいてある:
   as: かいて + ある
   why: The て-form stands alone and ある is a separate auxiliary verb, cut like おわって + しまう.
@@ -65,6 +165,34 @@
   as: かがくはくぶつかん
   why: Part of a facility name (Pewter Museum of Science) and a dictionary entry.
   example: ニビかがくはくぶつかん
+かって:
+  as: depends
+  why: The て-forms of 買う/勝つ/飼う are one conjugated word, but か + って is a question particle plus the quoting particle.
+  example: ポケモン　とろうとして　モンスター　ボール　なげてたら　すぐ　なくなっちゃった　きみも　おおめに　かって　おくと　いいよ
+かっていた:
+  as: かって + いた
+  why: The て-form plus helper いた is the same cut for both the "keep" and "win" verbs.
+  example: ここは　ポケモンの　おはかで　ゆうめいな　タウンだ…　かっていた　ポケモンが　しんだとき　ポケモン　タワーに　もっていって　めいふくを　いのるのさ…
+かもしれん:
+  as: かもしれん
+  why: かもしれん is a dictionary set expression ("might"), the same as かもしれない.
+  example: ともだちと　こうかん　すると　もっと　あつまる　かもしれん
+かよ:
+  as: か + よ
+  why: か marks the question or doubt and よ adds rough emphasis, so each piece does its own job.
+  example: マジかよ
+からだ:
+  as: depends
+  why: からだ "body" is one noun, while から + だ "it is because" is particle plus copula.
+  example: あいてに　むかって　からだ　ぜんたいで　つっこんで　いって　こうげきする。
+かわりに:
+  as: かわり + に
+  why: Noun plus particle, and most sentences in the deck already cut it this way.
+  example: かわりに　わしの　だいじな　かくとう　ポケモンを　わたす！
+かんたんに:
+  as: かんたん + に
+  why: Na-adjective stem plus に, which is how most sentences already cut it.
+  example: そう　かんたんには　いかないぜ！
 かんぺきな:
   as: かんぺき + な
   why: かんぺき stands alone and な only links it to the noun; cut like the other na-adjectives.
@@ -73,6 +201,26 @@
   as: がんせきふうじ
   why: Name of a move (Rock Tomb).
   example: どの　ポケモンに　おぼえさせるか　よく　かんがえた　ほうが　いい　ところで…　わざマシン３９には　がんせきふうじ　が　はいっている！
+きたって:
+  as: depends
+  why: 'two independent decisions disagreed: depends / きた + って'
+  example: ……めずらしい　ポケモン　つかまえたら　みせに　きたって！
+きておくれ:
+  as: きて + おくれ
+  why: きて is a complete te-form and おくれ is a separate auxiliary request word, so the meaning is just the two together.
+  example: それじゃ　また　きておくれ
+きてくれた:
+  as: きて + くれた
+  why: The te-form stands on its own and くれた is a separate helping verb, with no dictionary entry for the whole.
+  example: …　どうも　ありがとう　でも…　わたしは…　カラカラの　おかあさん　ガラガラの　たましいを　なぐさめる　ために　すすんで　ここまで　きたのです　…ああ　どうやら　ガラガラも　てんごくへ　むかった　ようですね　せっかく　ここまで　きてくれた　きみにも　おれいを　しなきゃね！
+きもちよさそう:
+  as: きもち + よさそう
+  why: The meaning is just "feeling" plus "looks good", and there is no entry for the whole.
+  example: ポケモンが　とても　きもちよさそうに　ねています
+きょうぼうな:
+  as: きょうぼう + な
+  why: The na-adjective stem stands alone and な is the linking copula.
+  example: みのこなしが　かるく　きょうぼうな　せいかく。
 きれいな:
   as: きれい + な
   why: A na-adjective plus its linking な.
@@ -81,6 +229,10 @@
   as: きれい + に
   why: きれい stands alone and に makes it adverbial or marks the result; cut like the other na-adjectives.
   example: いろんな　しょっきが　きれいに　ならんでいる！
+くれい:
+  as: くれ + い
+  why: くれ stands on its own as a command, い is an old-man emphatic ending, and most sentences already cut it so.
+  example: もって　いかないで　くれい！
 こうげきする:
   as: こうげき + する
   why: こうげき stands alone as a noun and most sentences in the deck already cut it this way.
@@ -89,10 +241,18 @@
   as: こうげきりょく
   why: こうげきりょく is a dictionary word and the name of a game stat; りょく is a suffix that does not stand alone.
   example: やけどは　たいりょくが　へって　こうげきりょくが　さがって　しまいます！
+こなくなる:
+  as: こなく + なる
+  why: こなく is a complete form and なる is the plain verb "become"; most sentences already cut it this way.
+  example: ２５０ぽ　すすむ　あいだ　よわい　やせいの　ポケモンが　まったく　でて　こなくなる。
 この:
   as: depends
   why: この 'this' is one word, but in よいこの it is こ 'child' + の linking it to the next noun.
   example: もどる　やめるなど　キャンセルは　この　ボタンです。
+このあいだ:
+  as: このあいだ
+  why: Set expression meaning "the other day", which この and あいだ do not add up to.
+  example: このあいだ　さしあげた　ふえは　やくに　たってるかな？
 このくらい:
   as: depends
   why: 'two independent decisions disagreed: このくらい / この + くらい'
@@ -101,22 +261,86 @@
   as: depends
   why: 'two independent decisions disagreed: この + さき / このさき'
   example: トキワの　もり　…　でぐち　このさき　ニビ　シティ
+このへん:
+  as: この + へん
+  why: The meaning is just "this" plus "area", and most sentences already cut it.
+  example: ああー　きっと　もう　このへんには　いないな！
 こまめに:
   as: こまめ + に
   why: こまめ stands alone and に makes it adverbial; cut like the other na-adjectives.
   example: セーブするには　ポケモン　レポート　こまめに　かくと　いいなり
+これいじょう:
+  as: これいじょう
+  why: Dictionary expression meaning "any more", and most sentences already keep it whole.
+  example: これいじょう　あずけられません！
+これまで:
+  as: これまで
+  why: これまで is a dictionary word for "so far, up to now", and both sentences use it in that sense.
+  example: これまでの　あらすじ
 さきに:
   as: さき + に
   why: The noun さき (ahead, first, tip) + に fits every sentence, and most already cut it.
   example: おれは　おとな　だから　がっつかないのさ　レッドから　さきに　えらばせて　やるぜ！
+さしあげなくては:
+  as: さしあげなくて + は
+  why: The negative te-form stands on its own and は is a separate particle, as with たたかって + も.
+  example: まいり　ましたわ　ほんとうに　おつよい　かた…　この　レインボーバッジ　さしあげ　なくては　なりませんね
 さまざまな:
   as: さまざま + な
   why: さまざま stands on its own as a na-adjective and な just links it to the noun; no dictionary entry for the whole.
   example: ぼうけんを　つうじて　さまざまな　ひとと　コミュニケーションを　とりながら　せいちょう　すること。
+しかたない:
+  as: しかたない
+  why: Set expression "can't be helped / unbearably so" with a dictionary entry.
+  example: もうかって　しかたないわ！
+しずかに:
+  as: しずか + に
+  why: しずか stands on its own and に does its ordinary adverb-making job, the same in both sentences.
+  example: かいぬしの　じまん　ばなしには　しずかに　みみを　かたむけよう！
+しぜんに:
+  as: しぜん + に
+  why: The na-adjective stem stands alone and に makes it an adverb, parallel to the な cuts.
+  example: ポケモンが　そだって　しぜんに　おぼえる　わざの　ほかに　いつでも　わざを　おしえられる　すごい　マシンの　ことさ！
+してあげて:
+  as: して + あげて
+  why: して stands alone as a て-form and あげて is the separate helping verb "do for someone"; most sentences cut it this way.
+  example: あら…　おねえさんが　あいて　して　あげても　いいわよ
+してきた:
+  as: して + きた
+  why: して stands alone and きた is the separate helping verb "has come to", matching して + あげて.
+  example: せかい　じゅうを　たび　してきたが　ねむって　ばかりの　あいつを　みつけたときは　ほんとに　あきれた　たしか…！
+してくれる:
+  as: して + くれる
+  why: The て-form plus helper verb くれる, and most sentences already cut it.
+  example: となりのこが　ゴーストと　ガルーラ　こうかん　してくれるって！
+してない:
+  as: して + ない
+  why: して stands alone and ない is the contracted helper いない, parallel to して + いる.
+  example: でんきの　けしわすれ　して　ないか
+しゃちょうしつ:
+  as: しゃちょうしつ
+  why: It is the name of a place, the president's office, and a dictionary word.
+  example: さっき　ロケットだんの　ボスが　しゃちょうしつに　あがってったが　…　しゃちょうが　しんぱいだ！
 しょうがない:
   as: しょうがない
   why: Set expression meaning 'it can't be helped / hopeless', which is not the sum of its words, and it has a dictionary entry.
   example: やれやれ…　まったく　しょうがない　ヤツじゃのう　レッド！
+しょうぶごと:
+  as: しょうぶごと
+  why: Dictionary compound noun whose voiced ごと cannot stand on its own.
+  example: やっぱ　しょうぶ　ごとが　いちばん！
+しんかした:
+  as: しんか + した
+  why: Noun plus する, cut the same way as しんか + する.
+  example: ＊は　＊に　しんかした！
+しんかする:
+  as: しんか + する
+  why: The noun しんか stands alone with する, and most sentences already cut it.
+  example: ３しゅるいの　ポケモンに　しんかする　かのうせいを　もつ　めずらしい　ポケモンだ。
+しんせいひん:
+  as: しんせいひん
+  why: 新製品 is a dictionary word, and しん is a prefix that cannot stand alone.
+  example: しんせいひん　スーパーボールは　モンスターボール　より　かくじつに　ポケモンを　つかまえます！
 じどうてきに:
   as: じどうてき + に
   why: じどうてき stands alone and に makes it adverbial; cut like the other na-adjectives.
@@ -125,6 +349,18 @@
   as: じゃない
   why: The dictionary lists it and じゃ here is only the contracted では, with no fitting sense of its own.
   example: カスミが　でる　まく　じゃないわ
+じゃないか:
+  as: じゃない + か
+  why: じゃない and the rhetorical か each do their own job, and most sentences already cut it.
+  example: いい　できばえ　じゃないか！
+じゃなかった:
+  as: depends
+  why: 'two independent decisions disagreed: じゃなかった / じゃ + なかった'
+  example: エリカさんを　みてたのか…　あたしじゃ　なかったのね
+じゃなくて:
+  as: じゃ + なくて
+  why: There is no entry for the whole, and the copula じゃ and the negative なくて each do their own job, as in ではなく.
+  example: タケシに　もらったんだね　おれも　タケシを　みならって　つよいだけ　じゃなくて　みんなに　したわれる　ジムリーダーに　なりたいなあ
 すきな:
   as: すき + な
   why: すき stands alone; な links it to a noun or belongs to the following なの.
@@ -141,14 +377,58 @@
   as: せいちょう + する
   why: せいちょう is a noun that stands alone plus する, cut like かいふく + する.
   example: だっぴして　せいちょうすると　いとを　かけて　サナギに　かわる。
+せいめいはんだん:
+  as: せいめいはんだん
+  why: Dictionary compound and the name of the name-rating feature.
+  example: せいめいはんだんしのいえ
+せんとうちゅう:
+  as: せんとう + ちゅう
+  why: Noun plus the suffix ちゅう, meaning just the sum of its parts; most sentences already cut it.
+  example: エフェクトガードは　せんとうちゅうに　つかうと　みかたの　ポケモンの　のうりょくを　さげられずに　すみます！
+せんとうふのう:
+  as: せんとうふのう
+  why: It is a game term for the fainted state and a dictionary word.
+  example: げんきのかけら　たかい　けど　せんとうふのうの　ポケモンが　げんきに　なるの　すごいわ！
+そうか:
+  as: そうか
+  why: As 'I see' it is a set interjection, and most sentences already have it as one word.
+  example: …　…　…　おお　そうか　わしが　よんだのじゃった！
+そうだ:
+  as: そうだ
+  why: そうだ is a dictionary expression and also underlies そうだな; most sentences keep it whole.
+  example: そうだ　おもいだしたぞ！
+そうです:
+  as: depends
+  why: 'two independent decisions disagreed: depends / そう + です'
+  example: それは　それは　にぎやかな　まちだそうです
+そこそこ:
+  as: depends
+  why: そこそこ "reasonably" is one adverb, but そこ　そこ！ is the word "there" said twice.
+  example: とにかく…　ポケモンは　そこそこ　そだててる　ようだな！
 そこで:
   as: depends
   why: The conjunction "and so" is one word, while "at that spot or moment" is そこ + で.
   example: さいきん　ポケモンセンターの　２かいの　ダイレクト　コーナーで　きのみを　つぶす　きかいを　おいて　もらったのじゃ　……そこで！
+そのへん:
+  as: そのへん
+  why: その辺 is a dictionary word for "around there", and every sentence uses it in that sense.
+  example: はかせから　レッドくんへの　おくりものを　もって　でかけた　はずなんだけど…　２ばんどうろ　あたりで　レッドくんを　さがす　って　いってたから　そのへんかな？
 それいじょう:
   as: それいじょう
   why: Dictionary entry meaning 'any further / beyond that', and most sentences already keep it whole.
   example: レベル３０までの　ポケモンは　ひとから　もらった　ポケモンでも　おとなしく　いうことを　ききます　それいじょう　レベルが　たかいと　うまく　あつかえません　それから　いあいぎりの　わざは　たたかって　いない　ときでも　つかえるように　なります
+それだけ:
+  as: depends
+  why: 'two independent decisions disagreed: depends / それ + だけ'
+  example: それだけの　うでが　あれば　ロケットだん　でも　えらく　なれるのに　もったいないぜ！
+それで:
+  as: depends
+  why: それで "so, and then" is one conjunction, while それ + で is "with that".
+  example: でも　ここの　なかまは　おれの　いうこと　しんじないんだ　……それで　きみに　たのみが　ある！
+それに:
+  as: depends
+  why: The conjunction それに "besides" is one word, but それ + に "to/by it" is pronoun plus particle.
+  example: おなじ　レベルの　ポケモンでも　つよさは　まちまち　らしい　それに　ひとが　そだてた　ポケモンの　ほうが　やせい　より　つよい　らしい
 それは:
   as: depends
   why: The adverb "ever so" is one word, while "as for that" is それ + は.
@@ -161,14 +441,50 @@
   as: たたかって + いない
   why: たたかって stands on its own as a te-form and いない is the auxiliary いる negated; the deck already cuts it this way in 6 of 7 sentences.
   example: すべての　ポケモンの　こうげき　りょくが　すこし　たかく　なります　それから　フラッシュの　わざは　たたかって　いない　ときでも　つかえるように　なります
+たたかってなくても:
+  as: たたかって + なくても
+  why: A て-form followed by the dictionary word なくても; most sentences cut it this way.
+  example: レインボー　バッジで　レベル５０　までの　ポケモンが　おとなしく　いうこと　きき　ます　そして…　かいりきの　わざが　たたかって　なくても　つかえます　それから…　よろしかったら　これも　おつかいに　なって！
+たたかっても:
+  as: たたかって + も
+  why: The te-form stands on its own and も is a separate particle; most sentences already cut it so.
+  example: こども　あいてに　たたかっても　しょうきんは　たまらねえ！
+たたかわせてみよう:
+  as: たたかわせて + みよう
+  why: A て-form plus the auxiliary みる "try"; each piece stands on its own.
+  example: そろそろ　たたかわせて　みよう！
+だい:
+  as: だい
+  why: The familiar question ending だい is a single particle, and nearly all sentences already have it as one word.
+  example: レッド　どーだい？
+だいじな:
+  as: だいじ + な
+  why: Na-adjective stem plus linking な, the same cut as にがてな.
+  example: おれたちは　だいじな　しごとを　してるんだ！
+だいじに:
+  as: だいじ + に
+  why: A na-adjective plus adverbial に, with no dictionary entry for the whole; most sentences cut it.
+  example: だいじに　そだてた　ポケモン！
 だから:
   as: depends
   why: Sentence-initial だから 'therefore' is one conjunction, but after a noun or ん it is the copula だ + から 'because'.
   example: だから　むし・ひこうタイプの　バタフリーは　４ぶんの１しか　ダメージを　うけなくて　すむんだ！
+だが:
+  as: depends
+  why: Sentence-opening だが "however" is one conjunction, while after a noun or adjective it is the copula だ + が "but".
+  example: そうか　きみが　うわさの　レッドさん　ですか……　いい　めを　していますな　だが　この　わたくしが　みとめるには　……　まだまだ　ですな！
+だけでなく:
+  as: だけでなく
+  why: Set expression "not only ... but also" with its own dictionary entry.
+  example: こどもの　トレーナー　とはいえ　パワー　だけでなく　テクニックも　みがいてるな！
 だけど:
   as: depends
   why: After a noun it is the copula だ + けど ('it's a secret, but'), while as a standalone conjunction meaning 'however' it is one word.
   example: ……あの　いいづらいん　だけど　ポケモンに　そんなに　きらわれている　のは　なにか　わけが　あるのかしら……
+だけに:
+  as: depends
+  why: The set expression 'precisely because / as you'd expect' is one word, while 'only' plus 'to' is だけ + に.
+  example: マニアという　だけに　いろいろ　めずらしい　ポケモンを　もってる　らしい
 だって:
   as: depends
   why: 'two independent decisions disagreed: depends / だ + って'
@@ -177,22 +493,102 @@
   as: だっぴ + して
   why: だっぴ is a noun that stands on its own, followed by a form of する.
   example: だっぴして　せいちょうすると　いとを　かけて　サナギに　かわる。
+だれでも:
+  as: だれでも
+  why: Dictionary word meaning 'anyone', which is not the sum of 'who' and 'even'.
+  example: こちら　ポケモン　だいすき　クラブ　ポケモンずき　だれでも　かんげい！
+だれも:
+  as: だれも
+  why: だれも is a dictionary word for "everyone/no one", and most sentences already keep it whole.
+  example: だれも　じばくが　できなくなる
+ちからつきた:
+  as: ちからつきた
+  why: It is the past form of the single verb 力尽きる ("run out of strength, faint").
+  example: ＊は　ちからつきた
+っていう:
+  as: って + いう
+  why: Quotative って plus 'say/call' each do their own job, and most sentences already cut it this way.
+  example: おれたちは　ポケモンを　わるいことに　つかおうっていう　グループだ！
+ついていて:
+  as: ついて + いて
+  why: The te-form stands on its own and いて is the separate helping verb いる.
+  example: つぼみが　せなかに　ついていて　ようぶんを　きゅうしゅうしていくと　おおきな　はなが　さくという。
+つかまえやすい:
+  as: depends
+  why: 'two independent decisions disagreed: つかまえやすい / つかまえ + やすい'
+  example: みずタイプと　むしタイプの　ポケモンが　つかまえやすい　ちょっと　かわった　ボール。
+つかまえやすく:
+  as: depends
+  why: 'two independent decisions disagreed: つかまえやすく / つかまえ + やすく'
+  example: スーパーボールよりも　さらに　ポケモンを　つかまえやすく　なった　すごく　いい　ボール。
 つきのいし:
   as: つきのいし
   why: Moon Stone is an item name.
   example: オツキミやまに　つきのいしが　おちてから　みかける　ように　なったの
+つけな:
+  as: つけ + な
+  why: つけ is the verb stem and な a command ending in every sentence; the dictionary's "pickled greens" never occurs.
+  example: いって　おくが　ボスは　つよいぞ　くれぐれも　きを　つけな
+つけますか:
+  as: つけます + か
+  why: A complete polite verb followed by the question particle.
+  example: ＊に　ニックネームを　つけますか？
+つけよう:
+  as: depends
+  why: The volitional つけよう "let's attach/pay" is one conjugated form, but つけ + よう "way of attaching" is stem plus noun.
+  example: キャタピーは　どくが　ないけど　ビードルには　どくが　あるよ　ポケモンが　さされないように　きを　つけようね
+つれていく:
+  as: つれていく
+  why: Dictionary verb 'to take along', and it is also a menu option name.
+  example: つれていく
+てにいれた:
+  as: てにいれた
+  why: Set expression てにいれる "obtain", whose meaning is not the sum of its words; most sentences keep it whole.
+  example: かいのカセキを　てにいれた！
+であう:
+  as: depends
+  why: 出会う "come across" is one verb, but ところ + で + あう is the place particle plus "meet".
+  example: つり　バカ　ポケモン　バカに　であう！
+である:
+  as: である
+  why: である is the formal copula with its own dictionary entry, and most sentences already keep it whole.
+  example: こいつは　わたしの　まご　きみの　おさななじみであり　ライバル　である　……えーと？
 でてきて:
   as: でて + きて
   why: でて is a complete te-form that stands on its own and きて is the auxiliary くる; no dictionary entry for the whole, and the meaning is the sum of the parts.
   example: わしの　マゴが　でてきて　おしえて　くれるん　だから　とうぜん　じゃな！
+でてくる:
+  as: depends
+  why: 'two independent decisions disagreed: でてくる / でて + くる'
+  example: やせいポケモンが　いる　ばしょで　つかうと　ポケモンが　でてくる。
+でない:
+  as: depends
+  why: 出ない "doesn't come out" (and prohibitive でない) is one word, but ひと + で + ない is the copula で plus "not".
+  example: それは　きみの　ポケモンへの　しんらいと　あいじょうを　かんじて　おるから　なんじゃよ　それを　けして　わすれるでないぞ！
+でなく:
+  as: depends
+  why: でなく "not come out" is a conjugated form of でる, but で + なく "cries in (a voice)" is particle plus verb.
+  example: まひすると　わざが　ときどき　でなく　なり　すばやさも　さがって　しまいます！
+でにくくなった:
+  as: でにくく + なった
+  why: でにくく is a complete conjugated form (adverbial of でにくい) and なった is the separate verb なる, so the meaning is just the two words together.
+  example: ＊は　＊の　＊で　まひして　わざが　でにくくなった！
 では:
   as: depends
   why: Sentence-opening では ("well then") is one word, while で "in/by" + topic は is two.
   example: では　はじめに　きみの　ことを　おしえて　もらおう！
+ではない:
+  as: ではない
+  why: Dictionary entry for the copula negative "is not", where で and は carry no independent sense.
+  example: たたかいは　すきではない。
 ではないか:
   as: ではないか
   why: A set rhetorical ending, listed in the dictionary, that means more than its particles add up to.
   example: ひとの　かおのような　ツボミから　でんせつの　マンドラゴラの　いっしゅ　ではないかと　ささやかれている。
+ではなく:
+  as: で + は + なく
+  why: There is no entry for the whole, and the copula で, contrastive は and negative なく each do their own job.
+  example: フジ　から　レッドへ　きみの　ポケモン　だけではなく　みんなの　ポケモンの　しあわせ…　どうか　きみも　いのって　くれんか
 でも:
   as: depends
   why: でも "but" or "any-/even" (だれでも) is one word, while で "in" + も "even" is two.
@@ -201,22 +597,82 @@
   as: という
   why: Dictionary entry meaning "called; that says", and most sentences already keep it whole.
   example: その　ポケモン　という　いきものを　ひとは　ペットに　したり　しょうぶに　つかったり……　そして……　わたしは　この　ポケモンの　けんきゅうを　してる　というわけだ
+ということは:
+  as: ということは
+  why: Set expression "so that means" in both sentences, with its own dictionary entry.
+  example: ということは　ふしぎなおくりもの　を　しって　いらっしゃるの　ですね！
+といえば:
+  as: といえば
+  why: Set expression 'speaking of', which is more than 'if one says'.
+  example: クチバの　みなと　といえば　つりおやじは　げんき　かなー？
+といった:
+  as: depends
+  why: といった "such as" is a set expression, but と + いった is "was called" or "went with".
+  example: たたかい　おわった　あとでも　どく　ねむり　といった　こうかは　のこる　ところが　すき　だぜ！
+とかげ:
+  as: depends
+  why: とかげ "lizard" is one noun, but ひかり + と + かげ is "and" plus "shadow".
+  example: とかげ
+とき:
+  as: depends
+  why: とき "when, time" is one noun, but in たべないと　きが　すまない it is conditional と plus 気 "mind".
+  example: また　こうもくを　えらぶときに　つかいます。
 ときに:
   as: depends
   why: ときに "by the way; at times" is one word, while とき "when" + に "at" is noun plus particle.
   example: ときに　しょうぶを　しかけられたり　やせいの　いきものたちと　たたかうことも　あるでしょう。
+とくしゅな:
+  as: とくしゅ + な
+  why: とくしゅ stands on its own as a na-adjective and な is just its linking form.
+  example: とくしゅな　パワーを　あいてに　おくりこんで　じぶんと　あいての　とくせいを　いれかえる。
 ところで:
   as: depends
   why: ところで "by the way" is one word, while ところ "place" + で "in" is noun plus particle.
   example: ところで…　しってます？
+とした:
+  as: と + した
+  why: 'Same cut as とする: と after the volitional plus a form of する.'
+  example: レッドは　せんいんに　チケットを　みせようとした…　チケットが…　ない…！
 として:
   as: depends
   why: として "as, in the role of" is one word, while と + して after a volitional (とろうとして, "trying to") is two.
   example: モンスターボールの　なかに　ポケモンが　いれて　あるんじゃ　むかしは　わしも　バリバリの　ポケモン　トレーナーとして　ならした　もの！
+としている:
+  as: と + している
+  why: と belongs to the ようとする pattern and している stands on its own; there is no entry for the whole.
+  example: ＊は　あいてを　みちづれに　しようとしている
+とする:
+  as: と + する
+  why: と links the volitional to する, and most sentences already cut it this way.
+  example: てきには　ほえて　かみつき　おいはらおう　とする。
+とってくれる:
+  as: とって + くれる
+  why: The te-form stands on its own and くれる is a separate helping verb; most sentences already cut it so.
+  example: まあ　いい　おとうとが　かたきを　とってくれる
 とは:
   as: depends
   why: Exclamatory or defining とは ("to think that...") is one word, while と "with" + topic は is two.
   example: ふむ…　おしえテレビを　みる　じかんも　ないとは…　タイム　イズ　マネー…　…　ときは　かねなりか
+とびおきる:
+  as: とびおきる
+  why: Dictionary compound verb; most sentences keep it whole.
+  example: ポケモンのふえを　ふくと　グーグー　ねむってる　ポケモンでも　げんきが　わいて　とびおきる！
+とびだしてきた:
+  as: とびだして + きた
+  why: A て-form plus the auxiliary くる; each piece stands on its own.
+  example: ＊で　とびだしてきた　＊などを　＊ひき　たおした！
+とも:
+  as: depends
+  why: The suffix とも 'both/all of' is one word, while と 'as' plus も 'neither/nor' is two particles.
+  example: この　カセキは　ぼくが　みつけたんだ　ふたつ　とも　ぼくのだ！
+とりポケ:
+  as: とりポケ
+  why: A clipped name for とりポケモン; ポケ does not stand on its own.
+  example: ぼくの　とりポケが　きみたちと　たたかい　たがってる！
+どうか:
+  as: depends
+  why: どうか "please" is one adverb, while in 〜か どうか "whether or not" it is どう + か.
+  example: フジ　から　レッドへ　きみの　ポケモン　だけではなく　みんなの　ポケモンの　しあわせ…　どうか　きみも　いのって　くれんか
 どうぐや:
   as: depends
   why: どうぐや "item shop" is one word, while どうぐ "items" + や "and" is noun plus particle.
@@ -225,10 +681,46 @@
   as: どうじに
   why: Dictionary adverb 'simultaneously', also used in the set pattern すると どうじに 'as well as doing'; the same sense in both sentences.
   example: どうじに　あいての　すばやさを　さげる。
+どくが:
+  as: depends
+  why: どくが "Poison Moth" is one species-category name, while どく + が is "poison" plus the subject particle.
+  example: どくが
+どの:
+  as: depends
+  why: どの "which" is one word, but ど + の "of ... degrees" is counter plus particle.
+  example: どの　ポケモンに　する？
+ないで:
+  as: depends
+  why: ないで "without/instead of doing" is one form, while どうくつない + で is the suffix 内 "inside" plus the place particle.
+  example: つり　ばっかり　して　ないで　もっと　しごとも　できれば　さいこう　なんだが…
+なお:
+  as: depends
+  why: なお "still" is one adverb, while in ような おつよい it is the linking な plus the honorific prefix お.
+  example: げんだいに　なお　いき　のこる　ニンジャの　こわさを　みたな！
+なくても:
+  as: なくても
+  why: Dictionary entry "even if not"; most sentences keep it whole.
+  example: フラッシュ　という　わざを　もっている　ポケモンは　たたかって　なくても　フラッシュを　つかえる　ように　なる！
+なくならない:
+  as: なくならない
+  why: It is the negative of the verb なくなる "run out", whose meaning is not just なく plus なる.
+  example: ひでんマシンは　つかっても　なくならない　タイプ　ぜんぶで　７しゅるい　あります　…　シルフ　カンパニー
 なぜか:
   as: depends
   why: なぜか "for some reason" is one word, while なぜ "why" + question か is two.
   example: しかも…　なぜか　ゆめの　くいかたが　わかって　しまった　うーん　きみが　わるい！
+なったって:
+  as: depends
+  why: '"Even if I become" is なる with the ending たって and cannot be cut, while なった + って is "became" plus hearsay.'
+  example: たとえ　ひとりに　なったって　この　かたい　いしと　たんパンに　ちかって！
+なって:
+  as: depends
+  why: The て-form of なる 'become' is one conjugated form, while prohibitive な plus quotative って is two words.
+  example: これから　はじまる　せかいで　あなたは　ひとりの　しゅじんこうと　なって　ぼうけんを　することに　なります。
+なついていない:
+  as: なついて + いない
+  why: The text writes it with a space as て-form plus the auxiliary いない, and both parts stand on their own.
+  example: ポケモンが　じぶんに　なついて　いないほど　あいてに　あたえる　ダメージが　おおきい。
 なにも:
   as: なにも
   why: Both sentences use it with a negative to mean "nothing; not any", which is the dictionary's set expression.
@@ -237,10 +729,42 @@
   as: なの
   why: Listed under principle 3 as a one-word explanatory ending with a dictionary entry.
   example: …　そうね　おとこのこは　いつか　たびに　でるもの　なのよ　うん…　テレビの　はなしよ！
+なのに:
+  as: な + のに
+  why: After a noun, な is the copula and のに is "even though", each doing its own job; most sentences cut it.
+  example: せかいの　ポケモン　なのに…
+なまえ:
+  as: depends
+  why: なまえ "name" is one noun, while in だな まえの it is the sentence-ending な plus まえ "previous".
+  example: わたしの　なまえは　オーキド　みんなからは　ポケモン　はかせと　したわれて　おるよ
+なんじゃ:
+  as: depends
+  why: '''What (is it)'' is なん-based, while the explanatory copula is な + んじゃ, so the cut differs by meaning.'
+  example: なんじゃ…　がっかりだ
 なんだ:
   as: depends
   why: Explanatory なんだ ("it is, you see") is one ending, while なん "what" + だ "is it" is a question word plus copula.
   example: ねえ　この　みせの　うれすじは　どくけし　なんだって！
+なんと:
+  as: depends
+  why: 'two independent decisions disagreed: なんと / depends'
+  example: パソコンを　みると　なんと　でんしメールが　きていた！
+なんの:
+  as: なんの
+  why: なんの is a dictionary word meaning "what (kind of)" in every sentence, and most already keep it whole.
+  example: こどもが　なんの　ようだ！
+にがてな:
+  as: にがて + な
+  why: Na-adjective stem plus linking な, which is how most sentences already cut it.
+  example: ポケモンは　タイプに　よって　とくいな　タイプ　にがてな　タイプが　いるなり
+にぎやかな:
+  as: にぎやか + な
+  why: にぎやか is a な-adjective that stands on its own, and な is the linking form.
+  example: ヤマブキ　シティも　いちじは　ひとが　にげて　へっちゃった　けど　にぎやかな　まちに　もどるわ！
+にもつ:
+  as: depends
+  why: 荷物 "luggage" is one word, but in てに もつ it is the particle に plus the verb 持つ "hold".
+  example: にもつ　いっぱいよ
 ねむってしまった:
   as: ねむって + しまった
   why: 'Te-form plus auxiliary しまった: both stand as words, no dictionary entry for the whole, and the meaning is just the two together.'
@@ -265,6 +789,10 @@
   as: のです
   why: The dictionary lists のです as the polite form of explanatory のだ, which the rules treat as one word like んです.
   example: そのことばを　しってるの　ですか！
+のに:
+  as: depends
+  why: のに "even though" is one word, but nominalizer の + に "for doing" is two.
+  example: つかまえたと　おもったのに！
 のみ:
   as: depends
   why: 'two independent decisions disagreed: の + み / depends'
@@ -277,42 +805,210 @@
   as: はいはい
   why: Dictionary entry as a single interjection ("yes, yes; sure").
   example: はいはい　こどもは　けんがくりょう　５０えん　です　けんがく　しますか？
+はいる:
+  as: depends
+  why: はいる "enter" is one verb, but は + いる is topic particle plus "exist".
+  example: ひとんちの　にわ　はいるなよ！
+はき:
+  as: depends
+  why: はき "spitting" inside the name あわはき is not は + き "as for + temperament".
+  example: あわはき
 はっしゃして:
   as: はっしゃ + して
   why: はっしゃ stands alone as a noun, followed by a form of する, and most sentences cut it this way.
   example: するどい　つららを　あいてに　はっしゃして　こうげきする。
+はったつしており:
+  as: はったつ + しており
+  why: A noun plus the する verb form しており; the noun stands on its own.
+  example: ２ほんの　あしは　はったつしており　ちじょうで　くらせるのに　なぜか　すいちゅう　せいかつが　すき。
 はってある:
   as: はって + ある
   why: The て-form stands on its own and ある is a separate helper verb marking the resulting state.
   example: かみが　はってある……　わからないことが　あったら　ヘルプ！
+はっはッ:
+  as: はっはッ
+  why: A single laugh interjection; most sentences keep it whole.
+  example: はーッ　はっはッ！
 はどう:
   as: depends
   why: はどう 'wave/pulse' inside the move name みずのはどう is a noun, while in ちょうしは どうかな it is the particle は plus どう 'how'.
   example: みずのはどう
+はなし:
+  as: depends
+  why: はなし "talk/story" is one noun, but は + なし is topic particle plus "none/not allowed".
+  example: けっていする　しらべる　はなしを　すすめるときに　つかいます。
+はね:
+  as: depends
+  why: はね "wings" is one noun, while topic は + ね ("roots" or the sentence particle) are separate words.
+  example: はねをもたないが　たまに　そらを　とぶ　すがたが　もくげきされる。
 はやく:
   as: depends
   why: はやく "quickly" is one word, while particle は + やく (in やくにたつ) is a different pair that only looks alike.
   example: おれの　ほうが　はやく　いっぱい　ポケモン　あつめたのに！
+ひきだして:
+  as: depends
+  why: ひきだして "withdrew" is one compound verb, but ひき + だして is a counter plus "send out".
+  example: レッドの　パソコンから　＊を　ひきだして　＊に　ちゃんと　もたせた！
+ひだりがわ:
+  as: ひだりがわ
+  why: Dictionary word 左側 "left side", and most sentences already keep it whole.
+  example: しょうぶの　さいしょに　とびだす　ポケモンは…　ポケモン　リストの　ひだりがわの　やつだ！
+ひつような:
+  as: ひつよう + な
+  why: A na-adjective plus the copula な, with no dictionary entry for the whole; consistent with だいじ + に.
+  example: ほれ　そのために…　ひつような　どうぐを　わたそう！
+ひとたち:
+  as: ひと + たち
+  why: The meaning is just ひと plus the plural marker たち, and most sentences already cut it this way.
+  example: インタビューは　にがての　ようで　ことわられて　しまいましたが　シオンの　ひとたちに　したわれる　やさしそうな　かた　でした　…へんしゅうぶ
+ひろってくる:
+  as: ひろって + くる
+  why: Te-form plus くる means just what its words add up to, and both pieces stand alone.
+  example: どうぐを　ひろってくる　ことがある
+びっくりした:
+  as: びっくり + した
+  why: 'It means just "was surprised": びっくり stands on its own and した is the past of する.'
+  example: びっくり　した！
+ふえていく:
+  as: ふえて + いく
+  why: ふえて stands on its own and いく adds its ordinary "keep on" sense; most sentences already cut it this way.
+  example: まいターン　へる　どくの　ダメージが　ふえていく。
+ふしぎな:
+  as: ふしぎ + な
+  why: A na-adjective plus its linking な, with no dictionary entry for the whole and most sentences already cutting it this way.
+  example: ふしぎなアメ
 ふしぎなおくりもの:
   as: ふしぎなおくりもの
   why: Mystery Gift is the name of a game feature.
   example: レポートをかくと　ふしぎなおくりもの　が　つかえるように　なります
+ふたりめ:
+  as: ふたりめ
+  why: 二人目 "second person" has its own dictionary entry and め is a suffix that cannot stand alone.
+  example: あの　ときの　たたかい…　ふたりめの　わたしが　いちばん　つよかった　でしょ？
+ふにゃふにゃ:
+  as: ふにゃふにゃ
+  why: ふにゃふにゃ is a single mimetic word with its own dictionary entry.
+  example: ウチの　ヤドン　なにやら　ふにゃふにゃ　いってたな…　ボケた　のか？
 べんりな:
   as: べんり + な
   why: Set by hand to match the other な-adjectives (たいせつ + な, いろいろ + な); the two model decisions had kept it whole by majority.
   example: わたし　フレンドリィ　ショップの　てんいん　です　べんりな　どうぐや　ですから　トキワ　シティで　ぜひ　よって　くださいね！
+ほうしゃする:
+  as: ほうしゃ + する
+  why: ほうしゃ is a noun that stands alone, and する simply makes it a verb.
+  example: くうちゅうに　ういたまま　いどうして　さゆうの　ユニットから　でんじはなどを　ほうしゃする。
+ほうは:
+  as: depends
+  why: As garbled そうか it is one unit, while in きみの ほうは it is the noun ほう plus the particle は.
+  example: ほは　ほうは…　ひひ　ほはへには　はのはんはッ！
+ぼうぎょりょく:
+  as: ぼうぎょりょく
+  why: Name of a game stat, and most sentences already keep it whole.
+  example: ぼうぎょりょく
+ぼうそうぞく:
+  as: ぼうそうぞく
+  why: ぼうそうぞく is a dictionary word and a trainer class name.
+  example: ぼうそうぞく
+まだまだ:
+  as: まだまだ
+  why: Dictionary word 未だ未だ, and nearly all sentences already keep it whole.
+  example: まだまだ…　これからだ　あちこちの　くさむらに　はいって　ポケモンを　つかまえるのじゃ！
+まひして:
+  as: まひ + して
+  why: まひ is a noun that stands on its own, followed by the て-form of する.
+  example: ＊は　まひして　わざが　でにくくなった！
+みたいな:
+  as: みたいな
+  why: The dictionary lists みたいな, and it matches how the deck treats na-adjective plus な (ゆうめいな).
+  example: ずかん　みたいな　ものが　ある！
+みたいに:
+  as: みたい + に
+  why: みたい stands on its own and に does its ordinary adverbial job; no dictionary entry for the whole.
+  example: ポケモン　みたいに　かわいい　トレーナーさん　ね！
+みつけては:
+  as: みつけて + は
+  why: みつけて is a complete て-form and は adds its own "whenever" sense; the whole has no dictionary entry.
+  example: こういう　くさむらを　みつけては　あたらしい　ポケモン　いないか　さがしてるのさ！
+みてみよう:
+  as: みて + みよう
+  why: Te-form plus みる "try doing" is a regular pattern whose pieces each stand alone.
+  example: トレーナーカードを　みてみよう
 みな:
   as: みな
   why: みな is a command form of みる (short for みなさい), and み cannot stand on its own.
   example: かてる　じしんが　あるなら　タケシと　たたかって　みなよ！
+みのため:
+  as: みのため
+  why: みのため is a set expression with a dictionary entry, "for one's own good".
+  example: ロケットだんに　たてつかない　ほうが　みのため　だぜ
+むいてない:
+  as: むいて + ない
+  why: むいて stands on its own and ない is a plain negative, so the meaning is just the two words together.
+  example: ぼくは　たたかうの　むいて　ないな　かえって　イラスト　でも　かいてよう
+めいちゅうりつ:
+  as: めいちゅうりつ
+  why: Dictionary word and the name of a game stat.
+  example: めいちゅうりつ
 めのまえ:
   as: めのまえ
   why: Dictionary set expression 目の前, used in the fixed blackout phrase.
   example: レッドは　しょうきんとして　＊円　しはらった　…　…　…　…　レッドは　めのまえが　まっくらに　なった！
+もういちど:
+  as: もういちど
+  why: Dictionary set expression もう一度 "once more", and most sentences already keep it whole.
+  example: それを　つかうと　もういちど　しょうぶ　したい　トレーナーが　みつかるの！
+もうすぐ:
+  as: もうすぐ
+  why: もうすぐ "soon" is a set adverb with its own dictionary entry.
+  example: もうすぐ　サント・アンヌは　しゅっぱつ　するよ！
+もうれつに:
+  as: もうれつ + に
+  why: もうれつ is a な-adjective that stands on its own, and に makes it adverbial.
+  example: さらに　ポケモンリーグ　ほんぶには　…　もうれつに　つよい！
+もお:
+  as: depends
+  why: The exclamation もお "jeez" is one word, while particle も followed by honorific お is two unrelated words.
+  example: もお…！
+もっていって:
+  as: depends
+  why: 'two independent decisions disagreed: もっていって / もって + いって'
+  example: ここは　ポケモンの　おはかで　ゆうめいな　タウンだ…　かっていた　ポケモンが　しんだとき　ポケモン　タワーに　もっていって　めいふくを　いのるのさ…
+もってきた:
+  as: depends
+  why: 'two independent decisions disagreed: もってきた / もって + きた'
+  example: きのみの　こなを　もってきたのかね？
+もってない:
+  as: もって + ない
+  why: もって stands on its own and ない is a plain negative, cut the same way as むいて ない.
+  example: おともだちと　２かいへ　いって　もってない　ポケモン　こうかんして　もらったら　たくさん　あつまるわよ！
 やくにたつ:
   as: やくにたつ
   why: Set expression 役に立つ meaning 'be useful', which its words do not add up to.
   example: しょしんしゃの　トレーナーに　やくにたつ　ばんぐみを　みることが　できる　テレビ。
+やけど:
+  as: depends
+  why: 火傷 "burn" is one word, but in Kansai speech it is the copula や plus けど "but".
+  example: どくや　やけどで　よわらせても　いいよ！
+やさしそうな:
+  as: やさしそう + な
+  why: やさしそう stands on its own as a な-adjective and な is the linking copula form, as most sentences already cut it.
+  example: インタビューは　にがての　ようで　ことわられて　しまいましたが　シオンの　ひとたちに　したわれる　やさしそうな　かた　でした
+やだ:
+  as: やだ
+  why: やだ is a dictionary word contracted from いやだ; や cannot stand on its own.
+  example: はあーい…　よい　おてんきね　きもち　いい…　…　すー…　すー　…　あら　いけない　ねて　しまったわ…　ようこそ　わたくし　タマムシ　ジムの　エリカと　もうします　おはなを　いけるのが　しゅみで　ポケモンは　くさタイプ　ばかり　…　あら　やだ　しあいの　もうしこみ　ですの？
+やまみち:
+  as: やまみち
+  why: Dictionary compound 山道, and most sentences keep it whole.
+  example: やまみち　ひさしぶりに　あるいて　ひんけつ　ぎみ　なの
+やめられない:
+  as: やめられない
+  why: Negative potential conjugated form; やめられ cannot stand on its own.
+  example: …　はじめたら　やめられない
+ゆうめいな:
+  as: ゆうめいな
+  why: No higher principle decides, and the deck keeps it whole in 6 of 7 sentences.
+  example: なにしろ　マサキは　ゆうめいな　ポケモン　マニア　だからな！
 よいこ:
   as: よいこ
   why: Lexicalised dictionary word よいこ 'good kid', used as a fixed label in both sentences.
@@ -325,6 +1021,10 @@
   as: よう + だ
   why: よう 'appearance' and the copula だ each do their own job, and most sentences already cut it this way.
   example: ＊なせいかく　Ｌｖ＊のとき　＊で　であったようだ
+ようで:
+  as: よう + で
+  why: No dictionary entry for the whole; よう "seeming" and the copula で "being, and" each do their own job.
+  example: インタビューは　にがての　ようで　ことわられて　しまいましたが　シオンの　ひとたちに　したわれる　やさしそうな　かた　でした
 ような:
   as: よう + な
   why: よう has its own sense "like" and な just links it to the noun; most sentences cut it this way.
@@ -333,10 +1033,38 @@
   as: よう + に
   why: Noun よう plus particle に, each with a fitting sense, and most sentences already cut it this way.
   example: レッド　には　かさない　ように　ねえちゃんに　いって　おくから　おれんちへ　きても　むだ　だからな！
+よくも:
+  as: depends
+  why: よくも "how dare you" is one set word, while よく + も in よくも わるくも is "good" plus "either/or".
+  example: よくも　やって　くれたな！
+よさげな:
+  as: よさげな
+  why: Kept whole for consistency with the deck's treatment of na-adjective plus な (ゆうめいな).
+  example: よさげな　ポケモン　もって　ふらふら　あるいとる　おまえは　わすれて　おらんぞ
+よさそうに:
+  as: よさそう + に
+  why: よさそう stands on its own as a な-adjective-like word, and に is the separate particle that makes it adverbial.
+  example: ポケモンが　とても　きもち　よさそうに　ねてます
+よな:
+  as: よな
+  why: The dictionary lists よな as a single sentence ending, like かな.
+  example: むしポケモンは　しんかが　はやくて　たのしいよな！
+よなー:
+  as: よ + なー
+  why: There is no dictionary entry, and よ and なー each do their own job.
+  example: タケシって　いいよなー！
 よね:
   as: よ + ね
   why: 'Each particle does its own job: よ asserts and ね seeks agreement.'
   example: きに　なるのよね
+よりも:
+  as: より + も
+  why: より "than" and emphatic も each do their own job, as in にも, and most sentences already cut it this way.
+  example: パンチのスピードは　しんかんせんよりも　はやい。
+らくに:
+  as: らく + に
+  why: らく is a na-adjective that stands on its own and に is its ordinary adverbial/result particle.
+  example: このまま　らくに　すすめると　おもうな！
 わい:
   as: わい
   why: A dictionary-listed old-man ending in which い has no sense of its own; most sentences keep it whole.
@@ -353,6 +1081,10 @@
   as: depends
   why: 'two independent decisions disagreed: わざマシン３９ / わざマシン + ３９'
   example: どの　ポケモンに　おぼえさせるか　よく　かんがえた　ほうが　いい　ところで…　わざマシン３９には　がんせきふうじ　が　はいっている！
+わたしたち:
+  as: わたしたち
+  why: わたしたち is a dictionary word for "we", and most sentences already keep it whole.
+  example: わたしたち　いま　あなたの　うわさを　していたのよ　さいきん　すごい　つよい　トレーナーが　あらわれた　って！
 んじゃ:
   as: んじゃ
   why: Old-man form of んだ; ん has no sense of its own here.
@@ -361,6 +1093,14 @@
   as: んだ
   why: Explanatory んだ is a dictionary entry (のだ) and ん has no sense of its own.
   example: ふむ……　レッド　と　いうんだな！
+んです:
+  as: んです
+  why: The explanatory んです is a dictionary entry and ん has no sense of its own, as principle 3 lists.
+  example: レッドくん　グリーンと　しょうぶ　したんですってね　みたかったわ！
+んや:
+  as: んや
+  why: Kansai form of the explanatory んだ, treated as one word like んじゃ.
+  example: だれに　なに　いうても　ぜんぜん　つうじへんし　はずかしゅうて　じむしょも　かお　だせへん　かったんや　そや　ぼうず！
 タウンマップ:
   as: タウンマップ
   why: Item name (Town Map) is one word.
@@ -377,10 +1117,22 @@
   as: ニビシティ
   why: Place name (Pewter City) is one word.
   example: ときどき　ニビシティまで　おかいものに　いきますけど　トキワのもり　って　みちが　まがり　くねってるのよ
+バカな:
+  as: バカ + な
+  why: A na-adjective plus its linking な with no dictionary entry for the whole, the same as ふしぎな.
+  example: そんな　バカなあー
 パソコンつうしん:
   as: パソコンつうしん
   why: Dictionary compound naming a game feature (the PC link system), so it is one word.
   example: いまは　パソコンつうしんで　どうぐや　ポケモンを　データにして　おくれるんだと
+パワーポイント:
+  as: パワーポイント
+  why: パワーポイント is the name of a game feature (PP).
+  example: ポケモンには　たいりょくの　ほか　わざを　くりだす　げんきの　もと　パワーポイントが　あります　わざ　ごとの　パワーポイントが　なくなった　ときも　ポケモンセンターで　やすませて！
+ヘンな:
+  as: ヘン + な
+  why: ヘン is a な-adjective that stands on its own, and な is the linking form.
+  example: インチキ　くさい　おじさんから　なんだか　ヘンな　ポケモンを　かっちゃったよ！
 ポケモンセンター:
   as: ポケモンセンター
   why: Facility name (Pokémon Center) is one word.
@@ -393,3 +1145,15 @@
   as: モンスターボール
   why: Item name (Poké Ball) is one word.
   example: モンスターボールの　なかに　ポケモンが　いれて　あるんじゃ　むかしは　わしも　バリバリの　ポケモン　トレーナーとして　ならした　もの！
+１ど:
+  as: １ど
+  why: 一度 "once" is a single word and the counter ど does not stand on its own.
+  example: １ねんに　１ど　だけ　クチバこう　に　とまるんだ！
+１２:
+  as: depends
+  why: It is the number twelve in Route 12, but two separate numbers when counting "one, two".
+  example: さいきん…　１２ばん　どうろに　いねむり　ポケモンが　しゅつぼつ　とおれない　ことが　あります！
+３４:
+  as: depends
+  why: It is the number 34 in わざマシン３４, but two separate numbers when counting "three, four".
+  example: レッドは　マチスから　わざマシン３４を　もらった！

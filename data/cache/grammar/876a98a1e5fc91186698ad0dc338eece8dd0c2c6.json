@@ -1,0 +1,1 @@
+{"text": "ポケモン　もう１ぴき　いない？", "structure": [{"jp": "ポケモン", "en": "Pokémon"}, {"jp": "もう１ぴき　いない？", "en": "don't you have one more?"}], "patterns": [{"name": "もう〜", "span": "もう１ぴき", "words": ["もう", "１", "ぴき"], "explanation": "もう before a number means that many more. もう１ぴき = 'one more (animal)'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

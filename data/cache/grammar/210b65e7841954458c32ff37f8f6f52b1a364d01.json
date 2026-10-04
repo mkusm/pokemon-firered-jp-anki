@@ -1,0 +1,1 @@
+{"text": "４かい…まごころ　おくろう！", "structure": [{"jp": "４かい…", "en": "4th floor:"}, {"jp": "まごころ　おくろう！", "en": "let's give from the heart!"}], "patterns": [{"name": "〜よう", "span": "おくろう", "words": ["おくろう"], "explanation": "The おう ending on a verb says 'let's do it'. おくろう = 'let's give as a gift'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

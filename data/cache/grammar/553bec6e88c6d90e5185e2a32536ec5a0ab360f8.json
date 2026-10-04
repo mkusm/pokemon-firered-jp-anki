@@ -1,0 +1,1 @@
+{"text": "でも　ポケモン　たりないよ！", "structure": [{"jp": "でも", "en": "but"}, {"jp": "ポケモン　たりないよ！", "en": "you don't have enough Pokémon!"}], "patterns": [{"name": "〜ない", "span": "たりない", "words": ["たりない"], "explanation": "ない makes a verb say 'not'. たりる is 'to be enough', so たりない = 'there aren't enough'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

@@ -1,0 +1,1 @@
+{"text": "これは　めずらしい　ポケモン！？", "structure": [{"jp": "これは", "en": "this is"}, {"jp": "めずらしい　ポケモン！？", "en": "a rare Pokémon!?"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

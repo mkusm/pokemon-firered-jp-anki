@@ -1,0 +1,1 @@
+{"text": "そうだろ！", "structure": [{"jp": "そうだろ！", "en": "That's right, isn't it!"}], "patterns": [{"name": "〜だろう", "span": "そうだろ", "words": ["そう", "だろ"], "explanation": "だろ is a short, rough form of だろう, used to press the listener to agree. そうだろ = 'that's right, isn't it'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

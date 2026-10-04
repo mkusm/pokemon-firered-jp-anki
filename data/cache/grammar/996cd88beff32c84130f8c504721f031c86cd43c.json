@@ -1,0 +1,1 @@
+{"text": "レッドは　そだてや　じいさんから　タマゴを　もらった！", "structure": [{"jp": "レッドは", "en": "Red"}, {"jp": "そだてや　じいさんから", "en": "from the Day Care Man"}, {"jp": "タマゴを　もらった！", "en": "received an Egg!"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

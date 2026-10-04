@@ -1,0 +1,1 @@
+{"text": "くー　やられた！", "structure": [{"jp": "くー", "en": "argh"}, {"jp": "やられた！", "en": "I've been had!"}], "patterns": [{"name": "〜られる (passive)", "span": "やられた", "words": ["やられた"], "explanation": "The れる ending turns 'do' into 'have it done to you'. やられた = 'I got beaten', 'you got me'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

@@ -1,0 +1,1 @@
+{"text": "やあ　きみは　ひとりかい？", "structure": [{"jp": "やあ", "en": "hey"}, {"jp": "きみは　ひとりかい？", "en": "are you alone?"}], "patterns": [{"name": "〜かい", "span": "ひとりかい", "words": ["ひとり", "か", "い"], "explanation": "かい is a soft, friendly version of the question ending か, used mostly by men. ひとりかい？ = 'are you alone?'"}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

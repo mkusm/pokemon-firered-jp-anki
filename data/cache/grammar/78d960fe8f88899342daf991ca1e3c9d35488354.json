@@ -1,0 +1,1 @@
+{"text": "ダイビングを　つかいますか？", "structure": [{"jp": "ダイビングを", "en": "Dive"}, {"jp": "つかいますか？", "en": "will you use it?"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

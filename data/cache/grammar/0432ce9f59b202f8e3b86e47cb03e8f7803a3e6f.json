@@ -1,0 +1,1 @@
+{"text": "よし　これから　この　ポケモンは　＊だ！", "structure": [{"jp": "よし", "en": "all right"}, {"jp": "これから", "en": "from now on"}, {"jp": "この　ポケモンは　＊だ！", "en": "this Pokémon is ＊!"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

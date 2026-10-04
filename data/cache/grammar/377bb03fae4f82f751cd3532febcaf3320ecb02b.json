@@ -1,0 +1,1 @@
+{"text": "レッドは　そだてや　ばあさんから　＊を　ひきとった！", "structure": [{"jp": "レッドは", "en": "Red"}, {"jp": "そだてや　ばあさんから", "en": "from the Day Care lady"}, {"jp": "＊を　ひきとった！", "en": "took ＊ back!"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

@@ -1,0 +1,1 @@
+{"text": "では　がんばって！", "structure": [{"jp": "では", "en": "well then"}, {"jp": "がんばって！", "en": "do your best!"}], "patterns": [{"name": "〜て (request)", "span": "がんばって", "words": ["がんばって"], "explanation": "A て-form on its own at the end is a friendly way to ask someone to do something. がんばって = 'do your best'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

@@ -1,0 +1,1 @@
+{"text": "こりゃ　イカン", "structure": [{"jp": "こりゃ", "en": "this"}, {"jp": "イカン", "en": "is no good"}], "patterns": [{"name": "〜は", "span": "こりゃ", "words": ["こりゃ"], "explanation": "こりゃ is これは squeezed together in casual speech. こりゃ = 'this is'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

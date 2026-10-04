@@ -1,0 +1,1 @@
+{"text": "わかがえる　ようだ", "structure": [{"jp": "わかがえる　ようだ", "en": "it feels like I'm getting younger"}], "patterns": [{"name": "〜ようだ", "span": "わかがえる　ようだ", "words": ["わかがえる", "よう", "だ"], "explanation": "ようだ after a verb says 'it's as if' or 'it feels like'. わかがえる ようだ = 'it feels like I'm growing young again'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

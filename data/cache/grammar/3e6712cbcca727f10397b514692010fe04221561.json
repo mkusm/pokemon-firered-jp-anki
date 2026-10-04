@@ -1,0 +1,1 @@
+{"text": "レッドは　えんちょうから　ひでんマシン０４を　もらった！", "structure": [{"jp": "レッドは", "en": "Red"}, {"jp": "えんちょうから", "en": "from the Warden"}, {"jp": "ひでんマシン０４を　もらった！", "en": "received HM04!"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

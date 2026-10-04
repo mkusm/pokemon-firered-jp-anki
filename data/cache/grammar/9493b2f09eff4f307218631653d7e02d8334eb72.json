@@ -1,0 +1,1 @@
+{"text": "＊が　でてきた！", "structure": [{"jp": "＊が", "en": "a ＊"}, {"jp": "でてきた！", "en": "came out!"}], "patterns": [{"name": "〜てくる", "span": "でてきた", "words": ["でてきた"], "explanation": "くる after a て-form says the action moves toward you. でてきた = 'came out toward me'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

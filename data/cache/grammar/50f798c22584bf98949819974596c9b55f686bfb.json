@@ -1,0 +1,1 @@
+{"text": "また　きなさいよ", "structure": [{"jp": "また　きなさいよ", "en": "come again"}], "patterns": [{"name": "〜なさい", "span": "きなさい", "words": ["きなさい"], "explanation": "なさい on a verb is a gentle order, the kind an older person gives a younger one. きなさい = 'come'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

@@ -1,0 +1,1 @@
+{"text": "ドアは　あいている…", "structure": [{"jp": "ドアは", "en": "the door"}, {"jp": "あいている…", "en": "is open..."}], "patterns": [{"name": "〜ている", "span": "あいている", "words": ["あいている"], "explanation": "A て-form verb plus いる can show the state left after something happened. あいている = 'is open'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

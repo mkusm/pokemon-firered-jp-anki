@@ -1,0 +1,1 @@
+{"text": "こら　そこの！", "structure": [{"jp": "こら", "en": "hey"}, {"jp": "そこの！", "en": "you there!"}], "patterns": [{"name": "〜の (noun left out)", "span": "そこの", "words": ["そこ", "の"], "explanation": "の here stands in for a person who is not named, so the phrase means 'the one over there'. そこの = 'you there'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

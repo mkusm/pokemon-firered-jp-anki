@@ -1,0 +1,1 @@
+{"text": "はいってよ！", "structure": [{"jp": "はいってよ！", "en": "join, please!"}], "patterns": [{"name": "〜て (request)", "span": "はいって", "words": ["はいって"], "explanation": "A verb ending in て on its own is a casual request, short for てください. はいって = 'please join'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

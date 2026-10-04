@@ -1,0 +1,1 @@
+{"text": "む　きみは？", "structure": [{"jp": "む", "en": "hm"}, {"jp": "きみは？", "en": "and you are?"}], "patterns": [{"name": "〜は？", "span": "きみは？", "words": ["きみ", "は"], "explanation": "Ending on は with a rising voice asks 'what about this?' and leaves the rest unsaid. きみは？ = 'and you are?'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

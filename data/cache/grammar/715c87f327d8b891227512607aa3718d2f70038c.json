@@ -1,0 +1,1 @@
+{"text": "レッドは　てんそうマシンの　ぶんり　プログラムを　きどう　した！", "structure": [{"jp": "レッドは", "en": "Red"}, {"jp": "てんそうマシンの　ぶんり　プログラムを", "en": "the Teleporter's separation program"}, {"jp": "きどう　した！", "en": "started up!"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

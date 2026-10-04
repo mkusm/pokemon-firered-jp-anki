@@ -1,0 +1,1 @@
+{"text": "あー　まけたわい！", "structure": [{"jp": "あー　まけたわい！", "en": "ahh, I lost!"}], "patterns": [{"name": "〜わい", "span": "まけたわい", "words": ["まけた", "わい"], "explanation": "わい at the end is an old-man way of adding feeling to what you say. まけたわい = 'I lost, I did!'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

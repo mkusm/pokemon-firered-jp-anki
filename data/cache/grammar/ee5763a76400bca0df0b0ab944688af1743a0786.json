@@ -1,0 +1,1 @@
+{"text": "イヤなら　しょーがないな", "structure": [{"jp": "イヤなら", "en": "if you don't want to"}, {"jp": "しょーがないな", "en": "it can't be helped"}], "patterns": [{"name": "〜なら", "span": "イヤなら", "words": ["イヤ", "なら"], "explanation": "なら after a word means 'if that is how it is'. イヤなら = 'if you don't want to'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

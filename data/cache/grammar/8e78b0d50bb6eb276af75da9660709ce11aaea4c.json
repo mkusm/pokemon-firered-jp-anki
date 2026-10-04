@@ -1,0 +1,1 @@
+{"text": "やめられないっす！", "structure": [{"jp": "やめられないっす！", "en": "I can't stop!"}], "patterns": [{"name": "〜られる (potential)", "span": "やめられない", "words": ["やめられない"], "explanation": "The られる ending here means 'can do', and ない turns it into 'cannot'. やめられない = 'I can't stop'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

@@ -1,0 +1,1 @@
+{"text": "ふなよい　する　ひと！", "structure": [{"jp": "ふなよい　する　ひと！", "en": "people who get seasick!"}], "patterns": [{"name": "verb + noun", "span": "ふなよい　する　ひと", "words": ["ふなよい", "する", "ひと"], "explanation": "A verb placed right before a thing describes that thing. ふなよい する ひと = 'people who get seasick'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

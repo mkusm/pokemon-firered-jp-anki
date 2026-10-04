@@ -1,0 +1,1 @@
+{"text": "こまった　ものよ！", "structure": [{"jp": "こまった　ものよ！", "en": "It's such a nuisance!"}], "patterns": [{"name": "〜ものだ", "span": "こまった　ものよ", "words": ["こまった", "もの", "よ"], "explanation": "もの after a describing word adds a sighing 'what a ... thing it is' feeling. こまった ものよ = 'what a bother it is'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

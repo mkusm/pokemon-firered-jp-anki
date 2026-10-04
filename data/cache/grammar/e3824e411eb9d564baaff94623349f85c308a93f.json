@@ -1,0 +1,1 @@
+{"text": "レッドは　つりおやじから　いいつりざおを　もらった！", "structure": [{"jp": "レッドは", "en": "Red"}, {"jp": "つりおやじから", "en": "from the Fishing Guru"}, {"jp": "いいつりざおを　もらった！", "en": "received a Good Rod!"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

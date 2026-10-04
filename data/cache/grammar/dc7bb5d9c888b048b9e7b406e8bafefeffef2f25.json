@@ -1,0 +1,1 @@
+{"text": "あられが　ふりはじめた！", "structure": [{"jp": "あられが", "en": "hail"}, {"jp": "ふりはじめた！", "en": "started to fall!"}], "patterns": [{"name": "〜はじめる", "span": "ふりはじめた", "words": ["ふりはじめた"], "explanation": "はじめる stuck onto a verb says that the action starts. ふりはじめた = 'started to fall'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

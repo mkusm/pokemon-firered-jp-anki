@@ -1,0 +1,1 @@
+{"text": "あくりょう　じゃ", "structure": [{"jp": "あくりょう　じゃ", "en": "it is an evil spirit"}], "patterns": [{"name": "〜だ", "span": "あくりょう　じゃ", "words": ["あくりょう", "じゃ"], "explanation": "じゃ is how old men in stories say だ, 'it is'. あくりょう　じゃ = 'it is an evil spirit'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

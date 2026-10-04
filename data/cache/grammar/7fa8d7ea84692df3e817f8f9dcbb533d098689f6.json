@@ -1,0 +1,1 @@
+{"text": "ぼく　シルフ　カンパニーの　しゃいんです…　おろおろ", "structure": [{"jp": "ぼく", "en": "I"}, {"jp": "シルフ　カンパニーの　しゃいんです…", "en": "am a Silph Co. employee..."}, {"jp": "おろおろ", "en": "(flustered)"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

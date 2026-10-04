@@ -1,0 +1,1 @@
+{"text": "ここでは　のれません", "structure": [{"jp": "ここでは", "en": "here"}, {"jp": "のれません", "en": "you can't ride"}], "patterns": [{"name": "〜られる (potential)", "span": "のれません", "words": ["のれません"], "explanation": "のる 'ride' changes to のれる to say 'can ride'; ません makes it a polite 'cannot'. のれません = 'can't ride'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

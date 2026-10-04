@@ -1,0 +1,1 @@
+{"text": "＊は　ねむりはじめた！", "structure": [{"jp": "＊は", "en": "＊"}, {"jp": "ねむりはじめた！", "en": "began to sleep!"}], "patterns": [{"name": "〜はじめる", "span": "ねむりはじめた", "words": ["ねむりはじめた"], "explanation": "はじめる joined onto another verb means 'start doing' it. ねむりはじめた = 'started sleeping'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

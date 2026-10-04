@@ -1,0 +1,1 @@
+{"text": "…　きたな？", "structure": [{"jp": "…　きたな？", "en": "...so you've come, huh?"}], "patterns": [{"name": "〜な (confirming)", "span": "きたな", "words": ["きた", "な"], "explanation": "な at the end of a statement is a rough way of saying 'aren't you' or 'I see'. きたな = 'so you've come, huh'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

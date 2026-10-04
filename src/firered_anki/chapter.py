@@ -37,7 +37,8 @@ import sys
 from . import analyse, grammar, names, notes, particles, sense_pick, splits
 from .paths import ROOT
 
-MAX_ROUNDS = 8
+MAX_ROUNDS = 12
+LIMITED = 75  # exit code when the plan's usage limit stopped the run: try again later
 
 
 def steps(n: int) -> list[list[str]]:
@@ -99,22 +100,47 @@ def status(n: int) -> dict[str, int]:
     return json.loads(done.stdout.strip().splitlines()[-1])
 
 
+def run(step: list[str]) -> tuple[int, bool]:
+    """Run one stage, passing its output through. → (exit code, whether it
+    said the usage limit stopped it)."""
+    proc = subprocess.Popen([sys.executable, "-m", f"firered_anki.{step[0]}", *step[1:]], cwd=ROOT,
+                            stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
+    limited = False
+    for line in proc.stdout:
+        print(line, end="", flush=True)
+        # A stage that gives up on the limit says so. (The analysis waits it out and carries on.)
+        limited |= any(x in line for x in ("usage limit reached", "usage limit;", "usage limit: stopping",
+                                           "stopped by the usage limit"))
+    return proc.wait(), limited
+
+
 def settle(n: int, total: int) -> None:
     """Run the series for one chapter until nothing is left."""
+    stalled = 0
     for round_no in range(1, MAX_ROUNDS + 1):
+        limited = False
         for step in steps(n):
             print(f"\n== chapter {n}, round {round_no}: {' '.join(step)}", flush=True)
-            done = subprocess.run([sys.executable, "-m", f"firered_anki.{step[0]}", *step[1:]], cwd=ROOT)
-            if done.returncode:
+            code, hit = run(step)
+            limited |= hit
+            if code:
                 sys.exit(f"[chapter {n}] stopped: {' '.join(step)} failed. Fix that and run this again; "
                          "it carries on from the caches.")
         print()
         before, total = total, report(n, status(n))
         if not total:
             return
-        if total >= before:
-            sys.exit(f"[chapter {n}] not settled: a round did not bring the count down "
-                     "(a usage limit, or an answer the model keeps giving). See the lines above.")
+        if limited:
+            print(f"[chapter {n}] stopped by the plan's limit. Run this again later; it carries on from the caches.")
+            sys.exit(LIMITED)
+        # A round can end with as much left as it began with and still have
+        # helped: redoing a sentence changes which sentences the chapter
+        # shows, and the next one comes up. Every sentence redone stays done,
+        # so this runs out. Three such rounds in a row is something else.
+        stalled = stalled + 1 if total >= before else 0
+        if stalled == 3:
+            sys.exit(f"[chapter {n}] not settled: three rounds in a row left as much to do as before. "
+                     "An answer the model keeps giving, most likely. See the lines above.")
     sys.exit(f"[chapter {n}] not settled after {MAX_ROUNDS} rounds, though each one helped. Run this again.")
 
 

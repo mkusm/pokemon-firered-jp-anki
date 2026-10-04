@@ -1,0 +1,1 @@
+{"text": "＊は　エサを　たべている！", "structure": [{"jp": "＊は", "en": "＊ (the one doing it)"}, {"jp": "エサを　たべている！", "en": "is eating the bait!"}], "patterns": [{"name": "〜ている", "span": "たべている", "words": ["たべている"], "explanation": "ている after a verb says the action is going on right now. たべている = 'is eating'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

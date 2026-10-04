@@ -1,0 +1,1 @@
+{"text": "ポケモン　１ひきの　こおり　じょうたいを　かいふくする。", "structure": [{"jp": "ポケモン　１ひきの", "en": "of one Pokémon"}, {"jp": "こおり　じょうたいを", "en": "the frozen condition"}, {"jp": "かいふくする。", "en": "heals"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

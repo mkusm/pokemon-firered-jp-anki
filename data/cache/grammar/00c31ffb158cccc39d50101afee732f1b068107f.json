@@ -1,0 +1,1 @@
+{"text": "なんとした　ことじゃ", "structure": [{"jp": "なんとした", "en": "what kind of"}, {"jp": "ことじゃ", "en": "thing is this!"}], "patterns": [{"name": "〜だ", "span": "ことじゃ", "words": ["こと", "じゃ"], "explanation": "じゃ is how old men in stories say だ, 'is'. なんとした ことじゃ = 'what a thing this is!'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

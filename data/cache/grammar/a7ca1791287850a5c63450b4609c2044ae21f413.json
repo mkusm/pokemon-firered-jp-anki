@@ -1,0 +1,1 @@
+{"text": "ぼくも　やりたい！", "structure": [{"jp": "ぼくも", "en": "me too"}, {"jp": "やりたい！", "en": "want to do it!"}], "patterns": [{"name": "〜たい", "span": "やりたい", "words": ["やりたい"], "explanation": "たい on a verb says the speaker wants to do it. やりたい = 'I want to do it'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

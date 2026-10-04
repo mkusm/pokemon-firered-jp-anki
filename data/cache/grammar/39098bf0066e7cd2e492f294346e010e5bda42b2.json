@@ -1,0 +1,1 @@
+{"text": "しかし　わが　ロケットだんは　ふめつだ！", "structure": [{"jp": "しかし", "en": "but"}, {"jp": "わが　ロケットだんは", "en": "my Team Rocket"}, {"jp": "ふめつだ！", "en": "is indestructible!"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

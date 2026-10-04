@@ -1,0 +1,1 @@
+{"text": "ショップで　やすく　うれる。", "structure": [{"jp": "ショップで", "en": "at shops"}, {"jp": "やすく　うれる。", "en": "can be sold cheaply"}], "patterns": [{"name": "〜られる (potential)", "span": "うれる", "words": ["うれる"], "explanation": "うる 'to sell' changes to うれる to say it can be sold. やすく　うれる = 'can be sold cheaply'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

@@ -1,0 +1,1 @@
+{"text": "オツキミやま　から　きたの？", "structure": [{"jp": "オツキミやま　から　きたの？", "en": "did you come from Mt. Moon?"}], "patterns": [{"name": "〜の (question)", "span": "きたの", "words": ["きた", "の"], "explanation": "の at the end with a rising voice makes a soft, casual question. きたの？ = 'did you come?'"}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

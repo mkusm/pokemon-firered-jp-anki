@@ -1,0 +1,1 @@
+{"text": "あっち　いけ！", "structure": [{"jp": "あっち", "en": "over there, away"}, {"jp": "いけ！", "en": "go!"}], "patterns": [{"name": "〜え (command)", "span": "いけ", "words": ["いけ"], "explanation": "Changing the last sound of a verb to え makes a blunt order. いく becomes いけ = 'go!'"}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

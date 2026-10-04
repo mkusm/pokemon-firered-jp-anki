@@ -1,0 +1,1 @@
+{"text": "ここは　クチバ　シティ　クチバは　オレンジ　ゆうやけのいろ", "structure": [{"jp": "ここは　クチバ　シティ", "en": "this is Vermilion City"}, {"jp": "クチバは　オレンジ", "en": "Vermilion is orange"}, {"jp": "ゆうやけのいろ", "en": "the color of the sunset"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

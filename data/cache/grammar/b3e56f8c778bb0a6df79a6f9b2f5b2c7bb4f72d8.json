@@ -1,0 +1,1 @@
+{"text": "これが　いちばんよ", "structure": [{"jp": "これが", "en": "this"}, {"jp": "いちばんよ", "en": "is the best"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

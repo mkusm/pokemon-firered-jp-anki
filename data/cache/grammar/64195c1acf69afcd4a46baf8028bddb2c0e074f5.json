@@ -1,0 +1,1 @@
+{"text": "ここは　みさきの　こや　…　マサキの　いえ", "structure": [{"jp": "ここは　みさきの　こや", "en": "this is the Sea Cottage"}, {"jp": "…　マサキの　いえ", "en": "Bill's house"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

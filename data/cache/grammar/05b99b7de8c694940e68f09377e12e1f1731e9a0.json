@@ -1,0 +1,1 @@
+{"text": "アナウンス「サファリ　ゲーム　おわり　でーす！", "structure": [{"jp": "アナウンス「", "en": "Announcement:"}, {"jp": "サファリ　ゲーム", "en": "the Safari Game"}, {"jp": "おわり　でーす！", "en": "is over!"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

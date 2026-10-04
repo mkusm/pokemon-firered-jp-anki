@@ -1,0 +1,1 @@
+{"text": "さかみちを　たのしもう！", "structure": [{"jp": "さかみちを", "en": "the slope"}, {"jp": "たのしもう！", "en": "let's enjoy!"}], "patterns": [{"name": "〜よう (let's)", "span": "たのしもう", "words": ["たのしもう"], "explanation": "Changing the end of a verb to an おう sound means 'let's do it'. たのしむ becomes たのしもう = 'let's enjoy'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

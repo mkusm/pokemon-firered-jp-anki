@@ -1,0 +1,1 @@
+{"text": "しくじったな", "structure": [{"jp": "しくじったな", "en": "I blew it, huh"}], "patterns": [{"name": "〜な", "span": "しくじったな", "words": ["しくじった", "な"], "explanation": "な at the end is said half to yourself, as you take in what happened. しくじったな = 'I blew it, huh'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

@@ -1,0 +1,1 @@
+{"text": "ここは　あぶないわよ！", "structure": [{"jp": "ここは　あぶないわよ！", "en": "it's dangerous here!"}], "patterns": [{"name": "〜わ", "span": "あぶないわよ", "words": ["わ", "よ"], "explanation": "わ before よ is a feminine way of ending a sentence, used here to give a warning. あぶないわよ = 'it's dangerous, you know'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

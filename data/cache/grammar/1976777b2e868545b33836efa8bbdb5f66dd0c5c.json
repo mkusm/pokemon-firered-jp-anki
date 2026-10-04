@@ -1,0 +1,1 @@
+{"text": "おれは　たいさん　しよう！", "structure": [{"jp": "おれは", "en": "I"}, {"jp": "たいさん　しよう！", "en": "shall withdraw!"}], "patterns": [{"name": "〜よう", "span": "しよう", "words": ["しよう"], "explanation": "The よう ending says what the speaker has decided to do; しよう is that form of する. たいさん　しよう = 'I shall withdraw'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

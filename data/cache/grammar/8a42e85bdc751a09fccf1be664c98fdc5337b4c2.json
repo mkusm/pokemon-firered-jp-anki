@@ -1,0 +1,1 @@
+{"text": "きたか！", "structure": [{"jp": "きたか！", "en": "so you've come!"}], "patterns": [{"name": "〜か (realization)", "span": "きたか", "words": ["きた", "か"], "explanation": "か here is not a real question. The speaker is noticing something and saying it aloud, like 'so...!'. きたか = 'so you've come!'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

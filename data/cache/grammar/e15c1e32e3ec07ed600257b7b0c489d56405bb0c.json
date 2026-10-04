@@ -1,0 +1,1 @@
+{"text": "なんで　じゃ", "structure": [{"jp": "なんで　じゃ", "en": "why is that"}], "patterns": [{"name": "〜だ", "span": "なんで　じゃ", "words": ["なんで", "じゃ"], "explanation": "じゃ is the old-man way of saying だ, 'is'. なんで　じゃ = 'why is that?'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

@@ -1,0 +1,1 @@
+{"text": "＊は　なまけている！", "structure": [{"jp": "＊は", "en": "＊"}, {"jp": "なまけている！", "en": "is loafing around!"}], "patterns": [{"name": "〜ている", "span": "なまけている", "words": ["なまけている"], "explanation": "ている after a verb says the action is going on right now. なまけている = 'is loafing around'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

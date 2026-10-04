@@ -1,0 +1,1 @@
+{"text": "３つの　あたまは　よろこび　かなしみ　いかりの　かんじょうを　あらわす。", "structure": [{"jp": "３つの　あたまは", "en": "its three heads"}, {"jp": "よろこび　かなしみ　いかりの　かんじょうを", "en": "the emotions of joy, sorrow and anger"}, {"jp": "あらわす。", "en": "represent"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

@@ -1,0 +1,1 @@
+{"text": "わざの　ついかこうかが　でやすい", "structure": [{"jp": "わざの　ついかこうかが", "en": "moves' added effects"}, {"jp": "でやすい", "en": "come out easily"}], "patterns": [{"name": "〜やすい", "span": "でやすい", "words": ["でやすい"], "explanation": "やすい on a verb says the thing happens easily or often. でやすい = 'come out easily'"}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

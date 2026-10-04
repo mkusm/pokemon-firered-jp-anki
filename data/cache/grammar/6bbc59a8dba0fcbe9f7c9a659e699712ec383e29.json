@@ -1,0 +1,1 @@
+{"text": "まけた　まけた　おわりだ　じゃあな", "structure": [{"jp": "まけた　まけた", "en": "I lost, I lost"}, {"jp": "おわりだ", "en": "it's over"}, {"jp": "じゃあな", "en": "see ya"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

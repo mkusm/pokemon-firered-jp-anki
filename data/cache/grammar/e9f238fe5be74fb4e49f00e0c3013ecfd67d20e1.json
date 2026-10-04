@@ -1,0 +1,1 @@
+{"text": "りかい　できない！", "structure": [{"jp": "りかい　できない！", "en": "I can't comprehend it!"}], "patterns": [{"name": "〜できる", "span": "りかい　できない", "words": ["りかい", "できない"], "explanation": "できる is the 'can do' form of する, and できない is 'cannot do'. りかい できない = 'cannot understand'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

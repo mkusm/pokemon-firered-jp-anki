@@ -1,0 +1,1 @@
+{"text": "わたし　まじめな　けいびいん　はー…　のどが　かわいた！", "structure": [{"jp": "わたし　まじめな　けいびいん", "en": "I'm a diligent security guard"}, {"jp": "はー…", "en": "phew..."}, {"jp": "のどが　かわいた！", "en": "I'm thirsty!"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

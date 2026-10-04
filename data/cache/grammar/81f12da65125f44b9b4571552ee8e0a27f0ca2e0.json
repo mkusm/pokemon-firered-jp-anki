@@ -1,0 +1,1 @@
+{"text": "もう　ポケモン　ないわ", "structure": [{"jp": "もう　ポケモン　ないわ", "en": "I have no Pokémon left"}], "patterns": [{"name": "〜わ", "span": "ないわ", "words": ["ない", "わ"], "explanation": "わ at the end is a soft, womanly way to round off a statement; it adds no meaning. ないわ = 'there are none'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

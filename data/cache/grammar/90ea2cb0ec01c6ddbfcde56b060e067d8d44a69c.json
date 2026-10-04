@@ -1,0 +1,1 @@
+{"text": "どれを　あげますか？", "structure": [{"jp": "どれを", "en": "which one"}, {"jp": "あげますか？", "en": "will you give?"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

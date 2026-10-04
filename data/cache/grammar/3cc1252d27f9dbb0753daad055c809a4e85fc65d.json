@@ -1,0 +1,1 @@
+{"text": "タチサレ……　タチサレ……", "structure": [{"jp": "タチサレ……", "en": "get out..."}, {"jp": "タチサレ……", "en": "get out..."}], "patterns": [{"name": "〜ろ (command)", "span": "タチサレ", "words": ["タチサレ"], "explanation": "Changing the last sound of たちさる to れ makes a harsh order. タチサレ = 'get out'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

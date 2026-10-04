@@ -1,0 +1,1 @@
+{"text": "すごいなあ！", "structure": [{"jp": "すごいなあ！", "en": "that's amazing!"}], "patterns": [{"name": "〜なあ", "span": "すごいなあ", "words": ["なあ"], "explanation": "なあ at the end shows the speaker is impressed and saying it half to himself. すごいなあ = 'wow, that's amazing'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

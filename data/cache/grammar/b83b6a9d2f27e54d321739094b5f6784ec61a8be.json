@@ -1,0 +1,1 @@
+{"text": "くやしく　ないもん", "structure": [{"jp": "くやしく　ないもん", "en": "I'm not upset, so there"}], "patterns": [{"name": "〜もん", "span": "くやしく　ないもん", "words": ["くやしく", "ない", "もん"], "explanation": "もん at the end is a childish, pouting way to insist on what you say. くやしく　ないもん = 'I'm not upset, so there!'"}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

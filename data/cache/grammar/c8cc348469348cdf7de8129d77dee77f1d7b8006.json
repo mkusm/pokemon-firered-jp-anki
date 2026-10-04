@@ -1,0 +1,1 @@
+{"text": "わたし　＊さまを　しんじてるわ！", "structure": [{"jp": "わたし", "en": "I"}, {"jp": "＊さまを　しんじてるわ！", "en": "believe in Master ＊!"}], "patterns": [{"name": "〜ている", "span": "しんじてる", "words": ["しんじてる"], "explanation": "ている after a verb shows an ongoing state; てる is its short spoken form. しんじてる = 'I believe in him'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

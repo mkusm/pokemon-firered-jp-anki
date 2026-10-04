@@ -1,0 +1,1 @@
+{"text": "まけて　しまった！", "structure": [{"jp": "まけて　しまった！", "en": "I've gone and lost!"}], "patterns": [{"name": "〜てしまう", "span": "まけて　しまった", "words": ["まけて", "しまった"], "explanation": "てしまう after a verb says the thing happened completely, often to your regret. まけて　しまった = 'I went and lost'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

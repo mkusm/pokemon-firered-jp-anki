@@ -1,0 +1,1 @@
+{"text": "なまいきな　やつだぜ！", "structure": [{"jp": "なまいきな　やつだぜ！", "en": "you're a cheeky one!"}], "patterns": [{"name": "〜ぜ", "span": "やつだぜ", "words": ["だ", "ぜ"], "explanation": "ぜ at the end of a sentence is a rough, manly way to push what you say. なまいきな やつだぜ = 'what a cheeky one, I tell ya'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

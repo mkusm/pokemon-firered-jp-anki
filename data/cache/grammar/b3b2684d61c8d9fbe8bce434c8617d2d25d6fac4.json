@@ -1,0 +1,1 @@
+{"text": "わしは　つりおやじの　あに　じゃ！", "structure": [{"jp": "わしは", "en": "I"}, {"jp": "つりおやじの　あに　じゃ！", "en": "am the Fishing Guru's older brother!"}], "patterns": [{"name": "〜だ", "span": "あに　じゃ", "words": ["あに", "じゃ"], "explanation": "じゃ is the way old men in stories say だ, 'is'. あに じゃ = 'am the older brother'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

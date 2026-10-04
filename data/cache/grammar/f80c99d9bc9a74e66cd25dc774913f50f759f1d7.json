@@ -1,0 +1,1 @@
+{"text": "＊は　ちゅうもくの　まとに　なった！", "structure": [{"jp": "＊は", "en": "＊"}, {"jp": "ちゅうもくの　まとに　なった！", "en": "became the center of attention!"}], "patterns": [{"name": "〜になる", "span": "まとに　なった", "words": ["まと", "に", "なった"], "explanation": "に with なる shows what something turns into. まとに　なった = 'became the target'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

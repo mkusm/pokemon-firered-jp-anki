@@ -1,0 +1,1 @@
+{"text": "ロケットだんが　いなくなった！", "structure": [{"jp": "ロケットだんが", "en": "Team Rocket"}, {"jp": "いなくなった！", "en": "is gone!"}], "patterns": [{"name": "〜なくなる", "span": "いなくなった", "words": ["いなくなった"], "explanation": "The 'not' form with なる says something comes to no longer be so. いなくなった = 'is no longer here'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

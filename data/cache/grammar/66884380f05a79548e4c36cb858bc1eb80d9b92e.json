@@ -1,0 +1,1 @@
+{"text": "ここは　いちばん　おくち　の　トレジャー　ハウス　だよ！", "structure": [{"jp": "ここは", "en": "this is"}, {"jp": "いちばん　おくち　の", "en": "in the very deepest part"}, {"jp": "トレジャー　ハウス　だよ！", "en": "the Secret House!"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

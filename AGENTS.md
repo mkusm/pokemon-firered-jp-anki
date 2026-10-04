@@ -234,23 +234,25 @@ fine.
 
 Update this when it changes.
 
-- Chapters 0 and 1: analysed by Opus with prompt version 4 or 5 (particle
-  senses picked by the analysis), grammar and notes by Opus. Both settled:
-  `chapter 0 --dry-run` and `chapter 1 --dry-run` report nothing left.
-- Chapters 2 to 9: analysed by Sonnet with prompt version 2, with Opus on the
+- Chapters 0 to 5: analysed by Opus with prompt version 4 or 5 (particle
+  senses picked by the analysis), grammar and notes by Opus. All settled:
+  `chapter N --dry-run` reports nothing left for each.
+- Chapters 6 to 9: analysed by Sonnet with prompt version 2, with Opus on the
   sentences Sonnet flagged; no grammar, no notes, and one card per particle. `analyse
   rerun N` redoes every sentence of a chapter that is not Opus on version 4 or 5;
   `analyse redo <file>` re-analyses only the sentences listed in a file.
-- `corrections.yaml` has seven entries: the SELECT button line, Mom's two TV
-  lines, and four word
-  forms the model wrote that were not in their sentence.
-- `splits.yaml` has 97 decisions, from chapters 0 and 1. They are checked
+- `corrections.yaml` has five entries: the SELECT button line, Mom's two TV
+  lines, and two word forms the model wrote that were not in their sentence
+  (ｃｍ, twice). Two more form corrections were removed when their chapters
+  were redone on Opus, which wrote the forms correctly; expect the same for
+  these two.
+- `splits.yaml` has 288 decisions, from chapters 0 to 5. They are checked
   across chapters: a later chapter's run can send an earlier sentence back.
-- Names: 916 cards (221 Pokémon, 150 items, 266 moves, 61 abilities, 17
+- Names: 923 cards (221 Pokémon, 153 items, 270 moves, 61 abilities, 17
   types, 132 places, 24 people, 2 for Team Rocket, 8 badges, 20 game terms, 15
   real-world names), found by `names.py` in every chapter with no model call.
   The 56 name lines this put in chapter 0 were re-analysed on Opus. The names
-  deck is gone: one deck, 11,112 cards. The note type has `Note` and
+  deck is gone: one deck, 10,868 cards. The note type has `Note` and
   `SentenceNote` fields.
 - English names: the name check passes on every sentence the deck shows, in
   all chapters. 91 sentences were redone on Opus for it, most of them in

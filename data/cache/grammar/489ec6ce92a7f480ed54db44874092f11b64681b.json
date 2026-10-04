@@ -1,0 +1,1 @@
+{"text": "ここは　セキチク　シティ　セキチクは　ピンク　はなやかな　いろ", "structure": [{"jp": "ここは　セキチク　シティ", "en": "this is Fuchsia City"}, {"jp": "セキチクは　ピンク", "en": "Fuchsia is pink"}, {"jp": "はなやかな　いろ", "en": "a brilliant color"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

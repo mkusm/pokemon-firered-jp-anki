@@ -1,0 +1,1 @@
+{"text": "そのまえに　しょうぶ　しよう！", "structure": [{"jp": "そのまえに", "en": "before that"}, {"jp": "しょうぶ　しよう！", "en": "let's battle!"}], "patterns": [{"name": "〜よう", "span": "しよう", "words": ["しよう"], "explanation": "The よう ending means 'let's do it' or 'I'll do it'. しょうぶ　しよう = 'let's battle'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

@@ -1,0 +1,1 @@
+{"text": "そうや　そこの　パソコンや！", "structure": [{"jp": "そうや", "en": "that's right"}, {"jp": "そこの　パソコンや！", "en": "it's that PC there!"}], "patterns": [{"name": "〜だ", "span": "そうや", "words": ["そう", "や"], "explanation": "や is the Kansai dialect way of saying だ, 'is'. そうや = 'that's right'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

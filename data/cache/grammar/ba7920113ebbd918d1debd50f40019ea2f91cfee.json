@@ -1,0 +1,1 @@
+{"text": "ここは　１５ばん　どうろ　にし　…　セキチク　シティ", "structure": [{"jp": "ここは　１５ばん　どうろ", "en": "This is Route 15"}, {"jp": "にし　…　セキチク　シティ", "en": "West: Fuchsia City"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

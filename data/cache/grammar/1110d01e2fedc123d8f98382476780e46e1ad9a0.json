@@ -1,0 +1,1 @@
+{"text": "ちょっと　まって　くれ", "structure": [{"jp": "ちょっと", "en": "a moment"}, {"jp": "まって　くれ", "en": "wait"}], "patterns": [{"name": "〜てくれ", "span": "まって　くれ", "words": ["まって", "くれ"], "explanation": "くれ after a て-form is a blunt, mostly male way of asking someone to do something for you. まって　くれ = 'wait for me'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

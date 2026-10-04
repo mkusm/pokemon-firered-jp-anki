@@ -1,0 +1,1 @@
+{"text": "だめだわ！", "structure": [{"jp": "だめだわ！", "en": "it's no good!"}], "patterns": [{"name": "〜わ", "span": "だめだわ", "words": ["だ", "わ"], "explanation": "わ at the end of a sentence gives it a soft, feminine tone. だめだわ = 'it's no good!'"}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

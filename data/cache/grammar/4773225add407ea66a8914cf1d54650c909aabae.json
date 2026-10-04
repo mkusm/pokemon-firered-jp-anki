@@ -1,0 +1,1 @@
+{"text": "こしょう　ちゅう！", "structure": [{"jp": "こしょう　ちゅう！", "en": "out of order!"}], "patterns": [{"name": "〜中", "span": "こしょう　ちゅう", "words": ["こしょう", "ちゅう"], "explanation": "ちゅう after a word for an activity or state means 'in the middle of it'. こしょう　ちゅう = 'currently broken down'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

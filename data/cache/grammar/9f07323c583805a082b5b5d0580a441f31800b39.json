@@ -1,0 +1,1 @@
+{"text": "どのこを　そだてて　みるかね？", "structure": [{"jp": "どのこを", "en": "which one"}, {"jp": "そだてて　みるかね？", "en": "shall we try raising?"}], "patterns": [{"name": "〜てみる", "span": "そだてて　みる", "words": ["そだてて", "みる"], "explanation": "てみる after a verb means doing it to see how it goes. そだてて　みる = 'try raising'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

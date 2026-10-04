@@ -1,0 +1,1 @@
+{"text": "しごと　しなきゃ　しごと！", "structure": [{"jp": "しごと　しなきゃ", "en": "gotta work"}, {"jp": "しごと！", "en": "work!"}], "patterns": [{"name": "〜なければならない", "span": "しなきゃ", "words": ["しなきゃ"], "explanation": "なきゃ is the short spoken form of なければならない, 'have to'; the ending is simply left off. しなきゃ = 'gotta do it'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

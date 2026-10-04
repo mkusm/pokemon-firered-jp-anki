@@ -1,0 +1,1 @@
+{"text": "レッドは　＊を　ふいてみた！", "structure": [{"jp": "レッドは", "en": "Red"}, {"jp": "＊を　ふいてみた！", "en": "tried playing the ＊!"}], "patterns": [{"name": "〜てみる", "span": "ふいてみた", "words": ["ふいてみた"], "explanation": "みる after a て-verb means 'try doing it and see'. ふいてみた = 'tried blowing it'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

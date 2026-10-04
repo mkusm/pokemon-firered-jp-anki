@@ -1,0 +1,1 @@
+{"text": "かつか　まけるか　しょうぶ！", "structure": [{"jp": "かつか　まけるか", "en": "win or lose"}, {"jp": "しょうぶ！", "en": "let's battle!"}], "patterns": [{"name": "〜か〜か", "span": "かつか　まけるか", "words": ["かつ", "か", "まける", "か"], "explanation": "か after each of two choices says 'whether this or that'. かつか まけるか = 'win or lose'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

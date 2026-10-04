@@ -1,0 +1,1 @@
+{"text": "これは　スポーツ　ゲームだ！", "structure": [{"jp": "これは", "en": "this"}, {"jp": "スポーツ　ゲームだ！", "en": "is a sports game!"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

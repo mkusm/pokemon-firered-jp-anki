@@ -1,0 +1,1 @@
+{"text": "…　カガミ　ヨ　カガミ！", "structure": [{"jp": "…　カガミ　ヨ", "en": "...O mirror"}, {"jp": "カガミ！", "en": "mirror!"}], "patterns": [{"name": "〜よ (calling)", "span": "カガミ　ヨ", "words": ["カガミ", "ヨ"], "explanation": "よ right after a name or thing calls out to it, in a storybook or poetic way. カガミ　ヨ = 'O mirror'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

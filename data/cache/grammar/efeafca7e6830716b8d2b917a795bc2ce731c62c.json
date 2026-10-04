@@ -1,0 +1,1 @@
+{"text": "まだまだ　だわ", "structure": [{"jp": "まだまだ　だわ", "en": "I've still got a long way to go"}], "patterns": [{"name": "〜わ", "span": "わ", "words": ["わ"], "explanation": "わ at the end of a sentence gives it a soft, feminine tone and adds a little feeling. まだまだ　だわ = 'I'm still not there yet'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

@@ -1,0 +1,1 @@
+{"text": "ロケットだん　みたいに　な！", "structure": [{"jp": "ロケットだん　みたいに　な！", "en": "like Team Rocket, you know!"}], "patterns": [{"name": "〜みたいに", "span": "ロケットだん　みたいに", "words": ["ロケットだん", "みたい", "に"], "explanation": "みたいに after a thing means 'in the same way as that thing'. ロケットだん みたいに = 'like Team Rocket'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

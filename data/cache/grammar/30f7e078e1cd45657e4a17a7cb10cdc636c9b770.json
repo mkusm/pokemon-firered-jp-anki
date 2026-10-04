@@ -1,0 +1,1 @@
+{"text": "…　おれは　しらねえよ", "structure": [{"jp": "…　おれは", "en": "...me, I"}, {"jp": "しらねえよ", "en": "don't know"}], "patterns": [{"name": "〜ない", "span": "しらねえ", "words": ["しらねえ"], "explanation": "ない after a verb means 'not'; ねえ is a rough, tough-guy way of saying it. しらねえ = 'I don't know'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

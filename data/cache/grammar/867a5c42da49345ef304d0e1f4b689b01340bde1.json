@@ -1,0 +1,1 @@
+{"text": "＊は　＊の　ほじょこうかを　コピーした！", "structure": [{"jp": "＊は", "en": "＊ (the user)"}, {"jp": "＊の　ほじょこうかを", "en": "＊'s stat changes"}, {"jp": "コピーした！", "en": "copied!"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

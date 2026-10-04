@@ -1,0 +1,1 @@
+{"text": "もえつきたぜ", "structure": [{"jp": "もえつきたぜ", "en": "I'm burned out"}], "patterns": [{"name": "〜ぜ", "span": "もえつきたぜ", "words": ["もえつきた", "ぜ"], "explanation": "ぜ at the end is rough, manly emphasis, like 'I tell ya'. もえつきたぜ = 'I'm burned out, man'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

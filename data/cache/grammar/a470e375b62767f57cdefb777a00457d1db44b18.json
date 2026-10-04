@@ -1,0 +1,1 @@
+{"text": "やる　ものだね！", "structure": [{"jp": "やる　ものだね！", "en": "you really can do it, eh!"}], "patterns": [{"name": "〜ものだ", "span": "やる　ものだ", "words": ["やる", "もの", "だ"], "explanation": "ものだ after a verb shows the speaker is impressed: 'well, well, how about that'. やる ものだ = 'you're really something'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

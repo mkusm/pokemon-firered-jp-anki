@@ -1,0 +1,1 @@
+{"text": "みたかね！", "structure": [{"jp": "みたかね！", "en": "did you see it?!"}], "patterns": [{"name": "〜かね", "span": "みたかね", "words": ["みた", "かね"], "explanation": "かね is a question ending used by older men talking to someone younger. みたかね = 'did you see it?'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

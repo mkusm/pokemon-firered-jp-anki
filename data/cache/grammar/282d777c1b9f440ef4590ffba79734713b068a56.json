@@ -1,0 +1,1 @@
+{"text": "ええい　あくりょうめ！", "structure": [{"jp": "ええい", "en": "Argh"}, {"jp": "あくりょうめ！", "en": "you damned evil spirit!"}], "patterns": [{"name": "〜め", "span": "あくりょうめ", "words": ["あくりょう", "め"], "explanation": "め stuck on someone's name or title is an insult, like 'damn'. あくりょうめ = 'you damned evil spirit'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

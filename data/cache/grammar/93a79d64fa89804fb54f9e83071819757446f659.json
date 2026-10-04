@@ -1,0 +1,1 @@
+{"text": "がんばるなあ", "structure": [{"jp": "がんばるなあ", "en": "you sure keep at it"}], "patterns": [{"name": "〜なあ", "span": "がんばるなあ", "words": ["がんばる", "なあ"], "explanation": "なあ at the end shows the speaker is impressed or musing to himself. がんばるなあ = 'wow, you really keep at it'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

@@ -1,0 +1,1 @@
+{"text": "…　えー　なんなの！", "structure": [{"jp": "…　えー", "en": "...huh?"}, {"jp": "なんなの！", "en": "what's with you!"}], "patterns": [{"name": "〜のだ", "span": "なんなの", "words": ["なん", "なの"], "explanation": "なの is a soft, girlish form of なのだ, here demanding an explanation. なんなの = 'what is this about?'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

@@ -1,0 +1,1 @@
+{"text": "ここは　タマムシ　シティ　タマムシ　にじいろ　ゆめの　いろ", "structure": [{"jp": "ここは　タマムシ　シティ", "en": "This is Celadon City"}, {"jp": "タマムシ　にじいろ　ゆめの　いろ", "en": "Celadon, rainbow color, the color of dreams"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

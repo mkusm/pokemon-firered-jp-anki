@@ -1,0 +1,1 @@
+{"text": "びっくり　した！", "structure": [{"jp": "びっくり　した！", "en": "I got startled!"}], "patterns": [{"name": "〜する", "span": "びっくり　した", "words": ["びっくり", "した"], "explanation": "する after a word like びっくり turns it into something you do; した is its past form. びっくり　した = 'I got startled'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

@@ -1,0 +1,1 @@
+{"text": "ちょっと　そこの　きみ！", "structure": [{"jp": "ちょっと", "en": "hey"}, {"jp": "そこの　きみ！", "en": "you there!"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

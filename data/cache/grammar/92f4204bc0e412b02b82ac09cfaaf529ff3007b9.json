@@ -1,0 +1,1 @@
+{"text": "ジュース　のみたいよー！", "structure": [{"jp": "ジュース", "en": "juice"}, {"jp": "のみたいよー！", "en": "I want to drink!"}], "patterns": [{"name": "〜たい", "span": "のみたい", "words": ["のみたい"], "explanation": "たい on a verb stem means 'want to do'. のみたい = 'I want to drink'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

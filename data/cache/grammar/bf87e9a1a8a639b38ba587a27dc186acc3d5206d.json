@@ -1,0 +1,1 @@
+{"text": "てかげんは　なしね！", "structure": [{"jp": "てかげんは", "en": "going easy"}, {"jp": "なしね！", "en": "is off, okay?"}], "patterns": [{"name": "〜はなし", "span": "てかげんは　なし", "words": ["てかげん", "は", "なし"], "explanation": "A thing plus は なし sets a rule: 'none of that allowed'. てかげんは　なし = 'no going easy'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

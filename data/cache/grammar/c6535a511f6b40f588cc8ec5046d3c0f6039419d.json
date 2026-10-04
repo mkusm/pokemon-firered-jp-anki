@@ -1,0 +1,1 @@
+{"text": "おしょくじ　ちゅう！", "structure": [{"jp": "おしょくじ　ちゅう！", "en": "in the middle of a meal!"}], "patterns": [{"name": "〜中", "span": "おしょくじ　ちゅう", "words": ["お", "しょくじ", "ちゅう"], "explanation": "ちゅう after a word for an activity means 'in the middle of it'. おしょくじ　ちゅう = 'out having a meal'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

@@ -1,0 +1,1 @@
+{"text": "あめが　ふりやんだ！", "structure": [{"jp": "あめが", "en": "the rain"}, {"jp": "ふりやんだ！", "en": "stopped falling!"}], "patterns": [{"name": "〜やむ", "span": "ふりやんだ", "words": ["ふりやんだ"], "explanation": "やむ stuck onto a verb says something that was going on by itself comes to a stop. ふりやんだ = 'stopped falling'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

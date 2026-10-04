@@ -1,0 +1,1 @@
+{"text": "ちょっと　まって！", "structure": [{"jp": "ちょっと　まって！", "en": "wait a moment!"}], "patterns": [{"name": "〜て (request)", "span": "まって", "words": ["まって"], "explanation": "A て-form on its own at the end is a casual request, short for てください. まって = 'wait'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

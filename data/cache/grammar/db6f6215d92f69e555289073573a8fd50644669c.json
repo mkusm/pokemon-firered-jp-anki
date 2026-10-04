@@ -1,0 +1,1 @@
+{"text": "おたくの　でんき　あんぜん　ですか？", "structure": [{"jp": "おたくの　でんき", "en": "the electricity at your home"}, {"jp": "あんぜん　ですか？", "en": "is it safe?"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

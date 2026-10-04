@@ -1,0 +1,1 @@
+{"text": "オッケー　やな！", "structure": [{"jp": "オッケー　やな！", "en": "it's OK, right?"}], "patterns": [{"name": "〜だ", "span": "オッケー　やな", "words": ["オッケー", "や", "な"], "explanation": "や is the Kansai dialect way of saying だ, 'is', and な asks for agreement. オッケー　やな = 'it's OK, right?'"}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

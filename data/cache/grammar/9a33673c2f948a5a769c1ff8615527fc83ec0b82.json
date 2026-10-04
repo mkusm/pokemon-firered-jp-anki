@@ -1,0 +1,1 @@
+{"text": "え　バトルサーチャーの　つかいかた？", "structure": [{"jp": "え", "en": "huh"}, {"jp": "バトルサーチャーの　つかいかた？", "en": "how to use the VS Seeker?"}], "patterns": [{"name": "〜かた", "span": "つかいかた", "words": ["つかいかた"], "explanation": "かた added to the stem of a verb means 'the way of doing it'. つかいかた = 'how to use it'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

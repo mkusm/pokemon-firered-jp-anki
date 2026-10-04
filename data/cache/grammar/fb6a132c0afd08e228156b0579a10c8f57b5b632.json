@@ -1,0 +1,1 @@
+{"text": "ボックスが　いっぱい　ですよ！", "structure": [{"jp": "ボックスが", "en": "the Box"}, {"jp": "いっぱい　ですよ！", "en": "is full!"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

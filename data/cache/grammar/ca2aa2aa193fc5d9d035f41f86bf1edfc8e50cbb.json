@@ -1,0 +1,1 @@
+{"text": "あめが　ふっている", "structure": [{"jp": "あめが", "en": "rain"}, {"jp": "ふっている", "en": "is falling"}], "patterns": [{"name": "〜ている", "span": "ふっている", "words": ["ふっている"], "explanation": "ている shows something going on right now. ふっている = 'is falling'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

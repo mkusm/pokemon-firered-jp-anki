@@ -1,0 +1,1 @@
+{"text": "＊は　かえってきた！", "structure": [{"jp": "＊は", "en": "＊"}, {"jp": "かえってきた！", "en": "came back!"}], "patterns": [{"name": "〜てくる", "span": "かえってきた", "words": ["かえってきた"], "explanation": "The て-form plus くる shows the action moves toward where the speaker is. かえってきた = 'came back here'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

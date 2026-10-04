@@ -1,0 +1,1 @@
+{"text": "なっとく　いかねえ", "structure": [{"jp": "なっとく　いかねえ", "en": "I can't accept this"}], "patterns": [{"name": "〜ない", "span": "いかねえ", "words": ["いかねえ"], "explanation": "ない makes a verb say 'not'. ねえ is a rough, tough-guy way to say ない. なっとく　いかねえ = 'I can't accept it'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

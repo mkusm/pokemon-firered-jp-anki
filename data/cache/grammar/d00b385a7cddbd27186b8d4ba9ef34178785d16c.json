@@ -1,0 +1,1 @@
+{"text": "なんでだろう？", "structure": [{"jp": "なんでだろう？", "en": "I wonder why?"}], "patterns": [{"name": "〜だろう", "span": "なんでだろう", "words": ["なんで", "だろう"], "explanation": "だろう with a question word shows the speaker is wondering to himself. なんでだろう = 'I wonder why'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

@@ -1,0 +1,1 @@
+{"text": "ダメージの　りょうが　いろいろ　かわる。", "structure": [{"jp": "ダメージの　りょうが", "en": "the amount of damage"}, {"jp": "いろいろ　かわる。", "en": "varies in all sorts of ways"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

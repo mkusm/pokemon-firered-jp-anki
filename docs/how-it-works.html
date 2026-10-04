@@ -137,7 +137,7 @@
 <main>
 <header class="hero">
   <h1>How a line of FireRed becomes a flashcard</h1>
-  <p class="lede">The deck has 11,112 cards. Each one is a word, in one form, in the sentence where the Japanese game first uses it. This page follows the text from the cartridge's script to the card.</p>
+  <p class="lede">The deck has 10,868 cards. Each one is a word, in one form, in the sentence where the Japanese game first uses it. This page follows the text from the cartridge's script to the card.</p>
 
   <figure class="card">
     <div class="gba jp" lang="ja">グリーンは　すでに　ポケモンを　<mark>つかまえて</mark>　ずかんの　ページを　ふやしている　そうじゃ！</div>
@@ -182,7 +182,7 @@
         <rect x="30" y="96" width="110" height="52" rx="8"/><text x="85" y="118" text-anchor="middle" font-size="14" font-weight="700">extract</text><text class="sub" x="85" y="136" text-anchor="middle">16,166 sentences</text>
         <rect x="160" y="96" width="110" height="52" rx="8"/><text x="215" y="118" text-anchor="middle" font-size="14" font-weight="700">order</text><text class="sub" x="215" y="136" text-anchor="middle">12,780 kept</text>
         <rect x="290" y="96" width="110" height="52" rx="8"/><text x="345" y="118" text-anchor="middle" font-size="14" font-weight="700">tokenize</text><text class="sub" x="345" y="136" text-anchor="middle">11,163 unique</text>
-        <rect x="550" y="96" width="90" height="52" rx="8"/><text x="595" y="118" text-anchor="middle" font-size="14" font-weight="700">cards</text><text class="sub" x="595" y="136" text-anchor="middle">11,112</text>
+        <rect x="550" y="96" width="90" height="52" rx="8"/><text x="595" y="118" text-anchor="middle" font-size="14" font-weight="700">cards</text><text class="sub" x="595" y="136" text-anchor="middle">10,868</text>
         <rect x="660" y="96" width="90" height="52" rx="8"/><text x="705" y="118" text-anchor="middle" font-size="14" font-weight="700">build</text><text class="sub" x="705" y="136" text-anchor="middle">two .apkg</text>
       </g>
       <g class="llm">
@@ -313,7 +313,7 @@
   <p>A rule in prose only goes so far. The analysis decides where words begin and end one sentence at a time and cannot see what it chose elsewhere, so the same string came out as one word in some sentences and as several in others: <span class="jp" lang="ja">ポケモンセンター</span> twice whole and five times in two pieces, <span class="jp" lang="ja">ように</span> three times whole and seven times cut. In the first chapter that was 67 strings, and every rerun cut a fifth of the chapter differently.</p>
   <p>The <code>splits</code> stage settles each string once. It finds the strings cut two ways and asks Claude about each, twice and independently, showing the sentences, the glosses and the dictionary entries: always one word, always the same pieces, or "it depends on the meaning" (<span class="jp" lang="ja">でも</span> is "but" as one word and <span class="jp" lang="ja">で</span> + <span class="jp" lang="ja">も</span> as two). A string is fixed only where the two answers agree; otherwise it is left to the rule. The decisions go to <code>splits.yaml</code> with their reasons, the analysis is shown the ones that apply to its batch, and a check in code re-analyses the sentences that break one.</p>
   <p>The first chapter needed 72 decisions: 29 strings fixed as one word, 23 fixed as cut, 20 left to the rule. 89 sentences were re-analysed. Afterwards 17 strings are still cut two ways, all of them ones where the meaning decides.</p>
-  <p>The decisions hold across chapters: the second chapter is checked together with the first, so a string cut one way before Brock and another way after him is caught, and the sentence that differs goes back, whichever chapter it is in. The second chapter added 25 decisions, 97 in all, and sent a handful of first-chapter sentences back.</p>
+  <p>The decisions hold across chapters: the second chapter is checked together with the first, so a string cut one way before Brock and another way after him is caught, and the sentence that differs goes back, whichever chapter it is in. The second chapter added 25 decisions, the third 39, and chapters four to six another 152, 288 in all; each run sent a handful of earlier sentences back.</p>
 
   <h3>Opus for whole chapters</h3>
   <p>The second opinion only reaches sentences where Sonnet shows doubt. It cannot catch a confident mistake. The line for the SELECT button, <span class="jp" lang="ja">たいせつな　ものを　とうろくして　つかいます</span>, came back as "to register important things"; Opus reads it as the game means it, "to use a registered Key Item".</p>
@@ -353,6 +353,8 @@
   </ul>
   <p>It is told not to explain grammar, vocabulary or Pokémon lore, and not to explain names, which have notes of their own.</p>
   <p>A culture note states a fact about the outside world, and a model can be wrong about those. So each one carries the single fact a reader could look up, and a second call, the only one in the pipeline with web search switched on, looks it up. It returns the page, the passage that supports or contradicts the fact, and the note as it should be shown: unchanged, corrected, or empty if nothing settled it. An unconfirmed note is not shown. The page and the passage stay in the cache. Notes on wordplay, dialect and changed lines are not searched: the first two are about the language itself, the last is checked against the English text the model was given.</p>
+  <p>Chapters four to six: 2,133 sentences gave 187 notes that are shown. Of the 64 culture notes, 61 were confirmed by the search and 3 dropped.</p>
+  <p>The third chapter: 618 sentences gave 73 notes. 28 are on dialect, because this is where you meet Bill, who speaks Kansai dialect in every line; each note says which of his words are dialect and what the standard form is. All 11 culture notes were confirmed.</p>
   <p>The second chapter: 503 sentences gave 29 notes (18 changed lines, 7 on culture, all confirmed by the search, 4 on wordplay).</p>
   <p>The first chapter: 903 sentences in 23 calls gave 66 notes, 32 of them on lines the English game changed, 18 on culture, 11 on wordplay, 5 on dialect. Of the 18 culture notes the search confirmed 16; the other 2 were dropped (one called "I can't eat any more" the stock sleep-talking line of manga, which no page would back). A note shows on every card that uses its sentence, 180 cards, except on a name's card that has its own note.</p>
 </section>
@@ -387,31 +389,33 @@
   <h2>The deck in numbers</h2>
   <div class="scroll"><table>
     <tr><th>Chapter ends with</th><th class="n">Cards</th></tr>
-    <tr><td>Brock</td><td class="n">2,381</td></tr>
-    <tr><td>Misty</td><td class="n">982</td></tr>
-    <tr><td>Lt. Surge</td><td class="n">1,057</td></tr>
-    <tr><td>Erika</td><td class="n">1,286</td></tr>
-    <tr><td>Koga</td><td class="n">964</td></tr>
-    <tr><td>Sabrina</td><td class="n">886</td></tr>
-    <tr><td>Blaine</td><td class="n">373</td></tr>
-    <tr><td>Giovanni</td><td class="n">751</td></tr>
-    <tr><td>The League</td><td class="n">313</td></tr>
-    <tr><td>Postgame</td><td class="n">1,148</td></tr>
-    <tr><td>End of deck: link play, Help menu, errors</td><td class="n">971</td></tr>
-    <tr><th>Main deck</th><th class="n">11,112</th></tr>
+    <tr><td>Brock</td><td class="n">2,376</td></tr>
+    <tr><td>Misty</td><td class="n">979</td></tr>
+    <tr><td>Lt. Surge</td><td class="n">972</td></tr>
+    <tr><td>Erika</td><td class="n">1,176</td></tr>
+    <tr><td>Koga</td><td class="n">887</td></tr>
+    <tr><td>Sabrina</td><td class="n">796</td></tr>
+    <tr><td>Blaine</td><td class="n">403</td></tr>
+    <tr><td>Giovanni</td><td class="n">783</td></tr>
+    <tr><td>The League</td><td class="n">321</td></tr>
+    <tr><td>Postgame</td><td class="n">1,180</td></tr>
+    <tr><td>End of deck: link play, Help menu, errors</td><td class="n">995</td></tr>
+    <tr><th>Main deck</th><th class="n">10,868</th></tr>
   </table></div>
   <p>The first chapter is the largest because the menus, the battle screen and most everyday vocabulary all appear before the first gym. The deck's first 168 cards are the opening sequence alone.</p>
   <ul>
-    <li>6,229 distinct dictionary forms across the 11,112 cards.</li>
-    <li>6,638 cards take their example from story dialogue; the rest from Pokédex entries, menus, move and item descriptions and battle messages.</li>
-    <li>108 cards are tagged <code>low-confidence</code>: the dictionary entry does not match the word, there is no entry and the model was unsure, or the word is a scrap of broken text. A doubt only about which listed sense fits a helper verb or an idiom no longer counts; those glosses were checked by hand. 9 are tagged <code>sense-guessed</code>.</li>
-    <li>3,030 cards carry a sentence breakdown, and 1,572 of them a grammar pattern for their word. All but a few are in the first two chapters; the other cards of those chapters sit on a bare name or a line of one word, with nothing to break down.</li>
-    <li>232 cards carry a sentence note, from 93 notes.</li>
-    <li>210 are tagged <code>onomatopoeia</code>: JMdict marks the sense as a sound or mimetic word (<span class="jp" lang="ja">ドキドキ</span>, <span class="jp" lang="ja">キラキラ</span>), and the back says so.</li>
-    <li>70 are tagged <code>fragment</code>: stammers, garbled speech and pieces of interrupted words (<span class="jp" lang="ja">こっ　こんなに</span>). They stay in the deck because the card is what explains them.</li>
-    <li>916 cards are names: 221 Pokémon, 150 items, 266 moves, 61 abilities, 17 types, 132 places, 24 people, Team Rocket and its grunts, 8 badges, 20 game terms and 15 real-world names, each tagged with its kind. 277 of them sit on a line of dialogue or other text that says the name; 639 on the name's own line, where the thing is first met. 38 carry a note.</li>
+    <li>6,171 distinct dictionary forms across the 10,868 cards.</li>
+    <li>6,458 cards take their example from story dialogue; the rest from Pokédex entries, menus, move and item descriptions and battle messages.</li>
+    <li>107 cards are tagged <code>low-confidence</code>: the dictionary entry does not match the word, there is no entry and the model was unsure, or the word is a scrap of broken text. A doubt only about which listed sense fits a helper verb or an idiom no longer counts; those glosses were checked by hand. 8 are tagged <code>sense-guessed</code>.</li>
+    <li>6,332 cards carry a sentence breakdown, and 3,327 of them a grammar pattern for their word. All but a few are in the first six chapters; the other cards of those chapters sit on a bare name or a line of one word, with nothing to break down.</li>
+    <li>683 cards carry a sentence note, from 353 notes.</li>
+    <li>212 are tagged <code>onomatopoeia</code>: JMdict marks the sense as a sound or mimetic word (<span class="jp" lang="ja">ドキドキ</span>, <span class="jp" lang="ja">キラキラ</span>), and the back says so.</li>
+    <li>85 are tagged <code>fragment</code>: stammers, garbled speech and pieces of interrupted words (<span class="jp" lang="ja">こっ　こんなに</span>). They stay in the deck because the card is what explains them.</li>
+    <li>923 cards are names: 221 Pokémon, 153 items, 270 moves, 61 abilities, 17 types, 132 places, 24 people, Team Rocket and its grunts, 8 badges, 20 game terms and 15 real-world names, each tagged with its kind. 280 of them sit on a line of dialogue or other text that says the name; 643 on the name's own line, where the thing is first met. 38 carry a note.</li>
   </ul>
   <p>The second chapter, run with the one <code>chapter</code> command: 644 sentences re-analysed in 17 calls, 13 grammar calls, 13 note calls and a search check, then a few small rounds until nothing was left. 657 sentences are shown, 503 of them explained, 393 with at least one pattern.</p>
+  <p>Chapters four to six: about 2,670 sentences re-analysed. The run was stopped once by the plan's session limit, in the middle of the word-boundary step, and once more by a second hand correction that Opus had made unnecessary.</p>
+  <p>The third chapter: 730 sentences re-analysed in 19 calls, 16 grammar calls, 16 note calls. The run stopped once, as it should: a hand correction for a form Sonnet had written wrongly no longer fitted, because Opus writes it correctly, and the correction was removed.</p>
   <p>The first full analysis took about five hours of calls including one usage-limit pause. A classify pass is about 21 calls. Redoing the first chapter on Opus took 10 minutes, and its grammar pass 5.</p>
 </section>
 
@@ -435,8 +439,8 @@
 <section id="limits">
   <h2>Known limits</h2>
   <ul>
-    <li>The deck is in two states: the first two chapters are Opus's analysis with grammar and notes on their cards; the other eight are Sonnet's, with Opus only where Sonnet showed doubt, and have neither yet.</li>
-    <li>Particles are split into one card per job only in the first two chapters; in the later chapters all uses of a particle are still filed under one card.</li>
+    <li>The deck is in two states: the first six chapters are Opus's analysis with grammar and notes on their cards; the other four are Sonnet's, with Opus only where Sonnet showed doubt, and have neither yet.</li>
+    <li>Particles are split into one card per job only in the first six chapters; in the later chapters all uses of a particle are still filed under one card.</li>
     <li>A grammar pattern is named per sentence, so one pattern can be spelled two ways on different cards (<span class="jp" lang="ja">〜せる</span> and <span class="jp" lang="ja">〜させる</span>). The explanations have not been checked one by one.</li>
     <li>About 250 battle messages and 580 other strings are placed by the model's judgement. Ability messages and trainer-battle text are among them.</li>
     <li>Rematch lines of ordinary trainers sit at their route's first visit, though you only see them with the VS Seeker.</li>

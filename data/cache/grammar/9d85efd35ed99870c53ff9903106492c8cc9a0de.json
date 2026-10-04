@@ -1,0 +1,1 @@
+{"text": "フジ　ろうじんが　いないぞ！", "structure": [{"jp": "フジ　ろうじんが", "en": "Mr. Fuji"}, {"jp": "いないぞ！", "en": "isn't here!"}], "patterns": [{"name": "〜ぞ", "span": "いないぞ", "words": ["いない", "ぞ"], "explanation": "ぞ at the end is a rough, mostly male way to stress what you say. いないぞ = 'he's not here!'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

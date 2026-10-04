@@ -1,0 +1,1 @@
+{"text": "かのじょを　そんけい　している！", "structure": [{"jp": "かのじょを", "en": "her"}, {"jp": "そんけい　している！", "en": "I respect!"}], "patterns": [{"name": "〜ている", "span": "そんけい　している", "words": ["そんけい", "している"], "explanation": "A て-form verb plus いる shows a feeling or state that keeps going. そんけい　している = 'I respect her'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

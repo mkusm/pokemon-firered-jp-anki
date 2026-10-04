@@ -1,0 +1,1 @@
+{"text": "ねえ…　みて！", "structure": [{"jp": "ねえ…", "en": "hey..."}, {"jp": "みて！", "en": "look!"}], "patterns": [{"name": "〜てください", "span": "みて", "words": ["みて"], "explanation": "A verb ending in て on its own is a casual way to ask someone to do something; the ください is simply dropped. みて = 'look'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

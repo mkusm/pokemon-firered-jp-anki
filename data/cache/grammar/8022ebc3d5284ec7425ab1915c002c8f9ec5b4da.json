@@ -1,0 +1,1 @@
+{"text": "がんばったのに", "structure": [{"jp": "がんばったのに", "en": "even though I tried hard..."}], "patterns": [{"name": "〜のに", "span": "がんばったのに", "words": ["がんばった", "のに"], "explanation": "のに means 'even though', and left hanging at the end it shows disappointment. がんばったのに = 'and I tried so hard...'"}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

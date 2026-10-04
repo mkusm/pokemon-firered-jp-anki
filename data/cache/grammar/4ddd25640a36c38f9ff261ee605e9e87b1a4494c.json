@@ -1,0 +1,1 @@
+{"text": "かるくて　するどい　ツメ。", "structure": [{"jp": "かるくて", "en": "light and"}, {"jp": "するどい　ツメ。", "en": "a sharp claw."}], "patterns": [{"name": "〜て (linking)", "span": "かるくて", "words": ["かるくて"], "explanation": "Changing い to くて lets you add another describing word, like 'and'. かるくて　するどい = 'light and sharp'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

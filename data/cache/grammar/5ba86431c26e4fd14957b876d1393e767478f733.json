@@ -1,0 +1,1 @@
+{"text": "やるなあ", "structure": [{"jp": "やるなあ", "en": "you're pretty good"}], "patterns": [{"name": "〜なあ", "span": "やるなあ", "words": ["やる", "なあ"], "explanation": "なあ at the end shows the speaker is impressed. やるなあ = 'wow, you're good'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

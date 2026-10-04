@@ -1,0 +1,1 @@
+{"text": "せいせい　どうどう　やろう！", "structure": [{"jp": "せいせい　どうどう", "en": "fair and square"}, {"jp": "やろう！", "en": "let's do it!"}], "patterns": [{"name": "〜よう", "span": "やろう", "words": ["やろう"], "explanation": "Changing やる to やろう makes it 'let's'. やろう = 'let's do it'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}
