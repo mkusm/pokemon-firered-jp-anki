@@ -1,0 +1,1 @@
+{"text": "ぜんぶ　おれに　まかせなー！", "structure": [{"jp": "ぜんぶ　おれに　まかせなー！", "en": "leave it all to me!"}], "patterns": [{"name": "〜なさい", "span": "まかせなー", "words": ["まかせ", "なー"], "explanation": "な after a verb stem is the short casual form of なさい, a friendly but firm order. まかせなー = 'leave it to me!'."}], "_run": {"model": "opus", "effort": "low", "version": "2"}}

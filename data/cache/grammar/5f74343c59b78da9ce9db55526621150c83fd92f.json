@@ -1,0 +1,1 @@
+{"text": "じょうげさゆうに　しゅじんこうを　うごかします。", "structure": [{"jp": "じょうげさゆうに", "en": "up, down, left and right"}, {"jp": "しゅじんこうを　うごかします。", "en": "moves the main character"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2"}}

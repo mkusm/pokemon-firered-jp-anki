@@ -1,0 +1,1 @@
+{"text": "レッド　どーだい？", "structure": [{"jp": "レッド", "en": "Red"}, {"jp": "どーだい？", "en": "how is it going?"}], "patterns": [{"name": "〜だい", "span": "どーだい", "words": ["どー", "だい"], "explanation": "だい is a friendly, older-man way to end a question that has a question word in it. どーだい = 'how is it?'"}], "_run": {"model": "opus", "effort": "low", "version": "2"}}

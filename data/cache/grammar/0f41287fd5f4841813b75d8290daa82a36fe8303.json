@@ -1,0 +1,1 @@
+{"text": "まつんじゃあ！", "structure": [{"jp": "まつんじゃあ！", "en": "wait, I say!"}], "patterns": [{"name": "〜のだ", "span": "まつんじゃあ", "words": ["まつ", "んじゃあ"], "explanation": "んじゃ is the old-man way of saying んだ (のだ). Said firmly after a plain verb it works as an order. まつんじゃあ = 'you are to wait!'."}], "_run": {"model": "opus", "effort": "low", "version": "2"}}

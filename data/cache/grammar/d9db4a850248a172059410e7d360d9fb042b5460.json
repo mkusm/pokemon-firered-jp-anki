@@ -1,1 +1,0 @@
-{"text": "もらって　くれい！", "structure": [{"jp": "もらって　くれい！", "en": "do take it!"}], "patterns": [{"name": "〜てくれ", "span": "もらって　くれい", "words": ["もらって", "くれい"], "explanation": "くれ after a て-form verb is a blunt request: 'do this for me'. くれい is an old-man way of saying it. もらって くれい = 'do take it!'."}], "_run": {"model": "opus", "effort": "low", "version": "2"}}

@@ -1,0 +1,1 @@
+{"text": "＊は　＊を　おぼえずに　おわった！", "structure": [{"jp": "＊は", "en": "＊"}, {"jp": "＊を　おぼえずに", "en": "without learning ＊"}, {"jp": "おわった！", "en": "finished!"}], "patterns": [{"name": "〜ずに", "span": "おぼえずに", "words": ["おぼえずに"], "explanation": "ずに on a verb means 'without doing' it. おぼえずに = 'without learning'."}], "_run": {"model": "opus", "effort": "low", "version": "2"}}

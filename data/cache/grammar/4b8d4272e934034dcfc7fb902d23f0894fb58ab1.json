@@ -1,0 +1,1 @@
+{"text": "なにも　ありません！", "structure": [{"jp": "なにも　ありません！", "en": "there is nothing!"}], "patterns": [{"name": "なにも〜ない", "span": "なにも　ありません", "words": ["なにも", "ありません"], "explanation": "なにも together with a 'not' verb means 'nothing at all'. なにも　ありません = 'there is nothing'."}], "_run": {"model": "opus", "effort": "low", "version": "2"}}

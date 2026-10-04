@@ -28,7 +28,7 @@ from html import escape
 
 import pandas as pd
 
-from . import claude_cli, corrections
+from . import claude_cli, corrections, names
 from .analyse import MAIN, load, results as analysis_results
 from .paths import DATA
 
@@ -106,7 +106,8 @@ def prompt(rows, analyses) -> str:
         spk = f", speaker: {r.speaker}" if r.speaker else ""
         words = " / ".join(w["surface"] for w in a["words"])
         out.append(f"\ns{i} ({where}{spk})\n  {r.text}\n  kanji: {a['kanji']}\n  english: {a['english']}\n  words: {words}")
-    return "\n".join(out) + "\n\nReturn one item per sentence, with its id (s0, s1, …)."
+    return "\n".join(out) + names.for_prompt(rows["text"], "every English gloss and explanation") + (
+        "\n\nReturn one item per sentence, with its id (s0, s1, …).")
 
 
 # --- running -------------------------------------------------------------------
@@ -120,7 +121,7 @@ def ask(batch: pd.DataFrame, analyses: dict) -> tuple[int, dict]:
         if s:
             cache_file(r.text, analyses[r.text]["words"]).write_text(json.dumps(
                 {"text": r.text, "structure": s["structure"], "patterns": s["patterns"],
-                 "_run": {"model": MODEL, "effort": EFFORT, "version": VERSION}}, ensure_ascii=False))
+                 "_run": {"model": MODEL, "effort": EFFORT, "version": VERSION, "names": names.SHOWN}}, ensure_ascii=False))
             done += 1
     return done, info
 
@@ -158,6 +159,20 @@ def run(rows: pd.DataFrame, analyses: dict) -> None:
     print(f"[grammar] done: {len(rows) - left}/{len(rows)} sentences cached")
 
 
+def redo(rows: pd.DataFrame, analyses: dict) -> None:
+    """Ask again about these sentences, whatever the cache holds: for a fix
+    that touches a few of them."""
+    CACHE.mkdir(parents=True, exist_ok=True)
+    rows = rows[rows["text"].map(lambda t: t in analyses)].drop_duplicates("text")
+    for i in range(0, len(rows), BATCH):
+        try:
+            got, info = ask(rows.iloc[i:i + BATCH], analyses)
+        except claude_cli.UsageLimit as e:
+            print(f"[grammar] usage limit reached\n  {e}")
+            return
+        print(f"[grammar] redo: {got} sentences, {info['ms'] / 1000:.0f}s")
+
+
 def first_sentences(n_cards: int | None = None, n_sentences: int | None = None,
                     chapter: int | None = None) -> tuple[pd.DataFrame, dict]:
     """The deck's sentences in card order: all of them, one chapter's, the
@@ -166,6 +181,8 @@ def first_sentences(n_cards: int | None = None, n_sentences: int | None = None,
 
     deck, _, analyses, _ = prepare(offline_merge=True)
     placed = deck[deck["card_order"].notna()].sort_values("card_order").drop_duplicates("text")
+    # A line of the Pokémon or item list is one name: there is no grammar in it.
+    placed = placed[[not names.listed(g, lb) for g, lb in zip(placed["group"], placed["label"])]]
     if chapter is not None:
         placed = placed[placed["chapter"] == chapter]
     if n_cards:

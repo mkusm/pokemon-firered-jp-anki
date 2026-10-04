@@ -1,1 +1,0 @@
-{"text": "おまえも　すきなものを　とれ！", "structure": [{"jp": "おまえも", "en": "you too"}, {"jp": "すきなものを", "en": "the one you like"}, {"jp": "とれ！", "en": "take!"}], "patterns": [{"name": "〜ろ (command)", "span": "とれ", "words": ["とれ"], "explanation": "Changing the last sound of the verb to え makes a blunt order. とれ = 'take it!'"}], "_run": {"model": "opus", "effort": "low", "version": "2"}}

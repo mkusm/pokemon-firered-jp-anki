@@ -1,0 +1,1 @@
+{"text": "おぼえられる！", "structure": [{"jp": "おぼえられる！", "en": "can learn (it)!"}], "patterns": [{"name": "〜られる (potential)", "span": "おぼえられる", "words": ["おぼえられる"], "explanation": "られる put on a verb says that doing it is possible. おぼえられる = 'can learn it'."}], "_run": {"model": "opus", "effort": "low", "version": "2"}}

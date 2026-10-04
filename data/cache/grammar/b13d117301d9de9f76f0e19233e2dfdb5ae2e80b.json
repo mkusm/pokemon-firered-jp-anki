@@ -1,1 +1,0 @@
-{"text": "ピンチに　みずの　いりょくが　あがる", "structure": [{"jp": "ピンチに", "en": "in a pinch"}, {"jp": "みずの　いりょくが　あがる", "en": "the power of Water goes up"}], "patterns": [{"name": "〜に (time)", "span": "ピンチに", "words": ["ピンチ", "に"], "explanation": "に here tells when the thing happens. ピンチに = 'when in a pinch'."}], "_run": {"model": "opus", "effort": "low", "version": "2"}}

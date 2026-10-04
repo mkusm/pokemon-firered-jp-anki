@@ -6,6 +6,12 @@ often split wrong (てんそう → て+ん+そう), so besides single tokens we
 runs of up to 4 adjacent tokens. Runs never cross the game's spaces, which mark
 phrase boundaries.
 
+Particles, sentence endings and the copula get candidates too: the entries
+written in kana for that reading, with all their senses. A particle's jobs
+are its senses (か asks a question, or means "or"), and the analysis can only
+say which one it is doing if it is shown them. Runs of such words are looked
+up as well, so that かな and のに are offered as the single words they are.
+
 Writes one row per unique sentence, plus a table of the JMdict entries used.
 Run: uv run python -m firered_anki.tokenize
 """
@@ -32,6 +38,9 @@ NO_LOOKUP = {"助詞", "助動詞", "補助記号", "空白", "記号"}
 INFLECTS = {"動詞", "形容詞", "助動詞"}
 KANA = re.compile(r"^[ぁ-ゟ゠-ヿー]+$")
 SPACE = {"空白"}
+GRAMMAR = re.compile(r"^[\u3041-\u309f]{1,2}$")  # の, が, から, です…
+GRAMMAR_POS = {"助詞", "助動詞"}
+MAX_GRAMMAR_RUN = 3  # かな, のに, ではない…
 
 _tagger = fugashi.Tagger()
 _jam = Jamdict()
@@ -80,6 +89,20 @@ def lookup(key: str) -> tuple[int, ...]:
     return tuple(ids[:MAX_PER_KEY])
 
 
+@lru_cache(maxsize=None)
+def kana_entries(reading: str) -> tuple[int, ...]:
+    """Entries read this way that are written in kana: the particle か, not 蚊.
+    They are kept with every sense, not the first five (に has nine)."""
+    ids = []
+    for e in _jam.lookup(reading, strict_lookup=True, lookup_chars=False).entries:
+        in_kana = any("usually written using kana" in m for s in e.senses for m in s.misc)
+        if not e.kanji_forms or in_kana:
+            eid = int(e.idseq)
+            _entries[eid] = compact(e, max_senses=None)
+            ids.append(eid)
+    return tuple(ids)
+
+
 def tokenize(text: str) -> tuple[list[dict], dict[str, list[int]]]:
     words = list(_tagger(text))
     tokens = [
@@ -98,6 +121,10 @@ def tokenize(text: str) -> tuple[list[dict], dict[str, list[int]]]:
         if key and key not in cands and (ids := lookup(key)):
             cands[key] = list(ids)
 
+    def add_grammar(key: str) -> None:
+        if "＊" not in key and (ids := kana_entries(hira(key))):
+            cands[key] = list(dict.fromkeys(cands.get(key, []) + list(ids)))
+
     # Chunks between the game's spaces.
     chunks, cur = [], []
     for t in tokens:
@@ -114,6 +141,11 @@ def tokenize(text: str) -> tuple[list[dict], dict[str, list[int]]]:
                 add(t["l"])
                 add(t["lr"])
                 add(t["s"])
+            if GRAMMAR.match(hira(t["s"])):
+                add_grammar(t["s"])
+            for j in range(i + 2, min(i + MAX_GRAMMAR_RUN, len(chunk)) + 1):
+                if all(x["p"] in GRAMMAR_POS for x in chunk[i:j]):
+                    add_grammar("".join(x["s"] for x in chunk[i:j]))
             for j in range(i + 2, min(i + MAX_RUN, len(chunk)) + 1):
                 run = chunk[i:j]
                 if all(x["p"] in NO_LOOKUP for x in run) or any("＊" in x["s"] for x in run):

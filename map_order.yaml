@@ -40,7 +40,12 @@ order:
   - gOakSpeech_Text_LetsGo
 
   # --- Pallet Town (P1); the start menu opens here
+  - PalletTown_PlayersHouse_2F_Text_PlayedWithNES   # the console in your room: the first line after the intro
   - PalletTown_PlayersHouse_2F
+  # What is on TV comes before Mom, who then talks about it (テレビの　はなしよ).
+  - PalletTown_PlayersHouse_1F_Text_MovieOnTVFourBoysOnRailroad
+  - PalletTown_PlayersHouse_1F_Text_MovieOnTVGirlOnBrickRoad
+  - PalletTown_PlayersHouse_1F_Text_OopsWrongSide
   - PalletTown_PlayersHouse_1F
   - PalletTown                # Oak stops you in the grass; sign_lady girl
   - PalletTown_ProfessorOaksLab   # starter, first rival battle, later the Pokédex

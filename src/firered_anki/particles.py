@@ -2,12 +2,16 @@
 
 Particles, sentence endings and the copula do several jobs each: か asks a
 question or means "or", が marks the subject or means "but". The analysis
-mostly leaves them without a dictionary sense, and grounding does not look
+used to leave them without a dictionary sense, and grounding does not look
 them up, so every use of a particle landed on one card that showed whatever
 its first sentence said. か "or" was taught twice and か the question marker
 not at all.
 
-This stage asks Claude about every such use: it sees the sentence with the
+Since prompt version 3 the analysis is shown the particle entries and picks
+the sense itself. This stage is what remains for the uses it leaves without
+one, and for sentences analysed before that.
+
+It asks Claude about every such use: it sees the sentence with the
 word marked, the translation, the gloss the analysis wrote, and the senses of
 the kana-only JMdict entries with that reading, and answers with an entry and
 a sense. The cards stage then makes one card per sense, at the first sentence
@@ -22,15 +26,12 @@ import hashlib
 import json
 import sys
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from functools import lru_cache
-
-from jamdict import Jamdict
 
 from . import claude_cli
 from .grounding import GRAMMAR, full_entry
 from .paths import DATA
 from .spans import word_span
-from .tokenize import MAX_SENSES, hira
+from .tokenize import MAX_SENSES, hira, kana_entries
 
 CACHE = DATA / "cache" / "particles"
 MODEL, EFFORT, BATCH, WORKERS = "opus", "low", 50, 8
@@ -54,26 +55,15 @@ SCHEMA = {
     "required": ["items"],
 }
 
-_jam = None
-
-
 def wanted(w: dict) -> bool:
     """A short kana grammar word with no dictionary sense yet."""
     return (not w.get("proper") and not w.get("kanji") and "＊" not in w["surface"]
             and bool(GRAMMAR.match(hira(w["base"]))) and not (w.get("jmdict_id") and w.get("sense")))
 
 
-@lru_cache(maxsize=None)
 def candidates(base: str) -> tuple[int, ...]:
     """Entries read this way that are written in kana: the particle か, not 蚊."""
-    global _jam
-    _jam = _jam or Jamdict()
-    out = []
-    for e in _jam.lookup(base, strict_lookup=True, lookup_chars=False).entries:
-        in_kana = any("usually written using kana" in m for s in e.senses for m in s.misc)
-        if not e.kanji_forms or in_kana:
-            out.append(int(e.idseq))
-    return tuple(out)
+    return kana_entries(base)
 
 
 def cache_file(text: str, pos: int, word: dict):

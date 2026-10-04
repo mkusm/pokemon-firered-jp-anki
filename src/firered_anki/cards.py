@@ -1,16 +1,22 @@
 """Stage 5: one card per word form and sense, in story order.
 
   1. Every analysed word becomes an occurrence keyed by (jmdict_id, sense, form),
-     or (base, kanji, form) when it has no JMdict entry. Names go to their own
-     deck; words in known.txt are never carded.
+     or (base, kanji, form) when it has no JMdict entry. A name names.py knows
+     (a Pokémon, item, move, ability, type, place, main character, badge, game
+     term, real-world name) has one card, where it is first seen. Any other
+     name makes no card: a one-off character, a preset from the naming screen,
+     a piece of a longer name. Words in known.txt are never carded.
   2. Sense merge: an entry used in several senses goes to Claude once, with
      the sentences, to group senses that are one meaning for a learner
      (人 "person" / "human being") while keeping real ones apart (見る "see" /
      〜てみる "try"). Cached per entry.
   3. Spread: non-dialogue lines are interleaved with the story by chapter (see
-     spread.py), now on real card keys instead of tokenizer lemmas.
+     spread.py), now on real card keys instead of tokenizer lemmas. The line
+     that names a Pokémon or an item is not spread: it stays where the thing
+     is first met.
   4. Each card takes its first sentence in that order, except that a dialogue
-     sentence in the same chapter beats a non-dialogue line. Up to two later
+     sentence in the same chapter beats a non-dialogue line (not for a Pokémon
+     or item name, which stays at the first place it is seen). Up to two later
      sentences become extra examples.
   5. Where the grammar pass has covered a sentence (see grammar.py), its word
      cards get the patterns the word takes part in and a breakdown of the
@@ -28,7 +34,7 @@ from collections import Counter, defaultdict
 
 import pandas as pd
 
-from . import claude_cli, corrections, grammar
+from . import claude_cli, corrections, grammar, names
 from .analyse import MAIN, load, results
 from .grounding import sense_glosses
 from .map_order import MapOrder
@@ -39,7 +45,6 @@ from .spread import spread
 from .tokenize import hira
 
 CARDS_OUT = DATA / "05_cards" / "cards.parquet"
-NAMES_OUT = DATA / "05_cards" / "names.parquet"
 SPOTCHECK_OUT = DATA / "05_cards" / "spotcheck.txt"
 KNOWN = ROOT / "known.txt"
 MERGE_CACHE = DATA / "cache" / "sense_merge"
@@ -162,6 +167,12 @@ SCRAP = re.compile(r"[ァ-ヶーぞッっ]+")
 SOUND = re.compile(r"onomatop|mimetic|sound effect|sound word|\bsfx\b|\(sound|sound of|laugh|screech|noise|babbl", re.I)
 
 
+# A name that is not one names.py knows still gets a card when the card is
+# what explains the text: a Pokémon's cry (ぴかちゅ), a name drawn out in a
+# shout (やどらーん).
+ODD_NAME = re.compile(r"\bcr(?:y|ies)\b|drawn out", re.I)
+
+
 def _gloss(w: dict) -> str:
     return " | ".join(w.get(k) or "" for k in ("in_context", "literal", "modifiers"))
 
@@ -231,23 +242,59 @@ def word_key(w: dict) -> tuple:
     return ("base", hira(w["base"]), w.get("kanji") or "", form)
 
 
+def name_key(run: dict) -> tuple:
+    """A name's card key. A string that names two things (ゴースト: Haunter and
+    the Ghost type) has a card for each; the second carries its kind."""
+    first = names.official()[run["name"]][0]
+    return ("name", run["name"]) if run["kind"] == first else ("name", run["name"], run["kind"])
+
+
 # --- 1. occurrences ------------------------------------------------------------
 
 def occurrences(deck: pd.DataFrame, analyses: dict, known: set) -> pd.DataFrame:
+    """One row per word use. `span` is set for a Pokémon or item name, which
+    can be several of the analysis's words; `listed` marks the word a name-list
+    line is there to teach."""
     rows = []
+    # A list line that is one ordinary word is a name only if some sentence uses it as one.
+    as_names = frozenset(
+        run["name"] for r in deck.itertuples()
+        if r.text in analyses and not names.listed(r.group, r.label)
+        for run in names.find(r.text, analyses[r.text]["words"]))
     for r in deck.itertuples():
         a = analyses.get(r.text)
         if not a:
             continue
+        kind = names.listed(r.group, r.label)
+        runs = names.find(r.text, a["words"], kind, as_names=as_names)
+        inside = {pos: run for run in runs for pos in range(run["first"], run["last"] + 1)}
+        for run in runs:
+            rows.append({
+                "row": r.Index, "text": r.text, "pos": run["first"], "key": name_key(run),
+                "proper": True, "known": run["name"] in known, "word": names.word(run, a["words"]),
+                "span": run["span"], "listed": bool(kind),
+            })
         for pos, w in enumerate(a["words"]):
             if "＊" in w["surface"] or not w["surface"]:
+                continue
+            # The name's card covers the name-word, and a part that is only a
+            # name (ズリ in ズリのみ). Its ordinary words keep their cards (み "berry").
+            if pos in inside and (w.get("proper") or inside[pos]["first"] == inside[pos]["last"]):
                 continue
             skip = w["base"] in known or w["surface"] in known or (w.get("kanji") or "") in known
             rows.append({
                 "row": r.Index, "text": r.text, "pos": pos, "key": word_key(w),
-                "proper": bool(w.get("proper")), "known": skip, "word": w,
+                "proper": bool(w.get("proper")) and not (is_fragment(r.text, w) or ODD_NAME.search(_gloss(w))),
+                "known": skip, "word": w,
+                "span": None, "listed": bool(kind) and not runs and len(a["words"]) == 1,
             })
     return pd.DataFrame(rows)
+
+
+def in_story(occ: pd.DataFrame) -> pd.Series:
+    """The occurrences that make cards: ordinary words, and the names
+    names.py knows. `proper` is left for names it does not know."""
+    return (~occ["proper"] | occ["key"].map(lambda k: k[0] == "name")) & ~occ["known"]
 
 
 def unify_unlinked(occ: pd.DataFrame) -> pd.Series:
@@ -266,10 +313,10 @@ def unify_unlinked(occ: pd.DataFrame) -> pd.Series:
             linked[(bool(w.get("proper")), hira(w["base"]), k[3])][k] += 1
 
     def fix(k: tuple, w: dict) -> tuple:
+        if k[0] != "base" or w.get("_no_sense"):
+            return k
         group = (bool(w.get("proper")), k[1], k[3])
-        if k[0] == "base" and group in linked and not w.get("_no_sense"):
-            return linked[group].most_common(1)[0][0]
-        return k
+        return linked[group].most_common(1)[0][0] if group in linked else k
 
     return pd.Series([fix(k, w) for k, w in zip(occ["key"], occ["word"])], index=occ.index)
 
@@ -355,14 +402,24 @@ def location(r) -> str:
     # Route22_Text_LateRivalIntro) only moves the line in time: the place is
     # still the message's own group.
     place = r.group if "_Text_" in str(r.first_seen) else r.first_seen
-    name = place if r.dialogue else f"UI: {r.group}"
+    # A line of a name list: the place where the thing is first met.
+    if names.listed(r.group, r.label):
+        place = re.sub(r"_Text_.*| \(.*", "", str(r.first_seen))
+    name = place if r.dialogue or names.listed(r.group, r.label) else f"UI: {r.group}"
     name = re.sub(r"^llm: ", "", str(name))
     return re.sub(r"(?<=[a-z])(?=[A-Z])|_", " ", name).replace("  ", " ").strip()
 
 
-def highlight(text: str, words: list[dict], pos: int) -> str:
-    """The sentence with the word at `pos` in bold."""
-    at = word_span(text, words, pos, form_of(words[pos]))
+def english(r, analysis: dict) -> str:
+    """The sentence's translation. A line of a name list is the name itself:
+    the game's English name, not the model's guess at it."""
+    return names.line_english(r.group, r.label, r.text) or analysis["english"]
+
+
+def highlight(text: str, words: list[dict], pos: int, span=None) -> str:
+    """The sentence with the word at `pos` in bold, or the stretch `span` for
+    a name that is several words."""
+    at = span if isinstance(span, tuple) else word_span(text, words, pos, form_of(words[pos]))
     return text if at is None else f"{text[:at[0]]}<b>{text[at[0]:at[1]]}</b>{text[at[1]:]}"
 
 
@@ -381,15 +438,22 @@ def prepare(run_name: str = MAIN.name, offline_merge: bool = False) -> tuple[pd.
     occ["key"] = occ["key"].map(
         lambda k: (k[0], k[1], canon.get((k[1], k[2]), k[2]), k[3]) if k[0] == "jm" else k)
 
-    # Spread on card keys (names and known words make no cards).
-    cardable = occ[~occ["proper"] & ~occ["known"]]
+    # Spread on card keys (other names and known words make no cards here).
+    # A Pokémon or item name is first seen in dialogue or where its list line
+    # puts it. A menu or battle line that mentions it has no exact place in
+    # the story, so it does not count as showing the name.
+    occ["exact"] = occ["row"].map(deck["dialogue"]) | occ["listed"]
+    is_name = occ["key"].map(lambda k: k[0] == "name")
+    anchored = set(occ["key"][is_name & occ["exact"]])
+    cardable = occ[in_story(occ) & (occ["exact"] | ~occ["key"].isin(anchored))]
     words = cardable.groupby("row")["key"].agg(lambda ks: frozenset(ks))
     words = words.reindex(deck.index).map(lambda x: x if isinstance(x, frozenset) else frozenset())
-    deck["card_order"] = spread(deck, words)
+    pin = dict(zip(cardable["row"][cardable["listed"]], cardable["key"][cardable["listed"]]))
+    deck["card_order"] = spread(deck, words, pin)
     return deck, entries, analyses, occ
 
 
-def build_cards(run_name: str = MAIN.name, offline_merge: bool = False) -> tuple[pd.DataFrame, pd.DataFrame]:
+def build_cards(run_name: str = MAIN.name, offline_merge: bool = False) -> pd.DataFrame:
     deck, entries, analyses, occ = prepare(run_name, offline_merge)
     gram = grammar.results(deck["text"].unique(), analyses)
     corrections.check()  # every hand correction found what it corrects
@@ -406,7 +470,10 @@ def build_cards(run_name: str = MAIN.name, offline_merge: bool = False) -> tuple
             if placed.empty:
                 continue
             first = placed.iloc[0]
-            if not first["dialogue"]:
+            if key[0] == "name":
+                exact = placed[placed["exact"]]
+                first = exact.iloc[0] if len(exact) else first
+            elif not first["dialogue"]:
                 same_ch = placed[placed["dialogue"] & (placed["chapter"] == first["chapter"])]
                 if len(same_ch):
                     first = same_ch.iloc[0]
@@ -415,17 +482,21 @@ def build_cards(run_name: str = MAIN.name, offline_merge: bool = False) -> tuple
             later = later.sort_values(["own", "dialogue", "card_order"], ascending=[False, False, True])
             w, r = first["word"], deck.loc[first["row"]]
             a = analyses[first["text"]]
+            # A name-list line whose card is the ordinary word (たいあたり): the
+            # card still says what the English game calls it.
+            if not w.get("name") and len(a["words"]) == 1 and (eng := names.line_english(r.group, r.label, r.text)):
+                w = {**w, "in_context": f"{eng} ({names.KIND[names.kind_of(r.group, r.label)]})"}
             ctx = " ".join(f"<u>{t}</u>" if t == first["text"] else t for t in msg_text[first["msg_id"]])
             extras = [
-                f"{highlight(t, analyses[t]['words'], n)} — {analyses[t]['english']}"
+                f"{highlight(t, analyses[t]['words'], n, at)} — {english(deck.loc[row], analyses[t])}"
                 + (f" ({ww['surface']}: {ww['modifiers']})" if ww.get("modifiers") else "")
-                for t, ww, n in zip(later["text"][:MAX_EXTRA], later["word"][:MAX_EXTRA], later["pos"][:MAX_EXTRA])
+                for t, ww, n, at, row in later[["text", "word", "pos", "span", "row"]][:MAX_EXTRA].itertuples(index=False)
             ]
             e = entries.get(str(w.get("jmdict_id")), {}) if w.get("jmdict_id") else {}
             g = gram.get(first["text"])
             out.append({
                 "key": json.dumps(key, ensure_ascii=False), "order": first["card_order"],
-                "Sentence": highlight(first["text"], a["words"], first["pos"]),
+                "Sentence": highlight(first["text"], a["words"], first["pos"], first["span"]),
                 "Word": form_of(w), "Base": w["base"], "Kanji": w.get("kanji") or "",
                 "UsuallyKana": "yes" if w.get("usually_kana") else "",
                 "WordRomaji": romaji(form_of(w), particle=is_particle(w)),
@@ -435,36 +506,37 @@ def build_cards(run_name: str = MAIN.name, offline_merge: bool = False) -> tuple
                     w.get("kanji") or "", base_kana(w, e), w.get("char_readings") or ""),
                 "Literal": w.get("literal") or "",
                 "InContext": w.get("in_context") or "", "Modifiers": w.get("modifiers") or "",
+                "Note": w.get("note") or "",
                 "DictSense": dict_sense(w, e),
                 "Onomatopoeia": "onomatopoeic or mimetic word" if is_onomatopoeia(w, e) else "",
                 "Grammar": "".join(map(grammar.pattern_html, grammar.word_patterns(
                     g, first["text"], a["words"], first["pos"]))) if g else "",
                 "Breakdown": grammar.breakdown_html(g) if g else "",
-                "SentenceKanji": a["kanji"], "SentenceEnglish": a["english"],
+                "SentenceKanji": a["kanji"], "SentenceEnglish": english(r, a),
                 "ExtraExamples": "<br>".join(extras), "Context": ctx,
                 "Location": location(r), "MessageId": r.msg_id,
                 "Speaker": first["speaker"] or "",
                 "Dictionary": dictionary(w, e),
                 "tags": [re.sub(r"\W", "_", location(r))]
                 + (["proper"] if w.get("proper") else [])
+                + ([w["name"]] if w.get("name") else [])
                 + (["low-confidence"] if unsure(w, e) else [])
                 + (["sense-guessed"] if w.get("_sense_guessed") else [])
                 + (["onomatopoeia"] if is_onomatopoeia(w, e) else [])
-                + (["fragment"] if is_fragment(first["text"], w) else []),
+                + (["fragment"] if is_fragment(first["text"], w) and not w.get("name") else []),
             })
         df = pd.DataFrame(out).sort_values("order").reset_index(drop=True)
         df["Order"] = [f"{i:06d}" for i in range(len(df))]
         return df
 
-    return one_deck(occ[~occ["proper"] & ~occ["known"]]), one_deck(occ[occ["proper"]])
+    return one_deck(occ[in_story(occ)])
 
 
 def main() -> None:
     run_name = sys.argv[1] if len(sys.argv) > 1 else MAIN.name
-    cards, names = build_cards(run_name)
+    cards = build_cards(run_name)
     CARDS_OUT.parent.mkdir(parents=True, exist_ok=True)
     cards.to_parquet(CARDS_OUT, index=False)
-    names.to_parquet(NAMES_OUT, index=False)
 
     # The spec's check before trusting the deck: 30 random cards as text.
     rnd = random.Random(7)
@@ -478,11 +550,12 @@ def main() -> None:
             f"  {c.Modifiers}\n  {c.SentenceKanji}\n  {c.SentenceEnglish}\n")
     SPOTCHECK_OUT.write_text("\n".join(lines), encoding="utf-8")
 
-    print(f"cards {len(cards)}, name cards {len(names)} "
+    named = sum(k.startswith('["name"') for k in cards.key)
+    print(f"cards {len(cards)}, {named} of them names "
           f"(grammar on {sum(cards.Breakdown != '')} cards, a pattern line on {sum(cards.Grammar != '')})")
     print(f"low-confidence {sum('low-confidence' in t for t in cards.tags)}, "
           f"sense guessed {sum('sense-guessed' in t for t in cards.tags)}")
-    print(f"→ {CARDS_OUT.relative_to(ROOT)}, {NAMES_OUT.relative_to(ROOT)}, {SPOTCHECK_OUT.relative_to(ROOT)}")
+    print(f"→ {CARDS_OUT.relative_to(ROOT)}, {SPOTCHECK_OUT.relative_to(ROOT)}")
 
 
 if __name__ == "__main__":

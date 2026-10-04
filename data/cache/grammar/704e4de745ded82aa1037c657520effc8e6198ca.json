@@ -1,0 +1,1 @@
+{"text": "かたくて　がまん　づよい！", "structure": [{"jp": "かたくて", "en": "hard and"}, {"jp": "がまん　づよい！", "en": "tough at enduring!"}], "patterns": [{"name": "〜て (linking)", "span": "かたくて", "words": ["かたくて"], "explanation": "Changing the last い to くて joins this describing word to the next one, like 'and'. かたくて = 'hard, and'."}], "_run": {"model": "opus", "effort": "low", "version": "2"}}

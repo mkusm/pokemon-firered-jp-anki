@@ -1,1 +1,0 @@
-{"text": "ピンチに　ほのおが　つよくなる", "structure": [{"jp": "ピンチに", "en": "in a pinch"}, {"jp": "ほのおが　つよくなる", "en": "fire gets stronger"}], "patterns": [{"name": "〜くなる", "span": "つよくなる", "words": ["つよくなる"], "explanation": "Changing い to く and adding なる says that something becomes that way. つよくなる = 'gets stronger'."}], "_run": {"model": "opus", "effort": "low", "version": "2"}}

@@ -1,0 +1,125 @@
+# Names the game has no list of, by what the English game calls them. Kept by
+# hand; each was checked against the English script line that pairs with a
+# Japanese line saying it.
+#
+# An entry is the English name, or {en: the name, note: …} where a learner may
+# not know the thing: something from Japan, from the real world, or from
+# another Pokémon game. The note goes on the card.
+
+# People. The player and the rival are not here: レッド and
+# グリーン are defaults the player types over, and stay Red and Green.
+# マチス is Surge: the rank is a separate word in both scripts.
+person:
+  オーキド: Oak
+  タケシ: Brock
+  カスミ: Misty
+  マチス: Surge
+  エリカ: Erika
+  キョウ: Koga
+  ナツメ: Sabrina
+  カツラ: Blaine
+  サカキ: Giovanni
+  カンナ: Lorelei
+  シバ: Bruno
+  キクコ: Agatha
+  ワタル: Lance
+  マサキ: Bill
+  ナナミ: Daisy
+  フジろうじん: Mr. Fuji
+  フジ: Fuji
+  ニシキ: Celio
+  アキホ: Selphy
+  マヨ: Lostelle
+  つりおやじ: Fishing Guru
+  レッド: {en: Red, note: The player. The name is the game's default; you type your own.}
+  グリーン: {en: Green, note: "The rival, Professor Oak's grandson. The name is the Japanese game's default; the English games call him Blue."}
+  オダマキ: {en: Birch, note: "Professor Birch of Hoenn, the region of Pokémon Ruby and Sapphire."}
+
+team:
+  ロケットだん: Team Rocket
+  ロケットだんいん: Team Rocket Grunt
+
+pokemon:
+  ニドラン: Nidoran
+
+# The Safari Zone's two throwables are not in the item list.
+item:
+  エサだま: Bait
+  いしころ: Rock
+
+# Badges. The Japanese ones are named by colour; FireRed writes the English
+# ones as one word (BOULDERBADGE), spelled here as the series does now.
+badge:
+  グレーバッジ: Boulder Badge
+  ブルーバッジ: Cascade Badge
+  オレンジバッジ: Thunder Badge
+  レインボーバッジ: Rainbow Badge
+  ピンクバッジ: Soul Badge
+  ゴールドバッジ: Marsh Badge
+  クリムゾンバッジ: Volcano Badge
+  グリーンバッジ: Earth Badge
+
+# Places the Town Map has no entry for.
+place:
+  カントー: Kanto
+  ホウエン: Hoenn
+  ナナシマ: Sevii Islands
+  サント・アンヌ: S.S. Anne
+  ゴールデンボールブリッジ: Nugget Bridge
+  サイクリングロード: Cycling Road
+  サントアンヌ: S.S. Anne
+  グレンタウン: Cinnabar Island
+  シルフ: Silph
+  ミラクルサイクル: {en: Miracle Cycle, note: "The bike shop in Cerulean City. The English game only says BIKE SHOP."}
+  コガネシティ: {en: Goldenrod City, note: "A city in Johto, the region of Pokémon Gold and Silver."}
+  フエン: {en: Lavaridge, note: "Lavaridge Town, a hot-spring town in Hoenn, the region of Pokémon Ruby and Sapphire."}
+  タマムシマンション: Celadon Mansion
+  ゲームコーナー: Game Corner
+  ポケモンハウス: Pokémon House
+  ポケモンだいすきクラブ: Pokémon Fan Club
+  ポケモンワイヤレスクラブ: Pokémon Wireless Club
+  ユニオンルーム: Union Room
+  ダイレクトコーナー: Direct Corner
+
+# Words of the game that are names in English. フレンドリィショップ is POKéMON
+# MART in FireRed's text; the deck uses the name the series settled on.
+term:
+  ポケモンずかん: Pokédex
+  ぜんこくずかん: National Pokédex
+  ポケモンセンター: Pokémon Center
+  フレンドリィショップ: Poké Mart
+  してんのう: Elite Four
+  そだてや: Day Care
+  トレーナーカード: Trainer Card
+  たいせつなもの: Key Item
+  ランニングシューズ: Running Shoes
+  ふしぎなおくりもの: Mystery Gift
+  ふしぎなもらいもの: Mystery Gift
+  きのみクラッシュ: Berry Crush
+  ネットワークマシン: Network Machine
+  シーギャロップ: Seagallop
+  ポケルス: Pokérus
+  ポケモンジャーナル: Pokémon Journal
+  ポケナビ: {en: PokéNav, note: "The trainer's gadget in Pokémon Ruby and Sapphire."}
+  ポロック: {en: Pokéblock, note: "Candy for Pokémon made from Berries, from Pokémon Ruby and Sapphire. FireRed's text writes POKEBLOCK."}
+  いかりまんじゅう: {en: Rage Candy Bar, note: "A まんじゅう is a steamed bun with a sweet filling, sold as a local souvenir all over Japan. This one is the souvenir of Mahogany Town in Pokémon Gold and Silver."}
+  ポケモンのとも: {en: Pokémon Fan Magazine, note: "Literally 'The Pokémon Companion'. Japanese magazines are often called 〜の友, 'the companion of …'."}
+
+# The real world. The English game often replaces these, so the name here is
+# the thing's own name, not the English game's.
+world:
+  アメリカ: America
+  みなみアメリカ: South America
+  ギアナ: {en: Guiana, note: "The Guiana region of South America. The English game writes Guyana."}
+  ロシア: Russia
+  ちゅうごく: China
+  にっぽん: Japan
+  きょうと: Kyoto
+  とうきょうタワー: {en: Tokyo Tower, note: "A 333 m broadcast tower in Tokyo. The English game says Ayers Rock here."}
+  コロンビア: {en: Columbia, note: "The US Space Shuttle Columbia. ごう after a name is 'the ship …'."}
+  ファミコン: {en: Famicom, note: "Short for ファミリーコンピュータ (Family Computer), the console sold outside Japan as the NES. The English game says NES."}
+  ゲームボーイ: Game Boy
+  ゲームボーイアドバンス: Game Boy Advance
+  マリオ: {en: Mario, note: "Nintendo's Mario. The game described, where Mario walks along with a bucket on his head, is Mario & Wario (1993), made by Game Freak, the makers of Pokémon."}
+  はないちもんめ: {en: Hana Ichi Monme, note: "A children's game: two lines of children hold hands, walk toward each other singing, and win players from the other side. The English game drops the reference."}
+  だいもんじやき: {en: Daimonji-yaki, note: "A common wrong name for Kyoto's Gozan no Okuribi, the bonfires of 16 August that light the character 大 on a mountainside. The move だいもんじ (Fire Blast) is named after them."}

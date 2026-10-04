@@ -1,1 +1,1 @@
-{"text": "これまでの　あらすじ", "structure": [{"jp": "これまでの", "en": "up to now"}, {"jp": "あらすじ", "en": "the story outline"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2"}}
+{"text": "これまでの　あらすじ", "structure": [{"jp": "これまでの　あらすじ", "en": "the story up to now"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2"}}

@@ -1,0 +1,1 @@
+{"text": "こどもが　なんの　ようだ！", "structure": [{"jp": "こどもが", "en": "a kid"}, {"jp": "なんの　ようだ！", "en": "what business have you here?!"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2"}}

@@ -1,1 +1,0 @@
-{"text": "そこまで　ムリは　できん！", "structure": [{"jp": "そこまで", "en": "that far"}, {"jp": "ムリは　できん！", "en": "I can't overdo it!"}], "patterns": [{"name": "〜ない", "span": "できん", "words": ["できん"], "explanation": "ん at the end of a verb is a short, old-man way of saying ない, 'not'. できん = できない = 'can't do'."}], "_run": {"model": "opus", "effort": "low", "version": "2"}}

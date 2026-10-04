@@ -1,1 +1,0 @@
-{"text": "いどう　Ａけってい　Ｂもどる", "structure": [{"jp": "いどう", "en": "move"}, {"jp": "Ａけってい", "en": "A: confirm"}, {"jp": "Ｂもどる", "en": "B: go back"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2"}}

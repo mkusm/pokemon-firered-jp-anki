@@ -27,11 +27,30 @@ ORDER_OUT = DATA / "02_order" / "sentences.parquet"
 # exclusions: the classify stage's input.
 FALLBACK_OUT = DATA / "02_order" / "fallback.parquet"
 UNPLACED_OUT = DATA / "unplaced.csv"
+NEVER_OUT = DATA / "never_shown.csv"
+# Text FireRed never shows is left out of the deck, and so of every model
+# stage: Ruby/Sapphire data no FireRed player meets (Hoenn Pokédex text,
+# unobtainable items, moves nothing knows), text the decomp marks unused, and
+# text the English game left in Japanese.
+NEVER_MET = ("never met", "no move with this effect is met")
+# The translators skipped text no script shows, so a line whose English copy
+# is still Japanese is a leftover: Hoenn's Safari Zone script, berry tags, the
+# rival's lines for battles you cannot lose and carry on. ("Any unused text
+# was left untranslated", says the decomp's safari_zone.inc.) Link play and
+# other end-of-deck text is kept: an English decomp cannot say what the
+# Japanese release's own features (the e-Reader) showed.
+KANA = re.compile(r"[ぁ-ヿ]")
+UNTRANSLATED = "left in Japanese in the English game: no script shows it"
 
 # "start" text (start menu, options, bag, save) is first seen when the menu
 # opens: after the opening sequence, as you stand in your bedroom.
 MENU_OPENS = "PalletTown_PlayersHouse_2F"
+# gTypeNames.N is in this order (include/constants/pokemon.h).
+TYPES = ["TYPE_NORMAL", "TYPE_FIGHTING", "TYPE_FLYING", "TYPE_POISON", "TYPE_GROUND", "TYPE_ROCK", "TYPE_BUG",
+         "TYPE_GHOST", "TYPE_STEEL", "TYPE_MYSTERY", "TYPE_FIRE", "TYPE_WATER", "TYPE_GRASS", "TYPE_ELECTRIC",
+         "TYPE_PSYCHIC", "TYPE_ICE", "TYPE_DRAGON", "TYPE_DARK"]
 COMPUTED = {
+    "type",  # a type's name → the first Pokémon of that type
     "species", "move", "item", "ability", "trainer", "trainer_class", "mapsec", "pokedex",
     "berry",  # a berry name or description → that berry item
     "named",  # a move or ability named in the label → that move or ability
@@ -78,6 +97,13 @@ class FirstSeen:
         self.move: dict[str, tuple[float, str]] = {}
         self.item: dict[str, tuple[float, str]] = {}
         self.trainer: dict[str, tuple[float, str]] = {}
+        # How a species, move or ability is first seen, finer than its map:
+        # (kind, constant) → (the trainer who sends it out, or None for a wild
+        # or gift Pokémon; the number of the sighting). One sighting is one
+        # Pokémon, so a species, the moves it shows and its ability share a
+        # number and stay together in the deck.
+        self.fine: dict[tuple[str, str], tuple[str | None, float]] = {}
+        self._sightings = 0
         self._build()
 
     @staticmethod
@@ -85,15 +111,28 @@ class FirstSeen:
         if rank < table.get(key, (math.inf, ""))[0]:
             table[key] = (rank, where)
 
+    def _see_at(self, kind: str, key: str, rank: float, where: str, trainer: str | None, n: float) -> None:
+        """_see that also records the sighting. On the same map a trainer's
+        Pokémon wins over a wild one: its place in the story is exact."""
+        table = getattr(self, kind)
+        old = table.get(key, (math.inf, ""))[0]
+        if rank < old or (rank == old and trainer and not self.fine.get((kind, key), (None, 0))[0]
+                          and not math.isinf(rank)):
+            table[key] = (rank, where)
+            self.fine[(kind, key)] = (trainer, n)
+
     def _rank(self, m: str) -> float:
         return self.map_rank.get(m, math.inf)
 
     def _build(self) -> None:
         dc, refs = self.dc, self.dc.script_refs
-        for kind, table in (("item", self.item), ("species", self.species)):
-            for const, maps in refs[kind].items():
-                for m in maps:
-                    self._see(table, const, self._rank(m), m)
+        for const, maps in refs["item"].items():
+            for m in maps:
+                self._see(self.item, const, self._rank(m), m)
+        for const, maps in refs["species"].items():  # gifts, trades, Pokémon standing on the map
+            self._sightings += 1
+            for m in maps:
+                self._see_at("species", const, self._rank(m), m, None, self._sightings)
         # A trainer is met where their battle text is placed, which follows the
         # map_order label overrides: the rival's second Route 22 battle counts
         # from Route22_Text_LateRival…, not from the first visit to Route 22.
@@ -113,25 +152,30 @@ class FirstSeen:
                 for m in maps:
                     self._see(self.trainer, const, self._rank(m), m)
 
-        def see_mon(sp: str, lvl: int, moves, rank: float, where: str) -> None:
-            self._see(self.species, sp, rank, where)
+        def see_mon(sp: str, lvl: int, moves, rank: float, where: str, trainer: str | None = None) -> None:
+            self._sightings += 1
+            self._see_at("species", sp, rank, where, trainer, self._sightings)
             for mv in moves or dc.moves_at(sp, lvl):
                 if mv != "MOVE_NONE":
-                    self._see(self.move, mv, rank, where)
+                    self._see_at("move", mv, rank, where, trainer, self._sightings)
 
         for sp in STARTERS:
             see_mon(sp, STARTER_LEVEL, None, self._rank(STARTER_MAP), STARTER_MAP)
+        seen_wild: dict[tuple, None] = {}  # a map lists a species once per slot
         for m, sp, lvl, need in dc.wild:
+            seen_wild.setdefault((m, sp, lvl, need))
+        for m, sp, lvl, need in seen_wild:
             # A surfing or fishing encounter is first seen once you have both
             # the map and the HM or rod.
             rank = max(self._rank(m), self.item.get(need, (math.inf, ""))[0]) if need else self._rank(m)
             see_mon(sp, lvl, None, rank, m)
         for tr, (rank, where) in self.trainer.items():
             for sp, lvl, moves in dc.trainer_info.get(tr, {}).get("party", []):
-                see_mon(sp, lvl, moves, rank, where)
+                see_mon(sp, lvl, moves, rank, where, tr)
         for it, mv in dc.tmhm_moves.items():
             if it in self.item:
-                self._see(self.move, mv, *self.item[it])
+                self._sightings += 1
+                self._see_at("move", mv, *self.item[it], None, self._sightings)
 
         # A species only reachable by evolving (Vaporeon, Kabutops) is first seen
         # with the species it evolves from. Repeat for two-stage chains.
@@ -139,12 +183,17 @@ class FirstSeen:
             for pre, post in dc.evolutions:
                 if post not in self.species and pre in self.species:
                     rank, where = self.species[pre]
-                    self._see(self.species, post, rank, f"{where} (evolves from {pre})")
+                    trainer, n = self.fine.get(("species", pre), (None, 0))
+                    self._see_at("species", post, rank, f"{where} (evolves from {pre})", trainer, n + 0.1)
 
         self.ability: dict[str, tuple[float, str]] = {}
         for sp, (rank, where) in self.species.items():
             for ab in dc.species_abilities.get(sp, []):
-                self._see(self.ability, ab, rank, where)
+                self._see_at("ability", ab, rank, where, *self.fine.get(("species", sp), (None, 0)))
+        self.type: dict[str, tuple[float, str]] = {}
+        for sp, (rank, where) in self.species.items():
+            for ty in dc.species_types.get(sp, []):
+                self._see_at("type", ty, rank, where, *self.fine.get(("species", sp), (None, 0)))
         self.trainer_class: dict[str, tuple[float, str]] = {}
         for tr, (rank, where) in self.trainer.items():
             if cls := dc.trainer_info.get(tr, {}).get("class"):
@@ -237,6 +286,8 @@ class Keys:
         n = int(num.group(1)) if num else None
         if kind == "species":
             return self.species_by_id.get(n)
+        if kind == "type":
+            return TYPES[n] if n is not None and n < len(TYPES) else None
         if kind == "pokedex":
             if m := re.fullmatch(r"g(\w+?)PokedexText", label):
                 return self.species_by_norm.get(norm(m.group(1)))
@@ -368,16 +419,87 @@ class Placer:
         return "computed", rank, where
 
 
+NAME_LINES = {"species_names": "species", "battle_main": "type", "move_names": "move", "abilities": "ability"}
+KIND_ORDER = {"species": 0, "type": 1, "move": 2, "ability": 3}
+
+
+def fine_places(msgs: pd.DataFrame, placed: dict, placer: Placer, dc: Decomp) -> dict[str, tuple]:
+    """Where inside its map the line that names a Pokémon, a move, an ability
+    or a place goes: msg_id → (rank, after_dialogue, tiebreak or None,
+    sighting, kind order).
+
+      - A Pokémon first met in a trainer's team, with its type, the moves it
+        shows and its ability, goes right after that trainer's challenge (or
+        right before their defeat line, when there is no challenge line).
+      - Wild and gift Pokémon have no line to hang on. A map's sightings are
+        spread evenly between its messages, each Pokémon still followed by
+        its moves and ability.
+      - A place's name comes up as you walk in: before the map's dialogue.
+    """
+    fs, keys = placer.fs, placer.keys
+    line = dict(zip(msgs["label"], msgs["line_no"]))
+    said: dict[float, list[int]] = {}  # rank → line numbers of its dialogue messages
+    for r in msgs.itertuples(index=False):
+        if placed[r.msg_id][0] == "dialogue":
+            said.setdefault(placed[r.msg_id][1], []).append(r.line_no)
+    for lines in said.values():
+        lines.sort()
+    rank_of_label = {r.label: placed[r.msg_id][1] for r in msgs.itertuples(index=False)
+                     if placed[r.msg_id][0] == "dialogue"}
+
+    def hang(trainer: str, rank: float) -> float | None:
+        """The line number to sort by: just after the challenge, or just
+        before the defeat line, of a trainer whose text is at this rank."""
+        texts = sorted(t for _, t in dc.script_refs["trainer_text"].get(trainer, ()) if rank_of_label.get(t) == rank)
+        for suffix, shift in (("Intro", 0.5), ("Defeat", -0.5)):
+            for t in texts:
+                if t.endswith(suffix):
+                    return line[t] + shift
+        return line[texts[0]] + 0.5 if texts else None
+
+    out, loose = {}, {}
+    for r in msgs.itertuples(index=False):
+        bucket, rank, _, _, _ = placed[r.msg_id]
+        if bucket != "computed":
+            continue
+        if r.group == "region_map_entry_strings":
+            out[r.msg_id] = (rank, -1, None, 0.0, 0)
+            continue
+        kind = NAME_LINES.get(r.group)
+        if not kind or (kind == "ability" and not r.label.startswith("gAbilityNames.")):
+            continue
+        trainer, n = fs.fine.get((kind, keys.key(kind, r.label)), (None, 0.0))
+        at = hang(trainer, rank) if trainer else None
+        if at is not None:
+            out[r.msg_id] = (rank, 0, at, n, KIND_ORDER[kind])
+        else:
+            loose.setdefault(rank, []).append((n, KIND_ORDER[kind], r.msg_id))
+    for rank, rows in loose.items():
+        sightings = sorted({n for n, _, _ in rows})
+        lines = said.get(rank, [])
+        for n, kind_order, msg_id in rows:
+            i = (sightings.index(n) + 1) * len(lines) // (len(sightings) + 1) - 1
+            out[msg_id] = (rank, 0, lines[i] + 0.5, n, kind_order) if i >= 0 else (rank, -1, None, n, kind_order)
+    return out
+
+
 def main() -> None:
     mo, dc = MapOrder(), Decomp()
     cfg = yaml.safe_load(FIRST_SEEN.read_text(encoding="utf-8"))
     placer = Placer(mo, FirstSeen(mo, dc), Keys(dc), cfg)
 
     df = pd.read_parquet(EXTRACT_OUT)
-    msgs = df.drop_duplicates("msg_id")[["msg_id", "ns", "group", "label"]]
+    msgs = df.drop_duplicates("msg_id")[["msg_id", "ns", "group", "label", "line_no"]]
+    english = (CORPUS / "en_msg.txt").read_text(encoding="utf-8").split("\n")
     overrides = load_overrides()
+    unused = dc.unused_labels
     placed = {}
+    never = []
     for r in msgs.itertuples(index=False):
+        if r.label in unused:
+            placed[r.msg_id] = ("exclude", math.nan, "unused in the game", 0, False)
+            never.append((r.msg_id, "the decomp marks it unused"))
+            continue
         if r.ns == "script":
             bucket, entry = mo.resolve(r.group, r.label)
             if bucket == "order":
@@ -393,7 +515,19 @@ def main() -> None:
         if fallback and r.msg_id in overrides:
             b, rank, where = placer.place_one(overrides[r.msg_id], r.label)
             where = f"llm: {where}"
+        if any(x in where for x in NEVER_MET):
+            never.append((r.msg_id, where))
+            b, rank = "exclude", math.nan
         placed[r.msg_id] = (b, rank, where, 1, fallback)
+    for r in msgs.itertuples(index=False):
+        if placed[r.msg_id][0] not in ("exclude", "end", "unplaced") and KANA.search(english[r.line_no]):
+            placed[r.msg_id] = ("exclude", math.nan, UNTRANSLATED, 0, False)
+            never.append((r.msg_id, UNTRANSLATED))
+
+    fine = fine_places(msgs, placed, placer, dc)
+    for msg_id, (rank, after, tiebreak, sighting, kind_order) in fine.items():
+        b, _, where, _, fallback = placed[msg_id]
+        placed[msg_id] = (b, rank, where, after, fallback)
 
     cols = ["bucket", "rank", "first_seen", "after_dialogue", "fallback"]
     df = df.join(pd.DataFrame.from_dict(placed, orient="index", columns=cols), on="msg_id")
@@ -402,11 +536,17 @@ def main() -> None:
     freq = df["text"].map(df["text"].value_counts())
     # The end bucket and unplaced rows: most frequent text first.
     tail = df["bucket"].isin(["end", "unplaced"])
-    df["tiebreak"] = df["line_no"].where(~tail, -freq * 100000 + df["line_no"])
+    df["tiebreak"] = df["line_no"].where(~tail, -freq * 100000 + df["line_no"]).astype(float)
+    df["sighting"], df["kind_order"] = 0.0, 0
+    for msg_id, (_, _, tiebreak, sighting, kind_order) in fine.items():
+        at = df["msg_id"] == msg_id
+        if tiebreak is not None:
+            df.loc[at, "tiebreak"] = tiebreak
+        df.loc[at, ["sighting", "kind_order"]] = sighting, kind_order
     kept = df[df["bucket"] != "exclude"].sort_values(
-        ["rank", "after_dialogue", "tiebreak", "page", "sent"]
+        ["rank", "after_dialogue", "tiebreak", "sighting", "kind_order", "line_no", "page", "sent"]
     )
-    kept = kept.drop(columns=["tiebreak"]).reset_index(drop=True)
+    kept = kept.drop(columns=["tiebreak", "sighting", "kind_order"]).reset_index(drop=True)
     kept["first_seen_order"] = kept.index
 
     # Interleave non-dialogue lines with the story, chapter by chapter. This
@@ -423,8 +563,13 @@ def main() -> None:
     un = kept[kept["bucket"] == "unplaced"].drop_duplicates("msg_id")
     un[["msg_id", "group", "label", "first_seen", "text"]].to_csv(UNPLACED_OUT, index=False)
 
+    why = dict(never)
+    gone = df[df["msg_id"].isin(why)].drop_duplicates("msg_id")
+    gone.assign(why=gone["msg_id"].map(why))[["msg_id", "group", "label", "why", "text"]].to_csv(NEVER_OUT, index=False)
+
     n_ex = (df["bucket"] == "exclude").sum()
-    print(f"sentences kept {len(kept)}, excluded {n_ex}")
+    print(f"sentences kept {len(kept)}, excluded {n_ex} (of them never shown in the game: "
+          f"{int(df['msg_id'].isin(why).sum())}, in {len(why)} messages → {NEVER_OUT.relative_to(ROOT)})")
     print(kept["bucket"].value_counts().to_string())
     body = kept[~kept["tail"]]
     per = body.groupby("chapter").agg(

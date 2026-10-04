@@ -1,0 +1,1 @@
+{"text": "まちなー！", "structure": [{"jp": "まちなー！", "en": "hold it!"}], "patterns": [{"name": "〜なさい", "span": "まちなー", "words": ["まち", "なー"], "explanation": "な after a verb without ます is a short, rough form of なさい, giving an order. まちな = 'wait'."}], "_run": {"model": "opus", "effort": "low", "version": "2"}}

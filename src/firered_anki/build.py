@@ -5,10 +5,10 @@ the build updates existing notes instead of duplicating them and keeps review
 history. Notes are added in story order; set the deck's new-card order to
 "order added" in Anki.
 
-The note type's last two fields, Grammar and Breakdown, came with the grammar
-pass. They are at the end so that Anki can merge the note type into the
-earlier one on import ("Merge note types"). They are empty on cards whose
-sentence the grammar pass has not reached.
+Fields added after the first release are at the end of the note type, so that
+Anki can merge it into the earlier one on import ("Merge note types"): Grammar
+and Breakdown came with the grammar pass and are empty on cards whose sentence
+it has not reached; Note is the explanation on a name a learner may not know.
 
 Run: uv run python -m firered_anki.build
 """
@@ -18,21 +18,20 @@ import json
 import genanki
 import pandas as pd
 
-from .cards import CARDS_OUT, NAMES_OUT
+from .cards import CARDS_OUT
 from .paths import ROOT
 
 MODEL_ID = 1607392319
 DECK_ID = 2059400110
-NAMES_DECK_ID = 2059400111
+# 2059400111 was the names deck (FireRed JP::Names), retired: every name worth a card is in the main deck.
 DECK_OUT = ROOT / "firered_jp.apkg"
-NAMES_OUT_APKG = ROOT / "firered_jp_names.apkg"
 
 FIELDS = [
     "Order", "Sentence", "SentenceRomaji", "Word", "WordRomaji", "Base", "BaseRomaji",
     "Kanji", "UsuallyKana", "CharReadings",
     "Literal", "InContext", "DictSense", "Onomatopoeia", "Modifiers", "SentenceKanji", "SentenceEnglish",
     "ExtraExamples", "Context", "Location", "MessageId", "Speaker", "Dictionary",
-    "Grammar", "Breakdown",
+    "Grammar", "Breakdown", "Note",
 ]
 
 FRONT = """
@@ -54,7 +53,8 @@ BACK = """
 {{#UsuallyKana}}{{#Kanji}}<div class="note">usually written in kana</div>{{/Kanji}}{{/UsuallyKana}}
 {{#CharReadings}}<div class="readings">{{CharReadings}}</div>{{/CharReadings}}
 <div class="meaning">{{InContext}}</div>
-<div class="literal">literally: {{Literal}}</div>
+{{#Note}}<div class="about">{{Note}}</div>{{/Note}}
+{{#Literal}}<div class="literal">literally: {{Literal}}</div>{{/Literal}}
 {{#DictSense}}<div class="literal">dictionary sense: {{DictSense}}</div>{{/DictSense}}
 {{#Onomatopoeia}}<div class="literal">{{Onomatopoeia}}</div>{{/Onomatopoeia}}
 {{#Modifiers}}<div class="modifiers">{{Modifiers}}</div>{{/Modifiers}}
@@ -87,6 +87,7 @@ CSS = """
 .romaji { font-size: 16px; color: #6b7280; font-style: italic; letter-spacing: 0.01em; }
 .meaning { font-size: 21px; font-weight: 600; margin-top: 6px; }
 .literal, .note { font-size: 15px; }
+.about { font-size: 16px; margin: 4px 0; }
 .modifiers { font-size: 16px; margin-top: 6px; padding: 6px 8px; border-radius: 6px;
              background: rgba(127, 127, 127, 0.1); }
 .block { margin-top: 12px; }
@@ -133,9 +134,6 @@ def package(cards: pd.DataFrame, deck_id: int, name: str, path) -> None:
 
 def main() -> None:
     package(pd.read_parquet(CARDS_OUT), DECK_ID, "FireRed JP", DECK_OUT)
-    names = pd.read_parquet(NAMES_OUT)
-    if len(names):
-        package(names, NAMES_DECK_ID, "FireRed JP::Names", NAMES_OUT_APKG)
 
 
 if __name__ == "__main__":

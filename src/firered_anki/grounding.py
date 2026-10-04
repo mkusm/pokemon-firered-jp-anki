@@ -27,7 +27,7 @@ from functools import lru_cache
 
 from jamdict import Jamdict
 
-from .tokenize import MAX_SENSES, compact, hira
+from .tokenize import GRAMMAR, MAX_SENSES, compact, hira
 
 _jam = None
 
@@ -61,7 +61,6 @@ def _forms(e: dict) -> tuple[set, set]:
     return set(e["k"]), {hira(r) for r in e["r"]}
 
 
-GRAMMAR = re.compile(r"^[\u3041-\u309f]{1,2}$")  # の, が, から, です…
 
 
 def _stem(s: str) -> str:

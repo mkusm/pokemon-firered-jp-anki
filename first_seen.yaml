@@ -37,7 +37,7 @@ groups:
   berry: berry                      # each berry where it is first found
 
   # --- first battle and first look at your party (rival in Oak's lab)
-  battle_main: PalletTown_ProfessorOaksLab      # type names
+  battle_main: type                 # type names: with the first Pokémon of each type
   battle_interface: PalletTown_ProfessorOaksLab
   learn_move: PalletTown_ProfessorOaksLab
   nature_names: PalletTown_ProfessorOaksLab

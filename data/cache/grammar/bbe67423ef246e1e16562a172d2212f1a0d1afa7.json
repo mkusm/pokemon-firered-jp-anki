@@ -1,1 +1,0 @@
-{"text": "もちものを　どうしますか？", "structure": [{"jp": "もちものを", "en": "the held item"}, {"jp": "どうしますか？", "en": "what will you do with it?"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2"}}

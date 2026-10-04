@@ -109,6 +109,25 @@ class Decomp:
                     best = name
         return best
 
+    # --- text the game has but never shows -----------------------------------
+    @cached_property
+    def unused_labels(self) -> set[str]:
+        """Text labels the decomp marks `@ Unused` on the line above them:
+        leftovers from Ruby and Sapphire and lines no script calls, such as
+        the Trainer School e-mail from the R/S rival's computer."""
+        files = [DECOMP / "data" / "event_scripts.s", *(DECOMP / "data").glob("text/*.inc"),
+                 *(DECOMP / "data").glob("scripts/*.inc"), *(DECOMP / "data").glob("maps/*/*.inc")]
+        out = set()
+        for f in files:
+            lines = f.read_text(encoding="utf-8", errors="replace").split("\n")
+            for mark, nxt in zip(lines, lines[1:]):
+                m = LABEL_RE.match(nxt)
+                # The mark itself, capitalised: a note that merely contains the
+                # word (Brock's defeat text, "the otherwise unused array") is not one.
+                if m and re.match(r"\s*@ Unused\b", mark):
+                    out.add(m.group(1))
+        return out
+
     # --- scripts: trainers, items, gift/static Pokémon per map --------------
     @cached_property
     def script_refs(self) -> dict[str, dict[str, set[str]]]:
@@ -177,6 +196,16 @@ class Decomp:
         for sp, body in zip(parts[1::2], parts[2::2]):
             if m := re.search(r"\.abilities = \{(\w+),\s*(\w+)\}", body):
                 out[sp] = [a for a in m.groups() if a != "ABILITY_NONE"]
+        return out
+
+    @cached_property
+    def species_types(self) -> dict[str, list[str]]:
+        text = read("src/data/pokemon/species_info.h")
+        out = {}
+        parts = re.split(r"\n    \[(SPECIES_\w+)\]\s*=", text)
+        for sp, body in zip(parts[1::2], parts[2::2]):
+            if m := re.search(r"\.types = \{(\w+),\s*(\w+)\}", body):
+                out[sp] = list(dict.fromkeys(m.groups()))
         return out
 
     @cached_property

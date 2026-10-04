@@ -27,7 +27,10 @@
     the SELECT button does. The button only uses the item; registering is done
     from the item's menu in the Bag (pokefirered, src/item_menu.c). The て form
     here sets up the state the main verb happens in. The breakdown said
-    "registering a Key Item and / using it", the same two-jobs reading.
+    "registering a Key Item and / using it", the same two-jobs reading. A later
+    re-analysis translated the sentence that way again, so the translation is
+    fixed here too.
+  english: Used for rearranging items, and for using a Key Item you have registered.
   breakdown:
     - jp: たいせつな　ものを　とうろくして
       en: having registered a Key Item,
@@ -41,12 +44,6 @@
 
 # Forms the model wrote that are not in the sentence. The card showed the wrong
 # form and could not mark it in the sentence.
-
-- sentence: スプレーしきの　きずぐすり。
-  why: The model's form ended in Latin letters.
-  words:
-    - surface: きずぐすri
-      new_surface: きずぐすり
 
 - sentence: ジムでの　たたかい　シビレましタ！
   why: The speaker's last kana is written in katakana; the model normalised it.
@@ -73,3 +70,23 @@
   words:
     - surface: cm
       new_surface: ｃｍ
+
+# Mom's line by the TV. テレビの　はなしよ means her remark was about the
+# programme she is watching. "I'm talking about the TV!" reads as the TV set.
+
+- sentence: …　そうね　おとこのこは　いつか　たびに　でるもの　なのよ　うん…　テレビの　はなしよ！
+  why: >-
+    The model wrote "All boys … I'm talking about the TV!". "All" is not in the
+    Japanese (it is in the official English line), and the last sentence reads
+    as if she meant the television set.
+  english: "...Right. Boys set out on a journey someday; that's just how it is. Mm... I mean on TV!"
+  breakdown:
+    - jp: テレビの　はなしよ！
+      en: I mean on TV!
+
+- sentence: …　そうね　おんなのこって　いつも　たびを　ゆめみて　いるものよ　うん…　テレビの　はなしよ！
+  why: The same last sentence as the boy's version of this line.
+  english: "...Right. Girls are always dreaming of going on a journey. Mm... I mean on TV!"
+  breakdown:
+    - jp: テレビの　はなしよ！
+      en: I mean on TV!

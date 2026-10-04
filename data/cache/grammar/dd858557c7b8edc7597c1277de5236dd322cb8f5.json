@@ -1,1 +1,0 @@
-{"text": "それなら　いいんだ！", "structure": [{"jp": "それなら", "en": "in that case"}, {"jp": "いいんだ！", "en": "it's fine!"}], "patterns": [{"name": "〜んだ", "span": "いいんだ", "words": ["いい", "ん", "だ"], "explanation": "んだ after a word gives it the feel of explaining or reassuring. いいんだ = 'it's fine, really'."}], "_run": {"model": "opus", "effort": "low", "version": "2"}}

@@ -1,1 +1,1 @@
-{"text": "＊　よくやった！", "structure": [{"jp": "＊", "en": "＊ (the Pokémon's name)"}, {"jp": "よくやった！", "en": "well done!"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2"}}
+{"text": "＊　よくやった！", "structure": [{"jp": "＊　よくやった！", "en": "＊, well done!"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2"}}

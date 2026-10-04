@@ -21,7 +21,7 @@ from dataclasses import dataclass
 
 import pandas as pd
 
-from . import claude_cli, corrections, particles, sense_pick
+from . import claude_cli, corrections, names, particles, sense_pick, splits
 from .order import ORDER_OUT
 from .paths import DATA, ROOT
 from .grounding import ground
@@ -29,7 +29,15 @@ from .tokenize import ENTRIES_OUT, TOKENIZE_OUT
 
 CACHE = DATA / "cache" / "analyse"
 DRYRUN_OUT = DATA / "dryrun"
-PROMPT_VERSION = "2"
+# 3: particles are among the candidates and get a sense; three lines keep the
+# word boundaries where they were (はけば and かな stay whole).
+# 4: a compound stays whole only if a piece of it has no sense of its own
+# (のだ, かな); には and においがする come apart again.
+# 5: a set expression that means more than its words stays whole (というわけだ).
+PROMPT_VERSION = "5"
+# Versions whose answers a chapter rerun leaves alone. 5 only reworded one
+# sentence of 4, and a full rerun reshuffles a fifth of a chapter's word splits.
+ACCEPTED = {"4", "5"}
 
 SYSTEM = """You analyse Japanese sentences from Pokémon FireRed (GBA, Japanese version) for a learner's Anki deck.
 
@@ -38,7 +46,7 @@ The game text is almost all kana, with spaces between phrases (not between words
 For each sentence, return:
 - kanji: the sentence as a native would write it with normal kanji, keeping the game's wording
 - english: a natural English translation
-- words: every word in order, including particles. Attach conjugation endings and auxiliaries to their word (行っちゃった is one word), but particles (は, が, を, に, で, と, も, の, から, より…) are always separate words, also after nouns like こと or もの: ことが is こと + が. Skip ＊ (a runtime name) and punctuation.
+- words: every word in order, including particles. Attach conjugation endings and auxiliaries to their word (行っちゃった is one word), but particles (は, が, を, に, で, と, も, の, から, より…) are always separate words, also after nouns like こと or もの: ことが is こと + が. Skip ＊ (a runtime name) and punctuation. Decide where the words are first, by these rules, and only then look up each word: a particle appearing among the candidates is not a reason to cut it off. Do not cut inside a conjugated form: when what would be left before the particle cannot stand on its own, the ending belongs to the word (はけば is one word, not はけ + ば). The next rule is only about runs of particles, sentence endings and the copula; it does not touch other words (どれか stays the one word it is). Keep such a run whole only when the candidates have an entry for it and one of its pieces has no sense of its own that fits there: かな "I wonder" is one word, and so are のだ, んだ, んです, のか and なの, because の has no sense for explaining. When every piece does a job it has a sense for, they are separate words: には is に + は, にも is に + も, わよ is わ + よ. A phrase whose meaning is just its words together is never one word, even when the dictionary lists it: においが　する is におい + が + する. A set expression that means something its words do not add up to stays whole when the candidates have an entry for it: というわけだ "so that's how it is" is one word.
 
 For each word:
 - surface: exactly as it appears in the sentence (a substring of it, without spaces)
@@ -48,7 +56,7 @@ For each word:
 - literal: literal meaning, a few words
 - in_context: what it means in this sentence, a few words
 - modifiers: if not in base form, each ending explained, like "行っ (te-form) + ちゃ (= てしまう, contraction) + った (past)"; "" if base form
-- jmdict_id and sense: the JMdict entry and 1-based sense number that fit this sentence. Prefer the candidates given; use null for both if none fits
+- jmdict_id and sense: the JMdict entry and 1-based sense number that fit this sentence. Prefer the candidates given; use null for both if none fits. Particles, sentence endings and the copula are among the candidates too: give each one the sense for the job it does in this sentence (か asking a question is not か meaning "or")
 - proper: true for names of Pokémon, people, places, moves, items and teams
 - low_confidence: true if you are unsure of the reading, meaning or entry
 
@@ -161,7 +169,8 @@ def prompt(batch: pd.DataFrame, entries: dict) -> str:
         out.append(f"s{i}: {r.text}\n    tokenizer: {split}\n    candidates: {cand_txt or '-'}")
     head = ["JMdict entries (id: kanji【reading】 senses):"]
     head += [entry_line(eid, entries[eid]) for eid in used]
-    return "\n".join(head) + "\n\nSentences, in game order:" + "\n".join(out) + (
+    return "\n".join(head) + "\n\nSentences, in game order:" + "\n".join(out) + splits.for_prompt(batch["text"]) + (
+        names.for_prompt(batch["text"], "the translation and in that word's in_context")) + (
         "\n\nReturn one item per sentence, with its id (s0, s1, …).")
 
 
@@ -196,14 +205,22 @@ def cached_model(run: str, text: str) -> str | None:
     return json.loads(p.read_text())["_run"]["model"] if p.exists() else None
 
 
+def current(run: str, text: str, model: str) -> bool:
+    """Cached, by this model, with a prompt close enough to the present one."""
+    p = cache_path(run, text)
+    made = json.loads(p.read_text())["_run"] if p.exists() else {}
+    return made.get("model") == model and made.get("prompt") in ACCEPTED
+
+
 def run(cfg: Config, rows: pd.DataFrame, entries: dict, workers: int = 3,
-        redo: bool = False) -> dict:
+        redo: bool = False, force: bool = False) -> dict:
     """Analyse rows under cfg, using and filling the cache. → stats.
     redo: also re-analyse cached sentences unless this model already did them
-    (the escalation pass overwrites Sonnet's answers with Opus's)."""
+    with the current prompt (the escalation pass overwrites Sonnet's answers
+    with Opus's). force: re-analyse every row, whatever is cached."""
     run_dir = CACHE / cfg.name
     run_dir.mkdir(parents=True, exist_ok=True)
-    done = (lambda t: cached_model(cfg.name, t) == cfg.model) if redo else (
+    done = (lambda t: False) if force else (lambda t: current(cfg.name, t, cfg.model)) if redo else (
         lambda t: cache_path(cfg.name, t).exists())
     todo = rows[~rows["text"].map(done)]
     batches = make_batches(todo, cfg.batch)
@@ -239,7 +256,7 @@ def run(cfg: Config, rows: pd.DataFrame, entries: dict, workers: int = 3,
             for rec in check(b, res, entries):
                 if not rec["missing"]:
                     rec["_run"] = {"model": cfg.model, "effort": cfg.effort, "batch": len(b),
-                                   "prompt": PROMPT_VERSION}
+                                   "prompt": PROMPT_VERSION, "names": names.SHOWN}  # the English names it was shown
                     cache_path(cfg.name, rec["text"]).write_text(json.dumps(rec, ensure_ascii=False))
             print(f"[{cfg.name}] {stats['calls']}/{len(batches)} calls, {len(b)} sentences, {info['ms'] / 1000:.0f}s")
     return stats
@@ -340,9 +357,9 @@ def escalate() -> None:
 RERUN = Config("main", "opus", "low", 40)  # writes over the main cache
 
 
-def rerun(chapter: int | None = None, workers: int = 10) -> None:
-    """Redo on Opus the sentences only Sonnet has answered: every one, or the
-    ones the deck shows in one chapter. Sonnet is wrong without flagging it in
+def rerun(chapter: int | None = None, workers: int = 20) -> None:
+    """Redo on Opus every sentence that Opus has not answered with the current
+    prompt: all of them, or the ones the deck shows in one chapter. Sonnet is wrong without flagging it in
     about 3 sentences in 100 (a wrong item name, あったら filed under ある for
     合う), which escalation cannot catch."""
     df, entries = load()
@@ -352,7 +369,7 @@ def rerun(chapter: int | None = None, workers: int = 10) -> None:
         deck = prepare(offline_merge=True)[0]
         shown = deck[(deck["chapter"] == chapter) & deck["card_order"].notna()]
         df = df[df["text"].isin(set(shown["text"]))]
-    rows = df[df["text"].map(lambda t: cached_model(MAIN.name, t) not in (None, RERUN.model))]
+    rows = df[df["text"].map(lambda t: cache_path(MAIN.name, t).exists() and not current(MAIN.name, t, RERUN.model))]
     print(f"[rerun] {rows['text'].nunique()} sentences to redo on {RERUN.model}, {workers} calls at a time")
     while True:
         st = run(RERUN, rows, entries, workers=workers, redo=True)
@@ -365,6 +382,22 @@ def rerun(chapter: int | None = None, workers: int = 10) -> None:
             time.sleep(LIMIT_WAIT_S)
         elif st["calls"] == st["failed_calls"]:
             sys.exit("[rerun] giving up: a round with no successful call")
+
+
+def redo(path: str) -> None:
+    """Re-analyse on Opus just the sentences listed in a file, one per line."""
+    redo_texts({ln.rstrip("\n") for ln in open(path, encoding="utf-8") if ln.strip()})
+
+
+def redo_texts(texts: set[str], workers: int = 20) -> None:
+    """Re-analyse just these sentences: for a fix that touches a few of them,
+    where a chapter rerun would reshuffle everything else."""
+    df, entries = load()
+    rows = df[df["text"].isin(texts)]
+    print(f"[redo] {rows['text'].nunique()} of {len(texts)} listed sentences found")
+    small = Config(RERUN.name, RERUN.model, RERUN.effort, 20)  # picked sentences run long
+    st = run(small, rows, entries, workers=workers, force=True)
+    print(f"[redo] {st['calls']} calls ({st['failed_calls']} failed){', stopped by the usage limit' if st['limited'] else ''}")
 
 
 # --- dry run -----------------------------------------------------------------
@@ -441,5 +474,7 @@ if __name__ == "__main__":
         escalate()
     elif args[:1] == ["rerun"]:
         rerun(int(args[1]) if len(args) > 1 else None)
+    elif args[:1] == ["redo"] and len(args) == 2:
+        redo(args[1])
     else:
-        sys.exit("usage: python -m firered_anki.analyse full | escalate | rerun [chapter] | dry-run [config-name]")
+        sys.exit("usage: python -m firered_anki.analyse full | escalate | rerun [chapter] | redo <file of sentences> | dry-run [config-name]")

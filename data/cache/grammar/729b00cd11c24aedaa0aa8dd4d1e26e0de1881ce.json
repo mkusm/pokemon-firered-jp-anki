@@ -1,0 +1,1 @@
+{"text": "どうぐを　とうろくしたい", "structure": [{"jp": "どうぐを", "en": "an item"}, {"jp": "とうろくしたい", "en": "I want to register"}], "patterns": [{"name": "〜たい", "span": "とうろくしたい", "words": ["とうろく", "したい"], "explanation": "たい on a verb stem says you want to do it. とうろくしたい = 'I want to register it'."}], "_run": {"model": "opus", "effort": "low", "version": "2"}}

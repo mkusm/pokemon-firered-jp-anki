@@ -13,6 +13,10 @@ must be released before its chapter ends. Within a chapter:
   3. Lines that teach nothing stay out of the sequence (order = NaN). They are
      still candidates for extra example sentences.
 
+A pinned line is not spread. The line that names a Pokémon or an item goes
+exactly where the thing is first met, unless dialogue before it has already
+shown the name; then it is an ordinary line.
+
 `words` is any set of hashable word keys per sentence: tokenizer lemmas for a
 preview in the order stage, (jmdict_id, sense) pairs in the cards stage.
 """
@@ -41,15 +45,18 @@ def chapter_of(ranks: pd.Series, rank_of: dict[str, int]) -> pd.Series:
     return ranks.map(lambda r: next(i for i, b in enumerate(bounds) if r <= b))
 
 
-def spread(df: pd.DataFrame, words: pd.Series) -> pd.Series:
+def spread(df: pd.DataFrame, words: pd.Series, pin: dict | None = None) -> pd.Series:
     """df: rows already sorted by first-seen position, with columns `dialogue`
     (bool), `chapter` (int) and `tail` (bool: end-of-deck rows, kept as they are).
+    `pin`: row → the word that row is there to teach at its own place.
     Returns the new order (float, NaN for lines that teach nothing)."""
+    pin = pin or {}
     freq = Counter(w for ws in words for w in ws)
     value = lambda ws, known: sum(math.sqrt(freq[w]) for w in ws - known)
 
     out: dict = {}
     known: set = set()
+    shown: set = set()  # by dialogue and pinned lines so far, whose place in the story is exact
     pos = 0
     for ch in sorted(df.loc[~df["tail"], "chapter"].unique()):
         rows = df[(df["chapter"] == ch) & ~df["tail"]]
@@ -57,9 +64,20 @@ def spread(df: pd.DataFrame, words: pd.Series) -> pd.Series:
         ui = rows[~rows["dialogue"]]
         dia_words = set().union(*words[dia.index]) if len(dia) else set()
 
+        # Pinned lines whose word nothing has shown by the time they come up.
+        pinned = []
+        for i, is_dia in zip(rows.index, rows["dialogue"]):
+            if not is_dia and (i not in pin or pin[i] in shown):
+                continue
+            if not is_dia:
+                pinned.append(i)
+            shown |= words[i]
+        pinned_words = set().union(*words[pinned]) if pinned else set()
+        pinned = set(pinned)
+
         # 1. Which UI lines to keep.
-        covered = known | dia_words
-        pool = {i: words[i] for i in ui.index if words[i] - covered}
+        covered = known | dia_words | pinned_words
+        pool = {i: words[i] for i in ui.index if i not in pinned and words[i] - covered}
         kept = set()
         while pool:
             best = max(pool, key=lambda i: value(pool[i], covered))
@@ -74,7 +92,7 @@ def spread(df: pd.DataFrame, words: pd.Series) -> pd.Series:
         for i, is_dia in zip(rows.index, rows["dialogue"]):
             if is_dia:
                 n_dia += 1
-            elif i in kept:
+            elif i in kept or i in pinned:
                 avail[i] = n_dia
 
         # 2. Spread evenly: after each dialogue sentence, release lines while
@@ -82,11 +100,16 @@ def spread(df: pd.DataFrame, words: pd.Series) -> pd.Series:
         rate = len(kept) / max(len(dia), 1)
         credit = 0.0
         waiting: list = []
-        pending = sorted(avail, key=avail.get)
+        pending = sorted((i for i in avail if i in kept), key=avail.get)
+        due = [i for i in avail if i in pinned]  # in first-seen order
         seen_now = set(known)
 
         def release_upto(n_done: int, force: bool = False) -> None:
             nonlocal credit, pos
+            while due and avail[due[0]] <= n_done:
+                out[due[0]] = pos
+                pos += 1
+                seen_now.update(words[due.pop(0)])
             while pending and avail[pending[0]] <= n_done:
                 waiting.append(pending.pop(0))
             while waiting and (credit >= 1 or force):
