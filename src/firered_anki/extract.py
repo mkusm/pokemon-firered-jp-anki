@@ -9,7 +9,12 @@ from collections import Counter
 
 import pandas as pd
 
-from .paths import CORPUS, EXTRACT_OUT
+import yaml
+
+from .paths import CORPUS, EXTRACT_OUT, ROOT
+
+# Text the game draws as a picture, so the corpus has no line for it.
+HAND_LINES = ROOT / "hand_lines.yaml"
 
 PLAYER = "レッド"
 RIVAL = "グリーン"
@@ -119,6 +124,14 @@ def load_corpus() -> pd.DataFrame:
     return df
 
 
+def hand_lines() -> pd.DataFrame:
+    """hand_lines.yaml as corpus rows: namespace `hand`, no line number."""
+    listed = yaml.safe_load(HAND_LINES.read_text(encoding="utf-8")) if HAND_LINES.exists() else {}
+    rows = [{"line_no": -1, "msg_id": f"frlg.hand.{key}", "raw": text, "ns": "hand",
+             "group": key.split(".", 1)[0], "label": key.split(".", 1)[1]} for key, text in (listed or {}).items()]
+    return pd.DataFrame(rows, columns=["line_no", "msg_id", "raw", "ns", "group", "label"])
+
+
 def main() -> None:
     df = load_corpus()
     n_all = len(df)
@@ -127,6 +140,8 @@ def main() -> None:
     # FireRed only: the LeafGreen Pokédex, and LeafGreen's in-game trades
     # (labels ending ^LG; FireRed's end ^FR).
     df = df[(df["group"] != "pokedex_text_lg") & ~df["label"].str.endswith("^LG")]
+    by_hand = hand_lines()
+    df = pd.concat([df, by_hand], ignore_index=True)
 
     unknown: Counter = Counter()
     rows = []
@@ -156,7 +171,7 @@ def main() -> None:
 
     print(f"corpus lines        {n_all}")
     print(f"with text           {n_text}")
-    print(f"FireRed messages    {len(df)}")
+    print(f"FireRed messages    {len(df)} ({len(by_hand)} written by hand)")
     print(f"sentences           {len(out)}")
     print(f"unique sentences    {out['text'].nunique()}")
     print(f"  from dialogue     {out.loc[out['ns'] == 'script', 'text'].nunique()}")

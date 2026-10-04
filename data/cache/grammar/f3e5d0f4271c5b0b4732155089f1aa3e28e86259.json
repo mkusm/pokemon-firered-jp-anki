@@ -1,0 +1,1 @@
+{"text": "パソコンに　どうぐを　あずけます", "structure": [{"jp": "パソコンに", "en": "in the PC"}, {"jp": "どうぐを", "en": "items"}, {"jp": "あずけます", "en": "store"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

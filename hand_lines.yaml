@@ -1,0 +1,6 @@
+# Text the game draws as a picture, so the text dump has no line for it.
+# Written by hand, from the screen. group.label: text. A line is placed by
+# listing its label in map_order.yaml.
+
+# The logo on the title screen: the first thing the game shows.
+title_screen.TitleScreen_Logo: ポケットモンスター

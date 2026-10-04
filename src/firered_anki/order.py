@@ -43,9 +43,11 @@ NEVER_MET = ("never met", "no move with this effect is met")
 KANA = re.compile(r"[ぁ-ヿ]")
 UNTRANSLATED = "left in Japanese in the English game: no script shows it"
 
-# "start" text (start menu, options, bag, save) is first seen when the menu
-# opens: after the opening sequence, as you stand in your bedroom.
-MENU_OPENS = "PalletTown_PlayersHouse_2F"
+# The opening and your house are a fixed walk (map_order.yaml lists every line
+# of it, the start menu and the bedroom PC included). Text with no exact place
+# floats only from the first step outside: "start" text (the title menu, the
+# naming screen, the rest of the menus), and whatever a rule files under the house.
+FLOATS_FROM = "PalletTown"
 # gTypeNames.N is in this order (include/constants/pokemon.h).
 TYPES = ["TYPE_NORMAL", "TYPE_FIGHTING", "TYPE_FLYING", "TYPE_POISON", "TYPE_GROUND", "TYPE_ROCK", "TYPE_BUG",
          "TYPE_GHOST", "TYPE_STEEL", "TYPE_MYSTERY", "TYPE_FIRE", "TYPE_WATER", "TYPE_GRASS", "TYPE_ELECTRIC",
@@ -383,7 +385,7 @@ class Placer:
         if anchor == "exclude":
             return "exclude", math.nan, ""
         if anchor == "start":
-            return "start", self.mo.rank[MENU_OPENS] - 0.5, "start"
+            return "start", self.mo.rank[FLOATS_FROM] - 0.5, "start"
         if anchor == "end":
             return "end", self.end_rank, "end"
         if anchor.startswith("item:"):
@@ -494,12 +496,21 @@ def main() -> None:
     english = (CORPUS / "en_msg.txt").read_text(encoding="utf-8").split("\n")
     overrides = load_overrides()
     unused = dc.unused_labels
+    by_hand = cfg.get("never_shown") or {}  # label → why: what no rule here can tell
     placed = {}
     never = []
     for r in msgs.itertuples(index=False):
         if r.label in unused:
             placed[r.msg_id] = ("exclude", math.nan, "unused in the game", 0, False)
             never.append((r.msg_id, "the decomp marks it unused"))
+            continue
+        if r.label in by_hand:
+            placed[r.msg_id] = ("exclude", math.nan, "never shown", 0, False)
+            never.append((r.msg_id, by_hand[r.label]))
+            continue
+        if r.label in mo.place:
+            # A line of a walk has an exact place, like dialogue, whatever kind of text it is.
+            placed[r.msg_id] = ("dialogue", float(mo.rank[r.label]), mo.place[r.label], 0, False)
             continue
         if r.ns == "script":
             bucket, entry = mo.resolve(r.group, r.label)
@@ -521,6 +532,8 @@ def main() -> None:
             b, rank = "exclude", math.nan
         placed[r.msg_id] = (b, rank, where, 1, fallback)
     for r in msgs.itertuples(index=False):
+        if r.ns == "hand":
+            continue  # no English line to compare
         if placed[r.msg_id][0] not in ("exclude", "end", "unplaced") and KANA.search(english[r.line_no]):
             placed[r.msg_id] = ("exclude", math.nan, UNTRANSLATED, 0, False)
             never.append((r.msg_id, UNTRANSLATED))
@@ -542,6 +555,12 @@ def main() -> None:
             later.append((r.msg_id, r.group, r.label, mo.order[int(rank)], mo.order[int(possible)],
                           ", ".join(sorted(waits[r.label]))))
     pd.DataFrame(later, columns=["msg_id", "map", "label", "was_at", "now_after", "waits_for"]).to_csv(LATER_OUT, index=False)
+
+    # Nothing floats inside the opening or the house.
+    outside = float(mo.rank[FLOATS_FROM]) - 0.5
+    for msg_id, (b, rank, where, after, fallback) in placed.items():
+        if b in ("start", "anchored", "computed") and rank < outside:
+            placed[msg_id] = (b, outside, where, after, fallback)
 
     fine = fine_places(msgs, placed, placer, dc)
     for msg_id, (rank, after, tiebreak, sighting, kind_order) in fine.items():

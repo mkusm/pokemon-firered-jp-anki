@@ -5,6 +5,11 @@
 # An entry is the English name, or {en: the name, note: …} where a learner may
 # not know the thing: something from Japan, from the real world, or from
 # another Pokémon game. The note goes on the card.
+#
+# Two more fields, for a game term that is an ordinary word:
+#   plain: true      the word is the term wherever it stands, whether or not
+#                    the analysis marked it as a name (レポート is always the save)
+#   accept: [forms]  other forms of the English name a translation may use
 
 # People. The player and the rival are not here: レッド and
 # グリーン are defaults the player types over, and stay Red and Green.
@@ -100,6 +105,10 @@ term:
   シーギャロップ: Seagallop
   ポケルス: Pokérus
   ポケモンジャーナル: Pokémon Journal
+  # The title, and Oak's ポケット　モンスター: POKéMON in every English line that pairs with it.
+  ポケットモンスター: {en: Pokémon, note: "Literally 'Pocket Monsters': the full name, which ポケモン shortens. The English game says POKéMON for both."}
+  # The start menu's レポート is SAVE in the English game, which never names the report.
+  レポート: {en: Save, plain: true, accept: [saving], note: "Literally 'report'. The game's word for saving: レポートを　かく, 'to write the report', is to save the game, and the start menu's レポート is where you do it. English: SAVE."}
   ポケナビ: {en: PokéNav, note: "The trainer's gadget in Pokémon Ruby and Sapphire."}
   ポロック: {en: Pokéblock, note: "Candy for Pokémon made from Berries, from Pokémon Ruby and Sapphire. FireRed's text writes POKEBLOCK."}
   いかりまんじゅう: {en: Rage Candy Bar, note: "A まんじゅう is a steamed bun with a sweet filling, sold as a local souvenir all over Japan. This one is the souvenir of Mahogany Town in Pokémon Gold and Silver."}

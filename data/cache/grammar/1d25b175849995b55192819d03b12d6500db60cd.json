@@ -1,0 +1,1 @@
+{"text": "なにを　しますか？", "structure": [{"jp": "なにを", "en": "what"}, {"jp": "しますか？", "en": "will you do?"}], "patterns": [{"name": "〜か", "span": "しますか", "words": ["します", "か"], "explanation": "か at the end turns the sentence into a question. しますか = 'will you do?'"}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

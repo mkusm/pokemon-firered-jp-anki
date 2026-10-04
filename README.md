@@ -21,7 +21,7 @@ How it works, in detail: [`docs/how-it-works.html`](docs/how-it-works.html)
 
 | | |
 |---|---|
-| `firered_jp.apkg` | 10,868 cards, in story order |
+| `firered_jp.apkg` | 10,863 cards, in story order |
 
 It is attached to the [latest release](https://github.com/mkusm/pokemon-firered-jp-anki/releases/latest).
 
@@ -59,7 +59,7 @@ deck fills in for them, Red and Green.
 
 Everything with a name worth knowing has one card: 221 Pokémon, 148 items,
 253 moves, 61 abilities, the 17 types, 132 places, the main characters, the
-badges, 20 game terms (ポケモンずかん, してんのう) and 15 names from the real world
+badges, 22 game terms (ポケモンずかん, してんのう) and 15 names from the real world
 (ファミコン, きょうと). The card sits at the first line of dialogue that says the
 name, or else where the thing is first met:
 
@@ -115,8 +115,8 @@ All you need is [Anki](https://apps.ankiweb.net/), on desktop or on your phone.
    defaults. With a random order the deck loses its point.
 3. **Pick a pace.** The cards follow the game, so the natural way to use the
    deck is to study a stretch and then play it. For scale: the opening sequence
-   is the first 168 cards, everything up to the first gym about 2,500, the whole
-   deck 10,868. At 20 new cards a day that is about four months to Brock.
+   is the first 172 cards, everything up to the first gym about 2,500, the whole
+   deck 10,863. At 20 new cards a day that is about four months to Brock.
 4. **Read the card.** The front is the line as the game shows it, in kana, with
    one word highlighted: read the sentence and recall that word. The back gives
    the reading in romaji, the dictionary form, the meaning in this sentence,
@@ -154,8 +154,15 @@ All you need is [Anki](https://apps.ankiweb.net/), on desktop or on your phone.
    where the thing is first met, unless dialogue has already said the name.
    Inside a map, a trainer's Pokémon, its moves and its ability hang on that
    trainer's challenge; wild ones are spread between the map's messages.
-4. The deck opens with the game's own opening (controls guide, intro, Oak's
-   speech); menu text only starts once the menu can be opened.
+4. **Walks.** Where the game gives you one thing to do at a time,
+   `map_order.yaml` lists the lines one by one, whatever kind of text they
+   are. The deck opens with the title, the controls guide and Oak's speech,
+   then walks through your house: the start menu's entries, each with its
+   description, the SELECT button, the bookshelf, everything the bedroom PC
+   lets you do with its one Potion, the poster, the TV, Mom and the kitchen.
+   The options screen comes just before the first battle, saving after the
+   aide in the lab explains it, the bag on Route 1. Other menu text floats as
+   in step 3, and only from the first step outside.
 
 Link play, error messages and the Help menu go to the end of the deck.
 
@@ -166,7 +173,11 @@ as unused, such as an e-mail from the Ruby/Sapphire rival's computer, and text
 the English game left in Japanese. The translators skipped what no script
 shows, so a line whose English copy is still Japanese is a leftover: a copy of
 Hoenn's Safari Zone script, berry tags, the rival's lines for battles you
-cannot lose and carry on. The order stage lists what it left out, and why, in
+cannot lose and carry on. A few lines that none of these tests can tell are
+listed by hand in `first_seen.yaml`, each checked against the decomp: the TV
+looked at from its side, which cannot be reached, a rain message only Ruby and
+Sapphire use, the line for two wild Pokémon at once, the Pokédex entry of
+Pokémon 0. The order stage lists what it left out, and why, in
 `data/never_shown.csv`.
 
 ## Building it yourself
@@ -238,8 +249,9 @@ pass only mops up what the analysis left without a sense: a single call.
 |---|---|
 | `known.txt` | Words you already know. They are analysed but never carded. |
 | `name_spellings.yaml` | English names FireRed squeezed into twelve letters, with today's spelling (PARLYZ HEAL → Paralyze Heal). |
-| `names_by_hand.yaml` | English names of the things the game has no list of, 91 in all: people, Team Rocket, badges, places, game terms and real-world names, some with a note for the card. |
-| `map_order.yaml` | Play order of the 344 maps and scenes, following Bulbapedia's walkthrough. Lists single labels where a map is revisited later in the story. |
+| `names_by_hand.yaml` | English names of the things the game has no list of, 93 in all: people, Team Rocket, badges, places, game terms and real-world names, some with a note for the card. A game term that is an ordinary word (レポート, the game's word for saving) is marked `plain`, so that it is the term wherever it stands. |
+| `map_order.yaml` | Play order of the 344 maps and scenes, following Bulbapedia's walkthrough. Lists single labels where a map is revisited later in the story, and walks: the lines of a screen or a room one by one, in the order you meet them. |
+| `hand_lines.yaml` | Text the game draws as a picture, which the text dump lacks. One line: the title screen's ポケットモンスター. |
 | `first_seen.yaml` | Where menus, battle text, items and other non-dialogue text is first seen: rules per text group, and the list of story points the LLM may choose from. |
 | `first_seen_llm.yaml` | Written by `classify`: the story point chosen for each string no rule fits. Readable, so you can review it. |
 | `splits.yaml` | Fixed word boundaries, one decision per string (ポケモンセンター is one word, たいせつな is たいせつ + な), each with its reason. Written by the `splits` stage from two independent model decisions that agreed; you can edit a line by hand, and the stage never changes a string that is already there. |

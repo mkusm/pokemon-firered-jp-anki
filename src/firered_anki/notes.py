@@ -108,7 +108,8 @@ def needs_check(rec: dict) -> bool:
 def prompt(rows: pd.DataFrame, analyses: dict, english: list[str]) -> str:
     out = ["Sentences, in game order:"]
     for i, r in enumerate(rows.itertuples()):
-        official = re.sub(r"\\[nplcr]|\[[A-Z_0-9 ]+\]", " ", english[r.line_no]).strip()
+        # A line written by hand (hand_lines.yaml) has no English line.
+        official = re.sub(r"\\[nplcr]|\[[A-Z_0-9 ]+\]", " ", english[r.line_no] if r.line_no >= 0 else "").strip()
         out.append(f"\ns{i} ({r.first_seen if r.dialogue else r.group})\n  {r.text}\n"
                    f"  translation: {analyses[r.text]['english']}\n  official English line: {official[:500]}")
     return "\n".join(out) + names.for_prompt(rows["text"], "the note") + (

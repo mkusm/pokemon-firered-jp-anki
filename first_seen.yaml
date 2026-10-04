@@ -266,6 +266,19 @@ groups:
     - ['Nickname', PalletTown_ProfessorOaksLab]
     - ['.', ViridianCity_PokemonCenter_1F]
 
+# Text the game holds and never shows, which nothing above can tell: the label,
+# and how we know. Checked against the decomp; found through The Cutting Room
+# Floor's page on the game. Such a line is left out of the deck and listed in
+# data/never_shown.csv with the rest.
+never_shown:
+  PalletTown_PlayersHouse_1F_Text_OopsWrongSide: "the TV's sides and back cannot be reached (the script calls them normally inaccessible)"
+  sText_ItIsRaining: "a battle that starts in rain: no FireRed map has rain (battle_message.c: used only in RSE)"
+  sText_WindBecameHeatWave: "no battle script prints it (unused in Ruby and Sapphire too)"
+  sText_TwoWildPkmnAppeared: "two wild Pokémon at once: FireRed has no wild double battles"
+  sText_YouThrowABallNowRight: "Wally's catching lesson, left over from Ruby and Sapphire"
+  gDummyPokedexText: "the Pokédex entry of Pokémon 0, which no game shows"
+  gPokedexEntries.0: "the category of Pokémon 0, which no game shows"
+
 # Story points the classify stage (LLM) may choose from for rows that only a
 # catch-all '.' rule placed. id → what the player first meets there.
 llm_points:

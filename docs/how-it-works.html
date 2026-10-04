@@ -137,7 +137,7 @@
 <main>
 <header class="hero">
   <h1>How a line of FireRed becomes a flashcard</h1>
-  <p class="lede">The deck has 10,868 cards. Each one is a word, in one form, in the sentence where the Japanese game first uses it. This page follows the text from the cartridge's script to the card.</p>
+  <p class="lede">The deck has 10,863 cards. Each one is a word, in one form, in the sentence where the Japanese game first uses it. This page follows the text from the cartridge's script to the card.</p>
 
   <figure class="card">
     <div class="gba jp" lang="ja">グリーンは　すでに　ポケモンを　<mark>つかまえて</mark>　ずかんの　ページを　ふやしている　そうじゃ！</div>
@@ -182,7 +182,7 @@
         <rect x="30" y="96" width="110" height="52" rx="8"/><text x="85" y="118" text-anchor="middle" font-size="14" font-weight="700">extract</text><text class="sub" x="85" y="136" text-anchor="middle">16,166 sentences</text>
         <rect x="160" y="96" width="110" height="52" rx="8"/><text x="215" y="118" text-anchor="middle" font-size="14" font-weight="700">order</text><text class="sub" x="215" y="136" text-anchor="middle">12,780 kept</text>
         <rect x="290" y="96" width="110" height="52" rx="8"/><text x="345" y="118" text-anchor="middle" font-size="14" font-weight="700">tokenize</text><text class="sub" x="345" y="136" text-anchor="middle">11,163 unique</text>
-        <rect x="550" y="96" width="90" height="52" rx="8"/><text x="595" y="118" text-anchor="middle" font-size="14" font-weight="700">cards</text><text class="sub" x="595" y="136" text-anchor="middle">10,868</text>
+        <rect x="550" y="96" width="90" height="52" rx="8"/><text x="595" y="118" text-anchor="middle" font-size="14" font-weight="700">cards</text><text class="sub" x="595" y="136" text-anchor="middle">10,863</text>
         <rect x="660" y="96" width="90" height="52" rx="8"/><text x="705" y="118" text-anchor="middle" font-size="14" font-weight="700">build</text><text class="sub" x="705" y="136" text-anchor="middle">two .apkg</text>
       </g>
       <g class="llm">
@@ -224,6 +224,7 @@
   <h3>Dialogue follows the walkthrough</h3>
   <p><code>map_order.yaml</code> lists 344 maps and scenes in play order: Kanto, the first three Sevii Islands after Blaine, the League, then the postgame. It was drafted from the decomp's map names and checked against all 21 parts of Bulbapedia's walkthrough.</p>
   <p>Two details matter. A map you return to can list single messages to be placed later, so the rival's second battle on Route 22 sits after the eighth badge and not at your first visit. And the game's opening is listed message by message, because the script dump stores it out of order: controls guide, intro pages, Professor Oak's speech, then the naming prompts.</p>
+  <p>The start of the game is stricter still. Where the game gives you one thing to do at a time, the file lists a <em>walk</em>: the lines of a screen or a room one by one, whatever kind of text they are. The deck opens with the title screen's <span class="jp" lang="ja">ポケットモンスター</span> (a picture in the game, so that one line is written by hand), the controls guide and Oak's speech, and then goes through your house: the start menu's entries, each with the description shown under it, what the SELECT button says, the bookshelf, everything the bedroom PC lets you do with its one Potion, the poster, the TV, Mom and the kitchen. The town's name comes up only as you step outside. The options screen sits just before the first battle, the save questions after the aide in the lab explains saving, the bag on Route 1. The lines of each screen were read from the code that draws it.</p>
 
   <h3>Everything else goes where it first appears</h3>
   <p>Menus, battle messages, move and item descriptions and Pokédex entries have no map. Most of them can be worked out from the <a href="https://github.com/pret/pokefirered">decompiled game</a>:</p>
@@ -231,14 +232,15 @@
     <tr><th>Text</th><th>First seen where</th><th class="n">Placed</th><th class="n">Never met</th></tr>
     <tr><td>Species names, Pokédex entries</td><td>The species is in the wild, in a trainer's party, a gift, or evolves from one that is</td><td class="n">657</td><td class="n">501</td></tr>
     <tr><td>Move names and descriptions</td><td>A Pokémon you meet knows the move at its level, or you get its TM</td><td class="n">582</td><td class="n">127</td></tr>
-    <tr><td>Items</td><td>A Mart sells it, it lies on the ground, it is hidden, or someone gives it to you</td><td class="n">354</td><td class="n">260</td></tr>
+    <tr><td>Items</td><td>A Mart sells it, it lies on the ground, it is hidden, or someone gives it to you</td><td class="n">352</td><td class="n">260</td></tr>
     <tr><td>Abilities</td><td>A species that has the ability is met</td><td class="n">122</td><td class="n">34</td></tr>
-    <tr><td>Map names, Town Map descriptions</td><td>The area is reached</td><td class="n">117</td><td class="n">11</td></tr>
-    <tr><td>Battle messages</td><td>The first move whose effect prints the message is seen</td><td class="n">167</td><td class="n">6</td></tr>
+    <tr><td>Map names, Town Map descriptions</td><td>The area is reached</td><td class="n">116</td><td class="n">11</td></tr>
+    <tr><td>Battle messages</td><td>The first move whose effect prints the message is seen</td><td class="n">166</td><td class="n">6</td></tr>
   </table></div>
   <p>"Never met" is mostly Ruby and Sapphire data still in the cartridge: Hoenn species, items and trainers a FireRed player cannot reach. That text is left out of the deck, and no model stage ever sees it. So is text the decomp marks as unused: 35 messages no script calls, such as the Trainer School e-mail from the Ruby and Sapphire rival's computer, which a model had placed at the PC in your room. </p>
   <p>A third kind was found late: text the English game left in Japanese. The translators skipped what no script shows, and the decomp says so at the top of the Safari Zone's text ("a copy/paste from Hoenn's Safari Zone, and any unused text was left untranslated"). So a line whose English copy is still Japanese is a leftover. There were 151 such messages in the story part of the deck, 230 sentences that 232 cards had been built on: Hoenn's Safari Zone with its <span class="jp" lang="ja">ポロック</span>, berry tags, the rival's lines for battles you cannot lose and carry on. None is called by any script in the decomp. The same test marks 113 sentences at the end of the deck (link play, the union room); those stay, because an English decomp cannot say what the Japanese release's own features, such as the e-Reader, showed.</p>
-  <p>Together that is 1,271 messages, listed with the reason in <code>data/never_shown.csv</code>.</p>
+  <p>A fourth kind no test can tell, and is listed by hand, each line checked against the decomp: what the TV says when you look at it from the side, where you cannot stand; a rain message only Ruby and Sapphire use; the line for two wild Pokémon appearing at once; the Pokédex entry of Pokémon 0. They were found through The Cutting Room Floor's page on the game.</p>
+  <p>Together that is 1,278 messages, listed with the reason in <code>data/never_shown.csv</code>.</p>
   <p>Battle messages needed the most care. The game's battle scripts say which move effect prints which message, so each effect's script is followed through its jumps, shared sub-scripts and message tables. "<span class="jp" lang="ja">＊は　へんしんした</span>" then sits on Route 13, where Ditto appears, instead of in your first battle. Three corrections came out of checking the results: surfing and fishing encounters count only once you have Surf or a rod; a trainer counts from where their battle text is placed; and the engine's own table pads unused effects with the sleep script, which has to be ignored.</p>
 
   <h3>Rules for the rest, and a model for what no rule fits</h3>
@@ -255,7 +257,8 @@
     <li>At each slot the line with the most common new words per word of text goes first, so short menu words come before long help-style prose.</li>
     <li>If dialogue in the same chapter uses the same word, the dialogue sentence becomes the card's example.</li>
   </ol>
-  <p>One kind of line is not spread: the line that names a Pokémon, an item, a move, an ability or a place. It stays where the thing is first met, unless dialogue has already said the name by then, and the order stage works out where inside the map that is:</p>
+  <p>The lines of a walk are not spread: they are listed in order already. Nor does anything float into the opening or your house, so the first menu text that drifts appears as you step into Pallet Town.</p>
+  <p>One more kind of line is not spread: the line that names a Pokémon, an item, a move, an ability or a place. It stays where the thing is first met, unless dialogue has already said the name by then, and the order stage works out where inside the map that is:</p>
   <ul>
     <li><strong>A trainer's Pokémon</strong> goes right after that trainer's challenge, followed by the moves it shows and its ability. Brock's gym reads: his challenge, <span class="jp" lang="ja">イシツブテ</span>, <span class="jp" lang="ja">まるくなる</span>, <span class="jp" lang="ja">がんじょう</span>, <span class="jp" lang="ja">いしあたま</span>, <span class="jp" lang="ja">イワーク</span>, <span class="jp" lang="ja">しめつける</span>, <span class="jp" lang="ja">がんせきふうじ</span>, his defeat line. Where a trainer has no challenge line (the rival in Oak's lab), the team goes right before the defeat line. On the same map a trainer's Pokémon wins over a wild one, because its place is exact.</li>
     <li><strong>Wild and gift Pokémon</strong> have no line to hang on. A map's sightings are spread evenly between its messages, each Pokémon still followed by its moves and ability.</li>
@@ -400,18 +403,18 @@
     <tr><td>The League</td><td class="n">321</td></tr>
     <tr><td>Postgame</td><td class="n">1,180</td></tr>
     <tr><td>End of deck: link play, Help menu, errors</td><td class="n">995</td></tr>
-    <tr><th>Main deck</th><th class="n">10,868</th></tr>
+    <tr><th>Main deck</th><th class="n">10,863</th></tr>
   </table></div>
   <p>The first chapter is the largest because the menus, the battle screen and most everyday vocabulary all appear before the first gym. The deck's first 168 cards are the opening sequence alone.</p>
   <ul>
-    <li>6,171 distinct dictionary forms across the 10,868 cards.</li>
+    <li>6,168 distinct dictionary forms across the 10,863 cards.</li>
     <li>6,458 cards take their example from story dialogue; the rest from Pokédex entries, menus, move and item descriptions and battle messages.</li>
     <li>107 cards are tagged <code>low-confidence</code>: the dictionary entry does not match the word, there is no entry and the model was unsure, or the word is a scrap of broken text. A doubt only about which listed sense fits a helper verb or an idiom no longer counts; those glosses were checked by hand. 8 are tagged <code>sense-guessed</code>.</li>
     <li>6,332 cards carry a sentence breakdown, and 3,327 of them a grammar pattern for their word. All but a few are in the first six chapters; the other cards of those chapters sit on a bare name or a line of one word, with nothing to break down.</li>
     <li>683 cards carry a sentence note, from 353 notes.</li>
     <li>212 are tagged <code>onomatopoeia</code>: JMdict marks the sense as a sound or mimetic word (<span class="jp" lang="ja">ドキドキ</span>, <span class="jp" lang="ja">キラキラ</span>), and the back says so.</li>
     <li>85 are tagged <code>fragment</code>: stammers, garbled speech and pieces of interrupted words (<span class="jp" lang="ja">こっ　こんなに</span>). They stay in the deck because the card is what explains them.</li>
-    <li>923 cards are names: 221 Pokémon, 153 items, 270 moves, 61 abilities, 17 types, 132 places, 24 people, Team Rocket and its grunts, 8 badges, 20 game terms and 15 real-world names, each tagged with its kind. 280 of them sit on a line of dialogue or other text that says the name; 643 on the name's own line, where the thing is first met. 38 carry a note.</li>
+    <li>925 cards are names: 221 Pokémon, 153 items, 270 moves, 61 abilities, 17 types, 132 places, 24 people, Team Rocket and its grunts, 8 badges, 22 game terms and 15 real-world names, each tagged with its kind. 280 of them sit on a line of dialogue or other text that says the name; 643 on the name's own line, where the thing is first met. 38 carry a note.</li>
   </ul>
   <p>The second chapter, run with the one <code>chapter</code> command: 644 sentences re-analysed in 17 calls, 13 grammar calls, 13 note calls and a search check, then a few small rounds until nothing was left. 657 sentences are shown, 503 of them explained, 393 with at least one pattern.</p>
   <p>Chapters four to six: about 2,670 sentences re-analysed. The run was stopped once by the plan's session limit, in the middle of the word-boundary step, and once more by a second hand correction that Opus had made unnecessary.</p>

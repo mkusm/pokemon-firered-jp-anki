@@ -6,6 +6,13 @@
 # of its label (whole `_`-separated parts only, so Route2 never matches Route21);
 # the group wins ties. Label-prefix entries pull a map's later-story lines out
 # to where they are actually seen. Within an entry, messages keep corpus order.
+#
+# An entry can also be a walk: {at: place, lines: [labels]}. Its lines are shown
+# in exactly that order, one after another, and may be any text: a menu entry,
+# an item's name, a line you get by looking at something. Use it where the game
+# gives the player one thing to do at a time. `at` is a map, a text group or a
+# screen named in cards.PLACES: it is the card's Location. Text that is not in
+# a walk floats (see spread.py), and nothing floats before Pallet Town.
 # Check coverage with: uv run python -m firered_anki.map_order
 #
 # Route: Bulbapedia's FireRed/LeafGreen walkthrough, Parts 1–21 (P1…P21 below):
@@ -14,8 +21,14 @@
 
 order:
   # --- Before you can open the menu: the opening sequence, in game order (P1)
+  - at: title_screen
+    lines: [TitleScreen_Logo]       # hand_lines.yaml: the logo is a picture
   - gControlsGuide_Text_Intro
+  - at: new_game_intro              # the bar above the button guide
+    lines: [gText_Controls, gText_ABUTTONNext]
   - gControlsGuide_Text_DPad
+  - at: new_game_intro              # from the second page on, B goes back
+    lines: [gText_ABUTTONNext_BBUTTONBack]
   - gControlsGuide_Text_AButton
   - gControlsGuide_Text_BButton
   - gControlsGuide_Text_StartButton
@@ -33,20 +46,78 @@ order:
   - gOakSpeech_Text_YourNameWhatIsIt
   - new_game_intro            # the name choices (NEW NAME, レッド, グリーン…)
   - gOakSpeech_Text_SoYourNameIsPlayer
+  - at: new_game_intro              # the first yes/no box
+    lines: [gText_YesNo]
   - gOakSpeech_Text_WhatWasHisName
   - gOakSpeech_Text_YourRivalsNameWhatWasIt
   - gOakSpeech_Text_ConfirmRivalName
   - gOakSpeech_Text_RememberRivalsName
   - gOakSpeech_Text_LetsGo
 
-  # --- Pallet Town (P1); the start menu opens here
-  - PalletTown_PlayersHouse_2F_Text_PlayedWithNES   # the console in your room: the first line after the intro
+  # --- Your house (P1): a walk through everything the bedroom and the floor
+  # below let you do before you have a Pokémon. Strings from start_menu.c,
+  # player_pc.c and item_pc.c in the decomp.
+  - at: PalletTown_PlayersHouse_2F
+    lines: [PalletTown_PlayersHouse_2F_Text_PlayedWithNES]   # the console in your room: the first line after the intro
+  # The start menu as it first opens: no Pokédex, no Pokémon. Each entry, then
+  # the description shown under it. The second entry is the player's own name,
+  # which makes no card: only its description is here.
+  - at: start_menu
+    lines:
+      - gText_MenuBag
+      - gStartMenuDesc_Bag
+      - gStartMenuDesc_Player
+      - gText_MenuSave
+      - gStartMenuDesc_Save
+      - gText_MenuOption
+      - gStartMenuDesc_Option
+      - gText_MenuExit
+      - gStartMenuDesc_Exit
+  - at: PalletTown_PlayersHouse_2F
+    lines:
+      - Text_BagItemCanBeRegistered       # SELECT with nothing registered
+      - Text_Bookshelf
+      - Text_Dresser
+  # The bedroom PC. It holds one Potion (gNewGamePCItems), so everything in
+  # item storage can be tried: take it out, be told there is no Pokémon to
+  # give it to, find the PC empty, put it back, look at the empty mailbox.
+  - at: pc
+    lines:
+      - Text_PlayerBootedUpPC
+      - gText_WhatWouldYouLikeToDo
+      - gText_ItemStorage
+      - gText_Mailbox
+      - gText_TurnOff
+      - gText_WithdrawItem2
+      - gText_TakeOutItemsFromThePC
+      - gText_DepositItem2
+      - gText_StoreItemsInThePC
+      - gFameCheckerText_Cancel           # もどる, the last entry of every list here
+      - gText_GoBackToThePreviousMenu
+      - gItems.13                         # キズぐすり
+      - gItemDescription_ITEM_POTION
+      - gText_ReturnToPC
+      - gText_Var1IsSelected
+      - gText_Withdraw
+      - gOtherText_Give
+      - gText_ThereIsNoPokemon
+      - gText_WithdrewQuantItem
+      - gText_ThereAreNoItems
+      - gText_DepositedStrVar2StrVar1s
+      - gText_TheresNoMailHere
+  - at: PalletTown_PlayersHouse_2F
+    lines: [PalletTown_PlayersHouse_2F_Text_PressLRForHelp]   # the poster by the stairs
   - PalletTown_PlayersHouse_2F
   # What is on TV comes before Mom, who then talks about it (テレビの　はなしよ).
   - PalletTown_PlayersHouse_1F_Text_MovieOnTVFourBoysOnRailroad
   - PalletTown_PlayersHouse_1F_Text_MovieOnTVGirlOnBrickRoad
-  - PalletTown_PlayersHouse_1F_Text_OopsWrongSide
   - PalletTown_PlayersHouse_1F
+  - at: PalletTown_PlayersHouse_1F      # the cupboard and the kitchen, before you leave
+    lines: [Text_DishesPlatesNeatlyLinedUp, Text_Kitchen]
+  # The town's name comes up as you step outside. (The house is in the same
+  # map section, which would put the name in the bedroom.)
+  - at: PalletTown
+    lines: [sMapsecName_PALLETTOWN]
   - PalletTown                # the town's people and signs; sign_lady girl
   - PalletTown_RivalsHouse_Text_HiBrothersAtLab   # Daisy, before you have met Oak
   - PalletTown_Text_OakDontGoOut                  # Oak stops you in the grass
@@ -71,10 +142,47 @@ order:
   - PalletTown_ProfessorOaksLab_Text_OakCanReachNextTownWithMon
   - PalletTown_ProfessorOaksLab_Text_OakBattleMonForItToGrow
   - PalletTown_ProfessorOaksLab_Text_OakHeyDontGoAwayYet
+  # The options screen, just before the first battle, which is what most of
+  # it is about. Rows top to bottom, each with its choices (option_menu.c).
+  - at: options_menu
+    lines:
+      - gText_Option
+      - gText_TextSpeed
+      - gText_TextSpeedSlow
+      - gText_TextSpeedMid
+      - gText_TextSpeedFast
+      - gText_BattleScene
+      - gText_BattleSceneOn
+      - gText_BattleSceneOff
+      - gText_BattleStyle
+      - gText_BattleStyleShift
+      - gText_BattleStyleSet
+      - gText_Sound
+      - gText_SoundMono
+      - gText_SoundStereo
+      - gText_ButtonMode
+      - gText_ButtonTypeHelp
+      - gText_ButtonTypeLR
+      - gText_ButtonTypeLEqualsA
+      - gText_Frame
+      - gText_FrameType
+      - gText_OptionMenuCancel
+      - gText_PickSwitchCancel
   - PalletTown_ProfessorOaksLab_Text_RivalLetsCheckOutMons
   - PalletTown_ProfessorOaksLab_Text_RivalDefeat
   - PalletTown_ProfessorOaksLab_Text_RivalGoToughenMyMon
   - PalletTown_ProfessorOaksLab   # the rest of the room: the aides, the desk, the PC, the signs
+  # Saving, after the aide has said how (セーブするには…): the window with your
+  # name, badges and play time, then the questions (start_menu.c).
+  - at: save
+    lines:
+      - gSaveStatName_Player
+      - gSaveStatName_Badges
+      - gSaveStatName_Time
+      - gText_WouldYouLikeToSaveTheGame
+      - gText_SavingDontTurnOffThePower
+      - gText_PlayerSavedTheGame
+      - gText_AlreadySaveFile_WouldLikeToOverwrite   # the second time
   # Back in town with your first Pokémon: Mom heals it, Daisy has heard of the battle
   - PalletTown_PlayersHouse_1F_Text_YouShouldTakeQuickRest
   - PalletTown_PlayersHouse_1F_Text_LookingGreatTakeCare
@@ -82,6 +190,19 @@ order:
 
   # --- Route 1 → Viridian → parcel → Pokédex → Route 22 → Viridian Forest (P2)
   - Route1
+  # The bag, once the clerk's Potion is in it: the three pockets, then what
+  # can be done with an item (item_menu.c).
+  - at: bag
+    lines:
+      - gText_Items2
+      - gText_KeyItems2
+      - gText_PokeBalls2
+      - gOtherText_Use
+      - gOtherText_Toss
+      - gText_TossOutHowManyStrVar1s
+      - gText_ThrowAwayStrVar2OfThisItemQM
+      - gText_ThrewAwayStrVar2StrVar1s
+      - gText_CloseBag
   - ViridianCity              # old man blocking the road
   - ViridianCity_PokemonCenter_1F
   - pc                        # "Someone's PC" menus

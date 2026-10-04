@@ -97,6 +97,10 @@ first gym badge. The docs call it "the first chapter".
   Japanese line saying it. The player and the rival stay Red and Green.
 - When a kind of name is added, raise `names.SHOWN`, so answers given before
   it are checked again.
+- A game term that is an ordinary word is marked `plain: true` in
+  `names_by_hand.yaml`: レポート is Save wherever it stands, so that every
+  translation says "save" and the card carries the literal meaning. `accept`
+  lists other forms a translation may use ("saving").
 - The analysis and the grammar pass are shown the names their sentences
   mention. To fix a misnamed thing, run `names`; do not hand-correct it and do
   not rerun the chapter. An answer given with the names shown is the model's
@@ -111,12 +115,36 @@ first gym badge. The docs call it "the first chapter".
   `map_order.yaml` instead, as for Professor Oak's lab and Pallet Town. Take
   the scenes from the map's `scripts.inc`, not from memory.
 
+**Where the game gives one thing to do at a time, the order is a fixed walk.**
+- The opening and the player's house are listed line by line in
+  `map_order.yaml`, as walks: `{at: place, lines: [labels]}`. A walk's lines
+  are shown in exactly that order and may be any text: a start-menu entry and
+  its description, an item's name, what the bedroom PC says. `at` is the
+  card's `Location`.
+- The options screen, the save questions and the bag are walks too, each at
+  its first natural use: before the first battle, after the aide in the lab
+  explains saving, on Route 1 once the first Potion is in the bag.
+- Take a walk's lines from the code that draws the screen (`start_menu.c`,
+  `player_pc.c`, `item_pc.c`, `option_menu.c`, `item_menu.c`), fetched with
+  `git show`, not from memory.
+- Text outside a walk floats (`spread.py`). Nothing floats before Pallet Town
+  (`order.FLOATS_FROM`): do not let menu text drift into the house again.
+- Text the game draws as a picture is not in the text dump. The title screen's
+  ポケットモンスター is written by hand in `hand_lines.yaml`; add to it only
+  what the owner asks for.
+
 **Text FireRed never shows is not in the deck.**
 - The order stage leaves out Ruby/Sapphire data no FireRed player meets,
   text the decomp marks `@ Unused`, and text whose line in the English game is
   still Japanese (the translators skipped what no script shows), and lists it
   in `data/never_shown.csv`. Nothing downstream sees it, so no model call is
   ever spent on it.
+- What those three tests cannot tell is listed by hand under `never_shown` in
+  `first_seen.yaml`, each with how we know: the TV seen from the side, the
+  rain message, Wally's line, the wild double battle. Check the decomp before
+  adding one; The Cutting Room Floor's page on the game is a good place to
+  find candidates, and must be read from a saved copy (the site refuses
+  Claude).
 - The untranslated-in-English test is not applied to the end of the deck
   (link play, union room): the decomp is of the English game and cannot say
   what the Japanese release's own features showed.
@@ -248,16 +276,26 @@ Update this when it changes.
   these two.
 - `splits.yaml` has 288 decisions, from chapters 0 to 5. They are checked
   across chapters: a later chapter's run can send an earlier sentence back.
-- Names: 923 cards (221 Pokémon, 153 items, 270 moves, 61 abilities, 17
-  types, 132 places, 24 people, 2 for Team Rocket, 8 badges, 20 game terms, 15
+- Names: 925 cards (221 Pokémon, 153 items, 270 moves, 61 abilities, 17
+  types, 132 places, 24 people, 2 for Team Rocket, 8 badges, 22 game terms, 15
   real-world names), found by `names.py` in every chapter with no model call.
   The 56 name lines this put in chapter 0 were re-analysed on Opus. The names
-  deck is gone: one deck, 10,868 cards. The note type has `Note` and
+  deck is gone: one deck, 10,863 cards. The note type has `Note` and
   `SentenceNote` fields.
 - English names: the name check passes on every sentence the deck shows, in
   all chapters. 91 sentences were redone on Opus for it, most of them in
   chapters 1 to 9, so those chapters now have a few more Opus sentences.
-  `name_spellings.yaml` has 40 entries, `names_by_hand.yaml` 91.
+  `name_spellings.yaml` has 40 entries, `names_by_hand.yaml` 93.
+- `names.SHOWN` is 5: レポート (Save, `plain`) and ポケットモンスター (Pokémon)
+  were added, and 23 more sentences redone for them. Every translation of a
+  レポート sentence now says "save" in some form; the wording is the model's
+  and varies ("the Save", "save file", "this report (save)"). The Rocket
+  Warehouse's レポート is a real report, and the model kept it so.
+- Walks: 14 in `map_order.yaml`, 82 lines: the title and the bars of the
+  opening, the house (start menu, SELECT, furniture, bedroom PC, poster,
+  kitchen), マサラタウン at the door, options, saving, the bag.
+  `hand_lines.yaml` has one line, the title. `never_shown` in
+  `first_seen.yaml` has seven labels.
 - Re-analysing a chapter changes how about one sentence in five is split, even
   between two Opus runs, and so changes card identities (about 220 of the first
   chapter's 2,500 cards each time). Do not rerun a finished chapter for a small

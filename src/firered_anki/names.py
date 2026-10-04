@@ -43,7 +43,7 @@ BY_HAND = ROOT / "names_by_hand.yaml"
 TOWN = (("シティ", " City"), ("タウン", " Town"), ("じま", " Island"), ("こうげん", " Plateau"))
 # Which set of names an answer was given with, recorded with the answer. An
 # answer from before a kind was added has not seen those names and is checked again.
-SHOWN = 4  # 2: people, badges, towns by their short names; 3: gyms, regions, game terms; 4: types, real-world names
+SHOWN = 5  # 2: people, badges, towns by their short names; 3: gyms, regions, game terms; 4: types, real-world names; 5: レポート, a game term that is an ordinary word
 KEEP = {"HP", "PP", "TM", "HM", "TV", "VS", "S.S."}  # not title-cased
 NUMBER = re.compile(r"[０-９]+$")
 # A word the analysis glossed as the species: "Pidgey", "Pokémon name". Not
@@ -63,6 +63,8 @@ def kind_of(group: str, label: str) -> str | None:
         return "ability"
     if group == "battle_main" and label.startswith("gTypeNames."):
         return "type"
+    if group == "title_screen":
+        return "term"  # the logo, written in hand_lines.yaml: one name, like a list's line
     return "place" if group == "region_map_entry_strings" else None
 
 
@@ -82,13 +84,14 @@ def english(raw: str) -> str:
 
 
 @cache
-def _tables() -> tuple[dict, dict, dict]:
-    """(name → (kind, English name), name → its other readings, name → note).
+def _tables() -> tuple[dict, dict, dict, dict]:
+    """(name → (kind, English name), name → its other readings, name → note,
+    name → how a hand-kept name is recognised: {plain, accept}).
     A string can be two things: ゴースト is Haunter and the Ghost type."""
     rows = pd.read_parquet(EXTRACT_OUT, columns=["group", "label", "text", "line_no"])
     en = (CORPUS / "en_msg.txt").read_text(encoding="utf-8").split("\n")
     today = yaml.safe_load(SPELLINGS.read_text(encoding="utf-8")) if SPELLINGS.exists() else {}
-    out, also, notes = {}, {}, {}
+    out, also, notes, ways = {}, {}, {}, {}
 
     def add(jp: str, kind: str, name: str) -> None:
         if jp not in out:
@@ -97,6 +100,8 @@ def _tables() -> tuple[dict, dict, dict]:
             also.setdefault(jp, []).append((kind, name))
 
     for r in rows.itertuples():
+        if r.line_no < 0:
+            continue  # written by hand: no English line; its name is in names_by_hand.yaml
         kind = kind_of(r.group, r.label)
         name = english(en[r.line_no])
         # A list's empty slots are ？？？ or a row of dashes.
@@ -122,7 +127,9 @@ def _tables() -> tuple[dict, dict, dict]:
             add(jp, kind, name)
             if note:
                 notes[jp] = " ".join(note.split())
-    return out, also, notes
+            if isinstance(entry, dict) and (entry.get("plain") or entry.get("accept")):
+                ways[jp] = {"plain": bool(entry.get("plain")), "accept": tuple(entry.get("accept") or ())}
+    return out, also, notes, ways
 
 
 def official() -> dict[str, tuple[str, str]]:
@@ -134,7 +141,7 @@ def official() -> dict[str, tuple[str, str]]:
 
 def readings(name: str) -> list[tuple[str, str]]:
     """Everything the string names, a species first: its gloss test is the strictest."""
-    out, also, _ = _tables()
+    out, also = _tables()[:2]
     return sorted([out[name], *also.get(name, [])], key=lambda v: v[0] != "pokemon")
 
 
@@ -166,7 +173,7 @@ def find(text: str, words: list[dict], kind: str | None = None, names: dict | No
     one name whatever the analysis made of it. `as_names`: the names some other
     sentence uses as a name."""
     names = load() if names is None else names
-    notes = _tables()[2]
+    notes, ways = _tables()[2:]
     if kind:
         name = bare(text.replace("　", ""))
         eng = next((e for k, e in readings(name) if k == kind), None) if name in names else None
@@ -188,7 +195,9 @@ def find(text: str, words: list[dict], kind: str | None = None, names: dict | No
             is_a = names[name]
             if j == i:  # one word: which of the things it can name, if any
                 nxt = words[i + 1] if i + 1 < len(words) else None
-                is_a = next((v for v in readings(name) if _is_name(words[i], *v, nxt)), None)
+                # レポート is the game's word for saving wherever it stands, name or not.
+                plain = ways.get(name, {}).get("plain")
+                is_a = next((v for v in readings(name) if plain or _is_name(words[i], *v, nxt)), None)
                 if not is_a:
                     continue
             a, b = word_span(text, words, i), word_span(text, words, j)
@@ -205,6 +214,7 @@ def find(text: str, words: list[dict], kind: str | None = None, names: dict | No
             if is_a[0] in ("move", "ability") and not any(w.get("proper") for w in words[i:j + 1]):
                 continue
             out.append({"name": name, "kind": is_a[0], "english": is_a[1], "note": notes.get(name),
+                        "accept": ways.get(name, {}).get("accept", ()),
                         "first": i, "last": j, "span": (a[0], b[1])})
             i = j
             break
@@ -290,6 +300,13 @@ def _plain(s: str) -> str:
     return re.sub(r"[^a-z0-9♀♂]", "", (s or "").lower().replace("é", "e"))
 
 
+def _says(run: dict, english: str) -> bool:
+    """Whether a translation calls the name what the game does, or by a form
+    of it the entry accepts ("saving" for Save)."""
+    said = _plain(english)
+    return any(_plain(e) in said for e in (run["english"], *run.get("accept", ())))
+
+
 def misses(text: str, analysis: dict, seen: bool = False) -> list[dict]:
     """The names in a sentence that its translation calls something else.
     An answer given with the English names in the prompt is the model's own
@@ -297,8 +314,7 @@ def misses(text: str, analysis: dict, seen: bool = False) -> list[dict]:
     alone; `seen` asks for exactly those."""
     if (analysis.get("_run", {}).get("names") == SHOWN) != seen:
         return []
-    said = _plain(analysis["english"])
-    return [run for run in find(text, analysis["words"], names=official()) if _plain(run["english"]) not in said]
+    return [run for run in find(text, analysis["words"], names=official()) if not _says(run, analysis["english"])]
 
 
 def grammar_misses(text: str, analysis: dict, answer: dict, seen: bool = False) -> list[dict]:
@@ -309,7 +325,7 @@ def grammar_misses(text: str, analysis: dict, answer: dict, seen: bool = False) 
     for run in find(text, analysis["words"], names=official()):
         spelled = text[run["span"][0]:run["span"][1]].replace("　", "")
         for line in answer.get("structure", []):
-            if spelled in line["jp"].replace("　", "") and _plain(run["english"]) not in _plain(line["en"]):
+            if spelled in line["jp"].replace("　", "") and not _says(run, line["en"]):
                 out.append(run)
     return out
 

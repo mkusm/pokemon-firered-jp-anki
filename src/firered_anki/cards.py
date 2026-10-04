@@ -451,6 +451,8 @@ PLACES = {
     "link_rfu_2": "Wireless link", "dodrio_berry_picking": "Dodrio Berry-Picking", "competitive_brothers": "Seven Island",
     "eon_ticket": "Mystery Gift", "description": "Menus and messages", "header": "Menus and messages",
     "pokemon": "Menus and messages", "test": "Menus and messages",
+    # Places a walk in map_order.yaml names that are screens, not maps or text groups.
+    "title_screen": "Title screen", "start_menu": "Start menu", "options_menu": "Options", "bag": "Bag",
 }
 # Map names as the decomp spells them, to words: Route1, SSAnne, ProfessorOaksLab.
 SPELLED = [(r"(?<=[a-z])(?=[A-Z0-9])|(?<=[A-Z])(?=[A-Z][a-z])|_", " "), (r"\bSS Anne\b", "S.S. Anne"),
