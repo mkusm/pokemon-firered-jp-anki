@@ -43,11 +43,14 @@ NEVER_MET = ("never met", "no move with this effect is met")
 KANA = re.compile(r"[ぁ-ヿ]")
 UNTRANSLATED = "left in Japanese in the English game: no script shows it"
 
-# The opening and your house are a fixed walk (map_order.yaml lists every line
-# of it, the start menu and the bedroom PC included). Text with no exact place
-# floats only from the first step outside: "start" text (the title menu, the
-# naming screen, the rest of the menus), and whatever a rule files under the house.
-FLOATS_FROM = "PalletTown"
+# The game's start is listed line by line in map_order.yaml: the opening, your
+# house, Pallet Town, the scene in Oak's lab. Text with no exact place floats
+# only once you have left the lab with your first Pokémon: "start" text (the
+# title menu, the naming screen, the rest of the menus), battle text, and
+# whatever a rule files under a place before that. This is the last line
+# before you step out: the end of the save walk. A name's own line (a
+# starter's moves, its type) is not floating text and stays where it is met.
+FLOATS_AFTER = "gText_AlreadySaveFile_WouldLikeToOverwrite"
 # gTypeNames.N is in this order (include/constants/pokemon.h).
 TYPES = ["TYPE_NORMAL", "TYPE_FIGHTING", "TYPE_FLYING", "TYPE_POISON", "TYPE_GROUND", "TYPE_ROCK", "TYPE_BUG",
          "TYPE_GHOST", "TYPE_STEEL", "TYPE_MYSTERY", "TYPE_FIRE", "TYPE_WATER", "TYPE_GRASS", "TYPE_ELECTRIC",
@@ -385,7 +388,7 @@ class Placer:
         if anchor == "exclude":
             return "exclude", math.nan, ""
         if anchor == "start":
-            return "start", self.mo.rank[FLOATS_FROM] - 0.5, "start"
+            return "start", self.mo.rank[FLOATS_AFTER] + 0.5, "start"
         if anchor == "end":
             return "end", self.end_rank, "end"
         if anchor.startswith("item:"):
@@ -545,7 +548,8 @@ def main() -> None:
     waits, set_in, later = dc.waits_for, dc.set_in, []
     for r in msgs.itertuples(index=False):
         b, rank, where, after, fallback = placed[r.msg_id]
-        if b != "dialogue" or r.label not in waits:
+        # A walk's lines are in the order they were listed in by hand.
+        if b != "dialogue" or r.label not in waits or r.label in mo.place:
             continue
         ranks = [min((placer.fs.map_rank.get(m, math.inf) for m in set_in.get(c, ())), default=math.inf)
                  for c in waits[r.label]]
@@ -556,16 +560,17 @@ def main() -> None:
                           ", ".join(sorted(waits[r.label]))))
     pd.DataFrame(later, columns=["msg_id", "map", "label", "was_at", "now_after", "waits_for"]).to_csv(LATER_OUT, index=False)
 
-    # Nothing floats inside the opening or the house.
-    outside = float(mo.rank[FLOATS_FROM]) - 0.5
-    for msg_id, (b, rank, where, after, fallback) in placed.items():
-        if b in ("start", "anchored", "computed") and rank < outside:
-            placed[msg_id] = (b, outside, where, after, fallback)
-
     fine = fine_places(msgs, placed, placer, dc)
     for msg_id, (rank, after, tiebreak, sighting, kind_order) in fine.items():
         b, _, where, _, fallback = placed[msg_id]
         placed[msg_id] = (b, rank, where, after, fallback)
+
+    # Nothing floats before the first walk out of the lab. Name lines, placed
+    # just above, are not floating text.
+    outside = float(mo.rank[FLOATS_AFTER]) + 0.5
+    for msg_id, (b, rank, where, after, fallback) in placed.items():
+        if b in ("start", "anchored", "computed") and rank < outside and msg_id not in fine:
+            placed[msg_id] = (b, outside, where, after, fallback)
 
     cols = ["bucket", "rank", "first_seen", "after_dialogue", "fallback"]
     df = df.join(pd.DataFrame.from_dict(placed, orient="index", columns=cols), on="msg_id")

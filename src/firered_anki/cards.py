@@ -14,7 +14,8 @@
      spread.py), now on real card keys instead of tokenizer lemmas. The line
      that names a Pokémon or an item is not spread: it stays where the thing
      is first met.
-  4. Each card takes its first sentence in that order, except that a dialogue
+  4. Cards follow their sentences, and within a sentence the words left to
+     right. Each card takes its first sentence in that order, except that a dialogue
      sentence in the same chapter beats a non-dialogue line (not for a Pokémon
      or item name, which stays at the first place it is seen). Up to two later
      sentences become extra examples.
@@ -590,6 +591,8 @@ def build_cards(run_name: str = MAIN.name, offline_merge: bool = False) -> pd.Da
             g = gram.get(first["text"])
             out.append({
                 "key": json.dumps(key, ensure_ascii=False), "order": first["card_order"],
+                # Within a sentence: the words left to right, a name before a word inside it.
+                "_at": (first["pos"], key[0] != "name"),
                 "Sentence": highlight(first["text"], a["words"], first["pos"], first["span"]),
                 "Word": form_of(w), "Base": w["base"], "Kanji": w.get("kanji") or "",
                 "UsuallyKana": "yes" if w.get("usually_kana") else "",
@@ -621,7 +624,8 @@ def build_cards(run_name: str = MAIN.name, offline_merge: bool = False) -> pd.Da
                 + (["onomatopoeia"] if is_onomatopoeia(w, e) else [])
                 + (["fragment"] if is_fragment(first["text"], w) and not w.get("name") else []),
             })
-        df = pd.DataFrame(out).sort_values("order").reset_index(drop=True)
+        out.sort(key=lambda c: (c["order"], c.pop("_at")))
+        df = pd.DataFrame(out)
         df["Order"] = [f"{i:06d}" for i in range(len(df))]
         return df
 

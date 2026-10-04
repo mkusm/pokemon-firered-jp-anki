@@ -159,10 +159,15 @@ All you need is [Anki](https://apps.ankiweb.net/), on desktop or on your phone.
    are. The deck opens with the title, the controls guide and Oak's speech,
    then walks through your house: the start menu's entries, each with its
    description, the SELECT button, the bookshelf, everything the bedroom PC
-   lets you do with its one Potion, the poster, the TV, Mom and the kitchen.
+   lets you do with its one Potion, the poster, the TV, Mom and the kitchen,
+   and then through Pallet Town from your door to the lab.
    The options screen comes just before the first battle, saving after the
    aide in the lab explains it, the bag on Route 1. Other menu text floats as
-   in step 3, and only from the first step outside.
+   in step 3, and only once you have left Oak's lab with your first Pokémon.
+
+A sentence often teaches several words. Their cards come in the order the
+words stand in the sentence, left to right, so a particle follows the word it
+attaches to.
 
 Link play, error messages and the Help menu go to the end of the deck.
 

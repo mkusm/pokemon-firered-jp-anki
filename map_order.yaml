@@ -12,7 +12,7 @@
 # an item's name, a line you get by looking at something. Use it where the game
 # gives the player one thing to do at a time. `at` is a map, a text group or a
 # screen named in cards.PLACES: it is the card's Location. Text that is not in
-# a walk floats (see spread.py), and nothing floats before Pallet Town.
+# a walk floats (see spread.py), and nothing floats before you first leave Oak's lab.
 # Check coverage with: uv run python -m firered_anki.map_order
 #
 # Route: Bulbapedia's FireRed/LeafGreen walkthrough, Parts 1–21 (P1…P21 below):
@@ -115,10 +115,28 @@ order:
   - at: PalletTown_PlayersHouse_1F      # the cupboard and the kitchen, before you leave
     lines: [Text_DishesPlatesNeatlyLinedUp, Text_Kitchen]
   # The town's name comes up as you step outside. (The house is in the same
-  # map section, which would put the name in the bedroom.)
+  # map section, which would put the name in the bedroom.) Then the town in
+  # walking order, from your door at the top to the lab at the bottom: your
+  # house's sign, the town sign, the woman who stands at the notice board
+  # (おとくな　けいじばん) and makes you read it, the rival's house's sign, the
+  # man near the lab, the lab's sign. Her last two lines are the other way
+  # her scene can go: she shows you her copy of the board at the way out.
   - at: PalletTown
-    lines: [sMapsecName_PALLETTOWN]
-  - PalletTown                # the town's people and signs; sign_lady girl
+    lines:
+      - sMapsecName_PALLETTOWN
+      - PalletTown_Text_PlayersHouse
+      - PalletTown_Text_TownSign
+      - PalletTown_Text_HmmIsThatRight
+      - PalletTown_Text_OhLookLook
+      - PalletTown_Text_ReadItReadIt
+      - PalletTown_Text_PressStartToOpenMenu
+      - PalletTown_Text_SignsAreUsefulArentThey
+      - PalletTown_Text_LookCopiedTrainerTipsSign
+      - PalletTown_Text_PressStartToOpenMenuCopy
+      - PalletTown_Text_RivalsHouse
+      - PalletTown_Text_CanStoreItemsAndMonsInPC
+      - PalletTown_Text_OakPokemonResearchLab
+  - PalletTown                # anything else said in town
   - PalletTown_RivalsHouse_Text_HiBrothersAtLab   # Daisy, before you have met Oak
   - PalletTown_Text_OakDontGoOut                  # Oak stops you in the grass
   - PalletTown_Text_OakGrassUnsafeNeedMon
@@ -184,6 +202,10 @@ order:
       - gText_PlayerSavedTheGame
       - gText_AlreadySaveFile_WouldLikeToOverwrite   # the second time
   # Back in town with your first Pokémon: Mom heals it, Daisy has heard of the battle
+  # The woman by the sign says this only once she has shown you the sign and
+  # you have left the town map and come back. That is a scene variable, not a
+  # flag, so the order stage cannot see it: placed by hand, as you step out of the lab.
+  - PalletTown_Text_RaisingMonsToo
   - PalletTown_PlayersHouse_1F_Text_YouShouldTakeQuickRest
   - PalletTown_PlayersHouse_1F_Text_LookingGreatTakeCare
   - PalletTown_RivalsHouse_Text_HeardYouBattledRival

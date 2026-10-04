@@ -111,6 +111,10 @@ first gym badge. The docs call it "the first chapter".
   dialogue line that is shown only once a flag is set to just after the map
   whose script sets it (`decomp.set_in`); the list is `data/moved_later.csv`.
   The line keeps its own map as its location.
+- Only flags are followed. A line that waits on a scene variable is not
+  moved: the woman by Pallet Town's sign says わたしも　ポケモンを　そだててるの！
+  only after her sign routine (`VAR_MAP_SCENE_PALLET_TOWN_SIGN_LADY`), and was
+  placed by hand. When a line reads oddly early, look at its script.
 - Where the position inside a scene matters, list the scene's labels in
   `map_order.yaml` instead, as for Professor Oak's lab and Pallet Town. Take
   the scenes from the map's `scripts.inc`, not from memory.
@@ -127,8 +131,13 @@ first gym badge. The docs call it "the first chapter".
 - Take a walk's lines from the code that draws the screen (`start_menu.c`,
   `player_pc.c`, `item_pc.c`, `option_menu.c`, `item_menu.c`), fetched with
   `git show`, not from memory.
-- Text outside a walk floats (`spread.py`). Nothing floats before Pallet Town
-  (`order.FLOATS_FROM`): do not let menu text drift into the house again.
+- Text outside a walk floats (`spread.py`). Nothing floats before the player
+  first leaves Oak's lab (`order.FLOATS_AFTER`, the owner's choice): do not
+  let menu or battle text drift into the house, the town or the lab scene
+  again. A name's own line (a starter's move, its type) is not floating text
+  and stays where the thing is met.
+- Pallet Town itself is a walk, in walking order from the player's door to
+  the lab. The owner confirmed that order; ask before changing it.
 - Text the game draws as a picture is not in the text dump. The title screen's
   ポケットモンスター is written by hand in `hand_lines.yaml`; add to it only
   what the owner asks for.
@@ -154,6 +163,8 @@ first gym badge. The docs call it "the first chapter".
 **Cards.**
 - One card per word form and sense: つかまえた and つかまえて are two cards.
   Particles are never part of a form.
+- The cards of one sentence come in the order its words stand in, left to
+  right. Only the `Order` field depends on this, not a card's key.
 - Do not drop cards for stammers, garbled speech, word fragments or sound
   words. They are tagged (`fragment`, `onomatopoeia`), not filtered: the card is
   what explains the odd text.
@@ -291,9 +302,10 @@ Update this when it changes.
   レポート sentence now says "save" in some form; the wording is the model's
   and varies ("the Save", "save file", "this report (save)"). The Rocket
   Warehouse's レポート is a real report, and the model kept it so.
-- Walks: 14 in `map_order.yaml`, 82 lines: the title and the bars of the
+- Walks: 14 in `map_order.yaml`, 94 lines: the title and the bars of the
   opening, the house (start menu, SELECT, furniture, bedroom PC, poster,
-  kitchen), マサラタウン at the door, options, saving, the bag.
+  kitchen), Pallet Town from the door to the lab, options, saving, the bag.
+  A walk's line is not moved by the flag rule: its place is the listed one.
   `hand_lines.yaml` has one line, the title. `never_shown` in
   `first_seen.yaml` has seven labels.
 - Re-analysing a chapter changes how about one sentence in five is split, even
