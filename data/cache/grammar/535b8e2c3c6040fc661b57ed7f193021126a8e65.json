@@ -1,0 +1,1 @@
+{"text": "うむ　また　よろしく　たのむぞい", "structure": [{"jp": "うむ", "en": "mm"}, {"jp": "また　よろしく　たのむぞい", "en": "I'm counting on you again"}], "patterns": [{"name": "〜ぞ", "span": "たのむぞい", "words": ["たのむ", "ぞい"], "explanation": "ぞい is an old-man version of the forceful ending ぞ. たのむぞい = 'I'm counting on you, I am'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

@@ -1,0 +1,1 @@
+{"text": "ポケモンを　さそいだす", "structure": [{"jp": "ポケモンを", "en": "Pokémon"}, {"jp": "さそいだす", "en": "lure out"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

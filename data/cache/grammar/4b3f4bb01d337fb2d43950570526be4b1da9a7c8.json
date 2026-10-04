@@ -1,0 +1,1 @@
+{"text": "ひとの　ものを　とったら　どろぼう！", "structure": [{"jp": "ひとの　ものを　とったら", "en": "if you take other people's things"}, {"jp": "どろぼう！", "en": "you're a thief!"}], "patterns": [{"name": "〜たら", "span": "とったら", "words": ["とったら"], "explanation": "たら on a verb means 'if' or 'once you do it'. とったら = 'if you take'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

@@ -1,0 +1,1 @@
+{"text": "うむ　いいこな　じゃ！", "structure": [{"jp": "うむ", "en": "mm"}, {"jp": "いいこな　じゃ！", "en": "it's good powder!"}], "patterns": [{"name": "〜だ", "span": "じゃ", "words": ["じゃ"], "explanation": "じゃ is the old-man way of saying だ, 'it is'. いいこな　じゃ = 'it's good powder'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

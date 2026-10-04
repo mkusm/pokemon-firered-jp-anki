@@ -1,0 +1,1 @@
+{"text": "ないのか！", "structure": [{"jp": "ないのか！", "en": "you don't have any?!"}], "patterns": [{"name": "〜のか", "span": "ないのか", "words": ["ない", "のか"], "explanation": "のか asks for confirmation of something the speaker has just realised, often with surprise. ないのか = 'so you don't have any?!'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

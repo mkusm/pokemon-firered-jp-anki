@@ -1,0 +1,1 @@
+{"text": "……うそじゃ！", "structure": [{"jp": "……うそじゃ！", "en": "...that's a lie!"}], "patterns": [{"name": "〜だ", "span": "うそじゃ", "words": ["うそ", "じゃ"], "explanation": "じゃ is the old-man way of saying だ, 'it is'. うそじゃ = 'it's a lie'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

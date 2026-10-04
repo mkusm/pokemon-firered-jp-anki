@@ -1,0 +1,1 @@
+{"text": "ハナダ　ポケモン　ジム　カスミ　にんてい　トレーナー！", "structure": [{"jp": "ハナダ　ポケモン　ジム", "en": "Cerulean Pokémon Gym"}, {"jp": "カスミ　にんてい　トレーナー！", "en": "Trainers certified by Misty!"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

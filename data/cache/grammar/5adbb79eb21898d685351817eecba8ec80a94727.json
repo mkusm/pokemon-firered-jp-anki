@@ -1,0 +1,1 @@
+{"text": "＊の　からだの　こおりが　とけた", "structure": [{"jp": "＊の　からだの", "en": "of ＊'s body"}, {"jp": "こおりが", "en": "the ice"}, {"jp": "とけた", "en": "melted"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

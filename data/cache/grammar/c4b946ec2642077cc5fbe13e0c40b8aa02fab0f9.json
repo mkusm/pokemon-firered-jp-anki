@@ -1,0 +1,1 @@
+{"text": "まいったわ！", "structure": [{"jp": "まいったわ！", "en": "I give up!"}], "patterns": [{"name": "〜わ", "span": "まいったわ", "words": ["まいった", "わ"], "explanation": "わ at the end is a soft, feminine way to state something with feeling. まいったわ = 'I give up'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

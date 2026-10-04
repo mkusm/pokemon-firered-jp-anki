@@ -1,0 +1,1 @@
+{"text": "ＳＴＡＲＴきりかえ　えらぶ　Ｂもどる", "structure": [{"jp": "ＳＴＡＲＴきりかえ", "en": "START: switch"}, {"jp": "えらぶ", "en": "choose"}, {"jp": "Ｂもどる", "en": "B: go back"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

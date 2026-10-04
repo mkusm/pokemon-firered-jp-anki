@@ -1,0 +1,1 @@
+{"text": "しかし　＊の　たいりょくは　まんたんだ！", "structure": [{"jp": "しかし", "en": "but"}, {"jp": "＊の　たいりょくは", "en": "＊'s HP"}, {"jp": "まんたんだ！", "en": "is full!"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

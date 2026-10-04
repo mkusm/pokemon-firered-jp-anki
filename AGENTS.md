@@ -208,6 +208,9 @@ fine.
 - Commit only when asked. New commits only: no amending, no force-push, no
   moving tags.
 - Use the repository's own git identity; do not override it.
+- Commit messages and release notes carry no links to Claude sessions, and no
+  `Claude-Session:` line. The history was rewritten once, on the owner's
+  request, to remove them; that was the exception to the rule above.
 - `docs/ankiweb-description.md` is left untracked on purpose. `vendor/`, the
   `.apkg` files and everything in `data/` except the model caches are ignored.
   `data/grounding_lookups.json` is a copy of dictionary lookups, rebuilt when
@@ -231,21 +234,24 @@ fine.
 
 Update this when it changes.
 
-- Chapter 0: analysed by Opus with prompt version 4, and 5 for 49 sentences (particle
-  senses picked by the analysis), grammar by Opus.
-- Chapters 1 to 9: analysed by Sonnet with prompt version 2, with Opus on the
-  sentences Sonnet flagged; no grammar, and one card per particle. `analyse
+- Chapters 0 and 1: analysed by Opus with prompt version 4 or 5 (particle
+  senses picked by the analysis), grammar and notes by Opus. Both settled:
+  `chapter 0 --dry-run` and `chapter 1 --dry-run` report nothing left.
+- Chapters 2 to 9: analysed by Sonnet with prompt version 2, with Opus on the
+  sentences Sonnet flagged; no grammar, no notes, and one card per particle. `analyse
   rerun N` redoes every sentence of a chapter that is not Opus on version 4 or 5;
   `analyse redo <file>` re-analyses only the sentences listed in a file.
 - `corrections.yaml` has seven entries: the SELECT button line, Mom's two TV
   lines, and four word
   forms the model wrote that were not in their sentence.
-- `splits.yaml` has 72 decisions, all from the first chapter.
-- Names: 901 cards (221 Pokémon, 148 items, 253 moves, 61 abilities, 17
+- `splits.yaml` has 97 decisions, from chapters 0 and 1. They are checked
+  across chapters: a later chapter's run can send an earlier sentence back.
+- Names: 916 cards (221 Pokémon, 150 items, 266 moves, 61 abilities, 17
   types, 132 places, 24 people, 2 for Team Rocket, 8 badges, 20 game terms, 15
   real-world names), found by `names.py` in every chapter with no model call.
   The 56 name lines this put in chapter 0 were re-analysed on Opus. The names
-  deck is gone: one deck, 11,120 cards. The note type has a `Note` field.
+  deck is gone: one deck, 11,112 cards. The note type has `Note` and
+  `SentenceNote` fields.
 - English names: the name check passes on every sentence the deck shows, in
   all chapters. 91 sentences were redone on Opus for it, most of them in
   chapters 1 to 9, so those chapters now have a few more Opus sentences.

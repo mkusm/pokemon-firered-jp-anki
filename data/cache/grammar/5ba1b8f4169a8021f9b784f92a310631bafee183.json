@@ -1,0 +1,1 @@
+{"text": "うなる　こぶし！", "structure": [{"jp": "うなる　こぶし！", "en": "a roaring fist!"}], "patterns": [{"name": "verb + noun", "span": "うなる　こぶし", "words": ["うなる", "こぶし"], "explanation": "A verb placed right before a noun describes that noun. うなる　こぶし = 'a fist that roars'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

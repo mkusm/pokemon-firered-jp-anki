@@ -1,0 +1,1 @@
+{"text": "ここは　ハナダシティ　ハナダは　みずいろ　しんぴのいろ", "structure": [{"jp": "ここは　ハナダシティ", "en": "This is Cerulean City"}, {"jp": "ハナダは　みずいろ", "en": "Cerulean is light blue"}, {"jp": "しんぴのいろ", "en": "the color of mystery"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

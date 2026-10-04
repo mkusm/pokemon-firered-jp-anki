@@ -1,0 +1,1 @@
+{"text": "しかし　なかは　いがいと　やわらかい。", "structure": [{"jp": "しかし", "en": "however"}, {"jp": "なかは", "en": "the inside"}, {"jp": "いがいと　やわらかい。", "en": "is surprisingly soft"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

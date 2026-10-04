@@ -1,0 +1,1 @@
+{"text": "…　どれどれ　レッドは　なんか　つかまえた？", "structure": [{"jp": "…　どれどれ", "en": "...let's see"}, {"jp": "レッドは", "en": "Red, you"}, {"jp": "なんか　つかまえた？", "en": "caught anything?"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

@@ -1,0 +1,1 @@
+{"text": "コーナー　で　こな　じゃぞ！", "structure": [{"jp": "コーナー　で", "en": "at the Corner"}, {"jp": "こな　じゃぞ！", "en": "it's powder, I tell you!"}], "patterns": [{"name": "〜だ", "span": "じゃ", "words": ["じゃ"], "explanation": "じゃ is the old-man way of saying だ, 'it is'. こな　じゃぞ = 'it's powder, I tell you!'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

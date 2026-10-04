@@ -1,0 +1,1 @@
+{"text": "じてんしゃの　のりごこちは　いかが　です？", "structure": [{"jp": "じてんしゃの　のりごこちは", "en": "the feel of riding the Bicycle"}, {"jp": "いかが　です？", "en": "how is it?"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

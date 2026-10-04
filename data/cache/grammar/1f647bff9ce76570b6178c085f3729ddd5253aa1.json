@@ -1,0 +1,1 @@
+{"text": "みせて　みろよ！", "structure": [{"jp": "みせて　みろよ！", "en": "go on, show me!"}], "patterns": [{"name": "〜てみる", "span": "みせて　みろ", "words": ["みせて", "みろ"], "explanation": "てみる means 'try doing it and see'; みろ is its blunt order form, so it sounds like a dare. みせて みろ = 'go on, show me'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

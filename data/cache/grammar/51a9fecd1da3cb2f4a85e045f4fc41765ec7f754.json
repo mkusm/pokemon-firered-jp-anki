@@ -1,0 +1,1 @@
+{"text": "すべての　ポケモンは　おとなしく　いうことを　ききます", "structure": [{"jp": "すべての　ポケモンは", "en": "all Pokémon"}, {"jp": "おとなしく　いうことを　ききます", "en": "obediently do as you say"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

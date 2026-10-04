@@ -1,0 +1,1 @@
+{"text": "ＰＰが　かいふくした！", "structure": [{"jp": "ＰＰが", "en": "PP"}, {"jp": "かいふくした！", "en": "was restored!"}], "patterns": [{"name": "〜た", "span": "かいふくした", "words": ["かいふくした"], "explanation": "た at the end of a verb says the thing has already happened. する becomes した. かいふくした = 'was restored'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

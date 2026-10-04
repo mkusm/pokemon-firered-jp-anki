@@ -1,0 +1,1 @@
+{"text": "あたらしい　ニュースじゃ！", "structure": [{"jp": "あたらしい　ニュースじゃ！", "en": "it's fresh news!"}], "patterns": [{"name": "〜だ", "span": "ニュースじゃ", "words": ["ニュース", "じゃ"], "explanation": "じゃ is how old men in stories say だ, 'it is'. ニュースじゃ = 'it's news'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

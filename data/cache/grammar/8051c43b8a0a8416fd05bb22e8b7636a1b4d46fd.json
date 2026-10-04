@@ -1,0 +1,1 @@
+{"text": "アドバイス　しよう！", "structure": [{"jp": "アドバイス　しよう！", "en": "let me give advice!"}], "patterns": [{"name": "〜よう (let's)", "span": "アドバイス　しよう", "words": ["アドバイス", "しよう"], "explanation": "The よう ending on a verb means 'let's do it' or, as here, 'let me do it'. アドバイス　しよう = 'let me give you some advice'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

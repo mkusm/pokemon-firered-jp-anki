@@ -233,12 +233,21 @@ def scope(chapter: int | None):
     from .cards import prepare
 
     deck, _, analyses, _ = prepare(offline_merge=True)
+    return in_scope(deck, analyses, chapter), analyses
+
+
+def in_scope(deck, analyses: dict, chapter: int | None) -> list[str]:
+    """The sentences whose word boundaries must agree: every shown sentence up
+    to and including the chapter. A string cut one way in the first chapter
+    and another way in the second is the same disagreement as inside one
+    chapter, so a later chapter's run can send an earlier sentence back."""
+    from . import analyse
+
     shown = deck[deck["card_order"].notna()].sort_values("card_order").drop_duplicates("text")
     if chapter is not None:
-        shown = shown[shown["chapter"] == chapter]
+        shown = shown[shown["chapter"] <= chapter]
     # Only sentences on the current analysis: the older ones follow other rules.
-    texts = [t for t in shown["text"] if t in analyses and analyse.current(analyse.MAIN.name, t, analyse.RERUN.model)]
-    return texts, analyses
+    return [t for t in shown["text"] if t in analyses and analyse.current(analyse.MAIN.name, t, analyse.RERUN.model)]
 
 
 def main() -> None:

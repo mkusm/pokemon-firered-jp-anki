@@ -1,0 +1,1 @@
+{"text": "＊は　すでに　やけどを　おっている", "structure": [{"jp": "＊は", "en": "＊"}, {"jp": "すでに　やけどを　おっている", "en": "already has a burn"}], "patterns": [{"name": "〜ている", "span": "おっている", "words": ["おっている"], "explanation": "ている here shows a state that came about and still holds. やけどを　おっている = 'is carrying a burn'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

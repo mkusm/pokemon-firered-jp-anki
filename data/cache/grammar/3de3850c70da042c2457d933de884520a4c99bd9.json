@@ -1,0 +1,1 @@
+{"text": "そう　おもうだろう！", "structure": [{"jp": "そう", "en": "so"}, {"jp": "おもうだろう！", "en": "you think, don't you!"}], "patterns": [{"name": "〜だろう", "span": "おもうだろう", "words": ["おもう", "だろう"], "explanation": "だろう after a sentence asks the listener to agree, like 'right?'. おもうだろう = 'you think so, don't you!'"}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

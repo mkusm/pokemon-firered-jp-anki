@@ -1,0 +1,1 @@
+{"text": "しくじったか！", "structure": [{"jp": "しくじったか！", "en": "so I blew it!"}], "patterns": [{"name": "〜か (realizing)", "span": "しくじったか", "words": ["しくじった", "か"], "explanation": "か here is not a real question: the speaker is talking to himself as he realizes something. しくじったか = 'so I messed up, huh!'"}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

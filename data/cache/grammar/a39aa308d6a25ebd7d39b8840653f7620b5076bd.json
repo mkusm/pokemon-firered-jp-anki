@@ -1,0 +1,1 @@
+{"text": "かいがらの　いちぶ　らしい。", "structure": [{"jp": "かいがらの　いちぶ　らしい。", "en": "seems to be part of a seashell"}], "patterns": [{"name": "〜らしい", "span": "いちぶ　らしい", "words": ["いちぶ", "らしい"], "explanation": "らしい says the speaker is not sure but it appears so from what is known. いちぶ　らしい = 'it seems to be a part'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

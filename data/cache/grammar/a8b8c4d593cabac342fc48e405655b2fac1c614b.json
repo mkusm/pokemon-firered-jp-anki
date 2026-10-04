@@ -1,0 +1,1 @@
+{"text": "こんな　はずは　ない", "structure": [{"jp": "こんな　はずは　ない", "en": "it can't be like this"}], "patterns": [{"name": "〜はずはない", "span": "はずは　ない", "words": ["はず", "は", "ない"], "explanation": "はず means what you expect to be true; はずはない says there is no way something is true. こんな　はずは　ない = 'it can't be like this'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

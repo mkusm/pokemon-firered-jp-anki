@@ -1,0 +1,1 @@
+{"text": "きれいな　タンスだ！", "structure": [{"jp": "きれいな　タンスだ！", "en": "it's a lovely dresser!"}], "patterns": [{"name": "〜な (na-adjective)", "span": "きれいな　タンス", "words": ["きれい", "な", "タンス"], "explanation": "Describing words like きれい need な before the thing they describe. きれいな タンス = 'a lovely dresser'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

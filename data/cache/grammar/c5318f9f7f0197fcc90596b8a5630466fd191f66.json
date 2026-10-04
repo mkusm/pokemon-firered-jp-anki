@@ -1,0 +1,1 @@
+{"text": "やっぱり　ママチャリ　かしら？", "structure": [{"jp": "やっぱり　ママチャリ　かしら？", "en": "maybe a granny bike after all?"}], "patterns": [{"name": "〜かしら", "span": "ママチャリ　かしら", "words": ["ママチャリ", "かしら"], "explanation": "かしら at the end means 'I wonder', and is mostly used by women. ママチャリ かしら = 'a granny bike, I wonder?'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

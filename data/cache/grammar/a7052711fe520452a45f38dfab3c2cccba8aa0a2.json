@@ -1,0 +1,1 @@
+{"text": "サイクリングを　たのしもう！", "structure": [{"jp": "サイクリングを　たのしもう！", "en": "let's enjoy cycling!"}], "patterns": [{"name": "〜よう", "span": "たのしもう", "words": ["たのしもう"], "explanation": "Changing the end of a verb to the long おう sound means 'let's do it'. たのしもう = 'let's enjoy it'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

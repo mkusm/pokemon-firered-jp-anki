@@ -1,0 +1,1 @@
+{"text": "こんな　うわさが…　はるの　ポケモンコンテスト　そうごう　ゆうしょうは　マサラタウンの　ナナミちゃん！", "structure": [{"jp": "こんな　うわさが…", "en": "there's this rumor…"}, {"jp": "はるの　ポケモンコンテスト　そうごう　ゆうしょうは", "en": "the overall winner of the Spring Pokémon Contest is"}, {"jp": "マサラタウンの　ナナミちゃん！", "en": "Daisy from Pallet Town!"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

@@ -1,0 +1,1 @@
+{"text": "くやしいけど　まけた", "structure": [{"jp": "くやしいけど", "en": "it's frustrating, but"}, {"jp": "まけた", "en": "I lost"}], "patterns": [{"name": "〜けど", "span": "くやしいけど", "words": ["くやしい", "けど"], "explanation": "けど joins two parts with 'but'. くやしいけど まけた = 'it's frustrating, but I lost'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

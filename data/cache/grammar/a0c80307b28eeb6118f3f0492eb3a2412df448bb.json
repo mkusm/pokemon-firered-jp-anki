@@ -1,0 +1,1 @@
+{"text": "＊は　＊で　たいりょくを　かいふくした！", "structure": [{"jp": "＊は", "en": "＊"}, {"jp": "＊で", "en": "using ＊"}, {"jp": "たいりょくを　かいふくした！", "en": "restored its HP!"}], "patterns": [{"name": "〜で (how)", "span": "＊で", "words": ["で"], "explanation": "で after a thing says what was used to do the action. ＊で = 'using ＊'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

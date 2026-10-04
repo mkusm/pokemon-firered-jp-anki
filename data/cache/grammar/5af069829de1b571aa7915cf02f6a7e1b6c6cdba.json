@@ -1,0 +1,1 @@
+{"text": "うー　おこったぞ！", "structure": [{"jp": "うー", "en": "grr"}, {"jp": "おこったぞ！", "en": "now I'm mad!"}], "patterns": [{"name": "〜ぞ", "span": "おこったぞ", "words": ["おこった", "ぞ"], "explanation": "ぞ at the end is rough, forceful speech that pushes the statement at the listener. おこったぞ = 'now I'm mad!'"}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

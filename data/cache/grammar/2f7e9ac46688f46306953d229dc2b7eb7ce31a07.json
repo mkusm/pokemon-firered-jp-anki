@@ -1,0 +1,1 @@
+{"text": "キノコの　カサから　どくほうしを　まきちらす。", "structure": [{"jp": "キノコの　カサから", "en": "from its mushroom cap"}, {"jp": "どくほうしを　まきちらす。", "en": "it scatters poison spores"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

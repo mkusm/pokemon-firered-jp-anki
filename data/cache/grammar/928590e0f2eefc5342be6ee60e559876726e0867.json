@@ -1,0 +1,1 @@
+{"text": "ここでは　おりられない！", "structure": [{"jp": "ここでは", "en": "here"}, {"jp": "おりられない！", "en": "you can't get off!"}], "patterns": [{"name": "〜られる (potential)", "span": "おりられない", "words": ["おりられない"], "explanation": "られる on a verb turns 'do' into 'can do', and ない makes it 'cannot'. おりられない = 'can't get off'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

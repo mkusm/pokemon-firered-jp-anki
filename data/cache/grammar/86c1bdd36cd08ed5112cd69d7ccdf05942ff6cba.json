@@ -1,0 +1,1 @@
+{"text": "もう　しないよ！", "structure": [{"jp": "もう　しないよ！", "en": "I won't do it anymore!"}], "patterns": [{"name": "もう〜ない", "span": "もう　しない", "words": ["もう", "しない"], "explanation": "もう together with a 'not' verb means 'not anymore'. もう しない = 'I won't do it again'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}

@@ -1,0 +1,1 @@
+{"text": "こら　まてよ！", "structure": [{"jp": "こら", "en": "hey"}, {"jp": "まてよ！", "en": "wait!"}], "patterns": [{"name": "〜ろ (command)", "span": "まて", "words": ["まて"], "explanation": "Changing the last sound of a verb to え makes a blunt order. まつ 'wait' becomes まて. まてよ = 'wait, will you!'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 4}}
