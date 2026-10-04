@@ -167,6 +167,8 @@ SCRAP = re.compile(r"[ァ-ヶーぞッっ]+")
 SOUND = re.compile(r"onomatop|mimetic|sound effect|sound word|\bsfx\b|\(sound|sound of|laugh|screech|noise|babbl", re.I)
 
 
+NUMBER = re.compile(r"[0-9０-９]+")
+
 # A name that is not one names.py knows still gets a card when the card is
 # what explains the text: a Pokémon's cry (ぴかちゅ), a name drawn out in a
 # shout (やどらーん).
@@ -272,11 +274,15 @@ def occurrences(deck: pd.DataFrame, analyses: dict, known: set) -> pd.DataFrame:
             rows.append({
                 "row": r.Index, "text": r.text, "pos": run["first"], "key": name_key(run),
                 "proper": True, "known": run["name"] in known, "word": names.word(run, a["words"]),
-                "span": run["span"], "listed": bool(kind),
+                "span": run["span"], "listed": bool(kind), "name_line": bool(kind),
             })
         for pos, w in enumerate(a["words"]):
             if "＊" in w["surface"] or not w["surface"]:
                 continue
+            if kind and NUMBER.fullmatch(w["surface"]):
+                continue  # ２２ in ２２ばん　どうろ: the route's card is enough
+            if kind == "pokemon" and runs:
+                continue  # マダ and ツボミ in マダツボミ are wordplay, on the name's card as its literal meaning
             # The name's card covers the name-word, and a part that is only a
             # name (ズリ in ズリのみ). Its ordinary words keep their cards (み "berry").
             if pos in inside and (w.get("proper") or inside[pos]["first"] == inside[pos]["last"]):
@@ -287,6 +293,7 @@ def occurrences(deck: pd.DataFrame, analyses: dict, known: set) -> pd.DataFrame:
                 "proper": bool(w.get("proper")) and not (is_fragment(r.text, w) or ODD_NAME.search(_gloss(w))),
                 "known": skip, "word": w,
                 "span": None, "listed": bool(kind) and not runs and len(a["words"]) == 1,
+                "name_line": bool(kind),
             })
     return pd.DataFrame(rows)
 
@@ -397,6 +404,51 @@ def merge_senses(occ: pd.DataFrame, entries: dict, offline: bool = False) -> dic
 
 # --- 3–4. order and examples ------------------------------------------------------
 
+# What the corpus calls its groups of text, in words a player would use.
+PLACES = {
+    "new_game_intro": "Opening", "strings": "Menus and messages", "battle_message": "Battle messages",
+    "battle_main": "Battle messages", "pokedex_text_fr": "Pokédex entries", "pokedex_entries": "Pokédex: species",
+    "pokedex_rating": "Oak's Pokédex rating", "move_descriptions": "Move descriptions", "move_names": "Moves",
+    "items": "Item descriptions", "abilities": "Abilities", "help_system": "Help menu", "fame_checker": "Fame Checker",
+    "teachy_tv": "Teachy TV", "pokedude": "Teachy TV", "union_room_message": "Union Room", "union_room": "Union Room",
+    "union_room_chat": "Union Room", "quest_log": "Quest log", "cable_club": "Cable Club",
+    "flavor_text": "Things you look at", "event_scripts": "Common events", "poke_mart": "Poké Mart",
+    "trainer_class_names": "Trainer classes", "trainers": "Trainers", "day_care": "Day Care", "daycare": "Day Care",
+    "nature_names": "Natures", "field_moves": "Field moves", "ingame_trade": "In-game trades",
+    "ingame_trades": "In-game trades", "white_out": "Blacking out", "save": "Saving", "pc": "PC",
+    "pc_transfer": "PC", "route23": "Route 23", "safari_zone": "Safari Zone", "diploma": "Diploma",
+    "obtain_item": "Getting an item", "aide": "Oak's aides", "surf": "Surf", "itemfinder": "Itemfinder",
+    "seagallop": "Seagallop ferry", "berries": "Berries", "berry": "Berries", "trainer_card": "Trainer Card",
+    "learn_move": "Learning a move", "mon_markings": "Pokémon markings", "keyboard_text": "Naming screen",
+    "mystery_gift_menu": "Mystery Gift", "mystery_event_club": "Mystery Gift", "mystery_event_msg": "Mystery Gift",
+    "trade": "Trading", "sign_lady": "Pallet Town", "repel": "Repel", "sprite": "Menus and messages",
+    "species_names": "Pokémon", "region_map_entry_strings": "Town Map", "battle_interface": "Battle messages",
+    "battle_script_commands": "Battle messages", "battle_anim_status_effects": "Battle messages",
+    "field_player_avatar": "Menus and messages", "string_util": "Menus and messages", "item_menu": "Bag",
+    "link_rfu_2": "Wireless link", "dodrio_berry_picking": "Dodrio Berry-Picking", "competitive_brothers": "Seven Island",
+    "eon_ticket": "Mystery Gift", "description": "Menus and messages", "header": "Menus and messages",
+    "pokemon": "Menus and messages", "test": "Menus and messages",
+}
+# Map names as the decomp spells them, to words: Route1, SSAnne, ProfessorOaksLab.
+SPELLED = [(r"(?<=[a-z])(?=[A-Z0-9])|(?<=[A-Z])(?=[A-Z][a-z])|_", " "), (r"\bSS Anne\b", "S.S. Anne"),
+           (r"\bMt\b", "Mt."), (r"\bCo\b", "Co."), (r"\bPokemon\b", "Pokémon"),
+           (r"\b(Oak|Rival|Player|Copycat|Warden|Captain|Lorelei|Bruno|Agatha|Lance|Champion|Diglett|Mr Psychic)s\b", r"\1's"),
+           (r"\bMr\b", "Mr."), (r" +", " ")]
+
+
+def place_name(name: str) -> str:
+    name = re.sub(r"^llm: ", "", str(name))
+    if name in PLACES:
+        return PLACES[name]
+    if m := re.fullmatch(r"easy_chat_group_(\w+)", name):
+        return "Easy chat words: " + m.group(1).replace("_", " ")
+    lowercase = name == name.lower()  # a group the table lacks: its own name, tidied
+    for pattern, to in SPELLED:
+        name = re.sub(pattern, to, name)
+    name = name.strip()
+    return name.capitalize() if lowercase else name
+
+
 def location(r) -> str:
     # A map_order entry that is a single label (gControlsGuide_Text_Intro,
     # Route22_Text_LateRivalIntro) only moves the line in time: the place is
@@ -405,9 +457,7 @@ def location(r) -> str:
     # A line of a name list: the place where the thing is first met.
     if names.listed(r.group, r.label):
         place = re.sub(r"_Text_.*| \(.*", "", str(r.first_seen))
-    name = place if r.dialogue or names.listed(r.group, r.label) else f"UI: {r.group}"
-    name = re.sub(r"^llm: ", "", str(name))
-    return re.sub(r"(?<=[a-z])(?=[A-Z])|_", " ", name).replace("  ", " ").strip()
+    return place_name(place if r.dialogue or names.listed(r.group, r.label) else r.group)
 
 
 def english(r, analysis: dict) -> str:
@@ -446,6 +496,11 @@ def prepare(run_name: str = MAIN.name, offline_merge: bool = False) -> tuple[pd.
     is_name = occ["key"].map(lambda k: k[0] == "name")
     anchored = set(occ["key"][is_name & occ["exact"]])
     cardable = occ[in_story(occ) & (occ["exact"] | ~occ["key"].isin(anchored))]
+    # A bare name teaches its name. The words inside it (しっぽ in しっぽをふる) are
+    # better learned from a real sentence, so they count here only when no
+    # real sentence has them.
+    elsewhere = set(cardable["key"][~cardable["name_line"]])
+    cardable = cardable[~cardable["name_line"] | is_name[cardable.index] | ~cardable["key"].isin(elsewhere)]
     words = cardable.groupby("row")["key"].agg(lambda ks: frozenset(ks))
     words = words.reindex(deck.index).map(lambda x: x if isinstance(x, frozenset) else frozenset())
     pin = dict(zip(cardable["row"][cardable["listed"]], cardable["key"][cardable["listed"]]))
@@ -477,6 +532,9 @@ def build_cards(run_name: str = MAIN.name, offline_merge: bool = False) -> pd.Da
             placed = sorted((u for u in g if u["placed"]), key=lambda u: u["card_order"])
             if not placed:
                 continue
+            if key[0] != "name":
+                # A real sentence before a bare name the word happens to be part of.
+                placed = [u for u in placed if not u["name_line"]] or placed
             first = placed[0]
             if key[0] == "name":
                 first = next((u for u in placed if u["exact"]), first)

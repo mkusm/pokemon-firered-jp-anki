@@ -28,6 +28,7 @@ ORDER_OUT = DATA / "02_order" / "sentences.parquet"
 FALLBACK_OUT = DATA / "02_order" / "fallback.parquet"
 UNPLACED_OUT = DATA / "unplaced.csv"
 NEVER_OUT = DATA / "never_shown.csv"
+LATER_OUT = DATA / "moved_later.csv"  # lines moved to after the map that sets the flag they wait for
 # Text FireRed never shows is left out of the deck, and so of every model
 # stage: Ruby/Sapphire data no FireRed player meets (Hoenn Pokédex text,
 # unobtainable items, moves nothing knows), text the decomp marks unused, and
@@ -524,6 +525,24 @@ def main() -> None:
             placed[r.msg_id] = ("exclude", math.nan, UNTRANSLATED, 0, False)
             never.append((r.msg_id, UNTRANSLATED))
 
+    # A line a script shows only once a flag is set cannot come before the map
+    # that sets it: the Silph employees' thanks wait for Giovanni's defeat,
+    # the old man's "how is the Teachy TV?" for Brock's badge. It goes just
+    # after that map and keeps its own place as its location.
+    waits, set_in, later = dc.waits_for, dc.set_in, []
+    for r in msgs.itertuples(index=False):
+        b, rank, where, after, fallback = placed[r.msg_id]
+        if b != "dialogue" or r.label not in waits:
+            continue
+        ranks = [min((placer.fs.map_rank.get(m, math.inf) for m in set_in.get(c, ())), default=math.inf)
+                 for c in waits[r.label]]
+        possible = max((x for x in ranks if not math.isinf(x)), default=-math.inf)
+        if possible > rank:
+            placed[r.msg_id] = (b, possible + 0.5, where, after, fallback)
+            later.append((r.msg_id, r.group, r.label, mo.order[int(rank)], mo.order[int(possible)],
+                          ", ".join(sorted(waits[r.label]))))
+    pd.DataFrame(later, columns=["msg_id", "map", "label", "was_at", "now_after", "waits_for"]).to_csv(LATER_OUT, index=False)
+
     fine = fine_places(msgs, placed, placer, dc)
     for msg_id, (rank, after, tiebreak, sighting, kind_order) in fine.items():
         b, _, where, _, fallback = placed[msg_id]
@@ -568,6 +587,7 @@ def main() -> None:
     gone.assign(why=gone["msg_id"].map(why))[["msg_id", "group", "label", "why", "text"]].to_csv(NEVER_OUT, index=False)
 
     n_ex = (df["bucket"] == "exclude").sum()
+    print(f"{len(later)} messages wait for a flag set later than their map and were moved after it → {LATER_OUT.relative_to(ROOT)}")
     print(f"sentences kept {len(kept)}, excluded {n_ex} (of them never shown in the game: "
           f"{int(df['msg_id'].isin(why).sum())}, in {len(why)} messages → {NEVER_OUT.relative_to(ROOT)})")
     print(kept["bucket"].value_counts().to_string())

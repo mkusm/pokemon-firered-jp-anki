@@ -99,6 +99,15 @@ first gym badge. The docs call it "the first chapter".
   not rerun the chapter. An answer given with the names shown is the model's
   decision and is not asked again.
 
+**A line cannot come before the flag it waits for.**
+- The order stage reads the scripts' branches (`decomp.waits_for`) and moves a
+  dialogue line that is shown only once a flag is set to just after the map
+  whose script sets it (`decomp.set_in`); the list is `data/moved_later.csv`.
+  The line keeps its own map as its location.
+- Where the position inside a scene matters, list the scene's labels in
+  `map_order.yaml` instead, as for Professor Oak's lab and Pallet Town. Take
+  the scenes from the map's `scripts.inc`, not from memory.
+
 **Text FireRed never shows is not in the deck.**
 - The order stage leaves out Ruby/Sapphire data no FireRed player meets,
   text the decomp marks `@ Unused`, and text whose line in the English game is
@@ -128,6 +137,9 @@ first gym badge. The docs call it "the first chapter".
   line that says the name, or else at the name's line in the game's list,
   which stays where the thing is first met and is not spread like other menu
   text. A menu or battle line that mentions a name does not move its card.
+- The words inside a name get a card from a real sentence when one has them,
+  and from the bare name line only when nothing else does. The pieces of a
+  Pokémon's name and the number in a route's name make no card.
 - Any other name makes no card. There is no names deck: do not bring it back
   for naming-screen presets, one-off characters or pieces of names. A name
   that should have a card goes into `names_by_hand.yaml`. A cry or a shouted
@@ -140,6 +152,8 @@ first gym badge. The docs call it "the first chapter".
   its moves and ability; wild ones spread between the map's messages; a place
   before the map's dialogue; a type with the first Pokémon of that type. Change
   placement there, not in `cards` or `spread`.
+- A card's `Location` is a readable name from `cards.PLACES` and
+  `cards.place_name`. Add a new text group there; do not show raw group names.
 - A card's identity is its key (dictionary entry, sense, form). Changing how
   keys are made changes identities, and people lose review history on those
   cards. Measure it (see below) and say so.
@@ -152,7 +166,8 @@ first gym badge. The docs call it "the first chapter".
 - Everything on a card is written for that card's sentence. There is no shared
   index of patterns; one was tried and produced headings that contradicted the
   explanation under them.
-- A line of the species or item list is one name. The grammar pass skips it.
+- A bare name line and a line of one word get no grammar: nothing is asked
+  and nothing is shown (`grammar.has_grammar`).
 - The grammar pass must run after the analysis of the same sentences: its
   answers are matched to the analysis's word list. The order for a chapter is
   `analyse rerun N`, `splits --chapter N`, `names --chapter N`, `sense_pick`,
@@ -212,7 +227,7 @@ Update this when it changes.
   types, 132 places, 24 people, 2 for Team Rocket, 8 badges, 20 game terms, 15
   real-world names), found by `names.py` in every chapter with no model call.
   The 56 name lines this put in chapter 0 were re-analysed on Opus. The names
-  deck is gone: one deck, 11,251 cards. The note type has a `Note` field.
+  deck is gone: one deck, 11,212 cards. The note type has a `Note` field.
 - English names: the name check passes on every sentence the deck shows, in
   all chapters. 91 sentences were redone on Opus for it, most of them in
   chapters 1 to 9, so those chapters now have a few more Opus sentences.

@@ -184,14 +184,21 @@ def first_sentences(n_cards: int | None = None, n_sentences: int | None = None,
 
     deck, _, analyses, _ = prepare(offline_merge=True)
     placed = deck[deck["card_order"].notna()].sort_values("card_order").drop_duplicates("text")
-    # A line of the Pokémon or item list is one name: there is no grammar in it.
-    placed = placed[[not names.listed(g, lb) for g, lb in zip(placed["group"], placed["label"])]]
+    placed = placed[[has_grammar(t, g, lb, analyses) for t, g, lb in zip(placed["text"], placed["group"], placed["label"])]]
     if chapter is not None:
         placed = placed[placed["chapter"] == chapter]
     if n_cards:
         cut = pd.read_parquet(CARDS_OUT, columns=["order"])["order"].iloc[n_cards - 1]
         placed = placed[placed["card_order"] <= cut]
     return placed.head(n_sentences) if n_sentences else placed, analyses
+
+
+def has_grammar(text: str, group: str, label: str, analyses: dict) -> bool:
+    """Whether the sentence is one the grammar pass explains. Not a line of a
+    name list, which is one name, and not a line of one word (はい, a menu
+    word): there is nothing between words to explain, and the word's own card
+    already says how its form is built."""
+    return not names.listed(group, label) and len(analyses.get(text, {}).get("words", [])) > 1
 
 
 # --- reading the results -----------------------------------------------------------
@@ -227,6 +234,8 @@ def results(texts, analyses: dict) -> dict[str, dict]:
     or None if it is not in it)."""
     out = {}
     for t, g in cached(texts, analyses):
+        if len(analyses[t]["words"]) <= 1:
+            continue  # answered before one-word lines were left out: not shown either
         corrections.apply_grammar(t, g)
         for p in g["patterns"]:
             p.update(name=tidy(p["name"]), at=locate(t, p["span"]))

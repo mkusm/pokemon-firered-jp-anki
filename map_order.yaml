@@ -47,8 +47,38 @@ order:
   - PalletTown_PlayersHouse_1F_Text_MovieOnTVGirlOnBrickRoad
   - PalletTown_PlayersHouse_1F_Text_OopsWrongSide
   - PalletTown_PlayersHouse_1F
-  - PalletTown                # Oak stops you in the grass; sign_lady girl
-  - PalletTown_ProfessorOaksLab   # starter, first rival battle, later the Pokédex
+  - PalletTown                # the town's people and signs; sign_lady girl
+  - PalletTown_RivalsHouse_Text_HiBrothersAtLab   # Daisy, before you have met Oak
+  - PalletTown_Text_OakDontGoOut                  # Oak stops you in the grass
+  - PalletTown_Text_OakGrassUnsafeNeedMon
+  # Oak's lab, first visit: the starter scene line by line, as the script runs it
+  - PalletTown_ProfessorOaksLab_Text_RivalGrampsIsntAround
+  - PalletTown_ProfessorOaksLab_Text_RivalFedUpWithWaiting
+  - PalletTown_ProfessorOaksLab_Text_OakThreeMonsChooseOne
+  - PalletTown_ProfessorOaksLab_Text_RivalNoFairWhatAboutMe
+  - PalletTown_ProfessorOaksLab_Text_OakBePatientRival
+  - PalletTown_ProfessorOaksLab_Text_RivalGoChoosePlayer
+  - PalletTown_ProfessorOaksLab_Text_OakWhichOneWillYouChoose
+  - PalletTown_ProfessorOaksLab_Text_ThoseArePokeBalls
+  - PalletTown_ProfessorOaksLab_Text_OakChoosingBulbasaur
+  - PalletTown_ProfessorOaksLab_Text_OakChoosingCharmander
+  - PalletTown_ProfessorOaksLab_Text_OakChoosingSquirtle
+  - PalletTown_ProfessorOaksLab_Text_OakThisMonIsEnergetic
+  - PalletTown_ProfessorOaksLab_Text_ReceivedMonFromOak
+  - PalletTown_ProfessorOaksLab_Text_RivalIllTakeThisOneThen
+  - PalletTown_ProfessorOaksLab_Text_RivalReceivedMonFromOak
+  - PalletTown_ProfessorOaksLab_Text_RivalMyMonLooksTougher
+  - PalletTown_ProfessorOaksLab_Text_OakCanReachNextTownWithMon
+  - PalletTown_ProfessorOaksLab_Text_OakBattleMonForItToGrow
+  - PalletTown_ProfessorOaksLab_Text_OakHeyDontGoAwayYet
+  - PalletTown_ProfessorOaksLab_Text_RivalLetsCheckOutMons
+  - PalletTown_ProfessorOaksLab_Text_RivalDefeat
+  - PalletTown_ProfessorOaksLab_Text_RivalGoToughenMyMon
+  - PalletTown_ProfessorOaksLab   # the rest of the room: the aides, the desk, the PC, the signs
+  # Back in town with your first Pokémon: Mom heals it, Daisy has heard of the battle
+  - PalletTown_PlayersHouse_1F_Text_YouShouldTakeQuickRest
+  - PalletTown_PlayersHouse_1F_Text_LookingGreatTakeCare
+  - PalletTown_RivalsHouse_Text_HeardYouBattledRival
 
   # --- Route 1 → Viridian → parcel → Pokédex → Route 22 → Viridian Forest (P2)
   - Route1
@@ -59,6 +89,25 @@ order:
   - poke_mart
   - ViridianCity_House
   - ViridianCity_School
+  # Oak's lab again, with the parcel: the Pokédex scene, then Oak's lines once you have it
+  - PalletTown_ProfessorOaksLab_Text_OakHaveSomethingForMe
+  - PalletTown_ProfessorOaksLab_Text_DeliveredOaksParcel
+  - PalletTown_ProfessorOaksLab_Text_OakCustomBallIOrdered
+  - PalletTown_ProfessorOaksLab_Text_RivalGramps
+  - PalletTown_ProfessorOaksLab_Text_RivalWhatDidYouCallMeFor
+  - PalletTown_ProfessorOaksLab_Text_OakHaveRequestForYouTwo
+  - PalletTown_ProfessorOaksLab_Text_OakPokedexOnDesk
+  - PalletTown_ProfessorOaksLab_Text_OakTakeTheseWithYou
+  - PalletTown_ProfessorOaksLab_Text_ReceivedPokedexFromOak
+  - PalletTown_ProfessorOaksLab_Text_OakCatchMonsForDataTakeThese
+  - PalletTown_ProfessorOaksLab_Text_ReceivedFivePokeBalls
+  - PalletTown_ProfessorOaksLab_Text_OakExplainCatching
+  - PalletTown_ProfessorOaksLab_Text_OakCompleteMonGuideWasMyDream
+  - PalletTown_ProfessorOaksLab_Text_RivalLeaveItToMeGramps
+  - PalletTown_ProfessorOaksLab_Text_RivalTellSisNotToGiveYouMap
+  - PalletTown_ProfessorOaksLab_Text_OakMonsAroundWorldWait
+  - PalletTown_ProfessorOaksLab_Text_OakAddedNothingToPokedex
+  - PalletTown_ProfessorOaksLab_Text_OakComeSeeMeSometime
   - pokedex_rating            # Oak's ratings, from when he hands over the Pokédex
   - PalletTown_RivalsHouse    # Daisy, Town Map
   - pokedude                  # Teachy TV from the old man, after the Pokédex
@@ -346,7 +395,37 @@ order:
   - PokemonLeague_HallOfFame
 
   # --- Postgame: National Dex, Ruby, Sevii 4–7, Sapphire (P18–P19)
+  # Pallet Town after the Hall of Fame: Oak meets you at your door and asks for the Pokédex
+  - PalletTown_Text_OakLetMeSeePokedex
+  - PalletTown_Text_OakYouEnjoyingTraveling
+  - PalletTown_Text_CaughtXPuttingInHonestEffort
+  - PalletTown_Text_CaughtXImpressiveFollowMe
+  # Oak's lab after the Hall of Fame: what the aides say now, Daisy's grooming, then the National Dex scene
+  - PalletTown_ProfessorOaksLab_Text_OakIsGoingToHaveRadioShow
+  - PalletTown_ProfessorOaksLab_Text_DaisyWillGroomMons
+  - PalletTown_RivalsHouse_Text_LikeMeToGroomMon
+  - PalletTown_RivalsHouse_Text_GroomWhichOne
+  - PalletTown_RivalsHouse_Text_LookingNiceInNoTime
+  - PalletTown_RivalsHouse_Text_ThereYouGoAllDone
+  - PalletTown_RivalsHouse_Text_DontNeedAnyGrooming
+  - PalletTown_RivalsHouse_Text_CantGroomAnEgg
+  - PalletTown_RivalsHouse_Text_MayISeeFirstMon
+  - PalletTown_RivalsHouse_Text_CouldntLoveYouMore
+  - PalletTown_RivalsHouse_Text_ItLooksVeryHappy
+  - PalletTown_RivalsHouse_Text_ItsQuiteFriendly
+  - PalletTown_RivalsHouse_Text_ItsWarmingUpToYou
+  - PalletTown_RivalsHouse_Text_NotFamiliarWithYouYet
+  - PalletTown_RivalsHouse_Text_DontLikeWayItGlaresAtYou
+  - PalletTown_RivalsHouse_Text_WhyWouldMonHateYouSoMuch
+  - PalletTown_ProfessorOaksLab_Text_OakFavorToAskYouPlayer
+  - PalletTown_ProfessorOaksLab_Text_OakSightingsOfRareMons
+  - PalletTown_ProfessorOaksLab_Text_RivalJustLetMeHandleEverything
+  - PalletTown_ProfessorOaksLab_Text_OakNeedYourHelpTooNeedToSeePokedexes
+  - PalletTown_ProfessorOaksLab_Text_OakTookBothPokedexUnits
   - PalletTown_ProfessorOaksLab_Text_OakNowTheseUnitsCanRecordMoreData
+  - PalletTown_ProfessorOaksLab_Text_PlayersPokedexWasUpgraded
+  - PalletTown_ProfessorOaksLab_Text_OakMustReallyWorkToFillPokedex
+  - PalletTown_ProfessorOaksLab_Text_RivalIllCompleteThePokedex
   - MtEmber_RubyPath_B3F
   - FourIsland
   - FourIsland_PokemonCenter_1F

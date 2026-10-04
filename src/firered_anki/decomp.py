@@ -16,6 +16,8 @@ DECOMP = ROOT / "vendor" / "pokefirered"
 STARTERS = ["SPECIES_BULBASAUR", "SPECIES_CHARMANDER", "SPECIES_SQUIRTLE"]
 STARTER_MAP = "PalletTown_ProfessorOaksLab"
 STARTER_LEVEL = 5
+# FLAG_SYS_GAME_CLEAR and the scenes hall_of_fame.inc sets up count from here.
+HALL_OF_FAME = "PokemonLeague_HallOfFame"
 
 TRAINER_RE = re.compile(r"^\s*trainerbattle_\w+\s+(TRAINER_\w+)")
 ITEM_RES = [
@@ -197,6 +199,87 @@ class Decomp:
             if m := re.search(r"\.abilities = \{(\w+),\s*(\w+)\}", body):
                 out[sp] = [a for a in m.groups() if a != "ABILITY_NONE"]
         return out
+
+    # --- what a line waits for ----------------------------------------------
+    @cached_property
+    def _script_blocks(self) -> dict[str, tuple[str | None, list[str]]]:
+        """Script label → (the map its file belongs to, its commands)."""
+        blocks: dict[str, tuple[str | None, list[str]]] = {}
+        files = sorted((DECOMP / "data" / "maps").glob("*/scripts.inc"))
+        files += sorted((DECOMP / "data" / "scripts").glob("*.inc"))
+        for f in files:
+            where = f.parent.name if f.parent.parent.name == "maps" else HALL_OF_FAME if f.name == "hall_of_fame.inc" else None
+            cur = None
+            for line in f.read_text(encoding="utf-8", errors="ignore").splitlines():
+                if m := re.match(r"^(\w+)::?\s*(?:@.*)?$", line):
+                    cur = m.group(1)
+                    blocks[cur] = (where, [])
+                elif cur and line.strip() and not line.strip().startswith("@"):
+                    blocks[cur][1].append(line.strip())
+        return blocks
+
+    @cached_property
+    def set_in(self) -> dict[str, set[str]]:
+        """A condition (a flag, or "VAR_MAP_SCENE_X>=n") → the maps whose
+        scripts make it true."""
+        out: dict[str, set[str]] = defaultdict(set)
+        for where, cmds in self._script_blocks.values():
+            if not where:
+                continue
+            for c in cmds:
+                if m := re.match(r"setflag (FLAG_\w+)", c):
+                    out[m.group(1)].add(where)
+                if m := re.match(r"setvar (VAR_MAP_SCENE_\w+), (\d+)", c):
+                    for n in range(1, int(m.group(2)) + 1):
+                        out[f"{m.group(1)}>={n}"].add(where)
+        out["FLAG_SYS_GAME_CLEAR"].add(HALL_OF_FAME)  # set by the game's code, after the credits
+        return out
+
+    @cached_property
+    def waits_for(self) -> dict[str, frozenset]:
+        """Text label → the conditions that hold every time a script shows it:
+        Mom's "you and your Pokémon are looking great" waits for
+        FLAG_BEAT_RIVAL_IN_OAKS_LAB. Read from the scripts' own branches
+        (goto_if_set, call_if_unset, goto_if_eq on a scene variable, a map's
+        scene table), followed through gotos and calls."""
+        blocks = self._script_blocks
+        edges: dict[str, list] = defaultdict(list)   # target → [(source, conditions on the way)]
+        texts: dict[str, list] = defaultdict(list)   # block → [(text label, conditions at that line)]
+        for label, (_, cmds) in blocks.items():
+            here: set[str] = set()                   # true from this line of the block on
+            for c in cmds:
+                if m := re.match(r"(goto|call)_if_(set|unset) (FLAG_\w+), (\w+)", c):
+                    kind, state, flag, target = m.groups()
+                    edges[target].append((label, frozenset(here | ({flag} if state == "set" else set()))))
+                    if kind == "goto" and state == "unset":
+                        here.add(flag)               # carried on: the flag is set
+                elif m := re.match(r"(?:goto|call)_if_(?:eq|ge) (VAR_MAP_SCENE_\w+), (\d+), (\w+)", c):
+                    var, n, target = m.groups()
+                    edges[target].append((label, frozenset(here | ({f"{var}>={n}"} if int(n) else set()))))
+                elif m := re.match(r"map_script_2 (VAR_MAP_SCENE_\w+), (\d+), (\w+)", c):
+                    var, n, target = m.groups()
+                    edges[target].append((None, frozenset({f"{var}>={n}"} if int(n) else set())))
+                elif m := re.match(r"(?:goto|call)(?:_if_\w+)? .*?(\w+)$", c):
+                    edges[m.group(1)].append((label, frozenset(here)))
+                if re.match(r"msgbox|message|trainerbattle", c):
+                    for t in re.findall(r"\b(\w+_Text_\w+|g?Text_\w+)\b", c):
+                        texts[label].append((t, frozenset(here)))
+        # What holds on every way into a block. None: not worked out yet.
+        holds: dict[str, frozenset | None] = {b: (None if b in edges else frozenset()) for b in blocks}
+        for _ in range(40):
+            changed = False
+            for b in blocks:
+                ways = [(holds.get(src, frozenset()) if src else frozenset(), extra) for src, extra in edges.get(b, ())]
+                known = [base | extra for base, extra in ways if base is not None]
+                if known and (new := frozenset.intersection(*known)) != holds[b]:
+                    holds[b], changed = new, True
+            if not changed:
+                break
+        uses: dict[str, list] = defaultdict(list)
+        for b, shown in texts.items():
+            for t, here in shown:
+                uses[t].append((holds[b] or frozenset()) | here)
+        return {t: frozenset.intersection(*cs) for t, cs in uses.items() if frozenset.intersection(*cs)}
 
     @cached_property
     def species_types(self) -> dict[str, list[str]]:

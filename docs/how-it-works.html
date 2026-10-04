@@ -136,7 +136,7 @@
 <main>
 <header class="hero">
   <h1>How a line of FireRed becomes a flashcard</h1>
-  <p class="lede">The deck has 11,251 cards. Each one is a word, in one form, in the sentence where the Japanese game first uses it. This page follows the text from the cartridge's script to the card.</p>
+  <p class="lede">The deck has 11,212 cards. Each one is a word, in one form, in the sentence where the Japanese game first uses it. This page follows the text from the cartridge's script to the card.</p>
 
   <figure class="card">
     <div class="gba jp" lang="ja">グリーンは　すでに　ポケモンを　<mark>つかまえて</mark>　ずかんの　ページを　ふやしている　そうじゃ！</div>
@@ -181,7 +181,7 @@
         <rect x="30" y="96" width="110" height="52" rx="8"/><text x="85" y="118" text-anchor="middle" font-size="14" font-weight="700">extract</text><text class="sub" x="85" y="136" text-anchor="middle">16,166 sentences</text>
         <rect x="160" y="96" width="110" height="52" rx="8"/><text x="215" y="118" text-anchor="middle" font-size="14" font-weight="700">order</text><text class="sub" x="215" y="136" text-anchor="middle">12,780 kept</text>
         <rect x="290" y="96" width="110" height="52" rx="8"/><text x="345" y="118" text-anchor="middle" font-size="14" font-weight="700">tokenize</text><text class="sub" x="345" y="136" text-anchor="middle">11,163 unique</text>
-        <rect x="550" y="96" width="90" height="52" rx="8"/><text x="595" y="118" text-anchor="middle" font-size="14" font-weight="700">cards</text><text class="sub" x="595" y="136" text-anchor="middle">11,251</text>
+        <rect x="550" y="96" width="90" height="52" rx="8"/><text x="595" y="118" text-anchor="middle" font-size="14" font-weight="700">cards</text><text class="sub" x="595" y="136" text-anchor="middle">11,212</text>
         <rect x="660" y="96" width="90" height="52" rx="8"/><text x="705" y="118" text-anchor="middle" font-size="14" font-weight="700">build</text><text class="sub" x="705" y="136" text-anchor="middle">two .apkg</text>
       </g>
       <g class="llm">
@@ -241,6 +241,8 @@
   <p>Battle messages needed the most care. The game's battle scripts say which move effect prints which message, so each effect's script is followed through its jumps, shared sub-scripts and message tables. "<span class="jp" lang="ja">＊は　へんしんした</span>" then sits on Route 13, where Ditto appears, instead of in your first battle. Three corrections came out of checking the results: surfing and fishing encounters count only once you have Surf or a rod; a trainer counts from where their battle text is placed; and the engine's own table pads unused effects with the sleep script, which has to be ignored.</p>
 
   <h3>Rules for the rest, and a model for what no rule fits</h3>
+  <p>A map visited several times is split by scene where it matters. Pallet Town is the worked example. Professor Oak's lab is three scenes: the starter scene, line by line in the order its script runs it; the parcel and the Pokédex, after Viridian's Mart; and after the Hall of Fame, what the aides say then and the National Dex scene. Mom's "you and your Pokémon are looking great" comes after the first battle, because she only heals you once you have a Pokémon. Daisy's grooming and Oak meeting you at your door are in the postgame. The scenes come from the decomp's scripts, which say which flag each line waits for.</p>
+  <p>The same reading is done for every map by rule. The scripts branch on story flags (<code>goto_if_set FLAG_BEAT_RIVAL_IN_OAKS_LAB</code>) and on scene variables, so for each line the order stage works out what holds every time a script shows it, following gotos and calls, and finds the map whose script sets that flag. A line placed before that map is moved to just after it, and keeps its own place as its location. That moved 64 messages: the Silph Co. employees' thanks, said only after Giovanni is beaten; the gate guards' lines about the Tea; Celio's Ruby and Sapphire scenes, which are postgame; the old man in Viridian asking how the Teachy TV is helping, which he says after Brock. They are listed in <code>data/moved_later.csv</code>.</p>
   <p>What the decomp cannot say is handled by <code>first_seen.yaml</code>: rules per group of text, matching on the programmers' labels. PC screens go to the first Pokémon Center, badge names to their gym, each quest-log line to the place or action it recaps, the Help menu and error messages to the end.</p>
   <p>Some groups are too mixed for keywords. For those, the <code>classify</code> stage shows Claude each string's label, Japanese and English text and asks it to pick one of 56 story points. It placed 835 strings this way; the answers are saved in <code>first_seen_llm.yaml</code> where you can read and correct them.</p>
 
@@ -259,6 +261,7 @@
     <li><strong>A move</strong> belongs to the first Pokémon that knows it at the level you meet it, or to its TM. <strong>An ability</strong> belongs to the first Pokémon that has it, and <strong>a type</strong> to the first Pokémon of that type: <span class="jp" lang="ja">みず</span> "Water (Pokémon type)" comes with the rival's <span class="jp" lang="ja">ゼニガメ</span>.</li>
     <li><strong>A place</strong> comes before its map's dialogue: its name comes up as you walk in.</li>
     <li><strong>An item</strong> comes after the dialogue of the map where it can first be had.</li>
+    <li><strong>The words inside a name</strong> (<span class="jp" lang="ja">しっぽ</span> "tail" in <span class="jp" lang="ja">しっぽをふる</span>) are on the name's card as its literal meaning. A word of that kind gets its own card from a real sentence when one has it, and from the bare name only when nothing else does. The pieces of a Pokémon's name and the number in a route's name make no card.</li>
   </ul>
   <p>This runs twice: here on tokenizer guesses, as a preview, and again in the cards stage on the model's real word senses.</p>
 </section>
@@ -333,7 +336,7 @@
   <p>The explanations are asked for in plain words. The first version said "<span class="jp" lang="ja">で</span> marks the manner/basis", which told a learner nothing; it now says "<span class="jp" lang="ja">で</span> after a word tells you the way something is done". Three terms survive because nothing shorter exists: て-form, plain verb, verb stem.</p>
   <p>Everything on a card was written for that card's sentence. An index of patterns was tried and removed: it gave each pattern name one fixed heading, and a name that covers several uses then put a line on the card that contradicted the explanation under it (<span class="jp" lang="ja">から</span> "because" headed "the starting point: from"). The price is that one pattern can be spelled two ways on different cards.</p>
   <p>The pass runs on Opus, like the analysis it builds on. It first ran on Sonnet, which is given the translation but, where it would have read the sentence differently, glossed a phrase its own way: under the translation "using a registered Key Item", the breakdown of <span class="jp" lang="ja">とうろくして　つかいます</span> said "registering important things / it is used". Opus writes "registering a Key Item and / using it". In 30 breakdowns drawn at random after the change, all agree with their translations.</p>
-  <p>Answers are cached by sentence and word list, so a sentence the analysis later splits differently is asked again, and so is one answered by another model. The first chapter is 1,167 sentences, not counting 56 lines that are only a name and are skipped: 31 calls, eight at a time, five minutes. 789 of them have at least one pattern, 1,511 patterns in all.</p>
+  <p>Answers are cached by sentence and word list, so a sentence the analysis later splits differently is asked again, and so is one answered by another model. A line of one word (a menu word, <span class="jp" lang="ja">はい</span>) and a bare name are skipped: there is nothing between words to explain, and the word's own card already says how its form is built. That leaves 903 of the 1,171 sentences the first chapter shows: 31 calls when it was first run, eight at a time, five minutes. 721 of them have at least one pattern, 1,384 patterns in all.</p>
 </section>
 
 <section id="cards">
@@ -364,28 +367,28 @@
   <h2>The deck in numbers</h2>
   <div class="scroll"><table>
     <tr><th>Chapter ends with</th><th class="n">Cards</th></tr>
-    <tr><td>Brock</td><td class="n">2,510</td></tr>
-    <tr><td>Misty</td><td class="n">1,038</td></tr>
-    <tr><td>Lt. Surge</td><td class="n">1,051</td></tr>
-    <tr><td>Erika</td><td class="n">1,295</td></tr>
-    <tr><td>Koga</td><td class="n">957</td></tr>
-    <tr><td>Sabrina</td><td class="n">892</td></tr>
-    <tr><td>Blaine</td><td class="n">370</td></tr>
-    <tr><td>Giovanni</td><td class="n">758</td></tr>
-    <tr><td>The League</td><td class="n">313</td></tr>
-    <tr><td>Postgame</td><td class="n">1,108</td></tr>
-    <tr><td>End of deck: link play, Help menu, errors</td><td class="n">959</td></tr>
-    <tr><th>Main deck</th><th class="n">11,251</th></tr>
+    <tr><td>Brock</td><td class="n">2,402</td></tr>
+    <tr><td>Misty</td><td class="n">1,051</td></tr>
+    <tr><td>Lt. Surge</td><td class="n">1,047</td></tr>
+    <tr><td>Erika</td><td class="n">1,300</td></tr>
+    <tr><td>Koga</td><td class="n">961</td></tr>
+    <tr><td>Sabrina</td><td class="n">889</td></tr>
+    <tr><td>Blaine</td><td class="n">374</td></tr>
+    <tr><td>Giovanni</td><td class="n">755</td></tr>
+    <tr><td>The League</td><td class="n">312</td></tr>
+    <tr><td>Postgame</td><td class="n">1,148</td></tr>
+    <tr><td>End of deck: link play, Help menu, errors</td><td class="n">973</td></tr>
+    <tr><th>Main deck</th><th class="n">11,212</th></tr>
   </table></div>
   <p>The first chapter is the largest because the menus, the battle screen and most everyday vocabulary all appear before the first gym. The deck's first 168 cards are the opening sequence alone.</p>
   <ul>
-    <li>6,343 distinct dictionary forms across the 11,251 cards.</li>
-    <li>6,912 cards take their example from story dialogue; the rest from Pokédex entries, menus, move and item descriptions and battle messages.</li>
+    <li>6,310 distinct dictionary forms across the 11,212 cards.</li>
+    <li>6,682 cards take their example from story dialogue; the rest from Pokédex entries, menus, move and item descriptions and battle messages.</li>
     <li>110 cards are tagged <code>low-confidence</code>: the dictionary entry does not match the word, there is no entry and the model was unsure, or the word is a scrap of broken text. A doubt only about which listed sense fits a helper verb or an idiom no longer counts; those glosses were checked by hand. 10 are tagged <code>sense-guessed</code>.</li>
-    <li>2,454 of the first chapter's 2,510 cards carry a sentence breakdown, and 1,186 of them a grammar pattern for their word. The other 56 are names on their own line, with no sentence to break down.</li>
+    <li>2,227 cards carry a sentence breakdown, and 1,139 of them a grammar pattern for their word. All but a few are in the first chapter, whose other 214 cards sit on a bare name or a line of one word, with nothing to break down.</li>
     <li>210 are tagged <code>onomatopoeia</code>: JMdict marks the sense as a sound or mimetic word (<span class="jp" lang="ja">ドキドキ</span>, <span class="jp" lang="ja">キラキラ</span>), and the back says so.</li>
     <li>67 are tagged <code>fragment</code>: stammers, garbled speech and pieces of interrupted words (<span class="jp" lang="ja">こっ　こんなに</span>). They stay in the deck because the card is what explains them.</li>
-    <li>901 cards are names: 221 Pokémon, 148 items, 253 moves, 61 abilities, 17 types, 132 places, 24 people, Team Rocket and its grunts, 8 badges, 20 game terms and 15 real-world names, each tagged with its kind. 273 of them sit on a line of dialogue or other text that says the name; 628 on the name's own line, where the thing is first met. 17 carry a note.</li>
+    <li>901 cards are names: 221 Pokémon, 148 items, 253 moves, 61 abilities, 17 types, 132 places, 24 people, Team Rocket and its grunts, 8 badges, 20 game terms and 15 real-world names, each tagged with its kind. 302 of them sit on a line of dialogue or other text that says the name; 599 on the name's own line, where the thing is first met. 17 carry a note.</li>
   </ul>
   <p>The first full analysis took about five hours of calls including one usage-limit pause. A classify pass is about 21 calls. Redoing the first chapter on Opus took 10 minutes, and its grammar pass 5.</p>
 </section>
@@ -420,6 +423,7 @@
     <li>A map's dialogue is all placed at the map's first visit, so a name first said on a later visit (<span class="jp" lang="ja">１のしま</span> in Oak's lab) gets its card early.</li>
     <li>A Pokémon or an item is placed with the map where it is first met or found, at that map's first visit, even where it is in a part of the map reached only later.</li>
     <li>The dictionary is the 2020 JMdict snapshot shipped with jamdict.</li>
+    <li>The rule that moves a line to after the flag it waits for only knows flags set in a map's own script, plus the Hall of Fame. A flag set by shared scripts or by the game's code is not followed, and a line that depends on a choice (the girl player's lines, the starter you did not pick) is in the deck as if seen.</li>
     <li>The order follows one walkthrough. The game lets you do several stretches in a different order.</li>
   </ul>
   <div class="aside">This is an unofficial fan project for studying Japanese. Pokémon and the game's text belong to Nintendo, Creatures and GAME FREAK.</div>

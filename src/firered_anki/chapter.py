@@ -54,6 +54,7 @@ def left(n: int) -> dict[str, int]:
     shown = shown[shown["text"].map(lambda t: t in analyses)]
     current = [t for t in shown["text"] if analyse.current(analyse.MAIN.name, t, analyse.RERUN.model)]
     sentences = shown[[not names.listed(g, lb) for g, lb in zip(shown["group"], shown["label"])]]  # not a bare name
+    explained = sentences[sentences["text"].map(lambda t: len(analyses[t]["words"]) > 1)]["text"]
     gram = grammar.results(sentences["text"], analyses)
     decided = splits.load()
     return {
@@ -66,7 +67,7 @@ def left(n: int) -> dict[str, int]:
             w.get("_id_source") == "lookup" and not sense_pick.cache_file(t, w).exists()
             for t, a in analyses.items() for w in a["words"]),
         "particle uses to ask about": len(particles.unasked(shown["text"], analyses, known_words())),
-        "sentences with no grammar": sum(not grammar.answered(t, analyses) for t in sentences["text"]),
+        "sentences with no grammar": sum(not grammar.answered(t, analyses) for t in explained),
         "_shown": len(shown),
     }
 
