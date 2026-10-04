@@ -42,6 +42,7 @@ There is no test suite. The checks are in "Before you say it is done" below.
 | `splits` | one fixed word boundary per string cut two ways; redoes the sentences that differ (`--chapter N`) | yes |
 | `particles` | the particle uses the analysis left without a sense (`--chapter N`) | yes |
 | `grammar` | patterns and sentence breakdown (`run --chapter N`) | yes |
+| `chapter` | runs the model stages for one chapter in order until nothing is left (`chapter N`, `--dry-run`) | yes, through the stages it runs |
 | `corrections` | lays `corrections.yaml` over the cached answers | no |
 | `names` | finds the names (Pokémon, items, moves, abilities, places, people, badges, game terms) for their cards; gives the model the English names; redoes sentences that misname one (`--chapter N`, `--dry-run`) | yes, only for the sentences that fail |
 | `cards` | occurrences → cards | only for a sense-merge question not yet cached |
@@ -155,10 +156,12 @@ first gym badge. The docs call it "the first chapter".
 - The grammar pass must run after the analysis of the same sentences: its
   answers are matched to the analysis's word list. The order for a chapter is
   `analyse rerun N`, `splits --chapter N`, `names --chapter N`, `sense_pick`,
-  `particles --chapter N`, `grammar run --chapter N`, `cards`, `build`.
-- A change to card keys can change which lines the chapter shows, so after
-  `cards` check that nothing is left to ask: `particles --chapter N --dry-run`
-  and a grammar run should both find nothing to do.
+  `cards`, `particles --chapter N`, `grammar run --chapter N`, `cards`, `build`.
+- `chapter N` runs that series, and repeats it until nothing is left to ask:
+  a change to card keys can change which lines the chapter shows. Use it
+  instead of running the stages by hand. `chapter N --dry-run` only says what
+  is left, and calls nothing; run it after any change that could touch a
+  finished chapter.
 
 **No cost figures.** Do not put dollar amounts or token counts in the code's
 output, the docs or release notes. Sentence counts, call counts and minutes are
@@ -174,6 +177,8 @@ fine.
 - Use the repository's own git identity; do not override it.
 - `docs/ankiweb-description.md` is left untracked on purpose. `vendor/`, the
   `.apkg` files and everything in `data/` except the model caches are ignored.
+  `data/grounding_lookups.json` is a copy of dictionary lookups, rebuilt when
+  missing; delete it freely.
 - Cut a release only when asked. Attach `firered_jp.apkg`, built from the
   commit being tagged. Write the notes so they stand alone against v1.0.
 

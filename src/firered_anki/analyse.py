@@ -371,6 +371,8 @@ def rerun(chapter: int | None = None, workers: int = 20) -> None:
         df = df[df["text"].isin(set(shown["text"]))]
     rows = df[df["text"].map(lambda t: cache_path(MAIN.name, t).exists() and not current(MAIN.name, t, RERUN.model))]
     print(f"[rerun] {rows['text'].nunique()} sentences to redo on {RERUN.model}, {workers} calls at a time")
+    if rows.empty:
+        return
     while True:
         st = run(RERUN, rows, entries, workers=workers, redo=True)
         print(f"[rerun] round: {st['calls']} calls ({st['failed_calls']} failed)")

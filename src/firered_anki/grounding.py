@@ -22,31 +22,75 @@ Each word gains:
   _bad_sense      the LLM's sense number is not in the entry
 """
 
+import atexit
+import hashlib
+import inspect
+import json
+import os
 import re
-from functools import lru_cache
+from importlib import metadata
 
 from jamdict import Jamdict
 
+from .paths import DATA
 from .tokenize import GRAMMAR, MAX_SENSES, compact, hira
 
 _jam = None
 
+# The same 1,400 or so dictionary lookups are made every time the analyses are
+# read, so their answers are kept in a file. The dictionary is a fixed
+# snapshot: the file is good until the dictionary package or the shape of an
+# entry (compact) changes, and the stamp says which it was made with.
+LOOKUPS = DATA / "grounding_lookups.json"
+_seen: dict | None = None
+_new = False
 
-@lru_cache(maxsize=None)
-def _lookup(key: str) -> tuple:
-    global _jam
-    _jam = _jam or Jamdict()
-    res = _jam.lookup(key, strict_lookup=True, lookup_chars=False)
-    return tuple((int(e.idseq), compact(e)) for e in res.entries)
+
+def _stamp() -> str:
+    how = hashlib.sha1(inspect.getsource(compact).encode()).hexdigest()[:12]
+    return f"jamdict-data {metadata.version('jamdict-data')}, {MAX_SENSES} senses, entry {how}"
 
 
-@lru_cache(maxsize=None)
+def _lookups() -> dict:
+    global _seen
+    if _seen is None:
+        try:
+            _seen = json.loads(LOOKUPS.read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            _seen = {}
+        if _seen.get("stamp") != _stamp():
+            _seen = {"stamp": _stamp(), "forms": {}, "ids": {}}
+        atexit.register(_save)
+    return _seen
+
+
+def _save() -> None:
+    if _new:
+        tmp = LOOKUPS.with_suffix(f".{os.getpid()}.tmp")
+        tmp.write_text(json.dumps(_seen, ensure_ascii=False), encoding="utf-8")
+        tmp.replace(LOOKUPS)
+
+
+def _lookup(key: str) -> list:
+    """(entry ID, entry) for every entry with this written form."""
+    global _jam, _new
+    forms = _lookups()["forms"]
+    if key not in forms:
+        _jam = _jam or Jamdict()
+        res = _jam.lookup(key, strict_lookup=True, lookup_chars=False)
+        forms[key], _new = [[int(e.idseq), compact(e)] for e in res.entries], True
+    return forms[key]
+
+
 def full_entry(jid: int) -> dict | None:
     """The entry with this ID and all of its senses, or None if JMdict has no such ID."""
-    global _jam
-    _jam = _jam or Jamdict()
-    res = _jam.lookup(f"id#{jid}")
-    return compact(res.entries[0], max_senses=None) if res.entries else None
+    global _jam, _new
+    ids = _lookups()["ids"]
+    if str(jid) not in ids:
+        _jam = _jam or Jamdict()
+        res = _jam.lookup(f"id#{jid}")
+        ids[str(jid)], _new = (compact(res.entries[0], max_senses=None) if res.entries else None), True
+    return ids[str(jid)]
 
 
 def sense_glosses(jid, n: int | None, entries: dict) -> list[str]:

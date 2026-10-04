@@ -126,14 +126,17 @@ def ask(batch: pd.DataFrame, analyses: dict) -> tuple[int, dict]:
     return done, info
 
 
+def answered(text: str, analyses: dict) -> bool:
+    """Whether the cache has this model's answer for the sentence as it is now analysed."""
+    f = cache_file(text, analyses[text]["words"])
+    return f.exists() and json.loads(f.read_text())["_run"]["model"] == MODEL
+
+
 def run(rows: pd.DataFrame, analyses: dict) -> None:
     """Fill the cache for rows: deck rows in card order, one per sentence."""
     CACHE.mkdir(parents=True, exist_ok=True)
     rows = rows[rows["text"].map(lambda t: t in analyses)]
-
-    def done(t: str) -> bool:
-        f = cache_file(t, analyses[t]["words"])
-        return f.exists() and json.loads(f.read_text())["_run"]["model"] == MODEL
+    done = lambda t: answered(t, analyses)  # noqa: E731
 
     for _ in range(3):  # a call can fail or skip a sentence: go round again
         todo = rows[~rows["text"].map(done)]

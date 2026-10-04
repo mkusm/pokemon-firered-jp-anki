@@ -131,13 +131,17 @@ def pending(chapter: int | None) -> tuple[list[tuple], dict]:
     shown = deck[deck["card_order"].notna()].sort_values("card_order").drop_duplicates("text")
     if chapter is not None:
         shown = shown[shown["chapter"] == chapter]
-    known = known_words()
-    items = [(t, pos, w) for t in shown["text"] if t in analyses for pos, w in enumerate(analyses[t]["words"])
+    return unasked(shown["text"], analyses, known_words()), analyses
+
+
+def unasked(texts, analyses: dict, known: set) -> list[tuple]:
+    """The uses in these sentences that have not been asked about: (sentence, position, word)."""
+    items = [(t, pos, w) for t in texts if t in analyses for pos, w in enumerate(analyses[t]["words"])
              if wanted(w) and w["base"] not in known and w["surface"] not in known
              and candidates(hira(w["base"])) and not cache_file(t, pos, w).exists()]
     # One word at a time: the same table and the same judgement through a batch.
     items.sort(key=lambda x: hira(x[2]["base"]))
-    return items, analyses
+    return items
 
 
 def main() -> None:

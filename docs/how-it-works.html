@@ -400,7 +400,7 @@
     <tr><td>Fix how a string is cut into words, everywhere</td><td><code>splits.yaml</code></td><td><code>splits --chapter N</code></td></tr>
     <tr><td>Correct a translation, a gloss or a grammar explanation by hand</td><td><code>corrections.yaml</code></td><td><code>cards</code></td></tr>
     <tr><td>Correct one string the model placed</td><td><code>first_seen_llm.yaml</code></td><td><code>order</code></td></tr>
-    <tr><td>Redo a chapter on Opus</td><td>nothing</td><td><code>analyse rerun N</code>, then <code>splits --chapter N</code>, <code>sense_pick</code>, <code>particles --chapter N</code>, <code>grammar run --chapter N</code>, <code>cards</code></td></tr>
+    <tr><td>Redo a chapter on Opus, or bring one up to date after a change</td><td>nothing</td><td><code>chapter N</code>: it runs <code>analyse rerun</code>, <code>splits</code>, <code>names</code>, <code>sense_pick</code>, <code>cards</code>, <code>particles</code>, <code>grammar</code> and <code>cards</code> for that chapter, and repeats until nothing is left to ask. <code>chapter N --dry-run</code> only says what is left.</td></tr>
     <tr><td>Change the card layout</td><td><code>build.py</code></td><td><code>build</code></td></tr>
   </table></div>
   <p>A rule change that brings in text not seen before needs <code>tokenize</code> and <code>analyse full</code> as well; they only work on what is missing from the cache. Changing the analysis prompt does not re-run cached sentences by itself: delete the cache entries you want redone.</p>

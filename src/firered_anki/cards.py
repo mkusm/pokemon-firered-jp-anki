@@ -463,24 +463,33 @@ def build_cards(run_name: str = MAIN.name, offline_merge: bool = False) -> pd.Da
 
     msg_text = deck.sort_values(["line_no", "page", "sent"]).groupby("msg_id")["text"].agg(list)
 
+    rows = list(deck.itertuples())  # deck's index is 0…n-1: a row by its number
+
     def one_deck(sub: pd.DataFrame) -> pd.DataFrame:
+        # Plain lists and dicts from here on: filtering a DataFrame once per
+        # card took three quarters of the stage's time.
+        uses: dict[tuple, list[dict]] = {}
+        for u in sub.to_dict("records"):
+            u["placed"] = u["card_order"] == u["card_order"]  # not NaN
+            uses.setdefault(u["key"], []).append(u)
         out = []
-        for key, g in sub.groupby("key", sort=False):
-            placed = g[g["card_order"].notna()].sort_values("card_order")
-            if placed.empty:
+        for key, g in uses.items():
+            placed = sorted((u for u in g if u["placed"]), key=lambda u: u["card_order"])
+            if not placed:
                 continue
-            first = placed.iloc[0]
+            first = placed[0]
             if key[0] == "name":
-                exact = placed[placed["exact"]]
-                first = exact.iloc[0] if len(exact) else first
+                first = next((u for u in placed if u["exact"]), first)
             elif not first["dialogue"]:
-                same_ch = placed[placed["dialogue"] & (placed["chapter"] == first["chapter"])]
-                if len(same_ch):
-                    first = same_ch.iloc[0]
-            later = g[(g["text"] != first["text"])].drop_duplicates("text")
+                first = next((u for u in placed if u["dialogue"] and u["chapter"] == first["chapter"]), first)
+            later, seen = [], {first["text"]}
+            for u in g:
+                if u["text"] not in seen:
+                    seen.add(u["text"])
+                    later.append(u)
             # A use filed here by its form alone may be another sense: show it last.
-            later = later.sort_values(["own", "dialogue", "card_order"], ascending=[False, False, True])
-            w, r = first["word"], deck.loc[first["row"]]
+            later.sort(key=lambda u: (not u["own"], not u["dialogue"], not u["placed"], u["card_order"] if u["placed"] else 0))
+            w, r = first["word"], rows[first["row"]]
             a = analyses[first["text"]]
             # A name-list line whose card is the ordinary word (たいあたり): the
             # card still says what the English game calls it.
@@ -488,9 +497,10 @@ def build_cards(run_name: str = MAIN.name, offline_merge: bool = False) -> pd.Da
                 w = {**w, "in_context": f"{eng} ({names.KIND[names.kind_of(r.group, r.label)]})"}
             ctx = " ".join(f"<u>{t}</u>" if t == first["text"] else t for t in msg_text[first["msg_id"]])
             extras = [
-                f"{highlight(t, analyses[t]['words'], n, at)} — {english(deck.loc[row], analyses[t])}"
-                + (f" ({ww['surface']}: {ww['modifiers']})" if ww.get("modifiers") else "")
-                for t, ww, n, at, row in later[["text", "word", "pos", "span", "row"]][:MAX_EXTRA].itertuples(index=False)
+                f"{highlight(u['text'], analyses[u['text']]['words'], u['pos'], u['span'])}"
+                f" — {english(rows[u['row']], analyses[u['text']])}"
+                + (f" ({u['word']['surface']}: {u['word']['modifiers']})" if u["word"].get("modifiers") else "")
+                for u in later[:MAX_EXTRA]
             ]
             e = entries.get(str(w.get("jmdict_id")), {}) if w.get("jmdict_id") else {}
             g = gram.get(first["text"])

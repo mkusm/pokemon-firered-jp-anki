@@ -199,6 +199,14 @@ uv run python -m firered_anki.particles --chapter 0     # particle uses the anal
 uv run python -m firered_anki.grammar run --chapter 0   # grammar patterns and sentence breakdowns
 ```
 
+For a whole chapter there is one command that runs the last six in the right
+order and repeats until nothing is left to ask:
+
+```sh
+uv run python -m firered_anki.chapter 1 --dry-run   # what the chapter still needs
+uv run python -m firered_anki.chapter 1             # do it, then build
+```
+
 All of them resume from the cache, and `analyse` waits out a usage limit and
 carries on. For scale: the first full run was 12,747 sentences in 322 calls
 (Sonnet, low effort, 40 sentences a call), about five hours with one usage-limit
