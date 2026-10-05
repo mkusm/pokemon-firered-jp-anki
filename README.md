@@ -28,7 +28,8 @@ One package, `firered_jp.apkg`, with 11,084 cards in three decks:
 ### The cards
 
 <p align="center">
-  <img src="docs/card.png" width="440" alt="The back of a card. The sentence おとこのこが　４にん　せんろのうえを　あるいてる… is on top with あるいてる highlighted; below it the dictionary form 歩く, the meaning 'are walking', how the form is built, two grammar patterns, the sentence in kanji and English, a note that the line describes the film Stand by Me, and the sentence breakdown.">
+  <img src="docs/card-back.png" width="48%" alt="The back of a card. The sentence その　ポケモン　という　いきものを… is on top with けんきゅう highlighted and its romaji under it; below, the dictionary form 研究 with its reading, the meaning 'research', the dictionary sense, the sentence in kanji and in English, and four closed sections: Sentence breakdown, More examples, Whole message, Dictionary.">
+  <img src="docs/card-back-open.png" width="48%" alt="The same card with two sections opened. The sentence breakdown gives each phrase with its meaning, then three grammar patterns explained in plain words: 〜たり, 〜という and 〜というわけだ. More examples shows two later sentences that use けんきゅう.">
 </p>
 
 - **Front:** the sentence as the game shows it, in kana, with one word
