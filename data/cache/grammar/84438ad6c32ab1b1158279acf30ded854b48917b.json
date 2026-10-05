@@ -1,0 +1,1 @@
+{"text": "コインが　ありません　ゲームを　しゅうりょうします", "structure": [{"jp": "コインが　ありません", "en": "there are no coins"}, {"jp": "ゲームを　しゅうりょうします", "en": "the game will end"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

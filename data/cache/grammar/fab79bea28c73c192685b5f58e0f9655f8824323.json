@@ -1,0 +1,1 @@
+{"text": "この　はしは　ひと　よんで　ゴールデンボール　ブリッジ！", "structure": [{"jp": "この　はしは", "en": "this bridge"}, {"jp": "ひと　よんで", "en": "people call it"}, {"jp": "ゴールデンボール　ブリッジ！", "en": "Nugget Bridge!"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

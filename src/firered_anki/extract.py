@@ -124,6 +124,20 @@ def load_corpus() -> pd.DataFrame:
     return df
 
 
+# One label the dump has in two rows. The party menu's confirm button is
+# けっ in the slot where the English game has "OK", and てい in the next,
+# which is an empty string there. party_menu.c draws the one label, so the
+# two rows are joined: けってい.
+JOINED = {"frlg.common.strings.gText_PartyMenu_OK": ["frlg.common.strings.gText_Empty"]}
+
+
+def join_rows(df: pd.DataFrame) -> pd.DataFrame:
+    raw = df.set_index("msg_id")["raw"]
+    for head, rest in JOINED.items():
+        df.loc[df["msg_id"] == head, "raw"] = raw[head] + "".join(raw[m] for m in rest)
+    return df[~df["msg_id"].isin({m for rest in JOINED.values() for m in rest})]
+
+
 def hand_lines() -> pd.DataFrame:
     """hand_lines.yaml as corpus rows: namespace `hand`, no line number."""
     listed = yaml.safe_load(HAND_LINES.read_text(encoding="utf-8")) if HAND_LINES.exists() else {}
@@ -133,7 +147,7 @@ def hand_lines() -> pd.DataFrame:
 
 
 def main() -> None:
-    df = load_corpus()
+    df = join_rows(load_corpus())
     n_all = len(df)
     df = df[~df["raw"].isin(["", "[NULL]"])]
     n_text = len(df)

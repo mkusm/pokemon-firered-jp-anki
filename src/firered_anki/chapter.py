@@ -4,7 +4,7 @@ After anything changes in a chapter (a prompt, a rule, the order of lines), a
 fixed series of stages has to run before the chapter is consistent again:
 
   1. analyse rerun N       sentences the chapter shows that are not on the current analysis
-  2. splits --chapter N    strings now cut two ways
+  2. splits --chapter N    strings now cut two ways, or at a space inside a word
   3. names --chapter N     sentences that call a name something else
   4. sense_pick            dictionary links found by lookup
   5. cards                 the steps above change words, and so which sentences are shown
@@ -88,10 +88,10 @@ def _left(n: int, deck, analyses: dict, known: set) -> dict[str, int]:
     mine = set(first_in[first_in["chapter"] == n]["text"])
     explained = sentences[sentences["text"].map(lambda t: t in mine and len(analyses[t]["words"]) > 1)]["text"]
     gram = grammar.results(sentences["text"], analyses)
-    decided, bounded = splits.load(), splits.in_scope(deck, analyses, n)
+    bounded = splits.in_scope(deck, analyses, n)
     return {
         "sentences to re-analyse": len(shown) - len(current),
-        "strings cut two ways, not decided": sum(s not in decided for s in splits.conflicts(bounded, analyses)),
+        "strings cut two ways or at a space inside, not decided": len(splits.undecided(bounded, analyses)),
         "sentences that cut a fixed string differently": len(splits.violations(bounded, analyses)),
         "translations that misname something": sum(bool(names.misses(t, analyses[t])) for t in sentences["text"]),
         "breakdowns that misname something": sum(bool(names.grammar_misses(t, analyses[t], g)) for t, g in gram.items()),

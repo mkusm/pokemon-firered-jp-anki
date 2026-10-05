@@ -1,0 +1,1 @@
+{"text": "あたま　くるぜ", "structure": [{"jp": "あたま　くるぜ", "en": "this ticks me off!"}], "patterns": [{"name": "〜ぜ", "span": "くるぜ", "words": ["あたまくる", "ぜ"], "explanation": "ぜ at the end is a rough, tough-guy way of stressing what you say. あたま　くるぜ = 'this really ticks me off!'"}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

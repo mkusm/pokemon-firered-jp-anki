@@ -3,8 +3,10 @@
 fugashi + UniDic splits the sentence (a hint: kana-only text makes it guess).
 JMdict (jamdict) then gives every entry each word could be. Kana-only text is
 often split wrong (てんそう → て+ん+そう), so besides single tokens we look up
-runs of up to 4 adjacent tokens. Runs never cross the game's spaces, which mark
-phrase boundaries.
+runs of up to 4 adjacent tokens. The game's spaces mark phrase boundaries, but
+it also puts one inside some words (とおり　すがり, しのび　こむ), so a run may
+cross one space, never two. Such a run has to be four characters or longer:
+the shorter ones that match an entry do so by chance (に　お is not 鳰).
 
 Particles, sentence endings and the copula get candidates too: the entries
 written in kana for that reading, with all their senses. A particle's jobs
@@ -13,6 +15,8 @@ say which one it is doing if it is shown them. Runs of such words are looked
 up as well, so that かな and のに are offered as the single words they are.
 
 Writes one row per unique sentence, plus a table of the JMdict entries used.
+A row also lists the strings that have an entry only when read across a space
+(`across`): the splits stage asks about the ones the analysis cuts there.
 Run: uv run python -m firered_anki.tokenize
 """
 
@@ -31,6 +35,7 @@ TOKENIZE_OUT = DATA / "03_tokenize" / "sentences.parquet"
 ENTRIES_OUT = DATA / "03_tokenize" / "entries.json"
 
 MAX_RUN = 4          # tokens per looked-up run
+MIN_ACROSS = 4       # characters in a run that crosses a space
 MAX_PER_KEY = 6      # entries kept per lookup key, common words first
 MAX_SENSES = 5
 MAX_GLOSSES = 3
@@ -103,7 +108,7 @@ def kana_entries(reading: str) -> tuple[int, ...]:
     return tuple(ids)
 
 
-def tokenize(text: str) -> tuple[list[dict], dict[str, list[int]]]:
+def tokenize(text: str) -> tuple[list[dict], dict[str, list[int]], list[str]]:
     words = list(_tagger(text))
     tokens = [
         {
@@ -124,6 +129,18 @@ def tokenize(text: str) -> tuple[list[dict], dict[str, list[int]]]:
     def add_grammar(key: str) -> None:
         if "＊" not in key and (ids := kana_entries(hira(key))):
             cands[key] = list(dict.fromkeys(cands.get(key, []) + list(ids)))
+
+    def add_run(run: list[dict]) -> bool:
+        """Look the run up, as written and with its last token in dictionary
+        form. → whether either is an entry."""
+        if all(x["p"] in NO_LOOKUP for x in run) or any("＊" in x["s"] for x in run):
+            return False
+        keys = ["".join(x["s"] for x in run)]
+        if run[-1]["p"] in INFLECTS and run[-1]["lr"]:
+            keys.append("".join(x["s"] for x in run[:-1]) + run[-1]["lr"])
+        for key in keys:
+            add(key)
+        return any(key in cands for key in keys)
 
     # Chunks between the game's spaces.
     chunks, cur = [], []
@@ -147,13 +164,18 @@ def tokenize(text: str) -> tuple[list[dict], dict[str, list[int]]]:
                 if all(x["p"] in GRAMMAR_POS for x in chunk[i:j]):
                     add_grammar("".join(x["s"] for x in chunk[i:j]))
             for j in range(i + 2, min(i + MAX_RUN, len(chunk)) + 1):
-                run = chunk[i:j]
-                if all(x["p"] in NO_LOOKUP for x in run) or any("＊" in x["s"] for x in run):
-                    continue
-                add("".join(x["s"] for x in run))
-                if run[-1]["p"] in INFLECTS and run[-1]["lr"]:
-                    add("".join(x["s"] for x in run[:-1]) + run[-1]["lr"])
-    return tokens, cands
+                add_run(chunk[i:j])
+
+    # A word written with a space inside: the end of one chunk and the start
+    # of the next, looked up as one string.
+    across = []
+    for a, b in zip(chunks, chunks[1:]):
+        for m in range(1, min(MAX_RUN - 1, len(a)) + 1):
+            for n in range(1, min(MAX_RUN - m, len(b)) + 1):
+                run = a[-m:] + b[:n]
+                if sum(len(x["s"]) for x in run) >= MIN_ACROSS and add_run(run):
+                    across.append("".join(x["s"] for x in run))
+    return tokens, cands, across
 
 
 def main() -> None:
@@ -161,9 +183,10 @@ def main() -> None:
     texts = df.drop_duplicates("text")["text"].tolist()
     rows = []
     for n, text in enumerate(texts, 1):
-        tokens, cands = tokenize(text)
+        tokens, cands, across = tokenize(text)
         rows.append({"text": text, "tokens": json.dumps(tokens, ensure_ascii=False),
-                     "candidates": json.dumps(cands, ensure_ascii=False)})
+                     "candidates": json.dumps(cands, ensure_ascii=False),
+                     "across": json.dumps(across, ensure_ascii=False)})
         if n % 2000 == 0:
             print(f"  {n}/{len(texts)}")
     out = pd.DataFrame(rows)

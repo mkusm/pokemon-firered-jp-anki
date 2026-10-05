@@ -35,7 +35,7 @@ from collections import Counter, defaultdict
 
 import pandas as pd
 
-from . import claude_cli, corrections, grammar, models, names, notes
+from . import claude_cli, corrections, grammar, kanji_line, models, names, notes
 from .analyse import MAIN, load, results
 from .grounding import sense_glosses
 from .map_order import MapOrder
@@ -228,7 +228,12 @@ def literal(w: dict, sense: str) -> str:
 def dict_sense(w: dict, entry: dict) -> str:
     """The JMdict definition of the sense chosen for this sentence. It tells
     apart cards whose short gloss is the same: 危ない "dangerous" (sense 1) and
-    "close (call); narrow (escape)" (sense 4)."""
+    "close (call); narrow (escape)" (sense 4). Nothing for a guessed sense:
+    the sense check found none of the senses it was shown to fit (〜てあげる is
+    あげる 24, and it saw five), so the one guessed from them is a wrong line
+    ("to do up (one's hair)")."""
+    if w.get("_sense_guessed"):
+        return ""
     return "; ".join(sense_glosses(w.get("jmdict_id"), w.get("sense"), {str(w.get("jmdict_id")): entry}))
 
 
@@ -551,6 +556,7 @@ def build_cards(run_name: str = MAIN.name, offline_merge: bool = False) -> pd.Da
     deck, entries, analyses, occ = prepare(run_name, offline_merge)
     gram = grammar.results(deck["text"].unique(), analyses)
     noted = notes.results(deck["text"].unique())
+    readings = kanji_line.readings_from(analyses)
     corrections.check()  # every hand correction found what it corrects
 
     occ = occ.join(deck[["card_order", "dialogue", "chapter", "msg_id", "text", "speaker", "deck", "gender"]]
@@ -637,7 +643,8 @@ def build_cards(run_name: str = MAIN.name, offline_merge: bool = False) -> pd.Da
                 "Grammar": "".join(map(grammar.pattern_html, grammar.word_patterns(
                     g, first["text"], a["words"], first["pos"]))) if g else "",
                 "Breakdown": grammar.breakdown_html(g) if g else "",
-                "SentenceKanji": a["kanji"], "SentenceEnglish": english(r, a),
+                "SentenceKanji": kanji_line.spaced(first["text"], a["kanji"], readings),
+                "SentenceEnglish": english(r, a),
                 "ExtraExamples": "<br>".join(extras), "Context": ctx,
                 "Location": location(r), "MessageId": r.msg_id,
                 "Speaker": first["speaker"] or "",

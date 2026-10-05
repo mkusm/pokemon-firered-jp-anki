@@ -6,8 +6,15 @@ in some sentences and as several in others (ポケモンセンター, ように,
 たいせつな), and each rerun of a chapter splits a fifth of it differently.
 A prose rule cannot fix that: the fix is a list of decisions.
 
+The game also writes some words with a space inside (とおり　すがり,
+いき　のこる). The analysis cut most of them at the space every time, so they
+were never "split two ways" and nothing caught the two half-cards. A string
+that the dictionary has as one entry, and that the deck cuts at a space
+inside it, is asked about in the same way.
+
 This stage
-  1. finds the strings that are split two ways,
+  1. finds the strings that are split two ways, and the dictionary entries
+     cut at a space,
   2. asks Claude about each, twice and independently: always one word, always
      split (and how), or "depends on the meaning" (とは, でも). A string is
      only fixed when both answers agree; otherwise it is left to the rule,
@@ -125,6 +132,44 @@ def conflicts(texts, analyses: dict) -> dict[str, dict]:
     return found
 
 
+# Not asked about when cut at a space: a phrase with a particle in it is its
+# words together (なみだを　ながす), which the analysis's rule already splits.
+PARTICLES = {"が", "を", "は", "に", "で", "と", "も", "の", "へ", "から", "まで", "より", "や", "か", "って"}
+
+
+def spaced(texts, analyses: dict) -> dict[str, dict]:
+    """string → {whole: [], split: [(sentence, words)]}: dictionary entries the
+    game writes with a space inside, where the analysis cuts at that space."""
+    import pandas as pd
+
+    from .tokenize import TOKENIZE_OUT
+
+    across = pd.read_parquet(TOKENIZE_OUT, columns=["text", "across"]).set_index("text")["across"]
+    named = names.load()
+    found: dict[str, dict] = {}
+    for t in texts:
+        listed = set(json.loads(across.get(t, "[]")))
+        if not listed:
+            continue
+        words, at = analyses[t]["words"], layout(t, analyses[t]["words"])
+        for n in (2, 3, 4):
+            for i in range(len(words) - n + 1):
+                run = at[i:i + n]
+                if None in run or any(run[k][1] != run[k + 1][0] for k in range(n - 1)):
+                    continue
+                s = "".join(w["surface"].replace("　", "") for w in words[i:i + n])
+                if s in listed and names.bare(s) not in named and not any(
+                        w["surface"] in PARTICLES for w in words[i:i + n]):
+                    found.setdefault(s, {"whole": [], "split": []})["split"].append((t, words[i:i + n]))
+    return found
+
+
+def undecided(texts, analyses: dict) -> dict[str, dict]:
+    """Every string that needs a decision and has none."""
+    known = load()
+    return {s: c for s, c in {**spaced(texts, analyses), **conflicts(texts, analyses)}.items() if s not in known}
+
+
 # --- 2. decisions ----------------------------------------------------------------
 
 def _entries(string: str) -> str:
@@ -163,7 +208,7 @@ def decide(found: dict[str, dict]) -> dict[str, dict]:
         got = [{a["n"]: a for a in ans.get("strings", [])} for ans in (first, second)]
         for n, s in enumerate(b):
             a, c = got[0].get(n), got[1].get(n)
-            ex = (found[s]["whole"] or [(None,)])[0][0]
+            ex = (found[s]["whole"] or found[s]["split"])[0][0]
             ok = lambda x: x and (x["decision"] != "split" or "".join(x["pieces"]) == s)
             if not ok(a) or not ok(c):
                 continue  # no usable answer: ask again next time
@@ -256,10 +301,10 @@ def main() -> None:
     # Strings are checked up to and including a chapter: of several, the last.
     chapter = max(chapters(args[args.index("--chapter") + 1])) if "--chapter" in args else None
     texts, analyses = scope(chapter)
-    found = conflicts(texts, analyses)
-    known = dict(load())
-    new = {s: c for s, c in found.items() if s not in known}
-    print(f"[splits] {len(texts)} sentences; {len(found)} strings cut two ways, {len(new)} not decided yet")
+    found, known = conflicts(texts, analyses), dict(load())
+    new = undecided(texts, analyses)
+    print(f"[splits] {len(texts)} sentences; {len(found)} strings cut two ways, "
+          f"{len(spaced(texts, analyses))} dictionary entries cut at a space, {len(new)} not decided yet")
     if "--dry-run" in args:
         return
     if new:

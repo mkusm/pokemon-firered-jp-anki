@@ -21,7 +21,7 @@ How it works, in detail: [`docs/how-it-works.html`](docs/how-it-works.html)
 
 | | |
 |---|---|
-| `firered_jp.apkg` | 11,078 cards in three decks: the story (9,533, in story order), the Help menu (940) and link play (605) |
+| `firered_jp.apkg` | 11,084 cards in three decks: the story (9,537, in story order), the Help menu (941) and link play (606) |
 
 It is attached to the [latest release](https://github.com/mkusm/pokemon-firered-jp-anki/releases/latest).
 
@@ -124,7 +124,7 @@ All you need is [Anki](https://apps.ankiweb.net/), on desktop or on your phone.
 3. **Pick a pace.** The cards follow the game, so the natural way to use the
    deck is to study a stretch and then play it. For scale: the opening sequence
    is the first 172 cards, everything up to the first gym about 2,400, the whole
-   story 9,533. At 20 new cards a day that is about four months to Brock.
+   story 9,537. At 20 new cards a day that is about four months to Brock.
 4. **Read the card.** The front is the line as the game shows it, in kana, with
    one word highlighted: read the sentence and recall that word. The back gives
    the reading in romaji, the dictionary form, the meaning in this sentence,
@@ -251,7 +251,7 @@ uv run python -m firered_anki.analyse full      # analyse uncached sentences
 uv run python -m firered_anki.analyse escalate  # redo flagged ones on Opus
 uv run python -m firered_anki.analyse rerun 0    # redo a chapter on Opus with the current prompt (no number: all)
 uv run python -m firered_anki.sense_pick        # check entries found by lookup, choose their sense
-uv run python -m firered_anki.splits --chapter 0        # settle strings cut two ways, redo the sentences that differ
+uv run python -m firered_anki.splits --chapter 0        # settle strings cut two ways or at a space inside a word, redo the sentences that differ
 uv run python -m firered_anki.names --chapter 0         # redo sentences whose translation misnames a Pokémon, item, move, ability, place, person or badge
 uv run python -m firered_anki.particles --chapter 0     # particle uses the analysis left without a sense
 uv run python -m firered_anki.grammar run --chapter 0   # grammar patterns and sentence breakdowns
@@ -315,6 +315,7 @@ src/firered_anki/
   spans.py        where a word is in its sentence
   grammar.py      LLM pass for grammar patterns and sentence breakdowns
   cards.py        occurrences → cards, sense merge, examples
+  kanji_line.py   the game's spaces put back into a card's kanji line
   romaji.py       kana → Hepburn
   build.py        cards → .apkg
 data/cache/       the LLM's answers (tracked)
@@ -325,7 +326,7 @@ vendor/           upstream clones (ignored)
 ## Known limits
 
 - Two models made the deck. The story and the Help deck are Opus's work:
-  analysis, grammar and notes. The Link play deck (605 cards) is Sonnet's,
+  analysis, grammar and notes. The Link play deck (606 cards) is Sonnet's,
   which costs less and is less sure: on a sample of 100 sentences Opus
   corrected a clear Sonnet error in 3 (a wrong item name, a line read as "I
   was asked a favor" that means "do me a favor", and あったら filed under ある

@@ -1,0 +1,1 @@
+{"text": "ひと　よんで　ポケモンマニアや！", "structure": [{"jp": "ひと　よんで", "en": "people call me"}, {"jp": "ポケモンマニアや！", "en": "the Pokémon maniac!"}], "patterns": [{"name": "〜だ", "span": "ポケモンマニアや", "words": ["マニア", "や"], "explanation": "や here is the Kansai-dialect form of だ, 'is'. ポケモンマニアや = 'I'm the Pokémon maniac'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

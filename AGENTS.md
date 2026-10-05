@@ -41,7 +41,7 @@ have gone wrong before; the rest is in "Before you say it is done" below.
 | `analyse` | every word of every sentence, particles included (`full`, `escalate`, `rerun N`) | yes |
 | `grounding` | checks and fills dictionary links | no |
 | `sense_pick` | checks links found by lookup | yes |
-| `splits` | one fixed word boundary per string cut two ways; redoes the sentences that differ (`--chapter N`) | yes |
+| `splits` | one fixed word boundary per string cut two ways, or cut at a space the game writes inside a word; redoes the sentences that differ (`--chapter N`) | yes |
 | `particles` | the particle uses the analysis left without a sense (`--chapter N`) | yes |
 | `grammar` | patterns and sentence breakdown (`run --chapter N`) | yes |
 | `notes` | a note where a sentence needs knowledge a learner may not have; checks the factual ones by web search (`--chapter N`, `--dry-run`) | yes; the check is the only call with tools |
@@ -93,6 +93,14 @@ deck, 11 the Link play deck. The docs do not call them chapters.
 - When the same string is cut two ways, do not reword the analysis prompt
   again. Run `splits`: it fixes one decision per string in `splits.yaml` and
   re-analyses only the sentences that differ.
+- The game writes some words with a space inside (とおり　すがり). `tokenize`
+  looks a run up across one space, so the whole word is among the candidates,
+  and `splits` asks about every dictionary entry the deck cuts at such a
+  space. Do not make half-cards of them ("first half of …"), and do not join
+  them by hand: the decision goes in `splits.yaml`.
+- A label the dump has in two rows is joined in `extract.JOINED`: the party
+  menu's confirm button, けっ + てい, is けってい. It is Link play text: the
+  button is drawn only when several Pokémon are chosen for a battle.
 - A hand correction covers only the fields it names. A re-analysed sentence
   gets a fresh translation, so after any redo, re-read the sentences that have
   an entry in `corrections.yaml`.
@@ -275,6 +283,13 @@ deck, 11 the Link play deck. The docs do not call them chapters.
   its moves and ability; wild ones spread between the map's messages; a place
   before the map's dialogue; a type with the first Pokémon of that type. Change
   placement there, not in `cards` or `spread`.
+- The kanji line of a card has the game's spaces, put back by rule
+  (`kanji_line.py`): the analysis kept them in some sentences and dropped
+  them in others. Do not strip them instead: a list, or two clauses with no
+  punctuation between them, needs its spaces.
+- A `sense-guessed` card shows no dictionary-sense line: the sense check
+  rejected every sense it was shown (the first five), so the guess is wrong
+  more often than right.
 - A card's `Location` is a readable name from `cards.PLACES` and
   `cards.place_name`. Add a new text group there; do not show raw group names.
 - A card's identity is its key (dictionary entry, sense, form). Changing how
@@ -370,13 +385,15 @@ Update this when it changes.
   (ナウい for ナウイ). Four corrections of word forms Sonnet wrote wrongly were removed
   as their chapters were redone on Opus, which wrote the forms correctly; the
   last two (ｃｍ, twice) went with the postgame.
-- `splits.yaml` has 476 decisions, from chapters 0 to 11. They are checked
+- `splits.yaml` has 689 decisions, from chapters 0 to 11: 211 of them came
+  from the pass on words the game writes with a space inside (57 one word,
+  131 cut, 23 left to the rule), one of them, かもしれません, written by hand. They are checked
   across chapters: a later chapter's run can send an earlier sentence back.
 - Names: 953 cards (221 Pokémon, 153 items, 284 moves, 76 abilities, 17
   types, 132 places, 23 people, 2 for Team Rocket, 8 badges, 22 game terms, 15
   real-world names), found by `names.py` in every chapter with no model call.
   The 56 name lines this put in chapter 0 were re-analysed on Opus. The names
-  deck is gone. Three decks, 11,078 cards: story 9,533, Help 940 (stand-alone), Link play 605. The note type has `Note` and
+  deck is gone. Three decks, 11,084 cards: story 9,537, Help 941 (stand-alone), Link play 606. The note type has `Note` and
   `SentenceNote` fields.
 - English names: the name check passes on every sentence the deck shows, in
   all chapters. 91 sentences were redone on Opus for it, most of them in

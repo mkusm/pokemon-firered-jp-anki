@@ -1,0 +1,1 @@
+{"text": "せいせい　どうどう　やろう！", "structure": [{"jp": "せいせい　どうどう", "en": "fair and square"}, {"jp": "やろう！", "en": "let's do it!"}], "patterns": [{"name": "〜ましょう", "span": "やろう", "words": ["やろう"], "explanation": "The おう ending is the casual form of ましょう and means 'let's'. やろう = 'let's do it'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

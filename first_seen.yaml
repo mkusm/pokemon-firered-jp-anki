@@ -172,6 +172,10 @@ groups:
     - ['Questionnaire', poke_mart]                    # the form on the Mart counter
     - ['NotEnoughHp', field_moves]                    # Softboiled outside battle
     - ['Credits|Staff|HOF|LeagueChamp|Victories|BecomeLeader', PokemonLeague_HallOfFame]
+    # The confirm button under the party list: drawn only when several Pokémon
+    # are chosen for a battle (party_menu.c, chooseMultiple), which is the
+    # Cable Club and the e-Reader battle house on Seven Island.
+    - ['PartyMenu_OK', end]
     - ['Giddy|Mail|EasyChat|BerryCrush|Union|Link|Trade|Communicat|Record|Wonder|News|Mystery|Wireless|Profile|Chat|Designers|Dodrio|PokemonJump|Colosseum|Hoenn|Birch|Contest|SecretBase|Decor', end]
     - ['Bard|Trendy|GoodSaying|Song|Phrase|Beauty|Tough|Pink|Rankings|Players|Pressing|Cooperative|Excellents|WantToPlayAgain|EReader|JPText|Card|Stamp|Gift|Comm', end]
     - ['Shop|Sell|Buy|Pokedollar|HowMany|QuitShopping|SendItHome', poke_mart]
