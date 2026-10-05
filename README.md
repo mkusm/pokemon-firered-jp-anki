@@ -15,11 +15,6 @@ view, and JMdict is used to ground and check the answer.
 - **How it is made:** [`docs/how-it-works.html`](docs/how-it-works.html)
   (open it in a browser), and [Building it yourself](#building-it-yourself).
 
-This is an unofficial fan project for studying Japanese. Pokémon and the game's
-text belong to Nintendo, Creatures and GAME FREAK; the text comes from the public
-[poke-corpus](https://github.com/abcboy101/poke-corpus) and is also present in
-`data/cache/`, inside the analysed sentences.
-
 ## What you get
 
 One package, `firered_jp.apkg`, with 11,084 cards in three decks:
@@ -133,10 +128,6 @@ All you need is [Anki](https://apps.ankiweb.net/), on desktop or on your phone.
    play (`tag:player-boy` or `tag:player-girl`), or a place such as
    `tag:Pewter_City_Gym`. To drop words for good, add them to `known.txt` and
    rebuild.
-6. **Update later.** The deck is still in development: its layout, its order
-   and some of its cards change from one version to the next. To update,
-   delete the old deck (FireRed JP, or Pokemon FireRed Japanese) and import
-   the new package. Review history is not carried over.
 
 ## How the order is decided
 
