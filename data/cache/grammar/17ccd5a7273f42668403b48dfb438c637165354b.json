@@ -1,0 +1,1 @@
+{"text": "すばらしい　すばらしい　しょうぶ　じゃった！！", "structure": [{"jp": "すばらしい　すばらしい　しょうぶ", "en": "a wonderful, wonderful battle"}, {"jp": "じゃった！！", "en": "it was!!"}], "patterns": [{"name": "〜だ", "span": "じゃった", "words": ["じゃった"], "explanation": "じゃった is the old-man form of だった, 'was'. しょうぶ　じゃった = 'it was a battle'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

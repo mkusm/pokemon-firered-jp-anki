@@ -1,0 +1,1 @@
+{"text": "この　さきへ　すすみなさい！", "structure": [{"jp": "この　さきへ　すすみなさい！", "en": "go on ahead from here!"}], "patterns": [{"name": "〜なさい", "span": "すすみなさい", "words": ["すすみなさい"], "explanation": "なさい after the verb stem is a firm command from someone in charge, like a teacher or guard. すすみなさい = 'go forward'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

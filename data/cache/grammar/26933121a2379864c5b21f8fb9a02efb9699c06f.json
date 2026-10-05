@@ -1,0 +1,1 @@
+{"text": "どうぞ　とおって　ください！", "structure": [{"jp": "どうぞ　とおって　ください！", "en": "please go through!"}], "patterns": [{"name": "〜てください", "span": "とおって　ください", "words": ["とおって", "ください"], "explanation": "The て-form plus ください is a polite 'please do'. とおって　ください = 'please go through'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

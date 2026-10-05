@@ -1,0 +1,1 @@
+{"text": "わたしたちと　しょうぶ？", "structure": [{"jp": "わたしたちと", "en": "with us"}, {"jp": "しょうぶ？", "en": "a battle?"}], "patterns": [{"name": "〜と (with)", "span": "わたしたちと", "words": ["わたしたち", "と"], "explanation": "と after a person shows who you do something with or against. わたしたちと = 'with us'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

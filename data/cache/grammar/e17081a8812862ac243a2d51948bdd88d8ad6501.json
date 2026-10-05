@@ -1,0 +1,1 @@
+{"text": "すごいんですね！", "structure": [{"jp": "すごいんですね！", "en": "so you're amazing!"}], "patterns": [{"name": "〜のだ", "span": "すごいんです", "words": ["すごい", "んです"], "explanation": "んです is the polite form of んだ and shows the speaker reacting to what he just learned. すごいんですね = 'so you're amazing, then'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

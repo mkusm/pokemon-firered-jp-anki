@@ -1,0 +1,1 @@
+{"text": "マヨの　ともだちかい？", "structure": [{"jp": "マヨの　ともだちかい？", "en": "are you a friend of Lostelle's?"}], "patterns": [{"name": "〜かい", "span": "ともだちかい", "words": ["ともだち", "か", "い"], "explanation": "かい is a soft, casual way to ask a yes-or-no question, mostly used by older men. ともだちかい = 'are you a friend?'"}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

@@ -1,0 +1,1 @@
+{"text": "およぐの　だいすき！", "structure": [{"jp": "およぐの", "en": "swimming"}, {"jp": "だいすき！", "en": "I love it!"}], "patterns": [{"name": "〜の (nominalizer)", "span": "およぐの", "words": ["およぐ", "の"], "explanation": "の after a verb turns the action into a thing you can talk about. およぐの = 'swimming'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

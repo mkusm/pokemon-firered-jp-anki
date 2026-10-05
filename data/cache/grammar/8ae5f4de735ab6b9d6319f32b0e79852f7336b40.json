@@ -1,0 +1,1 @@
+{"text": "レッドは　おとなに　なった！", "structure": [{"jp": "レッドは", "en": "Red"}, {"jp": "おとなに　なった！", "en": "has become an adult!"}], "patterns": [{"name": "〜になる", "span": "おとなに　なった", "words": ["おとな", "に", "なった"], "explanation": "に before なる shows what someone turns into. おとなに　なった = 'became an adult'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

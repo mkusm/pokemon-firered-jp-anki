@@ -1,0 +1,1 @@
+{"text": "こんな　おんなのこ　あたしだけ？", "structure": [{"jp": "こんな　おんなのこ", "en": "a girl like this"}, {"jp": "あたしだけ？", "en": "is it only me?"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

@@ -1,0 +1,1 @@
+{"text": "よく　きたのう！", "structure": [{"jp": "よく　きたのう！", "en": "how good of you to come!"}], "patterns": [{"name": "〜なあ", "span": "きたのう", "words": ["きた", "のう"], "explanation": "のう is the old-man version of なあ, added at the end to show warm feeling. よく　きたのう = 'well, how good that you came!'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

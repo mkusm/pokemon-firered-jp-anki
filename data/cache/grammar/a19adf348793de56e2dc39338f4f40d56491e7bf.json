@@ -1,0 +1,1 @@
+{"text": "ひいいい　おたすけを！", "structure": [{"jp": "ひいいい", "en": "Eeeek"}, {"jp": "おたすけを！", "en": "help, (please)!"}], "patterns": [{"name": "〜を", "span": "おたすけを", "words": ["おたすけ", "を"], "explanation": "Stopping at を leaves the verb unsaid, so the listener fills in 'give me'. おたすけを = 'help, please!'"}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

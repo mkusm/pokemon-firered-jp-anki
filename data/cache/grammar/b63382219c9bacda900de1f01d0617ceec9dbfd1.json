@@ -1,0 +1,1 @@
+{"text": "まあ　まて！", "structure": [{"jp": "まあ", "en": "now, now"}, {"jp": "まて！", "en": "wait!"}], "patterns": [{"name": "〜ろ (command)", "span": "まて", "words": ["まて"], "explanation": "Changing the last sound of まつ to て gives a blunt order, with no politeness at all. まて = 'wait!'"}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

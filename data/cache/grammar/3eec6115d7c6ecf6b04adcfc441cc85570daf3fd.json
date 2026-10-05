@@ -1,0 +1,1 @@
+{"text": "そんな　こと　いうなよお", "structure": [{"jp": "そんな　こと　いうなよお", "en": "don't say things like that!"}], "patterns": [{"name": "〜な (don't)", "span": "いうな", "words": ["いう", "な"], "explanation": "な right after the plain form of a verb is a blunt 'don't'. いうな = 'don't say it'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

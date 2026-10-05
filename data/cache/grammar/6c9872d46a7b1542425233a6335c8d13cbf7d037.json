@@ -1,0 +1,1 @@
+{"text": "……　はッはッ　うれしいぜ！", "structure": [{"jp": "……　はッはッ", "en": "...Ha ha"}, {"jp": "うれしいぜ！", "en": "I'm glad!"}], "patterns": [{"name": "〜ぜ", "span": "うれしいぜ", "words": ["うれしい", "ぜ"], "explanation": "ぜ at the end is a rough, cocky, boyish way to push what you say. うれしいぜ = 'I'm glad, man'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

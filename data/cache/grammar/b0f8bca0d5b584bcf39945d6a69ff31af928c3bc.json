@@ -1,0 +1,1 @@
+{"text": "そりゃ　ないぜ", "structure": [{"jp": "そりゃ", "en": "that"}, {"jp": "ないぜ", "en": "just isn't on, man"}], "patterns": [{"name": "〜ぜ", "span": "ないぜ", "words": ["ない", "ぜ"], "explanation": "ぜ at the end is rough, boyish talk that pushes your words at the listener. そりゃ　ないぜ = 'that's just not fair, man'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

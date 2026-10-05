@@ -1,0 +1,1 @@
+{"text": "こんどは　まけないよ！", "structure": [{"jp": "こんどは", "en": "this time"}, {"jp": "まけないよ！", "en": "we won't lose!"}], "patterns": [{"name": "〜ない", "span": "まけない", "words": ["まけない"], "explanation": "ない on a verb says the thing does not or will not happen. まけない = 'we won't lose'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

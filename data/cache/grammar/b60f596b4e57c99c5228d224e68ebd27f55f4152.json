@@ -1,0 +1,1 @@
+{"text": "きのみクラッシュ　しようよ！", "structure": [{"jp": "きのみクラッシュ", "en": "Berry Crush"}, {"jp": "しようよ！", "en": "let's do it!"}], "patterns": [{"name": "〜よう", "span": "しよう", "words": ["しよう"], "explanation": "The よう ending on a verb means 'let's'. It is the casual form of ましょう. しよう = 'let's do'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

@@ -1,0 +1,1 @@
+{"text": "つかれた　もう　かえろうよー", "structure": [{"jp": "つかれた", "en": "I'm tired"}, {"jp": "もう　かえろうよー", "en": "let's go home already"}], "patterns": [{"name": "〜よう", "span": "かえろう", "words": ["かえろう"], "explanation": "The おう ending on a verb means 'let's do it'. かえろう = 'let's go home'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

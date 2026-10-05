@@ -1,0 +1,1 @@
+{"text": "おっかしーなー", "structure": [{"jp": "おっかしーなー", "en": "that's weird..."}], "patterns": [{"name": "〜な", "span": "おっかしーなー", "words": ["おっかしー", "なー"], "explanation": "な at the end, here drawn out, shows the speaker musing to himself. おっかしー is a stretched, emphatic おかしい. おっかしーなー = 'that's so weird...'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

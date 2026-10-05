@@ -1,0 +1,1 @@
+{"text": "おまえに　こそ！", "structure": [{"jp": "おまえに　こそ！", "en": "to you, of all people!"}], "patterns": [{"name": "〜こそ", "span": "おまえに　こそ", "words": ["おまえ", "に", "こそ"], "explanation": "こそ puts strong stress on the word before it, like 'precisely this one'. おまえに こそ = 'to you and no one else'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

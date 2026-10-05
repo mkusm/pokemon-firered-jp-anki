@@ -1,0 +1,1 @@
+{"text": "つよいわね！", "structure": [{"jp": "つよいわね！", "en": "you're strong, aren't you!"}], "patterns": [{"name": "〜わ", "span": "つよいわね", "words": ["わ", "ね"], "explanation": "わ at the end softens a statement and sounds womanly, and ね adds 'aren't you'. つよいわね = 'you're strong, aren't you'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

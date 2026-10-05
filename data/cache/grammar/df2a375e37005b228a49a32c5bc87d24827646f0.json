@@ -1,0 +1,1 @@
+{"text": "よし　いいぞ…", "structure": [{"jp": "よし", "en": "okay"}, {"jp": "いいぞ…", "en": "this is good..."}], "patterns": [{"name": "〜ぞ", "span": "いいぞ", "words": ["いい", "ぞ"], "explanation": "ぞ at the end adds rough, strong emphasis, here talking to himself. いいぞ = 'good, that's it!'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

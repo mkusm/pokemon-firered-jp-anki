@@ -1,0 +1,1 @@
+{"text": "いいわね？", "structure": [{"jp": "いいわね？", "en": "all right?"}], "patterns": [{"name": "〜わ", "span": "いいわね", "words": ["いい", "わ", "ね"], "explanation": "わ is a feminine way of speaking and ね checks that the listener agrees. いいわね = 'that's fine, right?'"}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

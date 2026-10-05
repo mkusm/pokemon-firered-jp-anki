@@ -1,0 +1,1 @@
+{"text": "ぶっつぶして　やるわ！", "structure": [{"jp": "ぶっつぶして　やるわ！", "en": "I'll crush you!"}], "patterns": [{"name": "〜てやる", "span": "ぶっつぶして　やる", "words": ["ぶっつぶして", "やる"], "explanation": "やる after a て-form verb here is a threat: 'I'll do this to you'. ぶっつぶして　やる = 'I'll crush you'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

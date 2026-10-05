@@ -1,0 +1,1 @@
+{"text": "あー　あつかった", "structure": [{"jp": "あー　あつかった", "en": "ahh, that was hot"}], "patterns": [{"name": "〜かった", "span": "あつかった", "words": ["あつかった"], "explanation": "Describing words ending in い swap it for かった to talk about the past. あつかった = 'it was hot'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

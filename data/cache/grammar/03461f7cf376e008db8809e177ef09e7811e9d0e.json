@@ -1,0 +1,1 @@
+{"text": "うほっ　すげえ！", "structure": [{"jp": "うほっ", "en": "whoa"}, {"jp": "すげえ！", "en": "awesome!"}], "patterns": [{"name": "〜い → 〜ええ", "span": "すげえ", "words": ["すげえ"], "explanation": "In rough male speech the ending of a describing word like すごい gets slurred to えー. すげえ = 'awesome'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

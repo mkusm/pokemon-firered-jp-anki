@@ -1,0 +1,1 @@
+{"text": "ど　どうじゃ！", "structure": [{"jp": "ど　どうじゃ！", "en": "h-how about it!"}], "patterns": [{"name": "〜だ", "span": "どうじゃ", "words": ["どう", "じゃ"], "explanation": "だ means 'is'. じゃ is the old-man way of saying だ. どうじゃ = 'how about it?'"}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

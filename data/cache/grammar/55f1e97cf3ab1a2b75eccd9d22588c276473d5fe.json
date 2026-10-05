@@ -1,0 +1,1 @@
+{"text": "とびらが　ひらいている！", "structure": [{"jp": "とびらが", "en": "the door"}, {"jp": "ひらいている！", "en": "is open!"}], "patterns": [{"name": "〜ている", "span": "ひらいている", "words": ["ひらいている"], "explanation": "ている after a verb of change says the result is still there. ひらいている = 'is open'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

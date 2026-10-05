@@ -1,0 +1,1 @@
+{"text": "ここは　６のしま　いにしえの　ことづて　たこうじま", "structure": [{"jp": "ここは　６のしま", "en": "this is Six Island"}, {"jp": "いにしえの　ことづて", "en": "messages from ancient times"}, {"jp": "たこうじま", "en": "Fortune Island"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

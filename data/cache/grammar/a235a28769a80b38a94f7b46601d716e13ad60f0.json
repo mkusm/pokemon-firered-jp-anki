@@ -1,0 +1,1 @@
+{"text": "ずかん　どのくらい　あつまった？", "structure": [{"jp": "ずかん", "en": "your Pokédex"}, {"jp": "どのくらい　あつまった？", "en": "how much has it filled up?"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

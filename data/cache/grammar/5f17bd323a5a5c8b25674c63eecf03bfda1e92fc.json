@@ -1,0 +1,1 @@
+{"text": "ここが　１のしまや！", "structure": [{"jp": "ここが", "en": "this place"}, {"jp": "１のしまや！", "en": "is One Island!"}], "patterns": [{"name": "〜だ", "span": "１のしまや", "words": ["や"], "explanation": "や is the Kansai dialect form of だ, 'is'. Bill talks this way all the time. １のしまや = 'it's One Island'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

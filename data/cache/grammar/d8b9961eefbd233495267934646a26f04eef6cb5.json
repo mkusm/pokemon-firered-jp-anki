@@ -1,0 +1,1 @@
+{"text": "きみ　つよいなあ…", "structure": [{"jp": "きみ", "en": "you"}, {"jp": "つよいなあ…", "en": "sure are strong..."}], "patterns": [{"name": "〜なあ", "span": "つよいなあ", "words": ["つよい", "なあ"], "explanation": "なあ at the end shows the speaker is quietly impressed, half talking to himself. つよいなあ = 'you sure are strong'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

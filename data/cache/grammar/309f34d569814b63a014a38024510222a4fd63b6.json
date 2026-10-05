@@ -1,0 +1,1 @@
+{"text": "まいったな", "structure": [{"jp": "まいったな", "en": "well, I'm beaten"}], "patterns": [{"name": "〜な (feeling)", "span": "まいったな", "words": ["まいった", "な"], "explanation": "な at the end of a sentence is the speaker sighing a feeling half to himself. まいったな = 'well, I'm beaten'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

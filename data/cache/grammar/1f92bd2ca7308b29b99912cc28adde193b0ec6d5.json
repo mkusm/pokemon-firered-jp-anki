@@ -1,0 +1,1 @@
+{"text": "あなたは　おとうと　いる？", "structure": [{"jp": "あなたは", "en": "as for you"}, {"jp": "おとうと　いる？", "en": "do you have a little brother?"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

@@ -17,7 +17,7 @@ import yaml
 from .decomp import STARTER_LEVEL, STARTER_MAP, STARTERS, Decomp, norm
 from .lemmas import lemmas
 from .map_order import MapOrder
-from .spread import CHAPTER_ENDS, chapter_of, spread
+from .spread import CHAPTER_ENDS, END_OF_DECK, chapter_of, spread
 from .paths import CORPUS, DATA, EXTRACT_OUT, ROOT
 
 FIRST_SEEN = ROOT / "first_seen.yaml"
@@ -597,6 +597,7 @@ def main() -> None:
     kept["dialogue"] = kept["bucket"] == "dialogue"
     kept["tail"] = kept["bucket"].isin(["end", "unplaced"])
     kept["chapter"] = chapter_of(kept["rank"], mo.rank)
+    kept.loc[kept["tail"], "chapter"] = END_OF_DECK
     kept["order"] = spread(kept, kept["text"].map(lemmas))
     kept["teaches"] = kept["order"].notna()
     kept = kept.sort_values("order", na_position="last")

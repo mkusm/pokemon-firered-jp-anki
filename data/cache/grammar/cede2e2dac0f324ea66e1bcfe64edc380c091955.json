@@ -1,0 +1,1 @@
+{"text": "ふっ　ふざけるな！", "structure": [{"jp": "ふっ", "en": "D-"}, {"jp": "ふざけるな！", "en": "don't mess around!"}], "patterns": [{"name": "〜な (don't)", "span": "ふざけるな", "words": ["ふざける", "な"], "explanation": "な right after the plain form of a verb is a harsh 'don't do that!'. ふざけるな = 'don't mess with us!'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

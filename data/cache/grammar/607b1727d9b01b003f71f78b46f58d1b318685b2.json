@@ -1,0 +1,1 @@
+{"text": "＊は　＊から　＊を　うばいとった！", "structure": [{"jp": "＊は", "en": "＊"}, {"jp": "＊から", "en": "from ＊"}, {"jp": "＊を　うばいとった！", "en": "stole ＊!"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

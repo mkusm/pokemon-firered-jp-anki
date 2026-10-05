@@ -1,0 +1,1 @@
+{"text": "ポケモンチャンピオン　こうほや！", "structure": [{"jp": "ポケモンチャンピオン　こうほや！", "en": "he's a Pokémon Champion candidate!"}], "patterns": [{"name": "〜だ", "span": "こうほや", "words": ["や"], "explanation": "や is the Kansai dialect form of だ, 'is'. こうほや = 'he's a candidate'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

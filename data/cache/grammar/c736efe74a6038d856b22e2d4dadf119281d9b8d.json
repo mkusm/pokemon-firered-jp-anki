@@ -1,0 +1,1 @@
+{"text": "いるんだよっ！", "structure": [{"jp": "いるんだよっ！", "en": "there are, you know!"}], "patterns": [{"name": "〜のだ", "span": "いるんだ", "words": ["いる", "んだ"], "explanation": "んだ at the end gives the sentence an explaining tone. いるんだよ = 'there are, you see'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

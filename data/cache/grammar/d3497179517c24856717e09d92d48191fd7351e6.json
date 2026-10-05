@@ -1,0 +1,1 @@
+{"text": "グリーンよ……！", "structure": [{"jp": "グリーンよ……！", "en": "O Green...!"}], "patterns": [{"name": "〜よ (calling)", "span": "グリーンよ", "words": ["グリーン", "よ"], "explanation": "よ right after a name is a solemn, old-fashioned way of calling out to someone. グリーンよ = 'Green, hear me'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

@@ -1,0 +1,1 @@
+{"text": "じゃ　コレ　いらないねえ", "structure": [{"jp": "じゃ", "en": "then"}, {"jp": "コレ　いらないねえ", "en": "you don't need this, do you"}], "patterns": [{"name": "〜ない", "span": "いらない", "words": ["いらない"], "explanation": "ない on a verb makes it 'not'. いらない = 'don't need'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

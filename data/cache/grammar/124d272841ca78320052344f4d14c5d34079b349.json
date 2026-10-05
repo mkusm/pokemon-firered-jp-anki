@@ -1,0 +1,1 @@
+{"text": "たまげたぜ！", "structure": [{"jp": "たまげたぜ！", "en": "I was flabbergasted!"}], "patterns": [{"name": "〜ぜ", "span": "たまげたぜ", "words": ["たまげた", "ぜ"], "explanation": "ぜ at the end of a sentence is rough, confident men's speech. たまげたぜ = 'I was floored, I tell you!'"}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

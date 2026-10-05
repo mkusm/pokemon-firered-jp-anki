@@ -1,0 +1,1 @@
+{"text": "……いわくだきを　つかいますか？", "structure": [{"jp": "……いわくだきを", "en": "...Rock Smash"}, {"jp": "つかいますか？", "en": "will you use it?"}], "patterns": [{"name": "〜か", "span": "つかいますか", "words": ["つかいます", "か"], "explanation": "か at the end turns the sentence into a question. つかいますか = 'will you use it?'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

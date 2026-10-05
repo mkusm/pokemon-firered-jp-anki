@@ -1,0 +1,1 @@
+{"text": "うお　つよいな！", "structure": [{"jp": "うお", "en": "whoa"}, {"jp": "つよいな！", "en": "you're strong!"}], "patterns": [{"name": "〜な", "span": "つよいな", "words": ["つよい", "な"], "explanation": "な at the end shows the speaker's impressed reaction, half to himself. つよいな = 'man, you're strong'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

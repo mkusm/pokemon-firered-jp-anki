@@ -1,0 +1,1 @@
+{"text": "つぎに　いって　くれ！", "structure": [{"jp": "つぎに", "en": "to the next one"}, {"jp": "いって　くれ！", "en": "go on!"}], "patterns": [{"name": "〜てくれ", "span": "いって　くれ", "words": ["いって", "くれ"], "explanation": "てくれ after a verb is a blunt, manly way of asking someone to do it. いって　くれ = 'go on, will you'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

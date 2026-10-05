@@ -1,0 +1,1 @@
+{"text": "がんばって　ください！", "structure": [{"jp": "がんばって　ください！", "en": "please do your best!"}], "patterns": [{"name": "〜てください", "span": "がんばって　ください", "words": ["がんばって", "ください"], "explanation": "て-form + ください politely asks someone to do something. がんばって ください = 'please do your best'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

@@ -1,0 +1,1 @@
+{"text": "…　きみは　どうなの？", "structure": [{"jp": "…　きみは", "en": "...as for you"}, {"jp": "どうなの？", "en": "how about it?"}], "patterns": [{"name": "〜のだ", "span": "どうなの", "words": ["どう", "なの"], "explanation": "なの at the end of a question asks for an explanation in a soft, casual way. どうなの = 'how is it for you?'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

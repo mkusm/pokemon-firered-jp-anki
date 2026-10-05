@@ -1,0 +1,1 @@
+{"text": "ひざしが　きもちいーぜ！", "structure": [{"jp": "ひざしが", "en": "the sunshine"}, {"jp": "きもちいーぜ！", "en": "feels great"}], "patterns": [{"name": "〜ぜ", "span": "きもちいーぜ", "words": ["ぜ"], "explanation": "ぜ at the end is a rough, manly way of pushing what you say. きもちいーぜ = 'it feels great, man'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

@@ -1,0 +1,1 @@
+{"text": "こまったな", "structure": [{"jp": "こまったな", "en": "now I'm in trouble"}], "patterns": [{"name": "〜なあ", "span": "こまったな", "words": ["こまった", "な"], "explanation": "な at the end, a short なあ, shows a feeling said half to yourself. こまったな = 'oh dear, I'm in trouble'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

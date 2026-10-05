@@ -1,0 +1,1 @@
+{"text": "こんどは　てかげん　なしだ！", "structure": [{"jp": "こんどは", "en": "this time"}, {"jp": "てかげん　なしだ！", "en": "there's no holding back!"}], "patterns": [{"name": "〜なし", "span": "てかげん　なし", "words": ["てかげん", "なし"], "explanation": "なし after a thing says 'without it' or 'none of it'. てかげん　なし = 'no going easy'"}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

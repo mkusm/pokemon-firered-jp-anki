@@ -1,0 +1,1 @@
+{"text": "オイっ　だれか　きいてる！", "structure": [{"jp": "オイっ", "en": "hey!"}, {"jp": "だれか　きいてる！", "en": "someone's listening!"}], "patterns": [{"name": "〜ている", "span": "きいてる", "words": ["きいてる"], "explanation": "てる is the spoken short form of ている, which shows something going on right now. きいてる = 'is listening'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

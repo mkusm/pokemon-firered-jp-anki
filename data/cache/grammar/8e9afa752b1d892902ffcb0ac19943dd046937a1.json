@@ -1,0 +1,1 @@
+{"text": "そろそろ　はじめよう！", "structure": [{"jp": "そろそろ", "en": "it's about time"}, {"jp": "はじめよう！", "en": "let's begin!"}], "patterns": [{"name": "〜（よ）う", "span": "はじめよう", "words": ["はじめよう"], "explanation": "The よう ending on a verb means 'let's do it' or 'I think I'll do it'. はじめよう = 'let's begin'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

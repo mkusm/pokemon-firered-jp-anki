@@ -1,0 +1,1 @@
+{"text": "ほな　また　あとでな！", "structure": [{"jp": "ほな", "en": "well then"}, {"jp": "また　あとでな！", "en": "see you later!"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

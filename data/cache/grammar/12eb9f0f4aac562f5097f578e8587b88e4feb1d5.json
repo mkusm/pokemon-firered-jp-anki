@@ -1,0 +1,1 @@
+{"text": "カラテ　こそ！", "structure": [{"jp": "カラテ　こそ！", "en": "karate, and nothing else!"}], "patterns": [{"name": "〜こそ", "span": "カラテ　こそ", "words": ["カラテ", "こそ"], "explanation": "こそ after a word singles it out strongly: 'this one above all'. カラテ　こそ = 'karate is the one'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

@@ -1,0 +1,1 @@
+{"text": "これを　キミに……", "structure": [{"jp": "これを", "en": "this"}, {"jp": "キミに……", "en": "to you..."}], "patterns": [{"name": "〜を〜に", "span": "これを　キミに", "words": ["を", "に"], "explanation": "The sentence stops before the verb, and 'I give' is left for you to fill in. これを　キミに = 'this, to you'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

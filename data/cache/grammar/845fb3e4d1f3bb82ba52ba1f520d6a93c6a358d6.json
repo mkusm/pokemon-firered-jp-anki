@@ -1,0 +1,1 @@
+{"text": "すなあらしが　おさまった！", "structure": [{"jp": "すなあらしが", "en": "the sandstorm"}, {"jp": "おさまった！", "en": "subsided!"}], "patterns": [{"name": "〜た", "span": "おさまった", "words": ["おさまった"], "explanation": "た at the end of a verb says the thing has happened and is over. おさまった = 'died down'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

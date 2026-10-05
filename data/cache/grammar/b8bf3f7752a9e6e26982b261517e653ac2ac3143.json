@@ -1,0 +1,1 @@
+{"text": "いや　わしは　あきらめぬ…！", "structure": [{"jp": "いや", "en": "no"}, {"jp": "わしは　あきらめぬ…！", "en": "I won't give up...!"}], "patterns": [{"name": "〜ない", "span": "あきらめぬ", "words": ["あきらめぬ"], "explanation": "ない after a verb says 'not'. ぬ is an old-fashioned form of ない. あきらめぬ = 'won't give up'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

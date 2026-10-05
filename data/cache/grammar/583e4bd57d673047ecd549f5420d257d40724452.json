@@ -1,0 +1,1 @@
+{"text": "どなたでも　いいわ！", "structure": [{"jp": "どなたでも", "en": "whoever it is"}, {"jp": "いいわ！", "en": "is fine!"}], "patterns": [{"name": "〜でもいい", "span": "どなたでも　いい", "words": ["どなた", "でも", "いい"], "explanation": "でも いい after a question word means any answer at all is fine. どなたでも　いい = 'anyone will do'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

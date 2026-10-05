@@ -1,0 +1,1 @@
+{"text": "なんや　ひさしぶり！", "structure": [{"jp": "なんや", "en": "well now"}, {"jp": "ひさしぶり！", "en": "long time no see!"}], "patterns": [{"name": "〜だ", "span": "なんや", "words": ["なん", "や"], "explanation": "や is the Kansai dialect form of だ, so なんや is なんだ, a small cry of surprise. なんや = 'well now'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

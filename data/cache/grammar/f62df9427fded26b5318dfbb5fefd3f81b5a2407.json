@@ -1,0 +1,1 @@
+{"text": "また　おいで　ぼよーん！", "structure": [{"jp": "また　おいで", "en": "come again"}, {"jp": "ぼよーん！", "en": "boing!"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

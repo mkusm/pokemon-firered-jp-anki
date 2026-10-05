@@ -1,0 +1,1 @@
+{"text": "はんッ　だらしない　わね！", "structure": [{"jp": "はんッ", "en": "hmph"}, {"jp": "だらしない　わね！", "en": "how pathetic!"}], "patterns": [{"name": "〜わ", "span": "だらしない　わね", "words": ["だらしない", "わ", "ね"], "explanation": "わ is a feminine way of speaking and ね adds 'aren't you'. だらしない　わね = 'how pathetic you are'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

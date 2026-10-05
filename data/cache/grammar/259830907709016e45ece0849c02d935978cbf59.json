@@ -1,0 +1,1 @@
+{"text": "マシンの　ほうは", "structure": [{"jp": "マシンの　ほうは", "en": "the machine side of things, I mean"}], "patterns": [{"name": "〜のほう", "span": "マシンの　ほう", "words": ["マシン", "の", "ほう"], "explanation": "のほう after a thing points loosely to that side of things. マシンの　ほう = 'the machine side of things'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

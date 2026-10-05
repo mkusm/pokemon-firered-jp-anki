@@ -1,0 +1,1 @@
+{"text": "＊は　さわぎだした！", "structure": [{"jp": "＊は", "en": "＊ (topic)"}, {"jp": "さわぎだした！", "en": "started making an uproar!"}], "patterns": [{"name": "〜だす", "span": "さわぎだした", "words": ["さわぎだした"], "explanation": "だす stuck onto a verb means to suddenly start doing it. さわぎだした = 'started making a racket'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

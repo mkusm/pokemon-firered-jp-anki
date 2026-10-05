@@ -1,0 +1,1 @@
+{"text": "みごと　だったぞ！", "structure": [{"jp": "みごと　だったぞ！", "en": "it was splendid!"}], "patterns": [{"name": "〜ぞ", "span": "だったぞ", "words": ["だった", "ぞ"], "explanation": "ぞ at the end is a rough, forceful way of driving a point home. みごと　だったぞ = 'that was splendid, I tell you!'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

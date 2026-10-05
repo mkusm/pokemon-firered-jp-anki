@@ -1,0 +1,1 @@
+{"text": "＊は　さわいでいる！", "structure": [{"jp": "＊は", "en": "＊ (the Pokémon)"}, {"jp": "さわいでいる！", "en": "is making an uproar!"}], "patterns": [{"name": "〜ている", "span": "さわいでいる", "words": ["さわいでいる"], "explanation": "ている after a verb says the action is going on right now. さわいでいる = 'is making an uproar'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

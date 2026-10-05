@@ -1,0 +1,1 @@
+{"text": "しらない　ひとだー！", "structure": [{"jp": "しらない　ひとだー！", "en": "it's someone I don't know!"}], "patterns": [{"name": "verb + noun", "span": "しらない　ひと", "words": ["しらない", "ひと"], "explanation": "A verb right before a person or thing describes it. しらない ひと = 'a person I don't know'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

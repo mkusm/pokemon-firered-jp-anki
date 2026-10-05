@@ -1,0 +1,1 @@
+{"text": "ほしいでしょー？", "structure": [{"jp": "ほしいでしょー？", "en": "you want some, don't you?"}], "patterns": [{"name": "〜でしょう", "span": "ほしいでしょー", "words": ["ほしい", "でしょー"], "explanation": "でしょう with a rising voice asks the listener to agree, like 'don't you?'. ほしいでしょー = 'you want some, right?'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

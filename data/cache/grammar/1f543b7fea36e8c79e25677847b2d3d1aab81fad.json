@@ -1,0 +1,1 @@
+{"text": "ここは　５のしま　かんきゅうの　ながれ　ときのしま", "structure": [{"jp": "ここは　５のしま", "en": "this is Five Island"}, {"jp": "かんきゅうの　ながれ　ときのしま", "en": "a flow of slow and fast: the island of time"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

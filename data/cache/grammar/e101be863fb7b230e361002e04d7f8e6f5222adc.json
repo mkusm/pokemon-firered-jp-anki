@@ -1,0 +1,1 @@
+{"text": "みごと　じゃったー！", "structure": [{"jp": "みごと　じゃったー！", "en": "it was magnificent!"}], "patterns": [{"name": "〜だ", "span": "じゃったー", "words": ["じゃったー"], "explanation": "じゃった is the old-man form of だった, 'was', here drawn out in a shout. みごと　じゃったー = 'it was magnificent!'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

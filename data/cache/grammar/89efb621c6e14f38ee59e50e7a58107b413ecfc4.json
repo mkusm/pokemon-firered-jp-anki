@@ -1,0 +1,1 @@
+{"text": "とんで　くわえて！", "structure": [{"jp": "とんで", "en": "jump and"}, {"jp": "くわえて！", "en": "catch it in your mouth!"}], "patterns": [{"name": "〜て (linking)", "span": "とんで　くわえて", "words": ["とんで", "くわえて"], "explanation": "The て-form joins one action to the next, like 'and'. とんで くわえて = 'jump and chomp'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

@@ -1,0 +1,1 @@
+{"text": "おして　みますか？", "structure": [{"jp": "おして　みますか？", "en": "will you try pressing it?"}], "patterns": [{"name": "〜てみる", "span": "おして　みます", "words": ["おして", "みます"], "explanation": "てみる after a verb means doing it to see what happens. おして　みます = 'try pressing it'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

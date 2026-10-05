@@ -50,7 +50,10 @@ There is no test suite. The checks are in "Before you say it is done" below.
 | `build` | cards → `.apkg` | no |
 
 Chapters are numbered from 0 in the code: chapter 0 is everything up to the
-first gym badge. The docs call it "the first chapter".
+first gym badge. The docs call it "the first chapter". Chapter 9 is the
+postgame story. The end of the deck (link play, the Help menu, error messages,
+the easy-chat word lists) is chapter 10 in the code, so that the postgame can
+be run without it; the docs do not call it a chapter.
 
 ## Rules
 
@@ -273,25 +276,25 @@ fine.
 
 Update this when it changes.
 
-- Chapters 0 to 5: analysed by Opus with prompt version 4 or 5 (particle
+- Chapters 0 to 9, the whole story: analysed by Opus with prompt version 4 or 5 (particle
   senses picked by the analysis), grammar and notes by Opus. All settled:
   `chapter N --dry-run` reports nothing left for each.
-- Chapters 6 to 9: analysed by Sonnet with prompt version 2, with Opus on the
+- Chapter 10 (the end of the deck):
+  analysed by Sonnet with prompt version 2, with Opus on the
   sentences Sonnet flagged; no grammar, no notes, and one card per particle. `analyse
   rerun N` redoes every sentence of a chapter that is not Opus on version 4 or 5;
   `analyse redo <file>` re-analyses only the sentences listed in a file.
-- `corrections.yaml` has five entries: the SELECT button line, Mom's two TV
-  lines, and two word forms the model wrote that were not in their sentence
-  (ｃｍ, twice). Two more form corrections were removed when their chapters
-  were redone on Opus, which wrote the forms correctly; expect the same for
-  these two.
-- `splits.yaml` has 288 decisions, from chapters 0 to 5. They are checked
+- `corrections.yaml` has three entries: the SELECT button line and Mom's two
+  TV lines. Four corrections of word forms Sonnet wrote wrongly were removed
+  as their chapters were redone on Opus, which wrote the forms correctly; the
+  last two (ｃｍ, twice) went with the postgame.
+- `splits.yaml` has 443 decisions, from chapters 0 to 9. They are checked
   across chapters: a later chapter's run can send an earlier sentence back.
-- Names: 925 cards (221 Pokémon, 153 items, 270 moves, 61 abilities, 17
+- Names: 939 cards (221 Pokémon, 153 items, 284 moves, 61 abilities, 17
   types, 132 places, 24 people, 2 for Team Rocket, 8 badges, 22 game terms, 15
   real-world names), found by `names.py` in every chapter with no model call.
   The 56 name lines this put in chapter 0 were re-analysed on Opus. The names
-  deck is gone: one deck, 10,863 cards. The note type has `Note` and
+  deck is gone: one deck, 10,536 cards. The note type has `Note` and
   `SentenceNote` fields.
 - English names: the name check passes on every sentence the deck shows, in
   all chapters. 91 sentences were redone on Opus for it, most of them in
@@ -308,6 +311,11 @@ Update this when it changes.
   A walk's line is not moved by the flag rule: its place is the listed one.
   `hand_lines.yaml` has one line, the title. `never_shown` in
   `first_seen.yaml` has seven labels.
+- `chapter N` can stop with "not settled: three rounds in a row" on a chain
+  of near-identical floating lines, of which only one is shown at a time (the
+  Fame Checker's four してんのう … とくしゅう！ titles in chapter 8): each
+  round redoes one and brings up the next. Check that the sentence left is a
+  different one each round, and run the command again.
 - Re-analysing a chapter changes how about one sentence in five is split, even
   between two Opus runs, and so changes card identities (about 220 of the first
   chapter's 2,500 cards each time). Do not rerun a finished chapter for a small

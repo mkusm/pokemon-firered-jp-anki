@@ -1,0 +1,1 @@
+{"text": "とうぜんや！", "structure": [{"jp": "とうぜんや！", "en": "of course!"}], "patterns": [{"name": "〜だ", "span": "とうぜんや", "words": ["や"], "explanation": "や is the Kansai dialect form of だ, 'is'. とうぜんや = 'it's only natural'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

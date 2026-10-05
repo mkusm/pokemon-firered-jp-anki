@@ -43,21 +43,6 @@
         The て form sets up what comes first: having done one thing, you do the
         next. とうろくして　つかいます = 'having registered it, you use it'.
 
-# Forms the model wrote that are not in the sentence. The card showed the wrong
-# form and could not mark it in the sentence.
-
-- sentence: やーん　＊ｃｍよ　こんなの　はじめてよー！
-  why: The game writes ｃｍ in full-width letters; the model wrote ASCII.
-  words:
-    - surface: cm
-      new_surface: ｃｍ
-
-- sentence: ＊ｃｍって…　やだ　このまえと　おなじよー
-  why: The game writes ｃｍ in full-width letters; the model wrote ASCII.
-  words:
-    - surface: cm
-      new_surface: ｃｍ
-
 # Mom's line by the TV. テレビの　はなしよ means her remark was about the
 # programme she is watching. "I'm talking about the TV!" reads as the TV set.
 

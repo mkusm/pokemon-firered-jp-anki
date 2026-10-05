@@ -1,0 +1,1 @@
+{"text": "ここは　アキホの　おうち", "structure": [{"jp": "ここは", "en": "this place"}, {"jp": "アキホの　おうち", "en": "is Selphy's house"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

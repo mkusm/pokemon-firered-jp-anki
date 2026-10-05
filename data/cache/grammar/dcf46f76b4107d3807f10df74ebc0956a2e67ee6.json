@@ -1,0 +1,1 @@
+{"text": "いやな　まけかただ", "structure": [{"jp": "いやな　まけかただ", "en": "it's an unpleasant way to lose"}], "patterns": [{"name": "〜かた", "span": "まけかた", "words": ["まけ", "かた"], "explanation": "かた stuck onto the stem of a verb means 'the way of doing' it. まけかた = 'way of losing'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

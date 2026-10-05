@@ -1,0 +1,1 @@
+{"text": "あんたたち　おしえなさい！", "structure": [{"jp": "あんたたち", "en": "you lot"}, {"jp": "おしえなさい！", "en": "tell me!"}], "patterns": [{"name": "〜なさい", "span": "おしえなさい", "words": ["おしえなさい"], "explanation": "なさい on a verb is a firm order, like a teacher or parent gives. おしえなさい = 'tell me'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

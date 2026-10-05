@@ -1,0 +1,1 @@
+{"text": "はしを　わたれば　きのみのもり", "structure": [{"jp": "はしを　わたれば", "en": "if you cross the bridge"}, {"jp": "きのみのもり", "en": "Berry Forest"}], "patterns": [{"name": "〜ば", "span": "わたれば", "words": ["わたれば"], "explanation": "Changing the verb's ending to えば means 'if you do it'. わたれば = 'if you cross'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

@@ -1,0 +1,1 @@
+{"text": "また　やりたいね", "structure": [{"jp": "また", "en": "again"}, {"jp": "やりたいね", "en": "I want to do it, don't you?"}], "patterns": [{"name": "〜たい", "span": "やりたい", "words": ["やりたい"], "explanation": "たい on a verb means 'want to do'. やりたい = 'want to do it'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

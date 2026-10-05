@@ -1,0 +1,1 @@
+{"text": "チャンピオン　ロード　だあ！", "structure": [{"jp": "チャンピオン　ロード　だあ！", "en": "it's Victory Road!"}], "patterns": [{"name": "〜だ", "span": "ロード　だあ", "words": ["ロード", "だあ"], "explanation": "だ means 'it is'; here it is stretched to だあ because he is shouting. チャンピオン　ロード　だあ = 'it's Victory Road!'"}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

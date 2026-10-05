@@ -1,0 +1,1 @@
+{"text": "ここは　セキエイ　こうげん　ポケモン　さいこう　きかん　ポケモン　リーグ　ほんぶ", "structure": [{"jp": "ここは", "en": "this place is"}, {"jp": "セキエイ　こうげん", "en": "Indigo Plateau"}, {"jp": "ポケモン　さいこう　きかん", "en": "the highest Pokémon authority"}, {"jp": "ポケモン　リーグ　ほんぶ", "en": "Pokémon League Headquarters"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

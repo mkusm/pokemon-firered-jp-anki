@@ -1,0 +1,1 @@
+{"text": "おどれよ！", "structure": [{"jp": "おどれよ！", "en": "come on, dance!"}], "patterns": [{"name": "〜え (command)", "span": "おどれ", "words": ["おどれ"], "explanation": "Changing the last sound of おどる to れ makes a blunt order, and よ after it pushes harder. おどれよ = 'come on, dance'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

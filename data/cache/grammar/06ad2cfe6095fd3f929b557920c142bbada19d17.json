@@ -1,0 +1,1 @@
+{"text": "あたしの　バカっ！", "structure": [{"jp": "あたしの　バカっ！", "en": "stupid me!"}], "patterns": [{"name": "〜のバカ", "span": "あたしの　バカ", "words": ["あたし", "の", "バカ"], "explanation": "A person plus のバカ is a way of scolding that person: 'you idiot'. Here she scolds herself. あたしの　バカ = 'stupid me!'"}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

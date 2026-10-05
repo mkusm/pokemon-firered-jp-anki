@@ -1,0 +1,1 @@
+{"text": "レッドは　はかせから　＊を　うけとった！", "structure": [{"jp": "レッドは", "en": "Red"}, {"jp": "はかせから", "en": "from the doctor"}, {"jp": "＊を　うけとった！", "en": "received ＊!"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

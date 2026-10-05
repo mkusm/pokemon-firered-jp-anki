@@ -1,0 +1,1 @@
+{"text": "レッドよ…！", "structure": [{"jp": "レッドよ…！", "en": "O Red...!"}], "patterns": [{"name": "〜よ (calling)", "span": "レッドよ", "words": ["レッド", "よ"], "explanation": "よ straight after a name is a solemn, old-style way of calling out to someone. レッドよ = 'O Red'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

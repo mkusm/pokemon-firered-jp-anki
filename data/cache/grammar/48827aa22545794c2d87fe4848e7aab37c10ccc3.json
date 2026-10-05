@@ -1,0 +1,1 @@
+{"text": "さきへ　すすんで　いいです", "structure": [{"jp": "さきへ　すすんで　いいです", "en": "you may go on ahead"}], "patterns": [{"name": "〜ていい", "span": "すすんで　いいです", "words": ["すすんで", "いい", "です"], "explanation": "The て-form of a verb followed by いい says that doing it is allowed. すすんで　いいです = 'you may go on'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

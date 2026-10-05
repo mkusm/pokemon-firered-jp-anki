@@ -1,0 +1,1 @@
+{"text": "また　あえたねー！", "structure": [{"jp": "また　あえたねー！", "en": "we got to meet again, didn't we!"}], "patterns": [{"name": "〜られる (potential)", "span": "あえた", "words": ["あえた"], "explanation": "Changing あう to あえる turns 'meet' into 'can meet'; in the past it means it worked out. あえた = 'we were able to meet'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

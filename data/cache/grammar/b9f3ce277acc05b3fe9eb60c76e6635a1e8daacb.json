@@ -1,0 +1,1 @@
+{"text": "「つれますか？」", "structure": [{"jp": "「つれますか？」", "en": "\"Can you catch any?\" (Are they biting?)"}], "patterns": [{"name": "〜られる (potential)", "span": "つれます", "words": ["つれます"], "explanation": "つる 'to fish up' changed to つれる says that fish can be caught. つれますか = 'can you catch any?'"}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

@@ -1,0 +1,1 @@
+{"text": "ほんとかよ", "structure": [{"jp": "ほんとかよ", "en": "are you serious?"}], "patterns": [{"name": "〜かよ", "span": "ほんとかよ", "words": ["ほんと", "か", "よ"], "explanation": "かよ at the end is a rough way to show you doubt or can't believe something. ほんとかよ = 'is that really true?'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

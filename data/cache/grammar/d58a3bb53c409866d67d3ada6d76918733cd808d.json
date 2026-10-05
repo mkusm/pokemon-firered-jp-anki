@@ -1,0 +1,1 @@
+{"text": "この　おれさまが！", "structure": [{"jp": "この　おれさまが！", "en": "that I, the great me...!"}], "patterns": [{"name": "この〜", "span": "この　おれさま", "words": ["この", "おれさま"], "explanation": "この in front of a word for yourself is a boastful way of pointing at yourself. この　おれさま = 'I, this great me'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

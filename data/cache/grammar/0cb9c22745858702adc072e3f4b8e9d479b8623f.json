@@ -1,0 +1,1 @@
+{"text": "えー　しんじられない！", "structure": [{"jp": "えー", "en": "whaat"}, {"jp": "しんじられない！", "en": "I can't believe it!"}], "patterns": [{"name": "〜られる (potential)", "span": "しんじられない", "words": ["しんじられない"], "explanation": "られる on a verb means 'can do'; with ない it means 'cannot'. しんじられない = 'I can't believe it'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

@@ -1,0 +1,1 @@
+{"text": "ひまつぶしに　なった", "structure": [{"jp": "ひまつぶしに　なった", "en": "it served as a way to kill time"}], "patterns": [{"name": "〜になる", "span": "ひまつぶしに　なった", "words": ["に", "なった"], "explanation": "に plus なる says what something turns out to be. ひまつぶしに　なった = 'it turned out to be a way to kill time'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

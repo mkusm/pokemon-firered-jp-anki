@@ -1,0 +1,1 @@
+{"text": "すごうでだなあ", "structure": [{"jp": "すごうでだなあ", "en": "you're really skilled!"}], "patterns": [{"name": "〜な", "span": "だなあ", "words": ["だ", "なあ"], "explanation": "な at the end, here drawn out as なあ, shows the speaker's admiration spoken half to himself. すごうでだなあ = 'what a skilled one you are'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

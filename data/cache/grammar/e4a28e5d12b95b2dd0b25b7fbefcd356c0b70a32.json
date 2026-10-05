@@ -1,0 +1,1 @@
+{"text": "レッドやないか！", "structure": [{"jp": "レッドやないか！", "en": "well, if it isn't Red!"}], "patterns": [{"name": "〜じゃないか", "span": "レッドやないか", "words": ["レッド", "やない", "か"], "explanation": "じゃないか shows surprise at noticing something; やないか is the Kansai dialect form. レッドやないか = 'why, it's Red!'"}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

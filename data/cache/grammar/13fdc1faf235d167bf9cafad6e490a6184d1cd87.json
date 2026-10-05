@@ -1,0 +1,1 @@
+{"text": "そらが　ひろいなあ…", "structure": [{"jp": "そらが", "en": "the sky"}, {"jp": "ひろいなあ…", "en": "sure is vast..."}], "patterns": [{"name": "〜なあ", "span": "ひろいなあ", "words": ["ひろい", "なあ"], "explanation": "なあ at the end shows the speaker is quietly impressed, half talking to himself. ひろいなあ = 'it sure is vast'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

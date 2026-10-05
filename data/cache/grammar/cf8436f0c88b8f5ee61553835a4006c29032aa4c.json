@@ -1,0 +1,1 @@
+{"text": "わたしの　まけか", "structure": [{"jp": "わたしの　まけか", "en": "so it's my loss, huh"}], "patterns": [{"name": "〜か", "span": "まけか", "words": ["まけ", "か"], "explanation": "か here is not a real question: said to yourself, it shows you are taking in a fact. まけか = 'so it's a loss, huh'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

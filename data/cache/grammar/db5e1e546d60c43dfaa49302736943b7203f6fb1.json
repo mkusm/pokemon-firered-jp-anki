@@ -1,0 +1,1 @@
+{"text": "ほな　レッツゴーや！", "structure": [{"jp": "ほな", "en": "all right then"}, {"jp": "レッツゴーや！", "en": "let's go!"}], "patterns": [{"name": "〜だ", "span": "レッツゴーや", "words": ["レッツゴー", "や"], "explanation": "や is the Kansai dialect form of だ, here just rounding off the shout. レッツゴーや = 'it's let's go!'"}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

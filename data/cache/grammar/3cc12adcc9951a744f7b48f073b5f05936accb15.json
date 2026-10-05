@@ -1,0 +1,1 @@
+{"text": "かったか！", "structure": [{"jp": "かったか！", "en": "so you won!"}], "patterns": [{"name": "〜か (realizing)", "span": "かったか", "words": ["かった", "か"], "explanation": "か here is not a real question; the speaker is taking in something he just found out. かったか = 'so you won!'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

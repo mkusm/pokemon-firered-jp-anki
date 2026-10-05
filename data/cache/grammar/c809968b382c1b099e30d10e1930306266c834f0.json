@@ -1,0 +1,1 @@
+{"text": "なんでじゃーっ！", "structure": [{"jp": "なんでじゃーっ！", "en": "whyyy?!"}], "patterns": [{"name": "〜だ", "span": "なんでじゃー", "words": ["なんで", "じゃ"], "explanation": "じゃ is an old-man or country way of saying だ, 'is'. Shouted after なんで it just adds force. なんでじゃー = 'why is that?!'"}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

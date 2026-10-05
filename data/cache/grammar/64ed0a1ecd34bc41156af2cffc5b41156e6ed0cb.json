@@ -1,0 +1,1 @@
+{"text": "げんしの　ちからで　こうげきする。", "structure": [{"jp": "げんしの　ちからで", "en": "with primeval power"}, {"jp": "こうげきする。", "en": "attacks."}], "patterns": [{"name": "〜で (how)", "span": "ちからで", "words": ["ちから", "で"], "explanation": "で here shows what something is done with. ちからで = 'with power'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

@@ -1,0 +1,1 @@
+{"text": "こわかったよー！", "structure": [{"jp": "こわかったよー！", "en": "that was scary!"}], "patterns": [{"name": "〜かった", "span": "こわかった", "words": ["こわかった"], "explanation": "Words ending in い change that い to かった to talk about the past. こわかった = 'it was scary'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

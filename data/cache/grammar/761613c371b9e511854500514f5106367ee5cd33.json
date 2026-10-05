@@ -1,0 +1,1 @@
+{"text": "せかいで　いちばん！", "structure": [{"jp": "せかいで　いちばん！", "en": "the most in the world!"}], "patterns": [{"name": "〜でいちばん", "span": "せかいで　いちばん", "words": ["せかい", "で", "いちばん"], "explanation": "で gives the group or area inside which something is number one. せかいで　いちばん = 'the most in the world'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

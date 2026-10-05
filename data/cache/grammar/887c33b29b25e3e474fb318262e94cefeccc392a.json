@@ -1,0 +1,1 @@
+{"text": "すなあらしが　ふきあれている", "structure": [{"jp": "すなあらしが", "en": "the sandstorm"}, {"jp": "ふきあれている", "en": "is raging"}], "patterns": [{"name": "〜ている", "span": "ふきあれている", "words": ["ふきあれている"], "explanation": "ている after a verb says the thing is going on right now. ふきあれている = 'is raging'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

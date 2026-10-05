@@ -21,7 +21,7 @@ How it works, in detail: [`docs/how-it-works.html`](docs/how-it-works.html)
 
 | | |
 |---|---|
-| `firered_jp.apkg` | 10,863 cards, in story order |
+| `firered_jp.apkg` | 10,536 cards, in story order |
 
 It is attached to the [latest release](https://github.com/mkusm/pokemon-firered-jp-anki/releases/latest).
 
@@ -35,8 +35,8 @@ Each card:
   how the form is built
   (`つかまえ (stem) + て (te-form)`), the sentence in kanji and in English, up to
   two more example sentences, the whole message, and the JMdict senses.
-- **Grammar**, on the back, for the first six chapters so far (everything up
-  to the sixth gym, 7,186 cards): the patterns the word takes part in, each explained
+- **Grammar**, on the back, for the whole story, all ten chapters through the postgame
+  (9,506 cards): the patterns the word takes part in, each explained
   in plain words for that sentence, and a breakdown of the sentence phrase by
   phrase. The card for と in しゅじんこうと　なって says: "と before なる shows
   what someone turns into; it is a more formal に. しゅじんこうと　なって =
@@ -45,10 +45,10 @@ Each card:
 つかまえた, つかまえて and つかまえられる are three cards: every form is drilled
 where the story first uses it.
 
-Particles get a card for each job they do, in the first six chapters so far: か has
+Particles get a card for each job they do, in the whole story: か has
 one card as the question marker and another for "or", が one as the subject
-marker and another for "but". In the later chapters each particle still has a
-single card, showing its first use.
+marker and another for "but". At the end of the deck (link play, the Help menu, error messages) each
+particle still has a single card, showing its first use.
 
 Names are in English as the English game has them, on the cards and in every
 translation: ニビシティ is Pewter City, ふしぎなアメ the Rare Candy, チャンピオンロード
@@ -57,8 +57,8 @@ squeeze into twelve letters are spelled the way the series spells them now
 (Paralyze Heal, not PARLYZ HEAL). The player and the rival keep the names the
 deck fills in for them, Red and Green.
 
-Everything with a name worth knowing has one card: 221 Pokémon, 148 items,
-253 moves, 61 abilities, the 17 types, 132 places, the main characters, the
+Everything with a name worth knowing has one card: 221 Pokémon, 153 items,
+284 moves, 61 abilities, the 17 types, 132 places, the main characters, the
 badges, 22 game terms (ポケモンずかん, してんのう) and 15 names from the real world
 (ファミコン, きょうと). The card sits at the first line of dialogue that says the
 name, or else where the thing is first met:
@@ -83,7 +83,7 @@ something: a cultural reference (the film on the TV in your room), a play on
 words, a regional dialect, or a place where the English game says something
 else (the old man in Viridian is drunk in Japanese and wants coffee in
 English). Notes that state a fact about the outside world are checked by a web
-search before they are shown. The first six chapters have them so far.
+search before they are shown. The whole story has them; the end of the deck does not yet.
 
 Names not worth a card get none: the presets of the naming screen, characters
 who appear once, pieces of longer names. There is no separate names deck.
@@ -116,7 +116,7 @@ All you need is [Anki](https://apps.ankiweb.net/), on desktop or on your phone.
 3. **Pick a pace.** The cards follow the game, so the natural way to use the
    deck is to study a stretch and then play it. For scale: the opening sequence
    is the first 172 cards, everything up to the first gym about 2,500, the whole
-   deck 10,863. At 20 new cards a day that is about four months to Brock.
+   deck 10,536. At 20 new cards a day that is about four months to Brock.
 4. **Read the card.** The front is the line as the game shows it, in kana, with
    one word highlighted: read the sentence and recall that word. The back gives
    the reading in romaji, the dictionary form, the meaning in this sentence,
@@ -297,14 +297,15 @@ vendor/           upstream clones (ignored)
 
 ## Known limits
 
-- The deck is in two states. The first six chapters were analysed by Opus and
-  have grammar and notes on their cards. The other four are Sonnet's analysis, with
-  Opus only on the sentences Sonnet flagged, and have no grammar yet. On a
+- The deck is in two states. The story, all ten chapters, was analysed by Opus and
+  has grammar and notes on its cards. The end of the deck (link play, the
+  Help menu, error messages, 1,030 cards) is Sonnet's analysis, with
+  Opus only on the sentences Sonnet flagged, and has no grammar yet. On a
   sample of 100 sentences Opus corrected a clear Sonnet error in 3: a wrong
   item name, a line read as "I was asked a favor" that means "do me a favor",
   and あったら filed under ある where it is 合う.
-- Particles are split into one card per job only in the first six chapters. In the
-  later chapters all uses of a particle are still filed under one card.
+- Particles are split into one card per job only in the story. At the
+  end of the deck all uses of a particle are still filed under one card.
 - A grammar pattern's name is written per sentence, so the same pattern can be
   spelled two ways on different cards (〜せる and 〜させる).
 - Nothing has been proofread by a native speaker.

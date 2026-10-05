@@ -1,0 +1,1 @@
+{"text": "やっぱ　こわいの？", "structure": [{"jp": "やっぱ", "en": "after all"}, {"jp": "こわいの？", "en": "are you scared?"}], "patterns": [{"name": "〜の (question)", "span": "こわいの", "words": ["こわい", "の"], "explanation": "の at the end with a rising voice makes a soft, casual question. こわいの = 'you're scared?'"}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

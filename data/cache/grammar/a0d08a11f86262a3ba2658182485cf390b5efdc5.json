@@ -1,0 +1,1 @@
+{"text": "ませた　こどもだ！", "structure": [{"jp": "ませた　こどもだ！", "en": "what a precocious kid!"}], "patterns": [{"name": "verb + noun", "span": "ませた　こども", "words": ["ませた", "こども"], "explanation": "A verb placed right before a thing describes that thing. ませた　こども = 'a kid who acts older than his age'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

@@ -1,0 +1,1 @@
+{"text": "きいて　くれるか！", "structure": [{"jp": "きいて　くれるか！", "en": "so you'll listen to my request!"}], "patterns": [{"name": "〜てくれる", "span": "きいて　くれる", "words": ["きいて", "くれる"], "explanation": "くれる after a て-form says someone does the thing as a favor to the speaker. きいて　くれる = 'you'll hear me out (for me)'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

@@ -1,0 +1,1 @@
+{"text": "おしえてやる！", "structure": [{"jp": "おしえてやる！", "en": "I'll tell you!"}], "patterns": [{"name": "〜てやる", "span": "おしえてやる", "words": ["おしえて", "やる"], "explanation": "やる after a て-form verb says you do the thing for someone, talking down to them. おしえてやる = 'I'll tell you (since you need telling)'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

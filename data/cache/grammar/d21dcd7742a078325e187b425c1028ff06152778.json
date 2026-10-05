@@ -1,0 +1,1 @@
+{"text": "あたま　きたわ", "structure": [{"jp": "あたま　きたわ", "en": "now I'm mad"}], "patterns": [{"name": "〜わ", "span": "きたわ", "words": ["きた", "わ"], "explanation": "わ at the end of a sentence gives it a soft, feminine tone of feeling. あたま　きたわ = 'Now I'm mad!'"}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

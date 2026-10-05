@@ -1,0 +1,1 @@
+{"text": "ほれ　わいや　マサキや！", "structure": [{"jp": "ほれ", "en": "look"}, {"jp": "わいや", "en": "it's me"}, {"jp": "マサキや！", "en": "it's Bill!"}], "patterns": [{"name": "〜だ", "span": "わいや", "words": ["わい", "や"], "explanation": "や here is the Kansai dialect form of だ, 'is'. わいや = 'it's me'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

@@ -1,0 +1,1 @@
+{"text": "わしは　もえる　おとこ！", "structure": [{"jp": "わしは", "en": "I am"}, {"jp": "もえる　おとこ！", "en": "a burning man!"}], "patterns": [{"name": "verb + noun", "span": "もえる　おとこ", "words": ["もえる", "おとこ"], "explanation": "A verb placed right before a thing or person describes it. もえる おとこ = 'a man who burns'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}
