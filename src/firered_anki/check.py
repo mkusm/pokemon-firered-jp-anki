@@ -12,7 +12,7 @@ import sys
 import pandas as pd
 import yaml
 
-from . import analyse, chapter, grammar, models, notes
+from . import analyse, chapter, grammar, models, notes, speakers
 from .cards import CARDS_OUT, STAND_ALONE, in_story, prepare
 from .map_order import MapOrder
 from .order import FIRST_SEEN
@@ -70,6 +70,17 @@ def main() -> None:
     check("a card tagged player-boy or player-girl is on a word only that side meets", [
         f"{k} {tags}" for k, tags in zip(cards["key"], cards["tags"])
         for side in ("boy", "girl") if f"player-{side}" in tags and sides.get(k) != {side}])
+
+    # --- what the cards say about a line
+    marked = deck[deck["text"].str.contains("＊")]
+    check("every ＊ of a sentence has the code it stands for", [
+        t for t, v in zip(marked["text"], marked["vars"]) if t.count("＊") != len(json.loads(v))])
+    # The lines on which the game itself names a main character are the test
+    # of the speakers read from the maps: where both know, they must agree.
+    main_cast = set(speakers.NAMED.values())
+    check("a speaker read from the map is the one the game names on the line", [
+        f"{sp} / {who}: {t}" for sp, lb, t in zip(deck["speaker"], deck["label"], deck["text"])
+        if sp in main_cast and (who := speakers.who(lb, t)) and who != sp])
 
     # --- the models
     wrong = []

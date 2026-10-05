@@ -290,6 +290,16 @@ deck, 11 the Link play deck. The docs do not call them chapters.
 - A `sense-guessed` card shows no dictionary-sense line: the sense check
   rejected every sense it was shown (the first five), so the guess is wrong
   more often than right.
+- A card's speaker is the one the line names (オーキド『…), or else the one
+  `speakers.py` reads from the map: the person whose script shows the text.
+  It gives none for narration, for a text two kinds of people show, and for
+  a scene (a script that moves a second person). Do not loosen those rules
+  to cover more lines: `check` tests the result against the lines on which
+  the game names a main character.
+- `placeholders.py` says what each ＊ stands for: from the battle code's
+  placeholder names, from a script's `buffer…` command above the message, or
+  from a counter beside it. A buffer a C screen fills is not named. Do not
+  guess one from the English text.
 - A card's `Location` is a readable name from `cards.PLACES` and
   `cards.place_name`. Add a new text group there; do not show raw group names.
 - A card's identity is its key (dictionary entry, sense, form). Changing how
@@ -393,8 +403,10 @@ Update this when it changes.
   types, 132 places, 23 people, 2 for Team Rocket, 8 badges, 22 game terms, 15
   real-world names), found by `names.py` in every chapter with no model call.
   The 56 name lines this put in chapter 0 were re-analysed on Opus. The names
-  deck is gone. Three decks, 11,084 cards: story 9,537, Help 941 (stand-alone), Link play 606. The note type has `Note` and
-  `SentenceNote` fields.
+  deck is gone. Three decks, 11,084 cards: story 9,537, Help 941 (stand-alone), Link play 606. The note type has `Note`,
+  `SentenceNote` and `Placeholders` fields. 4,481 cards show a speaker (714
+  named by the line, the rest read from the map), and 230 cards on 171
+  sentences say what their ＊ stand for.
 - English names: the name check passes on every sentence the deck shows, in
   all chapters. 91 sentences were redone on Opus for it, most of them in
   chapters 1 to 9, so those chapters now have a few more Opus sentences.

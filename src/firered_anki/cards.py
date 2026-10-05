@@ -35,7 +35,7 @@ from collections import Counter, defaultdict
 
 import pandas as pd
 
-from . import claude_cli, corrections, grammar, kanji_line, models, names, notes
+from . import claude_cli, corrections, grammar, kanji_line, models, names, notes, placeholders, speakers
 from .analyse import MAIN, load, results
 from .grounding import sense_glosses
 from .map_order import MapOrder
@@ -647,8 +647,10 @@ def build_cards(run_name: str = MAIN.name, offline_merge: bool = False) -> pd.Da
                 "SentenceEnglish": english(r, a),
                 "ExtraExamples": "<br>".join(extras), "Context": ctx,
                 "Location": location(r), "MessageId": r.msg_id,
-                "Speaker": first["speaker"] or "",
+                # Named by the line itself (オーキド『…), or else read from the map.
+                "Speaker": first["speaker"] or speakers.who(r.label, first["text"]),
                 "Dictionary": dictionary(w, e),
+                "Placeholders": placeholders.hint(r.text, r.vars, r.label),
                 "tags": [re.sub(r"\W", "_", location(r))]
                 + (["proper"] if w.get("proper") else [])
                 + ([w["name"]] if w.get("name") else [])

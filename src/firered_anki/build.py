@@ -41,12 +41,13 @@ FIELDS = [
     "Kanji", "UsuallyKana", "CharReadings",
     "Literal", "InContext", "DictSense", "Onomatopoeia", "Modifiers", "SentenceKanji", "SentenceEnglish",
     "ExtraExamples", "Context", "Location", "MessageId", "Speaker", "Dictionary",
-    "Grammar", "Breakdown", "Note", "SentenceNote",
+    "Grammar", "Breakdown", "Note", "SentenceNote", "Placeholders",
 ]
 
 FRONT = """
 <div class="meta">{{#Speaker}}{{Speaker}}{{/Speaker}}</div>
 <div class="sentence">{{Sentence}}</div>
+{{#Placeholders}}<div class="meta">{{Placeholders}}</div>{{/Placeholders}}
 """
 
 BACK = """

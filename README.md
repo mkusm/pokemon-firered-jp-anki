@@ -28,7 +28,8 @@ It is attached to the [latest release](https://github.com/mkusm/pokemon-firered-
 Each card:
 
 - **Front:** the sentence as the game shows it, with one word highlighted, and
-  the speaker when known.
+  the speaker when known (named by the line, or read from the map: "old man",
+  タケシ), and what each ＊ stands for where the game's code says.
 - **Back:** the word's form and dictionary form, kanji with per-character
   readings, romaji, what it means here, its literal meaning where that adds
   something (ふとっぱら "big belly" for "generous"), the dictionary sense that was chosen,
@@ -316,6 +317,8 @@ src/firered_anki/
   grammar.py      LLM pass for grammar patterns and sentence breakdowns
   cards.py        occurrences → cards, sense merge, examples
   kanji_line.py   the game's spaces put back into a card's kanji line
+  speakers.py     who says a line, read from the map's people and scripts
+  placeholders.py what each ＊ in a sentence stands for
   romaji.py       kana → Hepburn
   build.py        cards → .apkg
 data/cache/       the LLM's answers (tracked)

@@ -4,6 +4,7 @@ One row per sentence, keyed by message ID. The raw message is kept on every row.
 Run: uv run python -m firered_anki.extract
 """
 
+import json
 import re
 from collections import Counter
 
@@ -57,8 +58,14 @@ DROP_RE = re.compile(
 )
 
 PLACEHOLDER = re.compile(r"\[([^\]]*)\]")
+# While a message is cut into sentences, each runtime variable is one
+# private-use character that says which it is: the n-th is MARK + n. A
+# sentence then knows which codes its ＊ stand for (`vars`), for the hint on
+# the card (placeholders.py).
+MARK = 0xE000
+MARKS = re.compile(r"[\ue000-\uf8ff]")
 # "オーキド『…" names the speaker. Help steps like "①『たたかう』" do not.
-SPEAKER = re.compile(r"^([぀-ヿ＊][^　 『』「」。！？…]{0,11})『")
+SPEAKER = re.compile(r"^([぀-ヿ＊\ue000-\uf8ff][^　 『』「」。！？…]{0,11})『")
 # A sentence ends at a run of 。！？ plus any closing brackets after it.
 SENTENCE = re.compile(r"[^。！？!?]+(?:[。！？!?]+[」』）)]*)?")
 ENDS = re.compile(r"[。！？!?][」』）)]*$")
@@ -82,7 +89,16 @@ def replace_placeholder(m: re.Match, unknown: Counter) -> str:
 
 
 def split_message(raw: str, unknown: Counter) -> list[dict]:
-    text = PLACEHOLDER.sub(lambda m: replace_placeholder(m, unknown), raw)
+    codes: list[str] = []
+
+    def replace(m: re.Match) -> str:
+        out = replace_placeholder(m, unknown)
+        if out != VAR:
+            return out
+        codes.append(m.group(1))
+        return chr(MARK + len(codes) - 1)
+
+    text = PLACEHOLDER.sub(replace, raw)
     # \c clears the box: a new page. \n and \r are line breaks inside a page;
     # they fall on phrase boundaries, so they become a space like the game's own.
     # A page that doesn't end a sentence runs on into the next one, unless the
@@ -109,7 +125,9 @@ def split_message(raw: str, unknown: Counter) -> list[dict]:
         for sent_no, sent in enumerate(SENTENCE.findall(c["text"])):
             sent = sent.strip("　 ")
             if HAS_WORD.search(sent):
-                rows.append({**c, "sent": sent_no, "text": sent})
+                rows.append({**c, "sent": sent_no, "text": MARKS.sub(VAR, sent),
+                             "speaker": c["speaker"] and MARKS.sub(VAR, c["speaker"]),
+                             "vars": [codes[ord(x) - MARK] for x in MARKS.findall(sent)]})
     return rows
 
 
@@ -173,6 +191,7 @@ def main() -> None:
                     "sent": s["sent"],
                     "speaker": s["speaker"],
                     "text": s["text"],
+                    "vars": json.dumps(s["vars"]),
                     "raw": r.raw,
                 }
             )
