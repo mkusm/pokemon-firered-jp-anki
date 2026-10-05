@@ -591,6 +591,7 @@ def build_cards(run_name: str = MAIN.name, offline_merge: bool = False) -> pd.Da
             g = gram.get(first["text"])
             out.append({
                 "key": json.dumps(key, ensure_ascii=False), "order": first["card_order"],
+                "deck": r.deck,  # story, help or link: the deck of the card's sentence
                 # Within a sentence: the words left to right, a name before a word inside it.
                 "_at": (first["pos"], key[0] != "name"),
                 "Sentence": highlight(first["text"], a["words"], first["pos"], first["span"]),

@@ -23,8 +23,8 @@ Word boundaries are fixed across chapters, so a chapter's run can send a
 sentence of an earlier chapter back to the model. The earlier chapters are
 therefore checked again afterwards, and settled if anything was reopened.
 
-N counts from 0. 9 is the postgame; 10 is the end of the deck (link play, the
-Help menu, error messages), which is not part of the story.
+N counts from 0. 9 is the postgame. 10 is the Help deck and 11 the Link play
+deck, which are not part of the story.
 
 This calls the model. Run it for the chapter you were asked to do.
 

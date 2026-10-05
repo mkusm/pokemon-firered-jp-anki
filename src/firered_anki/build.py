@@ -1,9 +1,10 @@
-"""Stage 6: cards → Anki packages.
+"""Stage 6: cards → one Anki package of three decks.
 
-Fixed model and deck IDs, and note GUIDs from each card's key, so re-running
-the build updates existing notes instead of duplicating them and keeps review
-history. Notes are added in story order; set the deck's new-card order to
-"order added" in Anki.
+The story, the Help menu and link play are subdecks of one deck, numbered so
+that Anki lists them in that order. Fixed model and deck IDs, and note GUIDs
+from each card's key, so re-running the build updates existing notes instead
+of duplicating them and keeps review history. Notes are added in story order
+and their new-card positions run on from one deck to the next.
 
 Fields added after the first release are at the end of the note type, so that
 Anki can merge it into the earlier one on import ("Merge note types"): Grammar
@@ -23,8 +24,16 @@ from .cards import CARDS_OUT
 from .paths import ROOT
 
 MODEL_ID = 1607392319
-DECK_ID = 2059400110
-# 2059400111 was the names deck (FireRed JP::Names), retired: every name worth a card is in the main deck.
+# The story deck has the ID the single deck had ("FireRed JP"). Anki matches
+# decks by name on import, not by ID, and does not move a card it already has:
+# a new layout means deleting the old deck and importing afresh.
+# 2059400111 was the names deck (FireRed JP::Names), retired: every name worth a card is in the story deck.
+PARENT = "Pokemon FireRed Japanese"
+DECKS = {  # cards.parquet's `deck` → (deck ID, name)
+    "story": (2059400110, f"{PARENT}::1 Story"),
+    "help": (1809916755, f"{PARENT}::2 Help"),
+    "link": (1762871900, f"{PARENT}::3 Link play / multiplayer"),
+}
 DECK_OUT = ROOT / "firered_jp.apkg"
 
 FIELDS = [
@@ -120,22 +129,25 @@ MODEL = genanki.Model(
 )
 
 
-def package(cards: pd.DataFrame, deck_id: int, name: str, path) -> None:
-    deck = genanki.Deck(deck_id, name)
-    for c in cards.sort_values("Order").itertuples():
+def package(cards: pd.DataFrame, path) -> None:
+    decks = {which: genanki.Deck(deck_id, name) for which, (deck_id, name) in DECKS.items()}
+    for position, c in enumerate(cards.sort_values("Order").itertuples()):
         key = json.loads(c.key)
-        deck.add_note(genanki.Note(
+        decks[c.deck].add_note(genanki.Note(
             model=MODEL,
             fields=[str(getattr(c, f) or "") for f in FIELDS],
             guid=genanki.guid_for(*map(str, key)),
             tags=list(c.tags),
+            due=position,
         ))
-    genanki.Package(deck).write_to_file(path)
-    print(f"{name}: {len(cards)} notes → {path.relative_to(ROOT)}")
+    genanki.Package(list(decks.values())).write_to_file(path)
+    for which, deck in decks.items():
+        print(f"{deck.name}: {len(deck.notes)} notes")
+    print(f"{len(cards)} notes → {path.relative_to(ROOT)}")
 
 
 def main() -> None:
-    package(pd.read_parquet(CARDS_OUT), DECK_ID, "FireRed JP", DECK_OUT)
+    package(pd.read_parquet(CARDS_OUT), DECK_OUT)
 
 
 if __name__ == "__main__":

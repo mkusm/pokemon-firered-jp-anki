@@ -8,7 +8,10 @@
 # Anchors:
 #   <map_order entry>  seen at that point, after that entry's own dialogue
 #   start              before the intro (title screen, menus)
-#   end                end of the deck (rare: link play, never-seen text)
+#   help               the Help deck: the Help menu (L/R)
+#   end                the Link play deck: link cable and wireless play, the
+#                      Union Room, trading, Mystery Gift, the e-Reader, mail and
+#                      the easy-chat word lists; also what no rule can place
 #   exclude            never carded (debug, Ruby/Sapphire leftovers)
 #   species | move | item | ability | trainer | trainer_class | mapsec | pokedex
 #                      computed from the pret decomp: first map where the thing
@@ -155,16 +158,25 @@ groups:
     - ['RegionMap_AreaDesc_', 'area_desc|PalletTown_RivalsHouse']
     - ['ExpandedPlaceholder|Empty\d|Unused|Dummy', exclude]   # Ruby/Sapphire names, blanks
     # Error messages a normal game never shows: save failures, corrupted or
-    # deleted save data, damaged backup memory.
-    - ['SaveError|SaveFail|Corrupt|BackupMemory|SaveFileHasBeenDeleted|GamePlayCannot', end]
-    # A hardware error and the hidden save-wipe screen.
-    - ['SubCircuitBoard|ClearAllSaveData|ClearingData', end]
+    # deleted save data, damaged backup memory, the check that follows, the
+    # Ruby/Sapphire clock fix. Left out of the deck at the owner's choice.
+    - ['SaveError|SaveFail|SaveComplete|Corrupt|BackupMemory|SaveFileHasBeenDeleted|GamePlayCannot|CheckCompleted|NoSaveFile|InGameClock', exclude]
+    # A hardware error and the hidden save-wipe screen: the same.
+    - ['SubCircuitBoard|ClearAllSaveData|ClearingData', exclude]
+    # The diploma for a complete Pokédex: the last thing the postgame gives.
+    - ['Diploma', PokemonLeague_ChampionsRoom_Text_RematchIntro]
+    # Solo text the classify stage had sent to the end with the link-play text.
+    - ['ByeByeVar1', pc]                              # releasing a Pokémon
+    - ['Mushroom', TwoIsland_House]                   # the move tutor's price
+    - ['MenuRetire', FuchsiaCity_SafariZone_Entrance] # the Safari Zone's start menu
+    - ['Questionnaire', poke_mart]                    # the form on the Mart counter
+    - ['NotEnoughHp', field_moves]                    # Softboiled outside battle
     - ['Credits|Staff|HOF|LeagueChamp|Victories|BecomeLeader', PokemonLeague_HallOfFame]
-    - ['Giddy|Mail|EasyChat|BerryCrush|Union|Link|Trade|Communicat|Record|Wonder|News|Mystery|Wireless|Profile|Chat|Designers|Dodrio|PokemonJump|Colosseum|Hoenn|Birch|Contest|SecretBase|Decor|Diploma', end]
+    - ['Giddy|Mail|EasyChat|BerryCrush|Union|Link|Trade|Communicat|Record|Wonder|News|Mystery|Wireless|Profile|Chat|Designers|Dodrio|PokemonJump|Colosseum|Hoenn|Birch|Contest|SecretBase|Decor', end]
     - ['Bard|Trendy|GoodSaying|Song|Phrase|Beauty|Tough|Pink|Rankings|Players|Pressing|Cooperative|Excellents|WantToPlayAgain|EReader|JPText|Card|Stamp|Gift|Comm', end]
     - ['Shop|Sell|Buy|Pokedollar|HowMany|QuitShopping|SendItHome', poke_mart]
     - ['Cut|Flash|LightUp|Dive|Surf|Strength|Waterfall|RockSmash|ShareHp|HealingSpot|Teleport|Dig', field_moves]
-    - ['Lemonade|SodaPop|FreshWater|Iron_|Zinc_|Calcium_|Carbos_|Protein_|HealPowder|\d+F\b|\d+F_|B\dF', CeladonCity_DepartmentStore_1F]
+    - ['Lemonade|SodaPop|FreshWater|Iron_|Zinc_|Calcium_|Carbos_|Protein_|HealPowder|\d+F\b|\d+F_|B\dF|Rooftop', CeladonCity_DepartmentStore_1F]
     - ['Nibble|Fish|Rod', 'item:ITEM_(OLD|GOOD|SUPER)_ROD']
     - ['Itemfinder', itemfinder]
     - ['PokeFlute', PokemonTower_7F]
@@ -223,11 +235,11 @@ groups:
 
   # --- map_order.yaml `global` entries (script text)
   # The Help menu (L/R) is optional reading in manual-style prose, and most of
-  # its words are in the story anyway: its cards go to the end of the deck.
-  help_system: end
+  # its words are in the story anyway: it has a deck of its own.
+  help_system: help
   save:
-    - ['SaveFailed|DifferentGameFile', end]   # save error, overwrite warning
-    - ['^', start]
+    - ['SaveFailed', exclude]                 # save error: left out with the others
+    - ['^', start]                            # (the overwrite warning is in the save walk)
   # Lines shown when you inspect an object (bookshelf, TV, kitchen, machines,
   # signs). The game triggers them by tile type, so the decomp can't say where
   # each first occurs: the classify stage places them.
@@ -255,7 +267,7 @@ groups:
   VSSeeker: VermilionCity_PokemonCenter_1F
   pc_transfer: pc
   repel: item:ITEM_REPEL
-  white_out: end
+  white_out: Route1                         # losing a battle: possible from the first wild Pokémon on
   cable_club: end
   event_scripts:
     - ['Colosseum|TradeCenter|TimeCapsule|RecordCorner|Link|Wireless|MixRecords|TestMsg', end]
@@ -278,6 +290,45 @@ never_shown:
   sText_YouThrowABallNowRight: "Wally's catching lesson, left over from Ruby and Sapphire"
   gDummyPokedexText: "the Pokédex entry of Pokémon 0, which no game shows"
   gPokedexEntries.0: "the category of Pokémon 0, which no game shows"
+  # Ruby and Sapphire features FireRed has no code for (no mauville_old_man.c,
+  # bard_music.c, dewford_trend.c, tv.c, lilycove_lady.c, contest.c or
+  # secret_base.c in the decomp). A key may be a glob, on the label or on
+  # group.label.
+  "GiddyText_*": "the giddy old man of Mauville, from Ruby and Sapphire"
+  gText_AndImproveTheBardsSong: "the bard of Mauville, from Ruby and Sapphire"
+  gText_TheNewSong: "the bard of Mauville, from Ruby and Sapphire"
+  gText_TheBardsSong: "the bard of Mauville, from Ruby and Sapphire"
+  gText_OriginalSongWillBeUsed: "the bard of Mauville, from Ruby and Sapphire"
+  gText_AndMakeATrendySaying: "Dewford's trendy sayings, from Ruby and Sapphire"
+  gText_TheTrendySaying: "Dewford's trendy sayings, from Ruby and Sapphire"
+  gText_ThatsTrendyAlready: "Dewford's trendy sayings, from Ruby and Sapphire"
+  gText_WhatsHipAndHappening: "Dewford's trendy sayings, from Ruby and Sapphire"
+  gText_ToTeachHerAGoodSaying: "the Lilycove lady, from Ruby and Sapphire"
+  gText_GoodSaying: "the Lilycove lady, from Ruby and Sapphire"
+  gText_TheMailSalutation: "Hoenn's TV shows, from Ruby and Sapphire"
+  gText_Interview: "Hoenn's TV shows, from Ruby and Sapphire"
+  gText_Beauty3: "a contest stat, left in Japanese in the English game: FireRed has no contests"
+  gText_Toughness: "a contest stat, left in Japanese in the English game: FireRed has no contests"
+  gText_SecretBase: "secret bases, from Ruby and Sapphire"
+  gText_Decoration: "secret bases, from Ruby and Sapphire"
+  gText_BirchInTrouble: "Hoenn's professor, from Ruby and Sapphire"
+  # Word-picker prompts for those features, left in Japanese in the English game.
+  gText_CombineTwoWordsOrPhrases2: "a word-picker prompt for a Ruby and Sapphire feature, left in Japanese in the English game"
+  gText_CombineTwoWordsOrPhrases3: "a word-picker prompt for a Ruby and Sapphire feature, left in Japanese in the English game"
+  gText_WithFourPhrases: "a word-picker prompt for a Ruby and Sapphire feature, left in Japanese in the English game"
+  gText_OnlyOnePhrase: "a word-picker prompt for a Ruby and Sapphire feature, left in Japanese in the English game"
+  gText_PleaseEnterPhraseOrWord: "a word-picker prompt for a Ruby and Sapphire feature, left in Japanese in the English game"
+  # The diploma group is Ruby and Sapphire's wording of the diploma (ホウエン);
+  # FireRed's own is gText_Diploma_… in strings.
+  "diploma.*": "Ruby and Sapphire's diploma text, left in Japanese in the English game; FireRed's own is kept"
+  # Shared event lines the English game left in Japanese.
+  Text_TestMsg: "a test message"
+  Text_MakingPreparations: "left in Japanese in the English game: no script shows it"
+  Text_IdLikeToSeeRequest: "left in Japanese in the English game: no script shows it"
+  Text_ThankYouForShowingMe: "left in Japanese in the English game: no script shows it"
+  Text_ThatsNotRight: "left in Japanese in the English game: no script shows it"
+  Text_ISee: "left in Japanese in the English game: no script shows it"
+  gText_QuestLog_UsedDive: "the recap line for Dive, which FireRed does not have"
 
 # Story points the classify stage (LLM) may choose from for rows that only a
 # catch-all '.' rule placed. id → what the player first meets there.

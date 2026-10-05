@@ -17,7 +17,7 @@ import yaml
 from .decomp import STARTER_LEVEL, STARTER_MAP, STARTERS, Decomp, norm
 from .lemmas import lemmas
 from .map_order import MapOrder
-from .spread import CHAPTER_ENDS, END_OF_DECK, chapter_of, spread
+from .spread import CHAPTER_ENDS, DECK_OF, HELP, LINK_PLAY, chapter_of, spread
 from .paths import CORPUS, DATA, EXTRACT_OUT, ROOT
 
 FIRST_SEEN = ROOT / "first_seen.yaml"
@@ -345,7 +345,9 @@ class Placer:
     def __init__(self, mo: MapOrder, fs: FirstSeen, keys: Keys, cfg: dict):
         self.mo, self.fs, self.keys = mo, fs, keys
         self.groups = cfg["groups"]
-        self.end_rank = float(len(mo.order) + 1)
+        # After the story: the Help deck, then the Link play deck.
+        self.help_rank = float(len(mo.order) + 1)
+        self.end_rank = float(len(mo.order) + 2)
         self.stats: Counter = Counter()
 
     def rules_for(self, name: str):
@@ -389,6 +391,8 @@ class Placer:
             return "exclude", math.nan, ""
         if anchor == "start":
             return "start", self.mo.rank[FLOATS_AFTER] + 0.5, "start"
+        if anchor == "help":
+            return "help", self.help_rank, "help"
         if anchor == "end":
             return "end", self.end_rank, "end"
         if anchor.startswith("item:"):
@@ -507,9 +511,12 @@ def main() -> None:
             placed[r.msg_id] = ("exclude", math.nan, "unused in the game", 0, False)
             never.append((r.msg_id, "the decomp marks it unused"))
             continue
-        if r.label in by_hand:
+        why = by_hand.get(r.label) or next(
+            (w for pat, w in by_hand.items() if "*" in pat and (
+                fnmatch.fnmatchcase(r.label, pat) or fnmatch.fnmatchcase(f"{r.group}.{r.label}", pat))), None)
+        if why:
             placed[r.msg_id] = ("exclude", math.nan, "never shown", 0, False)
-            never.append((r.msg_id, by_hand[r.label]))
+            never.append((r.msg_id, why))
             continue
         if r.label in mo.place:
             # A line of a walk has an exact place, like dialogue, whatever kind of text it is.
@@ -537,7 +544,7 @@ def main() -> None:
     for r in msgs.itertuples(index=False):
         if r.ns == "hand":
             continue  # no English line to compare
-        if placed[r.msg_id][0] not in ("exclude", "end", "unplaced") and KANA.search(english[r.line_no]):
+        if placed[r.msg_id][0] not in ("exclude", "help", "end", "unplaced") and KANA.search(english[r.line_no]):
             placed[r.msg_id] = ("exclude", math.nan, UNTRANSLATED, 0, False)
             never.append((r.msg_id, UNTRANSLATED))
 
@@ -578,7 +585,7 @@ def main() -> None:
     df[df["fallback"]].to_parquet(FALLBACK_OUT, index=False)
     freq = df["text"].map(df["text"].value_counts())
     # The end bucket and unplaced rows: most frequent text first.
-    tail = df["bucket"].isin(["end", "unplaced"])
+    tail = df["bucket"].isin(list(DECK_OF))
     df["tiebreak"] = df["line_no"].where(~tail, -freq * 100000 + df["line_no"]).astype(float)
     df["sighting"], df["kind_order"] = 0.0, 0
     for msg_id, (_, _, tiebreak, sighting, kind_order) in fine.items():
@@ -595,9 +602,11 @@ def main() -> None:
     # Interleave non-dialogue lines with the story, chapter by chapter. This
     # preview uses tokenizer lemmas; the cards stage re-runs it on LLM senses.
     kept["dialogue"] = kept["bucket"] == "dialogue"
-    kept["tail"] = kept["bucket"].isin(["end", "unplaced"])
+    kept["tail"] = kept["bucket"].isin(list(DECK_OF))
+    kept["deck"] = kept["bucket"].map(DECK_OF).fillna("story")
     kept["chapter"] = chapter_of(kept["rank"], mo.rank)
-    kept.loc[kept["tail"], "chapter"] = END_OF_DECK
+    kept.loc[kept["deck"] == "help", "chapter"] = HELP
+    kept.loc[kept["deck"] == "link", "chapter"] = LINK_PLAY
     kept["order"] = spread(kept, kept["text"].map(lemmas))
     kept["teaches"] = kept["order"].notna()
     kept = kept.sort_values("order", na_position="last")

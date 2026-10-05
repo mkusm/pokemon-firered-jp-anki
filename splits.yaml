@@ -273,6 +273,10 @@
   as: かって + いた
   why: The て-form plus helper いた is the same cut for both the "keep" and "win" verbs.
   example: ここは　ポケモンの　おはかで　ゆうめいな　タウンだ…　かっていた　ポケモンが　しんだとき　ポケモン　タワーに　もっていって　めいふくを　いのるのさ…
+かっておく:
+  as: かって + おく
+  why: かって stands on its own as the te-form of かう, and おく is the separate helper verb 'do ahead of time', so the meaning is just the two words together.
+  example: さっき　オーキドはかせから　きいたんだけど…　ポケモンの　たいりょく　ＨＰが　なくなってきたら　こまめに　ポケモンセンターで　かいふく　させるか　とおくに　ぼうけんするときは　フレンドリィショップで　キズぐすりを　かっておくのが　きほん　らしいわよ　それじゃ　おうえん　しているわ！
 かみついてくる:
   as: かみついて + くる
   why: The te-form stands on its own and くる is a separate auxiliary verb.
@@ -1049,6 +1053,10 @@
   as: なくても
   why: Dictionary entry "even if not"; most sentences keep it whole.
   example: フラッシュ　という　わざを　もっている　ポケモンは　たたかって　なくても　フラッシュを　つかえる　ように　なる！
+なくなって:
+  as: depends
+  why: なくなる "run out" is one verb, but かわいく + なく + なって is negative ない plus なる "become not cute", two words.
+  example: さっき　オーキドはかせから　きいたんだけど…　ポケモンの　たいりょく　ＨＰが　なくなってきたら　こまめに　ポケモンセンターで　かいふく　させるか　とおくに　ぼうけんするときは　フレンドリィショップで　キズぐすりを　かっておくのが　きほん　らしいわよ　それじゃ　おうえん　しているわ！
 なくならない:
   as: なくならない
   why: It is the negative of the verb なくなる "run out", whose meaning is not just なく plus なる.

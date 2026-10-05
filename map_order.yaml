@@ -201,6 +201,7 @@ order:
       - gText_SavingDontTurnOffThePower
       - gText_PlayerSavedTheGame
       - gText_AlreadySaveFile_WouldLikeToOverwrite   # the second time
+      - gText_DifferentGameFile                      # the warning when the cartridge holds another game's save
   # Back in town with your first Pokémon: Mom heals it, Daisy has heard of the battle
   # The woman by the sign says this only once she has shown you the sign and
   # you have left the town map and come back. That is a scene variable, not a

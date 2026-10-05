@@ -51,9 +51,9 @@ There is no test suite. The checks are in "Before you say it is done" below.
 
 Chapters are numbered from 0 in the code: chapter 0 is everything up to the
 first gym badge. The docs call it "the first chapter". Chapter 9 is the
-postgame story. The end of the deck (link play, the Help menu, error messages,
-the easy-chat word lists) is chapter 10 in the code, so that the postgame can
-be run without it; the docs do not call it a chapter.
+postgame story. The two decks that are not the story have chapter numbers in
+the code too, so that the model stages can be run on one alone: 10 is the Help
+deck, 11 the Link play deck. The docs do not call them chapters.
 
 ## Rules
 
@@ -157,11 +157,36 @@ be run without it; the docs do not call it a chapter.
   adding one; The Cutting Room Floor's page on the game is a good place to
   find candidates, and must be read from a saved copy (the site refuses
   Claude).
-- The untranslated-in-English test is not applied to the end of the deck
-  (link play, union room): the decomp is of the English game and cannot say
-  what the Japanese release's own features showed.
-- Do not bring such text back to give a word a card. Link play, error messages
-  and the Help menu are different: they can be seen, and stay at the end.
+- The untranslated-in-English test is not applied to the Help and Link play
+  decks: the decomp is of the English game and cannot say what the Japanese
+  release's own features (the e-Reader, the Joyspot) showed. What is known to
+  be Ruby and Sapphire's there is listed by hand under `never_shown`, by
+  feature: the decomp has no source file for the old men of Mauville, trendy
+  sayings, the Lilycove lady, TV shows, contests or secret bases.
+- Do not bring such text back to give a word a card.
+- Save failures and other error messages can be shown, but the owner chose to
+  leave them out (`exclude` in `first_seen.yaml`). The one kept is the warning
+  before saving over another game's file, which is in the save walk.
+
+**Three decks, one package.**
+- The story is one deck; the Help menu and link play are decks of their own
+  (`spread.DECK_OF`, `build.DECKS`). Link play is everything that needs a
+  second player or device: the Union Room, the Cable Club, trading, Mystery
+  Gift, the e-Reader, mail, the easy-chat screens and word lists. In
+  `first_seen.yaml` the anchor `help` sends text to the first and `end` to
+  the second.
+- Solo text does not go there. A line a player can see alone belongs in the
+  story where it is seen: blacking out from Route 1, the diploma at the end of
+  the postgame, releasing a Pokémon at the PC.
+- The deck names are the owner's: `Pokemon FireRed Japanese`, with `1 Story`,
+  `2 Help` and `3 Link play / multiplayer` under it. The numbers keep Anki's
+  alphabetical list in order.
+- The deck is in development and the owner is its only user: a new version
+  replaces the old one (delete the deck, then import). Do not build or
+  document a migration path. For the record, Anki matches decks by name on
+  import, not by ID, and leaves a card it already has in the deck it is in;
+  this was tested with Anki's own import code (`uv run --no-project --with
+  anki`), an old package first, then a new one.
 
 **Cards.**
 - One card per word form and sense: つかまえた and つかまえて are two cards.
@@ -202,10 +227,12 @@ be run without it; the docs do not call it a chapter.
 - A card's `Location` is a readable name from `cards.PLACES` and
   `cards.place_name`. Add a new text group there; do not show raw group names.
 - A card's identity is its key (dictionary entry, sense, form). Changing how
-  keys are made changes identities, and people lose review history on those
-  cards. Measure it (see below) and say so.
-- The note type and deck IDs are fixed. Add a new field at the end of the field
-  list, so Anki can merge the note type on import.
+  keys are made changes identities. While the deck is in development that
+  costs nobody their review history, but still measure it (see below) and say
+  so: an unexpected number is how a mistake shows.
+- The note type ID is fixed. Add a new field at the end of the field list, so
+  Anki can merge the note type on import. A card's deck is not a field: it is
+  `deck` in `cards.parquet`.
 
 **Grammar.**
 - Explanations are in plain words for a learner who knows no grammar terms, and
@@ -279,7 +306,8 @@ Update this when it changes.
 - Chapters 0 to 9, the whole story: analysed by Opus with prompt version 4 or 5 (particle
   senses picked by the analysis), grammar and notes by Opus. All settled:
   `chapter N --dry-run` reports nothing left for each.
-- Chapter 10 (the end of the deck):
+- Chapters 10 and 11 (the Help deck, 548 sentences to redo, and the Link
+  play deck, 1,553):
   analysed by Sonnet with prompt version 2, with Opus on the
   sentences Sonnet flagged; no grammar, no notes, and one card per particle. `analyse
   rerun N` redoes every sentence of a chapter that is not Opus on version 4 or 5;
@@ -288,13 +316,13 @@ Update this when it changes.
   TV lines. Four corrections of word forms Sonnet wrote wrongly were removed
   as their chapters were redone on Opus, which wrote the forms correctly; the
   last two (ｃｍ, twice) went with the postgame.
-- `splits.yaml` has 443 decisions, from chapters 0 to 9. They are checked
+- `splits.yaml` has 445 decisions, from chapters 0 to 9. They are checked
   across chapters: a later chapter's run can send an earlier sentence back.
-- Names: 939 cards (221 Pokémon, 153 items, 284 moves, 61 abilities, 17
-  types, 132 places, 24 people, 2 for Team Rocket, 8 badges, 22 game terms, 15
+- Names: 938 cards (221 Pokémon, 153 items, 284 moves, 61 abilities, 17
+  types, 132 places, 23 people, 2 for Team Rocket, 8 badges, 22 game terms, 15
   real-world names), found by `names.py` in every chapter with no model call.
   The 56 name lines this put in chapter 0 were re-analysed on Opus. The names
-  deck is gone: one deck, 10,536 cards. The note type has `Note` and
+  deck is gone. Three decks, 10,471 cards: story 9,523, Help 330, Link play 618. The note type has `Note` and
   `SentenceNote` fields.
 - English names: the name check passes on every sentence the deck shows, in
   all chapters. 91 sentences were redone on Opus for it, most of them in
@@ -310,7 +338,7 @@ Update this when it changes.
   kitchen), Pallet Town from the door to the lab, options, saving, the bag.
   A walk's line is not moved by the flag rule: its place is the listed one.
   `hand_lines.yaml` has one line, the title. `never_shown` in
-  `first_seen.yaml` has seven labels.
+  `first_seen.yaml` has 38 entries, two of them globs.
 - `chapter N` can stop with "not settled: three rounds in a row" on a chain
   of near-identical floating lines, of which only one is shown at a time (the
   Fame Checker's four してんのう … とくしゅう！ titles in chapter 8): each

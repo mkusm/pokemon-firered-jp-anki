@@ -38,11 +38,14 @@ CHAPTER_ENDS = [
     "ViridianCity_Gym",
     "PokemonLeague_HallOfFame",
 ]  # then the postgame
-# The end of the deck (link play, the Help menu, error messages, the easy-chat
-# word lists) is not part of the story and is not spread. It has a chapter
-# number of its own, after the postgame, so that the model stages can be run
-# on the postgame without it.
-END_OF_DECK = len(CHAPTER_ENDS) + 1
+# What comes after the story is not spread, and is two decks of its own: the
+# Help menu, and link play (the Union Room, trading, Mystery Gift, mail and
+# the easy-chat word lists). Each has a chapter number, after the postgame's,
+# so that the model stages can be run on one of them alone.
+HELP = len(CHAPTER_ENDS) + 1
+LINK_PLAY = len(CHAPTER_ENDS) + 2
+# Which deck a row is in, by its bucket in the order stage.
+DECK_OF = {"help": "help", "end": "link", "unplaced": "link"}  # everything else: "story"
 
 
 def chapter_of(ranks: pd.Series, rank_of: dict[str, int]) -> pd.Series:

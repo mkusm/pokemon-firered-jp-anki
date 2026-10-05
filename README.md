@@ -21,7 +21,7 @@ How it works, in detail: [`docs/how-it-works.html`](docs/how-it-works.html)
 
 | | |
 |---|---|
-| `firered_jp.apkg` | 10,536 cards, in story order |
+| `firered_jp.apkg` | 10,471 cards in three decks: the story (9,523, in story order), the Help menu (330) and link play (618) |
 
 It is attached to the [latest release](https://github.com/mkusm/pokemon-firered-jp-anki/releases/latest).
 
@@ -36,7 +36,7 @@ Each card:
   (`つかまえ (stem) + て (te-form)`), the sentence in kanji and in English, up to
   two more example sentences, the whole message, and the JMdict senses.
 - **Grammar**, on the back, for the whole story, all ten chapters through the postgame
-  (9,506 cards): the patterns the word takes part in, each explained
+  (9,523 cards): the patterns the word takes part in, each explained
   in plain words for that sentence, and a breakdown of the sentence phrase by
   phrase. The card for と in しゅじんこうと　なって says: "と before なる shows
   what someone turns into; it is a more formal に. しゅじんこうと　なって =
@@ -47,7 +47,7 @@ where the story first uses it.
 
 Particles get a card for each job they do, in the whole story: か has
 one card as the question marker and another for "or", が one as the subject
-marker and another for "but". At the end of the deck (link play, the Help menu, error messages) each
+marker and another for "but". In the Help and Link play decks each
 particle still has a single card, showing its first use.
 
 Names are in English as the English game has them, on the cards and in every
@@ -83,7 +83,7 @@ something: a cultural reference (the film on the TV in your room), a play on
 words, a regional dialect, or a place where the English game says something
 else (the old man in Viridian is drunk in Japanese and wants coffee in
 English). Notes that state a fact about the outside world are checked by a web
-search before they are shown. The whole story has them; the end of the deck does not yet.
+search before they are shown. The whole story has them; the Help and Link play decks do not yet.
 
 Names not worth a card get none: the presets of the naming screen, characters
 who appear once, pieces of longer names. There is no separate names deck.
@@ -108,15 +108,20 @@ All you need is [Anki](https://apps.ankiweb.net/), on desktop or on your phone.
 1. **Get the deck.** Download `firered_jp.apkg` from the
    [latest release](https://github.com/mkusm/pokemon-firered-jp-anki/releases/latest)
    and open it in Anki (desktop: File → Import; AnkiDroid and AnkiMobile: open
-   the file).
+   the file). It arrives as **Pokemon FireRed Japanese** with three decks
+   inside: **1 Story**, the game from the title screen through the postgame;
+   **2 Help**, the Help menu you open with L or R; and **3 Link play /
+   multiplayer**, everything that needs a second player or device (the Union
+   Room, trading, Mystery Gift, mail and the word lists you write messages
+   from). Study the story; the other two are there if you want them.
 2. **Keep the story order.** New cards must come in the order they were added.
    In the deck's options, under New Cards, set **Insertion order** to
    *Sequential (oldest cards first)*, and leave the display order on its
    defaults. With a random order the deck loses its point.
 3. **Pick a pace.** The cards follow the game, so the natural way to use the
    deck is to study a stretch and then play it. For scale: the opening sequence
-   is the first 172 cards, everything up to the first gym about 2,500, the whole
-   deck 10,536. At 20 new cards a day that is about four months to Brock.
+   is the first 172 cards, everything up to the first gym about 2,400, the whole
+   story 9,523. At 20 new cards a day that is about four months to Brock.
 4. **Read the card.** The front is the line as the game shows it, in kana, with
    one word highlighted: read the sentence and recall that word. The back gives
    the reading in romaji, the dictionary form, the meaning in this sentence,
@@ -126,15 +131,10 @@ All you need is [Anki](https://apps.ankiweb.net/), on desktop or on your phone.
    `tag:fragment` (stammers and broken speech), `tag:onomatopoeia`,
    `tag:low-confidence`, or a place such as `tag:Pewter_City_Gym`. To drop
    words for good, add them to `known.txt` and rebuild.
-6. **Update later.** Import a newer release over the old one. Card IDs are
-   stable, so your review history stays. In the import dialog set **Update
-   notes** and **Update note types** to *Always*, or Anki keeps the old card
-   layout. Also tick **Merge note types** when the note type has gained a
-   field since your copy: v1.2 added two for the grammar, and the build after
-   v1.3.1 one for notes on names. If you have the old names deck
-   (FireRed JP::Names), delete it: its cards are in the main deck now. About 220 first-chapter cards were re-analysed
-   into different words or forms in v1.2; those arrive as new cards and their
-   old versions stay in your collection until you delete them.
+6. **Update later.** The deck is still in development: its layout, its order
+   and some of its cards change from one version to the next. To update,
+   delete the old deck (FireRed JP, or Pokemon FireRed Japanese) and import
+   the new package. Review history is not carried over.
 
 ## How the order is decided
 
@@ -169,7 +169,11 @@ A sentence often teaches several words. Their cards come in the order the
 words stand in the sentence, left to right, so a particle follows the word it
 attaches to.
 
-Link play, error messages and the Help menu go to the end of the deck.
+The Help menu and link play are not part of the story and have decks of their
+own. Link play is everything that needs a second player or device: the Union
+Room, the Cable Club, trading, Mystery Gift, the e-Reader, mail, and the word
+lists messages are written from. Save failures and other error messages are
+left out.
 
 Text FireRed never shows is left out altogether, and no model stage ever sees
 it: Ruby and Sapphire data that no FireRed player meets (Hoenn Pokédex text,
@@ -182,8 +186,9 @@ cannot lose and carry on. A few lines that none of these tests can tell are
 listed by hand in `first_seen.yaml`, each checked against the decomp: the TV
 looked at from its side, which cannot be reached, a rain message only Ruby and
 Sapphire use, the line for two wild Pokémon at once, the Pokédex entry of
-Pokémon 0. The order stage lists what it left out, and why, in
-`data/never_shown.csv`.
+Pokémon 0, and the text of Ruby and Sapphire features FireRed has no code
+for (the old men of Mauville, trendy sayings, contests, secret bases). The
+order stage lists what it left out, and why, in `data/never_shown.csv`.
 
 ## Building it yourself
 
@@ -298,14 +303,14 @@ vendor/           upstream clones (ignored)
 ## Known limits
 
 - The deck is in two states. The story, all ten chapters, was analysed by Opus and
-  has grammar and notes on its cards. The end of the deck (link play, the
-  Help menu, error messages, 1,030 cards) is Sonnet's analysis, with
-  Opus only on the sentences Sonnet flagged, and has no grammar yet. On a
+  has grammar and notes on its cards. The Help and Link play decks (948
+  cards) are Sonnet's analysis, with
+  Opus only on the sentences Sonnet flagged, and have no grammar yet. On a
   sample of 100 sentences Opus corrected a clear Sonnet error in 3: a wrong
   item name, a line read as "I was asked a favor" that means "do me a favor",
   and あったら filed under ある where it is 合う.
-- Particles are split into one card per job only in the story. At the
-  end of the deck all uses of a particle are still filed under one card.
+- Particles are split into one card per job only in the story. In the
+  Help and Link play decks all uses of a particle are still filed under one card.
 - A grammar pattern's name is written per sentence, so the same pattern can be
   spelled two ways on different cards (〜せる and 〜させる).
 - Nothing has been proofread by a native speaker.
