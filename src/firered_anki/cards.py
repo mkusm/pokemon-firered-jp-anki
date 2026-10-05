@@ -420,7 +420,9 @@ def merge_senses(occ: pd.DataFrame, entries: dict, offline: bool = False) -> dic
         for grp in data["groups"] if isinstance(data, dict) else data:
             grp = [s for s in grp if s in senses]
             if grp:
-                first = min(grp, key=lambda s: list(senses).index(s))
+                # The lowest sense number names the group. (The first one used in
+                # the deck was tried: every reordering then changed some keys.)
+                first = min(grp)
                 for s in grp:
                     canon[(eid, s)] = first
     return canon

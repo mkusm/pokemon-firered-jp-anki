@@ -21,7 +21,7 @@ How it works, in detail: [`docs/how-it-works.html`](docs/how-it-works.html)
 
 | | |
 |---|---|
-| `firered_jp.apkg` | 11,079 cards in three decks: the story (9,533, in story order), the Help menu (940) and link play (606) |
+| `firered_jp.apkg` | 11,078 cards in three decks: the story (9,533, in story order), the Help menu (940) and link play (605) |
 
 It is attached to the [latest release](https://github.com/mkusm/pokemon-firered-jp-anki/releases/latest).
 
@@ -325,11 +325,11 @@ vendor/           upstream clones (ignored)
 ## Known limits
 
 - Two models made the deck. The story and the Help deck are Opus's work:
-  analysis, grammar and notes. The Link play deck (606 cards) is Sonnet's,
+  analysis, grammar and notes. The Link play deck (605 cards) is Sonnet's,
   which costs less and is less sure: on a sample of 100 sentences Opus
   corrected a clear Sonnet error in 3 (a wrong item name, a line read as "I
   was asked a favor" that means "do me a favor", and あったら filed under ある
-  where it is 合う), and 43 of that deck's cards are tagged `low-confidence`.
+  where it is 合う), and 40 of that deck's cards are tagged `low-confidence`.
   A sentence the story or the Help deck also shows is always Opus's.
 - A grammar pattern's name is written per sentence, so the same pattern can be
   spelled two ways on different cards (〜せる and 〜させる).

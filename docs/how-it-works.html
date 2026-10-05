@@ -137,7 +137,7 @@
 <main>
 <header class="hero">
   <h1>How a line of FireRed becomes a flashcard</h1>
-  <p class="lede">The deck has 11,079 cards. Each one is a word, in one form, in the sentence where the Japanese game first uses it. This page follows the text from the cartridge's script to the card.</p>
+  <p class="lede">The deck has 11,078 cards. Each one is a word, in one form, in the sentence where the Japanese game first uses it. This page follows the text from the cartridge's script to the card.</p>
 
   <figure class="card">
     <div class="gba jp" lang="ja">グリーンは　すでに　ポケモンを　<mark>つかまえて</mark>　ずかんの　ページを　ふやしている　そうじゃ！</div>
@@ -182,7 +182,7 @@
         <rect x="30" y="96" width="110" height="52" rx="8"/><text x="85" y="118" text-anchor="middle" font-size="14" font-weight="700">extract</text><text class="sub" x="85" y="136" text-anchor="middle">16,166 sentences</text>
         <rect x="160" y="96" width="110" height="52" rx="8"/><text x="215" y="118" text-anchor="middle" font-size="14" font-weight="700">order</text><text class="sub" x="215" y="136" text-anchor="middle">12,780 kept</text>
         <rect x="290" y="96" width="110" height="52" rx="8"/><text x="345" y="118" text-anchor="middle" font-size="14" font-weight="700">tokenize</text><text class="sub" x="345" y="136" text-anchor="middle">11,163 unique</text>
-        <rect x="550" y="96" width="90" height="52" rx="8"/><text x="595" y="118" text-anchor="middle" font-size="14" font-weight="700">cards</text><text class="sub" x="595" y="136" text-anchor="middle">11,079</text>
+        <rect x="550" y="96" width="90" height="52" rx="8"/><text x="595" y="118" text-anchor="middle" font-size="14" font-weight="700">cards</text><text class="sub" x="595" y="136" text-anchor="middle">11,078</text>
         <rect x="660" y="96" width="90" height="52" rx="8"/><text x="705" y="118" text-anchor="middle" font-size="14" font-weight="700">build</text><text class="sub" x="705" y="136" text-anchor="middle">two .apkg</text>
       </g>
       <g class="llm">
@@ -408,15 +408,15 @@
     <tr><td>Postgame</td><td class="n">1,041</td></tr>
     <tr><th>The story deck</th><th class="n">9,533</th></tr>
     <tr><td>The Help deck</td><td class="n">940</td></tr>
-    <tr><td>The Link play deck</td><td class="n">606</td></tr>
-    <tr><th>All three decks</th><th class="n">11,079</th></tr>
+    <tr><td>The Link play deck</td><td class="n">605</td></tr>
+    <tr><th>All three decks</th><th class="n">11,078</th></tr>
   </table></div>
   <p>The first chapter is the largest because the menus, the battle screen and most everyday vocabulary all appear before the first gym. The deck's first 172 cards are the opening sequence alone.</p>
   <ul>
-    <li>5,994 distinct dictionary forms across the 11,079 cards.</li>
+    <li>5,994 distinct dictionary forms across the 11,078 cards.</li>
     <li>6,359 cards take their example from story dialogue or from a walk through a screen; the rest from Pokédex entries, menus, move and item descriptions and battle messages.</li>
     <li>155 cards are tagged <code>low-confidence</code>: the dictionary entry does not match the word, there is no entry and the model was unsure, or the word is a scrap of broken text. A doubt only about which listed sense fits a helper verb or an idiom no longer counts; those glosses were checked by hand. 10 are tagged <code>sense-guessed</code>.</li>
-    <li>9,475 cards carry a sentence breakdown, and 5,030 of them a grammar pattern for their word. The other cards sit on a bare name or a line of one word, with nothing to break down; the Link play deck has many of those, in its word lists.</li>
+    <li>9,474 cards carry a sentence breakdown, and 5,029 of them a grammar pattern for their word. The other cards sit on a bare name or a line of one word, with nothing to break down; the Link play deck has many of those, in its word lists.</li>
     <li>925 cards carry a sentence note, from 541 notes.</li>
     <li>218 are tagged <code>onomatopoeia</code>: JMdict marks the sense as a sound or mimetic word (<span class="jp" lang="ja">ドキドキ</span>, <span class="jp" lang="ja">キラキラ</span>), and the back says so.</li>
     <li>100 are tagged <code>fragment</code>: stammers, garbled speech and pieces of interrupted words (<span class="jp" lang="ja">こっ　こんなに</span>). They stay in the deck because the card is what explains them.</li>
@@ -448,7 +448,7 @@
 <section id="limits">
   <h2>Known limits</h2>
   <ul>
-    <li>Two models made the deck. The story and the Help deck are Opus's: analysis, grammar and notes. The Link play deck is Sonnet's, which costs less and errs more: 43 of its 606 cards are tagged <code>low-confidence</code>. The choice is made per sentence, so a sentence the story or the Help deck also shows is Opus's wherever it turns up, and an Opus answer is never replaced by a Sonnet one. Word-boundary decisions hold for the whole deck and are always Opus's.</li>
+    <li>Two models made the deck. The story and the Help deck are Opus's: analysis, grammar and notes. The Link play deck is Sonnet's, which costs less and errs more: 40 of its 605 cards are tagged <code>low-confidence</code>. The choice is made per sentence, so a sentence the story or the Help deck also shows is Opus's wherever it turns up, and an Opus answer is never replaced by a Sonnet one. Word-boundary decisions hold for the whole deck and are always Opus's.</li>
     
     <li>A grammar pattern is named per sentence, so one pattern can be spelled two ways on different cards (<span class="jp" lang="ja">〜せる</span> and <span class="jp" lang="ja">〜させる</span>). The explanations have not been checked one by one.</li>
     <li>About 250 battle messages and 580 other strings are placed by the model's judgement. Ability messages and trainer-battle text are among them.</li>

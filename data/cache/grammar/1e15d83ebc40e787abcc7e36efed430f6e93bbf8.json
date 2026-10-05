@@ -1,0 +1,1 @@
+{"text": "ナウイことば", "structure": [{"jp": "ナウイ", "en": "trendy"}, {"jp": "ことば", "en": "words, sayings"}], "patterns": [{"name": "verb + noun", "span": "ナウイ ことば", "words": ["ナウイ", "ことば"], "explanation": "A describing word placed right before a noun says what kind of thing it is. ナウイ ことば = 'trendy sayings'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2", "names": 5}}

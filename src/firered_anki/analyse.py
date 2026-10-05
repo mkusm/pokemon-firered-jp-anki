@@ -189,7 +189,8 @@ def check(batch: pd.DataFrame, result: dict, entries: dict) -> list[dict]:
         text_nospace = r.text.replace("　", "")
         for w in s["words"]:
             jid = w.get("jmdict_id")
-            w["_not_in_text"] = w["surface"] not in text_nospace
+            # A name written with a space (ユニオン　ルーム) is in the text all the same.
+            w["_not_in_text"] = w["surface"].replace("　", "") not in text_nospace
             w["_off_list"] = jid is not None and jid not in cand_ids
             w["_unknown_id"] = jid is not None and str(jid) not in entries
             w["_bad_sense"] = (

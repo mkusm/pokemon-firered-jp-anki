@@ -364,8 +364,10 @@ Update this when it changes.
   shows are Opus's. Settled. `analyse rerun N` redoes every sentence of a
   chapter that its model has not answered on version 4 or 5;
   `analyse redo <file>` re-analyses only the sentences listed in a file.
-- `corrections.yaml` has three entries: the SELECT button line and Mom's two
-  TV lines. Four corrections of word forms Sonnet wrote wrongly were removed
+- `corrections.yaml` has eleven entries: the SELECT button line, Mom's two
+  TV lines, seven レポート translations the name check had left stiff ("the
+  Pokémon Save"), and one word form Sonnet wrote that is not in its sentence
+  (ナウい for ナウイ). Four corrections of word forms Sonnet wrote wrongly were removed
   as their chapters were redone on Opus, which wrote the forms correctly; the
   last two (ｃｍ, twice) went with the postgame.
 - `splits.yaml` has 476 decisions, from chapters 0 to 11. They are checked
@@ -374,7 +376,7 @@ Update this when it changes.
   types, 132 places, 23 people, 2 for Team Rocket, 8 badges, 22 game terms, 15
   real-world names), found by `names.py` in every chapter with no model call.
   The 56 name lines this put in chapter 0 were re-analysed on Opus. The names
-  deck is gone. Three decks, 11,079 cards: story 9,533, Help 940 (stand-alone), Link play 606. The note type has `Note` and
+  deck is gone. Three decks, 11,078 cards: story 9,533, Help 940 (stand-alone), Link play 605. The note type has `Note` and
   `SentenceNote` fields.
 - English names: the name check passes on every sentence the deck shows, in
   all chapters. 91 sentences were redone on Opus for it, most of them in
@@ -396,6 +398,8 @@ Update this when it changes.
   Fame Checker's four してんのう … とくしゅう！ titles in chapter 8): each
   round redoes one and brings up the next. Check that the sentence left is a
   different one each round, and run the command again.
+- A merged sense takes the lowest sense number of its group as the key, so
+  the order of the deck no longer decides a key.
 - Re-analysing a chapter changes how about one sentence in five is split, even
   between two Opus runs, and so changes card identities (about 220 of the first
   chapter's 2,500 cards each time). Do not rerun a finished chapter for a small

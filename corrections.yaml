@@ -62,3 +62,44 @@
   breakdown:
     - jp: テレビの　はなしよ！
       en: I mean on TV!
+
+# レポート. The name check makes every translation say "save", and a few came
+# back stiff ("the Pokémon Save"). The Japanese says "report" each time: these
+# keep both.
+
+- sentence: ここまでの　かつやくを　ポケモンレポートに　かきこみますか？
+  why: The model wrote "write your progress so far into the Pokémon Save".
+  english: Would you like to save your progress so far to the Pokémon Report?
+
+- sentence: レッド　は　レポートに　しっかり　かきのこした！
+  why: The model wrote "wrote it all down in the Save".
+  english: Red saved the game, writing it all down in the report!
+
+- sentence: まえに　かかれた　レポートに　うえから　かいても　いいですか？
+  why: The model wrote "write over the previously written Save".
+  english: Is it OK to save over the report written before?
+
+- sentence: 『つづきから　はじめる』で　ぼうけんしていた　レポートが　かかれています！
+  why: The model wrote "A Save from the adventure you were playing".
+  english: There is already a save here, the report of the adventure you were playing with "Continue"!
+
+- sentence: ②「はい」を　えらぶと　レポートに　ぼうけんが　きろく　されます。
+  why: The model wrote "is recorded in the Save".
+  english: 2. When you choose "Yes", your adventure is saved to the report.
+
+- sentence: とうろくが　かわりました　ポケモンレポートに　かきこみますか？
+  why: The model wrote "Write it to the Pokémon Save?".
+  english: The registered text has changed. Save it to the Pokémon Report?
+
+- sentence: ゲームの　けっかを　ポケモンレポートに　かきこんでいます　しばらく　おまちください
+  why: The model wrote "to your Pokémon Save".
+  english: Saving the game results to the Pokémon Report. Please wait a moment.
+
+# A form the model wrote that is not in the sentence: the card could not mark it.
+
+- sentence: ナウイことば
+  why: The game writes ナウイ in katakana throughout; the model wrote ナウい.
+  words:
+    - surface: ナウい
+      new_surface: ナウイ
+

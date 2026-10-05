@@ -59,12 +59,20 @@ Numbers are from the deck at commit `29c7689d` (11,081 cards).
   them as they are. 268 of the 556 notes; 198 are on dialogue and a sample of
   those read as worth having, 70 are on descriptions and menu text and mostly
   say what the English text adds. Not worth sorting.
-- [ ] **8. Loose ends.**
-  - [ ] 9 words whose form is not in their sentence: the card cannot mark them
-  - [ ] read the 157 `low-confidence` cards (43 of them in Link play)
-  - [ ] the stiff レポート translations ("the Pokémon Save")
-  - [ ] a merged sense takes the key of whichever sense comes first in the
-    deck, so reordering changes keys; use the lowest sense number
+- [x] **8. Loose ends.** All done 2026-10-05.
+  - [x] 9 words whose form is not in their sentence. Eight were a false
+    alarm: names written with a space (ユニオン　ルーム), which the flag did
+    not allow for; it does now. The ninth, ナウい for ナウイ, is a hand
+    correction.
+  - [x] read the 155 `low-confidence` cards. They are what the tag is for:
+    cries and sound words, garbled and stammered speech, sentence-end
+    particles with no dictionary entry, compound verbs JMdict lacks. No
+    wrong gloss found. In Link play Sonnet also leaves some verb chains
+    whole (みせてあげる) where Opus would cut them.
+  - [x] the stiff レポート translations: seven hand corrections, each keeping
+    both "save" and "report"
+  - [x] a merged sense now takes the lowest sense number as its key, so
+    reordering cannot change keys. 278 cards changed key once for this.
 - [x] **9. Tag the word lists.** Done 2026-10-05: cards on a bare word from
   the easy-chat lists are tagged `word-list`.
 
