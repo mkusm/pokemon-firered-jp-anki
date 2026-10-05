@@ -1,0 +1,1 @@
+{"text": "たいせんに　かったとき", "structure": [{"jp": "たいせんに　かったとき", "en": "when you win a battle"}], "patterns": [{"name": "〜とき", "span": "かったとき", "words": ["かった", "とき"], "explanation": "Verb + とき means 'when'. かったとき = 'when you won'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2", "names": 5}}

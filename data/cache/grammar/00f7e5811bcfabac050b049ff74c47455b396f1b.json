@@ -1,0 +1,1 @@
+{"text": "またせたね！", "structure": [{"jp": "またせたね！", "en": "I made you wait, right!"}], "patterns": [{"name": "〜せる", "span": "またせた", "words": ["またせた"], "explanation": "The せる form means making someone do something. またせた = 'made (you) wait'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2", "names": 5}}

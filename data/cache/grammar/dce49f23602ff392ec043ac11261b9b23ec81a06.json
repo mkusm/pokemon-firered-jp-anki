@@ -1,0 +1,1 @@
+{"text": "おすはやさ", "structure": [{"jp": "おすはやさ", "en": "pressing speed"}], "patterns": [{"name": "〜さ", "span": "はやさ", "words": ["はやさ"], "explanation": "さ turns a describing word into a noun for the degree. はやさ = 'speed'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2", "names": 5}}

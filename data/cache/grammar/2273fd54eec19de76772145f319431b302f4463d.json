@@ -1,0 +1,1 @@
+{"text": "つうしん　ちゅう　です", "structure": [{"jp": "つうしん　ちゅう　です", "en": "communicating"}], "patterns": [{"name": "〜中", "span": "ちゅう", "words": ["ちゅう"], "explanation": "ちゅう after an action noun means 'in the middle of'. つうしん ちゅう = 'in the middle of communicating'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2", "names": 5}}

@@ -1,0 +1,1 @@
+{"text": "＊円　だけど　かいますか？", "structure": [{"jp": "＊円　だけど", "en": "it's ＊ yen, but"}, {"jp": "かいますか？", "en": "will you buy it?"}], "patterns": [{"name": "〜けど", "span": "だけど", "words": ["だけど"], "explanation": "けど joins two statements with 'but', often just to soften. ＊円　だけど = 'it's ＊ yen, but'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2", "names": 5}}

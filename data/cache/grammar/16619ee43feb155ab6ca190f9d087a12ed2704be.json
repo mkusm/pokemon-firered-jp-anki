@@ -1,0 +1,1 @@
+{"text": "つうしん　たいきちゅうです", "structure": [{"jp": "つうしん　", "en": "link"}, {"jp": "たいきちゅうです", "en": "is standing by"}], "patterns": [{"name": "〜ちゅう", "span": "たいきちゅう", "words": ["たいき", "ちゅう"], "explanation": "ちゅう after a noun means 'in the middle of'. たいきちゅう = 'in the middle of standing by'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2", "names": 5}}

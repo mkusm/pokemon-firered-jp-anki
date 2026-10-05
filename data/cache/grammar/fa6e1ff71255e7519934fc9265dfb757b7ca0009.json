@@ -1,0 +1,1 @@
+{"text": "なにか　するかい？", "structure": [{"jp": "なにか", "en": "something"}, {"jp": "するかい？", "en": "will you do it?"}], "patterns": [{"name": "〜かい", "span": "するかい？", "words": ["かい", "する"], "explanation": "かい at the end is a casual, friendly (often older male) way to ask a question. するかい？ = 'Want to do it?'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2", "names": 5}}

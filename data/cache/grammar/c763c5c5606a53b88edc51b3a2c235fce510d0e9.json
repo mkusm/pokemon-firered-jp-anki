@@ -1,0 +1,1 @@
+{"text": "こうかん　を　やめますか？", "structure": [{"jp": "こうかん　を", "en": "the trade"}, {"jp": "やめますか？", "en": "cancel it?"}], "patterns": [{"name": "〜か", "span": "やめますか？", "words": ["やめます", "か"], "explanation": "か at the end makes the sentence a question. やめますか = 'Will you stop?'"}], "_run": {"model": "sonnet", "effort": "low", "version": "2", "names": 5}}

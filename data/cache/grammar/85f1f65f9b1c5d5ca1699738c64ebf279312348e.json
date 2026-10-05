@@ -1,0 +1,1 @@
+{"text": "なんなんだ", "structure": [{"jp": "なんなんだ", "en": "what on earth is it"}], "patterns": [{"name": "〜のだ", "span": "なんなんだ", "words": ["なん", "な", "んだ"], "explanation": "んだ is a spoken form of のだ. It adds a feeling of explaining or demanding an explanation. 何なんだ = 'what the heck is this?'"}], "_run": {"model": "sonnet", "effort": "low", "version": "2", "names": 5}}

@@ -1,0 +1,1 @@
+{"text": "には", "structure": [{"jp": "には", "en": "as for (in/to)"}], "patterns": [{"name": "〜には", "span": "には", "words": ["に", "は"], "explanation": "に plus は points at a place or person and sets it apart from others, like 'as for in/to ...'. には = 'as for (in/to) ...'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2", "names": 5}}

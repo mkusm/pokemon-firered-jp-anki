@@ -1,0 +1,1 @@
+{"text": "すこしは", "structure": [{"jp": "すこしは", "en": "at least a little"}], "patterns": [{"name": "〜は (contrast)", "span": "すこしは", "words": ["すこし", "は"], "explanation": "は after an amount can mean 'at least' or 'even if not more', setting it against a bigger amount. すこしは = 'at least a little'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2", "names": 5}}

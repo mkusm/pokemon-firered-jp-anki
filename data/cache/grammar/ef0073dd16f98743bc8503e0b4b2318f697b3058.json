@@ -1,0 +1,1 @@
+{"text": "ふしぎなカード　を　おくって　います．．．", "structure": [{"jp": "ふしぎなカード　を", "en": "the Wonder Card"}, {"jp": "おくって　います．．．", "en": "am sending"}], "patterns": [{"name": "〜ている", "span": "おくって　います", "words": ["おくって", "います"], "explanation": "ている says an action is going on right now. おくって　います = 'is sending'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2", "names": 5}}

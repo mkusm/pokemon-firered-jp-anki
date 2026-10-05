@@ -35,7 +35,7 @@ from collections import Counter, defaultdict
 
 import pandas as pd
 
-from . import claude_cli, corrections, grammar, names, notes
+from . import claude_cli, corrections, grammar, models, names, notes
 from .analyse import MAIN, load, results
 from .grounding import sense_glosses
 from .map_order import MapOrder
@@ -540,6 +540,7 @@ def prepare(run_name: str = MAIN.name, offline_merge: bool = False) -> tuple[pd.
     words = words.reindex(deck.index).map(lambda x: x if isinstance(x, frozenset) else frozenset())
     pin = dict(zip(cardable["row"][cardable["listed"]], cardable["key"][cardable["listed"]]))
     deck["card_order"] = spread(deck, words, pin)
+    models.use(deck)  # which model answers for which sentence follows from what each chapter shows
     return deck, entries, analyses, occ
 
 

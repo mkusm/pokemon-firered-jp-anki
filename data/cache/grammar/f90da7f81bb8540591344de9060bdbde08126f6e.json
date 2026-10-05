@@ -1,0 +1,1 @@
+{"text": "いくぜ", "structure": [{"jp": "いくぜ", "en": "here I go"}], "patterns": [{"name": "〜ぜ", "span": "いくぜ", "words": ["ぜ"], "explanation": "ぜ is a rough, boyish ending that adds punch, used by men. いくぜ = 'I'm going, you hear!'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2", "names": 5}}

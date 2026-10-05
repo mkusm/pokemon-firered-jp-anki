@@ -112,8 +112,8 @@ def prompt(batch: list[tuple], analyses: dict) -> str:
             + "\n\nReturn the entry and sense for each item, with its number.")
 
 
-def ask(batch: list[tuple], text: str) -> int:
-    out, _ = claude_cli.call(text, SYSTEM, SCHEMA, MODEL, EFFORT, timeout=900)
+def ask(batch: list[tuple], text: str, model: str = MODEL) -> int:
+    out, _ = claude_cli.call(text, SYSTEM, SCHEMA, model, EFFORT, timeout=900)
     done = 0
     for it in out.get("items", []):
         if 0 <= it["n"] < len(batch):
@@ -151,7 +151,15 @@ def main() -> None:
     chapter = chapters(args[args.index("--chapter") + 1]) if "--chapter" in args else None
     CACHE.mkdir(parents=True, exist_ok=True)
     items, analyses = pending(chapter)
-    batches = [items[i:i + BATCH] for i in range(0, len(items), BATCH)]
+    from . import models  # late: it reads the deck through cards
+
+    # Each call's uses are all from sentences one model answers for (models.py).
+    batches, asked_of = [], []
+    for model, texts in models.by_model(dict.fromkeys(t for t, _, _ in items)).items():
+        part = [it for it in items if it[0] in set(texts)]
+        for i in range(0, len(part), BATCH):
+            batches.append(part[i:i + BATCH])
+            asked_of.append(model)
     print(f"{len(items)} uses of short grammar words to ask about, {len(batches)} calls")
     if "--dry-run" in args or not batches:
         return
@@ -161,7 +169,7 @@ def main() -> None:
     done = 0
     try:
         with ThreadPoolExecutor(WORKERS) as pool:
-            futs = [pool.submit(ask, b, p) for b, p in zip(batches, prompts)]
+            futs = [pool.submit(ask, b, p, m) for b, p, m in zip(batches, prompts, asked_of)]
             for n, fut in enumerate(as_completed(futs), 1):
                 try:
                     done += fut.result()

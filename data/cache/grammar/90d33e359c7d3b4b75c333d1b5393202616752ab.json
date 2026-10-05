@@ -1,0 +1,1 @@
+{"text": "＊「また　なにかする？", "structure": [{"jp": "＊「また　", "en": "＊: again"}, {"jp": "なにかする？", "en": "do something?"}], "patterns": [{"name": "〜か (question)", "span": "なにかする？", "words": ["なにか", "する"], "explanation": "A rising tone alone makes a question or an offer. なにかする？ = 'Want to do something?'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2", "names": 5}}

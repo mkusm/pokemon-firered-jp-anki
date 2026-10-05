@@ -1,0 +1,1 @@
+{"text": "すでに　つかっています！", "structure": [{"jp": "すでに", "en": "already"}, {"jp": "つかっています！", "en": "is being used"}], "patterns": [{"name": "〜ている", "span": "つかっています", "words": ["つかっています"], "explanation": "ている shows a state that continues. つかっています = 'is in use'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2", "names": 5}}

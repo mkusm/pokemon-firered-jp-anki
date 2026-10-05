@@ -1,0 +1,1 @@
+{"text": "へんしゅうちゅうの　ことばを", "structure": [{"jp": "へんしゅうちゅうの　", "en": "being edited"}, {"jp": "ことばを", "en": "the words (object)"}], "patterns": [{"name": "〜中", "span": "へんしゅうちゅうの", "words": ["へんしゅう", "ちゅう"], "explanation": "ちゅう after an action word means 'in the middle of'. へんしゅうちゅうの = 'being edited'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2", "names": 5}}

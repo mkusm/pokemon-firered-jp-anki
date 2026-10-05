@@ -1,0 +1,1 @@
+{"text": "たいせん　かち＊　まけ＊　こうかん　＊かい　「＊　＊　＊　＊", "structure": [{"jp": "たいせん", "en": "battles"}, {"jp": "かち＊　まけ＊", "en": "wins ＊ losses ＊"}, {"jp": "こうかん　＊かい", "en": "trades ＊ times"}, {"jp": "「＊　＊　＊　＊", "en": "symbols"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2", "names": 5}}

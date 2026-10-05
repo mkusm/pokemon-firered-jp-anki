@@ -1,0 +1,1 @@
+{"text": "おすつよさ　ランキング", "structure": [{"jp": "おすつよさ　ランキング", "en": "pressing power ranking"}], "patterns": [{"name": "〜さ", "span": "つよさ", "words": ["つよさ"], "explanation": "さ turns a describing word into a noun for the degree. つよさ = 'strength'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2", "names": 5}}

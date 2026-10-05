@@ -1,1 +1,1 @@
-{"text": "ー", "missing": false, "id": "s29", "kanji": "ー", "english": "— (dash)", "words": [], "_run": {"model": "sonnet", "effort": "low", "batch": 40, "prompt": "2"}}
+{"text": "ー", "missing": false, "id": "s1", "kanji": "ー", "english": "-", "words": [], "_run": {"model": "sonnet", "effort": "low", "batch": 20, "prompt": "5", "names": 5}}

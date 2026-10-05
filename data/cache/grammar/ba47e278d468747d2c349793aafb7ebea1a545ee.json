@@ -1,0 +1,1 @@
+{"text": "さいこう　ジャンプかいすう", "structure": [{"jp": "さいこう　", "en": "highest"}, {"jp": "ジャンプかいすう", "en": "number of jumps"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2", "names": 5}}

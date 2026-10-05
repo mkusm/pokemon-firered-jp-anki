@@ -1,0 +1,1 @@
+{"text": "ミニポケモンでジャンプ", "structure": [{"jp": "ミニポケモンで", "en": "with mini Pokémon"}, {"jp": "ジャンプ", "en": "jump"}], "patterns": [{"name": "〜で (how)", "span": "ミニポケモンで", "words": ["で"], "explanation": "で names the thing you use to do something. ミニポケモンで = 'with mini Pokémon'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2", "names": 5}}

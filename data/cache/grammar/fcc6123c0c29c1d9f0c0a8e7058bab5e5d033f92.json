@@ -1,0 +1,1 @@
+{"text": "おなじ　ポケモンが　います！", "structure": [{"jp": "おなじ　ポケモンが", "en": "the same Pokémon"}, {"jp": "います！", "en": "there are"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2", "names": 5}}

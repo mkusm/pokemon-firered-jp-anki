@@ -1,0 +1,1 @@
+{"text": "メンバーから　ぬけますか？", "structure": [{"jp": "メンバーから　", "en": "from the group"}, {"jp": "ぬけますか？", "en": "will you leave?"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2", "names": 5}}

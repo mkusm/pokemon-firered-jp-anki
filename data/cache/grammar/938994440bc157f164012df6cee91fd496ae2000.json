@@ -1,0 +1,1 @@
+{"text": "その　ポケモンは　さんか　できません", "structure": [{"jp": "その　ポケモンは", "en": "that Pokémon"}, {"jp": "さんか　できません", "en": "can't participate"}], "patterns": [{"name": "〜できる", "span": "さんか　できません", "words": ["さんか", "できません"], "explanation": "A noun plus できる means 'can do that'. さんか　できません = 'can't participate'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2", "names": 5}}

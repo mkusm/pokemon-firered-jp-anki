@@ -1,0 +1,1 @@
+{"text": "そんなこと　しらなかったわ！", "structure": [{"jp": "そんなこと", "en": "such a thing"}, {"jp": "しらなかったわ！", "en": "I didn't know!"}], "patterns": [{"name": "〜ない", "span": "しらなかった", "words": ["しらなかった"], "explanation": "なかった is the past of ない, 'did not'. しらなかった = 'didn't know'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2", "names": 5}}

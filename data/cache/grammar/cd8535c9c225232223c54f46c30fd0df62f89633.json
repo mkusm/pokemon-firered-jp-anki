@@ -1,0 +1,1 @@
+{"text": "＊　ですね！", "structure": [{"jp": "＊　ですね！", "en": "it's ＊, right"}], "patterns": [{"name": "〜ね", "span": "ですね", "words": ["です", "ね"], "explanation": "ね at the end asks for agreement or confirms something. ＊　ですね = 'it's ＊, right'"}], "_run": {"model": "sonnet", "effort": "low", "version": "2", "names": 5}}

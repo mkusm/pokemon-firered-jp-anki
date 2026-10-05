@@ -1,0 +1,1 @@
+{"text": "それじゃあ　はじめましょう！", "structure": [{"jp": "それじゃあ　", "en": "well then"}, {"jp": "はじめましょう！", "en": "let's begin"}], "patterns": [{"name": "〜ましょう", "span": "はじめましょう", "words": ["はじめましょう"], "explanation": "ましょう is a polite 'let's'. はじめましょう = 'let's begin'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2", "names": 5}}

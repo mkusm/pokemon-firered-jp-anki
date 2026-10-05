@@ -1,0 +1,1 @@
+{"text": "は　おおめに", "structure": [{"jp": "は", "en": "(stat) topic"}, {"jp": "おおめに", "en": "a lot"}], "patterns": [{"name": "〜に (adverb)", "span": "おおめに", "words": ["おおめ", "に"], "explanation": "に after a word of amount turns it into a word that describes how the action happens. おおめに = 'by a large amount'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2", "names": 5}}

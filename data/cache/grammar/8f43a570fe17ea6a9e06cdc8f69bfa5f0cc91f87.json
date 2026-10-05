@@ -1,0 +1,1 @@
+{"text": "だね", "structure": [{"jp": "だ", "en": "it is"}, {"jp": "ね", "en": "isn't it"}], "patterns": [{"name": "〜ね", "span": "だね", "words": ["だ", "ね"], "explanation": "ね asks the listener to agree or shows you share a feeling. だね = 'it is, isn't it'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2", "names": 5}}

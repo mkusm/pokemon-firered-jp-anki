@@ -1,0 +1,1 @@
+{"text": "ゴールドカードだ！", "structure": [{"jp": "ゴールドカード", "en": "Gold Card"}, {"jp": "だ！", "en": "it is!"}], "patterns": [{"name": "〜だ", "span": "カードだ", "words": ["カード", "だ"], "explanation": "だ is the plain, casual way to say 'is'. ゴールドカードだ！ = 'It's a Gold Card!'"}], "_run": {"model": "sonnet", "effort": "low", "version": "2", "names": 5}}

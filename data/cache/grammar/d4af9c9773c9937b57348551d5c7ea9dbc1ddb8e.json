@@ -1,0 +1,1 @@
+{"text": "ぼくは　ゲームの　せつめいを　しますよ！", "structure": [{"jp": "ぼくは", "en": "I"}, {"jp": "ゲームの　せつめいを", "en": "explanation of the games"}, {"jp": "しますよ！", "en": "will do"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2", "names": 5}}

@@ -1,0 +1,1 @@
+{"text": "つぶした　けっか", "structure": [{"jp": "つぶした　けっか", "en": "crushing result"}], "patterns": [{"name": "verb + noun", "span": "つぶした　けっか", "words": ["つぶした", "けっか"], "explanation": "A verb before a noun describes it. つぶした けっか = 'the result of crushing'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2", "names": 5}}

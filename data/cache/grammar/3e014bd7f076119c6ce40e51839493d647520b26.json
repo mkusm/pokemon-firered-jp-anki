@@ -1,0 +1,1 @@
+{"text": "＊に　＊を　おくります！", "structure": [{"jp": "＊に", "en": "to *"}, {"jp": "＊を", "en": "* (object)"}, {"jp": "おくります！", "en": "send"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2", "names": 5}}

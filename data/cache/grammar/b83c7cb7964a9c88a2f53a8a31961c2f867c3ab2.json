@@ -1,0 +1,1 @@
+{"text": "たいせんだね！", "structure": [{"jp": "たいせんだね！", "en": "a battle, right!"}], "patterns": [{"name": "〜ね", "span": "だね", "words": ["だ", "ね"], "explanation": "ね asks for agreement or shows a shared feeling. たいせんだね = 'a battle, right!'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2", "names": 5}}

@@ -1,0 +1,1 @@
+{"text": "ポケモンこうかんを　かいさいする", "structure": [{"jp": "ポケモンこうかんを", "en": "a Pokémon trade"}, {"jp": "かいさいする", "en": "hold"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2", "names": 5}}

@@ -1,0 +1,1 @@
+{"text": "つうしんエラーが　はっせいしました", "structure": [{"jp": "つうしんエラーが", "en": "a communication error"}, {"jp": "はっせいしました", "en": "occurred"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2", "names": 5}}

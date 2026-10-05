@@ -28,7 +28,7 @@ from html import escape
 
 import pandas as pd
 
-from . import claude_cli, corrections, names
+from . import claude_cli, corrections, models, names
 from .analyse import MAIN, load, results as analysis_results
 from .paths import DATA
 
@@ -112,8 +112,8 @@ def prompt(rows, analyses) -> str:
 
 # --- running -------------------------------------------------------------------
 
-def ask(batch: pd.DataFrame, analyses: dict) -> tuple[int, dict]:
-    out, info = claude_cli.call(prompt(batch, analyses), SYSTEM, SCHEMA, MODEL, EFFORT, timeout=900)
+def ask(batch: pd.DataFrame, analyses: dict, model: str = MODEL) -> tuple[int, dict]:
+    out, info = claude_cli.call(prompt(batch, analyses), SYSTEM, SCHEMA, model, EFFORT, timeout=900)
     got = {s["id"]: s for s in out.get("sentences", [])}
     done = 0
     for i, r in enumerate(batch.itertuples()):
@@ -121,15 +121,25 @@ def ask(batch: pd.DataFrame, analyses: dict) -> tuple[int, dict]:
         if s:
             cache_file(r.text, analyses[r.text]["words"]).write_text(json.dumps(
                 {"text": r.text, "structure": s["structure"], "patterns": s["patterns"],
-                 "_run": {"model": MODEL, "effort": EFFORT, "version": VERSION, "names": names.SHOWN}}, ensure_ascii=False))
+                 "_run": {"model": model, "effort": EFFORT, "version": VERSION, "names": names.SHOWN}}, ensure_ascii=False))
             done += 1
     return done, info
 
 
 def answered(text: str, analyses: dict) -> bool:
-    """Whether the cache has this model's answer for the sentence as it is now analysed."""
+    """Whether the cache has an answer for the sentence as it is now analysed,
+    by the model the sentence needs or a better one (models.py)."""
     f = cache_file(text, analyses[text]["words"])
-    return f.exists() and json.loads(f.read_text())["_run"]["model"] == MODEL
+    return f.exists() and models.enough(json.loads(f.read_text())["_run"]["model"], text)
+
+
+def batches_by_model(rows: pd.DataFrame) -> list[tuple[pd.DataFrame, str]]:
+    """Rows cut into calls, each call's sentences all answered by one model."""
+    out = []
+    for model, texts in models.by_model(rows["text"]).items():
+        part = rows[rows["text"].isin(set(texts))]
+        out += [(part.iloc[i:i + BATCH], model) for i in range(0, len(part), BATCH)]
+    return out
 
 
 def run(rows: pd.DataFrame, analyses: dict) -> None:
@@ -142,10 +152,11 @@ def run(rows: pd.DataFrame, analyses: dict) -> None:
         todo = rows[~rows["text"].map(done)]
         if todo.empty:
             break
-        batches = [todo.iloc[i:i + BATCH] for i in range(0, len(todo), BATCH)]
-        print(f"[grammar] {len(rows)} sentences, {len(todo)} to do, {len(batches)} calls")
+        batches = batches_by_model(todo)
+        print(f"[grammar] {len(rows)} sentences, {len(todo)} to do, {len(batches)} calls "
+              f"({', '.join(f'{sum(m == k for _, m in batches)} on {k}' for k in dict.fromkeys(m for _, m in batches))})")
         with ThreadPoolExecutor(WORKERS) as pool:
-            futs = [pool.submit(ask, b, analyses) for b in batches]
+            futs = [pool.submit(ask, b, analyses, m) for b, m in batches]
             for n, fut in enumerate(as_completed(futs), 1):
                 try:
                     got, info = fut.result()
@@ -167,13 +178,13 @@ def redo(rows: pd.DataFrame, analyses: dict) -> None:
     that touches a few of them."""
     CACHE.mkdir(parents=True, exist_ok=True)
     rows = rows[rows["text"].map(lambda t: t in analyses)].drop_duplicates("text")
-    for i in range(0, len(rows), BATCH):
+    for batch, model in batches_by_model(rows):
         try:
-            got, info = ask(rows.iloc[i:i + BATCH], analyses)
+            got, info = ask(batch, analyses, model)
         except claude_cli.UsageLimit as e:
             print(f"[grammar] usage limit reached\n  {e}")
             return
-        print(f"[grammar] redo: {got} sentences, {info['ms'] / 1000:.0f}s")
+        print(f"[grammar] redo on {model}: {got} sentences, {info['ms'] / 1000:.0f}s")
 
 
 def first_sentences(n_cards: int | None = None, n_sentences: int | None = None,

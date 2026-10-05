@@ -57,6 +57,18 @@ deck, 11 the Link play deck. The docs do not call them chapters.
 
 ## Rules
 
+**Which model answers is decided per sentence (`models.py`).**
+- Opus, except the Link play deck, which the owner put on Sonnet: analysis,
+  grammar, notes and particle senses. A sentence that any Opus chapter shows
+  is Opus's wherever a stage meets it, and an Opus answer is never handed
+  back to Sonnet. Word-boundary decisions hold for the whole deck and stay on
+  Opus. `sense_pick` and the sense merge in `cards` were always Sonnet's.
+- Do not put a story or Help sentence on Sonnet. To check, compare which
+  model made each cached answer under chapters 0 to 10 before and after a run.
+- Sonnet sometimes answers only the first few sentences of a call. Its calls
+  are 20 sentences (`analyse.BATCH_BY_MODEL`); the rerun asks again for what
+  is missing and gives up after three rounds without progress.
+
 **Model calls spend the owner's Claude plan allowance.**
 - Do not run a stage that calls the model unless asked, and run it on the
   scope that was named (a sentence, a chapter), not on the whole deck.
@@ -313,22 +325,23 @@ Update this when it changes.
 - Chapters 0 to 10, the whole story and the Help deck: analysed by Opus with prompt version 4 or 5 (particle
   senses picked by the analysis), grammar and notes by Opus. All settled:
   `chapter N --dry-run` reports nothing left for each.
-- Chapter 11 (the Link play deck, 1,544 sentences to redo):
-  analysed by Sonnet with prompt version 2, with Opus on the
-  sentences Sonnet flagged; no grammar, no notes, and one card per particle. `analyse
-  rerun N` redoes every sentence of a chapter that is not Opus on version 4 or 5;
+- Chapter 11 (the Link play deck): analysed by Sonnet with prompt version 5,
+  grammar, notes and particle senses by Sonnet too, at the owner's choice.
+  1,537 of its sentences are Sonnet's; the 129 that an earlier chapter also
+  shows are Opus's. Settled. `analyse rerun N` redoes every sentence of a
+  chapter that its model has not answered on version 4 or 5;
   `analyse redo <file>` re-analyses only the sentences listed in a file.
 - `corrections.yaml` has three entries: the SELECT button line and Mom's two
   TV lines. Four corrections of word forms Sonnet wrote wrongly were removed
   as their chapters were redone on Opus, which wrote the forms correctly; the
   last two (ｃｍ, twice) went with the postgame.
-- `splits.yaml` has 474 decisions, from chapters 0 to 10. They are checked
+- `splits.yaml` has 475 decisions, from chapters 0 to 11. They are checked
   across chapters: a later chapter's run can send an earlier sentence back.
-- Names: 938 cards (221 Pokémon, 153 items, 284 moves, 61 abilities, 17
+- Names: 953 cards (221 Pokémon, 153 items, 284 moves, 76 abilities, 17
   types, 132 places, 23 people, 2 for Team Rocket, 8 badges, 22 game terms, 15
   real-world names), found by `names.py` in every chapter with no model call.
   The 56 name lines this put in chapter 0 were re-analysed on Opus. The names
-  deck is gone. Three decks, 11,100 cards: story 9,525, Help 940 (stand-alone), Link play 635. The note type has `Note` and
+  deck is gone. Three decks, 11,081 cards: story 9,533, Help 940 (stand-alone), Link play 608. The note type has `Note` and
   `SentenceNote` fields.
 - English names: the name check passes on every sentence the deck shows, in
   all chapters. 91 sentences were redone on Opus for it, most of them in

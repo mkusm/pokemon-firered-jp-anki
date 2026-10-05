@@ -1,0 +1,1 @@
+{"text": "ナウイことば", "structure": [{"jp": "ナウイ", "en": "trendy"}, {"jp": "ことば", "en": "words"}], "patterns": [{"name": "verb + noun", "span": "ナウイことば", "words": ["ナウい", "ことば"], "explanation": "An adjective in plain form sits right before the noun it describes. ナウイことば = 'trendy sayings'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2", "names": 5}}

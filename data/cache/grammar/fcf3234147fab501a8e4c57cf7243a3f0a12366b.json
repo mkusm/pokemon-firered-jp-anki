@@ -1,0 +1,1 @@
+{"text": "たいせんが　はじまるとき", "structure": [{"jp": "たいせんが　はじまるとき", "en": "when a battle starts"}], "patterns": [{"name": "〜とき", "span": "はじまるとき", "words": ["はじまる", "とき"], "explanation": "Verb + とき means 'when that happens'. はじまるとき = 'when it starts'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2", "names": 5}}

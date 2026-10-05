@@ -1,0 +1,1 @@
+{"text": "これで　いいですか？", "structure": [{"jp": "これで　", "en": "with this"}, {"jp": "いいですか？", "en": "is it OK?"}], "patterns": [{"name": "〜で (how)", "span": "これで", "words": ["これで"], "explanation": "で after a thing says what you go with or choose. これで　いいですか = 'is it OK with this?'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2", "names": 5}}

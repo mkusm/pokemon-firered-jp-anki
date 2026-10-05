@@ -1,0 +1,1 @@
+{"text": "＊にんよう", "structure": [{"jp": "＊にんよう", "en": "for ＊ people"}], "patterns": [{"name": "〜用", "span": "にんよう", "words": ["にん", "よう"], "explanation": "よう after a noun means 'for use by'. ＊にんよう = 'for ＊ players'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2", "names": 5}}

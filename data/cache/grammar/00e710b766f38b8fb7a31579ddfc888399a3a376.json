@@ -1,0 +1,1 @@
+{"text": "なのよ", "structure": [{"jp": "なの", "en": "it is the case"}, {"jp": "よ", "en": "you see"}], "patterns": [{"name": "〜のだ", "span": "なの", "words": ["なの"], "explanation": "のだ explains or stresses the situation; なの is the soft, often feminine form. なのよ = 'it is, you see'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2", "names": 5}}

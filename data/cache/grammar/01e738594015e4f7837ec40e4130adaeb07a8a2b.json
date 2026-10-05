@@ -1,0 +1,1 @@
+{"text": "たいせんに　まけたとき", "structure": [{"jp": "たいせんに　まけたとき", "en": "when you lose a battle"}], "patterns": [{"name": "〜とき", "span": "まけたとき", "words": ["まけた", "とき"], "explanation": "Verb + とき means 'when'. まけたとき = 'when you lost'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2", "names": 5}}

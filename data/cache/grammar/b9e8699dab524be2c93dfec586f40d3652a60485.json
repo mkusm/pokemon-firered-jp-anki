@@ -1,0 +1,1 @@
+{"text": "チャットを　かいし　します！", "structure": [{"jp": "チャットを", "en": "the chat (object)"}, {"jp": "かいし", "en": "start"}, {"jp": "します！", "en": "will do"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2", "names": 5}}

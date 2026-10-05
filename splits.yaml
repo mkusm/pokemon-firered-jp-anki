@@ -229,6 +229,10 @@
   as: おまえたち
   why: Dictionary entry for plural 'you', and most sentences already keep it whole.
   example: おまえたちに　たのみが　あるんじゃ
+おまちください:
+  as: お + まち + ください
+  why: Productive polite request お + verb stem + ください whose meaning is just its parts, with no dictionary entry for the whole.
+  example: ゲームの　けっかを　ポケモンレポートに　かきこんでいます　しばらく　おまちください
 おまちしてます:
   as: おまちしてます
   why: Humble お + stem + する is one conjugated form; まち cannot stand on its own here.

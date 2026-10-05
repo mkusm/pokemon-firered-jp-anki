@@ -78,9 +78,15 @@ def left(ns: list[int]) -> dict[int, dict[str, int]]:
 def _left(n: int, deck, analyses: dict, known: set) -> dict[str, int]:
     shown = deck[deck["card_order"].notna() & (deck["chapter"] == n)].sort_values("card_order").drop_duplicates("text")
     shown = shown[shown["text"].map(lambda t: t in analyses)]
-    current = [t for t in shown["text"] if analyse.current(analyse.MAIN.name, t, analyse.RERUN.model)]
+    current = [t for t in shown["text"] if analyse.ok(t)]
     sentences = shown[[not names.listed(g, lb) for g, lb in zip(shown["group"], shown["label"])]]  # not a bare name
-    explained = sentences[sentences["text"].map(lambda t: len(analyses[t]["words"]) > 1)]["text"]
+    # The grammar and the notes are asked for a sentence in the chapter that
+    # shows it first (grammar.first_sentences). A sentence an earlier chapter
+    # also shows is that chapter's to explain: counting it here too left this
+    # chapter waiting for an answer only the earlier one's run asks for.
+    first_in = deck[deck["card_order"].notna()].sort_values("card_order").drop_duplicates("text")
+    mine = set(first_in[first_in["chapter"] == n]["text"])
+    explained = sentences[sentences["text"].map(lambda t: t in mine and len(analyses[t]["words"]) > 1)]["text"]
     gram = grammar.results(sentences["text"], analyses)
     decided, bounded = splits.load(), splits.in_scope(deck, analyses, n)
     return {

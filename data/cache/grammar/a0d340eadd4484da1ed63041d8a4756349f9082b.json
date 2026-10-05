@@ -1,0 +1,1 @@
+{"text": "こうかんを　キャンセルしました", "structure": [{"jp": "こうかんを", "en": "the trade"}, {"jp": "キャンセルしました", "en": "canceled"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2", "names": 5}}

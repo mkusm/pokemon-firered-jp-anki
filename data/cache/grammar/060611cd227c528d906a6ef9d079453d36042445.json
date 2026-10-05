@@ -1,0 +1,1 @@
+{"text": "おした　かいすう　ランキング", "structure": [{"jp": "おした　かいすう", "en": "number of presses"}, {"jp": "ランキング", "en": "ranking"}], "patterns": [{"name": "verb + noun", "span": "おした　かいすう", "words": ["おした", "かいすう"], "explanation": "A verb before a noun describes it. おした かいすう = 'the number of times pressed'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2", "names": 5}}

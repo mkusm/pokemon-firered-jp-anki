@@ -1,0 +1,1 @@
+{"text": "＊は　＊を　ひっこめた！", "structure": [{"jp": "＊は　", "en": "＊ (topic)"}, {"jp": "＊を　", "en": "＊ (object)"}, {"jp": "ひっこめた！", "en": "withdrew!"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2", "names": 5}}

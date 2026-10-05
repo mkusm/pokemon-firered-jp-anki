@@ -1,0 +1,1 @@
+{"text": "とうろくが　かわりました　ポケモンレポートに　かきこみますか？", "structure": [{"jp": "とうろくが　かわりました　", "en": "the registration changed"}, {"jp": "ポケモンレポートに　", "en": "in the Pokémon Save"}, {"jp": "かきこみますか？", "en": "write it?"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2", "names": 5}}

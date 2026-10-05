@@ -1,0 +1,1 @@
+{"text": "なのか", "structure": [{"jp": "なのか", "en": "is it that...?"}], "patterns": [{"name": "〜のだ", "span": "なのか", "words": ["な", "のか"], "explanation": "のだ gives an explanation or reason; with か it asks about it. なのか = 'is it that...?'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2", "names": 5}}

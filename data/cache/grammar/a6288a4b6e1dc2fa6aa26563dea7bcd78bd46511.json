@@ -1,0 +1,1 @@
+{"text": "このポケモン　ほしかったんだ！", "structure": [{"jp": "このポケモン", "en": "this Pokémon"}, {"jp": "ほしかったんだ！", "en": "I wanted it!"}], "patterns": [{"name": "〜のだ", "span": "ほしかったんだ", "words": ["ほしかった", "んだ"], "explanation": "んだ at the end gives a casual explanation or feeling. ほしかったんだ = 'I wanted it, you see'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2", "names": 5}}

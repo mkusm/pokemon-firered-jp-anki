@@ -1,0 +1,1 @@
+{"text": "だぜ", "structure": [{"jp": "だ", "en": "it is"}, {"jp": "ぜ", "en": "I tell you"}], "patterns": [{"name": "〜ぜ", "span": "だぜ", "words": ["だ", "ぜ"], "explanation": "ぜ is a rough, boyish ending that pushes your point. だぜ = 'it is, I tell you'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2", "names": 5}}

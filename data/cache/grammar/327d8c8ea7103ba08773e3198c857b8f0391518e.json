@@ -1,0 +1,1 @@
+{"text": "ことばを　みつけよう！", "structure": [{"jp": "ことばを　", "en": "words (object)"}, {"jp": "みつけよう！", "en": "let's find"}], "patterns": [{"name": "〜よう", "span": "みつけよう", "words": ["みつけよう"], "explanation": "The よう ending means 'let's do it'. みつけよう = 'let's find them'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2", "names": 5}}

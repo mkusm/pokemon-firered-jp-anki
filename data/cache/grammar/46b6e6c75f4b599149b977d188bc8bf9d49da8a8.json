@@ -1,0 +1,1 @@
+{"text": "さんかを　やめますか？", "structure": [{"jp": "さんかを", "en": "participation"}, {"jp": "やめますか？", "en": "will you stop?"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2", "names": 5}}

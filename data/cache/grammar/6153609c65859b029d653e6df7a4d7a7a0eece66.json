@@ -1,0 +1,1 @@
+{"text": "しばらく　おまちください", "structure": [{"jp": "しばらく", "en": "for a while"}, {"jp": "おまちください", "en": "please wait"}], "patterns": [{"name": "お〜ください", "span": "おまちください", "words": ["おまち", "ください"], "explanation": "お plus the stem of a verb plus ください is a polite request. おまちください = 'please wait'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2", "names": 5}}

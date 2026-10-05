@@ -21,7 +21,7 @@ from dataclasses import dataclass
 
 import pandas as pd
 
-from . import claude_cli, corrections, names, particles, sense_pick, splits
+from . import claude_cli, corrections, models, names, particles, sense_pick, splits
 from .order import ORDER_OUT
 from .paths import DATA, ROOT
 from .grounding import ground
@@ -212,6 +212,14 @@ def current(run: str, text: str, model: str) -> bool:
     return made.get("model") == model and made.get("prompt") in ACCEPTED
 
 
+def ok(text: str) -> bool:
+    """Cached with a prompt close enough to the present one, by the model this
+    sentence needs or a better one (models.py)."""
+    p = cache_path(MAIN.name, text)
+    made = json.loads(p.read_text())["_run"] if p.exists() else {}
+    return made.get("prompt") in ACCEPTED and models.enough(made.get("model"), text)
+
+
 def run(cfg: Config, rows: pd.DataFrame, entries: dict, workers: int = 3,
         redo: bool = False, force: bool = False) -> dict:
     """Analyse rows under cfg, using and filling the cache. → stats.
@@ -355,35 +363,50 @@ def escalate() -> None:
 
 
 RERUN = Config("main", "opus", "low", 40)  # writes over the main cache
+# Sonnet with the present prompt sometimes answers only the first few sentences
+# of a call (5 of 20 in one of the first three calls tried). Smaller calls lose
+# less when that happens; the loop below asks again for what is missing.
+BATCH_BY_MODEL = {"sonnet": 20}
 
 
 def rerun(chapter: list[int] | None = None, workers: int = 20) -> None:
-    """Redo on Opus every sentence that Opus has not answered with the current
-    prompt: all of them, or the ones the deck shows in one chapter. Sonnet is wrong without flagging it in
-    about 3 sentences in 100 (a wrong item name, あったら filed under ある for
-    合う), which escalation cannot catch."""
-    df, entries = load()
-    if chapter is not None:
-        from .cards import prepare  # late: cards imports this module
+    """Redo every sentence that its model has not answered with the current
+    prompt: all of them, or the ones the deck shows in some chapters. The model
+    is Opus unless models.py says otherwise for the sentence: Sonnet is wrong
+    without flagging it in about 3 sentences in 100 (a wrong item name,
+    あったら filed under ある for 合う), which escalation cannot catch."""
+    from .cards import prepare  # late: cards imports this module
 
-        deck = prepare(offline_merge=True)[0]
+    df, entries = load()
+    deck = prepare(offline_merge=True)[0]  # also settles which model each sentence needs
+    if chapter is not None:
         shown = deck[deck["chapter"].isin(chapter) & deck["card_order"].notna()]
         df = df[df["text"].isin(set(shown["text"]))]
-    rows = df[df["text"].map(lambda t: cache_path(MAIN.name, t).exists() and not current(MAIN.name, t, RERUN.model))]
-    print(f"[rerun] {rows['text'].nunique()} sentences to redo on {RERUN.model}, {workers} calls at a time")
+    rows = df[df["text"].map(lambda t: cache_path(MAIN.name, t).exists() and not ok(t))]
     if rows.empty:
+        print("[rerun] 0 sentences to redo")
         return
-    while True:
-        st = run(RERUN, rows, entries, workers=workers, redo=True)
-        print(f"[rerun] round: {st['calls']} calls ({st['failed_calls']} failed)")
-        if st["todo"] == 0:
-            print("[rerun] done")
-            return
-        if st["limited"]:
-            print(f"[rerun] waiting {LIMIT_WAIT_S // 60} min for the usage limit", flush=True)
-            time.sleep(LIMIT_WAIT_S)
-        elif st["calls"] == st["failed_calls"]:
-            sys.exit("[rerun] giving up: a round with no successful call")
+    for model, texts in models.by_model(rows["text"].unique()).items():
+        part = rows[rows["text"].isin(set(texts))]
+        print(f"[rerun] {len(texts)} sentences to redo on {model}, {workers} calls at a time")
+        cfg = Config(RERUN.name, model, RERUN.effort, BATCH_BY_MODEL.get(model, RERUN.batch))
+        before, stuck = None, 0
+        while True:
+            st = run(cfg, part, entries, workers=workers, redo=True)
+            print(f"[rerun] round: {st['calls']} calls ({st['failed_calls']} failed)")
+            if st["todo"] == 0:
+                break
+            # A model that keeps skipping the same sentences must not be asked for ever.
+            stuck = stuck + 1 if st["todo"] == before and not st["limited"] else 0
+            before = st["todo"]
+            if stuck == 3:
+                sys.exit(f"[rerun] giving up: {st['todo']} sentences that {model} left unanswered three times running")
+            if st["limited"]:
+                print(f"[rerun] waiting {LIMIT_WAIT_S // 60} min for the usage limit", flush=True)
+                time.sleep(LIMIT_WAIT_S)
+            elif st["calls"] == st["failed_calls"]:
+                sys.exit("[rerun] giving up: a round with no successful call")
+    print("[rerun] done")
 
 
 def redo(path: str) -> None:
@@ -397,9 +420,11 @@ def redo_texts(texts: set[str], workers: int = 20) -> None:
     df, entries = load()
     rows = df[df["text"].isin(texts)]
     print(f"[redo] {rows['text'].nunique()} of {len(texts)} listed sentences found")
-    small = Config(RERUN.name, RERUN.model, RERUN.effort, 20)  # picked sentences run long
-    st = run(small, rows, entries, workers=workers, force=True)
-    print(f"[redo] {st['calls']} calls ({st['failed_calls']} failed){', stopped by the usage limit' if st['limited'] else ''}")
+    for model, mine in models.by_model(rows["text"].unique()).items():  # each by the model it needs
+        small = Config(RERUN.name, model, RERUN.effort, 20)  # picked sentences run long
+        st = run(small, rows[rows["text"].isin(set(mine))], entries, workers=workers, force=True)
+        print(f"[redo] {model}: {st['calls']} calls ({st['failed_calls']} failed)"
+              f"{', stopped by the usage limit' if st['limited'] else ''}")
 
 
 # --- dry run -----------------------------------------------------------------

@@ -1,0 +1,1 @@
+{"text": "こうかんにだす", "structure": [{"jp": "こうかんに", "en": "for trade"}, {"jp": "だす", "en": "put out"}], "patterns": [{"name": "〜に (purpose)", "span": "こうかんに　だす", "words": ["こうかん", "に", "だす"], "explanation": "に shows what something is put out for. こうかんにだす = 'put up for trade'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2", "names": 5}}

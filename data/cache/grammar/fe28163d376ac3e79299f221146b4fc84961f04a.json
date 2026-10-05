@@ -1,0 +1,1 @@
+{"text": "９つの　ことばを　くみあわせて", "structure": [{"jp": "９つの　ことばを　", "en": "nine words (object)"}, {"jp": "くみあわせて", "en": "combine, and…"}], "patterns": [{"name": "〜て (linking)", "span": "くみあわせて", "words": ["くみあわせて"], "explanation": "The て form links to the next line. くみあわせて = 'combine, and (then)…'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2", "names": 5}}

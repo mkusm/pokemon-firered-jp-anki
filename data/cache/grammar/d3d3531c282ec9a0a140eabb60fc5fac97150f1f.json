@@ -1,0 +1,1 @@
+{"text": "ノーマルカードだ！", "structure": [{"jp": "ノーマルカード", "en": "Normal Card"}, {"jp": "だ！", "en": "it is!"}], "patterns": [{"name": "〜だ", "span": "カードだ", "words": ["カード", "だ"], "explanation": "だ is the plain, casual way to say 'is'. ノーマルカードだ！ = 'It's a Normal Card!'"}], "_run": {"model": "sonnet", "effort": "low", "version": "2", "names": 5}}

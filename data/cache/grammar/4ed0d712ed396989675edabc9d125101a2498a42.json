@@ -1,0 +1,1 @@
+{"text": "メールを　どうしますか？", "structure": [{"jp": "メールを", "en": "the Mail"}, {"jp": "どうしますか？", "en": "what will you do?"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2", "names": 5}}

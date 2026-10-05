@@ -1,0 +1,1 @@
+{"text": "７もじの　ことばは　１ぎょうに　２つまで！", "note": "The Japanese says words of seven characters, at most two per line. The English game put 12-letter phrases instead, because English text needs a different length limit.", "kind": "changed", "claim": "", "_run": {"model": "sonnet", "effort": "low", "version": "1"}}

@@ -1,0 +1,1 @@
+{"text": "＊は　こうかんけいじばんを　みた！", "structure": [{"jp": "＊は", "en": "＊ (topic)"}, {"jp": "こうかんけいじばんを", "en": "the trading board"}, {"jp": "みた！", "en": "looked at"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2", "names": 5}}

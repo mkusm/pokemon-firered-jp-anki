@@ -1,0 +1,1 @@
+{"text": "＊に　ニュース　を　おくり　ました！", "structure": [{"jp": "＊に", "en": "to ＊"}, {"jp": "ニュース　を", "en": "the news"}, {"jp": "おくり　ました！", "en": "sent"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2", "names": 5}}

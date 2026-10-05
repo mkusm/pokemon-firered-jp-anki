@@ -1,0 +1,1 @@
+{"text": "とうろくを　ちゅうし　しました", "structure": [{"jp": "とうろくを", "en": "the registration"}, {"jp": "ちゅうし　しました", "en": "stopped"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2", "names": 5}}

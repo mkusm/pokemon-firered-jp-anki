@@ -1,0 +1,1 @@
+{"text": "＊に　ＯＫの　へんじを　だしました", "structure": [{"jp": "＊に　", "en": "to ＊"}, {"jp": "ＯＫの　", "en": "OK"}, {"jp": "へんじを　", "en": "reply (object)"}, {"jp": "だしました", "en": "sent"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2", "names": 5}}

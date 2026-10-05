@@ -1,0 +1,1 @@
+{"text": "ちょいと　まってね", "structure": [{"jp": "ちょいと", "en": "just a bit"}, {"jp": "まってね", "en": "wait"}], "patterns": [{"name": "〜てください", "span": "まってね", "words": ["まって", "ね"], "explanation": "A bare て-form plus ね is a friendly, casual request. まってね = 'please wait'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2", "names": 5}}

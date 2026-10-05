@@ -1,0 +1,1 @@
+{"text": "よわすぎ", "structure": [{"jp": "よわすぎ", "en": "too weak"}], "patterns": [{"name": "〜すぎる", "span": "よわすぎ", "words": ["よわ", "すぎ"], "explanation": "すぎ after a word's stem means too much. よわすぎ = 'too weak'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2", "names": 5}}

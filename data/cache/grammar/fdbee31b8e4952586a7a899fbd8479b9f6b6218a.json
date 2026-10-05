@@ -1,0 +1,1 @@
+{"text": "つうしんたいきちゅう……", "structure": [{"jp": "つうしんたいきちゅう……", "en": "link standby"}], "patterns": [{"name": "〜ちゅう", "span": "たいきちゅう", "words": ["たいき", "ちゅう"], "explanation": "ちゅう after a noun means it is going on right now. たいきちゅう = 'on standby'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2", "names": 5}}

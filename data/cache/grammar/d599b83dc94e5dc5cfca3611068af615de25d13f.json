@@ -1,0 +1,1 @@
+{"text": "メッセージを　つくろう！", "structure": [{"jp": "メッセージを　", "en": "message (object)"}, {"jp": "つくろう！", "en": "let's make"}], "patterns": [{"name": "〜よう", "span": "つくろう", "words": ["つくろう"], "explanation": "The う ending means 'let's do it'. つくろう = 'let's make it'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2", "names": 5}}

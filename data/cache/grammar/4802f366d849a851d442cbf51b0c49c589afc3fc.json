@@ -1,0 +1,1 @@
+{"text": "カードの　よみこみを　ちゅうし　しました", "structure": [{"jp": "カードの　よみこみを", "en": "the card reading (object)"}, {"jp": "ちゅうし　しました", "en": "stopped"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2", "names": 5}}

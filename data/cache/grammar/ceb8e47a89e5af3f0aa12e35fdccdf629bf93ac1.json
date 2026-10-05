@@ -1,0 +1,1 @@
+{"text": "チャットね！", "structure": [{"jp": "チャットね！", "en": "a chat, then!"}], "patterns": [{"name": "〜ね", "span": "チャットね", "words": ["ね"], "explanation": "ね here confirms and agrees. チャットね = 'a chat, then!'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2", "names": 5}}

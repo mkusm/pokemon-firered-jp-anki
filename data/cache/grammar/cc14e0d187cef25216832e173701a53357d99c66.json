@@ -1,0 +1,1 @@
+{"text": "きのせい", "structure": [{"jp": "きの", "en": "of the feeling"}, {"jp": "せい", "en": "fault / cause"}], "patterns": [{"name": "〜のせい", "span": "きのせい", "words": ["き", "の", "せい"], "explanation": "のせい blames something as the cause. 気のせい blames your own mind. きのせい = 'just my imagination'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2", "names": 5}}

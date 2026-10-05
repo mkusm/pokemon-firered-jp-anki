@@ -1,0 +1,1 @@
+{"text": "つうしんたいきちゅう", "structure": [{"jp": "つうしんたいきちゅう", "en": "communication standby"}], "patterns": [{"name": "〜中", "span": "たいきちゅう", "words": ["たいき", "ちゅう"], "explanation": "ちゅう after a noun means 'in the middle of'. つうしんたいきちゅう = 'on communication standby'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2", "names": 5}}

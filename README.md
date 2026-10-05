@@ -21,7 +21,7 @@ How it works, in detail: [`docs/how-it-works.html`](docs/how-it-works.html)
 
 | | |
 |---|---|
-| `firered_jp.apkg` | 11,100 cards in three decks: the story (9,525, in story order), the Help menu (940) and link play (635) |
+| `firered_jp.apkg` | 11,081 cards in three decks: the story (9,533, in story order), the Help menu (940) and link play (608) |
 
 It is attached to the [latest release](https://github.com/mkusm/pokemon-firered-jp-anki/releases/latest).
 
@@ -35,8 +35,7 @@ Each card:
   how the form is built
   (`つかまえ (stem) + て (te-form)`), the sentence in kanji and in English, up to
   two more example sentences, the whole message, and the JMdict senses.
-- **Grammar**, on the back, for the whole story, all ten chapters through the postgame,
-  and for the Help deck (10,465 cards): the patterns the word takes part in, each explained
+- **Grammar**, on the back, in all three decks: the patterns the word takes part in, each explained
   in plain words for that sentence, and a breakdown of the sentence phrase by
   phrase. The card for と in しゅじんこうと　なって says: "と before なる shows
   what someone turns into; it is a more formal に. しゅじんこうと　なって =
@@ -45,10 +44,9 @@ Each card:
 つかまえた, つかまえて and つかまえられる are three cards: every form is drilled
 where the story first uses it.
 
-Particles get a card for each job they do, in the whole story: か has
+Particles get a card for each job they do: か has
 one card as the question marker and another for "or", が one as the subject
-marker and another for "but". In the Link play deck each
-particle still has a single card, showing its first use.
+marker and another for "but".
 
 Names are in English as the English game has them, on the cards and in every
 translation: ニビシティ is Pewter City, ふしぎなアメ the Rare Candy, チャンピオンロード
@@ -58,7 +56,7 @@ squeeze into twelve letters are spelled the way the series spells them now
 deck fills in for them, Red and Green.
 
 Everything with a name worth knowing has one card: 221 Pokémon, 153 items,
-284 moves, 61 abilities, the 17 types, 132 places, the main characters, the
+284 moves, 76 abilities, the 17 types, 132 places, the main characters, the
 badges, 22 game terms (ポケモンずかん, してんのう) and 15 names from the real world
 (ファミコン, きょうと). The card sits at the first line of dialogue that says the
 name, or else where the thing is first met:
@@ -83,7 +81,7 @@ something: a cultural reference (the film on the TV in your room), a play on
 words, a regional dialect, or a place where the English game says something
 else (the old man in Viridian is drunk in Japanese and wants coffee in
 English). Notes that state a fact about the outside world are checked by a web
-search before they are shown. The story and the Help deck have them; the Link play deck does not yet.
+search before they are shown.
 
 Names not worth a card get none: the presets of the naming screen, characters
 who appear once, pieces of longer names. There is no separate names deck.
@@ -125,7 +123,7 @@ All you need is [Anki](https://apps.ankiweb.net/), on desktop or on your phone.
 3. **Pick a pace.** The cards follow the game, so the natural way to use the
    deck is to study a stretch and then play it. For scale: the opening sequence
    is the first 172 cards, everything up to the first gym about 2,400, the whole
-   story 9,525. At 20 new cards a day that is about four months to Brock.
+   story 9,533. At 20 new cards a day that is about four months to Brock.
 4. **Read the card.** The front is the line as the game shows it, in kana, with
    one word highlighted: read the sentence and recall that word. The back gives
    the reading in romaji, the dictionary form, the meaning in this sentence,
@@ -306,15 +304,13 @@ vendor/           upstream clones (ignored)
 
 ## Known limits
 
-- The deck is in two states. The story, all ten chapters, was analysed by Opus and
-  has grammar and notes on its cards, and so was the Help deck. The Link play
-  deck (635 cards) is Sonnet's analysis, with
-  Opus only on the sentences Sonnet flagged, and has no grammar yet. On a
-  sample of 100 sentences Opus corrected a clear Sonnet error in 3: a wrong
-  item name, a line read as "I was asked a favor" that means "do me a favor",
-  and あったら filed under ある where it is 合う.
-- Particles are split into one card per job only in the story and the Help deck. In the
-  Link play deck all uses of a particle are still filed under one card.
+- Two models made the deck. The story and the Help deck are Opus's work:
+  analysis, grammar and notes. The Link play deck (608 cards) is Sonnet's,
+  which costs less and is less sure: on a sample of 100 sentences Opus
+  corrected a clear Sonnet error in 3 (a wrong item name, a line read as "I
+  was asked a favor" that means "do me a favor", and あったら filed under ある
+  where it is 合う), and 43 of that deck's cards are tagged `low-confidence`.
+  A sentence the story or the Help deck also shows is always Opus's.
 - A grammar pattern's name is written per sentence, so the same pattern can be
   spelled two ways on different cards (〜せる and 〜させる).
 - Nothing has been proofread by a native speaker.

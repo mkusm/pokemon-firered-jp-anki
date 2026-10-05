@@ -1,0 +1,1 @@
+{"text": "こちらでは　ともだちと　ちょくせつ　やりとり　できます　どの　へやに　はいりますか？", "structure": [{"jp": "こちらでは", "en": "here"}, {"jp": "ともだちと　ちょくせつ　やりとり　できます", "en": "you can interact directly with friends"}, {"jp": "どの　へやに　はいりますか？", "en": "which room will you enter?"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2", "names": 5}}

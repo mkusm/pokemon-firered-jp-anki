@@ -1,0 +1,1 @@
+{"text": "とかいって", "structure": [{"jp": "とか", "en": "things like"}, {"jp": "いって", "en": "saying"}], "patterns": [{"name": "〜とか", "span": "とか", "words": ["とか"], "explanation": "とか gives a loose example, 'things like ...'. Before いって it means saying something like that. とかいって = 'saying things like...'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2", "names": 5}}

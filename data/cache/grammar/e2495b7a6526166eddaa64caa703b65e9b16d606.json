@@ -1,0 +1,1 @@
+{"text": "メールを　パソコンに　てんそうしました", "structure": [{"jp": "メールを", "en": "the mail (object)"}, {"jp": "パソコンに", "en": "to the PC"}, {"jp": "てんそうしました", "en": "sent it"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2", "names": 5}}

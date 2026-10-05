@@ -1,0 +1,1 @@
+{"text": "＊さんが　ぬけました", "structure": [{"jp": "＊さんが　", "en": "＊ (subject)"}, {"jp": "ぬけました", "en": "left"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2", "names": 5}}

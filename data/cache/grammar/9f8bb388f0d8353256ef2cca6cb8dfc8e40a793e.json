@@ -1,0 +1,1 @@
+{"text": "だいじに", "structure": [{"jp": "だいじに", "en": "carefully"}], "patterns": [{"name": "〜に (adverb)", "span": "だいじに", "words": ["だいじ", "に"], "explanation": "に after a な-type word turns it into 'in that way'. だいじに = 'carefully; take care'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2", "names": 5}}

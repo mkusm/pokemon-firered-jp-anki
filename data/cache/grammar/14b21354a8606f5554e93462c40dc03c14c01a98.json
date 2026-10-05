@@ -1,0 +1,1 @@
+{"text": "たいせんね！", "structure": [{"jp": "たいせんね！", "en": "a battle, then!"}], "patterns": [{"name": "〜ね", "span": "たいせんね", "words": ["ね"], "explanation": "ね here confirms and agrees, in a softer, often female-sounding way. たいせんね = 'a battle, then!'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2", "names": 5}}

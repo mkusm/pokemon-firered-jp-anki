@@ -1,0 +1,1 @@
+{"text": "＊「こんどは　なにをする？", "structure": [{"jp": "＊「こんどは　", "en": "＊: this time"}, {"jp": "なにをする？", "en": "what shall we do?"}], "patterns": [{"name": "〜か (question)", "span": "なにをする？", "words": ["する"], "explanation": "A rising tone alone makes a question. なにをする？ = 'What shall we do?'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2", "names": 5}}

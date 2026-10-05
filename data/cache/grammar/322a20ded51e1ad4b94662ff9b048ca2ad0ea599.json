@@ -1,0 +1,1 @@
+{"text": "＊の＊ひきめは　いません", "structure": [{"jp": "＊の＊ひきめは　", "en": "＊'s ＊th one"}, {"jp": "いません", "en": "is not there"}], "patterns": [{"name": "〜め", "span": "ひきめ", "words": ["ひき", "め"], "explanation": "め after a counted amount makes it an order number. ＊ひきめ = 'the ＊th one'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2", "names": 5}}

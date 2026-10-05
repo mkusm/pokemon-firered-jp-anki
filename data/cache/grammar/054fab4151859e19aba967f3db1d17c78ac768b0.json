@@ -1,0 +1,1 @@
+{"text": "＊からの　へんじを　まっています", "structure": [{"jp": "＊からの　へんじを", "en": "a reply from ＊"}, {"jp": "まっています", "en": "am waiting"}], "patterns": [{"name": "〜ている", "span": "まっています", "words": ["まっています"], "explanation": "ている says an action is going on right now. まっています = 'am waiting'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2", "names": 5}}

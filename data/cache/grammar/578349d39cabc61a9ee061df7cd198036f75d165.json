@@ -1,0 +1,1 @@
+{"text": "えらぶ：Ａさんかする：Ｂやめる", "structure": [{"jp": "えらぶ：", "en": "choose:"}, {"jp": "Ａさんかする：", "en": "A to join"}, {"jp": "Ｂやめる", "en": "B to cancel"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2", "names": 5}}

@@ -38,7 +38,7 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 
 import pandas as pd
 
-from . import claude_cli, corrections, names
+from . import claude_cli, corrections, models, names
 from .paths import CORPUS, DATA
 
 CACHE = DATA / "cache" / "notes"
@@ -116,8 +116,8 @@ def prompt(rows: pd.DataFrame, analyses: dict, english: list[str]) -> str:
         "\n\nReturn one item per sentence, with its id (s0, s1, …).")
 
 
-def write(batch: pd.DataFrame, analyses: dict, english: list[str]) -> tuple[int, dict]:
-    out, info = claude_cli.call(prompt(batch, analyses, english), SYSTEM, SCHEMA, MODEL, EFFORT, timeout=900)
+def write(batch: pd.DataFrame, analyses: dict, english: list[str], model: str = MODEL) -> tuple[int, dict]:
+    out, info = claude_cli.call(prompt(batch, analyses, english), SYSTEM, SCHEMA, model, EFFORT, timeout=900)
     got = {s["id"]: s for s in out.get("sentences", [])}
     done = 0
     for i, r in enumerate(batch.itertuples()):
@@ -125,17 +125,17 @@ def write(batch: pd.DataFrame, analyses: dict, english: list[str]) -> tuple[int,
             note = " ".join(s["note"].split())
             cache_file(r.text).write_text(json.dumps(
                 {"text": r.text, "note": note, "kind": s["kind"] if note else "", "claim": s["claim"] if note else "",
-                 "_run": {"model": MODEL, "effort": EFFORT, "version": VERSION}}, ensure_ascii=False))
+                 "_run": {"model": model, "effort": EFFORT, "version": VERSION}}, ensure_ascii=False))
             done += 1
     return done, info
 
 
 # --- 2. check -------------------------------------------------------------------
 
-def check(batch: list[dict]) -> tuple[int, dict]:
+def check(batch: list[dict], model: str = MODEL) -> tuple[int, dict]:
     body = "\n".join(f"\nn{i}\n  note: {r['note']}\n  fact: {r['claim'] or r['note']}" for i, r in enumerate(batch))
     out, info = claude_cli.call("Notes to check:" + body + "\n\nReturn one item per note, with its id (n0, n1, …).",
-                                CHECK_SYSTEM, CHECK_SCHEMA, MODEL, EFFORT, timeout=900, tools=("WebSearch", "WebFetch"))
+                                CHECK_SYSTEM, CHECK_SCHEMA, model, EFFORT, timeout=900, tools=("WebSearch", "WebFetch"))
     got = {c["id"]: c for c in out.get("notes", [])}
     done = 0
     for i, r in enumerate(batch):
@@ -216,12 +216,21 @@ def main() -> None:
         return
     CACHE.mkdir(parents=True, exist_ok=True)
     english = (CORPUS / "en_msg.txt").read_text(encoding="utf-8").split("\n")
-    if len(todo) and not _pool([(write, todo.iloc[i:i + BATCH], analyses, english) for i in range(0, len(todo), BATCH)], "write"):
+    # Each call's sentences are all answered by one model (models.py).
+    jobs = []
+    for model, texts in models.by_model(todo["text"]).items():
+        part = todo[todo["text"].isin(set(texts))]
+        jobs += [(write, part.iloc[i:i + BATCH], analyses, english, model) for i in range(0, len(part), BATCH)]
+    if jobs and not _pool(jobs, "write"):
         return
     todo, unchecked = left(rows)
     if unchecked:
         print(f"[notes] {len(unchecked)} notes to check by search")
-        _pool([(check, unchecked[i:i + CHECK_BATCH]) for i in range(0, len(unchecked), CHECK_BATCH)], "check")
+        jobs = []
+        for model, texts in models.by_model(r["text"] for r in unchecked).items():
+            part = [r for r in unchecked if r["text"] in set(texts)]
+            jobs += [(check, part[i:i + CHECK_BATCH], model) for i in range(0, len(part), CHECK_BATCH)]
+        _pool(jobs, "check")
     todo, unchecked = left(rows)
     recs = [r for t in rows["text"] if (r := read(t))]
     written = [r for r in recs if r["note"]]

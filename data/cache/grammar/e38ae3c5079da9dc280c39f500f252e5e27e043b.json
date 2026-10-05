@@ -1,0 +1,1 @@
+{"text": "ここに　とうろくしますか？", "structure": [{"jp": "ここに　", "en": "here"}, {"jp": "とうろくしますか？", "en": "register?"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2", "names": 5}}

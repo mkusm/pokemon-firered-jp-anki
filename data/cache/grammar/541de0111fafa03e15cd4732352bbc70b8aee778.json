@@ -1,0 +1,1 @@
+{"text": "いっしょに", "structure": [{"jp": "いっしょに", "en": "together"}], "patterns": [{"name": "〜に (adverb)", "span": "いっしょに", "words": ["いっしょ", "に"], "explanation": "に after some nouns turns them into 'in that way'. いっしょに = 'together'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2", "names": 5}}

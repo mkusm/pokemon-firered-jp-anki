@@ -1,0 +1,1 @@
+{"text": "こうかんを　かいし　します", "structure": [{"jp": "こうかんを　", "en": "the trade"}, {"jp": "かいし　します", "en": "will start"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2", "names": 5}}

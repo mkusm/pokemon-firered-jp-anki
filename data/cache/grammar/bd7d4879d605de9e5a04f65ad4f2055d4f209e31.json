@@ -1,0 +1,1 @@
+{"text": "ジョイスポットの　けんさくを　ちゅうししました", "structure": [{"jp": "ジョイスポットの　けんさくを", "en": "the Joy Spot search"}, {"jp": "ちゅうししました", "en": "canceled"}], "patterns": [{"name": "〜をする", "span": "ちゅうししました", "words": ["ちゅうし", "しました"], "explanation": "Noun ＋ する makes a verb. ちゅうししました = 'stopped, canceled'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2", "names": 5}}

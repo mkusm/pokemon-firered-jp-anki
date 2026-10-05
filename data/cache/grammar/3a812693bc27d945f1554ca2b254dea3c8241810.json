@@ -1,0 +1,1 @@
+{"text": "たいせんを　かいし　します！", "structure": [{"jp": "たいせんを", "en": "the battle (object)"}, {"jp": "かいし", "en": "start"}, {"jp": "します！", "en": "will do"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2", "names": 5}}

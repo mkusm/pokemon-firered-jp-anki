@@ -1,0 +1,1 @@
+{"text": "おなじ　ニュースを　すでに　もっています", "structure": [{"jp": "おなじ　ニュースを", "en": "the same news"}, {"jp": "すでに", "en": "already"}, {"jp": "もっています", "en": "have"}], "patterns": [{"name": "〜ている", "span": "もっています", "words": ["もっています"], "explanation": "ている after a verb says a state that continues. もっています = 'have'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2", "names": 5}}

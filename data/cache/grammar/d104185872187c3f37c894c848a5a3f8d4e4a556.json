@@ -1,0 +1,1 @@
+{"text": "ますわ", "structure": [{"jp": "ます", "en": "(polite verb ending)"}, {"jp": "わ", "en": "(feminine softener)"}], "patterns": [{"name": "〜わ", "span": "ますわ", "words": ["ます", "わ"], "explanation": "わ after polite ます gives a soft, ladylike sound. ますわ = 'I do (politely, softly)'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2", "names": 5}}

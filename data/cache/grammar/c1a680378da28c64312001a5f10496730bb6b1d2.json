@@ -1,0 +1,1 @@
+{"text": "いくわよ", "structure": [{"jp": "いくわよ", "en": "here it goes"}], "patterns": [{"name": "〜わ", "span": "いくわよ", "words": ["わよ"], "explanation": "わよ is a soft ending used mostly by women. いくわよ = 'I'm going, you know.'"}], "_run": {"model": "sonnet", "effort": "low", "version": "2", "names": 5}}

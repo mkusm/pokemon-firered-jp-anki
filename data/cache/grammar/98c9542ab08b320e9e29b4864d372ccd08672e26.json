@@ -1,0 +1,1 @@
+{"text": "だわ", "structure": [{"jp": "だ", "en": "it is"}, {"jp": "わ", "en": "(feminine softener)"}], "patterns": [{"name": "〜わ", "span": "だわ", "words": ["だ", "わ"], "explanation": "わ at the end is a soft ending often used by women or in a gentle voice. だわ = 'it is (softly)'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2", "names": 5}}

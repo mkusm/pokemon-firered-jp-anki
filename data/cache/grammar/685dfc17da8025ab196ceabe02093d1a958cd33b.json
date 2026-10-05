@@ -1,0 +1,1 @@
+{"text": "せつぞくが　まちがっています", "structure": [{"jp": "せつぞくが", "en": "the connection"}, {"jp": "まちがっています", "en": "is wrong"}], "patterns": [{"name": "〜ている", "span": "まちがっています", "words": ["まちがっています"], "explanation": "ている here shows a state that has come about. まちがっています = 'is wrong'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2", "names": 5}}

@@ -1,0 +1,1 @@
+{"text": "とりこみちゅうの　ようだ…", "structure": [{"jp": "とりこみちゅうの", "en": "busy"}, {"jp": "ようだ…", "en": "it seems"}], "patterns": [{"name": "〜ようだ", "span": "とりこみちゅうの　ようだ", "words": ["よう", "だ", "の"], "explanation": "ようだ says it seems like something is so. とりこみちゅうの　ようだ = 'they seem to be busy'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2", "names": 5}}

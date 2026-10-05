@@ -1,0 +1,1 @@
+{"text": "ふしぎなできごとを　かいさいする", "structure": [{"jp": "ふしぎな", "en": "mysterious"}, {"jp": "できごとを　", "en": "event (object)"}, {"jp": "かいさいする", "en": "hold"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2", "names": 5}}

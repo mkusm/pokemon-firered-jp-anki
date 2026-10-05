@@ -1,0 +1,1 @@
+{"text": "ひとりで", "structure": [{"jp": "ひとりで", "en": "alone"}], "patterns": [{"name": "〜で (how)", "span": "ひとりで", "words": ["ひとり", "で"], "explanation": "で after a number of people says in what state something is done. ひとりで = 'alone, by oneself'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2", "names": 5}}

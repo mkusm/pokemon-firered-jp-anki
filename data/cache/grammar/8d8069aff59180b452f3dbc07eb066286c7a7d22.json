@@ -1,0 +1,1 @@
+{"text": "どうなの？", "structure": [{"jp": "どう", "en": "how"}, {"jp": "なの？", "en": "is it?"}], "patterns": [{"name": "〜のだ", "span": "なの", "words": ["なの"], "explanation": "の at the end of a casual question asks for an explanation. どうなの？ = 'how is it?'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2", "names": 5}}

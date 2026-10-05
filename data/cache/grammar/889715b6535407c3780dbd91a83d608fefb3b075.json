@@ -1,0 +1,1 @@
+{"text": "を　こうかんしますか？", "structure": [{"jp": "を", "en": "(this) as object"}, {"jp": "こうかんしますか？", "en": "will you trade?"}], "patterns": [{"name": "〜か", "span": "こうかんしますか？", "words": ["こうかんし", "ます", "か"], "explanation": "か at the end turns a sentence into a question. こうかんしますか = 'Will you trade?'"}], "_run": {"model": "sonnet", "effort": "low", "version": "2", "names": 5}}

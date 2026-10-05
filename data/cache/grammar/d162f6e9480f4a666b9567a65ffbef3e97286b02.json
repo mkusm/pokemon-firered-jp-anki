@@ -1,0 +1,1 @@
+{"text": "にも", "structure": [{"jp": "にも", "en": "also to/in"}], "patterns": [{"name": "〜にも", "span": "にも", "words": ["に", "も"], "explanation": "に plus も adds 'also' to a place or person. にも = 'also in/to ...'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2", "names": 5}}

@@ -1,0 +1,1 @@
+{"text": "だれかがぬけました　つうしんを　しゅうりょうします", "structure": [{"jp": "だれかが　ぬけました　", "en": "someone dropped out"}, {"jp": "つうしんを　", "en": "the link"}, {"jp": "しゅうりょうします", "en": "will end"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2", "names": 5}}

@@ -1,0 +1,1 @@
+{"text": "プロフィールを　つくろう！", "structure": [{"jp": "プロフィールを　", "en": "profile (object)"}, {"jp": "つくろう！", "en": "let's make"}], "patterns": [{"name": "〜よう", "span": "つくろう", "words": ["つくろう"], "explanation": "The う/よう ending means 'let's do it' or invites the player to act. つくろう = 'let's make it'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2", "names": 5}}

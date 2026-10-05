@@ -1,0 +1,1 @@
+{"text": "ている", "structure": [{"jp": "ている", "en": "is doing / has done"}], "patterns": [{"name": "〜ている", "span": "ている", "words": ["て", "いる"], "explanation": "ている after a verb says an action is going on or its result remains. ている = 'is doing / has done'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2", "names": 5}}

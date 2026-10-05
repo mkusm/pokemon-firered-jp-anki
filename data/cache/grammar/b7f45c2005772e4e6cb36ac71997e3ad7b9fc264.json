@@ -1,0 +1,1 @@
+{"text": "ていない", "structure": [{"jp": "ていない", "en": "is not doing / has not"}], "patterns": [{"name": "〜ている", "span": "ていない", "words": ["て", "いない"], "explanation": "ている after a verb says an action is going on or its result remains. The negative says it is not so. ていない = 'is not doing / has not done'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2", "names": 5}}

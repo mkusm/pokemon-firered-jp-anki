@@ -1,0 +1,1 @@
+{"text": "＊で　いいかしら？", "structure": [{"jp": "＊で　", "en": "with ＊"}, {"jp": "いいかしら？", "en": "is it good, I wonder?"}], "patterns": [{"name": "〜かしら", "span": "いいかしら", "words": ["かしら"], "explanation": "かしら is a feminine way to wonder or ask softly. いいかしら = 'I wonder if it's okay'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2", "names": 5}}

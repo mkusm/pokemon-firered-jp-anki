@@ -1,0 +1,1 @@
+{"text": "おなじ　どうぐを　もってます", "structure": [{"jp": "おなじ　どうぐを", "en": "the same item"}, {"jp": "もってます", "en": "is holding"}], "patterns": [{"name": "〜ている", "span": "もってます", "words": ["もってます"], "explanation": "This is ている with the い dropped in casual speech. もってます = 'is holding'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2", "names": 5}}

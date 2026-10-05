@@ -1,0 +1,1 @@
+{"text": "よね", "structure": [{"jp": "よ", "en": "you know"}, {"jp": "ね", "en": "right?"}], "patterns": [{"name": "〜よね", "span": "よね", "words": ["よ", "ね"], "explanation": "よね says something and checks the listener agrees. よね = 'right? isn't it?'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2", "names": 5}}

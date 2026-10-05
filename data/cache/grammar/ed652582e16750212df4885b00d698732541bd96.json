@@ -1,0 +1,1 @@
+{"text": "ていねいさ　ランキング", "structure": [{"jp": "ていねいさ", "en": "neatness"}, {"jp": "ランキング", "en": "ranking"}], "patterns": [{"name": "〜さ", "span": "ていねいさ", "words": ["ていねい", "さ"], "explanation": "さ turns a describing word into a noun for the degree. ていねいさ = 'neatness'."}], "_run": {"model": "sonnet", "effort": "low", "version": "2", "names": 5}}

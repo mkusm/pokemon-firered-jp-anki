@@ -1,0 +1,1 @@
+{"text": "ボックスから　メールを　うつしました", "structure": [{"jp": "ボックスから", "en": "from the Box"}, {"jp": "メールを　うつしました", "en": "moved the mail"}], "patterns": [], "_run": {"model": "sonnet", "effort": "low", "version": "2", "names": 5}}
