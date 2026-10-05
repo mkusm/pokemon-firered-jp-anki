@@ -1,6 +1,6 @@
 # pokemon-firered-jp-anki
 
-Builds an Anki deck from the Japanese text of Pokémon FireRed (GBA): one card
+An Anki deck made from the Japanese text of Pokémon FireRed (GBA): one card
 for every form of every word, in the order you meet them when you play, each
 shown in the sentence where it first appears.
 
@@ -9,45 +9,62 @@ words (かみ is 紙, 神 or 髪). A tokenizer and a dictionary alone pick wrong
 every sentence is analysed by Claude with its neighbours, speaker and location in
 view, and JMdict is used to ground and check the answer.
 
+- **Use the deck:** download `firered_jp.apkg` from the
+  [latest release](https://github.com/mkusm/pokemon-firered-jp-anki/releases/latest)
+  and read [How to use](#how-to-use).
+- **How it is made:** [`docs/how-it-works.html`](docs/how-it-works.html)
+  (open it in a browser), and [Building it yourself](#building-it-yourself).
+
 This is an unofficial fan project for studying Japanese. Pokémon and the game's
 text belong to Nintendo, Creatures and GAME FREAK; the text comes from the public
 [poke-corpus](https://github.com/abcboy101/poke-corpus) and is also present in
 `data/cache/`, inside the analysed sentences.
 
-How it works, in detail: [`docs/how-it-works.html`](docs/how-it-works.html)
-(open it in a browser).
-
 ## What you get
 
-| | |
-|---|---|
-| `firered_jp.apkg` | 11,084 cards in three decks: the story (9,537, in story order), the Help menu (941) and link play (606) |
+One package, `firered_jp.apkg`, with 11,084 cards in three decks:
 
-It is attached to the [latest release](https://github.com/mkusm/pokemon-firered-jp-anki/releases/latest).
+| Deck | Cards | What it is |
+|---|---|---|
+| **1 Story** | 9,537 | The game from the title screen through the postgame, in the order you meet the text. |
+| **2 Help** | 941 | The Help menu you open with L or R, in the menu's own order: each question, then its answer. It stands on its own, with a card for every word the menu uses, so you can read it at any point. About 700 of its words have a card in the story too. |
+| **3 Link play / multiplayer** | 606 | What needs a second player or device: the Union Room, trading, Mystery Gift, mail and the word lists you write messages from. Only what the story has not taught. |
 
-Each card:
+### The cards
 
-- **Front:** the sentence as the game shows it, with one word highlighted, and
-  the speaker when known (named by the line, or read from the map: "old man",
-  タケシ), and what each ＊ stands for where the game's code says.
+<p align="center">
+  <img src="docs/card.png" width="440" alt="The back of a card. The sentence おとこのこが　４にん　せんろのうえを　あるいてる… is on top with あるいてる highlighted; below it the dictionary form 歩く, the meaning 'are walking', how the form is built, two grammar patterns, the sentence in kanji and English, a note that the line describes the film Stand by Me, and the sentence breakdown.">
+</p>
+
+- **Front:** the sentence as the game shows it, in kana, with one word
+  highlighted. Above it, who is speaking when that is known: named by the line
+  (オーキド), or read from the map ("old man", タケシ). Below it, what each ＊
+  stands for where the game's code says ("the Pokémon making the move").
 - **Back:** the word's form and dictionary form, kanji with per-character
   readings, romaji, what it means here, its literal meaning where that adds
-  something (ふとっぱら "big belly" for "generous"), the dictionary sense that was chosen,
-  how the form is built
-  (`つかまえ (stem) + て (te-form)`), the sentence in kanji and in English, up to
-  two more example sentences, the whole message, and the JMdict senses.
-- **Grammar**, on the back, in all three decks: the patterns the word takes part in, each explained
-  in plain words for that sentence, and a breakdown of the sentence phrase by
-  phrase. The card for と in しゅじんこうと　なって says: "と before なる shows
-  what someone turns into; it is a more formal に. しゅじんこうと　なって =
-  'becoming the hero'."
+  something (ふとっぱら "big belly" for "generous"), the dictionary sense that
+  was chosen, how the form is built (`つかまえ (stem) + て (te-form)`), the
+  sentence in kanji and in English, up to two more example sentences, the whole
+  message, and the JMdict senses.
+- **Grammar:** the patterns the word takes part in, each explained in plain
+  words for that sentence, and a breakdown of the sentence phrase by phrase.
+  The card for と in しゅじんこうと　なって says: "と before なる shows what
+  someone turns into; it is a more formal に. しゅじんこうと　なって = 'becoming
+  the hero'." A line of one word (はい, a menu word) and a bare name get no
+  grammar: there is nothing between words to explain.
+- **Notes:** 438 sentences carry a note where a reader outside Japan would
+  miss something: a cultural reference (the film on the TV in your room), a
+  play on words, a regional dialect, or a place where the English game says
+  something else (the old man in Viridian is drunk in Japanese and wants coffee
+  in English). Notes that state a fact about the outside world are checked by a
+  web search before they are shown.
 
-つかまえた, つかまえて and つかまえられる are three cards: every form is drilled
-where the story first uses it.
-
-Particles get a card for each job they do: か has
-one card as the question marker and another for "or", が one as the subject
+Every form is drilled where the story first uses it: つかまえた, つかまえて and
+つかまえられる are three cards. A particle gets a card for each job it does: か
+has one as the question marker and another for "or", が one as the subject
 marker and another for "but".
+
+### Names
 
 Names are in English as the English game has them, on the cards and in every
 translation: ニビシティ is Pewter City, ふしぎなアメ the Rare Candy, チャンピオンロード
@@ -56,11 +73,11 @@ squeeze into twelve letters are spelled the way the series spells them now
 (Paralyze Heal, not PARLYZ HEAL). The player and the rival keep the names the
 deck fills in for them, Red and Green.
 
-Everything with a name worth knowing has one card: 221 Pokémon, 153 items,
-284 moves, 76 abilities, the 17 types, 132 places, the main characters, the
-badges, 22 game terms (ポケモンずかん, してんのう) and 15 names from the real world
-(ファミコン, きょうと). The card sits at the first line of dialogue that says the
-name, or else where the thing is first met:
+Everything with a name worth knowing has one card, 953 in all: 221 Pokémon,
+153 items, 284 moves, 76 abilities, the 17 types, 132 places, the main
+characters, the badges, 22 game terms (ポケモンずかん, してんのう) and 15 names from
+the real world (ファミコン, きょうと). The card sits at the first line of dialogue
+that says the name, or else where the thing is first met:
 
 - a Pokémon in a trainer's team comes right after that trainer's challenge,
   followed by its type, the moves it shows there and its ability (Brock's
@@ -70,35 +87,27 @@ name, or else where the thing is first met:
   ability;
 - a place comes as you walk in; an item where you can first get it.
 
-The card gives the name the English game uses and, where the Japanese name is
-made of words, what they mean: げんきのかけら is the Revive, "vigor + shard". A
-type says it is one: ほのお is "Fire (Pokémon type)". Where a name needs
-knowledge a learner may not have, the card explains it: ファミコン is "short for
-ファミリーコンピュータ (Family Computer), the console sold outside Japan as the
-NES".
-
-A sentence can carry a note too, where a reader outside Japan would miss
-something: a cultural reference (the film on the TV in your room), a play on
-words, a regional dialect, or a place where the English game says something
-else (the old man in Viridian is drunk in Japanese and wants coffee in
-English). Notes that state a fact about the outside world are checked by a web
-search before they are shown.
+The card gives the English name and, where the Japanese name is made of words,
+what they mean: げんきのかけら is the Revive, "vigor + shard". A type says it is
+one: ほのお is "Fire (Pokémon type)". Where a name needs knowledge a learner may
+not have, the card explains it: ファミコン is "short for ファミリーコンピュータ (Family
+Computer), the console sold outside Japan as the NES".
 
 Names not worth a card get none: the presets of the naming screen, characters
-who appear once, pieces of longer names. There is no separate names deck.
+who appear once, pieces of longer names.
 
-A line of one word (はい, a menu word) and a bare name get no grammar: there
-is nothing between words to explain.
+### Tags
 
-Tags: every card has its location (Route 1, Pallet Town Professor Oak's Lab,
-Battle messages, Teachy TV). `pokemon`, `item`, `move`, `ability`,
-`type`, `place`, `person`, `badge`, `term` and `world` mark the name cards (with `proper`, so
-you can suspend them all at once). `low-confidence` marks cards whose
-dictionary entry could not be confirmed, or whose word is a scrap of text the
-analysis had to guess at, `onomatopoeia` sound and mimetic words (ドキドキ, キラキラ),
-and `fragment` pieces of broken speech: stammers (こっ　こんなに), garbled or
-interrupted words. Fragment cards are kept on purpose, because they explain
-text that would otherwise be puzzling.
+| Tag | Cards |
+|---|---|
+| a place (`Route_1`, `Pewter_City_Gym`, `Battle_messages`) | every card: where its sentence is |
+| `proper`, with `pokemon`, `item`, `move`, `ability`, `type`, `place`, `person`, `badge`, `term` or `world` | the name cards |
+| `fragment` | pieces of broken speech: stammers (こっ　こんなに), garbled or interrupted words. Kept on purpose: the card explains text that would otherwise be puzzling |
+| `onomatopoeia` | sound and mimetic words (ドキドキ, キラキラ) |
+| `low-confidence` | the dictionary entry could not be confirmed, or the word is a scrap of text the analysis had to guess at |
+| `sense-guessed` | the dictionary entry is right but none of its listed senses was confirmed for this sentence |
+| `player-boy`, `player-girl` | the 18 words only one side ever meets (ぼっちゃん, じょうちゃん, ウェイトレス…): the game says some lines only to a boy and others only to a girl. A word that also comes up in a line everyone sees is not tagged |
+| `word-list` | the bare words of the Link play deck's word lists |
 
 ## How to use
 
@@ -107,17 +116,8 @@ All you need is [Anki](https://apps.ankiweb.net/), on desktop or on your phone.
 1. **Get the deck.** Download `firered_jp.apkg` from the
    [latest release](https://github.com/mkusm/pokemon-firered-jp-anki/releases/latest)
    and open it in Anki (desktop: File → Import; AnkiDroid and AnkiMobile: open
-   the file). It arrives as **Pokemon FireRed Japanese** with three decks
-   inside: **1 Story**, the game from the title screen through the postgame;
-   **2 Help**, the Help menu you open with L or R; and **3 Link play /
-   multiplayer**, everything that needs a second player or device (the Union
-   Room, trading, Mystery Gift, mail and the word lists you write messages
-   from). Study the story; the other two are there if you want them. The
-   Help deck stands on its own: it has a card for every word the Help menu
-   uses, in the menu's own order (each question, then its answer), so you can
-   read it at any point, as in the game. About 700 of its
-   words have a card in the story too. The Link play deck holds only what
-   the story has not taught.
+   the file). It arrives as **Pokemon FireRed Japanese** with the three decks
+   inside. Study the story; the other two are there if you want them.
 2. **Keep the story order.** New cards must come in the order they were added.
    In the deck's options, under New Cards, set **Insertion order** to
    *Sequential (oldest cards first)*, and leave the display order on its
@@ -126,20 +126,13 @@ All you need is [Anki](https://apps.ankiweb.net/), on desktop or on your phone.
    deck is to study a stretch and then play it. For scale: the opening sequence
    is the first 172 cards, everything up to the first gym about 2,400, the whole
    story 9,537. At 20 new cards a day that is about four months to Brock.
-4. **Read the card.** The front is the line as the game shows it, in kana, with
-   one word highlighted: read the sentence and recall that word. The back gives
-   the reading in romaji, the dictionary form, the meaning in this sentence,
-   how the form is built, the grammar it is part of, and the sentence in kanji
-   and in English.
+4. **Read the card.** Read the sentence on the front and recall the
+   highlighted word; the back tells you whether you had it.
 5. **Trim what you don't want.** In the browser, search by tag and suspend:
-   `tag:fragment` (stammers and broken speech), `tag:onomatopoeia`,
-   `tag:low-confidence`, or a place such as `tag:Pewter_City_Gym`. The game
-   says some lines only to a boy and others only to a girl (Mom's remark, what
-   is on TV). A word that only one side ever meets is tagged `player-boy` or
-   `player-girl` (18 cards: ぼっちゃん, じょうちゃん, ウェイトレス…), so you can
-   drop the side you do not play. A word that also comes up in a line everyone
-   sees is not tagged, even when its card sits on one of those lines. `tag:word-list` finds the bare words of the Link play deck's word
-   lists. To drop words for good, add them to `known.txt` and rebuild.
+   `tag:fragment`, `tag:onomatopoeia`, `tag:low-confidence`, the side you do not
+   play (`tag:player-boy` or `tag:player-girl`), or a place such as
+   `tag:Pewter_City_Gym`. To drop words for good, add them to `known.txt` and
+   rebuild.
 6. **Update later.** The deck is still in development: its layout, its order
    and some of its cards change from one version to the next. To update,
    delete the old deck (FireRed JP, or Pokemon FireRed Japanese) and import
@@ -268,13 +261,9 @@ uv run python -m firered_anki.chapter 1             # do it, then build
 ```
 
 All of them resume from the cache, and `analyse` waits out a usage limit and
-carries on. For scale: the first full run was 12,747 sentences in 322 calls
-(Sonnet, low effort, 40 sentences a call), about five hours with one usage-limit
-pause. Escalation redid 2,132 sentences on Opus. Redoing the first chapter on
-Opus is about 1,200 sentences in 31 calls, twenty at a time, 10 minutes; that analysis
-also picks the sense of each particle. The grammar pass, also on Opus, is 40
-sentences a call, eight at a time: 5 minutes for the whole chapter. The particle
-pass only mops up what the analysis left without a sense: a single call.
+carries on. For scale: redoing the first chapter on Opus is about 1,200
+sentences in 31 calls, twenty at a time, 10 minutes; its grammar pass is 40
+sentences a call, eight at a time, 5 minutes.
 
 ### Things you edit
 
@@ -291,9 +280,7 @@ pass only mops up what the analysis left without a sense: a single call.
 | `corrections.yaml` | Hand corrections to the model's answers: a translation, a word's gloss, a breakdown line, a grammar explanation. They are laid over the cache when it is read, so running the model again never overwrites them. If the model's answer changes so that a correction no longer fits, `cards` stops and says so. |
 
 After editing any of them, re-run from `order` onward (`corrections.yaml` and
-`known.txt` only need `cards` and `build`). Card IDs come from the
-word, sense and form, so a rebuilt deck updates your existing cards and keeps
-their review history.
+`known.txt` only need `cards` and `build`).
 
 ### Layout
 
@@ -303,24 +290,31 @@ src/firered_anki/
   map_order.py    resolve a message to a map_order entry; coverage check
   decomp.py       read the pret decomp
   order.py        first-seen placement and the global order
+  walking.py      the order you walk past a map's people and signs
   classify.py     LLM placement of catch-all strings
   spread.py       interleave non-dialogue lines by chapter
+  lemmas.py       rough lemmas for the order stage's previews
   tokenize.py     fugashi tokens, JMdict candidates
+  models.py       which model answers for which sentence
   analyse.py      per-sentence LLM analysis, dry run, escalation, Opus rerun
   claude_cli.py   headless `claude -p` with a JSON schema
   grounding.py    fill and check JMdict IDs after the LLM
   corrections.py  lay the hand corrections over the LLM's answers
   sense_pick.py   LLM check of entries found by lookup, and their sense
   particles.py    LLM pass: the dictionary sense of each use of a particle
-  splits.py       LLM pass: one fixed word boundary per string cut two ways
-  spans.py        where a word is in its sentence
+  splits.py       LLM pass: one fixed word boundary per string
+  names.py        the names and their cards; the English game's names
   grammar.py      LLM pass for grammar patterns and sentence breakdowns
+  notes.py        LLM pass for notes on a sentence; facts checked by web search
+  chapter.py      runs the LLM stages for one chapter until nothing is left
+  spans.py        where a word is in its sentence
   cards.py        occurrences → cards, sense merge, examples
   kanji_line.py   the game's spaces put back into a card's kanji line
   speakers.py     who says a line, read from the map's people and scripts
   placeholders.py what each ＊ in a sentence stands for
   romaji.py       kana → Hepburn
   build.py        cards → .apkg
+  check.py        checks on the built deck
 data/cache/       the LLM's answers (tracked)
 data/…            stage outputs (ignored; rebuilt)
 vendor/           upstream clones (ignored)
@@ -337,7 +331,6 @@ vendor/           upstream clones (ignored)
   A sentence the story or the Help deck also shows is always Opus's.
 - A grammar pattern's name is written per sentence, so the same pattern can be
   spelled two ways on different cards (〜せる and 〜させる).
-- Nothing has been proofread by a native speaker.
 - A wild Pokémon is spread along its route by rule, not by where its grass
   is, and a move is placed with the first Pokémon that could show it, whether
   or not it uses it.
@@ -348,8 +341,12 @@ vendor/           upstream clones (ignored)
   only later.
 - About 250 battle messages and 580 other UI strings are placed by the LLM's
   judgement, not computed. See `first_seen_llm.yaml`.
-- Chapter 1, up to Brock, is the largest, about 2,500 cards: that is where the
-  menus and most basic vocabulary first appear.
+- The first chapter, up to Brock, is the largest, about 2,400 cards: that is
+  where the menus and most basic vocabulary first appear.
+- A speaker is read from the map only where one kind of person can say the
+  line; scenes with several people, signs and narration show none. What a ＊
+  stands for is given on 171 of the 299 sentences that have one: the rest
+  are filled in by screens whose code is not read.
 - JMdict comes from `jamdict-data` (a 2020 snapshot).
 - Rematch lines of ordinary trainers sit at their route's first visit.
 
