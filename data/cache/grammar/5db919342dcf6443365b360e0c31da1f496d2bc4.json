@@ -1,0 +1,1 @@
+{"text": "それじゃ　きを　つけて！", "structure": [{"jp": "それじゃ", "en": "well then"}, {"jp": "きを　つけて！", "en": "take care!"}], "patterns": [{"name": "〜てください", "span": "きを　つけて", "words": ["きをつけて"], "explanation": "A verb ending in て on its own is a friendly request, short for てください. きを　つけて = 'take care'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

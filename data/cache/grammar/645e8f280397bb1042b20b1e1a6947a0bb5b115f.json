@@ -1,0 +1,1 @@
+{"text": "すこし　ポケモンを　きたえましょう！", "structure": [{"jp": "すこし　ポケモンを　きたえましょう！", "en": "let's train your Pokémon a little"}], "patterns": [{"name": "〜ましょう", "span": "きたえましょう", "words": ["きたえましょう"], "explanation": "ましょう is a polite 'let's', used here as friendly advice. きたえましょう = 'let's train them'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

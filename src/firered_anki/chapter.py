@@ -21,7 +21,9 @@ write files this process has already read (splits.yaml).
 
 Word boundaries are fixed across chapters, so a chapter's run can send a
 sentence of an earlier chapter back to the model. The earlier chapters are
-therefore checked again afterwards, and settled if anything was reopened.
+therefore checked again afterwards, and the ones it reopened are settled
+together: one run of the series for all of them, so that a few sentences from
+several chapters share a call instead of costing one call per chapter.
 
 N counts from 0. 9 is the postgame. 10 is the Help deck and 11 the Link play
 deck, which are not part of the story.
@@ -44,25 +46,36 @@ MAX_ROUNDS = 12
 LIMITED = 75  # exit code when the plan's usage limit stopped the run: try again later
 
 
-def steps(n: int) -> list[list[str]]:
+def name(ns: list[int]) -> str:
+    """Chapters as the stages take them: 7, or 0,1,4."""
+    return ",".join(map(str, ns))
+
+
+def steps(ns: list[int]) -> list[list[str]]:
+    n = name(ns)
     return [
-        ["analyse", "rerun", str(n)],
-        ["splits", "--chapter", str(n)],
-        ["names", "--chapter", str(n)],
+        ["analyse", "rerun", n],
+        ["splits", "--chapter", n],
+        ["names", "--chapter", n],
         ["sense_pick"],
         ["cards"],
-        ["particles", "--chapter", str(n)],
-        ["grammar", "run", "--chapter", str(n)],
-        ["notes", "--chapter", str(n)],
+        ["particles", "--chapter", n],
+        ["grammar", "run", "--chapter", n],
+        ["notes", "--chapter", n],
         ["cards"],
     ]
 
 
-def left(n: int) -> dict[str, int]:
-    """What the chapter still needs from the model, counted the way each stage counts it."""
+def left(ns: list[int]) -> dict[int, dict[str, int]]:
+    """What each chapter still needs from the model, counted the way each
+    stage counts it. The deck is worked out once for all of them."""
     from .cards import known_words, prepare  # late: cards imports the stages
 
     deck, _, analyses, _ = prepare(offline_merge=True)
+    return {n: _left(n, deck, analyses, known_words()) for n in ns}
+
+
+def _left(n: int, deck, analyses: dict, known: set) -> dict[str, int]:
     shown = deck[deck["card_order"].notna() & (deck["chapter"] == n)].sort_values("card_order").drop_duplicates("text")
     shown = shown[shown["text"].map(lambda t: t in analyses)]
     current = [t for t in shown["text"] if analyse.current(analyse.MAIN.name, t, analyse.RERUN.model)]
@@ -79,7 +92,7 @@ def left(n: int) -> dict[str, int]:
         "dictionary links to check": sum(
             w.get("_id_source") == "lookup" and not sense_pick.cache_file(t, w).exists()
             for t, a in analyses.items() for w in a["words"]),
-        "particle uses to ask about": len(particles.unasked(shown["text"], analyses, known_words())),
+        "particle uses to ask about": len(particles.unasked(shown["text"], analyses, known)),
         "sentences with no grammar": sum(not grammar.answered(t, analyses) for t in explained),
         "sentences not asked for a note": sum(notes.read(t) is None for t in explained),
         "notes not checked": sum(bool(r := notes.read(t)) and notes.needs_check(r) for t in explained),
@@ -94,13 +107,20 @@ def report(n: int, todo: dict[str, int]) -> int:
     return sum(open_.values())
 
 
-def status(n: int) -> dict[str, int]:
-    """left(n), worked out by a fresh process."""
-    done = subprocess.run([sys.executable, "-m", "firered_anki.chapter", str(n), "--status"],
+def status(ns: list[int]) -> dict[int, dict[str, int]]:
+    """left(ns), worked out by a fresh process."""
+    done = subprocess.run([sys.executable, "-m", "firered_anki.chapter", name(ns), "--status"],
                           cwd=ROOT, capture_output=True, text=True)
     if done.returncode:
-        sys.exit(f"[chapter {n}] could not read the chapter's state:\n{done.stderr[-600:]}")
-    return json.loads(done.stdout.strip().splitlines()[-1])
+        sys.exit(f"[chapter {name(ns)}] could not read the state:\n{done.stderr[-600:]}")
+    return {int(n): todo for n, todo in json.loads(done.stdout.strip().splitlines()[-1]).items()}
+
+
+def report_all(ns: list[int]) -> tuple[int, list[int]]:
+    """Report each chapter. → (what is left in all of them, the chapters with something left)."""
+    now = status(ns)
+    counts = {n: report(n, now[n]) for n in ns}
+    return sum(counts.values()), [n for n in ns if counts[n]]
 
 
 def run(step: list[str]) -> tuple[int, bool]:
@@ -117,12 +137,13 @@ def run(step: list[str]) -> tuple[int, bool]:
     return proc.wait(), limited
 
 
-def settle(n: int, total: int) -> None:
-    """Run the series for one chapter until nothing is left."""
+def settle(ns: list[int], total: int) -> None:
+    """Run the series for these chapters, together, until nothing is left in any of them."""
+    n = name(ns)
     stalled = 0
     for round_no in range(1, MAX_ROUNDS + 1):
         limited = False
-        for step in steps(n):
+        for step in steps(ns):
             print(f"\n== chapter {n}, round {round_no}: {' '.join(step)}", flush=True)
             code, hit = run(step)
             limited |= hit
@@ -130,9 +151,10 @@ def settle(n: int, total: int) -> None:
                 sys.exit(f"[chapter {n}] stopped: {' '.join(step)} failed. Fix that and run this again; "
                          "it carries on from the caches.")
         print()
-        before, total = total, report(n, status(n))
+        before, (total, ns) = total, report_all(ns)  # the next round: only the chapters with something left
         if not total:
             return
+        n = name(ns)
         if limited:
             print(f"[chapter {n}] stopped by the plan's limit. Run this again later; it carries on from the caches.")
             sys.exit(LIMITED)
@@ -149,13 +171,13 @@ def settle(n: int, total: int) -> None:
 
 def main() -> None:
     args = [a for a in sys.argv[1:] if not a.startswith("--")]
+    if "--status" in sys.argv and len(args) == 1:  # several chapters at once: 0,1,4
+        print(json.dumps(left([int(x) for x in args[0].split(",")]), ensure_ascii=False))
+        return
     if len(args) != 1 or not args[0].isdigit():
         sys.exit(__doc__.strip().splitlines()[-2].strip())
     n = int(args[0])
-    if "--status" in sys.argv:
-        print(json.dumps(left(n), ensure_ascii=False))
-        return
-    todo = left(n)
+    todo = left([n])[n]
     total = report(n, todo)
     if "--dry-run" in sys.argv:
         if todo["sentences to re-analyse"] or todo["sentences with no grammar"]:
@@ -165,16 +187,16 @@ def main() -> None:
             print(f"[chapter {n}] the particle uses are counted on the old analysis; the new one picks most of them itself")
         return
     if total:
-        settle(n, total)
-    # The chapters before it: settled already, unless this run reopened a sentence of theirs.
+        settle([n], total)
+    # The chapters before it: settled already, unless this run reopened a
+    # sentence of theirs. The reopened ones are settled together.
     for _ in range(3):
-        reopened = [(m, t) for m in range(n) if (t := report(m, status(m)))]
+        t, reopened = report_all(list(range(n)))
         if not reopened:
             break
-        for m, t in reopened:
-            settle(m, t)
-        if t := report(n, status(n)):
-            settle(n, t)
+        settle(reopened, t)
+        if t := report(n, status([n])[n]):
+            settle([n], t)
     else:
         sys.exit(f"[chapter {n}] the earlier chapters keep being reopened. See the lines above.")
     subprocess.run([sys.executable, "-m", "firered_anki.build"], cwd=ROOT)

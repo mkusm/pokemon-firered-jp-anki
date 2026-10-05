@@ -1,0 +1,1 @@
+{"text": "①メニューを　ひらきます。", "structure": [{"jp": "①メニューを", "en": "① the menu"}, {"jp": "ひらきます。", "en": "open"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

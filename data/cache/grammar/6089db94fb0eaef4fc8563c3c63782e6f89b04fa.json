@@ -1,0 +1,1 @@
+{"text": "じぶんの　ポケモンが　「ノーマル」", "structure": [{"jp": "じぶんの　ポケモンが", "en": "your Pokémon is"}, {"jp": "「ノーマル」", "en": "\"Normal\""}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

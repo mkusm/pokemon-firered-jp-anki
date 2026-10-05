@@ -357,7 +357,7 @@ def escalate() -> None:
 RERUN = Config("main", "opus", "low", 40)  # writes over the main cache
 
 
-def rerun(chapter: int | None = None, workers: int = 20) -> None:
+def rerun(chapter: list[int] | None = None, workers: int = 20) -> None:
     """Redo on Opus every sentence that Opus has not answered with the current
     prompt: all of them, or the ones the deck shows in one chapter. Sonnet is wrong without flagging it in
     about 3 sentences in 100 (a wrong item name, あったら filed under ある for
@@ -367,7 +367,7 @@ def rerun(chapter: int | None = None, workers: int = 20) -> None:
         from .cards import prepare  # late: cards imports this module
 
         deck = prepare(offline_merge=True)[0]
-        shown = deck[(deck["chapter"] == chapter) & deck["card_order"].notna()]
+        shown = deck[deck["chapter"].isin(chapter) & deck["card_order"].notna()]
         df = df[df["text"].isin(set(shown["text"]))]
     rows = df[df["text"].map(lambda t: cache_path(MAIN.name, t).exists() and not current(MAIN.name, t, RERUN.model))]
     print(f"[rerun] {rows['text'].nunique()} sentences to redo on {RERUN.model}, {workers} calls at a time")
@@ -475,7 +475,9 @@ if __name__ == "__main__":
     elif args == ["escalate"]:
         escalate()
     elif args[:1] == ["rerun"]:
-        rerun(int(args[1]) if len(args) > 1 else None)
+        from .spread import chapters
+
+        rerun(chapters(args[1]) if len(args) > 1 else None)
     elif args[:1] == ["redo"] and len(args) == 2:
         redo(args[1])
     else:

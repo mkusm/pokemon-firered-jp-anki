@@ -1,0 +1,1 @@
+{"text": "②まちがえたら　Ｂボタンです。", "structure": [{"jp": "②まちがえたら", "en": "② if you make a mistake"}, {"jp": "Ｂボタンです。", "en": "it's the B Button"}], "patterns": [{"name": "〜たら", "span": "まちがえたら", "words": ["まちがえたら"], "explanation": "たら on a verb means 'if' or 'once' that happens. まちがえたら = 'if you make a mistake'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

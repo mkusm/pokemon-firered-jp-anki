@@ -1,0 +1,1 @@
+{"text": "どの　はなしが　たいせつ？", "structure": [{"jp": "どの　はなしが", "en": "which conversations"}, {"jp": "たいせつ？", "en": "are important?"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

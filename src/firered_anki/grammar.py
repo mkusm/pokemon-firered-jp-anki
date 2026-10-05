@@ -177,7 +177,7 @@ def redo(rows: pd.DataFrame, analyses: dict) -> None:
 
 
 def first_sentences(n_cards: int | None = None, n_sentences: int | None = None,
-                    chapter: int | None = None) -> tuple[pd.DataFrame, dict]:
+                    chapter: list[int] | None = None) -> tuple[pd.DataFrame, dict]:
     """The deck's sentences in card order: all of them, one chapter's, the
     first n, or up to the one the nth card is on."""
     from .cards import CARDS_OUT, prepare  # late: cards imports this module
@@ -186,7 +186,7 @@ def first_sentences(n_cards: int | None = None, n_sentences: int | None = None,
     placed = deck[deck["card_order"].notna()].sort_values("card_order").drop_duplicates("text")
     placed = placed[[has_grammar(t, g, lb, analyses) for t, g, lb in zip(placed["text"], placed["group"], placed["label"])]]
     if chapter is not None:
-        placed = placed[placed["chapter"] == chapter]
+        placed = placed[placed["chapter"].isin(chapter)]
     if n_cards:
         cut = pd.read_parquet(CARDS_OUT, columns=["order"])["order"].iloc[n_cards - 1]
         placed = placed[placed["card_order"] <= cut]
@@ -317,10 +317,13 @@ if __name__ == "__main__":
     sys.stdout.reconfigure(line_buffering=True)  # progress shows up in redirected logs
     args = sys.argv[1:]
     if args[:1] == ["run"]:
-        n = int(args[2]) if len(args) > 2 else None
+        from .spread import chapters
+
+        by_chapter = args[1:2] == ["--chapter"]
+        n = int(args[2]) if len(args) > 2 and not by_chapter else None
         run(*first_sentences(n_cards=n if args[1:2] == ["--cards"] else None,
                              n_sentences=n if args[1:2] == ["--sentences"] else None,
-                             chapter=n if args[1:2] == ["--chapter"] else None))
+                             chapter=chapters(args[2]) if by_chapter else None))
     elif args[:1] == ["dry-run"]:
         dry_run(args[1] if len(args) > 1 else "これから　はじまる", int(args[2]) if len(args) > 2 else 10)
     else:

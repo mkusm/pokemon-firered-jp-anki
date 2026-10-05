@@ -1,0 +1,1 @@
+{"text": "こうげきの　つよさを　あらわします。", "structure": [{"jp": "こうげきの　つよさを", "en": "the strength of attacks"}, {"jp": "あらわします。", "en": "it represents"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

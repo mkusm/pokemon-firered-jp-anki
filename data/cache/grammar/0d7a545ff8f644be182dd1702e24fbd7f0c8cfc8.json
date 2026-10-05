@@ -1,0 +1,1 @@
+{"text": "へやから　でられない！", "structure": [{"jp": "へやから", "en": "out of the room"}, {"jp": "でられない！", "en": "I can't get out!"}], "patterns": [{"name": "〜られる (potential)", "span": "でられない", "words": ["でられない"], "explanation": "られる on a verb means 'can do'; with ない it becomes 'cannot'. でられない = 'can't get out'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

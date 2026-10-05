@@ -1,0 +1,1 @@
+{"text": "えらんだ　わざが　でます！", "structure": [{"jp": "えらんだ　わざが", "en": "the move you chose"}, {"jp": "でます！", "en": "comes out"}], "patterns": [{"name": "verb + noun", "span": "えらんだ　わざ", "words": ["えらんだ", "わざ"], "explanation": "The verb before わざ describes which move it is. えらんだ わざ = 'the move you chose'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

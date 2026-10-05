@@ -1,0 +1,1 @@
+{"text": "③「つよさをみる」「ならびかえ」　「もちもの」から　えらびます。", "structure": [{"jp": "③「つよさをみる」「ならびかえ」", "en": "③ \"Summary\", \"Switch\""}, {"jp": "「もちもの」から", "en": "and \"Item\", from these"}, {"jp": "えらびます。", "en": "you choose"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

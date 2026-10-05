@@ -330,14 +330,14 @@ def grammar_misses(text: str, analysis: dict, answer: dict, seen: bool = False) 
     return out
 
 
-def scope(chapter: int | None):
+def scope(chapter: list[int] | None):
     """The sentences the deck shows, with their analyses."""
     from .cards import prepare  # late: cards imports this module
 
     deck, entries, analyses, _ = prepare(offline_merge=True)
     shown = deck[deck["card_order"].notna()].sort_values("card_order").drop_duplicates("text")
     if chapter is not None:
-        shown = shown[shown["chapter"] == chapter]
+        shown = shown[shown["chapter"].isin(chapter)]
     shown = shown[[not kind_of(g, lb) and t in analyses for g, lb, t in zip(shown["group"], shown["label"], shown["text"])]]
     return shown, analyses, entries
 
@@ -346,7 +346,9 @@ def main() -> None:
     from . import analyse, grammar  # late: both import this module
 
     args = sys.argv[1:]
-    chapter = int(args[args.index("--chapter") + 1]) if "--chapter" in args else None
+    from .spread import chapters
+
+    chapter = chapters(args[args.index("--chapter") + 1]) if "--chapter" in args else None
     shown, analyses, entries = scope(chapter)
 
     def report(label: str, bad: dict) -> None:

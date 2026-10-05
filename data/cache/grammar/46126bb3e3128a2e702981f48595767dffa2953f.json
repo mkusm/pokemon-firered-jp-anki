@@ -1,0 +1,1 @@
+{"text": "①「たいせつなもの」ポケットを　えらびます。", "structure": [{"jp": "①「たいせつなもの」ポケットを", "en": "① the Key Items pocket"}, {"jp": "えらびます。", "en": "select"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

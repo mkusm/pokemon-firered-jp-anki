@@ -30,6 +30,7 @@ import yaml
 
 from . import claude_cli, names
 from .paths import ROOT
+from .spread import chapters
 
 FILE = ROOT / "splits.yaml"
 MODEL, EFFORT, BATCH = "opus", "low", 25
@@ -252,7 +253,8 @@ def in_scope(deck, analyses: dict, chapter: int | None) -> list[str]:
 
 def main() -> None:
     args = sys.argv[1:]
-    chapter = int(args[args.index("--chapter") + 1]) if "--chapter" in args else None
+    # Strings are checked up to and including a chapter: of several, the last.
+    chapter = max(chapters(args[args.index("--chapter") + 1])) if "--chapter" in args else None
     texts, analyses = scope(chapter)
     found = conflicts(texts, analyses)
     known = dict(load())

@@ -1,0 +1,1 @@
+{"text": "メニューを　ひらくと　のこり　じかんと　ボールの　かずを　みることが　できます", "note": "The Japanese says the menu shows the remaining time; the English game says it shows the remaining number of steps.", "kind": "changed", "claim": "", "_run": {"model": "opus", "effort": "low", "version": "1"}}

@@ -1,0 +1,1 @@
+{"text": "わざって　なに？", "structure": [{"jp": "わざって", "en": "this 'moves' thing"}, {"jp": "なに？", "en": "what is it?"}], "patterns": [{"name": "〜って (topic)", "span": "わざって", "words": ["わざ", "って"], "explanation": "って is a casual way to bring up a word you want to ask or talk about. わざって なに？ = 'what are moves?'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

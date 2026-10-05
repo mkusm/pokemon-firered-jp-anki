@@ -21,7 +21,7 @@ How it works, in detail: [`docs/how-it-works.html`](docs/how-it-works.html)
 
 | | |
 |---|---|
-| `firered_jp.apkg` | 10,471 cards in three decks: the story (9,523, in story order), the Help menu (330) and link play (618) |
+| `firered_jp.apkg` | 11,100 cards in three decks: the story (9,525, in story order), the Help menu (940) and link play (635) |
 
 It is attached to the [latest release](https://github.com/mkusm/pokemon-firered-jp-anki/releases/latest).
 
@@ -35,8 +35,8 @@ Each card:
   how the form is built
   (`つかまえ (stem) + て (te-form)`), the sentence in kanji and in English, up to
   two more example sentences, the whole message, and the JMdict senses.
-- **Grammar**, on the back, for the whole story, all ten chapters through the postgame
-  (9,523 cards): the patterns the word takes part in, each explained
+- **Grammar**, on the back, for the whole story, all ten chapters through the postgame,
+  and for the Help deck (10,465 cards): the patterns the word takes part in, each explained
   in plain words for that sentence, and a breakdown of the sentence phrase by
   phrase. The card for と in しゅじんこうと　なって says: "と before なる shows
   what someone turns into; it is a more formal に. しゅじんこうと　なって =
@@ -47,7 +47,7 @@ where the story first uses it.
 
 Particles get a card for each job they do, in the whole story: か has
 one card as the question marker and another for "or", が one as the subject
-marker and another for "but". In the Help and Link play decks each
+marker and another for "but". In the Link play deck each
 particle still has a single card, showing its first use.
 
 Names are in English as the English game has them, on the cards and in every
@@ -83,7 +83,7 @@ something: a cultural reference (the film on the TV in your room), a play on
 words, a regional dialect, or a place where the English game says something
 else (the old man in Viridian is drunk in Japanese and wants coffee in
 English). Notes that state a fact about the outside world are checked by a web
-search before they are shown. The whole story has them; the Help and Link play decks do not yet.
+search before they are shown. The story and the Help deck have them; the Link play deck does not yet.
 
 Names not worth a card get none: the presets of the naming screen, characters
 who appear once, pieces of longer names. There is no separate names deck.
@@ -113,7 +113,11 @@ All you need is [Anki](https://apps.ankiweb.net/), on desktop or on your phone.
    **2 Help**, the Help menu you open with L or R; and **3 Link play /
    multiplayer**, everything that needs a second player or device (the Union
    Room, trading, Mystery Gift, mail and the word lists you write messages
-   from). Study the story; the other two are there if you want them.
+   from). Study the story; the other two are there if you want them. The
+   Help deck stands on its own: it has a card for every word the Help menu
+   uses, so you can read it at any point, as in the game. About 700 of its
+   words have a card in the story too. The Link play deck holds only what
+   the story has not taught.
 2. **Keep the story order.** New cards must come in the order they were added.
    In the deck's options, under New Cards, set **Insertion order** to
    *Sequential (oldest cards first)*, and leave the display order on its
@@ -121,7 +125,7 @@ All you need is [Anki](https://apps.ankiweb.net/), on desktop or on your phone.
 3. **Pick a pace.** The cards follow the game, so the natural way to use the
    deck is to study a stretch and then play it. For scale: the opening sequence
    is the first 172 cards, everything up to the first gym about 2,400, the whole
-   story 9,523. At 20 new cards a day that is about four months to Brock.
+   story 9,525. At 20 new cards a day that is about four months to Brock.
 4. **Read the card.** The front is the line as the game shows it, in kana, with
    one word highlighted: read the sentence and recall that word. The back gives
    the reading in romaji, the dictionary form, the meaning in this sentence,
@@ -303,14 +307,14 @@ vendor/           upstream clones (ignored)
 ## Known limits
 
 - The deck is in two states. The story, all ten chapters, was analysed by Opus and
-  has grammar and notes on its cards. The Help and Link play decks (948
-  cards) are Sonnet's analysis, with
-  Opus only on the sentences Sonnet flagged, and have no grammar yet. On a
+  has grammar and notes on its cards, and so was the Help deck. The Link play
+  deck (635 cards) is Sonnet's analysis, with
+  Opus only on the sentences Sonnet flagged, and has no grammar yet. On a
   sample of 100 sentences Opus corrected a clear Sonnet error in 3: a wrong
   item name, a line read as "I was asked a favor" that means "do me a favor",
   and あったら filed under ある where it is 合う.
-- Particles are split into one card per job only in the story. In the
-  Help and Link play decks all uses of a particle are still filed under one card.
+- Particles are split into one card per job only in the story and the Help deck. In the
+  Link play deck all uses of a particle are still filed under one card.
 - A grammar pattern's name is written per sentence, so the same pattern can be
   spelled two ways on different cards (〜せる and 〜させる).
 - Nothing has been proofread by a native speaker.

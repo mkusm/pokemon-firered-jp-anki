@@ -499,6 +499,15 @@ def highlight(text: str, words: list[dict], pos: int, span=None) -> str:
     return text if at is None else f"{text[:at[0]]}<b>{text[at[0]:at[1]]}</b>{text[at[1]:]}"
 
 
+# Decks that can be studied without the story: every word in one of them has a
+# card there, on its first sentence in that deck, even when the story has a
+# card for the word too. The Help menu can be opened from the first screen, so
+# it must not lean on what later chapters teach. The Link play deck is the
+# other kind: it holds only what the story has not taught, and does not count
+# on the Help deck either.
+STAND_ALONE = ("help",)
+
+
 def prepare(run_name: str = MAIN.name, offline_merge: bool = False) -> tuple[pd.DataFrame, dict, dict, pd.DataFrame]:
     """Deck rows with their card order, the JMdict entries, the analyses, and
     every word occurrence under its card key."""
@@ -540,19 +549,24 @@ def build_cards(run_name: str = MAIN.name, offline_merge: bool = False) -> pd.Da
     noted = notes.results(deck["text"].unique())
     corrections.check()  # every hand correction found what it corrects
 
-    occ = occ.join(deck[["card_order", "dialogue", "chapter", "msg_id", "text", "speaker"]]
+    occ = occ.join(deck[["card_order", "dialogue", "chapter", "msg_id", "text", "speaker", "deck"]]
                    .rename(columns={"text": "_t"}), on="row")
 
     msg_text = deck.sort_values(["line_no", "page", "sent"]).groupby("msg_id")["text"].agg(list)
 
     rows = list(deck.itertuples())  # deck's index is 0…n-1: a row by its number
 
-    def one_deck(sub: pd.DataFrame) -> pd.DataFrame:
+    def one_deck(sub: pd.DataFrame, alone: str | None = None) -> list[dict]:
+        """One card per key. `alone`: only the cards of this deck, each on its
+        first sentence there, whatever the other decks have already taught;
+        without it, the cards of every other deck."""
         # Plain lists and dicts from here on: filtering a DataFrame once per
         # card took three quarters of the stage's time.
         uses: dict[tuple, list[dict]] = {}
         for u in sub.to_dict("records"):
-            u["placed"] = u["card_order"] == u["card_order"]  # not NaN
+            # A use can be a card's sentence only in its own run; any use can be an extra example.
+            mine = (u["deck"] == alone) if alone else (u["deck"] not in STAND_ALONE)
+            u["placed"] = mine and u["card_order"] == u["card_order"]  # not NaN
             uses.setdefault(u["key"], []).append(u)
         out = []
         for key, g in uses.items():
@@ -590,7 +604,8 @@ def build_cards(run_name: str = MAIN.name, offline_merge: bool = False) -> pd.Da
             e = entries.get(str(w.get("jmdict_id")), {}) if w.get("jmdict_id") else {}
             g = gram.get(first["text"])
             out.append({
-                "key": json.dumps(key, ensure_ascii=False), "order": first["card_order"],
+                # A stand-alone deck's card is a note of its own beside the story's card for the word.
+                "key": json.dumps([alone, *key] if alone else key, ensure_ascii=False), "order": first["card_order"],
                 "deck": r.deck,  # story, help or link: the deck of the card's sentence
                 # Within a sentence: the words left to right, a name before a word inside it.
                 "_at": (first["pos"], key[0] != "name"),
@@ -625,12 +640,14 @@ def build_cards(run_name: str = MAIN.name, offline_merge: bool = False) -> pd.Da
                 + (["onomatopoeia"] if is_onomatopoeia(w, e) else [])
                 + (["fragment"] if is_fragment(first["text"], w) and not w.get("name") else []),
             })
-        out.sort(key=lambda c: (c["order"], c.pop("_at")))
-        df = pd.DataFrame(out)
-        df["Order"] = [f"{i:06d}" for i in range(len(df))]
-        return df
+        return out
 
-    return one_deck(occ[in_story(occ)])
+    made = occ[in_story(occ)]
+    out = one_deck(made) + [c for name in STAND_ALONE for c in one_deck(made, name)]
+    out.sort(key=lambda c: (c["order"], c.pop("_at")))
+    df = pd.DataFrame(out)
+    df["Order"] = [f"{i:06d}" for i in range(len(df))]
+    return df
 
 
 def main() -> None:

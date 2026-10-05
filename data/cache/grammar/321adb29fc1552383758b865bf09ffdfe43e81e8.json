@@ -1,0 +1,1 @@
+{"text": "ポケモンにも　せいかくが　あります。", "structure": [{"jp": "ポケモンにも", "en": "Pokémon too"}, {"jp": "せいかくが　あります。", "en": "have natures"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

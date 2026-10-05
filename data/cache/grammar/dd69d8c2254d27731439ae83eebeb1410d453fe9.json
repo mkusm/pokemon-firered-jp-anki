@@ -1,0 +1,1 @@
+{"text": "やることが　なくなった！", "structure": [{"jp": "やることが", "en": "things to do"}, {"jp": "なくなった！", "en": "have run out!"}], "patterns": [{"name": "verb + noun", "span": "やること", "words": ["やる", "こと"], "explanation": "A verb placed right before a thing describes it. やる こと = 'things to do'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

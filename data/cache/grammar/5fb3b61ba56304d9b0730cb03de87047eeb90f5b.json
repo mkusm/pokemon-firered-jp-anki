@@ -1,0 +1,1 @@
+{"text": "じてんしゃの　のりかた", "structure": [{"jp": "じてんしゃの", "en": "of the Bicycle"}, {"jp": "のりかた", "en": "how to ride"}], "patterns": [{"name": "〜かた", "span": "のりかた", "words": ["のり", "かた"], "explanation": "かた stuck onto the front part of an action word means the way of doing it. のりかた = 'how to ride'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

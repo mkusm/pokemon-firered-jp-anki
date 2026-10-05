@@ -1,0 +1,1 @@
+{"text": "この　ゲームに　ついて", "structure": [{"jp": "この　ゲームに　ついて", "en": "about this game"}], "patterns": [{"name": "〜について", "span": "ゲームに　ついて", "words": ["に", "ついて"], "explanation": "について after a thing means 'about' that thing. この　ゲームに　ついて = 'about this game'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

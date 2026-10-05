@@ -171,7 +171,7 @@ def results(texts) -> dict[str, str]:
 
 # --- running ----------------------------------------------------------------------
 
-def scope(chapter: int | None) -> tuple[pd.DataFrame, dict]:
+def scope(chapter: list[int] | None) -> tuple[pd.DataFrame, dict]:
     """The sentences that can have a note: the ones the grammar pass explains."""
     from .grammar import first_sentences  # late: it builds the deck
 
@@ -205,7 +205,9 @@ def _pool(jobs: list, what: str) -> bool:
 
 def main() -> None:
     args = sys.argv[1:]
-    chapter = int(args[args.index("--chapter") + 1]) if "--chapter" in args else None
+    from .spread import chapters
+
+    chapter = chapters(args[args.index("--chapter") + 1]) if "--chapter" in args else None
     rows, analyses = scope(chapter)
     todo, unchecked = left(rows)
     print(f"[notes] {len(rows)} sentences; {len(todo)} to ask about ({-(-len(todo) // BATCH)} calls), "

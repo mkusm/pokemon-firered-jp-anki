@@ -1,0 +1,1 @@
+{"text": "ポケモンの　そだちぐあいと　つよさの　めやすです。", "structure": [{"jp": "ポケモンの　そだちぐあいと　つよさの", "en": "of how far a Pokémon has grown and its strength"}, {"jp": "めやすです。", "en": "it is a rough measure"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

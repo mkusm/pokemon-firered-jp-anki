@@ -1,0 +1,1 @@
+{"text": "わざを　ふやしたい！", "structure": [{"jp": "わざを", "en": "moves"}, {"jp": "ふやしたい！", "en": "I want to increase!"}], "patterns": [{"name": "〜たい", "span": "ふやしたい", "words": ["ふやしたい"], "explanation": "たい on the end of a verb says the speaker wants to do it. ふやしたい = 'I want to increase'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

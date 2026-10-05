@@ -1,0 +1,1 @@
+{"text": "ポケモンを　そだてたい！", "structure": [{"jp": "ポケモンを", "en": "Pokémon"}, {"jp": "そだてたい！", "en": "I want to raise!"}], "patterns": [{"name": "〜たい", "span": "そだてたい", "words": ["そだてたい"], "explanation": "たい on the end of a verb says the speaker wants to do it. そだてたい = 'I want to raise'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

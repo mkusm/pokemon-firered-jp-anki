@@ -1,0 +1,1 @@
+{"text": "メニューの　ひらきかた", "structure": [{"jp": "メニューの", "en": "of the menu"}, {"jp": "ひらきかた", "en": "how to open"}], "patterns": [{"name": "〜かた", "span": "ひらきかた", "words": ["ひらき", "かた"], "explanation": "かた stuck onto the front part of an action word means the way of doing it. ひらきかた = 'how to open'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

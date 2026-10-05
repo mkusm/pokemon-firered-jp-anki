@@ -1,0 +1,1 @@
+{"text": "サファリ　ゲームを　やめたい！", "structure": [{"jp": "サファリ　ゲームを", "en": "the Safari Game"}, {"jp": "やめたい！", "en": "I want to quit!"}], "patterns": [{"name": "〜たい", "span": "やめたい", "words": ["やめたい"], "explanation": "たい on the end of a verb says the speaker wants to do it. やめたい = 'I want to quit'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

@@ -1,0 +1,1 @@
+{"text": "ゲームを　おわりたい！", "structure": [{"jp": "ゲームを", "en": "the game"}, {"jp": "おわりたい！", "en": "I want to end!"}], "patterns": [{"name": "〜たい", "span": "おわりたい", "words": ["おわりたい"], "explanation": "たい on the end of a verb says the speaker wants to do it. おわりたい = 'I want to end'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

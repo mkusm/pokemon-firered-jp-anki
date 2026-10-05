@@ -124,13 +124,13 @@ def ask(batch: list[tuple], text: str) -> int:
     return done
 
 
-def pending(chapter: int | None) -> tuple[list[tuple], dict]:
+def pending(chapter: list[int] | None) -> tuple[list[tuple], dict]:
     from .cards import known_words, prepare  # late: cards imports analyse, which imports this module
 
     deck, _, analyses, _ = prepare(offline_merge=True)
     shown = deck[deck["card_order"].notna()].sort_values("card_order").drop_duplicates("text")
     if chapter is not None:
-        shown = shown[shown["chapter"] == chapter]
+        shown = shown[shown["chapter"].isin(chapter)]
     return unasked(shown["text"], analyses, known_words()), analyses
 
 
@@ -146,7 +146,9 @@ def unasked(texts, analyses: dict, known: set) -> list[tuple]:
 
 def main() -> None:
     args = sys.argv[1:]
-    chapter = int(args[args.index("--chapter") + 1]) if "--chapter" in args else None
+    from .spread import chapters
+
+    chapter = chapters(args[args.index("--chapter") + 1]) if "--chapter" in args else None
     CACHE.mkdir(parents=True, exist_ok=True)
     items, analyses = pending(chapter)
     batches = [items[i:i + BATCH] for i in range(0, len(items), BATCH)]

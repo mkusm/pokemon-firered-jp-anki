@@ -1,0 +1,1 @@
+{"text": "『ずかん』の　つかいかた", "structure": [{"jp": "『ずかん』の　つかいかた", "en": "how to use the \"Pokédex\""}], "patterns": [{"name": "〜かた", "span": "つかいかた", "words": ["つかいかた"], "explanation": "かた added to a verb with ます taken off means 'the way of doing' it. つかいかた = 'how to use'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

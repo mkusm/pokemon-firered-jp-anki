@@ -48,6 +48,11 @@ LINK_PLAY = len(CHAPTER_ENDS) + 2
 DECK_OF = {"help": "help", "end": "link", "unplaced": "link"}  # everything else: "story"
 
 
+def chapters(arg) -> list[int] | None:
+    """A stage's --chapter argument: one chapter, or several at once (0,1,4)."""
+    return None if arg is None else sorted({int(x) for x in str(arg).split(",")})
+
+
 def chapter_of(ranks: pd.Series, rank_of: dict[str, int]) -> pd.Series:
     bounds = [rank_of[e] for e in CHAPTER_ENDS] + [math.inf]
     return ranks.map(lambda r: next(i for i, b in enumerate(bounds) if r <= b))

@@ -175,6 +175,13 @@ deck, 11 the Link play deck. The docs do not call them chapters.
   Gift, the e-Reader, mail, the easy-chat screens and word lists. In
   `first_seen.yaml` the anchor `help` sends text to the first and `end` to
   the second.
+- The Help deck stands alone (`cards.STAND_ALONE`): it has a card for every
+  word the Help menu uses, on its first sentence there, even when the story
+  has a card for the word. The menu can be opened from the first screen, so
+  it must not lean on later chapters. Such a card's key begins with `help`,
+  which makes it a separate note. The Link play deck holds only what the
+  story has not taught, and does not count on the Help deck. The owner chose
+  this; do not make Link play stand alone without asking.
 - Solo text does not go there. A line a player can see alone belongs in the
   story where it is seen: blacking out from Route 1, the diploma at the end of
   the postgame, releasing a Pokémon at the PC.
@@ -303,11 +310,10 @@ fine.
 
 Update this when it changes.
 
-- Chapters 0 to 9, the whole story: analysed by Opus with prompt version 4 or 5 (particle
+- Chapters 0 to 10, the whole story and the Help deck: analysed by Opus with prompt version 4 or 5 (particle
   senses picked by the analysis), grammar and notes by Opus. All settled:
   `chapter N --dry-run` reports nothing left for each.
-- Chapters 10 and 11 (the Help deck, 548 sentences to redo, and the Link
-  play deck, 1,553):
+- Chapter 11 (the Link play deck, 1,544 sentences to redo):
   analysed by Sonnet with prompt version 2, with Opus on the
   sentences Sonnet flagged; no grammar, no notes, and one card per particle. `analyse
   rerun N` redoes every sentence of a chapter that is not Opus on version 4 or 5;
@@ -316,13 +322,13 @@ Update this when it changes.
   TV lines. Four corrections of word forms Sonnet wrote wrongly were removed
   as their chapters were redone on Opus, which wrote the forms correctly; the
   last two (ｃｍ, twice) went with the postgame.
-- `splits.yaml` has 445 decisions, from chapters 0 to 9. They are checked
+- `splits.yaml` has 474 decisions, from chapters 0 to 10. They are checked
   across chapters: a later chapter's run can send an earlier sentence back.
 - Names: 938 cards (221 Pokémon, 153 items, 284 moves, 61 abilities, 17
   types, 132 places, 23 people, 2 for Team Rocket, 8 badges, 22 game terms, 15
   real-world names), found by `names.py` in every chapter with no model call.
   The 56 name lines this put in chapter 0 were re-analysed on Opus. The names
-  deck is gone. Three decks, 10,471 cards: story 9,523, Help 330, Link play 618. The note type has `Note` and
+  deck is gone. Three decks, 11,100 cards: story 9,525, Help 940 (stand-alone), Link play 635. The note type has `Note` and
   `SentenceNote` fields.
 - English names: the name check passes on every sentence the deck shows, in
   all chapters. 91 sentences were redone on Opus for it, most of them in

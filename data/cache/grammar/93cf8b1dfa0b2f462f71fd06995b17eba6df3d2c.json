@@ -1,0 +1,1 @@
+{"text": "なまえの　いれかた", "structure": [{"jp": "なまえの", "en": "of a name"}, {"jp": "いれかた", "en": "how to enter"}], "patterns": [{"name": "〜かた", "span": "いれかた", "words": ["いれ", "かた"], "explanation": "かた stuck onto the front part of an action word means the way of doing it. いれかた = 'how to enter'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

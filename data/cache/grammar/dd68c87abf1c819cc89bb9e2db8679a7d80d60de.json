@@ -1,0 +1,1 @@
+{"text": "ヘルプに　ついて", "structure": [{"jp": "ヘルプに　ついて", "en": "about Help"}], "patterns": [{"name": "〜について", "span": "ヘルプに　ついて", "words": ["に", "ついて"], "explanation": "について after a thing means 'about' that thing. ヘルプに　ついて = 'about Help'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}
