@@ -160,6 +160,30 @@ order:
   - PalletTown_ProfessorOaksLab_Text_OakCanReachNextTownWithMon
   - PalletTown_ProfessorOaksLab_Text_OakBattleMonForItToGrow
   - PalletTown_ProfessorOaksLab_Text_OakHeyDontGoAwayYet
+  # The start menu has a new entry now that you have a Pokémon: the party
+  # screen and the three pages of the summary (party_menu.c, its tables in
+  # src/data/party_menu.h, pokemon_summary_screen.c).
+  - at: party_menu
+    lines:
+      - gText_MenuPokemon
+      - gStartMenuDesc_Pokemon
+      - gText_ChoosePokemon
+      - gText_DoWhatWithPokemon
+      - gText_Summary5
+      - gText_Switch2
+      - gText_Item
+      - gText_Take
+      - gText_PkmnNotHolding
+      - gText_PokeSum_PageName_PokemonInfo
+      - gText_PokeSum_Met
+      - gText_PokeSum_Item_None
+      - gText_PokeSum_Controls_PageCancel
+      - gText_PokeSum_PageName_PokemonSkills
+      - gText_PokeSum_ExpPoints
+      - gText_PokeSum_NextLv
+      - gText_PokeSum_PageName_KnownMoves
+      - gText_PokeSum_Controls_PageDetail
+      - gText_PokeSum_Controls_PickSwitch
   # The options screen, just before the first battle, which is what most of
   # it is about. Rows top to bottom, each with its choices (option_menu.c).
   - at: options_menu
@@ -187,7 +211,40 @@ order:
       - gText_OptionMenuCancel
       - gText_PickSwitchCancel
   - PalletTown_ProfessorOaksLab_Text_RivalLetsCheckOutMons
+  # The first battle, as it runs: the challenge, Oak's commentary from the
+  # side (battle_controller_oak_old_man.c: his opening words, then a remark
+  # the first time you deal damage, lower a stat, open the party list, try to
+  # run, or get low on HP), the action menu, and the messages every battle
+  # has. A Lv. 5 starter that wins this battle reaches Lv. 6.
+  - at: battle_message
+    lines:
+      - sText_Trainer1WantsToBattle
+      - gText_ForPetesSake
+      - gText_TheTrainerThat
+      - gText_TryBattling
+      - sText_Trainer1SentOutPkmn
+      - sText_GoPkmn
+      - gText_WhatWillPkmnDo
+      - gText_BattleMenu
+      - gText_MoveInterfacePP
+      - gText_MoveInterfaceType
+      - gText_InflictingDamageIsKey
+      - sText_StatFell
+      - gText_LoweringStats
+      - gText_OakThisIsListOfPokemon
+      - gText_OakImportantToGetToKnowPokemonThroughly
+      - gText_OakNoRunningFromATrainer
+      - gText_KeepAnEyeOnHP
+      - sText_CriticalHit
+      - sText_TargetFainted
+      - sText_PkmnGainedEXP
+      - sText_PkmnGrewToLv
   - PalletTown_ProfessorOaksLab_Text_RivalDefeat
+  - at: battle_message              # the prize, and what Oak says to a winner and to a loser
+    lines:
+      - sText_PlayerGotMoney
+      - gText_WinEarnsPrizeMoney
+      - gText_HowDissapointing
   - PalletTown_ProfessorOaksLab_Text_RivalGoToughenMyMon
   - PalletTown_ProfessorOaksLab   # the rest of the room: the aides, the desk, the PC, the signs
   # Saving, after the aide has said how (セーブするには…): the window with your
@@ -231,6 +288,24 @@ order:
   - pc                        # "Someone's PC" menus
   - ViridianCity_Mart         # Oak's Parcel
   - poke_mart
+  # Buying and selling at the counter (shop.c, item_menu.c).
+  - at: poke_mart
+    lines:
+      - gText_ShopBuy
+      - gText_ShopSell
+      - gText_ShopQuit
+      - gText_Var1CertainlyHowMany
+      - gText_InBagVar1
+      - gText_Var1AndYouWantedVar2
+      - gText_HereYouGoThankYou
+      - gText_YouDontHaveMoney
+      - gText_NoMoreRoomForThis
+      - gText_QuitShopping
+      - gText_HowManyWouldYouLikeToSell
+      - gText_ICanPayThisMuch_WouldThatBeOkay
+      - gText_TurnedOverItemsWorthYen
+      - gText_OhNoICantBuyThat
+      - gText_AnythingElseICanHelp
   - ViridianCity_House
   - ViridianCity_School
   # Oak's lab again, with the parcel: the Pokédex scene, then Oak's lines once you have it
@@ -252,6 +327,45 @@ order:
   - PalletTown_ProfessorOaksLab_Text_OakMonsAroundWorldWait
   - PalletTown_ProfessorOaksLab_Text_OakAddedNothingToPokedex
   - PalletTown_ProfessorOaksLab_Text_OakComeSeeMeSometime
+  # The Pokédex, as soon as Oak has handed it over: its start-menu entry, the
+  # table of contents top to bottom, then a Pokémon's page (pokedex_screen.c).
+  # The Kanto and National headings come with the National Pokédex, much later.
+  - at: pokedex
+    lines:
+      - gText_MenuPokedex
+      - gStartMenuDesc_Pokedex
+      - gText_PokedexTableOfContents
+      - gText_PokemonList
+      - gText_NumericalMode
+      - gText_PokemonHabitats
+      - gText_DexCategory_GrasslandPkmn
+      - gText_DexCategory_ForestPkmn
+      - gText_DexCategory_WatersEdgePkmn
+      - gText_DexCategory_SeaPkmn
+      - gText_DexCategory_CavePkmn
+      - gText_DexCategory_MountainPkmn
+      - gText_DexCategory_RoughTerrainPkmn
+      - gText_DexCategory_UrbanPkmn
+      - gText_DexCategory_RarePkmn
+      - gText_Search
+      - gText_AToZMode
+      - gText_TypeMode
+      - gText_LightestMode
+      - gText_SmallestMode
+      - gText_PokedexOther
+      - gText_ClosePokedex
+      - gText_Seen
+      - gText_Owned
+      - gText_PickOK
+      - gText_PickFlipPageCheckCancel
+      - gText_HT
+      - gText_WT
+      - gText_Cry
+      - gText_Size
+      - gText_Area
+      - gText_AreaUnknown
+      - gText_NextDataCancel
+      - gText_CancelPreviousData
   - pokedex_rating            # Oak's ratings, from when he hands over the Pokédex
   - PalletTown_RivalsHouse    # Daisy, Town Map
   - pokedude                  # Teachy TV from the old man, after the Pokédex

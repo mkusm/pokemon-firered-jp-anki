@@ -99,6 +99,14 @@ def read(text: str) -> dict | None:
     return json.loads(f.read_text()) if f.exists() else None
 
 
+def asked(text: str) -> bool:
+    """Whether the sentence has been asked about, by the model it needs or a
+    better one (models.py). A sentence Sonnet was asked about while only the
+    Link play deck showed it is asked again once the story shows it."""
+    rec = read(text)
+    return rec is not None and models.enough(rec["_run"]["model"], text)
+
+
 def needs_check(rec: dict) -> bool:
     return bool(rec["note"]) and rec["kind"] in SEARCHED and "check" not in rec
 
@@ -181,7 +189,7 @@ def scope(chapter: list[int] | None) -> tuple[pd.DataFrame, dict]:
 def left(rows: pd.DataFrame) -> tuple[pd.DataFrame, list[dict]]:
     """(sentences not yet asked about, notes not yet checked)."""
     recs = {t: read(t) for t in rows["text"]}
-    return rows[[recs[t] is None for t in rows["text"]]], [r for r in recs.values() if r and needs_check(r)]
+    return rows[[not asked(t) for t in rows["text"]]], [r for t, r in recs.items() if r and asked(t) and needs_check(r)]
 
 
 def _pool(jobs: list, what: str) -> bool:

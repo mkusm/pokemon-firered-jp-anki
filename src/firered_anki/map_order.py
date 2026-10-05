@@ -19,11 +19,12 @@ class MapOrder:
         # An entry is a name, or a walk: {at: place, lines: [labels]}. A walk's
         # lines are seen in exactly that order at that place, whatever kind of
         # text they are (a start-menu entry, an item's name, a sign).
-        self.order, self.place = [], {}
-        for entry in cfg["order"]:
+        self.order, self.place, self.walk = [], {}, {}
+        for n, entry in enumerate(cfg["order"]):
             if isinstance(entry, dict):
                 self.order += entry["lines"]
                 self.place.update(dict.fromkeys(entry["lines"], entry["at"]))
+                self.walk.update(dict.fromkeys(entry["lines"], n))  # which walk a line is in
             else:
                 self.order.append(entry)
         self.rank = {name: i for i, name in enumerate(self.order)}

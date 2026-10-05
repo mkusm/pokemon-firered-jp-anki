@@ -90,6 +90,11 @@ class Decomp:
         return out
 
     @cached_property
+    def layouts(self) -> dict[str, dict]:
+        """Layout id → its size and where its block data is."""
+        return {lay["id"]: lay for lay in json.loads(read("data/layouts/layouts.json"))["layouts"] if "id" in lay}
+
+    @cached_property
     def mapsec(self) -> dict[str, str]:
         return {name: m["region_map_section"] for name, m in self.map_json.items()}
 
@@ -233,6 +238,53 @@ class Decomp:
                     for n in range(1, int(m.group(2)) + 1):
                         out[f"{m.group(1)}>={n}"].add(where)
         out["FLAG_SYS_GAME_CLEAR"].add(HALL_OF_FAME)  # set by the game's code, after the credits
+        return out
+
+    @cached_property
+    def gender_only(self) -> dict[str, str]:
+        """Text label → "boy" or "girl": a line the scripts show only to a
+        player of that gender (Mom's "all boys leave home some day"). Read
+        from the branches after `checkplayergender`: the block a MALE or
+        FEMALE branch goes to, and what follows a lone MALE branch in the
+        same block, which is the girl's."""
+        blocks = self._script_blocks
+        direct = lambda cmds: [t for c in cmds if re.match(r"msgbox|message", c)
+                               for t in re.findall(r"\b(\w+_Text_\w+|g?Text_\w+)\b", c)]
+        seen: dict[str, set[str]] = defaultdict(set)
+        for _, cmds in blocks.values():
+            for i, c in enumerate(cmds):
+                if c != "checkplayergender":
+                    continue
+                sides = {}
+                for j in range(i + 1, min(i + 3, len(cmds))):
+                    if m := re.match(r"(goto|call)_if_eq VAR_RESULT, (MALE|FEMALE), (\w+)", cmds[j]):
+                        sides[m.group(2)] = (m.group(1), m.group(3), j)
+                for side, (_, target, _) in sides.items():
+                    for t in direct(blocks.get(target, (None, []))[1]):
+                        seen[t].add("boy" if side == "MALE" else "girl")
+                if set(sides) == {"MALE"} and sides["MALE"][0] == "goto":
+                    for t in direct(cmds[sides["MALE"][2] + 1:]):
+                        seen[t].add("girl")
+        return {t: next(iter(s)) for t, s in seen.items() if len(s) == 1}
+
+    @cached_property
+    def set_with(self) -> dict[str, set[str]]:
+        """A condition → the text labels shown by the scripts that make it
+        true: the line you read as the thing happens (the clerk handing over
+        the parcel, as FLAG_GOT_... is set)."""
+        out: dict[str, set[str]] = defaultdict(set)
+        for _, cmds in self._script_blocks.values():
+            made = set()
+            for c in cmds:
+                if m := re.match(r"setflag (FLAG_\w+)", c):
+                    made.add(m.group(1))
+                if m := re.match(r"setvar (VAR_MAP_SCENE_\w+), (\d+)", c):
+                    made.update(f"{m.group(1)}>={n}" for n in range(1, int(m.group(2)) + 1))
+            if made:
+                shown = {t for c in cmds if re.match(r"msgbox|message|trainerbattle", c)
+                         for t in re.findall(r"\b(\w+_Text_\w+|g?Text_\w+)\b", c)}
+                for cond in made:
+                    out[cond] |= shown
         return out
 
     @cached_property

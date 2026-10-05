@@ -1,0 +1,1 @@
+{"text": "＊は　どうする？", "structure": [{"jp": "＊は", "en": "as for ＊"}, {"jp": "どうする？", "en": "what will it do?"}], "patterns": [{"name": "〜どうする", "span": "どうする", "words": ["どう", "する"], "explanation": "どう means 'how' and する means 'do'; together they ask what someone will do. どうする = 'what will you do'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

@@ -1049,6 +1049,10 @@
   as: と + なります
   why: Particle と plus the verb なる, each doing its own job.
   example: まちには　やせいの　ポケモンや　トレーナーたちは　いないので　あんぜんな　ばしょとなります。
+となる:
+  as: depends
+  why: 'two independent decisions disagreed: となる / と + なる'
+  example: ぶらさがったまま　エサとなる　ムシが　とんでくるのを　まっている。
 とは:
   as: depends
   why: Exclamatory or defining とは ("to think that...") is one word, while と "with" + topic は is two.

@@ -14,6 +14,7 @@ from collections import Counter
 import pandas as pd
 import yaml
 
+from . import walking
 from .decomp import STARTER_LEVEL, STARTER_MAP, STARTERS, Decomp, norm
 from .lemmas import lemmas
 from .map_order import MapOrder
@@ -429,11 +430,71 @@ class Placer:
         return "computed", rank, where
 
 
+def help_place(label: str, line_no: int, asked: dict[str, int]) -> float:
+    """Where a Help line sorts: an answer goes right after the line it
+    answers (Help_Text_AnswerX, HowToX and DefineX after Help_Text_X;
+    HowToUseX after UsingX)."""
+    if m := re.fullmatch(r"Help_Text_(Answer|HowTo|Define)(\w+)", label):
+        kind, what = m.groups()
+        titles = [f"Help_Text_{what}"] + ([f"Help_Text_Using{what[3:]}"] if kind == "HowTo" and what.startswith("Use") else [])
+        for title in titles:
+            if title in asked:
+                return asked[title] + 0.5
+    return float(line_no)
+
+
 NAME_LINES = {"species_names": "species", "battle_main": "type", "move_names": "move", "abilities": "ability"}
 KIND_ORDER = {"species": 0, "type": 1, "move": 2, "ability": 3}
 
 
-def fine_places(msgs: pd.DataFrame, placed: dict, placer: Placer, dc: Decomp) -> dict[str, tuple]:
+def within_map(msgs: pd.DataFrame, placed: dict, dc: Decomp, mo: MapOrder, map_rank: dict) -> dict[str, float]:
+    """Dialogue label → where it sorts inside its map_order entry.
+
+    A map's lines go in the order you walk past the people and signs that say
+    them (walking.py); a map this cannot be worked out for keeps the text
+    dump's order. Then a line that waits for something the same map sets is
+    put just after the lines it has to follow. A condition an earlier map can
+    set already holds on arrival and holds nothing back (Daisy's "an errand
+    for Grandpa?" waits for the lab)."""
+    waits, set_in, set_with = dc.waits_for, dc.set_in, dc.set_with
+    rows = [r for r in msgs.itertuples(index=False) if placed[r.msg_id][0] == "dialogue" and r.ns == "script"]
+    at = {r.label: float(r.line_no) for r in rows}
+    rank = {r.label: placed[r.msg_id][1] for r in rows}
+    in_entry: dict[float, list] = {}
+    for r in sorted(rows, key=lambda r: r.line_no):
+        in_entry.setdefault(rank[r.label], []).append(r.label)
+    for where, labels in in_entry.items():
+        name = mo.order[int(where)] if where == int(where) and where < len(mo.order) else None
+        if name in dc.map_json and (walked := walking.order(dc, name, labels, map_rank)):
+            at.update((label, float(i)) for i, label in enumerate(walked))
+    held: dict[str, list[str]] = {}    # label → the conditions its own map sets
+    for r in rows:
+        if r.label in mo.place or r.label in mo.rank:
+            continue
+        own = dc.map_of_label(r.label) or r.group
+        here = map_rank.get(own, math.inf)
+        if conds := [c for c in waits.get(r.label, ()) if own in set_in.get(c, ())
+                     and all(map_rank.get(m, math.inf) >= here for m in set_in[c])]:
+            held[r.label] = conds
+    last_free: dict[float, float] = {}  # entry → its last line that waits for nothing here
+    for r in rows:
+        if r.label not in held:
+            last_free[rank[r.label]] = max(last_free.get(rank[r.label], -math.inf), at[r.label])
+    for _ in range(5):                  # a line can follow a line that was itself moved
+        changed = False
+        for label, conds in held.items():
+            before = [at[t] for c in conds for t in set_with.get(c, ())
+                      if t != label and t in at and rank[t] == rank[label]]
+            after = (max(before) if before else last_free.get(rank[label], -math.inf)) + 0.25
+            if after > at[label]:
+                at[label], changed = after, True
+        if not changed:
+            break
+    return at
+
+
+def fine_places(msgs: pd.DataFrame, placed: dict, placer: Placer, dc: Decomp,
+                within: dict[str, float] | None = None) -> dict[str, tuple]:
     """Where inside its map the line that names a Pokémon, a move, an ability
     or a place goes: msg_id → (rank, after_dialogue, tiebreak or None,
     sighting, kind order).
@@ -447,11 +508,11 @@ def fine_places(msgs: pd.DataFrame, placed: dict, placer: Placer, dc: Decomp) ->
       - A place's name comes up as you walk in: before the map's dialogue.
     """
     fs, keys = placer.fs, placer.keys
-    line = dict(zip(msgs["label"], msgs["line_no"]))
-    said: dict[float, list[int]] = {}  # rank → line numbers of its dialogue messages
+    line = {**dict(zip(msgs["label"], msgs["line_no"])), **(within or {})}  # where each line sorts in its entry
+    said: dict[float, list[int]] = {}  # rank → those positions, for its dialogue messages
     for r in msgs.itertuples(index=False):
         if placed[r.msg_id][0] == "dialogue":
-            said.setdefault(placed[r.msg_id][1], []).append(r.line_no)
+            said.setdefault(placed[r.msg_id][1], []).append(line[r.label] if r.ns == "script" else r.line_no)
     for lines in said.values():
         lines.sort()
     rank_of_label = {r.label: placed[r.msg_id][1] for r in msgs.itertuples(index=False)
@@ -567,7 +628,14 @@ def main() -> None:
                           ", ".join(sorted(waits[r.label]))))
     pd.DataFrame(later, columns=["msg_id", "map", "label", "was_at", "now_after", "waits_for"]).to_csv(LATER_OUT, index=False)
 
-    fine = fine_places(msgs, placed, placer, dc)
+    # Inside a map, a line that waits for something the same map sets comes
+    # after the line shown as it is set (the gym guide's "you're champ
+    # material" after Brock's badge speech), or else after the map's ordinary
+    # lines. The text dump does not always list them that way. A walk's lines
+    # keep their listed place; so does a line that is an entry of its own.
+    within = within_map(msgs, placed, dc, mo, placer.fs.map_rank)
+
+    fine = fine_places(msgs, placed, placer, dc, within)
     for msg_id, (rank, after, tiebreak, sighting, kind_order) in fine.items():
         b, _, where, _, fallback = placed[msg_id]
         placed[msg_id] = (b, rank, where, after, fallback)
@@ -587,6 +655,14 @@ def main() -> None:
     # The end bucket and unplaced rows: most frequent text first.
     tail = df["bucket"].isin(list(DECK_OF))
     df["tiebreak"] = df["line_no"].where(~tail, -freq * 100000 + df["line_no"]).astype(float)
+    # The Help deck reads like the Help menu: its topics, then each question
+    # or term followed by its answer. The dump lists all questions first.
+    in_help = df["bucket"] == "help"
+    asked = dict(zip(df.loc[in_help, "label"], df.loc[in_help, "line_no"]))
+    df.loc[in_help, "tiebreak"] = [help_place(lb, n, asked) for lb, n in zip(df.loc[in_help, "label"], df.loc[in_help, "line_no"])]
+    moved_in_map = {r.msg_id: within[r.label] for r in msgs.itertuples(index=False)
+                    if r.ns == "script" and placed[r.msg_id][0] == "dialogue" and r.label in within}
+    df["tiebreak"] = df["msg_id"].map(moved_in_map).fillna(df["tiebreak"])
     df["sighting"], df["kind_order"] = 0.0, 0
     for msg_id, (_, _, tiebreak, sighting, kind_order) in fine.items():
         at = df["msg_id"] == msg_id
@@ -602,8 +678,11 @@ def main() -> None:
     # Interleave non-dialogue lines with the story, chapter by chapter. This
     # preview uses tokenizer lemmas; the cards stage re-runs it on LLM senses.
     kept["dialogue"] = kept["bucket"] == "dialogue"
+    # What must not be broken up by floating text: a message, and a walk.
+    kept["unit"] = [f"walk {mo.walk[lb]}" if lb in mo.walk else m for lb, m in zip(kept["label"], kept["msg_id"])]
     kept["tail"] = kept["bucket"].isin(list(DECK_OF))
     kept["deck"] = kept["bucket"].map(DECK_OF).fillna("story")
+    kept["gender"] = kept["label"].map(dc.gender_only).fillna("")  # shown only to a boy, or only to a girl
     kept["chapter"] = chapter_of(kept["rank"], mo.rank)
     kept.loc[kept["deck"] == "help", "chapter"] = HELP
     kept.loc[kept["deck"] == "link", "chapter"] = LINK_PLAY

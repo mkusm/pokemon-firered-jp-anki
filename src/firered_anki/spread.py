@@ -9,9 +9,16 @@ must be released before its chapter ends. Within a chapter:
      = new words weighted by corpus frequency), so each word needs one line.
   2. Spread the kept lines evenly over the chapter's dialogue; at each slot
      release the available line with the most value per word, so short common
-     UI words come before long help-style prose.
+     UI words come before long help-style prose. A slot is the gap between two
+     units: floating text never lands between the sentences of one message, or
+     between the lines of one walk (the `unit` column, when the rows have one).
   3. Lines that teach nothing stay out of the sequence (order = NaN). They are
      still candidates for extra example sentences.
+
+A line that is still waiting when its chapter ends is not dumped there. What
+is first seen at a chapter's last map (the gym leader's Pokémon, the TM)
+would pile up after the leader's last line; it runs on into the next chapter
+instead, ahead of that chapter's own lines. Only the last chapter empties.
 
 A pinned line is not spread. The line that names a Pokémon or an item goes
 exactly where the thing is first met, unless dialogue before it has already
@@ -25,6 +32,10 @@ import math
 from collections import Counter
 
 import pandas as pd
+
+# After a long message or walk several floating lines are due at once. No more
+# than this many come in a row; the rest follow the next units.
+MOST_IN_A_ROW = 2
 
 # Each chapter ends with this map_order entry.
 CHAPTER_ENDS = [
@@ -73,7 +84,9 @@ def spread(df: pd.DataFrame, words: pd.Series, pin: dict | None = None) -> pd.Se
     known: set = set()
     shown: set = set()  # by dialogue and pinned lines so far, whose place in the story is exact
     pos = 0
-    for ch in sorted(df.loc[~df["tail"], "chapter"].unique()):
+    carried: list = []  # kept lines the chapter before had no room for
+    story = sorted(df.loc[~df["tail"], "chapter"].unique())
+    for ch in story:
         rows = df[(df["chapter"] == ch) & ~df["tail"]]
         dia = rows[rows["dialogue"]]
         ui = rows[~rows["dialogue"]]
@@ -112,10 +125,11 @@ def spread(df: pd.DataFrame, words: pd.Series, pin: dict | None = None) -> pd.Se
 
         # 2. Spread evenly: after each dialogue sentence, release lines while
         # the running quota allows, most valuable available first.
-        rate = len(kept) / max(len(dia), 1)
         credit = 0.0
         waiting: list = []
-        pending = sorted((i for i in avail if i in kept), key=avail.get)
+        avail.update(dict.fromkeys(carried, 0))  # what ran over: from the chapter's first line on
+        pending = carried + sorted((i for i in avail if i in kept), key=avail.get)
+        carried = []
         due = [i for i in avail if i in pinned]  # in first-seen order
         seen_now = set(known)
 
@@ -127,7 +141,9 @@ def spread(df: pd.DataFrame, words: pd.Series, pin: dict | None = None) -> pd.Se
                 seen_now.update(words[due.pop(0)])
             while pending and avail[pending[0]] <= n_done:
                 waiting.append(pending.pop(0))
-            while waiting and (credit >= 1 or force):
+            in_a_row = 0
+            while waiting and (force or (credit >= 1 and in_a_row < MOST_IN_A_ROW)):
+                in_a_row += 1
                 # Per word, so short common lines (たたかう, どうぐ) come early and
                 # long manual-style prose fills the later slots.
                 best = max(
@@ -140,20 +156,34 @@ def spread(df: pd.DataFrame, words: pd.Series, pin: dict | None = None) -> pd.Se
                 seen_now.update(words[best])
                 credit -= 1
 
+        # The dialogue sentences after which something else may come: the last of each unit.
+        unit = dia["unit"].tolist() if "unit" in dia.columns else list(range(len(dia)))
+        ends_unit = [k + 1 == len(unit) or unit[k] != unit[k + 1] for k in range(len(unit))]
+
         release_upto(0)
         for k, i in enumerate(dia.index, start=1):
             out[i] = pos
             pos += 1
             seen_now.update(words[i])
-            credit += rate
+            # What is still to come, over the sentences left for it: where
+            # nothing may float for a stretch (the start of the game), the
+            # rest of the chapter takes it up evenly instead of the chapter's
+            # last line getting all of it at once.
+            credit += (len(pending) + len(waiting)) / (len(dia) - k + 1)
+            if not ends_unit[k - 1]:
+                continue
             release_upto(k)
             if not waiting:
                 # Nothing was available: don't save up a burst for later (the
                 # opening sequence runs before any menu text can be seen).
                 credit = min(credit, 1.0)
-        waiting.extend(pending)  # the chapter's deadline: release the rest
-        pending.clear()
-        release_upto(len(dia), force=True)
+        if ch == story[-1]:
+            waiting.extend(pending)  # the last chapter's deadline: release the rest
+            pending.clear()
+            release_upto(len(dia), force=True)
+        else:
+            release_upto(len(dia))   # what is due, and no more than fits
+            carried = waiting + pending
 
         known |= set().union(*words[rows.index]) if len(rows) else set()
 

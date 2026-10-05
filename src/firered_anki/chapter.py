@@ -100,7 +100,7 @@ def _left(n: int, deck, analyses: dict, known: set) -> dict[str, int]:
             for t, a in analyses.items() for w in a["words"]),
         "particle uses to ask about": len(particles.unasked(shown["text"], analyses, known)),
         "sentences with no grammar": sum(not grammar.answered(t, analyses) for t in explained),
-        "sentences not asked for a note": sum(notes.read(t) is None for t in explained),
+        "sentences not asked for a note": sum(not notes.asked(t) for t in explained),
         "notes not checked": sum(bool(r := notes.read(t)) and notes.needs_check(r) for t in explained),
         "_shown": len(shown),
     }

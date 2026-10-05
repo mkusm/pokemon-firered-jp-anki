@@ -1,0 +1,1 @@
+{"text": "１つだけ", "structure": [{"jp": "１つだけ", "en": "just one"}], "patterns": [{"name": "〜だけ", "span": "１つだけ", "words": ["１つ", "だけ"], "explanation": "だけ after a word means 'only' that and nothing more. １つだけ = 'just one'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

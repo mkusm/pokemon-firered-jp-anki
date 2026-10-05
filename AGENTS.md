@@ -20,13 +20,15 @@ uv run python -m firered_anki.order
 uv run python -m firered_anki.tokenize
 uv run python -m firered_anki.cards
 uv run python -m firered_anki.build     # → firered_jp.apkg
+uv run python -m firered_anki.check     # checks on what was built, no model calls
 ```
 
 About two minutes, no model calls. After a change that only affects cards
 (`cards.py`, `build.py`, `grounding.py`, `corrections.yaml`, `known.txt`),
 `cards` and `build` are enough.
 
-There is no test suite. The checks are in "Before you say it is done" below.
+There is no test suite. `check` looks in the built data for the things that
+have gone wrong before; the rest is in "Before you say it is done" below.
 
 ## Stages
 
@@ -126,10 +128,19 @@ deck, 11 the Link play deck. The docs do not call them chapters.
   dialogue line that is shown only once a flag is set to just after the map
   whose script sets it (`decomp.set_in`); the list is `data/moved_later.csv`.
   The line keeps its own map as its location.
-- Only flags are followed. A line that waits on a scene variable is not
-  moved: the woman by Pallet Town's sign says わたしも　ポケモンを　そだててるの！
-  only after her sign routine (`VAR_MAP_SCENE_PALLET_TOWN_SIGN_LADY`), and was
-  placed by hand. When a line reads oddly early, look at its script.
+- Inside a map, lines go in walking order (`walking.py`): by how far each
+  person, sign or trigger is, over walkable tiles, from the door or edge that
+  leads to the map visited just before. It needs `data/layouts/` from the
+  decomp (in `scripts/fetch_vendor.sh`). A person's lines stay together;
+  rematch lines go last. It is an approximation: where the order of a scene
+  matters, list it in `map_order.yaml`, do not tune the measuring.
+- Inside its own map, a line that waits for something the map itself sets
+  (a flag or a scene variable, when no earlier map sets it) comes after the
+  line shown as it is set, or else after the map's ordinary lines
+  (`order.within_map`). What this cannot see is a condition set without a
+  line, on re-entering the map: the woman by Pallet Town's sign says
+  わたしも　ポケモンを　そだててるの！ only after her sign routine, and was placed
+  by hand. When a line reads oddly early, look at its script.
 - Where the position inside a scene matters, list the scene's labels in
   `map_order.yaml` instead, as for Professor Oak's lab and Pallet Town. Take
   the scenes from the map's `scripts.inc`, not from memory.
@@ -146,6 +157,27 @@ deck, 11 the Link play deck. The docs do not call them chapters.
 - Take a walk's lines from the code that draws the screen (`start_menu.c`,
   `player_pc.c`, `item_pc.c`, `option_menu.c`, `item_menu.c`), fetched with
   `git show`, not from memory.
+- Floating text lands only between units: a message is one, a walk is one
+  (`unit` in the order stage's output). No more than two floating lines come
+  in a row (`spread.MOST_IN_A_ROW`), and the pace is what is left over the
+  sentences left. `TODO.md` item 11: what is first seen at a chapter's last
+  map still piles up at the chapter's end.
+- The first battle is a walk around the rival's challenge in Oak's lab, from
+  `battle_controller_oak_old_man.c`. The party screen, the Mart's counter and
+  the Pokédex are walks too, each where it is first used.
+- A floating line still waiting when its chapter ends runs on into the next
+  chapter. It keeps its own chapter number, which is what the model stages go
+  by, so a chapter's sentences are not all between that chapter's maps.
+- The Help deck is in the Help menu's order: each question or term, then its
+  answer (`order.help_place`, by the labels' names).
+- The game shows some lines only to a boy and others only to a girl
+  (`decomp.gender_only`, 14 pairs). A card is tagged `player-boy` or
+  `player-girl` only when every sentence that could carry it is that side's:
+  the tag is for dropping, and dropping it must not lose a word the player
+  meets elsewhere. Tagging every card that sits on such a line was tried
+  first and marked 97 cards as the boy's, 89 of them words everyone needs.
+  A bare easy-chat word is tagged `word-list`. Tag, do not remove: the
+  owner's choice.
 - Text outside a walk floats (`spread.py`). Nothing floats before the player
   first leaves Oak's lab (`order.FLOATS_AFTER`, the owner's choice): do not
   let menu or battle text drift into the house, the town or the lab scene
@@ -310,6 +342,7 @@ fine.
 
 - `cards` and `build` run without errors, and the card counts printed are the
   ones you expect.
+- `check` passes. When something new goes wrong, add a check for it there.
 - If the change could touch card identities, compare the `key` column of
   `data/05_cards/cards.parquet` before and after, and report how many cards
   went and how many appeared.
@@ -335,13 +368,13 @@ Update this when it changes.
   TV lines. Four corrections of word forms Sonnet wrote wrongly were removed
   as their chapters were redone on Opus, which wrote the forms correctly; the
   last two (ｃｍ, twice) went with the postgame.
-- `splits.yaml` has 475 decisions, from chapters 0 to 11. They are checked
+- `splits.yaml` has 476 decisions, from chapters 0 to 11. They are checked
   across chapters: a later chapter's run can send an earlier sentence back.
 - Names: 953 cards (221 Pokémon, 153 items, 284 moves, 76 abilities, 17
   types, 132 places, 23 people, 2 for Team Rocket, 8 badges, 22 game terms, 15
   real-world names), found by `names.py` in every chapter with no model call.
   The 56 name lines this put in chapter 0 were re-analysed on Opus. The names
-  deck is gone. Three decks, 11,081 cards: story 9,533, Help 940 (stand-alone), Link play 608. The note type has `Note` and
+  deck is gone. Three decks, 11,079 cards: story 9,533, Help 940 (stand-alone), Link play 606. The note type has `Note` and
   `SentenceNote` fields.
 - English names: the name check passes on every sentence the deck shows, in
   all chapters. 91 sentences were redone on Opus for it, most of them in
@@ -352,9 +385,9 @@ Update this when it changes.
   レポート sentence now says "save" in some form; the wording is the model's
   and varies ("the Save", "save file", "this report (save)"). The Rocket
   Warehouse's レポート is a real report, and the model kept it so.
-- Walks: 14 in `map_order.yaml`, 94 lines: the title and the bars of the
-  opening, the house (start menu, SELECT, furniture, bedroom PC, poster,
-  kitchen), Pallet Town from the door to the lab, options, saving, the bag.
+- Walks: 19 in `map_order.yaml`, 187 lines: the title and the bars of the
+  opening, the house, Pallet Town, the party screen, options, the first
+  battle, saving, the bag, the Mart's counter, the Pokédex.
   A walk's line is not moved by the flag rule: its place is the listed one.
   `hand_lines.yaml` has one line, the title. `never_shown` in
   `first_seen.yaml` has 38 entries, two of them globs.

@@ -1,0 +1,1 @@
+{"text": "たたかう　バッグ　ポケモン　にげる", "structure": [{"jp": "たたかう", "en": "Fight"}, {"jp": "　バッグ", "en": "Bag"}, {"jp": "　ポケモン", "en": "Pokémon"}, {"jp": "　にげる", "en": "Run"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

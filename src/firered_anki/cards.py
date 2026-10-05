@@ -454,6 +454,7 @@ PLACES = {
     "pokemon": "Menus and messages", "test": "Menus and messages",
     # Places a walk in map_order.yaml names that are screens, not maps or text groups.
     "title_screen": "Title screen", "start_menu": "Start menu", "options_menu": "Options", "bag": "Bag",
+    "party_menu": "Party screen", "pokedex": "Pokédex",
 }
 # Map names as the decomp spells them, to words: Route1, SSAnne, ProfessorOaksLab.
 SPELLED = [(r"(?<=[a-z])(?=[A-Z0-9])|(?<=[A-Z])(?=[A-Z][a-z])|_", " "), (r"\bSS Anne\b", "S.S. Anne"),
@@ -550,7 +551,7 @@ def build_cards(run_name: str = MAIN.name, offline_merge: bool = False) -> pd.Da
     noted = notes.results(deck["text"].unique())
     corrections.check()  # every hand correction found what it corrects
 
-    occ = occ.join(deck[["card_order", "dialogue", "chapter", "msg_id", "text", "speaker", "deck"]]
+    occ = occ.join(deck[["card_order", "dialogue", "chapter", "msg_id", "text", "speaker", "deck", "gender"]]
                    .rename(columns={"text": "_t"}), on="row")
 
     msg_text = deck.sort_values(["line_no", "page", "sent"]).groupby("msg_id")["text"].agg(list)
@@ -577,6 +578,12 @@ def build_cards(run_name: str = MAIN.name, offline_merge: bool = False) -> pd.Da
             if key[0] != "name":
                 # A real sentence before a bare name the word happens to be part of.
                 placed = [u for u in placed if not u["name_line"]] or placed
+            # The word is one only a boy, or only a girl, ever meets when every
+            # sentence that could carry its card is that side's. A word that
+            # also turns up in a line everyone sees is not tagged, wherever
+            # its card sits: dropping the tag must not drop a word you need.
+            sides = {u["gender"] for u in placed}
+            only = next(iter(sides)) if len(sides) == 1 else ""
             first = placed[0]
             if key[0] == "name":
                 first = next((u for u in placed if u["exact"]), first)
@@ -639,7 +646,10 @@ def build_cards(run_name: str = MAIN.name, offline_merge: bool = False) -> pd.Da
                 + (["low-confidence"] if unsure(w, e) else [])
                 + (["sense-guessed"] if w.get("_sense_guessed") else [])
                 + (["onomatopoeia"] if is_onomatopoeia(w, e) else [])
-                + (["fragment"] if is_fragment(first["text"], w) and not w.get("name") else []),
+                + (["fragment"] if is_fragment(first["text"], w) and not w.get("name") else [])
+                # A word only one gender of player meets; a bare word from the easy-chat lists.
+                + ([f"player-{only}"] if only else [])
+                + (["word-list"] if r.group.startswith("easy_chat_group_") else []),
             })
         return out
 

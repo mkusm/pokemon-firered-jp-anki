@@ -1,0 +1,1 @@
+{"text": "タイプじゅん", "structure": [{"jp": "タイプじゅん", "en": "in order of type"}], "patterns": [{"name": "〜じゅん", "span": "タイプじゅん", "words": ["タイプ", "じゅん"], "explanation": "じゅん stuck onto a word means 'sorted by that'. タイプじゅん = 'in order of type'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

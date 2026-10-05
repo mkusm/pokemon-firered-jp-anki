@@ -21,7 +21,7 @@ How it works, in detail: [`docs/how-it-works.html`](docs/how-it-works.html)
 
 | | |
 |---|---|
-| `firered_jp.apkg` | 11,081 cards in three decks: the story (9,533, in story order), the Help menu (940) and link play (608) |
+| `firered_jp.apkg` | 11,079 cards in three decks: the story (9,533, in story order), the Help menu (940) and link play (606) |
 
 It is attached to the [latest release](https://github.com/mkusm/pokemon-firered-jp-anki/releases/latest).
 
@@ -113,7 +113,8 @@ All you need is [Anki](https://apps.ankiweb.net/), on desktop or on your phone.
    Room, trading, Mystery Gift, mail and the word lists you write messages
    from). Study the story; the other two are there if you want them. The
    Help deck stands on its own: it has a card for every word the Help menu
-   uses, so you can read it at any point, as in the game. About 700 of its
+   uses, in the menu's own order (each question, then its answer), so you can
+   read it at any point, as in the game. About 700 of its
    words have a card in the story too. The Link play deck holds only what
    the story has not taught.
 2. **Keep the story order.** New cards must come in the order they were added.
@@ -131,8 +132,13 @@ All you need is [Anki](https://apps.ankiweb.net/), on desktop or on your phone.
    and in English.
 5. **Trim what you don't want.** In the browser, search by tag and suspend:
    `tag:fragment` (stammers and broken speech), `tag:onomatopoeia`,
-   `tag:low-confidence`, or a place such as `tag:Pewter_City_Gym`. To drop
-   words for good, add them to `known.txt` and rebuild.
+   `tag:low-confidence`, or a place such as `tag:Pewter_City_Gym`. The game
+   says some lines only to a boy and others only to a girl (Mom's remark, what
+   is on TV). A word that only one side ever meets is tagged `player-boy` or
+   `player-girl` (18 cards: ぼっちゃん, じょうちゃん, ウェイトレス…), so you can
+   drop the side you do not play. A word that also comes up in a line everyone
+   sees is not tagged, even when its card sits on one of those lines. `tag:word-list` finds the bare words of the Link play deck's word
+   lists. To drop words for good, add them to `known.txt` and rebuild.
 6. **Update later.** The deck is still in development: its layout, its order
    and some of its cards change from one version to the next. To update,
    delete the old deck (FireRed JP, or Pokemon FireRed Japanese) and import
@@ -143,7 +149,13 @@ All you need is [Anki](https://apps.ankiweb.net/), on desktop or on your phone.
 1. **Dialogue** follows `map_order.yaml`. A line a script shows only once a
    story flag is set goes after the map that sets the flag: the Silph Co.
    employees thank you only after Giovanni is beaten, Mom says "you and your
-   Pokémon are looking great" only once you have one.
+   Pokémon are looking great" only once you have one. Inside a map the lines
+   go in the order you walk past the people and signs that say them, measured
+   over walkable tiles from the door or edge the story enters by: on Nugget
+   Bridge the five trainers come first and the prize last. A line
+   that waits for something the same map sets comes after the line shown as
+   it happens: the clerk on Route 1 says "come and see us" after handing you
+   the Potion.
 2. **Everything else** goes where you first see it. Species, moves, items,
    abilities, map names and battle messages are worked out from the decomp: wild
    encounters, trainer parties, Mart stock, item pickups, TMs, and which move
@@ -154,6 +166,9 @@ All you need is [Anki](https://apps.ankiweb.net/), on desktop or on your phone.
    they teach something the chapter's dialogue does not. The line that names a
    Pokémon, an item, a move, an ability or a place is not spread: it stays
    where the thing is first met, unless dialogue has already said the name.
+   Spread lines land only between messages, never between two sentences of
+   one, and no more than two in a row. What is first seen at a chapter's last
+   map runs on into the next chapter instead of piling up at the end.
    Inside a map, a trainer's Pokémon, its moves and its ability hang on that
    trainer's challenge; wild ones are spread between the map's messages.
 4. **Walks.** Where the game gives you one thing to do at a time,
@@ -163,8 +178,12 @@ All you need is [Anki](https://apps.ankiweb.net/), on desktop or on your phone.
    description, the SELECT button, the bookshelf, everything the bedroom PC
    lets you do with its one Potion, the poster, the TV, Mom and the kitchen,
    and then through Pallet Town from your door to the lab.
-   The options screen comes just before the first battle, saving after the
-   aide in the lab explains it, the bag on Route 1. Other menu text floats as
+   Each screen comes as a walk where you first use it: the party screen
+   when you get your Pokémon, the options just before the first battle, which
+   is a walk too (the challenge, Oak's commentary, the action menu, the
+   messages every battle has), saving after the aide in the lab explains it,
+   the bag on Route 1, the Mart's counter in Viridian, the Pokédex when Oak
+   hands it over. Other menu text floats as
    in step 3, and only once you have left Oak's lab with your first Pokémon.
 
 A sentence often teaches several words. Their cards come in the order the
@@ -216,6 +235,7 @@ uv run python -m firered_anki.order      # story order
 uv run python -m firered_anki.tokenize   # tokens and dictionary candidates
 uv run python -m firered_anki.cards      # one card per word form and sense
 uv run python -m firered_anki.build      # → firered_jp.apkg
+uv run python -m firered_anki.check      # checks on what was built; calls no model
 ```
 
 That takes about two minutes and makes no LLM calls: every answer is read from
@@ -262,7 +282,7 @@ pass only mops up what the analysis left without a sense: a single call.
 | `known.txt` | Words you already know. They are analysed but never carded. |
 | `name_spellings.yaml` | English names FireRed squeezed into twelve letters, with today's spelling (PARLYZ HEAL → Paralyze Heal). |
 | `names_by_hand.yaml` | English names of the things the game has no list of, 93 in all: people, Team Rocket, badges, places, game terms and real-world names, some with a note for the card. A game term that is an ordinary word (レポート, the game's word for saving) is marked `plain`, so that it is the term wherever it stands. |
-| `map_order.yaml` | Play order of the 344 maps and scenes, following Bulbapedia's walkthrough. Lists single labels where a map is revisited later in the story, and walks: the lines of a screen or a room one by one, in the order you meet them. |
+| `map_order.yaml` | Play order of the maps and scenes, following Bulbapedia's walkthrough. Lists single labels where a map is revisited later in the story, and walks: the lines of a screen or a room one by one, in the order you meet them. |
 | `hand_lines.yaml` | Text the game draws as a picture, which the text dump lacks. One line: the title screen's ポケットモンスター. |
 | `first_seen.yaml` | Where menus, battle text, items and other non-dialogue text is first seen: rules per text group, and the list of story points the LLM may choose from. |
 | `first_seen_llm.yaml` | Written by `classify`: the story point chosen for each string no rule fits. Readable, so you can review it. |
@@ -305,7 +325,7 @@ vendor/           upstream clones (ignored)
 ## Known limits
 
 - Two models made the deck. The story and the Help deck are Opus's work:
-  analysis, grammar and notes. The Link play deck (608 cards) is Sonnet's,
+  analysis, grammar and notes. The Link play deck (606 cards) is Sonnet's,
   which costs less and is less sure: on a sample of 100 sentences Opus
   corrected a clear Sonnet error in 3 (a wrong item name, a line read as "I
   was asked a favor" that means "do me a favor", and あったら filed under ある

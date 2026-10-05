@@ -137,7 +137,7 @@
 <main>
 <header class="hero">
   <h1>How a line of FireRed becomes a flashcard</h1>
-  <p class="lede">The deck has 11,081 cards. Each one is a word, in one form, in the sentence where the Japanese game first uses it. This page follows the text from the cartridge's script to the card.</p>
+  <p class="lede">The deck has 11,079 cards. Each one is a word, in one form, in the sentence where the Japanese game first uses it. This page follows the text from the cartridge's script to the card.</p>
 
   <figure class="card">
     <div class="gba jp" lang="ja">グリーンは　すでに　ポケモンを　<mark>つかまえて</mark>　ずかんの　ページを　ふやしている　そうじゃ！</div>
@@ -182,7 +182,7 @@
         <rect x="30" y="96" width="110" height="52" rx="8"/><text x="85" y="118" text-anchor="middle" font-size="14" font-weight="700">extract</text><text class="sub" x="85" y="136" text-anchor="middle">16,166 sentences</text>
         <rect x="160" y="96" width="110" height="52" rx="8"/><text x="215" y="118" text-anchor="middle" font-size="14" font-weight="700">order</text><text class="sub" x="215" y="136" text-anchor="middle">12,780 kept</text>
         <rect x="290" y="96" width="110" height="52" rx="8"/><text x="345" y="118" text-anchor="middle" font-size="14" font-weight="700">tokenize</text><text class="sub" x="345" y="136" text-anchor="middle">11,163 unique</text>
-        <rect x="550" y="96" width="90" height="52" rx="8"/><text x="595" y="118" text-anchor="middle" font-size="14" font-weight="700">cards</text><text class="sub" x="595" y="136" text-anchor="middle">11,081</text>
+        <rect x="550" y="96" width="90" height="52" rx="8"/><text x="595" y="118" text-anchor="middle" font-size="14" font-weight="700">cards</text><text class="sub" x="595" y="136" text-anchor="middle">11,079</text>
         <rect x="660" y="96" width="90" height="52" rx="8"/><text x="705" y="118" text-anchor="middle" font-size="14" font-weight="700">build</text><text class="sub" x="705" y="136" text-anchor="middle">two .apkg</text>
       </g>
       <g class="llm">
@@ -223,8 +223,9 @@
 
   <h3>Dialogue follows the walkthrough</h3>
   <p><code>map_order.yaml</code> lists 344 maps and scenes in play order: Kanto, the first three Sevii Islands after Blaine, the League, then the postgame. It was drafted from the decomp's map names and checked against all 21 parts of Bulbapedia's walkthrough.</p>
+  <p>Inside a map the lines go in the order you walk past the people and signs that say them. The decomp has every person's, sign's and trigger's position and says which tiles can be walked on, so each map is measured from the door or edge that leads to the map the story visits just before it. The text dump lists Nugget Bridge with the prize first and its five trainers in reverse; walked, it runs from the first trainer to the prize. 190 of the 260 maps with more than one message changed order. It is an approximation: people wander, a script can move someone before you arrive, and a town has no single route. Then one correction. A line that waits for something the same map sets (a flag, a scene variable) comes after the line shown as it is set, or else after the map's ordinary lines: the gym guide's praise after the badge, the Mart clerk's "come and see us" after the free Potion. 113 lines in 48 maps moved for this.</p>
   <p>Two details matter. A map you return to can list single messages to be placed later, so the rival's second battle on Route 22 sits after the eighth badge and not at your first visit. And the game's opening is listed message by message, because the script dump stores it out of order: controls guide, intro pages, Professor Oak's speech, then the naming prompts.</p>
-  <p>The start of the game is stricter still. Where the game gives you one thing to do at a time, the file lists a <em>walk</em>: the lines of a screen or a room one by one, whatever kind of text they are. The deck opens with the title screen's <span class="jp" lang="ja">ポケットモンスター</span> (a picture in the game, so that one line is written by hand), the controls guide and Oak's speech, and then goes through your house: the start menu's entries, each with the description shown under it, what the SELECT button says, the bookshelf, everything the bedroom PC lets you do with its one Potion, the poster, the TV, Mom and the kitchen. The town's name comes up only as you step outside, and the town's signs and people follow in the order you walk past them, from your door down to the lab. The options screen sits just before the first battle, the save questions after the aide in the lab explains saving, the bag on Route 1. The lines of each screen were read from the code that draws it.</p>
+  <p>The start of the game is stricter still. Where the game gives you one thing to do at a time, the file lists a <em>walk</em>: the lines of a screen or a room one by one, whatever kind of text they are. The deck opens with the title screen's <span class="jp" lang="ja">ポケットモンスター</span> (a picture in the game, so that one line is written by hand), the controls guide and Oak's speech, and then goes through your house: the start menu's entries, each with the description shown under it, what the SELECT button says, the bookshelf, everything the bedroom PC lets you do with its one Potion, the poster, the TV, Mom and the kitchen. The town's name comes up only as you step outside, and the town's signs and people follow in the order you walk past them, from your door down to the lab. The party screen and the three pages of a Pokémon's summary come when you get your first Pokémon, the Mart's counter in Viridian, the Pokédex's contents and a Pokémon's page when Oak hands it over. The options screen sits just before the first battle. That battle is a walk as well: the challenge, Professor Oak's commentary from the side in the order the battle code gives it, the action menu, and the messages every battle has. The save questions come after the aide in the lab explains saving, the bag on Route 1. The lines of each screen were read from the code that draws it.</p>
 
   <h3>Everything else goes where it first appears</h3>
   <p>Menus, battle messages, move and item descriptions and Pokédex entries have no map. Most of them can be worked out from the <a href="https://github.com/pret/pokefirered">decompiled game</a>:</p>
@@ -254,7 +255,7 @@
   <p>Placing every line exactly where it is first seen put about 2,700 cards of menu and battle text before the story reached the second house. So the game is cut into ten chapters, one per gym badge, then the League, then the postgame. Inside a chapter:</p>
   <ol class="steps">
     <li>A non-dialogue line is kept only if it teaches something that neither earlier chapters nor this chapter's dialogue teach. Most do not, and are held back as extra example sentences.</li>
-    <li>The kept lines are spread evenly through the chapter's dialogue, each one no earlier than the point where it is first seen.</li>
+    <li>The kept lines are spread evenly through the chapter's dialogue, each one no earlier than the point where it is first seen. They land only between messages, never between two sentences of one or inside a walk, and no more than two come in a row. The pace follows what is left over the sentences left, so a stretch where nothing may float is made up for evenly afterwards. A line still waiting when its chapter ends runs on into the next one: what is first seen in the gym would otherwise pile up after the leader's last words.</li>
     <li>At each slot the line with the most common new words per word of text goes first, so short menu words come before long help-style prose.</li>
     <li>If dialogue in the same chapter uses the same word, the dialogue sentence becomes the card's example.</li>
   </ol>
@@ -317,7 +318,7 @@
   <p>A rule in prose only goes so far. The analysis decides where words begin and end one sentence at a time and cannot see what it chose elsewhere, so the same string came out as one word in some sentences and as several in others: <span class="jp" lang="ja">ポケモンセンター</span> twice whole and five times in two pieces, <span class="jp" lang="ja">ように</span> three times whole and seven times cut. In the first chapter that was 67 strings, and every rerun cut a fifth of the chapter differently.</p>
   <p>The <code>splits</code> stage settles each string once. It finds the strings cut two ways and asks Claude about each, twice and independently, showing the sentences, the glosses and the dictionary entries: always one word, always the same pieces, or "it depends on the meaning" (<span class="jp" lang="ja">でも</span> is "but" as one word and <span class="jp" lang="ja">で</span> + <span class="jp" lang="ja">も</span> as two). A string is fixed only where the two answers agree; otherwise it is left to the rule. The decisions go to <code>splits.yaml</code> with their reasons, the analysis is shown the ones that apply to its batch, and a check in code re-analyses the sentences that break one.</p>
   <p>The first chapter needed 72 decisions: 29 strings fixed as one word, 23 fixed as cut, 20 left to the rule. 89 sentences were re-analysed. Afterwards 17 strings are still cut two ways, all of them ones where the meaning decides.</p>
-  <p>The decisions hold across chapters: the second chapter is checked together with the first, so a string cut one way before Brock and another way after him is caught, and the sentence that differs goes back, whichever chapter it is in. The second chapter added 25 decisions, the third 39, chapters four to six another 152, the seventh 29, the eighth 33, the ninth 22 and the postgame 71, 445 in all with two later ones, and the Help deck 29 more, 474; each run sent a handful of earlier sentences back.</p>
+  <p>The decisions hold across chapters: the second chapter is checked together with the first, so a string cut one way before Brock and another way after him is caught, and the sentence that differs goes back, whichever chapter it is in. The second chapter added 25 decisions, the third 39, chapters four to six another 152, the seventh 29, the eighth 33, the ninth 22 and the postgame 71, 445 in all with two later ones, the Help deck 29 more and two since, 476; each run sent a handful of earlier sentences back.</p>
 
   <h3>Opus for whole chapters</h3>
   <p>The second opinion only reaches sentences where Sonnet shows doubt. It cannot catch a confident mistake. The line for the SELECT button, <span class="jp" lang="ja">たいせつな　ものを　とうろくして　つかいます</span>, came back as "to register important things"; Opus reads it as the game means it, "to use a registered Key Item".</p>
@@ -386,7 +387,7 @@
 <section id="build">
   <h2>Build: packages that can be rebuilt</h2>
   <p>genanki writes one package of three decks: the story, the Help menu, and link play (everything that needs a second player or device). They are subdecks of one deck, numbered so that Anki lists them in that order, and new-card positions run on from one to the next. The note type has a fixed ID, and each note's ID is derived from its key, so a rebuilt package holds the same notes under the same IDs wherever nothing changed.</p>
-  <p>The Help deck stands on its own. The game lets you open the Help menu from the first screen, so the deck has a card for every word the menu uses, each on its first sentence there, whether or not the story has a card for the word: 940 cards, of which about 700 repeat a word of the story in a Help sentence. Such a card is a note of its own, with <code>help</code> in its key. The Link play deck is the other kind: it holds only the words the story has not taught, and does not count on the Help deck either.</p>
+  <p>The Help deck stands on its own, in the Help menu's own order: its topics, then each question or term followed by its answer. The game lets you open the Help menu from the first screen, so the deck has a card for every word the menu uses, each on its first sentence there, whether or not the story has a card for the word: 940 cards, of which about 700 repeat a word of the story in a Help sentence. Such a card is a note of its own, with <code>help</code> in its key. The Link play deck is the other kind: it holds only the words the story has not taught, and does not count on the Help deck either.</p>
   <p>The deck is still in development, and a new version replaces the old one: delete the old deck, then import. Anki matches decks by name, not by ID, and does not move a card it already has, so an import over an older layout would leave the old cards where they were. Both were checked by importing an old package and then a new one into a scratch collection with Anki's own import code.</p>
   <p>Notes are added in story order. In Anki, set the deck's new-card order to "order added". New fields go at the end of the note type.</p>
 </section>
@@ -395,11 +396,11 @@
   <h2>The deck in numbers</h2>
   <div class="scroll"><table>
     <tr><th>Chapter ends with</th><th class="n">Cards</th></tr>
-    <tr><td>Brock</td><td class="n">2,403</td></tr>
-    <tr><td>Misty</td><td class="n">985</td></tr>
-    <tr><td>Lt. Surge</td><td class="n">972</td></tr>
-    <tr><td>Erika</td><td class="n">1,184</td></tr>
-    <tr><td>Koga</td><td class="n">885</td></tr>
+    <tr><td>Brock</td><td class="n">2,393</td></tr>
+    <tr><td>Misty</td><td class="n">994</td></tr>
+    <tr><td>Lt. Surge</td><td class="n">973</td></tr>
+    <tr><td>Erika</td><td class="n">1,183</td></tr>
+    <tr><td>Koga</td><td class="n">886</td></tr>
     <tr><td>Sabrina</td><td class="n">798</td></tr>
     <tr><td>Blaine</td><td class="n">338</td></tr>
     <tr><td>Giovanni</td><td class="n">661</td></tr>
@@ -407,16 +408,16 @@
     <tr><td>Postgame</td><td class="n">1,041</td></tr>
     <tr><th>The story deck</th><th class="n">9,533</th></tr>
     <tr><td>The Help deck</td><td class="n">940</td></tr>
-    <tr><td>The Link play deck</td><td class="n">608</td></tr>
-    <tr><th>All three decks</th><th class="n">11,081</th></tr>
+    <tr><td>The Link play deck</td><td class="n">606</td></tr>
+    <tr><th>All three decks</th><th class="n">11,079</th></tr>
   </table></div>
   <p>The first chapter is the largest because the menus, the battle screen and most everyday vocabulary all appear before the first gym. The deck's first 172 cards are the opening sequence alone.</p>
   <ul>
-    <li>5,995 distinct dictionary forms across the 11,081 cards.</li>
-    <li>6,255 cards take their example from story dialogue or from a walk through a screen; the rest from Pokédex entries, menus, move and item descriptions and battle messages.</li>
-    <li>157 cards are tagged <code>low-confidence</code>: the dictionary entry does not match the word, there is no entry and the model was unsure, or the word is a scrap of broken text. A doubt only about which listed sense fits a helper verb or an idiom no longer counts; those glosses were checked by hand. 10 are tagged <code>sense-guessed</code>.</li>
-    <li>9,473 cards carry a sentence breakdown, and 5,025 of them a grammar pattern for their word. The other cards sit on a bare name or a line of one word, with nothing to break down; the Link play deck has many of those, in its word lists.</li>
-    <li>927 cards carry a sentence note, from 540 notes.</li>
+    <li>5,994 distinct dictionary forms across the 11,079 cards.</li>
+    <li>6,359 cards take their example from story dialogue or from a walk through a screen; the rest from Pokédex entries, menus, move and item descriptions and battle messages.</li>
+    <li>155 cards are tagged <code>low-confidence</code>: the dictionary entry does not match the word, there is no entry and the model was unsure, or the word is a scrap of broken text. A doubt only about which listed sense fits a helper verb or an idiom no longer counts; those glosses were checked by hand. 10 are tagged <code>sense-guessed</code>.</li>
+    <li>9,475 cards carry a sentence breakdown, and 5,030 of them a grammar pattern for their word. The other cards sit on a bare name or a line of one word, with nothing to break down; the Link play deck has many of those, in its word lists.</li>
+    <li>925 cards carry a sentence note, from 541 notes.</li>
     <li>218 are tagged <code>onomatopoeia</code>: JMdict marks the sense as a sound or mimetic word (<span class="jp" lang="ja">ドキドキ</span>, <span class="jp" lang="ja">キラキラ</span>), and the back says so.</li>
     <li>100 are tagged <code>fragment</code>: stammers, garbled speech and pieces of interrupted words (<span class="jp" lang="ja">こっ　こんなに</span>). They stay in the deck because the card is what explains them.</li>
     <li>953 cards are names: 221 Pokémon, 153 items, 284 moves, 76 abilities, 17 types, 132 places, 23 people, Team Rocket and its grunts, 8 badges, 22 game terms and 15 real-world names, each tagged with its kind. 280 of them sit on a line of dialogue or other text that says the name; 643 on the name's own line, where the thing is first met. 38 carry a note.</li>
@@ -447,7 +448,7 @@
 <section id="limits">
   <h2>Known limits</h2>
   <ul>
-    <li>Two models made the deck. The story and the Help deck are Opus's: analysis, grammar and notes. The Link play deck is Sonnet's, which costs less and errs more: 43 of its 608 cards are tagged <code>low-confidence</code>. The choice is made per sentence, so a sentence the story or the Help deck also shows is Opus's wherever it turns up, and an Opus answer is never replaced by a Sonnet one. Word-boundary decisions hold for the whole deck and are always Opus's.</li>
+    <li>Two models made the deck. The story and the Help deck are Opus's: analysis, grammar and notes. The Link play deck is Sonnet's, which costs less and errs more: 43 of its 606 cards are tagged <code>low-confidence</code>. The choice is made per sentence, so a sentence the story or the Help deck also shows is Opus's wherever it turns up, and an Opus answer is never replaced by a Sonnet one. Word-boundary decisions hold for the whole deck and are always Opus's.</li>
     
     <li>A grammar pattern is named per sentence, so one pattern can be spelled two ways on different cards (<span class="jp" lang="ja">〜せる</span> and <span class="jp" lang="ja">〜させる</span>). The explanations have not been checked one by one.</li>
     <li>About 250 battle messages and 580 other strings are placed by the model's judgement. Ability messages and trainer-battle text are among them.</li>

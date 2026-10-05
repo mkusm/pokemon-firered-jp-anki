@@ -1,0 +1,1 @@
+{"text": "えらぶ＋ページきりかえ　Ａみる　Ｂもどる", "structure": [{"jp": "えらぶ＋ページきりかえ", "en": "pick + switch page"}, {"jp": "Ａみる", "en": "A: view"}, {"jp": "Ｂもどる", "en": "B: go back"}], "patterns": [], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}
