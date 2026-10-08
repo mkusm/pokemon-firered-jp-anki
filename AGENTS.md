@@ -355,6 +355,12 @@ deck, 11 the Link play deck. The docs do not call them chapters.
   a scene (a script that moves a second person). Do not loosen those rules
   to cover more lines: `check` tests the result against the lines on which
   the game names a main character.
+- A choice on a settings screen is listed under its setting in its walk
+  (`- gText_BattleStyle: [gText_BattleStyleShift, gText_BattleStyleSet]`),
+  and its card shows the setting on the front, in the line where a speaker
+  would be: しあいの　ルール above かちぬき, as the screen has them side by side.
+  It goes into the `Speaker` field, so the note type is unchanged. Only the
+  options screen is listed this way so far (10 cards).
 - `placeholders.py` says what each ＊ stands for: from the battle code's
   placeholder names, from a script's `buffer…` command above the message, or
   from a counter beside it. A buffer a C screen fills is not named. Do not
@@ -475,10 +481,13 @@ Update this when it changes.
   shows are Opus's. Settled. `analyse rerun N` redoes every sentence of a
   chapter that its model has not answered on version 4 or 5;
   `analyse redo <file>` re-analyses only the sentences listed in a file.
-- `corrections.yaml` has eleven entries: the SELECT button line, Mom's two
+- `corrections.yaml` has fifteen entries: the SELECT button line, Mom's two
   TV lines, seven レポート translations the name check had left stiff ("the
-  Pokémon Save"), and one word form Sonnet wrote that is not in its sentence
-  (ナウい for ナウイ). Four corrections of word forms Sonnet wrote wrongly were removed
+  Pokémon Save"), one word form Sonnet wrote that is not in its sentence
+  (ナウい for ナウイ), and four on settings of the options screen whose bare
+  label left the meaning to guess (かちぬき twice, ＬＲ, かたて), worded from the
+  Help menu's own definitions. The other 215 story cards that sit on a bare
+  label were read on 2026-10-08 and left as they were. Four corrections of word forms Sonnet wrote wrongly were removed
   as their chapters were redone on Opus, which wrote the forms correctly; the
   last two (ｃｍ, twice) went with the postgame.
 - `splits.yaml` has 689 decisions, from chapters 0 to 11: 211 of them came

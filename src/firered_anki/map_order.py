@@ -18,13 +18,24 @@ class MapOrder:
         cfg = yaml.safe_load(path.read_text(encoding="utf-8"))
         # An entry is a name, or a walk: {at: place, lines: [labels]}. A walk's
         # lines are seen in exactly that order at that place, whatever kind of
-        # text they are (a start-menu entry, an item's name, a sign).
-        self.order, self.place, self.walk = [], {}, {}
+        # text they are (a start-menu entry, an item's name, a sign). A line
+        # can be a setting with the choices the screen shows beside it,
+        # {setting: [choices]}: the setting, then its choices, and each
+        # choice's card names the setting on its front (`under`).
+        self.order, self.place, self.walk, self.under = [], {}, {}, {}
         for n, entry in enumerate(cfg["order"]):
             if isinstance(entry, dict):
-                self.order += entry["lines"]
-                self.place.update(dict.fromkeys(entry["lines"], entry["at"]))
-                self.walk.update(dict.fromkeys(entry["lines"], n))  # which walk a line is in
+                lines = []
+                for line in entry["lines"]:
+                    if isinstance(line, dict):
+                        (setting, choices), = line.items()
+                        lines += [setting, *choices]
+                        self.under.update(dict.fromkeys(choices, setting))
+                    else:
+                        lines.append(line)
+                self.order += lines
+                self.place.update(dict.fromkeys(lines, entry["at"]))
+                self.walk.update(dict.fromkeys(lines, n))  # which walk a line is in
             else:
                 self.order.append(entry)
         self.rank = {name: i for i, name in enumerate(self.order)}

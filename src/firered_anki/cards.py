@@ -565,6 +565,10 @@ def build_cards(run_name: str = MAIN.name, offline_merge: bool = False) -> pd.Da
     msg_text = deck.sort_values(["line_no", "page", "sent"]).groupby("msg_id")["text"].agg(list)
 
     rows = list(deck.itertuples())  # deck's index is 0…n-1: a row by its number
+    # A choice on a settings screen stands beside its setting (しあいの　ルール
+    # かちぬき). Its card shows the setting where a line shows its speaker.
+    said = dict(zip(deck["label"], deck["text"]))
+    setting = {choice: said[under] for choice, under in MapOrder().under.items() if under in said}
 
     def one_deck(sub: pd.DataFrame, alone: str | None = None) -> list[dict]:
         """One card per key. `alone`: only the cards of this deck, each on its
@@ -648,7 +652,7 @@ def build_cards(run_name: str = MAIN.name, offline_merge: bool = False) -> pd.Da
                 "ExtraExamples": "<br>".join(extras), "Context": ctx,
                 "Location": location(r), "MessageId": r.msg_id,
                 # Named by the line itself (オーキド『…), or else read from the map.
-                "Speaker": first["speaker"] or speakers.who(r.label, first["text"]),
+                "Speaker": first["speaker"] or speakers.who(r.label, first["text"]) or setting.get(r.label, ""),
                 "Dictionary": dictionary(w, e),
                 "Placeholders": placeholders.hint(r.text, r.vars, r.label),
                 "tags": [re.sub(r"\W", "_", location(r))]

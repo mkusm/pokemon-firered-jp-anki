@@ -103,3 +103,55 @@
     - surface: ナウい
       new_surface: ナウイ
 
+
+# Settings in the options screen. On a bare label the meaning line is all the
+# card has, and "Set battle style" or "one-handed button mode" says nothing to
+# someone who does not know the setting. What each does is taken from the Help
+# menu's own definitions (Help_Text_DefineBattleStyle, Help_Text_DefineButtonMode);
+# the English names are the English game's (SET, LR, L=A).
+
+- sentence: かちぬき
+  why: >-
+    The model wrote "Set battle style (no switch offer)" and "Set (winner stays
+    in, no switching)". You can still switch on your own turn: what the setting
+    turns off is the question after a knock-out (「かちぬき」では　きいてきません。).
+  english: Set (the winner stays in; you are not asked whether to switch)
+  words:
+    - surface: かちぬき
+      literal: "winning through: the winner stays on for the next opponent"
+      in_context: >-
+        the battle rule under which your Pokémon stays in after a knock-out: the
+        game does not ask whether you want to switch (SET in the English game;
+        the other rule, いれかえ, asks every time)
+
+- sentence: 「かちぬき」では　きいてきません。
+  why: The same word on the Help deck's card, which said "Set (battle style)".
+  words:
+    - surface: かちぬき
+      literal: "winning through: the winner stays on for the next opponent"
+      in_context: >-
+        かちぬき, the battle rule under which your Pokémon stays in after a
+        knock-out (SET in the English game)
+
+- sentence: ＬＲ
+  why: >-
+    The model wrote "L/R button mode", which does not say what the mode does
+    (「ＬＲ」は　ずかん　や　バッグなどで　さゆうに　きりかえる　ことが　できる　ボタン。).
+  english: LR (L and R flip through pages and pockets)
+  words:
+    - surface: ＬＲ
+      in_context: >-
+        the button setting in which L and R flip left and right through the
+        Pokédex's pages, the Bag's pockets and the like
+
+- sentence: かたて
+  why: >-
+    The model wrote "one-handed button mode" and "One-handed (L=A)", which
+    leaves "L=A" unexplained (「かたて」は　Ｌボタンが　Ａボタンと　おなじに　なり
+    ほとんどの　ばしょで　かたてだけで　そうさ　できる　ようになります。).
+  english: "One-handed (L=A: the L Button works as the A Button)"
+  words:
+    - surface: かたて
+      in_context: >-
+        the button setting for playing with one hand: the L Button works the
+        same as the A Button (L=A in the English game)

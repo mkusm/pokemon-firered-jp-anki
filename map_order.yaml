@@ -217,29 +217,19 @@ order:
       - gText_PokeSum_Controls_PageDetail
       - gText_PokeSum_Controls_PickSwitch
   # The options screen, just before the first battle, which is what most of
-  # it is about. Rows top to bottom, each with its choices (option_menu.c).
+  # it is about. Rows top to bottom (option_menu.c). A row is a setting with
+  # its choice beside it, so each choice is listed under its setting: the
+  # choice's card shows the setting above it, as the screen does. かちぬき
+  # alone says little; しあいの　ルール beside it says what is being chosen.
   - at: options_menu
     lines:
       - gText_Option
-      - gText_TextSpeed
-      - gText_TextSpeedSlow
-      - gText_TextSpeedMid
-      - gText_TextSpeedFast
-      - gText_BattleScene
-      - gText_BattleSceneOn
-      - gText_BattleSceneOff
-      - gText_BattleStyle
-      - gText_BattleStyleShift
-      - gText_BattleStyleSet
-      - gText_Sound
-      - gText_SoundMono
-      - gText_SoundStereo
-      - gText_ButtonMode
-      - gText_ButtonTypeHelp
-      - gText_ButtonTypeLR
-      - gText_ButtonTypeLEqualsA
-      - gText_Frame
-      - gText_FrameType
+      - gText_TextSpeed: [gText_TextSpeedSlow, gText_TextSpeedMid, gText_TextSpeedFast]
+      - gText_BattleScene: [gText_BattleSceneOn, gText_BattleSceneOff]
+      - gText_BattleStyle: [gText_BattleStyleShift, gText_BattleStyleSet]
+      - gText_Sound: [gText_SoundMono, gText_SoundStereo]
+      - gText_ButtonMode: [gText_ButtonTypeHelp, gText_ButtonTypeLR, gText_ButtonTypeLEqualsA]
+      - gText_Frame: [gText_FrameType]
       - gText_OptionMenuCancel
       - gText_PickSwitchCancel
   - PalletTown_ProfessorOaksLab_Text_RivalLetsCheckOutMons
