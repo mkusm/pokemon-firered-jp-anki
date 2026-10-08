@@ -23,6 +23,7 @@ if [ ! -d vendor/pokefirered/.git ]; then
     https://github.com/pret/pokefirered vendor/pokefirered
   git -C vendor/pokefirered sparse-checkout set --no-cone \
     '/data/maps/' '/data/layouts/' '/data/scripts/' '/data/text/' '/data/event_scripts.s' \
+    '/data/tilesets/*/*/metatile_attributes.bin' \
     '/data/battle_scripts_1.s' '/data/battle_scripts_2.s' \
     '/src/data/' '/include/constants/' \
     '/src/battle_message.c' '/src/battle_script_commands.c'

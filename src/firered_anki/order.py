@@ -14,7 +14,7 @@ from collections import Counter
 import pandas as pd
 import yaml
 
-from . import walking
+from . import blockers, walking
 from .decomp import STARTER_LEVEL, STARTER_MAP, STARTERS, Decomp, norm
 from .lemmas import lemmas
 from .map_order import MapOrder
@@ -30,6 +30,7 @@ FALLBACK_OUT = DATA / "02_order" / "fallback.parquet"
 UNPLACED_OUT = DATA / "unplaced.csv"
 NEVER_OUT = DATA / "never_shown.csv"
 LATER_OUT = DATA / "moved_later.csv"  # lines moved to after the map that sets the flag they wait for
+BEFORE_OUT = DATA / "before_blockers.csv"  # lines moved to before the scene that stops you
 # Text FireRed never shows is left out of the deck, and so of every model
 # stage: Ruby/Sapphire data no FireRed player meets (Hoenn Pokédex text,
 # unobtainable items, moves nothing knows), text the decomp marks unused, and
@@ -48,10 +49,11 @@ UNTRANSLATED = "left in Japanese in the English game: no script shows it"
 # house, Pallet Town, the scene in Oak's lab. Text with no exact place floats
 # only once you have left the lab with your first Pokémon: "start" text (the
 # title menu, the naming screen, the rest of the menus), battle text, and
-# whatever a rule files under a place before that. This is the last line
-# before you step out: the end of the save walk. A name's own line (a
-# starter's moves, its type) is not floating text and stays where it is met.
-FLOATS_AFTER = "gText_AlreadySaveFile_WouldLikeToOverwrite"
+# whatever a rule files under a place before that. This is the last entry
+# before you step out: the rest of the lab, after the rival's battle. A
+# name's own line (a starter's moves, its type) is not floating text and
+# stays where it is met.
+FLOATS_AFTER = "PalletTown_ProfessorOaksLab"
 # gTypeNames.N is in this order (include/constants/pokemon.h).
 TYPES = ["TYPE_NORMAL", "TYPE_FIGHTING", "TYPE_FLYING", "TYPE_POISON", "TYPE_GROUND", "TYPE_ROCK", "TYPE_BUG",
          "TYPE_GHOST", "TYPE_STEEL", "TYPE_MYSTERY", "TYPE_FIRE", "TYPE_WATER", "TYPE_GRASS", "TYPE_ELECTRIC",
@@ -453,10 +455,11 @@ def within_map(msgs: pd.DataFrame, placed: dict, dc: Decomp, mo: MapOrder, map_r
     A map's lines go in the order you walk past the people and signs that say
     them (walking.py); a map this cannot be worked out for keeps the text
     dump's order. Then a line that waits for something the same map sets is
-    put just after the lines it has to follow. A condition an earlier map can
+    put just after the lines it has to follow: by the way of showing it that
+    opens first, when a script has several. A condition an earlier map can
     set already holds on arrival and holds nothing back (Daisy's "an errand
     for Grandpa?" waits for the lab)."""
-    waits, set_in, set_with = dc.waits_for, dc.set_in, dc.set_with
+    ways, set_in, set_with = dc.shown_when, dc.set_in, dc.set_with
     rows = [r for r in msgs.itertuples(index=False) if placed[r.msg_id][0] == "dialogue" and r.ns == "script"]
     at = {r.label: float(r.line_no) for r in rows}
     rank = {r.label: placed[r.msg_id][1] for r in rows}
@@ -467,25 +470,28 @@ def within_map(msgs: pd.DataFrame, placed: dict, dc: Decomp, mo: MapOrder, map_r
         name = mo.order[int(where)] if where == int(where) and where < len(mo.order) else None
         if name in dc.map_json and (walked := walking.order(dc, name, labels, map_rank)):
             at.update((label, float(i)) for i, label in enumerate(walked))
-    held: dict[str, list[str]] = {}    # label → the conditions its own map sets
+    held: dict[str, list[list[str]]] = {}    # label → for each way a script shows it, the conditions its own map sets
     for r in rows:
         if r.label in mo.place or r.label in mo.rank:
             continue
         own = dc.map_of_label(r.label) or r.group
         here = map_rank.get(own, math.inf)
-        if conds := [c for c in waits.get(r.label, ()) if own in set_in.get(c, ())
-                     and all(map_rank.get(m, math.inf) >= here for m in set_in[c])]:
-            held[r.label] = conds
+        local = [[c for c in must if own in set_in.get(c, ()) and all(map_rank.get(m, math.inf) >= here for m in set_in[c])]
+                 for must, _ in ways.get(r.label, ())]
+        if local and all(local):             # every way waits for something here
+            held[r.label] = local
     last_free: dict[float, float] = {}  # entry → its last line that waits for nothing here
     for r in rows:
         if r.label not in held:
             last_free[rank[r.label]] = max(last_free.get(rank[r.label], -math.inf), at[r.label])
     for _ in range(5):                  # a line can follow a line that was itself moved
         changed = False
-        for label, conds in held.items():
-            before = [at[t] for c in conds for t in set_with.get(c, ())
-                      if t != label and t in at and rank[t] == rank[label]]
-            after = (max(before) if before else last_free.get(rank[label], -math.inf)) + 0.25
+        for label, alts in held.items():
+            after = math.inf
+            for conds in alts:          # the way that opens first
+                before = [at[t] for c in conds for t in set_with.get(c, ())
+                          if t != label and t in at and rank[t] == rank[label]]
+                after = min(after, (max(before) if before else last_free.get(rank[label], -math.inf)) + 0.25)
             if after > at[label]:
                 at[label], changed = after, True
         if not changed:
@@ -493,8 +499,51 @@ def within_map(msgs: pd.DataFrame, placed: dict, dc: Decomp, mo: MapOrder, map_r
     return at
 
 
+STEP = 1e-6  # how far apart the lines moved before a blocker sit: all of them inside the gap before its scene
+
+
+def positions(msgs: pd.DataFrame, placed: dict, within: dict) -> dict[str, tuple[float, float]]:
+    """Dialogue label → where it sorts: (its entry, its place inside it)."""
+    return {r.label: (placed[r.msg_id][1], within.get(r.label, float(r.line_no)) if r.ns == "script" else float(r.line_no))
+            for r in msgs.itertuples(index=False) if placed[r.msg_id][0] == "dialogue"}
+
+
+def before_blockers(msgs: pd.DataFrame, placed: dict, within: dict, dc: Decomp, mo: MapOrder) -> list[tuple]:
+    """Move every line that can be read before a blocker, and is placed after
+    it, to just before the blocker's scene. Changes `placed` and `within`.
+    → (blocker, the scene's first line, label, the label's map, where it was).
+
+    Only a line of a map's own entry moves: a line listed by hand, alone or
+    in a walk, stays. The lines moved before one blocker keep the order they
+    had. Moving a line can make another readable (a gym leader's badge
+    speech, once the challenge is in front of the blocker), so this repeats
+    until nothing is left."""
+    msg_of = {r.label: r.msg_id for r in msgs.itertuples(index=False)}
+    ground = blockers.Ground(dc)
+    out, n = [], 0
+    for _ in range(8):
+        pos = positions(msgs, placed, within)
+        scene_at = {at: t for t, at in pos.items()}
+        found: dict[str, tuple] = {}
+        for b, moment, t, m in blockers.late(blockers.Sides(dc, ground, pos, pos)):
+            if t not in mo.rank and t not in mo.place and placed[msg_of[t]][2] in dc.map_json:
+                if t not in found or moment < found[t][0]:
+                    found[t] = (moment, b, m)
+        if not found:
+            break
+        for t in sorted(found, key=pos.get):
+            moment, b, m = found[t]
+            bucket, _, where, after, fallback = placed[msg_of[t]]
+            n += 1
+            placed[msg_of[t]] = (bucket, moment[0], where, after, fallback)
+            within[t] = moment[1] - 10000 * STEP + n * STEP  # after the ones moved earlier, before the scene
+            out.append((b.name, scene_at[moment], t, m, where))
+    return out
+
+
 def fine_places(msgs: pd.DataFrame, placed: dict, placer: Placer, dc: Decomp,
-                within: dict[str, float] | None = None) -> dict[str, tuple]:
+                within: dict[str, float] | None = None, close: frozenset = frozenset(),
+                moved: frozenset = frozenset()) -> dict[str, tuple]:
     """Where inside its map the line that names a Pokémon, a move, an ability
     or a place goes: msg_id → (rank, after_dialogue, tiebreak or None,
     sighting, kind order).
@@ -518,15 +567,18 @@ def fine_places(msgs: pd.DataFrame, placed: dict, placer: Placer, dc: Decomp,
     rank_of_label = {r.label: placed[r.msg_id][1] for r in msgs.itertuples(index=False)
                      if placed[r.msg_id][0] == "dialogue"}
 
-    def hang(trainer: str, rank: float) -> float | None:
-        """The line number to sort by: just after the challenge, or just
-        before the defeat line, of a trainer whose text is at this rank."""
-        texts = sorted(t for _, t in dc.script_refs["trainer_text"].get(trainer, ()) if rank_of_label.get(t) == rank)
+    def hang(trainer: str, rank: float) -> tuple[float, float] | None:
+        """Where to sort, as (rank, line number): just after the challenge,
+        or just before the defeat line, of a trainer whose text is at this
+        rank, or was moved from it (`moved`): to before a blocker (`close`:
+        those lines sit a small step apart) or to after what it waits for."""
+        mine = sorted(t for _, t in dc.script_refs["trainer_text"].get(trainer, ()) if t in rank_of_label)
+        texts = [t for t in mine if rank_of_label[t] == rank] or [t for t in mine if t in moved]
         for suffix, shift in (("Intro", 0.5), ("Defeat", -0.5)):
             for t in texts:
                 if t.endswith(suffix):
-                    return line[t] + shift
-        return line[texts[0]] + 0.5 if texts else None
+                    return rank_of_label[t], line[t] + shift * (STEP if t in close else 1)
+        return (rank_of_label[texts[0]], line[texts[0]] + 0.5 * (STEP if texts[0] in close else 1)) if texts else None
 
     out, loose = {}, {}
     for r in msgs.itertuples(index=False):
@@ -542,7 +594,7 @@ def fine_places(msgs: pd.DataFrame, placed: dict, placer: Placer, dc: Decomp,
         trainer, n = fs.fine.get((kind, keys.key(kind, r.label)), (None, 0.0))
         at = hang(trainer, rank) if trainer else None
         if at is not None:
-            out[r.msg_id] = (rank, 0, at, n, KIND_ORDER[kind])
+            out[r.msg_id] = (at[0], 0, at[1], n, KIND_ORDER[kind])
         else:
             loose.setdefault(rank, []).append((n, KIND_ORDER[kind], r.msg_id))
     for rank, rows in loose.items():
@@ -609,24 +661,82 @@ def main() -> None:
             placed[r.msg_id] = ("exclude", math.nan, UNTRANSLATED, 0, False)
             never.append((r.msg_id, UNTRANSLATED))
 
-    # A line a script shows only once a flag is set cannot come before the map
-    # that sets it: the Silph employees' thanks wait for Giovanni's defeat,
-    # the old man's "how is the Teachy TV?" for Brock's badge. It goes just
-    # after that map and keeps its own place as its location.
-    waits, set_in, later = dc.waits_for, dc.set_in, []
+    # A line a script shows only once something has happened cannot come
+    # before it: the Silph employees' thanks wait for Giovanni's defeat, the
+    # old man's catching lesson for the parcel to reach Professor Oak. It
+    # goes after the scene that makes it possible, where that scene has a
+    # place of its own, or else after the map whose script does, and keeps
+    # its own map as its location.
+    ways, later = dc.shown_when, {}
+    said = {r.label: r.msg_id for r in msgs.itertuples(index=False) if placed[r.msg_id][0] == "dialogue"}
+
+    def home(entry: str) -> str | None:
+        """The map an entry of the route is on. None for a screen (a menu's walk)."""
+        if entry in mo.place:
+            return mo.place[entry] if mo.place[entry] in dc.map_json else None
+        return entry if entry in dc.map_json else dc.map_of_label(entry)
+
+    def left(rank: float, own: str | None) -> float:
+        """For a line of another map, the rank by which you have left the
+        scene's map: past the entries that follow it on the same map, and
+        the menus opened there. The catching lesson in Viridian comes after
+        all Oak says in his lab and after the Pokédex he hands over."""
+        i = int(rank)
+        if rank != i or i >= len(mo.order) or not (here := home(mo.order[i])) or own == here:
+            return rank
+        while i + 1 < len(mo.order) and home(mo.order[i + 1]) in (here, None):
+            i += 1
+        return float(i)
+
+    def true_from(cond: str, own: str | None) -> float:
+        # A scene with no line of its own counts from its map; one that only
+        # sets a variable the map keeps to itself (which side you came in
+        # from) is part of the same visit and holds nothing back.
+        ranks = [left(max(at), own) if (at := [placed[said[t]][1] for t in lines if t in said])
+                 else -math.inf if "==" in cond else placer.fs.map_rank.get(where, math.inf)
+                 for where, _, lines in dc.setters.get(cond, ())]
+        if cond not in dc.setters:      # set by the game's own code
+            ranks = [placer.fs.map_rank.get(m, math.inf) for m in dc.set_in.get(cond, ())]
+        return min(ranks, default=math.inf)
+
+    for _ in range(5):                  # a line can wait for a line that was itself moved
+        moved = False
+        for r in msgs.itertuples(index=False):
+            b, rank, where, after, fallback = placed[r.msg_id]
+            # A walk's lines are in the order they were listed in by hand.
+            if b != "dialogue" or r.label not in ways or r.label in mo.place:
+                continue
+            own = dc.map_of_label(r.label) or r.group
+            # The earliest of the ways a script shows it; a way is open once all it asks for is true.
+            possible = min(max((x for c in must if (x := true_from(c, own)) != math.inf), default=-math.inf)
+                           for must, _ in ways[r.label])
+            if possible > rank:
+                # Halfway to the next entry, so that a line waiting for a moved line still follows it.
+                placed[r.msg_id] = (b, possible + (math.floor(possible) + 1 - possible) / 2, where, after, fallback)
+                later[r.msg_id] = (r.msg_id, r.group, r.label, later.get(r.msg_id, (0, 0, 0, mo.order[int(rank)]))[3],
+                                   mo.order[int(possible)], " or ".join(", ".join(sorted(must)) for must, _ in ways[r.label]))
+                moved = True
+        if not moved:
+            break
+    later = list(later.values())
+    pd.DataFrame(later, columns=["msg_id", "map", "label", "was_at", "now_after", "waits_for"]).to_csv(LATER_OUT, index=False)
+
+    # The name of a thing a scene hands over is met in that scene. Mr. Fuji
+    # gives the Poké Flute once he is back from the Tower: now that his lines
+    # come after it, the flute's own line goes with them, so that its card
+    # sits on his sentence and not on the bare name.
     for r in msgs.itertuples(index=False):
         b, rank, where, after, fallback = placed[r.msg_id]
-        # A walk's lines are in the order they were listed in by hand.
-        if b != "dialogue" or r.label not in waits or r.label in mo.place:
+        anchor = placer.anchor_for(r.group, r.label)[0] if b == "computed" else None
+        if anchor not in ("item", "berry") or not (const := placer.keys.key(anchor, r.label)):
             continue
-        ranks = [min((placer.fs.map_rank.get(m, math.inf) for m in set_in.get(c, ())), default=math.inf)
-                 for c in waits[r.label]]
-        possible = max((x for x in ranks if not math.isinf(x)), default=-math.inf)
-        if possible > rank:
-            placed[r.msg_id] = (b, possible + 0.5, where, after, fallback)
-            later.append((r.msg_id, r.group, r.label, mo.order[int(rank)], mo.order[int(possible)],
-                          ", ".join(sorted(waits[r.label]))))
-    pd.DataFrame(later, columns=["msg_id", "map", "label", "was_at", "now_after", "waits_for"]).to_csv(LATER_OUT, index=False)
+        met = []                         # for each map that has it, when it is first to be had there
+        for m in dc.script_refs["item"].get(const, ()):
+            scenes = dc.handed_over.get(const, {}).get(m, [[]])
+            placed_at = [[placed[said[t]][1] for t in lines if t in said] for lines in scenes]
+            met.append(min(max(at) for at in placed_at) if all(placed_at) else placer.fs.map_rank.get(m, math.inf))
+        if met and not math.isinf(min(met)) and min(met) > rank:
+            placed[r.msg_id] = (b, min(met), where, after, fallback)
 
     # Inside a map, a line that waits for something the same map sets comes
     # after the line shown as it is set (the gym guide's "you're champ
@@ -635,7 +745,14 @@ def main() -> None:
     # keep their listed place; so does a line that is an entry of its own.
     within = within_map(msgs, placed, dc, mo, placer.fs.map_rank)
 
-    fine = fine_places(msgs, placed, placer, dc, within)
+    # What can be read before the game stops you comes before it does
+    # (blockers.py): Oak's lab is open before Oak calls you back from the
+    # grass. A line listed by hand keeps its place; `check` tests those.
+    before = before_blockers(msgs, placed, within, dc, mo)
+    pd.DataFrame(before, columns=["blocker", "before", "label", "map", "was_at"]).to_csv(BEFORE_OUT, index=False)
+
+    close = frozenset(t for _, _, t, _, _ in before)
+    fine = fine_places(msgs, placed, placer, dc, within, close, close | {label for _, _, label, *_ in later})
     for msg_id, (rank, after, tiebreak, sighting, kind_order) in fine.items():
         b, _, where, _, fallback = placed[msg_id]
         placed[msg_id] = (b, rank, where, after, fallback)
@@ -700,7 +817,9 @@ def main() -> None:
     gone.assign(why=gone["msg_id"].map(why))[["msg_id", "group", "label", "why", "text"]].to_csv(NEVER_OUT, index=False)
 
     n_ex = (df["bucket"] == "exclude").sum()
-    print(f"{len(later)} messages wait for a flag set later than their map and were moved after it → {LATER_OUT.relative_to(ROOT)}")
+    print(f"{len(later)} messages wait for something that happens later than their map and were moved after it → {LATER_OUT.relative_to(ROOT)}")
+    print(f"{len(before)} messages can be read before a blocker and were moved in front of it "
+          f"({len({b for b, *_ in before})} blockers) → {BEFORE_OUT.relative_to(ROOT)}")
     print(f"sentences kept {len(kept)}, excluded {n_ex} (of them never shown in the game: "
           f"{int(df['msg_id'].isin(why).sum())}, in {len(why)} messages → {NEVER_OUT.relative_to(ROOT)})")
     print(kept["bucket"].value_counts().to_string())

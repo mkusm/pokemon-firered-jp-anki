@@ -27,6 +27,9 @@ ITEM_RES = [
 ]
 MON_RE = re.compile(r"^\s*(?:givemon|setwildbattle)\s+(SPECIES_\w+)")
 LABEL_RE = re.compile(r"^(\w+)::?")
+# A variable a map's scripts keep to themselves: a temporary one, or the name the file gives it.
+OWN_VAR = r"VAR_TEMP_\w+|(?!VAR_|FLAG_|LOCALID_)[A-Z][A-Z0-9_]*"
+UNSET = ("0", "FALSE")  # what such a variable is when the map loads
 
 
 def norm(name: str) -> str:
@@ -220,23 +223,96 @@ class Decomp:
                     cur = m.group(1)
                     blocks[cur] = (where, [])
                 elif cur and line.strip() and not line.strip().startswith("@"):
-                    blocks[cur][1].append(line.strip())
+                    # Without a comment after the command: a jump is read by its last word.
+                    blocks[cur][1].append(line.strip() if ".string" in line else line.split("@")[0].strip())
         return blocks
 
     @cached_property
-    def set_in(self) -> dict[str, set[str]]:
-        """A condition (a flag, or "VAR_MAP_SCENE_X>=n") → the maps whose
-        scripts make it true."""
-        out: dict[str, set[str]] = defaultdict(set)
-        for where, cmds in self._script_blocks.values():
-            if not where:
-                continue
+    def hidden_at_start(self) -> set[str]:
+        """The flags a new game starts with set: the people they hide (Oak in
+        his lab, the rival on Route 22) are not there until a script clears
+        the flag."""
+        body = read("data/event_scripts.s").split("EventScript_ResetAllMapFlags::", 1)[1].split("\tend\n", 1)[0]
+        return set(re.findall(r"setflag (FLAG_\w+)", body))
+
+    @cached_property
+    def _scenes(self) -> tuple[dict[str, set[str]], dict[str, list[str]]]:
+        """(block → the blocks that jump to it, block → the text labels it shows)."""
+        blocks = self._script_blocks
+        into: dict[str, set[str]] = defaultdict(set)
+        for label, (_, cmds) in blocks.items():
+            for c in cmds:
+                if m := re.match(r"(?:goto|call)(?:_if_\w+)? .*?(\w+)$", c):
+                    into[m.group(1)].add(label)
+        shows = {label: [t for c in cmds for t in re.findall(r"\b(\w+_Text_\w+|g?Text_\w+)\b", c)]
+                 for label, (_, cmds) in blocks.items()}
+        return into, shows
+
+    def scene_lines(self, label: str) -> list[str]:
+        """The text labels a script block shows, or, when it shows none (the
+        last step of a scene often only sets things), those of the blocks
+        that lead into it."""
+        into, shows = self._scenes
+        seen, level = {label}, [label]
+        for _ in range(4):
+            if found := [t for b in level for t in shows[b]]:
+                return found
+            level = [src for b in level for src in sorted(into[b]) if src not in seen and src in shows]
+            seen.update(level)
+        return []
+
+    @cached_property
+    def handed_over(self) -> dict[str, dict[str, list[list[str]]]]:
+        """An item → map → for each script block of the map that gives it,
+        the text labels of the scene (none for a Mart's stock list or an item
+        lying on the ground)."""
+        out: dict[str, dict[str, list]] = defaultdict(lambda: defaultdict(list))
+        for label, (where, cmds) in self._script_blocks.items():
+            for item in {m.group(1) for c in cmds for rx in ITEM_RES if (m := rx.match(c))}:
+                if where and item != "ITEM_NONE":
+                    out[item][where].append(self.scene_lines(label))
+        return out
+
+    @cached_property
+    def setters(self) -> dict[str, list[tuple[str | None, str, list[str]]]]:
+        """A condition → the script blocks that make it true: (the map, the
+        block, the text labels the scene shows up to there). A condition is
+        a flag, "VAR_MAP_SCENE_X>=n", "FLAG_HIDE_X cleared" for a person who
+        is hidden when the game starts, or "Map: VAR==value" for a variable
+        a map keeps to itself (Daisy's "have I given you the map yet")."""
+        blocks, lines = self._script_blocks, self.scene_lines
+        # A scene variable only goes up. It first reaches n where a script
+        # sets it to the lowest value any script gives it that is n or more:
+        # setting it to 9 says nothing about when it passed 6.
+        given: dict[str, set[int]] = defaultdict(set)
+        for _, cmds in blocks.values():
+            for c in cmds:
+                if m := re.match(r"setvar (VAR_MAP_SCENE_\w+), (\d+)", c):
+                    given[m.group(1)].add(int(m.group(2)))
+        out: dict[str, list] = defaultdict(list)
+        for label, (where, cmds) in blocks.items():
+            made = set()
             for c in cmds:
                 if m := re.match(r"setflag (FLAG_\w+)", c):
-                    out[m.group(1)].add(where)
+                    made.add(m.group(1))
                 if m := re.match(r"setvar (VAR_MAP_SCENE_\w+), (\d+)", c):
-                    for n in range(1, int(m.group(2)) + 1):
-                        out[f"{m.group(1)}>={n}"].add(where)
+                    var, to = m.group(1), int(m.group(2))
+                    below = max((v for v in given[var] if v < to), default=0)
+                    made.update(f"{var}>={n}" for n in range(below + 1, to + 1))
+                if (m := re.match(r"clearflag (FLAG_\w+)", c)) and m.group(1) in self.hidden_at_start:
+                    made.add(f"{m.group(1)} cleared")
+                if where and (m := re.match(rf"setvar ({OWN_VAR}), (\w+)$", c)) and m.group(2) not in UNSET:
+                    made.add(f"{where}: {m.group(1)}=={m.group(2)}")
+            for cond in made:
+                out[cond].append((where, label, lines(label)))
+        return out
+
+    @cached_property
+    def set_in(self) -> dict[str, set[str]]:
+        """A condition → the maps whose scripts make it true."""
+        out: dict[str, set[str]] = defaultdict(set)
+        for cond, made in self.setters.items():
+            out[cond].update(where for where, _, _ in made if where)
         out["FLAG_SYS_GAME_CLEAR"].add(HALL_OF_FAME)  # set by the game's code, after the credits
         return out
 
@@ -273,65 +349,151 @@ class Decomp:
         true: the line you read as the thing happens (the clerk handing over
         the parcel, as FLAG_GOT_... is set)."""
         out: dict[str, set[str]] = defaultdict(set)
-        for _, cmds in self._script_blocks.values():
-            made = set()
-            for c in cmds:
-                if m := re.match(r"setflag (FLAG_\w+)", c):
-                    made.add(m.group(1))
-                if m := re.match(r"setvar (VAR_MAP_SCENE_\w+), (\d+)", c):
-                    made.update(f"{m.group(1)}>={n}" for n in range(1, int(m.group(2)) + 1))
-            if made:
-                shown = {t for c in cmds if re.match(r"msgbox|message|trainerbattle", c)
-                         for t in re.findall(r"\b(\w+_Text_\w+|g?Text_\w+)\b", c)}
-                for cond in made:
-                    out[cond] |= shown
+        for cond, made in self.setters.items():
+            for _, _, shown in made:
+                out[cond].update(shown)
         return out
 
     @cached_property
-    def waits_for(self) -> dict[str, frozenset]:
-        """Text label → the conditions that hold every time a script shows it:
-        Mom's "you and your Pokémon are looking great" waits for
-        FLAG_BEAT_RIVAL_IN_OAKS_LAB. Read from the scripts' own branches
-        (goto_if_set, call_if_unset, goto_if_eq on a scene variable, a map's
-        scene table), followed through gotos and calls."""
+    def starts(self) -> dict[str, list[tuple[frozenset, frozenset]]]:
+        """A script → the ways a map starts it, each as (what must hold, what
+        must not hold yet). A tile that runs it while a scene variable is n
+        needs the variable to have reached n and not passed it; a person
+        hidden when the game starts has to have been brought in; a person a
+        flag takes away for good is gone once it is set."""
+        cleared = {m.group(1) for _, cmds in self._script_blocks.values() for c in cmds
+                   if (m := re.match(r"clearflag (FLAG_\w+)", c))}
+        out: dict[str, list] = defaultdict(list)
+        for m in self.map_json.values():
+            for kind in ("object_events", "bg_events", "coord_events"):
+                for e in m.get(kind) or []:
+                    script = e.get("script")
+                    if not script or script == "0x0":
+                        continue
+                    must, not_yet = set(), set()
+                    var, n = e.get("var", ""), str(e.get("var_value", ""))
+                    if kind == "coord_events" and var.startswith("VAR_MAP_SCENE_") and n.isdigit():
+                        if int(n):
+                            must.add(f"{var}>={n}")
+                        not_yet.add(f"{var}>={int(n) + 1}")
+                    flag = e.get("flag", "0") if kind == "object_events" else "0"
+                    if flag in self.hidden_at_start:
+                        must.add(f"{flag} cleared")
+                    elif flag.startswith("FLAG_HIDE_") and flag not in cleared:
+                        not_yet.add(flag)
+                    out[script].append((frozenset(must), frozenset(not_yet)))
+        return out
+
+    @cached_property
+    def shown_when(self) -> dict[str, list[tuple[frozenset, frozenset]]]:
+        """Text label → the ways a script comes to show it, each as (what
+        must hold, what must not hold yet). Read from the scripts' branches
+        (goto_if_set, call_if_unset, goto_if_eq on a scene variable or on one
+        of the map's own, a map's scene table) and from how the maps start
+        each script (`starts`), followed through gotos and calls."""
         blocks = self._script_blocks
-        edges: dict[str, list] = defaultdict(list)   # target → [(source, conditions on the way)]
-        texts: dict[str, list] = defaultdict(list)   # block → [(text label, conditions at that line)]
-        for label, (_, cmds) in blocks.items():
+        free = (frozenset(), frozenset())
+        comes_back = {m.group(1) for _, cmds in blocks.values() for c in cmds
+                      if (m := re.match(r"clearflag (FLAG_\w+)", c))}
+        edges: dict[str, list] = defaultdict(list)   # target → [(source, must, not yet)]
+        texts: dict[str, list] = defaultdict(list)   # block → [(text label, must, not yet)]
+        for script, ways in self.starts.items():
+            edges[script] += [(None, must, not_yet) for must, not_yet in ways]
+        for label, (where, cmds) in blocks.items():
+            if label in self.unused_labels:
+                continue                             # never run: it leads nowhere
             here: set[str] = set()                   # true from this line of the block on
+            gone: set[str] = set()                   # not true yet, from this line on
             for c in cmds:
                 if m := re.match(r"(goto|call)_if_(set|unset) (FLAG_\w+), (\w+)", c):
                     kind, state, flag, target = m.groups()
-                    edges[target].append((label, frozenset(here | ({flag} if state == "set" else set()))))
-                    if kind == "goto" and state == "unset":
-                        here.add(flag)               # carried on: the flag is set
-                elif m := re.match(r"(?:goto|call)_if_(?:eq|ge) (VAR_MAP_SCENE_\w+), (\d+), (\w+)", c):
-                    var, n, target = m.groups()
-                    edges[target].append((label, frozenset(here | ({f"{var}>={n}"} if int(n) else set()))))
+                    lasting = {flag} - comes_back if not flag.startswith("FLAG_TEMP_") else set()
+                    if state == "set":
+                        edges[target].append((label, frozenset(here | {flag}), frozenset(gone)))
+                        if kind == "goto":
+                            gone |= lasting          # carried on: the flag is not set
+                    else:
+                        edges[target].append((label, frozenset(here), frozenset(gone | lasting)))
+                        if kind == "goto":
+                            here.add(flag)           # carried on: the flag is set
+                elif m := re.match(r"(goto|call)_if_(eq|ge|lt) (VAR_MAP_SCENE_\w+), (\d+), (\w+)", c):
+                    kind, test, var, n, target = m.groups()
+                    n = int(n)
+                    reached, passed = ({f"{var}>={n}"} if n else set()), {f"{var}>={n + 1}"}
+                    if test == "eq":
+                        edges[target].append((label, frozenset(here | reached), frozenset(gone | passed)))
+                        if kind == "goto" and n == 0:
+                            here |= passed           # carried on: no longer 0
+                    elif test == "ge":
+                        edges[target].append((label, frozenset(here | reached), frozenset(gone)))
+                        if kind == "goto":
+                            gone |= reached          # carried on: still below n
+                    else:
+                        edges[target].append((label, frozenset(here), frozenset(gone | reached)))
+                        if kind == "goto":
+                            here |= reached          # carried on: n or more
+                elif where and (m := re.match(rf"(?:goto|call)_if_eq ({OWN_VAR}), (\w+), (\w+)", c)) and m.group(2) not in UNSET:
+                    edges[m.group(3)].append((label, frozenset(here | {f"{where}: {m.group(1)}=={m.group(2)}"}), frozenset(gone)))
                 elif m := re.match(r"map_script_2 (VAR_MAP_SCENE_\w+), (\d+), (\w+)", c):
                     var, n, target = m.groups()
-                    edges[target].append((None, frozenset({f"{var}>={n}"} if int(n) else set())))
+                    edges[target].append((None, frozenset({f"{var}>={n}"} if int(n) else set()),
+                                          frozenset({f"{var}>={int(n) + 1}"})))
                 elif m := re.match(r"(?:goto|call)(?:_if_\w+)? .*?(\w+)$", c):
-                    edges[m.group(1)].append((label, frozenset(here)))
-                if re.match(r"msgbox|message|trainerbattle", c):
-                    for t in re.findall(r"\b(\w+_Text_\w+|g?Text_\w+)\b", c):
-                        texts[label].append((t, frozenset(here)))
-        # What holds on every way into a block. None: not worked out yet.
-        holds: dict[str, frozenset | None] = {b: (None if b in edges else frozenset()) for b in blocks}
+                    edges[m.group(1)].append((label, frozenset(here), frozenset(gone)))
+                # Any command that names a text shows it: msgbox, trainerbattle, giveitem_msg…
+                for t in re.findall(r"\b(\w+_Text_\w+|g?Text_\w+)\b", c):
+                    texts[label].append((t, frozenset(here), frozenset(gone)))
+
+        def fewest(ways: set) -> frozenset:
+            """Without the ways that ask for all another asks and more; and
+            as one way, what they share, when they are many."""
+            ways = {w for w in ways if not any(o != w and o[0] <= w[0] and o[1] <= w[1] for o in ways)}
+            if len(ways) > 12:
+                ways = {(frozenset.intersection(*(w[0] for w in ways)), frozenset.intersection(*(w[1] for w in ways)))}
+            return frozenset(ways)
+
+        # The ways into each block. Empty: not worked out yet.
+        into: dict[str, frozenset] = {b: (frozenset() if b in edges else frozenset({free})) for b in blocks}
         for _ in range(40):
             changed = False
             for b in blocks:
-                ways = [(holds.get(src, frozenset()) if src else frozenset(), extra) for src, extra in edges.get(b, ())]
-                known = [base | extra for base, extra in ways if base is not None]
-                if known and (new := frozenset.intersection(*known)) != holds[b]:
-                    holds[b], changed = new, True
+                new = fewest({(base[0] | must, base[1] | not_yet) for src, must, not_yet in edges.get(b, ())
+                              for base in (into.get(src, {free}) if src else {free})})
+                if new and new != into[b]:
+                    into[b], changed = new, True
             if not changed:
                 break
-        uses: dict[str, list] = defaultdict(list)
+        ways: dict[str, set] = defaultdict(set)
         for b, shown in texts.items():
-            for t, here in shown:
-                uses[t].append((holds[b] or frozenset()) | here)
-        return {t: frozenset.intersection(*cs) for t, cs in uses.items() if frozenset.intersection(*cs)}
+            for t, must, not_yet in shown:
+                ways[t] |= {(base[0] | must, base[1] | not_yet) for base in into[b] or {free}}
+        return {t: sorted(fewest(w), key=lambda x: (sorted(x[0]), sorted(x[1]))) for t, w in ways.items()}
+
+    @cached_property
+    def _conditions(self) -> tuple[dict[str, frozenset], dict[str, frozenset]]:
+        """(waits_for, gone_after): what every way of showing a line shares."""
+        waits, gone_after = {}, {}
+        for t, ways in self.shown_when.items():
+            if w := frozenset.intersection(*(x[0] for x in ways)):
+                waits[t] = w
+            if g := frozenset.intersection(*(x[1] for x in ways)):
+                gone_after[t] = g
+        return waits, gone_after
+
+    @property
+    def waits_for(self) -> dict[str, frozenset]:
+        """Text label → the conditions that hold every time a script shows it:
+        Mom's "you and your Pokémon are looking great" waits for
+        FLAG_BEAT_RIVAL_IN_OAKS_LAB, the old man's catching lesson for the
+        parcel to have been delivered."""
+        return self._conditions[0]
+
+    @property
+    def gone_after(self) -> dict[str, frozenset]:
+        """Text label → the conditions that do not hold yet any time a script
+        shows it: once one is true the line can no longer be read (the gym
+        guide's advice on Brock, gone when Brock is beaten)."""
+        return self._conditions[1]
 
     @cached_property
     def species_types(self) -> dict[str, list[str]]:

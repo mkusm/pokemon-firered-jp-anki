@@ -48,6 +48,55 @@ Numbers are from the deck at commit `29c7689d` (11,081 cards).
   topics first, then each question or term followed by its answer, as the
   dump's labels pair them (131 of 136 answers found their question).
 
+- [x] **12. What can be read before a blocker comes before it.** Done
+  2026-10-08 (`blockers.py`): where a tile's script stops you until its scene
+  has run, the lines still within reach on your side come first. 115 messages
+  moved before four scenes (Cerulean's rival, Silph Co.'s, the S.S. Anne's,
+  Three Island's bikers); a blocker that only guards a side room (the Pewter
+  Museum's counter) is not used. The rival's house
+  and Oak's lab come before Oak stops you in the grass, with the save walk
+  after the lab's sign. Tile triggers and hidden people now count as
+  conditions too: 143 messages come after what they wait for (the catching
+  lesson after the parcel, Mr. Fuji after the Tower). `check` tests both.
+- [x] **13. What lies behind a blocker comes after it.** The other half of
+  12, done by hand on 2026-10-08: three scenes are listed in
+  `map_order.yaml` (Mt. Moon's fossils after the man who guards them, the
+  Silph president after Giovanni, the camper west of Nugget Bridge after the
+  Rocket). No rule: the walk in `blockers.py` proves what can be reached,
+  not what cannot. With the three listed, the blocker rule judges 13 of the
+  25 scenes.
+- [x] **14. Side content before main content.** Two rules measured on
+  2026-10-08. "In a room, whoever moves the story on comes last" would have
+  moved 49 lines in 12 maps, about half of them wrongly, so the seven rooms
+  where it is right are listed by hand in `map_order.yaml` instead (15
+  lines). "A town's gym after the rest of the town" already holds: the only
+  maps listed after their town's gym are Cerulean's robbed house, which is
+  locked until then, and the Safari Zone's gate and office in Fuchsia, which
+  the walkthrough visits after Koga.
+  - Dead ends before the way on: inside one map nothing to do (all of a
+    map's lines come before the next map's), and across maps it is the
+    question below.
+  - [x] Places that can be walked to before the walkthrough goes there,
+    measured by walking from the bedroom at 40 moments of the story. Moved
+    on 2026-10-08, at the owner's "use your judgment": Saffron's Pokémon
+    Center, Mart and Mr. Psychic's house to the first walk through the city,
+    and the house that gives Fly to Celadon. Left where the walkthrough has
+    them: the Fighting Dojo and the Fan Club, the rest of Route 16, the
+    beach of Route 19.
+
+- [x] **15. Lines shown while their speaker cannot be reached.** Done
+  2026-10-08 (`reach.py`, a report). The walking order knows nothing of what
+  stands in the way: a blocker, a person, a tree, water. Walking the game
+  from the bedroom at the moment each line is shown found 35 lines in nine
+  places that were too early, now listed by hand where they open: Viridian's
+  gym corner, the Rocket behind Cerulean's robbed house, the Pewter Museum's
+  back room, a house in Saffron, the gate guards' greeting, the Diglett's
+  Cave sign, and three places that need Surf. 26 lines it lists wrongly are
+  named in the module with the reason; 77 it cannot judge.
+  - [ ] It is a report, not part of `check`. To make it one, the 26 known
+    lines would have to be told apart by rule (a scene that walks you in, a
+    person a script has moved).
+
 ## Quality
 
 - [x] **6. Tag the boy's and the girl's lines.** Done 2026-10-05: 14 pairs of

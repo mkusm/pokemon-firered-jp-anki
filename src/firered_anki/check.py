@@ -12,8 +12,9 @@ import sys
 import pandas as pd
 import yaml
 
-from . import analyse, chapter, grammar, models, notes, speakers
+from . import analyse, blockers, chapter, grammar, models, notes, speakers
 from .cards import CARDS_OUT, STAND_ALONE, in_story, prepare
+from .decomp import Decomp
 from .map_order import MapOrder
 from .order import FIRST_SEEN
 from .paths import EXTRACT_OUT
@@ -48,6 +49,21 @@ def main() -> None:
         where.setdefault(u, []).append(i)
     check("no message or walk has other text inside it",
           [u for u, ix in where.items() if story["dialogue"][ix[0]] and ix[-1] - ix[0] + 1 > len(ix)])
+    # Where each line of dialogue sorts, and with it when each thing the
+    # scripts wait for becomes true. Both tests are on every line, the ones
+    # listed by hand in map_order.yaml too.
+    dc = Decomp()
+    said = deck[deck["dialogue"]].groupby("label")["first_seen_order"].agg(["min", "max"])
+    first = said["min"].to_dict()
+    sides = blockers.Sides(dc, blockers.Ground(dc), first, said["max"].to_dict())
+    check("nothing that can be read before a blocker comes after its scene",
+          [f"{t} (on {m}) after {b.name}" for b, _, t, m in blockers.late(sides)])
+    check("no line comes before what its script waits for", [
+        f"{t}: " + " or ".join(", ".join(sorted(must)) for must, _ in ways)
+        for t, ways in dc.shown_when.items() if t in first and not any(
+            all((when := sides.when(c)) is None or when < first[t]
+                or any(t in lines for _, _, lines in dc.setters.get(c, ())) for c in must)
+            for must, _ in ways)])
     shown = deck[deck["card_order"].notna()].sort_values("card_order")
     last = {d: shown[shown["deck"] == d]["card_order"].agg(["min", "max"]) for d in ("story", "help", "link")}
     check("the three decks follow one another: story, Help, Link play",

@@ -35,7 +35,8 @@ have gone wrong before; the rest is in "Before you say it is done" below.
 | Module | Does | Calls the model |
 |---|---|---|
 | `extract` | corpus → cleaned sentences | no |
-| `order`, `map_order`, `decomp`, `spread` | story order of every line | no |
+| `order`, `map_order`, `decomp`, `walking`, `blockers`, `spread` | story order of every line | no |
+| `reach` | a report: lines shown while their speaker cannot be reached | no |
 | `classify` | places strings no rule fits | yes |
 | `tokenize` | tokens and JMdict candidates | no |
 | `analyse` | every word of every sentence, particles included (`full`, `escalate`, `rerun N`) | yes |
@@ -131,11 +132,68 @@ deck, 11 the Link play deck. The docs do not call them chapters.
   not rerun the chapter. An answer given with the names shown is the model's
   decision and is not asked again.
 
-**A line cannot come before the flag it waits for.**
-- The order stage reads the scripts' branches (`decomp.waits_for`) and moves a
-  dialogue line that is shown only once a flag is set to just after the map
-  whose script sets it (`decomp.set_in`); the list is `data/moved_later.csv`.
-  The line keeps its own map as its location.
+**A line cannot come before what its script waits for.**
+- The order stage reads when a script shows each line (`decomp.shown_when`):
+  the scripts' branches on flags and scene variables, the value a tile's
+  trigger needs in `map.json`, a person hidden when the game starts
+  (`decomp.hidden_at_start`) who is only there once a script clears the
+  flag, and a variable a map keeps to itself (Daisy's "have I given you the
+  map yet"). A script can show a line in several ways; the earliest counts.
+- A line placed before its condition is true moves to after the scene that
+  makes it true, where that scene's lines have a place (`decomp.setters`):
+  the old man's catching lesson after the parcel reaches Oak, Mr. Fuji's
+  lines after the Tower. A line of another map goes after you have left the
+  scene's map (`left` in the order stage). Where a scene shows no line, it
+  goes after the map whose script sets the thing (`decomp.set_in`). The list
+  is `data/moved_later.csv`. The line keeps its own map as its location.
+- The name of an item a scene hands over goes with that scene (the Poké
+  Flute with Mr. Fuji), so that its card sits on the sentence and not on the
+  bare name.
+
+**What can be read before the game stops you comes before it does.**
+- A blocker is a tile that runs a script while a scene variable has a given
+  value (`trigger` in a `map.json`): Oak in the grass, the rival on the bridge
+  out of Cerulean. `blockers.py` finds your side of each by walking: over
+  open tiles of the same height, through doors, with the blocker's tiles
+  shut, people who stand still in the way, and every other blocker that may
+  still be shut taken as a wall. A line there that is readable at that
+  moment, and is placed after the blocker's scene, moves to just before it
+  (`data/before_blockers.csv`). The owner chose to apply this literally: a
+  town's gym comes before the scene at the town's way out.
+- Only a blocker on the way forward counts (`Sides.leads_on`): behind it
+  there is a map's edge, or a script that changes the game (sets a flag or a
+  scene variable, gives an item or a Pokémon, starts a battle). One that
+  guards a side room does not, and the walkthrough's order stands there: the
+  Pewter Museum's ticket counter does not pull the gym in front of it. The
+  owner's choice; do not use an optional blocker.
+- It errs towards moving nothing. Your side is the part of the ground where
+  the deck has already shown a line, and the far side the part where it has
+  shown none; where both have one, or the blocker is switched on by a scene
+  in its own map, it says nothing. "Not reached" is not "cannot be reached":
+  do not use it to push a line later. Where text from behind a blocker sits
+  before its scene, list the scene in `map_order.yaml`.
+- Only a line of a map's own entry moves. A line listed by hand in
+  `map_order.yaml` stays, and `check` tests those too: when it fails, fix the
+  list. Do not loosen the walls (a guard, a tree to cut) to make more move.
+- In a room, whoever moves the story on comes after the others who can be
+  read without them. Seven rooms are listed that way by hand in
+  `map_order.yaml` (the Fan Club, the Tea woman's, the Celadon restaurant,
+  the Tower's top floor, the Fighting Dojo, two houses with a wall chart). A
+  rule for it was measured and not built: half of what it moved was wrong
+  (Bill's own computer, a fossil counted against the other fossil, trainers
+  behind Snorlax). A town's gym already comes after the rest of its town.
+- Nothing in the order stage asks whether you can get to a speaker. `reach`
+  does, as a report: it walks the game from the bedroom at the moment each
+  line is shown (doors, map edges, ledges, water once Surf is certain, boats)
+  and lists the lines whose speaker is walled off by a blocker, a person or
+  a tree to cut. Run it after any change to the order. A line it lists goes
+  later in `map_order.yaml`, where its place opens; what it lists wrongly is
+  in `reach.KNOWN`, each with the reason. It needs the tile behaviours
+  (`data/tilesets/*/*/metatile_attributes.bin`, in `scripts/fetch_vendor.sh`).
+- The start is listed by hand as walks, as before: the rival's house and
+  Oak's lab with Oak out come before he stops you, and the save walk follows
+  the lab's sign that explains saving. What the rival and the Poké Balls say
+  there cannot be read later.
 - Inside a map, lines go in walking order (`walking.py`): by how far each
   person, sign or trigger is, over walkable tiles, from the door or edge that
   leads to the map visited just before. It needs `data/layouts/` from the
@@ -160,8 +218,9 @@ deck, 11 the Link play deck. The docs do not call them chapters.
   its description, an item's name, what the bedroom PC says. `at` is the
   card's `Location`.
 - The options screen, the save questions and the bag are walks too, each at
-  its first natural use: before the first battle, after the aide in the lab
-  explains saving, on Route 1 once the first Potion is in the bag.
+  its first natural use: before the first battle, after the lab's sign
+  explains saving (on the first look round the lab, before Oak), on Route 1
+  once the first Potion is in the bag.
 - Take a walk's lines from the code that draws the screen (`start_menu.c`,
   `player_pc.c`, `item_pc.c`, `option_menu.c`, `item_menu.c`), fetched with
   `git show`, not from memory.
@@ -368,6 +427,8 @@ fine.
 - `cards` and `build` run without errors, and the card counts printed are the
   ones you expect.
 - `check` passes. When something new goes wrong, add a check for it there.
+  It tests the order too: nothing readable before a blocker comes after its
+  scene, and no line comes before what its script waits for.
 - If the change could touch card identities, compare the `key` column of
   `data/05_cards/cards.parquet` before and after, and report how many cards
   went and how many appeared.
@@ -382,7 +443,32 @@ Update this when it changes.
 
 - Chapters 0 to 10, the whole story and the Help deck: analysed by Opus with prompt version 4 or 5 (particle
   senses picked by the analysis), grammar and notes by Opus. All settled:
-  `chapter N --dry-run` reports nothing left for each.
+  `chapter N --dry-run` reports nothing left for each. The reordering of
+  2026-10-08 put a card on eleven sentences that had carried none (in
+  chapters 1, 2, 3, 5, 7 and 8); those six chapters were run again, eight
+  sentences were re-analysed on Opus, and no card changed its key.
+- The order after 2026-10-08: 136 messages moved to after what they wait
+  for, 115 to before a blocker (Cerulean's rival 46, Silph Co.'s 36, the
+  S.S. Anne's 29, Three Island's bikers 4), and the start listed by hand. No
+  card changed its key; 131 sit on another sentence. Of the 25 blockers with
+  a scene of their own, 13 can be judged and one, the Pewter Museum's
+  counter, is optional.
+- Listed by hand in `map_order.yaml` that day, each found by measuring:
+  three scenes whose far side came before them (Mt. Moon's fossils, the
+  Silph president, the camper beyond Nugget Bridge); seven rooms where the
+  person who moves the story on now comes last; and what `reach` found
+  walled off: Viridian's gym corner, the Rocket behind Cerulean's robbed
+  house, the Pewter Museum's back room, a house in Saffron, the four gate
+  guards' greeting, the Diglett's Cave sign, and three places that need
+  Surf (Cerulean's west bank, the upper path of Route 4, the Power Plant's
+  shore). `reach` now reports nothing but its 26 known lines; 77 lines it
+  cannot judge (behind a gym's quiz gates and the like).
+- Two places come earlier than the walkthrough has them, because they are
+  open then (the owner left it to judgment): Saffron's Pokémon Center, Mart
+  and Mr. Psychic's house on the first walk through the city, and the house
+  on Route 16 that gives Fly, from Celadon. Left with the walkthrough: the
+  Fighting Dojo and the Fan Club (Saffron's own visit), the rest of Route 16
+  (behind Snorlax), the beach of Route 19.
 - Chapter 11 (the Link play deck): analysed by Sonnet with prompt version 5,
   grammar, notes and particle senses by Sonnet too, at the owner's choice.
   1,537 of its sentences are Sonnet's; the 129 that an earlier chapter also
@@ -404,8 +490,8 @@ Update this when it changes.
   real-world names), found by `names.py` in every chapter with no model call.
   The 56 name lines this put in chapter 0 were re-analysed on Opus. The names
   deck is gone. Three decks, 11,084 cards: story 9,537, Help 941 (stand-alone), Link play 606. The note type has `Note`,
-  `SentenceNote` and `Placeholders` fields. 4,481 cards show a speaker (714
-  named by the line, the rest read from the map), and 230 cards on 171
+  `SentenceNote` and `Placeholders` fields. 4,468 cards show a speaker (714
+  named by the line, the rest read from the map), and 229 cards on 171
   sentences say what their ＊ stand for.
 - English names: the name check passes on every sentence the deck shows, in
   all chapters. 91 sentences were redone on Opus for it, most of them in
@@ -416,9 +502,10 @@ Update this when it changes.
   レポート sentence now says "save" in some form; the wording is the model's
   and varies ("the Save", "save file", "this report (save)"). The Rocket
   Warehouse's レポート is a real report, and the model kept it so.
-- Walks: 19 in `map_order.yaml`, 187 lines: the title and the bars of the
-  opening, the house, Pallet Town, the party screen, options, the first
-  battle, saving, the bag, the Mart's counter, the Pokédex.
+- Walks: 21 in `map_order.yaml`, 198 lines: the title and the bars of the
+  opening, the house, Pallet Town, the rival's house and the lab before Oak,
+  saving, the party screen, options, the first battle, the bag, the Mart's
+  counter, the Pokédex.
   A walk's line is not moved by the flag rule: its place is the listed one.
   `hand_lines.yaml` has one line, the title. `never_shown` in
   `first_seen.yaml` has 38 entries, two of them globs.

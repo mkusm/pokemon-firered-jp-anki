@@ -132,10 +132,13 @@ All you need is [Anki](https://apps.ankiweb.net/), on desktop or on your phone.
 
 ## How the order is decided
 
-1. **Dialogue** follows `map_order.yaml`. A line a script shows only once a
-   story flag is set goes after the map that sets the flag: the Silph Co.
-   employees thank you only after Giovanni is beaten, Mom says "you and your
-   Pokémon are looking great" only once you have one. Inside a map the lines
+1. **Dialogue** follows `map_order.yaml`. A line a script shows only once
+   something has happened goes after the scene that makes it happen: the
+   Silph Co. employees thank you only after Giovanni is beaten, the old man
+   in Viridian gives his catching lesson only once Oak has his parcel. And
+   what can be read before the game stops you comes before it does: where a
+   scene blocks the way (the rival on the bridge out of Cerulean), the
+   people, signs and houses still within reach are read first. Inside a map the lines
    go in the order you walk past the people and signs that say them, measured
    over walkable tiles from the door or edge the story enters by: on Nugget
    Bridge the five trainers come first and the prize last. A line
@@ -163,11 +166,13 @@ All you need is [Anki](https://apps.ankiweb.net/), on desktop or on your phone.
    then walks through your house: the start menu's entries, each with its
    description, the SELECT button, the bookshelf, everything the bedroom PC
    lets you do with its one Potion, the poster, the TV, Mom and the kitchen,
-   and then through Pallet Town from your door to the lab.
+   and then through Pallet Town from your door to the lab, into the
+   rival's house and into the lab while Oak is still out: only then does he
+   stop you in the grass.
    Each screen comes as a walk where you first use it: the party screen
    when you get your Pokémon, the options just before the first battle, which
    is a walk too (the challenge, Oak's commentary, the action menu, the
-   messages every battle has), saving after the aide in the lab explains it,
+   messages every battle has), saving after the sign in Oak's lab explains it,
    the bag on Route 1, the Mart's counter in Viridian, the Pokédex when Oak
    hands it over. Other menu text floats as
    in step 3, and only once you have left Oak's lab with your first Pokémon.
@@ -283,6 +288,8 @@ src/firered_anki/
   decomp.py       read the pret decomp
   order.py        first-seen placement and the global order
   walking.py      the order you walk past a map's people and signs
+  blockers.py     what can be read before a scene that stops you
+  reach.py        report: lines shown while their speaker cannot be reached
   classify.py     LLM placement of catch-all strings
   spread.py       interleave non-dialogue lines by chapter
   lemmas.py       rough lemmas for the order stage's previews
