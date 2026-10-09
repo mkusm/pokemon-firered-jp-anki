@@ -24,7 +24,8 @@ _applied: set[tuple] = set()
 # What names an item in each list. To correct a word's form itself, give
 # `new_surface`: the model sometimes writes a form that is not in the sentence
 # (きずぐすri, or ASCII cm for the game's ｃｍ).
-KEYS = {"words": ("surface", "nth", "new_surface"), "breakdown": ("jp",), "patterns": ("span",)}
+# `drop: true` takes the item out: a grammar pattern the sentence does not have.
+KEYS = {"words": ("surface", "nth", "new_surface"), "breakdown": ("jp", "drop"), "patterns": ("span", "drop")}
 
 
 @lru_cache(maxsize=None)
@@ -47,6 +48,8 @@ def _fix(text: str, kind: str, fixes: list[dict], items: list[dict], field: str)
         if "nth" in fix:
             hits = hits[fix["nth"] - 1:fix["nth"]]
         for it in hits[:1]:
+            if fix.get("drop"):
+                items.remove(it)
             it.update({k: v for k, v in fix.items() if k not in KEYS[kind]})
             if "new_surface" in fix:
                 it["surface"] = fix["new_surface"]

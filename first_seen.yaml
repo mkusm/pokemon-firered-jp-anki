@@ -244,11 +244,13 @@ groups:
   save:
     - ['SaveFailed', exclude]                 # save error: left out with the others
     - ['^', start]                            # (the overwrite warning is in the save walk)
-  # Lines shown when you inspect an object (bookshelf, TV, kitchen, machines,
-  # signs). The game triggers them by tile type, so the decomp can't say where
-  # each first occurs: the classify stage places them.
+  # Lines shown when you look at a kind of thing (a bookshelf, a TV, a machine,
+  # a poster). The game picks them by the kind of tile you face, so each goes
+  # to the first map of the route that has such a tile (`tile`). The ones in
+  # the opening's rooms are in their walks in map_order.yaml. A line no tile
+  # shows falls through to the old guess.
   flavor_text:
-    - ['.', PalletTown_PlayersHouse_2F]
+    - ['.', 'tile|PalletTown_PlayersHouse_2F']
   obtain_item: Route1                       # the Mart clerk's free Potion
   # Fame Checker entries unlock as you meet each person; the device itself
   # comes from the rival in Cerulean.
@@ -294,6 +296,13 @@ never_shown:
   sText_YouThrowABallNowRight: "Wally's catching lesson, left over from Ruby and Sapphire"
   gDummyPokedexText: "the Pokédex entry of Pokémon 0, which no game shows"
   gPokedexEntries.0: "the category of Pokémon 0, which no game shows"
+  # Read by looking at a kind of tile that no FireRed map has, or whose test
+  # in metatile_behavior.c always answers no.
+  Text_ImpressiveMachine: "shown for a kind of tile (MB_IMPRESSIVE_MACHINE) that no map uses"
+  Text_VideoGame: "shown for a kind of tile (MB_VIDEO_GAME) that no map uses: the bedroom's console is a sign with its own line"
+  Text_Snacks: "shown for a kind of tile (MB_SNACKS) that no map uses"
+  Text_PolishedWindow: "MetatileBehavior_IsPolishedWindow always returns FALSE"
+  Text_BeautifulSkyWindow: "MetatileBehavior_IsBeautifulSkyWindow always returns FALSE"
   # Ruby and Sapphire features FireRed has no code for (no mauville_old_man.c,
   # bard_music.c, dewford_trend.c, tv.c, lilycove_lady.c, contest.c or
   # secret_base.c in the decomp). A key may be a glob, on the label or on

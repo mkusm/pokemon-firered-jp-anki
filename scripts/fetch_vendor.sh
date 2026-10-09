@@ -26,7 +26,8 @@ if [ ! -d vendor/pokefirered/.git ]; then
     '/data/tilesets/*/*/metatile_attributes.bin' \
     '/data/battle_scripts_1.s' '/data/battle_scripts_2.s' \
     '/src/data/' '/include/constants/' \
-    '/src/battle_message.c' '/src/battle_script_commands.c'
+    '/src/battle_message.c' '/src/battle_script_commands.c' \
+    '/src/metatile_behavior.c' '/src/field_control_avatar.c'
   git -C vendor/pokefirered checkout
 fi
 

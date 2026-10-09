@@ -4,6 +4,7 @@ is the order stage's job; this module only knows the game data.
 """
 
 import json
+import struct
 import re
 from collections import defaultdict
 from functools import cached_property
@@ -30,6 +31,7 @@ LABEL_RE = re.compile(r"^(\w+)::?")
 # A variable a map's scripts keep to themselves: a temporary one, or the name the file gives it.
 OWN_VAR = r"VAR_TEMP_\w+|(?!VAR_|FLAG_|LOCALID_)[A-Z][A-Z0-9_]*"
 UNSET = ("0", "FALSE")  # what such a variable is when the map loads
+PRIMARY_METATILES = 640  # a block below this is the primary tileset's, the rest the secondary's
 
 
 def norm(name: str) -> str:
@@ -136,6 +138,70 @@ class Decomp:
                 # word (Brock's defeat text, "the otherwise unused array") is not one.
                 if m and re.match(r"\s*@ Unused\b", mark):
                     out.add(m.group(1))
+        return out
+
+    # --- what you read by looking at a kind of thing ---------------------------
+    @cached_property
+    def tile_behaviours(self) -> dict[str, list[int]]:
+        """Tileset → the behaviour of each of its metatiles (the low nine
+        bits of its attributes): a ledge, a bookshelf, a machine."""
+        paths = dict(re.findall(r'(gMetatileAttributes_\w+)\[\] = INCBIN_U32\("([^"]+)"\)', read("src/data/tilesets/metatiles.h")))
+        out = {}
+        for name, attr in re.findall(r"const struct Tileset (gTileset_\w+) =\s*\{.*?\.metatileAttributes = (\w+),",
+                                     read("src/data/tilesets/headers.h"), re.S):
+            if (f := DECOMP / paths.get(attr, "-")).exists():
+                raw = f.read_bytes()
+                out[name] = [a & 0x1FF for a in struct.unpack(f"<{len(raw) // 4}I", raw)]
+        return out
+
+    def behaviours_of(self, name: str) -> dict[tuple[int, int], int]:
+        """A map's tiles → their behaviour, for the tiles that have one."""
+        lay = self.layouts.get(self.map_json[name].get("layout"))
+        if not lay or lay["primary_tileset"] not in self.tile_behaviours or lay["secondary_tileset"] not in self.tile_behaviours:
+            return {}
+        w, h = lay["width"], lay["height"]
+        first, second = self.tile_behaviours[lay["primary_tileset"]], self.tile_behaviours[lay["secondary_tileset"]]
+        out = {}
+        for i, t in enumerate(struct.unpack(f"<{w * h}H", (DECOMP / lay["blockdata_filepath"]).read_bytes()[:w * h * 2])):
+            n = t & 0x3FF
+            b = first[n] if n < PRIMARY_METATILES and n < len(first) else second[n - PRIMARY_METATILES] if 0 <= n - PRIMARY_METATILES < len(second) else 0
+            if b:
+                out[(i % w, i // w)] = b
+        return out
+
+    @cached_property
+    def looked_at(self) -> dict[str, dict[str, list[tuple[int, int]]]]:
+        """Text label → map → the tiles that show it when you look at them:
+        "what kind of machine is this" for every machine tile, wherever one
+        stands. The game picks the script by the kind of tile you face
+        (field_control_avatar.c, metatile_behavior.c). A sign on the same
+        tile is read instead, so such a tile does not count."""
+        value = {n: int(v, 16) for n, v in re.findall(r"#define (MB_\w+)\s+(0x[0-9A-Fa-f]+)", read("include/constants/metatile_behaviors.h"))}
+        # Each test up to the next one: some are a single line, { return FALSE; }.
+        parts = re.split(r"\nbool8 MetatileBehavior_(Is\w+)\(", read("src/metatile_behavior.c"))
+        tests = {name: [value[c] for c in re.findall(r"MB_\w+", body) if c in value] for name, body in zip(parts[1::2], parts[2::2])}
+        shown: dict[int, list[str]] = defaultdict(list)       # behaviour → text labels
+        for test, script in re.findall(r"MetatileBehavior_(Is\w+)\(metatileBehavior(?:, direction)?\) == TRUE\)\s*\n\s*return (\w+);",
+                                       read("src/field_control_avatar.c")):
+            texts = [t for c in self._script_blocks.get(script, (None, []))[1] for t in re.findall(r"\b(\w*Text_\w+)\b", c)]
+            for b in tests.get(test, []):
+                shown[b] += texts
+        facing_up = set(tests.get("IsPlayerFacingTVScreen", []))   # read from below only
+        out: dict[str, dict[str, list]] = defaultdict(lambda: defaultdict(list))
+        for name, m in self.map_json.items():
+            signs = {(e["x"], e["y"]) for e in m.get("bg_events") or []}
+            lay = self.layouts.get(m.get("layout"))
+            if not lay:
+                continue
+            w, h = lay["width"], lay["height"]
+            raw = struct.unpack(f"<{w * h}H", (DECOMP / lay["blockdata_filepath"]).read_bytes()[:w * h * 2])
+            stand = lambda x, y: 0 <= x < w and 0 <= y < h and (raw[y * w + x] >> 10) & 3 == 0 and (x, y) not in signs
+            for (x, y), b in self.behaviours_of(name).items():
+                # It has to be a tile you can stand in front of.
+                sides = [(x, y + 1)] if b in facing_up else [(x, y + 1), (x, y - 1), (x - 1, y), (x + 1, y)]
+                if b in shown and (x, y) not in signs and any(stand(*at) for at in sides):
+                    for t in shown[b]:
+                        out[t][name].append((x, y))
         return out
 
     # --- scripts: trainers, items, gift/static Pokémon per map --------------

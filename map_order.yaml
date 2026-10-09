@@ -144,6 +144,7 @@ order:
   - at: PalletTown_RivalsHouse                    # the map on her table, the picture, the bookshelves
     lines:
       - PalletTown_RivalsHouse_Text_ItsBigMapOfKanto
+      - Text_PlayerFacingTVScreen         # her TV: the first one you can stand in front of
       - PalletTown_RivalsHouse_Text_LovelyAndSweetClefairy
       - PalletTown_RivalsHouse_Text_ShelvesCrammedFullOfBooks
   # The lab with Oak out, from the door to the back wall: the aides, the rival
@@ -154,8 +155,10 @@ order:
     lines:
       - PalletTown_ProfessorOaksLab_Text_StudyAsOaksAide
       - PalletTown_ProfessorOaksLab_Text_OakIsAuthorityOnMons
+      - Text_PowerPlantMachine            # the big machine by the left wall (the same kind as the Power Plant's)
       - PalletTown_ProfessorOaksLab_Text_RivalGrampsIsntAround
       - PalletTown_ProfessorOaksLab_Text_ThoseArePokeBalls
+      - Text_BlinkingLights               # the lamps in the top corner
       - PalletTown_ProfessorOaksLab_Text_EmailMessage
       - PalletTown_ProfessorOaksLab_Text_BlankEncyclopedia
       - PalletTown_ProfessorOaksLab_Text_PressStartToOpenMenu

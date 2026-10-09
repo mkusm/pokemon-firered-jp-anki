@@ -84,7 +84,8 @@ deck, 11 the Link play deck. The docs do not call them chapters.
 
 **The caches are the model's raw answers. Do not edit them by hand.**
 - To fix one wrong translation, gloss, breakdown line or grammar explanation,
-  add an entry to `corrections.yaml` with a `why`. It is laid over the cache on
+  add an entry to `corrections.yaml` with a `why` (`drop: true` takes out a
+  grammar pattern the sentence does not have). It is laid over the cache on
   every read and survives a rerun.
 - If `cards` stops with "these corrections no longer fit", a rerun changed the
   answer the correction pointed at. Fix or remove the entry; do not weaken the
@@ -190,6 +191,17 @@ deck, 11 the Link play deck. The docs do not call them chapters.
   later in `map_order.yaml`, where its place opens; what it lists wrongly is
   in `reach.KNOWN`, each with the reason. It needs the tile behaviours
   (`data/tilesets/*/*/metatile_attributes.bin`, in `scripts/fetch_vendor.sh`).
+- A line you read by looking at a kind of thing (a bookshelf, a machine, a
+  poster: the `flavor_text` group) has no place of its own in the scripts.
+  The game picks it by the kind of tile you face, so it goes to the first map
+  of the route that has such a tile and no sign on it (`decomp.looked_at`,
+  the `tile` anchor in `first_seen.yaml`). Its label says nothing about
+  where: "what kind of machine is this" is `Text_PowerPlantMachine`, and the
+  first such machine stands in Oak's lab. The ones in the opening's rooms are
+  in their walks. Five of these lines no tile can show (three kinds of tile
+  no map uses, two tests that always answer no): they are listed under
+  `never_shown`, at the owner's word, and four cards that had no other
+  sentence went with them (してある, すごそうな, まど, みがかれた).
 - The start is listed by hand as walks, as before: the rival's house and
   Oak's lab with Oak out come before he stops you, and the save walk follows
   the lab's sign that explains saving. What the rival and the Poké Balls say
@@ -449,7 +461,9 @@ Update this when it changes.
 
 - Chapters 0 to 10, the whole story and the Help deck: analysed by Opus with prompt version 4 or 5 (particle
   senses picked by the analysis), grammar and notes by Opus. All settled:
-  `chapter N --dry-run` reports nothing left for each. The reordering of
+  `chapter N --dry-run` reports nothing left for each. Placing the looked-at
+  lines on 2026-10-09 put cards on three sentences that had carried none;
+  chapters 0 and 4 were run again for them. The reordering of
   2026-10-08 put a card on eleven sentences that had carried none (in
   chapters 1, 2, 3, 5, 7 and 8); those six chapters were run again, eight
   sentences were re-analysed on Opus, and no card changed its key.
@@ -481,13 +495,19 @@ Update this when it changes.
   shows are Opus's. Settled. `analyse rerun N` redoes every sentence of a
   chapter that its model has not answered on version 4 or 5;
   `analyse redo <file>` re-analyses only the sentences listed in a file.
-- `corrections.yaml` has fifteen entries: the SELECT button line, Mom's two
+- `corrections.yaml` has seventeen entries: the SELECT button line, Mom's two
   TV lines, seven レポート translations the name check had left stiff ("the
   Pokémon Save"), one word form Sonnet wrote that is not in its sentence
   (ナウい for ナウイ), and four on settings of the options screen whose bare
   label left the meaning to guess (かちぬき twice, ＬＲ, かたて), worded from the
   Help menu's own definitions. The other 215 story cards that sit on a bare
-  label were read on 2026-10-08 and left as they were. Four corrections of word forms Sonnet wrote wrongly were removed
+  label were read on 2026-10-08 and left as they were. Two more are for
+  sentences the deck joins from two pages of a message, where the model read
+  the first word of the second page as the end of the first: Oak's
+  しょうがない　ヤツじゃのう is about the rival, not said to レッド, and the ほう！
+  after the Super Repel's description is "oh!", not 方. The 54 joined
+  sentences whose second page opens with a short call or cry were read for
+  this; the other 670 or so joined sentences were not. Four corrections of word forms Sonnet wrote wrongly were removed
   as their chapters were redone on Opus, which wrote the forms correctly; the
   last two (ｃｍ, twice) went with the postgame.
 - `splits.yaml` has 689 decisions, from chapters 0 to 11: 211 of them came
@@ -498,7 +518,7 @@ Update this when it changes.
   types, 132 places, 23 people, 2 for Team Rocket, 8 badges, 22 game terms, 15
   real-world names), found by `names.py` in every chapter with no model call.
   The 56 name lines this put in chapter 0 were re-analysed on Opus. The names
-  deck is gone. Three decks, 11,084 cards: story 9,537, Help 941 (stand-alone), Link play 606. The note type has `Note`,
+  deck is gone. Three decks, 11,080 cards: story 9,533, Help 941 (stand-alone), Link play 606. The note type has `Note`,
   `SentenceNote` and `Placeholders` fields. 4,468 cards show a speaker (714
   named by the line, the rest read from the map), and 229 cards on 171
   sentences say what their ＊ stand for.
@@ -517,7 +537,7 @@ Update this when it changes.
   counter, the Pokédex.
   A walk's line is not moved by the flag rule: its place is the listed one.
   `hand_lines.yaml` has one line, the title. `never_shown` in
-  `first_seen.yaml` has 38 entries, two of them globs.
+  `first_seen.yaml` has 43 entries, two of them globs.
 - `chapter N` can stop with "not settled: three rounds in a row" on a chain
   of near-identical floating lines, of which only one is shown at a time (the
   Fame Checker's four してんのう … とくしゅう！ titles in chapter 8): each

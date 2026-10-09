@@ -17,11 +17,11 @@ view, and JMdict is used to ground and check the answer.
 
 ## What you get
 
-One package, `firered_jp.apkg`, with 11,084 cards in three decks:
+One package, `firered_jp.apkg`, with 11,080 cards in three decks:
 
 | Deck | Cards | What it is |
 |---|---|---|
-| **1 Story** | 9,537 | The game from the title screen through the postgame, in the order you meet the text. |
+| **1 Story** | 9,533 | The game from the title screen through the postgame, in the order you meet the text. |
 | **2 Help** | 941 | The Help menu you open with L or R, in the menu's own order: each question, then its answer. It stands on its own, with a card for every word the menu uses, so you can read it at any point. About 700 of its words have a card in the story too. |
 | **3 Link play / multiplayer** | 606 | What needs a second player or device: the Union Room, trading, Mystery Gift, mail and the word lists you write messages from. Only what the story has not taught. |
 
@@ -121,7 +121,7 @@ All you need is [Anki](https://apps.ankiweb.net/), on desktop or on your phone.
 3. **Pick a pace.** The cards follow the game, so the natural way to use the
    deck is to study a stretch and then play it. For scale: the opening sequence
    is the first 172 cards, everything up to the first gym about 2,400, the whole
-   story 9,537. At 20 new cards a day that is about four months to Brock.
+   story 9,533. At 20 new cards a day that is about four months to Brock.
 4. **Read the card.** Read the sentence on the front and recall the
    highlighted word; the back tells you whether you had it.
 5. **Trim what you don't want.** In the browser, search by tag and suspend:

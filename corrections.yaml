@@ -20,6 +20,7 @@
 #     patterns:               # a grammar pattern, by its span
 #       - span: …
 #         explanation: …      #   and/or name
+#         drop: true          #   or take it out: the sentence has no such pattern
 #     note: …                 # the sentence's note; "" removes the model's
 
 - sentence: どうぐの　いれかえや　たいせつな　ものを　とうろくして　つかいます
@@ -155,3 +156,60 @@
       in_context: >-
         the button setting for playing with one hand: the L Button works the
         same as the A Button (L=A in the English game)
+
+# Two pages of a message that the deck joins into one sentence, because the
+# first has no full stop. The second page opens with a word that the model
+# read as the end of the first.
+
+- sentence: やれやれ…　まったく　しょうがない　ヤツじゃのう　レッド！
+  why: >-
+    The model wrote "You really are a hopeless one, Red!", as if Oak were
+    scolding the player. The game clears the box after ヤツじゃのう and shows the
+    name alone on the next page (gText_ForPetesSake): Oak sighs about the rival,
+    who has just forced a battle on you (…ちょっと　おれの　あいて　してみろ！), and
+    then turns to you. ヤツ is said of someone, not to them.
+  english: "Good grief... What a hopeless fellow he is. Red!"
+  words:
+    - surface: しょうがない
+      in_context: hopeless (said of the rival)
+    - surface: ヤツ
+      in_context: fellow (the rival, Oak's grandson)
+    - surface: じゃ
+      in_context: is
+    - surface: のう
+      in_context: isn't he (= なあ, a sigh)
+    - surface: レッド
+      in_context: Red (he turns to you; the game shows this on the next page)
+  breakdown:
+    - jp: まったく　しょうがない　ヤツじゃのう
+      en: what a hopeless fellow he is (the rival, who has just forced a battle on you)
+    - jp: レッド！
+      en: Red! (turning to you)
+  patterns:
+    - span: ヤツじゃのう
+      explanation: >-
+        じゃ is the old-man way of saying だ, 'is', and のう is his version of なあ,
+        a sigh over what he has just seen. ヤツ is how you speak of someone, not
+        to them: he means the rival. ヤツじゃのう = 'what a fellow he is'.
+
+- sentence: シルバースプレーは　よわい　ポケモンが　とびでて　こなくなる　ほう！
+  why: >-
+    The model read ほう as 方 and wrote "Super Repel is the one that stops weak
+    Pokémon from jumping out!". The game clears the box after こなくなる; ほう！
+    opens the next page (ほう！　むしよけスプレーの　きょうりょくな　やつだな) and is the
+    cry of someone who has just understood something. The English game has
+    "…Hmm, it's a more powerful REPEL."
+  english: Super Repel stops weak Pokémon from jumping out at you. Oh!
+  words:
+    - surface: ほう
+      jmdict_id: 2771030
+      sense: 1
+      kanji: ""
+      literal: oh; ho (surprise or interest)
+      in_context: oh! (he has just understood what it is)
+  breakdown:
+    - jp: ほう！
+      en: oh!
+  patterns:
+    - span: よわい　ポケモンが　とびでて　こなくなる　ほう
+      drop: true

@@ -65,6 +65,7 @@ COMPUTED = {
     "named",  # a move or ability named in the label → that move or ability
     "battle_effect",  # a battle message → the first move whose effect prints it
     "area_desc",  # a Town Map area description → that area's map section
+    "tile",  # what you read by looking at a kind of thing → the first map that has one
 }
 
 
@@ -138,6 +139,12 @@ class FirstSeen:
         for const, maps in refs["item"].items():
             for m in maps:
                 self._see(self.item, const, self._rank(m), m)
+        # A line shown by looking at a kind of thing (a machine, a poster) is
+        # first read on the first map of the route that has one.
+        self.tile: dict[str, tuple[float, str]] = {}
+        for label, maps in dc.looked_at.items():
+            for m in maps:
+                self._see(self.tile, label, self._rank(m), m)
         for const, maps in refs["species"].items():  # gifts, trades, Pokémon standing on the map
             self._sightings += 1
             for m in maps:
@@ -252,6 +259,7 @@ class Keys:
         self.ability_by_id = inv(dc.abilities)
         self.trainer_by_id = inv(dc.trainers)
         self.class_by_id = inv(dc.trainer_classes)
+        self.looked_at = set(dc.looked_at)
         self.species_by_norm = {norm(k[8:]): k for k in dc.species}
         self.move_by_norm = {norm(k[5:]): k for k in dc.moves}
         self.ability_by_norm = {norm(k[8:]): k for k in dc.abilities}
@@ -331,6 +339,8 @@ class Keys:
             return None
         if kind == "battle_effect":
             return label if label in self.battle_labels else None
+        if kind == "tile":
+            return label if label in self.looked_at else None
         return None
 
     def named_in(self, label: str) -> str | None:

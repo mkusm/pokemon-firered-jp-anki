@@ -124,6 +124,8 @@ def status(ns: list[int]) -> dict[int, dict[str, int]]:
 
 def report_all(ns: list[int]) -> tuple[int, list[int]]:
     """Report each chapter. → (what is left in all of them, the chapters with something left)."""
+    if not ns:      # chapter 0 has no chapters before it
+        return 0, []
     now = status(ns)
     counts = {n: report(n, now[n]) for n in ns}
     return sum(counts.values()), [n for n in ns if counts[n]]

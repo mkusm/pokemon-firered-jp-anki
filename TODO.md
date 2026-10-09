@@ -97,6 +97,22 @@ Numbers are from the deck at commit `29c7689d` (11,081 cards).
     lines would have to be told apart by rule (a scene that walks you in, a
     person a script has moved).
 
+- [x] **16. Lines read by looking at a kind of thing.** Done 2026-10-09: the
+  28 lines of the `flavor_text` group were placed by a guess from their
+  names. The game picks them by the kind of tile you face, so 23 now go to
+  the first map of the route that has such a tile (`decomp.looked_at`):
+  "what kind of machine is this" moved from the Power Plant to Oak's lab,
+  the advertising poster from Celadon to Viridian's Mart, the telephone from
+  Pallet Town to Celadon's Department Store.
+  - [x] Five of them no tile can show (`Text_ImpressiveMachine`,
+    `Text_VideoGame`, `Text_Snacks`, `Text_PolishedWindow`,
+    `Text_BeautifulSkyWindow`). Left out on 2026-10-09 at the owner's word,
+    under `never_shown`; four cards went with them (してある, すごそうな, まど,
+    みがかれた). The deck has 11,080 cards.
+  - [ ] The Poké Mart and Pokémon Center signs, the wall map and the Indigo
+    Plateau signs are picked by tests this does not read yet; they keep
+    their guessed places, which look right.
+
 ## Quality
 
 - [x] **6. Tag the boy's and the girl's lines.** Done 2026-10-05: 14 pairs of
