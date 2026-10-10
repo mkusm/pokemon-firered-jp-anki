@@ -21,7 +21,8 @@ class MapOrder:
         # text they are (a start-menu entry, an item's name, a sign). A line
         # can be a setting with the choices the screen shows beside it,
         # {setting: [choices]}: the setting, then its choices, and each
-        # choice's card names the setting on its front (`under`).
+        # choice's card names the setting on its front (`under`). Choices of
+        # a menu that is in no walk get their heading from the list `under`.
         self.order, self.place, self.walk, self.under = [], {}, {}, {}
         for n, entry in enumerate(cfg["order"]):
             if isinstance(entry, dict):
@@ -38,6 +39,9 @@ class MapOrder:
                 self.walk.update(dict.fromkeys(lines, n))  # which walk a line is in
             else:
                 self.order.append(entry)
+        # A heading for choices that are not in a walk: the menu they are picked from.
+        for heading, choices in (cfg.get("under") or {}).items():
+            self.under.update(dict.fromkeys(choices, heading))
         self.rank = {name: i for i, name in enumerate(self.order)}
         dupes = {n for n in self.order if self.order.count(n) > 1}
         if dupes:

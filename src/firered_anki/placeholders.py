@@ -10,7 +10,8 @@ screen may fill with anything. Those are named in two cases: where a map
 script fills the buffer just above the message that shows it
 (`bufferspeciesname STR_VAR_1, …` and then `message …`), and where the
 sentence itself tells: a ＊ with a counter after it, or Ｌｖ before it, is a
-number. What a screen written in C puts into a buffer is not read.
+number. What a screen written in C puts into a buffer is not read; the few
+buffers whose filling was looked up in the C code are listed by hand (`filled_in_c`).
 
 A sentence in which nothing can be named gets no line.
 """
@@ -58,6 +59,28 @@ BATTLE = {
     "B_ATK_PREFIX3": "みかたを or あいてを (your side or the foe's)",
     "B_DEF_PREFIX1": "みかたの or あいての (your side's or the foe's)",
 }
+# A plain buffer of one message, where the C code that fills it was read.
+# The stat messages (extract.FILLED): PREPARE_STAT_BUFFER(gBattleTextBuff1, …)
+# in ChangeStatBuffs (battle_script_commands.c) and in battle_util.c for the
+# berries; the names are gStatNamesTable's.
+STAT = "the stat (こうげき, ぼうぎょ, すばやさ…)"
+FILLED_IN_C = {label: {"B_BUFF1": STAT} for label in (
+    "sText_StatFell", "sText_StatHarshly", "gBattleText_Rose", "sText_StatSharply",
+    "sText_UsingItemTheStatOfPkmnRose")}
+# The trainer memo of the summary screen (pokemon_summary_screen.c,
+# PokeSum_PrintTrainerMemo_Mon_HeldByOT): the nature, the level it was met
+# at, the name of the place. The nature lines are this sentence with the
+# nature filled in (extract.build_rows).
+MEMO = {"DYNAMIC 0": "the Pokémon's nature", "DYNAMIC 1": "a number", "DYNAMIC 2": "the place it was met"}
+MEMO_LABELS = ("gText_PokeSum_Met", "gText_PokeSum_Met_BoldGentleGrammar")
+
+
+def filled_in_c(label: str) -> dict[str, str]:
+    if label in MEMO_LABELS or label.endswith("NatureName"):
+        return MEMO
+    return FILLED_IN_C.get(label, {})
+
+
 # Script commands that fill a text buffer, and what they put there.
 BUFFERS = {
     "bufferspeciesname": "a Pokémon",
@@ -105,7 +128,7 @@ UNKNOWN = "a name or number the game fills in"
 
 def kinds(text: str, codes: list[str], label: str = "") -> list[str | None]:
     """What each ＊ of the sentence is, in order; None where it cannot be told."""
-    out, at, scripted = [], -1, from_scripts().get(label, {})
+    out, at, scripted = [], -1, filled_in_c(label) or from_scripts().get(label, {})
     for code in codes:
         at = text.index(VAR, at + 1)
         if code in BATTLE:

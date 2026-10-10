@@ -28,7 +28,7 @@ from html import escape
 
 import pandas as pd
 
-from . import claude_cli, corrections, models, names
+from . import assembled, claude_cli, corrections, models, names
 from .analyse import MAIN, load, results as analysis_results
 from .paths import DATA
 
@@ -93,7 +93,16 @@ SCHEMA = {
 }
 
 
+def asked_about(text: str, words: list[dict]) -> tuple[str, list[dict]]:
+    """The sentence and words a grammar answer is about. For a label put
+    together from a word and ポケモン (たねポケモン): the word's own text."""
+    if (asked := assembled.explained_as(text)) != text:
+        return asked, [w for w in words if w.get("_from", [None])[0] == asked]
+    return text, words
+
+
 def cache_file(text: str, words: list[dict]):
+    text, words = asked_about(text, words)
     raw = json.dumps([VERSION, text, [w["surface"] for w in words]], ensure_ascii=False)
     return CACHE / f"{hashlib.sha1(raw.encode()).hexdigest()}.json"
 
@@ -208,8 +217,9 @@ def has_grammar(text: str, group: str, label: str, analyses: dict) -> bool:
     """Whether the sentence is one the grammar pass explains. Not a line of a
     name list, which is one name, and not a line of one word (はい, a menu
     word): there is nothing between words to explain, and the word's own card
-    already says how its form is built."""
-    return not names.listed(group, label) and len(analyses.get(text, {}).get("words", [])) > 1
+    already says how its form is built. A label put together from a word and
+    ポケモン (たねポケモン) counts as the word alone."""
+    return not names.listed(group, label) and len(asked_about(text, analyses.get(text, {}).get("words", []))[1]) > 1
 
 
 # --- reading the results -----------------------------------------------------------
@@ -245,7 +255,7 @@ def results(texts, analyses: dict) -> dict[str, dict]:
     or None if it is not in it)."""
     out = {}
     for t, g in cached(texts, analyses):
-        if len(analyses[t]["words"]) <= 1:
+        if len(asked_about(t, analyses[t]["words"])[1]) <= 1:
             continue  # answered before one-word lines were left out: not shown either
         corrections.apply_grammar(t, g)
         for p in g["patterns"]:

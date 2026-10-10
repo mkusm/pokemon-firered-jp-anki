@@ -176,6 +176,14 @@ groups:
     # are chosen for a battle (party_menu.c, chooseMultiple), which is the
     # Cable Club and the e-Reader battle house on Seven Island.
     - ['PartyMenu_OK', end]
+    # The score labels of Pokémon Jump (pokemon_jump.c, PrintScoreSuffixes): a
+    # wireless game for two to five players. The classify stage had put them
+    # at the Joyful Game Corner, where the game is started.
+    - ['SpacePoints2|SpaceTimes3', end]
+    # The contest condition かわいさ and its adjective, with the other four
+    # (Cool, Beauty, Smart, Tough: bufferstdstring strings no FireRed script
+    # asks for). Listed here so that the Cut rule below does not take "Cute".
+    - ['^gText_Cute(_2)?$', end]
     - ['Giddy|Mail|EasyChat|BerryCrush|Union|Link|Trade|Communicat|Record|Wonder|News|Mystery|Wireless|Profile|Chat|Designers|Dodrio|PokemonJump|Colosseum|Hoenn|Birch|Contest|SecretBase|Decor', end]
     - ['Bard|Trendy|GoodSaying|Song|Phrase|Beauty|Tough|Pink|Rankings|Players|Pressing|Cooperative|Excellents|WantToPlayAgain|EReader|JPText|Card|Stamp|Gift|Comm', end]
     - ['Shop|Sell|Buy|Pokedollar|HowMany|QuitShopping|SendItHome', poke_mart]

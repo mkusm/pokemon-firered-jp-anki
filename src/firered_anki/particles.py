@@ -67,6 +67,7 @@ def candidates(base: str) -> tuple[int, ...]:
 
 
 def cache_file(text: str, pos: int, word: dict):
+    text, pos = word.get("_from", (text, pos))  # a word of a sentence put together: filed under the part it is from
     raw = json.dumps([VERSION, text, pos, word["surface"]], ensure_ascii=False)
     return CACHE / f"{hashlib.sha1(raw.encode()).hexdigest()}.json"
 

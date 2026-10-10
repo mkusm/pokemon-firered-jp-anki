@@ -21,9 +21,9 @@ One package, `firered_jp.apkg`, with 11,080 cards in three decks:
 
 | Deck | Cards | What it is |
 |---|---|---|
-| **1 Story** | 9,533 | The game from the title screen through the postgame, in the order you meet the text. |
+| **1 Story** | 9,531 | The game from the title screen through the postgame, in the order you meet the text. |
 | **2 Help** | 941 | The Help menu you open with L or R, in the menu's own order: each question, then its answer. It stands on its own, with a card for every word the menu uses, so you can read it at any point. About 700 of its words have a card in the story too. |
-| **3 Link play / multiplayer** | 606 | What needs a second player or device: the Union Room, trading, Mystery Gift, mail and the word lists you write messages from. Only what the story has not taught. |
+| **3 Link play / multiplayer** | 608 | What needs a second player or device: the Union Room, trading, Mystery Gift, mail and the word lists you write messages from. Only what the story has not taught. |
 
 ### The cards
 
@@ -48,7 +48,7 @@ One package, `firered_jp.apkg`, with 11,080 cards in three decks:
   someone turns into; it is a more formal に. しゅじんこうと　なって = 'becoming
   the hero'." A line of one word (はい, a menu word) and a bare name get no
   grammar: there is nothing between words to explain.
-- **Notes:** 438 sentences carry a note where a reader outside Japan would
+- **Notes:** 443 sentences carry a note where a reader outside Japan would
   miss something: a cultural reference (the film on the TV in your room), a
   play on words, a regional dialect, or a place where the English game says
   something else (the old man in Viridian is drunk in Japanese and wants coffee
@@ -122,7 +122,7 @@ All you need is [Anki](https://apps.ankiweb.net/), on desktop or on your phone.
 3. **Pick a pace.** The cards follow the game, so the natural way to use the
    deck is to study a stretch and then play it. For scale: the opening sequence
    is the first 172 cards, everything up to the first gym about 2,400, the whole
-   story 9,533. At 20 new cards a day that is about four months to Brock.
+   story 9,531. At 20 new cards a day that is about four months to Brock.
 4. **Read the card.** Read the sentence on the front and recall the
    highlighted word; the back tells you whether you had it.
 5. **Trim what you don't want.** In the browser, search by tag and suspend:
@@ -285,6 +285,7 @@ After editing any of them, re-run from `order` onward (`corrections.yaml` and
 ```
 src/firered_anki/
   extract.py      corpus → sentences
+  assembled.py    analysis of a sentence built around a word the model read alone
   map_order.py    resolve a message to a map_order entry; coverage check
   decomp.py       read the pret decomp
   order.py        first-seen placement and the global order
@@ -323,7 +324,7 @@ vendor/           upstream clones (ignored)
 ## Known limits
 
 - Two models made the deck. The story and the Help deck are Opus's work:
-  analysis, grammar and notes. The Link play deck (606 cards) is Sonnet's,
+  analysis, grammar and notes. The Link play deck (608 cards) is Sonnet's,
   which costs less and is less sure: on a sample of 100 sentences Opus
   corrected a clear Sonnet error in 3 (a wrong item name, a line read as "I
   was asked a favor" that means "do me a favor", and あったら filed under ある
@@ -345,7 +346,7 @@ vendor/           upstream clones (ignored)
   where the menus and most basic vocabulary first appear.
 - A speaker is read from the map only where one kind of person can say the
   line; scenes with several people, signs and narration show none. What a ＊
-  stands for is given on 171 of the 299 sentences that have one: the rest
+  stands for is given on 225 of the 353 sentences that have one: the rest
   are filled in by screens whose code is not read.
 - JMdict comes from `jamdict-data` (a 2020 snapshot).
 - Rematch lines of ordinary trainers sit at their route's first visit.

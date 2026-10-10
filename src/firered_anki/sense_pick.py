@@ -54,6 +54,7 @@ SCHEMA = {
 
 
 def cache_file(text: str, word: dict):
+    text = word.get("_from", (text,))[0]  # a word of a sentence put together: filed under the part it is from
     raw = json.dumps([VERSION, text, word["surface"], word["jmdict_id"]], ensure_ascii=False)
     return CACHE / f"{hashlib.sha1(raw.encode()).hexdigest()}.json"
 

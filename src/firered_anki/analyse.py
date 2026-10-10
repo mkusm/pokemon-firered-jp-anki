@@ -21,7 +21,7 @@ from dataclasses import dataclass
 
 import pandas as pd
 
-from . import claude_cli, corrections, models, names, particles, sense_pick, splits
+from . import assembled, claude_cli, corrections, models, names, particles, sense_pick, splits
 from .order import ORDER_OUT
 from .paths import DATA, ROOT
 from .grounding import ground
@@ -201,24 +201,31 @@ def check(batch: pd.DataFrame, result: dict, entries: dict) -> list[dict]:
     return recs
 
 
-def cached_model(run: str, text: str) -> str | None:
+def made(run: str, text: str) -> dict:
+    """How the sentence's answer was made (`_run`), or {} if it has none. A
+    sentence put together from others (assembled.py) has no answer of its
+    own: it is as good as the weakest of its parts'."""
+    if rc := assembled.recipe(text):
+        return assembled.made([made(run, p) for p in assembled.parts(rc)], ACCEPTED, models.RANK)
     p = cache_path(run, text)
-    return json.loads(p.read_text())["_run"]["model"] if p.exists() else None
+    return json.loads(p.read_text())["_run"] if p.exists() else {}
+
+
+def cached_model(run: str, text: str) -> str | None:
+    return made(run, text).get("model")
 
 
 def current(run: str, text: str, model: str) -> bool:
     """Cached, by this model, with a prompt close enough to the present one."""
-    p = cache_path(run, text)
-    made = json.loads(p.read_text())["_run"] if p.exists() else {}
-    return made.get("model") == model and made.get("prompt") in ACCEPTED
+    by = made(run, text)
+    return by.get("model") == model and by.get("prompt") in ACCEPTED
 
 
 def ok(text: str) -> bool:
     """Cached with a prompt close enough to the present one, by the model this
     sentence needs or a better one (models.py)."""
-    p = cache_path(MAIN.name, text)
-    made = json.loads(p.read_text())["_run"] if p.exists() else {}
-    return made.get("prompt") in ACCEPTED and models.enough(made.get("model"), text)
+    by = made(MAIN.name, text)
+    return by.get("prompt") in ACCEPTED and models.enough(by.get("model"), text)
 
 
 def run(cfg: Config, rows: pd.DataFrame, entries: dict, workers: int = 3,
@@ -229,6 +236,12 @@ def run(cfg: Config, rows: pd.DataFrame, entries: dict, workers: int = 3,
     with Opus's). force: re-analyse every row, whatever is cached."""
     run_dir = CACHE / cfg.name
     run_dir.mkdir(parents=True, exist_ok=True)
+    # A sentence put together from cached answers is never asked about: its
+    # words must stay the ones the model gave when it read the pieces.
+    built = rows["text"].map(lambda t: assembled.recipe(t) is not None)
+    if built.any():
+        print(f"[{cfg.name}] {rows.loc[built, 'text'].nunique()} sentences are put together from cached answers and are not sent")
+        rows = rows[~built]
     done = (lambda t: False) if force else (lambda t: current(cfg.name, t, cfg.model)) if redo else (
         lambda t: cache_path(cfg.name, t).exists())
     todo = rows[~rows["text"].map(done)]
@@ -274,18 +287,30 @@ def run(cfg: Config, rows: pd.DataFrame, entries: dict, workers: int = 3,
 def results(run_name: str, texts, entries: dict) -> dict[str, dict]:
     """Cached analyses, with JMdict grounding and the hand corrections applied
     (the cache stays raw)."""
-    out = {}
-    for t in texts:
-        p = cache_path(run_name, t)
-        if p.exists():
+    read: dict[str, dict | None] = {}
+
+    def one(t: str) -> dict | None:
+        if t in read:
+            return read[t]
+        if rc := assembled.recipe(t):
+            # Its parts as they are read on their own, then put together.
+            got = [one(p) for p in assembled.parts(rc)]
+            r = None if any(g is None for g in got) else {
+                **assembled.join(t, rc, got), "_run": made(run_name, t)}
+        elif (p := cache_path(run_name, t)).exists():
             r = json.loads(p.read_text())
             for pos, w in enumerate(r["words"]):
                 ground(w, entries)
                 sense_pick.apply(t, w, entries)
                 particles.apply(t, pos, w, entries)
+        else:
+            r = None
+        if r is not None:
             corrections.apply_analysis(t, r)
-            out[t] = r
-    return out
+        read[t] = r
+        return r
+
+    return {t: r for t in texts if (r := one(t)) is not None}
 
 
 def metrics(res: dict[str, dict], n_texts: int) -> dict:
@@ -383,7 +408,7 @@ def rerun(chapter: list[int] | None = None, workers: int = 20) -> None:
     if chapter is not None:
         shown = deck[deck["chapter"].isin(chapter) & deck["card_order"].notna()]
         df = df[df["text"].isin(set(shown["text"]))]
-    rows = df[df["text"].map(lambda t: cache_path(MAIN.name, t).exists() and not ok(t))]
+    rows = df[df["text"].map(lambda t: bool(made(MAIN.name, t)) and not ok(t))]
     if rows.empty:
         print("[rerun] 0 sentences to redo")
         return

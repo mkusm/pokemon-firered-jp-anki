@@ -601,10 +601,14 @@ def build_cards(run_name: str = MAIN.name, offline_merge: bool = False) -> pd.Da
                 first = next((u for u in placed if u["exact"]), first)
             elif not first["dialogue"]:
                 first = next((u for u in placed if u["dialogue"] and u["chapter"] == first["chapter"]), first)
-            later, seen = [], {first["text"]}
+            # Another sentence, and not the same answer again: a sentence put
+            # together around this word's bare text, or around the frame the
+            # word is from (assembled.py), shows nothing the card has not got.
+            origin = lambda u: analyses[u["text"]]["words"][u["pos"]].get("_from", [u["text"]])[0]
+            later, seen = [], {first["text"], origin(first)}
             for u in g:
-                if u["text"] not in seen:
-                    seen.add(u["text"])
+                if not {u["text"], origin(u)} & seen:
+                    seen |= {u["text"], origin(u)}
                     later.append(u)
             # A use filed here by its form alone may be another sense: show it last.
             later.sort(key=lambda u: (not u["own"], not u["dialogue"], not u["placed"], u["card_order"] if u["placed"] else 0))

@@ -12,7 +12,7 @@ import sys
 import pandas as pd
 import yaml
 
-from . import analyse, blockers, chapter, grammar, models, notes, speakers
+from . import analyse, assembled, blockers, chapter, grammar, models, notes, speakers
 from .cards import CARDS_OUT, STAND_ALONE, in_story, prepare
 from .decomp import Decomp
 from .map_order import MapOrder
@@ -98,10 +98,18 @@ def main() -> None:
         f"{sp} / {who}: {t}" for sp, lb, t in zip(deck["speaker"], deck["label"], deck["text"])
         if sp in main_cast and (who := speakers.who(lb, t)) and who != sp])
 
+    # --- sentences put together from cached answers (assembled.py)
+    built = [t for t in deck["text"].unique() if assembled.recipe(t)]
+    check("every sentence put together has a cached answer for each of its parts",
+          [t for t in built if t not in analyses])
+    check("a word of a sentence put together is filed under the part it is from", [
+        f"{t}: {w['surface']}" for t in built if t in analyses for w in analyses[t]["words"]
+        if w.get("_from", [None])[0] not in assembled.parts(assembled.recipe(t))])
+
     # --- the models
     wrong = []
     for t in shown[shown["chapter"] < LINK_PLAY]["text"].unique():
-        made = [json.loads(analyse.cache_path(analyse.MAIN.name, t).read_text())["_run"]["model"]] if t in analyses else []
+        made = [analyse.cached_model(analyse.MAIN.name, t)] if t in analyses else []
         if t in analyses and (f := grammar.cache_file(t, analyses[t]["words"])).exists():
             made.append(json.loads(f.read_text())["_run"]["model"])
         if rec := notes.read(t):

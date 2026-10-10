@@ -86,7 +86,8 @@ def _left(n: int, deck, analyses: dict, known: set) -> dict[str, int]:
     # chapter waiting for an answer only the earlier one's run asks for.
     first_in = deck[deck["card_order"].notna()].sort_values("card_order").drop_duplicates("text")
     mine = set(first_in[first_in["chapter"] == n]["text"])
-    explained = sentences[sentences["text"].map(lambda t: t in mine and len(analyses[t]["words"]) > 1)]["text"]
+    explained = sentences[[t in mine and grammar.has_grammar(t, g, lb, analyses) for t, g, lb in zip(
+        sentences["text"], sentences["group"], sentences["label"])]]["text"]
     gram = grammar.results(sentences["text"], analyses)
     bounded = splits.in_scope(deck, analyses, n)
     return {

@@ -103,6 +103,34 @@ deck, 11 the Link play deck. The docs do not call them chapters.
 - A label the dump has in two rows is joined in `extract.JOINED`: the party
   menu's confirm button, けっ + てい, is けってい. It is Link play text: the
   button is drawn only when several Pokémon are chosen for a battle.
+- A message the battle code puts together from several rows is put together
+  in `extract.FILLED` too: a stat change is shown as ＊の　＊が　さがった！, never
+  as さがった！ alone. The row of each piece (さがった！, あがった！, がくっと, ぐーんと)
+  carries the whole message it is shown in, and the bare frames (＊の　＊が　＊)
+  are dropped. Read the C code that fills the buffer before adding one;
+  `placeholders.filled_in_c` says what the frame's other buffer holds (the
+  stat).
+- A word that already has a card, and that the game never shows alone, gets
+  the text around it without being analysed again (`extract.build_rows`,
+  `assembled.py`): a Pokédex category is たねポケモン, a nature is
+  まじめなせいかく　Ｌｖ＊のとき　＊で　であった, a stat's name is
+  ＊の　とくぼうが　さがった！, a trainer's class is
+  ミニスカートの　＊が　しょうぶを　しかけてきた！. The row says what it is built from (`parts`),
+  and its analysis is put together from the cached answers for those parts:
+  the word keeps the record the model gave the bare word, so the card keeps
+  its key. This is how to give a bare card its context when the key must
+  not change; asking the model about the longer sentence is a new answer.
+- Such a sentence is never sent to the analysis (`analyse.run` leaves it
+  out), is outside the `splits` scope, and its per-word caches are filed
+  under the part (`_from` on each word). A label of that kind (たねポケモン)
+  takes its piece's grammar answer and note; one with a frame is asked for
+  grammar and a note like any sentence. Its piece is frozen: the bare text
+  is no longer a sentence of the deck, so nothing re-analyses it. A frame is
+  still a sentence and can be redone; check then that its translation keeps
+  its ＊ in the order of the Japanese, because the piece's translation goes
+  in by position.
+- A sentence built this way is not an extra example on the card of the bare
+  word it is built on, or of the frame it is built on (`cards`, `origin`).
 - A hand correction covers only the fields it names. A re-analysed sentence
   gets a fresh translation, so after any redo, re-read the sentences that have
   an entry in `corrections.yaml`.
@@ -371,8 +399,12 @@ deck, 11 the Link play deck. The docs do not call them chapters.
   (`- gText_BattleStyle: [gText_BattleStyleShift, gText_BattleStyleSet]`),
   and its card shows the setting on the front, in the line where a speaker
   would be: しあいの　ルール above かちぬき, as the screen has them side by side.
-  It goes into the `Speaker` field, so the note type is unchanged. Only the
-  options screen is listed this way so far (10 cards).
+  It goes into the `Speaker` field, so the note type is unchanged. The
+  options screen is listed this way (10 cards). A menu that is in no walk
+  gets its headings from the list `under` at the end of `map_order.yaml`,
+  which places nothing: the PC box wallpapers, シティ under ふうけい１ and
+  ふうけい１ under かべがみ (15 cards). Take the menu from the code that
+  builds it.
 - `placeholders.py` says what each ＊ stands for: from the battle code's
   placeholder names, from a script's `buffer…` command above the message, or
   from a counter beside it. A buffer a C screen fills is not named. Do not
@@ -476,6 +508,43 @@ Update this when it changes.
   2026-10-08 put a card on eleven sentences that had carried none (in
   chapters 1, 2, 3, 5, 7 and 8); those six chapters were run again, eight
   sentences were re-analysed on Opus, and no card changed its key.
+- Stat-change messages are put together in `extract` since 2026-10-10
+  (`extract.FILLED`, five messages). Their sentences were analysed on Opus
+  and chapter 0 settled again; no card changed its key, and the cards for
+  さがった, がくっと and ぐーんと sit on the whole message.
+- The same day 526 rows of bare words got the text the screen shows around
+  them (387 Pokédex categories, 107 trainer classes, 25 natures, 7 stat
+  names), with the analysis put together from cached answers. 156 cards
+  changed their sentence (101 on categories, 26 on classes, 25 on natures,
+  4 on stat names) and none changed its key. One frame, the nature sentence
+  without な, was analysed on Opus for it; the 51 nature, stat and class
+  sentences got grammar and were asked for a note (two calls each, and one
+  search check for two new notes). 15 wallpaper cards show their menu's
+  heading. Two lines were filed wrongly and moved to Link play, each with
+  its card: Pokémon Jump's score label てん, and かわいさ, which the "Cut"
+  rule of `first_seen.yaml` had taken for a field move.
+- One-word cards read in the source that day and left as they are, for the
+  owner to decide:
+  - メロメロ (`gText_Love`) is the status name an ability's cure message
+    takes (`＊は　＊で　＊が　なおった！`, with どく, まひ and the others). The
+    frame has only a Sonnet answer whose translation puts the ＊ in another
+    order, so building it needs the frame redone on Opus.
+  - ギリギリ, よゆうで and しょくどう are pieces of quest-log sentences
+    (`quest_log_events.c`); the frames have up to five ＊ and one cached
+    translation drops one of them.
+  - ポカン！ (`gText_Poof`) is the last of three pieces that draw
+    １　２の　………　ポカン！ while a TM is used; the whole line has a card of
+    its own with another sense picked, so the word has two cards.
+  - ゴールド (`gText_Marshbadge`) is what a Route 23 guard's line takes for
+    ＊バッジ. のみ (`gText_Berry`) is the ending of the e-Reader berry's name.
+  - ｍ and ｋｇ: the English game writes feet, inches and pounds in code, so
+    the decomp does not show how the Japanese screen prints them.
+  - No FireRed script asks for むすこ and むすめ (`BufferSonOrDaughterString`)
+    or for the contest words (`STDSTRING_COOL` to `STDSTRING_TOUGH2`,
+    かしこそうな among them): candidates for `never_shown`. That would drop
+    the cards for むすこ and かしこそうな.
+  - Menu labels, easy-chat words, shouts in dialogue and Help terms stand
+    alone on the screen and stay as they are.
 - The order after 2026-10-08: 136 messages moved to after what they wait
   for, 115 to before a blocker (Cerulean's rival 46, Silph Co.'s 36, the
   S.S. Anne's 29, Three Island's bikers 4), and the start listed by hand. No
@@ -527,9 +596,9 @@ Update this when it changes.
   types, 132 places, 23 people, 2 for Team Rocket, 8 badges, 22 game terms, 15
   real-world names), found by `names.py` in every chapter with no model call.
   The 56 name lines this put in chapter 0 were re-analysed on Opus. The names
-  deck is gone. Three decks, 11,080 cards: story 9,533, Help 941 (stand-alone), Link play 606. The note type has `Note`,
+  deck is gone. Three decks, 11,080 cards: story 9,531, Help 941 (stand-alone), Link play 608. The note type has `Note`,
   `SentenceNote` and `Placeholders` fields. 4,468 cards show a speaker (714
-  named by the line, the rest read from the map), and 229 cards on 171
+  named by the line, the rest read from the map), and 287 cards on 225
   sentences say what their ＊ stand for.
 - English names: the name check passes on every sentence the deck shows, in
   all chapters. 91 sentences were redone on Opus for it, most of them in

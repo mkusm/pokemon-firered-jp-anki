@@ -35,7 +35,7 @@ from functools import lru_cache
 
 import yaml
 
-from . import claude_cli, names
+from . import assembled, claude_cli, names
 from .paths import ROOT
 from .spread import chapters
 
@@ -293,7 +293,10 @@ def in_scope(deck, analyses: dict, chapter: int | None) -> list[str]:
     if chapter is not None:
         shown = shown[shown["chapter"] <= chapter]
     # Only sentences on the current analysis: the older ones follow other rules.
-    return [t for t in shown["text"] if t in analyses and analyse.current(analyse.MAIN.name, t, analyse.RERUN.model)]
+    # Not one put together from cached answers either: it cannot be sent back,
+    # and its frame, where it has one, is a sentence of its own.
+    return [t for t in shown["text"] if t in analyses and not assembled.recipe(t)
+            and analyse.current(analyse.MAIN.name, t, analyse.RERUN.model)]
 
 
 def main() -> None:

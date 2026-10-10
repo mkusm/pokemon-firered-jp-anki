@@ -156,6 +156,115 @@ def join_rows(df: pd.DataFrame) -> pd.DataFrame:
     return df[~df["msg_id"].isin({m for rest in JOINED.values() for m in rest})]
 
 
+# A message the battle code puts together from rows of the dump. A stat
+# change is shown through a frame, ＊の　＊が　＊: the Pokémon, the stat, and a
+# last buffer that ChangeStatBuffs (battle_script_commands.c) fills with
+# さがった！ or あがった！, with がくっと or ぐーんと before it when the stat moves two
+# stages. The dump has the frame and the four pieces as rows of their own,
+# and none of them is what a player reads. So the row of each piece becomes
+# the whole message that piece is shown in: the frame, with the pieces listed
+# here in its last buffer. One frame serves the Pokémon making the move and
+# another the one it is aimed at, with the same text; the usual case is kept
+# (a stat falls on the target and rises on the user), and the bare frames
+# are dropped. A berry that raises a stat has a frame of its own
+# (battle_util.c fills the same buffer), which is filled in place.
+B = "frlg.common.battle_message."
+FILLED = {
+    B + "sText_StatFell": (B + "sText_DefendersStatFell", ["sText_StatFell"]),
+    B + "sText_StatHarshly": (B + "sText_DefendersStatFell", ["sText_StatHarshly", "sText_StatFell"]),
+    B + "gBattleText_Rose": (B + "sText_AttackersStatRose", ["gBattleText_Rose"]),
+    B + "sText_StatSharply": (B + "sText_AttackersStatRose", ["sText_StatSharply", "gBattleText_Rose"]),
+    B + "sText_UsingItemTheStatOfPkmnRose": (B + "sText_UsingItemTheStatOfPkmnRose", ["gBattleText_Rose"]),
+}
+FRAMES = [B + "sText_AttackersStatRose", B + "gText_DefendersStatRose",
+          B + "sText_AttackersStatFell", B + "sText_DefendersStatFell"]
+LAST_BUFFER = "[B_BUFF2]"
+
+
+def fill_rows(df: pd.DataFrame) -> pd.DataFrame:
+    raw = df.set_index("msg_id")["raw"]
+    for row, (frame, pieces) in FILLED.items():
+        if raw[frame].count(LAST_BUFFER) != 1:
+            raise ValueError(f"{frame} has no single {LAST_BUFFER}: {raw[frame]}")
+        df.loc[df["msg_id"] == row, "raw"] = raw[frame].replace(LAST_BUFFER, "".join(raw[B + p] for p in pieces))
+    return df[~df["msg_id"].isin(FRAMES)]
+
+
+# A word the game never shows alone, on a row of its own in the dump: a
+# Pokédex category, a nature, a stat's name. The model has read each as the
+# bare word, and the cards made from those answers must stay the cards they
+# are. So the row's text becomes what the screen shows, and the row says
+# what it was put together from (`parts`): the analysis is then put together
+# the same way from the answers already cached (assembled.py), and the word
+# is not asked about again.
+#   たねポケモン: pokedex_screen.c (DexScreen_PrintMonCategory) prints the
+#     category and gText_PokedexPokemon right after it.
+#   まじめなせいかく　Ｌｖ＊のとき　＊で　であった: the summary screen's trainer
+#     memo (pokemon_summary_screen.c) puts the nature into gText_PokeSum_Met;
+#     the two natures that are い-adjectives take the frame without な.
+#   ＊の　とくぼうが　さがった！: the stat messages above, whose other buffer is
+#     a name from gStatNamesTable (battle_message.c). Each stat is shown the
+#     way a move of the game changes it. たいりょく is in the table and no
+#     move changes it: its row stays as it is.
+#   ミニスカートの　＊が　しょうぶを　しかけてきた！: a trainer's class stands
+#     before the name in the challenge (sText_Trainer1WantsToBattle, the
+#     B_TRAINER1_CLASS buffer). The class's translation keeps its remark
+#     there ("literally: shorts kid"): nothing else on the card says it.
+S = "frlg.common.strings."
+CATEGORIES, CATEGORY_TAIL = "pokedex_entries", S + "gText_PokedexPokemon"
+NATURES, NATURE_SLOT = "nature_names", "DYNAMIC 0"
+NATURE_FRAME, NATURE_FRAME_I = S + "gText_PokeSum_Met", S + "gText_PokeSum_Met_BoldGentleGrammar"
+I_ADJECTIVES = {"sBoldNatureName", "sGentleNatureName"}  # PokeSum_IsMonBoldOrGentle
+STAT_SLOT = "B_BUFF1"
+CLASSES, CLASS_FRAME, CLASS_SLOT = "trainer_class_names", "sText_Trainer1WantsToBattle", "B_TRAINER1_CLASS"
+STATS = {
+    "sText_Attack2": "sText_StatFell", "sText_Defense2": "sText_StatFell", "sText_Speed": "sText_StatFell",
+    "sText_SpAtk2": "gBattleText_Rose", "sText_SpDef2": "sText_StatFell", "sText_Accuracy": "sText_StatFell",
+    "sText_Evasiveness": "gBattleText_Rose",
+}
+
+
+def build_rows(df: pd.DataFrame) -> tuple[pd.DataFrame, dict[str, dict]]:
+    """→ the rows with their text as shown, and msg_id → what it was built
+    from: the frame's raw text (or None), the code of the slot, the pieces' raw texts."""
+    raw = df.set_index("msg_id")["raw"]
+    plan: dict[str, tuple] = {}
+    for r in df.itertuples(index=False):
+        if r.group == CATEGORIES:
+            plan[r.msg_id] = (None, None, [r.msg_id, CATEGORY_TAIL])
+        elif r.group == NATURES:
+            plan[r.msg_id] = (NATURE_FRAME_I if r.label in I_ADJECTIVES else NATURE_FRAME, NATURE_SLOT, [r.msg_id])
+        elif r.msg_id.startswith(B) and r.label in STATS:
+            plan[r.msg_id] = (B + STATS[r.label], STAT_SLOT, [r.msg_id])
+        elif r.group == CLASSES:
+            plan[r.msg_id] = (B + CLASS_FRAME, CLASS_SLOT, [r.msg_id])
+    built, new = {}, {}
+    for row, (frame, code, pieces) in plan.items():
+        fill = "".join(raw[p] for p in pieces)
+        if frame and raw[frame].count(f"[{code}]") != 1:
+            raise ValueError(f"{frame} has no single [{code}]: {raw[frame]}")
+        new[row] = raw[frame].replace(f"[{code}]", fill) if frame else fill
+        built[row] = {"frame": raw[frame] if frame else None, "code": code, "pieces": [raw[p] for p in pieces],
+                      "remark": frame == B + CLASS_FRAME}
+    df = df[df["msg_id"] != CATEGORY_TAIL].copy()
+    df["raw"] = df["msg_id"].map(new).fillna(df["raw"])
+    return df, built
+
+
+def parts_of(built: dict, unknown: Counter) -> str:
+    """A built row's parts as the sentences the model was given: the frame,
+    which slot of it is filled (the n-th ＊, from 0), and the pieces."""
+    def one(raw: str) -> dict:
+        got = split_message(raw, unknown)
+        if len(got) != 1:
+            raise ValueError(f"a part must be one sentence: {raw}")
+        return got[0]
+
+    frame = one(built["frame"]) if built["frame"] else None
+    return json.dumps({"frame": frame and frame["text"], "slot": frame and frame["vars"].index(built["code"]),
+                       "pieces": [one(p)["text"] for p in built["pieces"]], "remark": built["remark"]}, ensure_ascii=False)
+
+
 def hand_lines() -> pd.DataFrame:
     """hand_lines.yaml as corpus rows: namespace `hand`, no line number."""
     listed = yaml.safe_load(HAND_LINES.read_text(encoding="utf-8")) if HAND_LINES.exists() else {}
@@ -165,10 +274,10 @@ def hand_lines() -> pd.DataFrame:
 
 
 def main() -> None:
-    df = join_rows(load_corpus())
-    n_all = len(df)
+    corpus = load_corpus()
+    n_all, n_text = len(corpus), int((~corpus["raw"].isin(["", "[NULL]"])).sum())
+    df, built = build_rows(fill_rows(join_rows(corpus)))
     df = df[~df["raw"].isin(["", "[NULL]"])]
-    n_text = len(df)
     # FireRed only: the LeafGreen Pokédex, and LeafGreen's in-game trades
     # (labels ending ^LG; FireRed's end ^FR).
     df = df[(df["group"] != "pokedex_text_lg") & ~df["label"].str.endswith("^LG")]
@@ -178,6 +287,7 @@ def main() -> None:
     unknown: Counter = Counter()
     rows = []
     for r in df.itertuples(index=False):
+        parts = parts_of(built[r.msg_id], unknown) if r.msg_id in built else ""
         for s in split_message(r.raw, unknown):
             rows.append(
                 {
@@ -193,6 +303,7 @@ def main() -> None:
                     "text": s["text"],
                     "vars": json.dumps(s["vars"]),
                     "raw": r.raw,
+                    "parts": parts,
                 }
             )
     if unknown:
@@ -209,6 +320,7 @@ def main() -> None:
     print(f"unique sentences    {out['text'].nunique()}")
     print(f"  from dialogue     {out.loc[out['ns'] == 'script', 'text'].nunique()}")
     print(f"with speaker        {out['speaker'].notna().sum()}")
+    print(f"put together        {(out['parts'] != '').sum()} from words the dump has alone")
     print(f"→ {EXTRACT_OUT.relative_to(EXTRACT_OUT.parents[2])}")
 
 

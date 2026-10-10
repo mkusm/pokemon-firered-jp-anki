@@ -38,7 +38,7 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 
 import pandas as pd
 
-from . import claude_cli, corrections, models, names
+from . import assembled, claude_cli, corrections, models, names
 from .paths import CORPUS, DATA
 
 CACHE = DATA / "cache" / "notes"
@@ -91,6 +91,7 @@ CHECK_SCHEMA = {"type": "object", "properties": {"notes": {"type": "array", "ite
 
 
 def cache_file(text: str):
+    text = assembled.explained_as(text)  # a label: the note for the text it is built on
     return CACHE / f"{hashlib.sha1(json.dumps([VERSION, text], ensure_ascii=False).encode()).hexdigest()}.json"
 
 

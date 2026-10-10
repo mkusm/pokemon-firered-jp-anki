@@ -866,6 +866,20 @@ order:
 
 # Script groups with no single map. Placed later by the first_seen_map stage
 # (see the spec's Non-dialogue text section), not dumped at the start.
+# Choices that stand under a heading without being in a walk: the menu you
+# pick them from. The card of each choice shows the heading on its front, as
+# a choice of the options screen shows its setting. Nothing here changes
+# where a line is placed.
+#
+# The wallpaper of a PC box (pokemon_storage_system_tasks.c: かべがみ opens
+# the four themes, and a theme opens its four pictures).
+under:
+  gPCText_Wallpaper: [gPCText_Scenery1, gPCText_Scenery2, gPCText_Scenery3, gPCText_Etcetera]
+  gPCText_Scenery1: [gPCText_Forest, gPCText_City, gPCText_Desert, gPCText_Savanna]
+  gPCText_Scenery2: [gPCText_Crag, gPCText_Volcano, gPCText_Snow, gPCText_Cave]
+  gPCText_Scenery3: [gPCText_Beach, gPCText_Seafloor, gPCText_River, gPCText_Sky]
+  gPCText_Etcetera: [gPCText_PolkaDot, gPCText_Pokecenter, gPCText_Machine, gPCText_Simple]
+
 global:
   - event_scripts   # shared Pokémon Center, door and link-room lines
   - obtain_item     # "received X" lines
