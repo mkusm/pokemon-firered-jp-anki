@@ -104,6 +104,7 @@ who appear once, pieces of longer names.
 | `sense-guessed` | the dictionary entry is right but none of its listed senses was confirmed for this sentence |
 | `player-boy`, `player-girl` | the 18 words only one side ever meets (ぼっちゃん, じょうちゃん, ウェイトレス…): the game says some lines only to a boy and others only to a girl. A word that also comes up in a line everyone sees is not tagged |
 | `word-list` | the bare words of the Link play deck's word lists |
+| the release (`v2.2`) | every card: the release the package was built for. After importing over an older deck, a card without the newest tag is one the new package no longer has |
 
 ## How to use
 

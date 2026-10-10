@@ -35,6 +35,11 @@ DECKS = {  # cards.parquet's `deck` → (deck ID, name)
     "link": (1762871900, f"{PARENT}::3 Link play / multiplayer"),
 }
 DECK_OUT = ROOT / "firered_jp.apkg"
+# The release this package is built for. Every card is tagged with it (v2.2),
+# so that after importing a package over an older one, the cards the new one
+# no longer has are the ones without its tag: an import never removes a card.
+# Raise it when a release is cut.
+RELEASE = "2.2"
 
 FIELDS = [
     "Order", "Sentence", "SentenceRomaji", "Word", "WordRomaji", "Base", "BaseRomaji",
@@ -138,7 +143,7 @@ def package(cards: pd.DataFrame, path) -> None:
             model=MODEL,
             fields=[str(getattr(c, f) or "") for f in FIELDS],
             guid=genanki.guid_for(*map(str, key)),
-            tags=list(c.tags),
+            tags=[*c.tags, f"v{RELEASE}"],
             due=position,
         ))
     genanki.Package(list(decks.values())).write_to_file(path)
