@@ -1,0 +1,1 @@
+{"text": "＊の　すばやさが　さがった！", "structure": [{"jp": "＊の　すばやさが", "en": "＊'s Speed"}, {"jp": "さがった！", "en": "fell!"}], "patterns": [{"name": "〜た", "span": "さがった", "words": ["さがった"], "explanation": "た at the end of a verb says the thing has already happened. さがった = 'fell'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

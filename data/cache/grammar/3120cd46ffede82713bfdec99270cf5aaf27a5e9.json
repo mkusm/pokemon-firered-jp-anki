@@ -1,0 +1,1 @@
+{"text": "＊の　かいひりつが　あがった！", "structure": [{"jp": "＊の　かいひりつが", "en": "＊'s Evasiveness"}, {"jp": "あがった！", "en": "rose!"}], "patterns": [{"name": "〜た", "span": "あがった", "words": ["あがった"], "explanation": "た at the end of a verb says the thing has already happened. あがった = 'rose'."}], "_run": {"model": "opus", "effort": "low", "version": "2", "names": 5}}

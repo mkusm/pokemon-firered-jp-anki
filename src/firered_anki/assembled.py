@@ -16,8 +16,9 @@ again about the longer sentence would be a new answer, with a boundary or a
 sense that may differ.
 
 A piece's answer is frozen by this: its bare text is no longer a sentence
-of the deck, so no stage sends it again. A frame is still a sentence of its
-own and can be redone; what is built on it follows.
+of the deck, so no stage sends it again (`analyse redo` does, when the bare
+word is listed). A frame is still a sentence of its own and can be redone;
+what is built on it follows.
 """
 
 import copy

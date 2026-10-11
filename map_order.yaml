@@ -254,7 +254,8 @@ order:
       - gText_MoveInterfacePP
       - gText_MoveInterfaceType
       - gText_InflictingDamageIsKey
-      - sText_StatFell
+      - sText_Attack2             # ＊の　こうげきりょくが　さがった！: Growl, which a Lv. 5 Bulbasaur and Charmander know
+      - sText_Defense2            # ＊の　ぼうぎょりょくが　さがった！: Tail Whip, a Lv. 5 Squirtle's
       - gText_LoweringStats
       - gText_OakThisIsListOfPokemon
       - gText_OakImportantToGetToKnowPokemonThroughly
@@ -272,6 +273,17 @@ order:
       - gText_WinEarnsPrizeMoney
       - gText_HowDissapointing
   - PalletTown_ProfessorOaksLab_Text_RivalGoToughenMyMon
+  # The other stats, each in the message that changes it, in the order the
+  # game lists them (gStatNamesTable). No move of the first battle changes
+  # these; the owner wants every stat's card right after that battle, next
+  # to Attack and Defense, and not spread over the chapter.
+  - at: battle_message
+    lines:
+      - sText_Speed
+      - sText_SpAtk2
+      - sText_SpDef2
+      - sText_Accuracy
+      - sText_Evasiveness
   - PalletTown_ProfessorOaksLab   # the rest of the room: the last Poké Ball, the sign that changes later
   # Back in town with your first Pokémon: Mom heals it, Daisy has heard of the battle
   # The woman by the sign says this only once she has shown you the sign and

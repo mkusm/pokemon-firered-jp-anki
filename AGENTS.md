@@ -125,7 +125,8 @@ deck, 11 the Link play deck. The docs do not call them chapters.
   under the part (`_from` on each word). A label of that kind (たねポケモン)
   takes its piece's grammar answer and note; one with a frame is asked for
   grammar and a note like any sentence. Its piece is frozen: the bare text
-  is no longer a sentence of the deck, so nothing re-analyses it. A frame is
+  is no longer a sentence of the deck, so no stage re-analyses it (only
+  `analyse redo` with the bare word listed does). A frame is
   still a sentence and can be redone; check then that its translation keeps
   its ＊ in the order of the Japanese, because the piece's translation goes
   in by position.
@@ -508,6 +509,17 @@ Update this when it changes.
   2026-10-08 put a card on eleven sentences that had carried none (in
   chapters 1, 2, 3, 5, 7 and 8); those six chapters were run again, eight
   sentences were re-analysed on Opus, and no card changed its key.
+- All seven stat names have their card in or right after the first battle
+  since 2026-10-11, at the owner's word. The battle's walk has
+  ＊の　こうげきりょくが　さがった！ and ＊の　ぼうぎょりょくが　さがった！ where it had the
+  bare frame (Growl or Tail Whip: every Lv. 5 starter knows one), so さがった
+  sits on the Attack message; a walk after the battle's scene lists the
+  messages of the other five, which no move of that battle shows. No card
+  changed its key; four sit on another sentence (さがった, こうげきりょく,
+  すばやさ, かいひりつ). The bare words こうげきりょく and かいひりつ had only a
+  Sonnet answer from before their rows carried a card, and were redone on
+  Opus (one call); three sentences got grammar and were asked for a note
+  (one call each, no note written).
 - Stat-change messages are put together in `extract` since 2026-10-10
   (`extract.FILLED`, five messages). Their sentences were analysed on Opus
   and chapter 0 settled again; no card changed its key, and the cards for
@@ -572,7 +584,9 @@ Update this when it changes.
   1,537 of its sentences are Sonnet's; the 129 that an earlier chapter also
   shows are Opus's. Settled. `analyse rerun N` redoes every sentence of a
   chapter that its model has not answered on version 4 or 5;
-  `analyse redo <file>` re-analyses only the sentences listed in a file.
+  `analyse redo <file>` re-analyses only the sentences listed in a file. A
+  listed bare word that is only a piece of a built sentence (こうげきりょく) is
+  asked alone, as it was first read: the one way a frozen piece is redone.
 - `corrections.yaml` has seventeen entries: the SELECT button line, Mom's two
   TV lines, seven レポート translations the name check had left stiff ("the
   Pokémon Save"), one word form Sonnet wrote that is not in its sentence
@@ -609,10 +623,10 @@ Update this when it changes.
   レポート sentence now says "save" in some form; the wording is the model's
   and varies ("the Save", "save file", "this report (save)"). The Rocket
   Warehouse's レポート is a real report, and the model kept it so.
-- Walks: 21 in `map_order.yaml`, 198 lines: the title and the bars of the
+- Walks: 22 in `map_order.yaml`, 204 lines: the title and the bars of the
   opening, the house, Pallet Town, the rival's house and the lab before Oak,
-  saving, the party screen, options, the first battle, the bag, the Mart's
-  counter, the Pokédex.
+  saving, the party screen, options, the first battle, the stats after it,
+  the bag, the Mart's counter, the Pokédex.
   A walk's line is not moved by the flag rule: its place is the listed one.
   `hand_lines.yaml` has one line, the title. `never_shown` in
   `first_seen.yaml` has 43 entries, two of them globs.

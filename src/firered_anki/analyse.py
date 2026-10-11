@@ -435,6 +435,28 @@ def rerun(chapter: list[int] | None = None, workers: int = 20) -> None:
     print("[rerun] done")
 
 
+def piece_rows(df: pd.DataFrame, texts: set[str], entries: dict) -> pd.DataFrame:
+    """Rows for bare words that are no sentence of the deck any more, only a
+    piece a sentence is built on (assembled.py): こうげきりょく, shown as
+    ＊の　こうげきりょくが　さがった！. Nothing else sends a piece again, and one
+    whose only answer is Sonnet's, from before its row carried a card, would
+    stay under a story card. Each is asked as it was first read: alone, on
+    the row that is now the built sentence. Adds the piece's dictionary
+    candidates to `entries`."""
+    from . import tokenize  # late: it loads the dictionary
+
+    built = {p: t for t, rc in assembled.recipes().items() for p in rc["pieces"]}
+    out = []
+    for piece in sorted(texts & set(built)):
+        row = df[df["text"] == built[piece]].iloc[0].copy()
+        tokens, cands, across = tokenize.tokenize(piece)
+        row["text"] = piece
+        row["tokens"], row["candidates"], row["across"] = (json.dumps(x, ensure_ascii=False) for x in (tokens, cands, across))
+        out.append(row)
+    entries.update({str(k): v for k, v in tokenize._entries.items() if str(k) not in entries})
+    return pd.DataFrame(out, columns=df.columns)
+
+
 def redo(path: str) -> None:
     """Re-analyse on Opus just the sentences listed in a file, one per line."""
     redo_texts({ln.rstrip("\n") for ln in open(path, encoding="utf-8") if ln.strip()})
@@ -444,7 +466,7 @@ def redo_texts(texts: set[str], workers: int = 20) -> None:
     """Re-analyse just these sentences: for a fix that touches a few of them,
     where a chapter rerun would reshuffle everything else."""
     df, entries = load()
-    rows = df[df["text"].isin(texts)]
+    rows = pd.concat([df[df["text"].isin(texts)], piece_rows(df, texts - set(df["text"]), entries)])
     print(f"[redo] {rows['text'].nunique()} of {len(texts)} listed sentences found")
     for model, mine in models.by_model(rows["text"].unique()).items():  # each by the model it needs
         small = Config(RERUN.name, model, RERUN.effort, 20)  # picked sentences run long

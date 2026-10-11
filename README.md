@@ -173,7 +173,8 @@ All you need is [Anki](https://apps.ankiweb.net/), on desktop or on your phone.
    Each screen comes as a walk where you first use it: the party screen
    when you get your Pokémon, the options just before the first battle, which
    is a walk too (the challenge, Oak's commentary, the action menu, the
-   messages every battle has), saving after the sign in Oak's lab explains it,
+   messages every battle has, with "Attack fell" and "Defense fell"; the
+   other five stats' messages follow right after the battle), saving after the sign in Oak's lab explains it,
    the bag on Route 1, the Mart's counter in Viridian, the Pokédex when Oak
    hands it over. Other menu text floats as
    in step 3, and only once you have left Oak's lab with your first Pokémon.
