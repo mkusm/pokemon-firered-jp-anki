@@ -35,11 +35,11 @@ DECKS = {  # cards.parquet's `deck` → (deck ID, name)
     "link": (1762871900, f"{PARENT}::3 Link play / multiplayer"),
 }
 DECK_OUT = ROOT / "firered_jp.apkg"
-# The release this package is built for. Every card is tagged with it (v2.2),
+# The release this package is built for. Every card is tagged with it (v2.3),
 # so that after importing a package over an older one, the cards the new one
 # no longer has are the ones without its tag: an import never removes a card.
 # Raise it when a release is cut.
-RELEASE = "2.2"
+RELEASE = "2.3"
 
 FIELDS = [
     "Order", "Sentence", "SentenceRomaji", "Word", "WordRomaji", "Base", "BaseRomaji",

@@ -473,10 +473,10 @@ fine.
 - Cut a release only when asked. Attach `firered_jp.apkg`, built from the
   commit being tagged. Write the notes so they stand alone against v1.0.
 - Every card is tagged with the release it is built for (`build.RELEASE`,
-  the tag `v2.2`). Raise it before building a release's package. It is how
+  the tag `v2.3`). Raise it before building a release's package. It is how
   the owner finds what an import left behind: Anki never removes a card, so
   after importing over an older deck, the cards the new package no longer
-  has are the ones without its tag (`-tag:v2.2`). Tested with Anki's import
+  has are the ones without its tag (`-tag:v2.3`). Tested with Anki's import
   code: an update replaces a note's tags with the package's, and a note
   edited after the package was built is skipped unless the import is set to
   update always. When a release drops cards, say so in its notes with the
