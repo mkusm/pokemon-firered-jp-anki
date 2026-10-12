@@ -31,6 +31,7 @@ LABEL_RE = re.compile(r"^(\w+)::?")
 # A variable a map's scripts keep to themselves: a temporary one, or the name the file gives it.
 OWN_VAR = r"VAR_TEMP_\w+|(?!VAR_|FLAG_|LOCALID_)[A-Z][A-Z0-9_]*"
 UNSET = ("0", "FALSE")  # what such a variable is when the map loads
+EGG = "an Egg"  # a condition no flag stands for: you hold an Egg (giveegg, the Day Care on Four Island)
 PRIMARY_METATILES = 640  # a block below this is the primary tileset's, the rest the secondary's
 
 
@@ -344,8 +345,9 @@ class Decomp:
         """A condition → the script blocks that make it true: (the map, the
         block, the text labels the scene shows up to there). A condition is
         a flag, "VAR_MAP_SCENE_X>=n", "FLAG_HIDE_X cleared" for a person who
-        is hidden when the game starts, or "Map: VAR==value" for a variable
-        a map keeps to itself (Daisy's "have I given you the map yet")."""
+        is hidden when the game starts, "Map: VAR==value" for a variable
+        a map keeps to itself (Daisy's "have I given you the map yet"), or
+        having an Egg, which only two scripts give."""
         blocks, lines = self._script_blocks, self.scene_lines
         # A scene variable only goes up. It first reaches n where a script
         # sets it to the lowest value any script gives it that is n or more:
@@ -369,6 +371,8 @@ class Decomp:
                     made.add(f"{m.group(1)} cleared")
                 if where and (m := re.match(rf"setvar ({OWN_VAR}), (\w+)$", c)) and m.group(2) not in UNSET:
                     made.add(f"{where}: {m.group(1)}=={m.group(2)}")
+                if re.match(r"giveegg\b|special GiveEggFromDaycare\b", c):
+                    made.add(EGG)
             for cond in made:
                 out[cond].append((where, label, lines(label)))
         return out
@@ -498,6 +502,9 @@ class Decomp:
                         edges[target].append((label, frozenset(here), frozenset(gone | reached)))
                         if kind == "goto":
                             here |= reached          # carried on: n or more
+                elif m := re.match(r"(?:goto|call)_if_eq VAR_RESULT, SPECIES_EGG, (\w+)", c):
+                    # What someone says when the Pokémon you hand over is an Egg.
+                    edges[m.group(1)].append((label, frozenset(here | {EGG}), frozenset(gone)))
                 elif where and (m := re.match(rf"(?:goto|call)_if_eq ({OWN_VAR}), (\w+), (\w+)", c)) and m.group(2) not in UNSET:
                     edges[m.group(3)].append((label, frozenset(here | {f"{where}: {m.group(1)}=={m.group(2)}"}), frozenset(gone)))
                 elif m := re.match(r"map_script_2 (VAR_MAP_SCENE_\w+), (\d+), (\w+)", c):

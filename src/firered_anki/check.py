@@ -72,6 +72,8 @@ def main() -> None:
     # --- the cards
     check("card keys are unique", cards["key"][cards["key"].duplicated()].tolist())
     check("every card is in one of the three decks", cards[~cards["deck"].isin(["story", "help", "link"])]["key"].tolist())
+    # A line listed alone in map_order.yaml once showed its label as its place ("Text Rival Victory").
+    check("no card's Location is a script label", sorted(set(cards["Location"][cards["Location"].str.contains(r"\bText\b")])))
     check("Order runs 000000, 000001, …", [o for i, o in enumerate(sorted(cards["Order"])) if o != f"{i:06d}"][:5])
     check("a stand-alone deck's cards carry its name in their key, and no others do", [
         k for k, d in zip(cards["key"], cards["deck"])

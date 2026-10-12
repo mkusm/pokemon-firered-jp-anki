@@ -350,6 +350,11 @@ deck, 11 the Link play deck. The docs do not call them chapters.
 **Cards.**
 - One card per word form and sense: つかまえた and つかまえて are two cards.
   Particles are never part of a form.
+- A card sits on the first sentence that has its word, dialogue or not, so
+  that no word is read before its card. Until 2026-10-12 a line of dialogue
+  in the same chapter took the card from a menu or battle line shown before
+  it (しかし in しかし　＊の　こうげきは　はずれた！ had its card 500 cards later).
+  Names have their own rule, below.
 - The cards of one sentence come in the order its words stand in, left to
   right. Only the `Order` field depends on this, not a card's key.
 - Do not drop cards for stammers, garbled speech, word fragments or sound
@@ -473,10 +478,10 @@ fine.
 - Cut a release only when asked. Attach `firered_jp.apkg`, built from the
   commit being tagged. Write the notes so they stand alone against v1.0.
 - Every card is tagged with the release it is built for (`build.RELEASE`,
-  the tag `v2.3`). Raise it before building a release's package. It is how
+  the tag `v2.3.1`). Raise it before building a release's package. It is how
   the owner finds what an import left behind: Anki never removes a card, so
   after importing over an older deck, the cards the new package no longer
-  has are the ones without its tag (`-tag:v2.3`). Tested with Anki's import
+  has are the ones without its tag (`-tag:v2.3.1`). Tested with Anki's import
   code: an update replaces a note's tags with the package's, and a note
   edited after the package was built is skipped unless the import is set to
   update always. When a release drops cards, say so in its notes with the
@@ -509,6 +514,30 @@ Update this when it changes.
   2026-10-08 put a card on eleven sentences that had carried none (in
   chapters 1, 2, 3, 5, 7 and 8); those six chapters were run again, eight
   sentences were re-analysed on Opus, and no card changed its key.
+- Egg and Day Care text is at Four Island since 2026-10-12. The couple's
+  shared lines (`day_care`, 28 of them) and the egg lines of the menus had
+  been tied to Route 5's Day Care, which takes one Pokémon, has text of its
+  own and gives no Egg: they came some 5,000 cards early. Four lines people
+  say when handed an Egg (the Name Rater, the Move Deleter, Two Island's
+  tutor, Daisy) are listed after that Day Care in `map_order.yaml`: their
+  scripts test the Pokémon chosen, which the order stage cannot see. The
+  hot-spring Egg's line is Ruby and Sapphire's and went to Link play. No
+  card changed its key or its deck.
+- Found by scanning the map scripts for shared lines (text defined outside
+  the map) that the deck places away from the first map that shows them.
+  The scan is not in `check`: it reads only lines a map's script names
+  itself, and most of what it lists is right (messages many places use).
+  Not looked at: the old man's two trade lines in a Cerulean house, which
+  sit with the other trade text some 1,500 cards later.
+- Since 2026-10-12, after v2.3, a card sits on the first sentence that has
+  its word. 83 story cards moved, 82 of them earlier, by 430 places on
+  average, before the egg text moved; no card changed its key and no chapter has anything left to ask.
+- The nickname question, ＊に　ニックネームを　つけますか？, is in the starter
+  scene since 2026-10-11, after v2.3: the lab's script asks it right after
+  you receive the Pokémon. It had floated to card 1349. ニックネーム sits on
+  it now, not on the Viridian house line; no card changed its key. A line
+  listed alone whose label starts with `Text_` showed the label as its
+  place ("Text Rival Victory"); it shows its group now, and `check` tests it.
 - All seven stat names have their card in or right after the first battle
   since 2026-10-11, at the owner's word. The battle's walk has
   ＊の　こうげきりょくが　さがった！ and ＊の　ぼうぎょりょくが　さがった！ where it had the
@@ -611,8 +640,8 @@ Update this when it changes.
   real-world names), found by `names.py` in every chapter with no model call.
   The 56 name lines this put in chapter 0 were re-analysed on Opus. The names
   deck is gone. Three decks, 11,080 cards: story 9,531, Help 941 (stand-alone), Link play 608. The note type has `Note`,
-  `SentenceNote` and `Placeholders` fields. 4,468 cards show a speaker (714
-  named by the line, the rest read from the map), and 287 cards on 225
+  `SentenceNote` and `Placeholders` fields. 4,426 cards show a speaker (700
+  named by the line, the rest read from the map), and 298 cards on 226
   sentences say what their ＊ stand for.
 - English names: the name check passes on every sentence the deck shows, in
   all chapters. 91 sentences were redone on Opus for it, most of them in

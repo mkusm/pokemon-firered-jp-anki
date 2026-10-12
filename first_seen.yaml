@@ -208,7 +208,12 @@ groups:
     - ['Coins|Slot|GameCorner', CeladonCity_GameCorner]
     - ['TM|HM|Tm\d', 'item:ITEM_(TM|HM)\d+']      # TM Case comes with the first TM
     - ['Berry|Berries', 'item:ITEM_\w+_BERRY']
-    - ['Egg|Hatch|DayCare|Daycare', Route5_PokemonDayCare]
+    # Eggs come only from Four Island's Day Care, which takes two Pokémon and
+    # says how they get along. Route 5's takes one and has text of its own.
+    # The hot-spring egg is Ruby and Sapphire's: the summary screen prints it
+    # only for an egg in the other player's party (PokeSum_PrintTrainerMemo_Egg).
+    - ['EggOrigin_Spa', end]
+    - ['Egg|Hatch|DayCare|Daycare', FourIsland]
     - ['Safari', FuchsiaCity_SafariZone_Entrance]
     - ['Island|Seagallop|Sevii', seagallop]
     - ['TeachyTv|Pokedude', pokedude]

@@ -15,10 +15,9 @@
      that names a Pokémon or an item is not spread: it stays where the thing
      is first met.
   4. Cards follow their sentences, and within a sentence the words left to
-     right. Each card takes its first sentence in that order, except that a dialogue
-     sentence in the same chapter beats a non-dialogue line (not for a Pokémon
-     or item name, which stays at the first place it is seen). Up to two later
-     sentences become extra examples.
+     right. Each card takes its first sentence in that order, dialogue or not:
+     a word is not read before its card. Up to two later sentences become
+     extra examples.
   5. Where the grammar pass has covered a sentence (see grammar.py), its word
      cards get the patterns the word takes part in and a breakdown of the
      sentence. There are no cards for the patterns themselves.
@@ -485,9 +484,9 @@ def place_name(name: str) -> str:
 
 def location(r) -> str:
     # A map_order entry that is a single label (gControlsGuide_Text_Intro,
-    # Route22_Text_LateRivalIntro) only moves the line in time: the place is
-    # still the message's own group.
-    place = r.group if "_Text_" in str(r.first_seen) else r.first_seen
+    # Route22_Text_LateRivalIntro, Text_RivalVictory) only moves the line in
+    # time: the place is still the message's own group.
+    place = r.group if re.search(r"(^|_)Text_", str(r.first_seen)) else r.first_seen
     # A line of a name list: the place where the thing is first met.
     if names.listed(r.group, r.label):
         place = re.sub(r"_Text_.*| \(.*", "", str(r.first_seen))
@@ -599,8 +598,6 @@ def build_cards(run_name: str = MAIN.name, offline_merge: bool = False) -> pd.Da
             first = placed[0]
             if key[0] == "name":
                 first = next((u for u in placed if u["exact"]), first)
-            elif not first["dialogue"]:
-                first = next((u for u in placed if u["dialogue"] and u["chapter"] == first["chapter"]), first)
             # Another sentence, and not the same answer again: a sentence put
             # together around this word's bare text, or around the frame the
             # word is from (assembled.py), shows nothing the card has not got.

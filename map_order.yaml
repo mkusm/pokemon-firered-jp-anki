@@ -189,6 +189,7 @@ order:
   - PalletTown_ProfessorOaksLab_Text_OakChoosingSquirtle
   - PalletTown_ProfessorOaksLab_Text_OakThisMonIsEnergetic
   - PalletTown_ProfessorOaksLab_Text_ReceivedMonFromOak
+  - Text_GiveNicknameToThisMon      # the script asks it right after the fanfare, before the rival picks
   - PalletTown_ProfessorOaksLab_Text_RivalIllTakeThisOneThen
   - PalletTown_ProfessorOaksLab_Text_RivalReceivedMonFromOak
   - PalletTown_ProfessorOaksLab_Text_RivalMyMonLooksTougher
@@ -480,7 +481,6 @@ order:
   # --- Route 5/6 → Vermilion → S.S. Anne (P5–P6)
   - Route5
   - Route5_PokemonDayCare
-  - day_care
   - Route5_SouthEntrance      # Saffron gate, thirsty guard
   - UndergroundPath_SouthEntrance
   - Route6
@@ -804,7 +804,6 @@ order:
   - PalletTown_RivalsHouse_Text_LookingNiceInNoTime
   - PalletTown_RivalsHouse_Text_ThereYouGoAllDone
   - PalletTown_RivalsHouse_Text_DontNeedAnyGrooming
-  - PalletTown_RivalsHouse_Text_CantGroomAnEgg
   - PalletTown_RivalsHouse_Text_MayISeeFirstMon
   - PalletTown_RivalsHouse_Text_CouldntLoveYouMore
   - PalletTown_RivalsHouse_Text_ItLooksVeryHappy
@@ -824,6 +823,17 @@ order:
   - PalletTown_ProfessorOaksLab_Text_RivalIllCompleteThePokedex
   - MtEmber_RubyPath_B3F
   - FourIsland
+  # The Day Care couple's shared text (data/text/day_care.inc): only Four
+  # Island's scripts show it, the man outside and his wife indoors. Route 5's
+  # Day-Care Man has text of his own.
+  - day_care
+  # What people say when you hand them an Egg: no Egg can be had before this
+  # Day Care. The order stage reads the test from the Name Rater's script
+  # and Daisy's (SPECIES_EGG); the other two ask the game's code.
+  - LavenderTown_House2_Text_ThatIsMerelyAnEgg    # the Name Rater
+  - FuchsiaCity_House3_Text_NoEggShouldKnowMoves  # the Move Deleter
+  - TwoIsland_House_Text_CantTeachAnEgg           # the move tutor on Two Island
+  - PalletTown_RivalsHouse_Text_CantGroomAnEgg    # Daisy
   - FourIsland_PokemonCenter_1F
   - FourIsland_Mart
   - FourIsland_House1
